@@ -11,11 +11,12 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 == Project Team
 
-=== John Doe
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
+=== Christian James Welly
+image::chrisjwelly.png[width="150", align="left"]
+{empty}[http://github.com/chrisjwelly[github]] [<<johndoe#, portfolio>>]
 
-Role: Project Advisor
+Role: Developer
+Responsibilities: Parser
 
 '''
 
