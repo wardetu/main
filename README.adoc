@@ -32,5 +32,3 @@ _Marco Jakob_.
 * The starting point of this code is AddressBook-Level3 project created by https://se-education.org[SE-EDU initiative]
 
 == Licence : link:LICENSE[MIT]
-
-Epstein didn't kill himself
