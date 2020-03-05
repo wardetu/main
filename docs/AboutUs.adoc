@@ -21,7 +21,7 @@ Responsibilities: Parser
 '''
 
 === Nguyen Minh Hoang
-image::hoang.png[width="150", align="left"]
+image::wardetu.png[width="150", align="left"]
 {empty}[http://github.com/wardetu[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
