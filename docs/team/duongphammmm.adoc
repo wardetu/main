@@ -1,0 +1,15 @@
+= Pham Thuy Duong - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: ResuMe
+
+---
+
+== Overview
+
+ResuMe is an application that helps users manage their resumés in a convenient and efficient way.
+
+== Summary of contributions
+To be updated in the future...
