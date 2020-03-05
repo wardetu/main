@@ -15,7 +15,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::chrisjwelly.png[width="150", align="left"]
 {empty}[http://github.com/chrisjwelly[github]] [<<johndoe#, portfolio>>]
 
-Role: Developer
+Role: Developer +
 Responsibilities: Parser
 
 '''
