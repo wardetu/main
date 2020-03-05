@@ -39,7 +39,7 @@ Responsibilities: Commands
 '''
 
 === Pham Thuy Duong
-image::duongphammmm.jpg[width="150", align="left"]
+image::duongphammmm.png[width="150", align="left"]
 {empty}[http://github.com/duongphammmm[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
