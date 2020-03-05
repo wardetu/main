@@ -30,7 +30,7 @@ Responsibilities: Storage
 '''
 
 === Nguyen Chi Hai
-image::helloimhai.jpg[width="150", align="left"]
+image::helloimhai.png[width="150", align="left"]
 {empty}[http://github.com/helloimhai[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
