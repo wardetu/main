@@ -33,7 +33,11 @@
 <li><a href="#dev-ops">6. Dev Ops</a></li>
 <li><a href="#product-scope">Appendix A: Product Scope</a></li>
 <li><a href="#user-stories">Appendix B: User Stories</a></li>
-<li><a href="#use-cases">Appendix C: Use Cases</a></li>
+<li><a href="#use-cases">Appendix C: Use Cases</a>
+<ul class="sectlevel2">
+<li><a href="#use-case-find-item-s">C.1. Use case: Find item(s)</a></li>
+</ul>
+</li>
 <li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
 <li><a href="#glossary">Appendix E: Glossary</a></li>
 <li><a href="#product-survey">Appendix F: Product Survey</a></li>
@@ -720,23 +724,26 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
-<h3 id="use-case-delete-person" class="discrete">Use case: Delete person</h3>
+<h3 id="use-case-edit-an-item" class="discrete">Use case: Edit an item</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list persons</p>
+<p>User requests to list all items or only items of a specific <code>TYPE</code></p>
 </li>
 <li>
-<p>AddressBook shows a list of persons</p>
+<p>ResuMe shows a list of corresponding items</p>
 </li>
 <li>
-<p>User requests to delete a specific person in the list</p>
+<p>User checks for the <code>ID</code> of a specific item in the list to edit</p>
 </li>
 <li>
-<p>AddressBook deletes the person</p>
+<p>User requests to edit a specific person in the list</p>
+</li>
+<li>
+<p>ResuMe updates that item and displays edited item to user</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -749,28 +756,61 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a. The list is empty.</p>
+<p>3a. The <code>ID</code> given by user does not match any item of type</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. ResuMe shows an error message</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="use-case-find-item-s"><a class="link" href="#use-case-find-item-s">C.1. Use case: Find item(s)</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters <code>find KEYWORD</code> without specifying a <code>TYPE</code></p>
+</li>
+<li>
+<p>ResuMe displays all items whose names contain the <code>KEYWORD</code></p>
+</li>
+<li>
+<p>If user enters <code>find -TYPE KEYWORD</code></p>
+</li>
+<li>
+<p>ResuMe displays only items of the <code>TYPE</code> whose names contain the <code>KEYWORD</code></p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
-<li>
-<p>3a. The given index is invalid.</p>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. AddressBook shows an error message.</p>
-<div class="paragraph">
-<p>Use case resumes at step 2.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
+<p>1a. None of the items contain the <code>KEYWORD</code>.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. AddressBook shows an error message.</p>
 <div class="paragraph">
 <p><em>{More to be added}</em></p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -958,4 +998,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-05 15:18:06 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-05 15:21:31 UTC</div></div></div></body></html>
