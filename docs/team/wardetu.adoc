@@ -1,4 +1,4 @@
-= Christian James Welly- Project Portfolio
+= Nguyen Minh Hoang- Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
