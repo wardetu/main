@@ -12,4 +12,4 @@
 ResuMe is an application that helps users manage their resumés in a convenient and efficient way.
 
 == Summary of contributions
-To be updated in the future...
+To be updated in the future... +
