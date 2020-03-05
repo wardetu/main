@@ -316,30 +316,47 @@ _{More to be added}_
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: Edit an item
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list all items or only items of a specific `TYPE`
+2.  ResuMe shows a list of corresponding items
+3.  User checks for the `ID` of a specific item in the list to edit
+4.  User requests to edit a specific person in the list
+5.  ResuMe updates that item and displays edited item to user
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+* 3a. The `ID` given by user does not match any item of type
++
+[none]
+** 3a1. ResuMe shows an error message
++
+
+
+=== Use case: Find item(s)
+
+*MSS*
+
+1.  User enters `find KEYWORD` without specifying a `TYPE`
+2.  ResuMe displays all items whose names contain the `KEYWORD`
+3.  If user enters `find -TYPE KEYWORD`
+4.  ResuMe displays only items of the `TYPE` whose names contain the `KEYWORD`
 +
 Use case ends.
 
-* 3a. The given index is invalid.
+*Extensions*
+
+[none]
+* 1a. None of the items contain the `KEYWORD`.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 1a1. AddressBook shows an error message.
 +
-Use case resumes at step 2.
 
 _{More to be added}_
 
