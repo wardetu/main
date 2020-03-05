@@ -11,5 +11,4 @@
 
 ResuMe - A ResuMe management application.
 
-Make your resume the easy way. +  
-
+Make your resume the easy way. +
