@@ -364,8 +364,14 @@ _{More to be added}_
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Should work on both 32-bit and 64-bit environments.
+.  Should be able to support up to 1000 users without a noticeable sluggishness in performance for typical usage.
+.  Should be able to support at least 5 resumes per user, 20 items per resume, and 100 resume items in total.
+.  Data should be stored locally such that users can access them (either through the application or directly by access
+the data file) without any network connection.
+.  Should response within two seconds for a normal item query, and five seconds for a pdf generation request.
+.  A user with some familiarity with Command Line Interface (CLI) should be able to accomplish most of the tasks faster
+using commands than using the mouse to navigate the Graphic User Interface (GUI).
 
 _{More to be added}_
 
