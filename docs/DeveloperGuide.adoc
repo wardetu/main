@@ -307,6 +307,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |preview my resume |check for mistakes in a resume before generating it
 
+|`* * *` |user | search for items containing certain keywords | find items that are relevant to my current need
+
 |`* *` |user |see all the 'items' I've added |
 
 |`* *` |user |see all my resumes |manage them in a centralised location
@@ -319,7 +321,10 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |busy user |auto-format my resumes |
 
+
 |=======================================================================
+
+_'items' refers to a resume field of type personal details, project, education, skills, internship, and achievement._
 
 _{More to be added}_
 
