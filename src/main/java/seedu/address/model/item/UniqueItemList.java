@@ -12,11 +12,11 @@ import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.exceptions.ItemNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of items that enforces uniqueness between its elements and does not allow nulls.
+ * An item is considered unique by comparing using {@code Item#isSame(Item)}. As such, adding and updating of
+ * items uses Item#isSame(Item) for equality so as to ensure that the item being added or updated is
+ * unique in terms of identity in the UniqueItemList. However, the removal of an item uses Item#equals(Object) so
+ * as to ensure that the item with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -29,7 +29,7 @@ public class UniqueItemList implements Iterable<Item> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent item as the given argument.
      */
     public boolean contains(Item toCheck) {
         requireNonNull(toCheck);
@@ -37,8 +37,8 @@ public class UniqueItemList implements Iterable<Item> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds an item to the list.
+     * The item must not already exist in the list.
      */
     public void add(Item toAdd) {
         requireNonNull(toAdd);
@@ -49,11 +49,11 @@ public class UniqueItemList implements Iterable<Item> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the item {@code target} in the list with {@code editedItem}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The item identity of {@code editedItem} must not be the same as another existing item in the list.
      */
-    public void setPerson(Item target, Item editedItem) {
+    public void setItem(Item target, Item editedItem) {
         requireAllNonNull(target, editedItem);
 
         int index = internalList.indexOf(target);
@@ -69,8 +69,8 @@ public class UniqueItemList implements Iterable<Item> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent item from the list.
+     * The item must exist in the list.
      */
     public void remove(Item toRemove) {
         requireNonNull(toRemove);
@@ -79,21 +79,20 @@ public class UniqueItemList implements Iterable<Item> {
         }
     }
 
-    public void setPersons(UniqueItemList replacement) {
+    public void setItems(UniqueItemList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code items}.
+     * {@code items} must not contain duplicate items.
      */
-    public void setPersons(List<Item> items) {
+    public void setItems(List<Item> items) {
         requireAllNonNull(items);
-        if (!personsAreUnique(items)) {
+        if (!itemsAreUnique(items)) {
             throw new DuplicateItemException();
         }
-
         internalList.setAll(items);
     }
 
@@ -122,9 +121,9 @@ public class UniqueItemList implements Iterable<Item> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code items} contains only unique items.
      */
-    private boolean personsAreUnique(List<Item> items) {
+    private boolean itemsAreUnique(List<Item> items) {
         for (int i = 0; i < items.size() - 1; i++) {
             for (int j = i + 1; j < items.size(); j++) {
                 if (items.get(i).isSame(items.get(j))) {

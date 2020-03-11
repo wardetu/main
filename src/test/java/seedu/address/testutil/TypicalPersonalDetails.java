@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.ResumeBook;
 import seedu.address.model.item.PersonalDetail;
 
 /**
@@ -62,10 +62,10 @@ public class TypicalPersonalDetails {
     /**
      * Returns an {@code AddressBook} with all the typical personal details.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static ResumeBook getTypicalAddressBook() {
+        ResumeBook ab = new ResumeBook();
         for (PersonalDetail pd : getTypicalPersonalDetails()) {
-            ab.addPerson(pd);
+            ab.addPersonalDetail(pd);
         }
         return ab;
     }

@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.ResumeBook;
 import seedu.address.model.item.Item;
 
 /**
@@ -10,13 +10,13 @@ import seedu.address.model.item.Item;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private ResumeBook addressBook;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        addressBook = new ResumeBook();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
+    public AddressBookBuilder(ResumeBook addressBook) {
         this.addressBook = addressBook;
     }
 
@@ -24,11 +24,11 @@ public class AddressBookBuilder {
      * Adds a new {@code Person} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withPerson(Item item) {
-        addressBook.addPerson(item);
+        addressBook.addPersonalDetail(item);
         return this;
     }
 
-    public AddressBook build() {
+    public ResumeBook build() {
         return addressBook;
     }
 }

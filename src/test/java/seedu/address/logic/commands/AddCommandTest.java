@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.ResumeBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.item.Item;
 import seedu.address.testutil.PersonalDetailBuilder;
@@ -99,52 +99,52 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getResumeBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setResumeBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addPerson(Item item) {
+        public void addPersonalDetail(Item item) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setResumeBook(ReadOnlyResumeBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyResumeBook getResumeBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Item item) {
+        public boolean hasPersonalDetail(Item item) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Item target) {
+        public void deletePersonalDetail(Item target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Item target, Item editedItem) {
+        public void setPersonalDetail(Item target, Item editedItem) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Item> getFilteredPersonList() {
+        public ObservableList<Item> getFilteredPersonalDetailList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Item> predicate) {
+        public void updateFilteredPersonalDetailList(Predicate<Item> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -161,7 +161,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Item item) {
+        public boolean hasPersonalDetail(Item item) {
             requireNonNull(item);
             return this.item.isSame(item);
         }
@@ -174,20 +174,20 @@ public class AddCommandTest {
         final ArrayList<Item> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Item item) {
+        public boolean hasPersonalDetail(Item item) {
             requireNonNull(item);
             return personsAdded.stream().anyMatch(item::isSame);
         }
 
         @Override
-        public void addPerson(Item item) {
+        public void addPersonalDetail(Item item) {
             requireNonNull(item);
             personsAdded.add(item);
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyResumeBook getResumeBook() {
+            return new ResumeBook();
         }
     }
 
