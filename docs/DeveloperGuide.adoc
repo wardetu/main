@@ -294,19 +294,37 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
+
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |user |manage and customise different resumes |use different resumes for different companies
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |user |create a resume file |print it
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |user |add to and remove 'items' from a certain resume |
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |user |add, edit, and remove 'items' |
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |user |preview my resume |check for mistakes in a resume before generating it
+
+|`* * *` |user | search for items containing certain keywords | find items that are relevant to my current need
+
+|`* *` |user |see all the 'items' I've added |
+
+|`* *` |user |see all my resumes |manage them in a centralised location
+
+|`* *` |user |categorise the 'items' I've added |to ensure my resume will have 'items' of different types
+
+|`* *` |new user |view more information about various commands |learn to use new commands
+
+|`*` |careless user |undo my previous command | skip the step of manually editing or deleting them.
+
+|`*` |busy user |auto-format my resumes |
+
+
 |=======================================================================
+
+_'items' refers to a resume field of type personal details, project, education, skills, internship, and achievement._
 
 _{More to be added}_
 
