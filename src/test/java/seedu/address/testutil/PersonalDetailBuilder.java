@@ -39,7 +39,7 @@ public class PersonalDetailBuilder {
     /**
      * Initializes the PersonalBuilder with the data of {@code pdToCopy}.
      */
-    public PersonalDetailBuilder(PersonalDetail pdToCopy) {
+    public PersonalDetailBuilder(Item pdToCopy) {
         name = pdToCopy.getName();
         phone = pdToCopy.getPhone();
         email = pdToCopy.getEmail();

@@ -5,9 +5,9 @@ import static seedu.address.testutil.TypicalPersonalDetails.getTypicalAddressBoo
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.ResumeBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ResumeBook;
 import seedu.address.model.UserPrefs;
 
 public class ClearCommandTest {

@@ -16,10 +16,11 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ResumeBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ResumeBook;
+
 import seedu.address.model.item.Item;
 import seedu.address.testutil.PersonalDetailBuilder;
 
@@ -109,17 +110,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPersonalDetail(Item item) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setResumeBook(ReadOnlyResumeBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ReadOnlyResumeBook getResumeBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPersonalDetail(Item item) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -145,6 +146,36 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonalDetailList(Predicate<Item> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addResume(Item item) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasResume(Item item) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteResume(Item target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setResume(Item target, Item editedItem) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Item> getFilteredResumeList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredResumeList(Predicate<Item> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
