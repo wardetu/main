@@ -21,7 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.item.Item;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PersonalDetailBuilder;
 
 public class AddCommandTest {
 
@@ -33,7 +33,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Item validItem = new PersonBuilder().build();
+        Item validItem = new PersonalDetailBuilder().build();
 
         CommandResult commandResult = new AddCommand(validItem).execute(modelStub);
 
@@ -43,7 +43,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Item validItem = new PersonBuilder().build();
+        Item validItem = new PersonalDetailBuilder().build();
         AddCommand addCommand = new AddCommand(validItem);
         ModelStub modelStub = new ModelStubWithPerson(validItem);
 
@@ -52,8 +52,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Item alice = new PersonBuilder().withName("Alice").build();
-        Item bob = new PersonBuilder().withName("Bob").build();
+        Item alice = new PersonalDetailBuilder().withName("Alice").build();
+        Item bob = new PersonalDetailBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -163,7 +163,7 @@ public class AddCommandTest {
         @Override
         public boolean hasPerson(Item item) {
             requireNonNull(item);
-            return this.item.isSamePerson(item);
+            return this.item.isSame(item);
         }
     }
 
@@ -176,7 +176,7 @@ public class AddCommandTest {
         @Override
         public boolean hasPerson(Item item) {
             requireNonNull(item);
-            return personsAdded.stream().anyMatch(item::isSamePerson);
+            return personsAdded.stream().anyMatch(item::isSame);
         }
 
         @Override

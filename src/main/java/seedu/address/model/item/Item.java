@@ -19,41 +19,48 @@ import seedu.address.model.tag.Tag;
  */
 public class Item {
 
+    private static int itemCount = 0;
+
     // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
+    protected final int id;
+    protected String type = "item"; // to be changed to pd, edu, achv, proj, int, ski, res later on
+    protected final Name name;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    protected final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Item(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Item(Name name, Phone phone, Email email, Address address, Set<Tag> tags) { // to remove phone, email, address
+        requireAllNonNull(name);
+        itemCount += 1;
+        this.id = itemCount;
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public Name getName() {
         return name;
     }
 
+    // to be removed --- phone, email, address placeholders for integration with other parts
     public Phone getPhone() {
-        return phone;
+        return new Phone("000");
     }
-
     public Email getEmail() {
-        return email;
+        return new Email("000@gmail.com");
     }
-
     public Address getAddress() {
-        return address;
+        return new Address("000");
     }
 
     /**
@@ -65,22 +72,22 @@ public class Item {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both items of the same type have the same name.
+     * This defines a weaker notion of equality between two items.
      */
-    public boolean isSamePerson(Item otherItem) {
+    public boolean isSame(Item otherItem) {
         if (otherItem == this) {
             return true;
         }
 
         return otherItem != null
-                && otherItem.getName().equals(getName())
-                && (otherItem.getPhone().equals(getPhone()) || otherItem.getEmail().equals(getEmail()));
+                && otherItem.getType().equals(getType())
+                && otherItem.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both items have the same identity.
+     * This defines a stronger notion of equality between two items.
      */
     @Override
     public boolean equals(Object other) {
@@ -93,29 +100,23 @@ public class Item {
         }
 
         Item otherItem = (Item) other;
-        return otherItem.getName().equals(getName())
-                && otherItem.getPhone().equals(getPhone())
-                && otherItem.getEmail().equals(getEmail())
-                && otherItem.getAddress().equals(getAddress())
-                && otherItem.getTags().equals(getTags());
+        return otherItem.getId() == getId();
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
-                .append(" Email: ")
-                .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
+        builder.append(getId())
+                .append(" Type: ")
+                .append(getType())
+                .append(" Name: ")
+                .append(getName())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

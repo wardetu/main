@@ -20,7 +20,7 @@ import seedu.address.model.item.exceptions.ItemNotFoundException;
  *
  * Supports a minimal set of list operations.
  *
- * @see Item#isSamePerson(Item)
+ * @see Item#isSame(Item)
  */
 public class UniqueItemList implements Iterable<Item> {
 
@@ -33,7 +33,7 @@ public class UniqueItemList implements Iterable<Item> {
      */
     public boolean contains(Item toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSame);
     }
 
     /**
@@ -61,7 +61,7 @@ public class UniqueItemList implements Iterable<Item> {
             throw new ItemNotFoundException();
         }
 
-        if (!target.isSamePerson(editedItem) && contains(editedItem)) {
+        if (!target.isSame(editedItem) && contains(editedItem)) {
             throw new DuplicateItemException();
         }
 
@@ -127,7 +127,7 @@ public class UniqueItemList implements Iterable<Item> {
     private boolean personsAreUnique(List<Item> items) {
         for (int i = 0; i < items.size() - 1; i++) {
             for (int j = i + 1; j < items.size(); j++) {
-                if (items.get(i).isSamePerson(items.get(j))) {
+                if (items.get(i).isSame(items.get(j))) {
                     return false;
                 }
             }
