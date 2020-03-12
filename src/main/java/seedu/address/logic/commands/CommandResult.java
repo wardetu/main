@@ -10,6 +10,7 @@ import java.util.Objects;
 public class CommandResult {
 
     private final String feedbackToUser;
+    private final String dataToUser;
 
     /** Help information should be shown to the user. */
     private final boolean showHelp;
@@ -20,7 +21,8 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String dataToUser, String feedbackToUser, boolean showHelp, boolean exit) {
+        this.dataToUser = requireNonNull(dataToUser);
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -30,13 +32,15 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+    public CommandResult(String dataToUser, String feedbackToUser) {
+        this(dataToUser, feedbackToUser, false, false);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
+
+    public String getDataToUser() { return dataToUser; }
 
     public boolean isShowHelp() {
         return showHelp;
