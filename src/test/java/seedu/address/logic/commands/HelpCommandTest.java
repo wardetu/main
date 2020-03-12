@@ -27,5 +27,4 @@ public class HelpCommandTest {
 //        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
 //        assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
 //    }
->>>>>>> 12a2b3dfac907dde685c651ea076cd99fa59c3de
 }
