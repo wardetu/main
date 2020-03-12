@@ -84,4 +84,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredItemList(Predicate<Item> predicate);
+
+    /**
+     * Updates the List as the list with specified type.
+     */
+    void setItemsToDisplay(String type);
 }
