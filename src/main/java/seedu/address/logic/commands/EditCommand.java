@@ -19,7 +19,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.item.*;
+import seedu.address.model.item.Item;
+import seedu.address.model.item.PersonalDetail;
 import seedu.address.model.item.field.Address;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Name;
@@ -91,7 +92,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static PersonalDetail createEditedPerson(PersonalDetail personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static PersonalDetail createEditedPerson(PersonalDetail personToEdit,
+                                                     EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());

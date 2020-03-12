@@ -2,8 +2,6 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
 import javafx.collections.ObservableList;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.UniqueItemList;
@@ -14,7 +12,8 @@ import seedu.address.model.item.UniqueItemList;
  */
 public class ResumeBook implements ReadOnlyResumeBook {
 
-    private final String TYPE_PERSONAL_DETAIL = "pd";
+    // Should be all caps but check style complain
+    private final String typePersonalDetail = "pd";
     private final UniqueItemList itemsToDisplay;
     private final UniqueItemList personalDetails;
 
@@ -74,7 +73,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public boolean hasItem(Item item) {
         requireNonNull(item);
         switch (item.getType()) {
-        case TYPE_PERSONAL_DETAIL:
+
+        case typePersonalDetail:
             return personalDetails.contains(item);
         default:
             return itemsToDisplay.contains(item);
@@ -88,12 +88,13 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public void addItem(Item item) {
         requireNonNull(item);
         switch (item.getType()) {
-            case TYPE_PERSONAL_DETAIL:
-                personalDetails.add(item);
-                setItemsToDisplay(personalDetails);
-                break;
-            default:
-                itemsToDisplay.add(item);
+
+        case typePersonalDetail:
+            personalDetails.add(item);
+            setItemsToDisplay(personalDetails);
+            break;
+        default:
+            itemsToDisplay.add(item);
         }
     }
 
@@ -104,12 +105,13 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     public void setItem(Item target, Item editedItem) {
         switch (editedItem.getType()) {
-            case TYPE_PERSONAL_DETAIL:
-                personalDetails.setItem(target, editedItem);
-                setItemsToDisplay(personalDetails);
-                break;
-            default:
-                itemsToDisplay.setItem(target, editedItem);
+
+        case typePersonalDetail:
+            personalDetails.setItem(target, editedItem);
+            setItemsToDisplay(personalDetails);
+            break;
+        default:
+            itemsToDisplay.setItem(target, editedItem);
         }
     }
 
@@ -119,11 +121,13 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     public void removeItem(Item key) {
         switch (key.getType()) {
-            case TYPE_PERSONAL_DETAIL:
-                personalDetails.remove(key);
-                setItemsToDisplay(personalDetails);
-            default:
-                itemsToDisplay.remove(key);
+
+        case typePersonalDetail:
+            personalDetails.remove(key);
+            setItemsToDisplay(personalDetails);
+            break;
+        default:
+            itemsToDisplay.remove(key);
         }
     }
 

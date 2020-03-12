@@ -15,7 +15,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.PersonalDetail;
 import seedu.address.storage.Storage;
 
 /**

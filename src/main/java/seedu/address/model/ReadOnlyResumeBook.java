@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.PersonalDetail;
 import seedu.address.model.item.UniqueItemList;
 
 /**

@@ -12,7 +12,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.PersonalDetail;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -72,8 +71,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setResumeBookFilePath
-            (Path resumeBookFilePath) {
+    public void setResumeBookFilePath(Path resumeBookFilePath) {
         requireNonNull(resumeBookFilePath);
         userPrefs.setResumeBookFilePath(resumeBookFilePath);
     }
