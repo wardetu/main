@@ -53,7 +53,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     /**
-     *
+     * Replaces the contents of the item list of type {@code type}.
      */
     public void setItemsToDisplay(String type) {
         switch (type) {
