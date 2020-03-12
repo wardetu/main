@@ -2,11 +2,12 @@ package seedu.address.model.item;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.item.field.Address;
+import seedu.address.model.item.field.Email;
+import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Phone;
 import seedu.address.model.tag.Tag;
 
 /**

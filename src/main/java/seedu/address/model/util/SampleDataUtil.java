@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.ResumeBook;
 import seedu.address.model.ReadOnlyResumeBook;
-import seedu.address.model.item.Address;
-import seedu.address.model.item.Email;
-import seedu.address.model.item.Name;
+import seedu.address.model.item.field.Address;
+import seedu.address.model.item.field.Email;
+import seedu.address.model.item.field.Name;
 import seedu.address.model.item.PersonalDetail;
-import seedu.address.model.item.Phone;
+import seedu.address.model.item.field.Phone;
 import seedu.address.model.tag.Tag;
 
 /**

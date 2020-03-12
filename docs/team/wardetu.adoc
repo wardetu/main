@@ -1,4 +1,4 @@
-= Christian James Welly- Project Portfolio
+= Nguyen Minh Hoang- Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
@@ -11,4 +11,4 @@
 
 ResuMe - A ResuMe management application.
 
-Watch this space for more information in the future! +
+Make your resume the easy way. +
