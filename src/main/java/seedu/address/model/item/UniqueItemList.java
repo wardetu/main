@@ -51,7 +51,7 @@ public class UniqueItemList implements Iterable<Item> {
     /**
      * Replaces the item {@code target} in the list with {@code editedItem}.
      * {@code target} must exist in the list.
-     * The item identity of {@code editedItem} must not be the same as another existing item in the list.
+     * The identity of {@code editedItem} must not be the same as another existing item in the list.
      */
     public void setItem(Item target, Item editedItem) {
         requireAllNonNull(target, editedItem);
@@ -93,6 +93,7 @@ public class UniqueItemList implements Iterable<Item> {
         if (!itemsAreUnique(items)) {
             throw new DuplicateItemException();
         }
+
         internalList.setAll(items);
     }
 
@@ -121,7 +122,7 @@ public class UniqueItemList implements Iterable<Item> {
     }
 
     /**
-     * Returns true if {@code items} contains only unique items.
+     * Returns true if {@code persons} contains only unique persons.
      */
     private boolean itemsAreUnique(List<Item> items) {
         for (int i = 0; i < items.size() - 1; i++) {

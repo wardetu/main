@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.PersonalDetail;
 
 /**
  * Panel containing the list of persons.
@@ -20,9 +21,9 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Item> personListView;
 
-    public PersonListPanel(ObservableList<Item> itemList) {
+    public PersonListPanel(ObservableList<Item> personList) {
         super(FXML);
-        personListView.setItems(itemList);
+        personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
 
@@ -31,14 +32,14 @@ public class PersonListPanel extends UiPart<Region> {
      */
     class PersonListViewCell extends ListCell<Item> {
         @Override
-        protected void updateItem(Item item, boolean empty) {
-            super.updateItem(item, empty);
+        protected void updateItem(Item person, boolean empty) {
+            super.updateItem(person, empty);
 
-            if (empty || item == null) {
+            if (empty || person == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(item, getIndex() + 1).getRoot());
+                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
             }
         }
     }

@@ -1,14 +1,14 @@
 package seedu.address.model;
-
+/*
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersonalDetails.ALICE;
-import static seedu.address.testutil.TypicalPersonalDetails.BENSON;
+import static seedu.address.testutil.Assert.assertThrows;*/
+/*import static seedu.address.testutil.TypicalPersonalDetails.ALICE;
+import static seedu.address.testutil.TypicalPersonalDetails.BENSON;*/
 
-import java.nio.file.Path;
+/*import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.AddressBookBuilder;*/
 
 public class ModelManagerTest {
 /*
