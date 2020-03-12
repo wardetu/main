@@ -72,6 +72,22 @@ public class Item {
     }
 
     /**
+     * Returns true if itemType matches any of the known item types.
+     *
+     * @param itemType The itemType String.
+     * @return true if the itemType matches any of the known item types.
+     */
+    public static boolean isValidItemType(String itemType) {
+        String[] correctFormats = new String[] {"pd", "res"};
+        for (String correctFormat: correctFormats) {
+            if (itemType.equals(correctFormat)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns true if both items have the same identity.
      * This defines a stronger notion of equality between two items.
      */
