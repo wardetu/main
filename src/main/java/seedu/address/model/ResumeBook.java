@@ -53,6 +53,23 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     /**
+     * Replaces the contents of the item list of type {@code type}.
+     */
+    public void setItemsToDisplay(String type) {
+        switch (type) {
+        case typePersonalDetail:
+            setItemsToDisplay(personalDetails);
+            break;
+        case typeResume:
+            setItemsToDisplay(resumes);
+            break;
+        default:
+            // Redundant call first, to be replaced with an exception
+            setItemsToDisplay(resumes);
+        }
+    }
+
+    /**
      * Replaces the contents of the personal detail list with {@code personalDetails}.
      * {@code personalDetails} must not contain duplicate items.
      */
