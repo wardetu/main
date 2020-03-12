@@ -14,6 +14,12 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
+    private String itemType;
+
+    public ListCommand(String itemType) {
+        this.itemType = itemType;
+    }
+
 
     @Override
     public CommandResult execute(Model model) {
