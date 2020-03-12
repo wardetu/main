@@ -14,8 +14,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     // Should be all caps but check style complain
     private final String typePersonalDetail = "pd";
+    private final String typeResume = "res";
     private final UniqueItemList itemsToDisplay;
     private final UniqueItemList personalDetails;
+    private final UniqueItemList resumes;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -27,6 +29,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     {
         itemsToDisplay = new UniqueItemList();
         personalDetails = new UniqueItemList();
+        resumes = new UniqueItemList();
     }
 
     public ResumeBook() {}
@@ -74,6 +77,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
         requireNonNull(item);
         switch (item.getType()) {
 
+        case typeResume:
+            return resumes.contains(item);
         case typePersonalDetail:
             return personalDetails.contains(item);
         default:
@@ -89,6 +94,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
         requireNonNull(item);
         switch (item.getType()) {
 
+        case typeResume:
+            resumes.add(item);
+            setItemsToDisplay(resumes);
+            break;
         case typePersonalDetail:
             personalDetails.add(item);
             setItemsToDisplay(personalDetails);
@@ -106,6 +115,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public void setItem(Item target, Item editedItem) {
         switch (editedItem.getType()) {
 
+        case typeResume:
+            personalDetails.setItem(target, editedItem);
+            setItemsToDisplay(resumes);
+            break;
         case typePersonalDetail:
             personalDetails.setItem(target, editedItem);
             setItemsToDisplay(personalDetails);
@@ -122,6 +135,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public void removeItem(Item key) {
         switch (key.getType()) {
 
+        case typeResume:
+            resumes.remove(key);
+            setItemsToDisplay(resumes);
+            break;
         case typePersonalDetail:
             personalDetails.remove(key);
             setItemsToDisplay(personalDetails);
