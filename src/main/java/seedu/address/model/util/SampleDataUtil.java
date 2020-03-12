@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.ResumeBook;
 import seedu.address.model.ReadOnlyResumeBook;
+import seedu.address.model.ResumeBook;
+import seedu.address.model.item.PersonalDetail;
 import seedu.address.model.item.field.Address;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Name;
-import seedu.address.model.item.PersonalDetail;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -25,8 +25,8 @@ public class SampleDataUtil {
             new PersonalDetail(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("colleagues", "friends")),
-            new PersonalDetail(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+            new PersonalDetail(new Name("Charlotte Oliveiro"), new Phone("93210283"),
+                new Email("charlotte@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getTagSet("neighbours")),
             new PersonalDetail(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),

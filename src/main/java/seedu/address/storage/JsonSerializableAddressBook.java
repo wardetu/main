@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ResumeBook;
 import seedu.address.model.ReadOnlyResumeBook;
+import seedu.address.model.ResumeBook;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.PersonalDetail;
 
@@ -38,7 +38,13 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyResumeBook source) {
-        persons.addAll(source.getPersonalDetailList().asUnmodifiableObservableList().stream().map(x -> (PersonalDetail) x).map(JsonAdaptedPersonalDetail::new).collect(Collectors.toList()));
+        persons.addAll(source
+                .getPersonalDetailList()
+                .asUnmodifiableObservableList()
+                .stream()
+                .map(x -> (PersonalDetail) x)
+                .map(JsonAdaptedPersonalDetail::new)
+                .collect(Collectors.toList()));
     }
 
     /**
