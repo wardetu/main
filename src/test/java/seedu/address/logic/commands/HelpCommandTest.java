@@ -9,6 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 public class HelpCommandTest {
+<<<<<<< HEAD
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
@@ -17,4 +18,14 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult = new CommandResult("", SHOWING_HELP_MESSAGE, true, false);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
+=======
+//    private Model model = new ModelManager();
+//    private Model expectedModel = new ModelManager();
+//
+//    @Test
+//    public void execute_help_success() {
+//        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+//        assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
+//    }
+>>>>>>> 12a2b3dfac907dde685c651ea076cd99fa59c3de
 }

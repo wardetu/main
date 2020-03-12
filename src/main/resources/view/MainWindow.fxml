@@ -38,28 +38,29 @@
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="200.0" styleClass="pane-with-border">
-               <padding>
-                  <Insets bottom="5" left="10" right="10" top="5" />
-               </padding>
-            </StackPane>
-            <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
-               <items>
-      
-              <StackPane fx:id="itemDisplayPlaceholder" minWidth="300.0" styleClass="pane-with-border">
-                <padding>
-                  <Insets bottom="5" left="10" right="10" top="5" />
-                </padding>
-              </StackPane>
-      
-              <VBox fx:id="personList" prefWidth="340.0" styleClass="pane-with-border">
-                <padding>
-                  <Insets bottom="10" left="10" right="10" top="10" />
-                </padding>
-                <StackPane fx:id="personListPanelPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
-              </VBox>
-               </items>
-            </SplitPane>
+
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="200.0" styleClass="pane-with-border">
+           <padding>
+              <Insets bottom="5" left="10" right="10" top="5" />
+           </padding>
+        </StackPane>
+        <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
+           <items>
+
+          <StackPane fx:id="itemDisplayPlaceholder" minWidth="300.0" styleClass="pane-with-border">
+            <padding>
+              <Insets bottom="5" left="10" right="10" top="5" />
+            </padding>
+          </StackPane>
+
+          <VBox fx:id="personList" prefWidth="340.0" styleClass="pane-with-border">
+            <padding>
+              <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <StackPane fx:id="personListPanelPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
+          </VBox>
+           </items>
+        </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.item.Item;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -19,26 +19,29 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final ResumeBook resumeBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Item> filteredPersonalDetails;
+    private final FilteredList<Item> filteredResumes;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given resumeBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyResumeBook resumeBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(resumeBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with resume book: " + resumeBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.resumeBook = new ResumeBook(resumeBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersonalDetails = new FilteredList<>(this.resumeBook.getPersonalDetailList());
+        filteredResumes = new FilteredList<>(this.resumeBook.getResumeList());
+        // do the same for edu, achv, proj, int, ski
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new ResumeBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,67 +69,110 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getResumeBookFilePath() {
+        return userPrefs.getResumeBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setResumeBookFilePath(Path resumeBookFilePath) {
+        requireNonNull(resumeBookFilePath);
+        userPrefs.setResumeBookFilePath(resumeBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== ResumeBook ==================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setResumeBook(ReadOnlyResumeBook resumeBook) {
+        this.resumeBook.resetData(resumeBook);
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public ReadOnlyResumeBook getResumeBook() {
+        return resumeBook;
+    }
+
+    //=========== Personal Detail ============================================================================
+
+    @Override
+    public boolean hasPersonalDetail(Item pd) {
+        requireNonNull(pd);
+        return resumeBook.hasPersonalDetail(pd);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deletePersonalDetail(Item target) {
+        resumeBook.removePersonalDetail(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addPersonalDetail(Item pd) {
+        resumeBook.addPersonalDetail(pd);
+        updateFilteredPersonalDetailList(PREDICATE_SHOW_ALL_PERSONAL_DETAILS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void setPersonalDetail(Item target, Item editedPd) {
+        requireAllNonNull(target, editedPd);
+        resumeBook.setPersonalDetail(target, editedPd);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Personal Detail List Accessors ===================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code PersonalDetail} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Item> getFilteredPersonalDetailList() {
+        return filteredPersonalDetails;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonalDetailList(Predicate<Item> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredPersonalDetails.setPredicate(predicate);
+    }
+
+    //=========== Resume =====================================================================================
+
+    @Override
+    public boolean hasResume(Item res) {
+        requireNonNull(res);
+        return resumeBook.hasResume(res);
+    }
+
+    @Override
+    public void deleteResume(Item target) {
+        resumeBook.removeResume(target);
+    }
+
+    @Override
+    public void addResume(Item res) {
+        resumeBook.addResume(res);
+        updateFilteredResumeList(PREDICATE_SHOW_ALL_RESUMES);
+    }
+
+    @Override
+    public void setResume(Item target, Item editedRes) {
+        requireAllNonNull(target, editedRes);
+        resumeBook.setResume(target, editedRes);
+    }
+
+    //=========== Filtered Resume List Accessors ==============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Resume} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Item> getFilteredResumeList() {
+        return filteredResumes;
+    }
+
+    @Override
+    public void updateFilteredResumeList(Predicate<Item> predicate) {
+        requireNonNull(predicate);
+        filteredResumes.setPredicate(predicate);
     }
 
     @Override
@@ -143,9 +189,10 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return resumeBook.equals(other.resumeBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersonalDetails.equals(other.filteredPersonalDetails)
+                && filteredResumes.equals(other.filteredResumes); // to add filtered edu, achv, proj, int, ski
     }
 
 }
