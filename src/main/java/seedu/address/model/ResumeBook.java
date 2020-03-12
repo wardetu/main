@@ -59,9 +59,12 @@ public class ResumeBook implements ReadOnlyResumeBook {
         switch (type) {
         case typePersonalDetail:
             setItemsToDisplay(personalDetails);
+            break;
         case typeResume:
             setItemsToDisplay(resumes);
+            break;
         default:
+            // Redundant call first, to be replaced with an exception
             setItemsToDisplay(resumes);
         }
     }
