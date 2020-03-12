@@ -40,7 +40,9 @@ public class CommandResult {
         return feedbackToUser;
     }
 
-    public String getDataToUser() { return dataToUser; }
+    public String getDataToUser() {
+        return dataToUser;
+    }
 
     public boolean isShowHelp() {
         return showHelp;
