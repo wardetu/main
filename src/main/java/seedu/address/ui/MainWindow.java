@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private Item item;
+    private ItemDisplay itemDisplay;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -115,8 +115,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        item = new Item();
-        itemDisplayPlaceholder.getChildren().add(item.getRoot());
+        itemDisplay = new ItemDisplay();
+        itemDisplayPlaceholder.getChildren().add(itemDisplay.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -184,9 +184,8 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             logger.info("Item Display: " + commandResult.getFeedbackToUser());
 
-            String feedback = commandResult.getFeedbackToUser();
-            resultDisplay.setFeedbackToUser(feedback);
-            item.setFeedbackToUser(feedback);
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            itemDisplay.setDataFeedbackToUser(commandResult.getDataToUser());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -200,6 +199,7 @@ public class MainWindow extends UiPart<Stage> {
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
+            itemDisplay.setDataFeedbackToUser(e.getMessage());
             throw e;
         }
     }

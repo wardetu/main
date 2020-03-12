@@ -157,14 +157,14 @@
     -fx-text-fill: black !important;
 }
 
-.item {
+.item-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
 }
 
-.item .label {
+.item-display .label {
     -fx-text-fill: black !important;
 }
 
@@ -348,7 +348,7 @@
     -fx-background-radius: 0;
 }
 
-#item .content {
+#itemDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
 }
