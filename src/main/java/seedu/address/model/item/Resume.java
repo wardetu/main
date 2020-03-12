@@ -12,5 +12,6 @@ public class Resume extends Item {
 
     public Resume(Name name, Set<Tag> tags) {
         super(name, tags);
+        this.type = "res";
     }
 }
