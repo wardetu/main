@@ -16,9 +16,12 @@ import seedu.address.model.tag.Tag;
  */
 public class Item {
 
-    // item-level fields
+    // class-level fields
     protected static int itemCount = 0;
+
+    // item-level fields
     protected String type = "item";
+    protected String information = "";
     protected final int id;
 
     // Identity fields
@@ -44,6 +47,10 @@ public class Item {
 
     public int getId() {
         return id;
+    }
+
+    public String getInfo() {
+        return information;
     }
 
     public Name getName() {
