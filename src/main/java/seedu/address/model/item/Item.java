@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Type;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,7 +21,7 @@ public class Item {
     protected static int itemCount = 0;
 
     // item-level fields
-    protected String type = "item";
+    protected Type type = null;
     protected String information = "";
     protected final int id;
 
@@ -41,7 +42,7 @@ public class Item {
         this.tags.addAll(tags);
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
