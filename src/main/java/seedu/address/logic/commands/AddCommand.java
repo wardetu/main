@@ -59,7 +59,7 @@ public class AddCommand extends Command {
 
         model.addItem(toAdd);
 
-        return new CommandResult(toAdd.toString(),
+        return new CommandResult(toAdd.toString(), 
                 String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType(), toAdd));
     }
 
