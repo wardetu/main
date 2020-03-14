@@ -5,7 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Resume;
 
 /**
  * The API of the Model component.
@@ -52,29 +54,69 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyResumeBook getResumeBook();
 
-    /**
-     * Returns true if an item with the same identity as {@code pd} exists in the resume book.
-     */
-    boolean hasItem(Item item);
+    //=========== Internships ================================================================================
 
     /**
-     * Deletes the given item.
-     * The item must exist in the resume book.
+     * Returns true if an internship with the same identity as {@code internship} exists in the resume book.
      */
-    void deleteItem(Item target);
+    boolean hasInternship(Internship internship);
 
     /**
-     * Adds the given item.
-     * {@code item} must not already exist in the resume book.
+     * Deletes the given internship.
+     * The internship must exist in the resume book.
      */
-    void addItem(Item item);
+    void deleteInternship(Internship internship);
 
     /**
-     * Replaces the given item {@code target} with {@code editedItem}.
+     * Adds the given internship.
+     * {@code internship} must not already exist in the resume book.
+     */
+    void addInternship(Internship internship);
+
+    /**
+     * Replaces the given internship {@code target} with {@code editedInternship}.
      * {@code target} must exist in the resume book.
-     * The identity of {@code editedItem} must not be the same as another existing item in the resume book.
+     * The identity of {@code editedInternship} must not be the same as another existing internship in the resume book.
      */
-    void setItem(Item target, Item editedItem);
+    void setInternship(Internship target, Internship editedInternship);
+
+    /**
+     * Updates the List as the internship list.
+     */
+    void setInternshipToDisplay();
+
+    //=========== Resumes ================================================================================
+
+    /**
+     * Returns true if a resume with the same identity as {@code resume} exists in the resume book.
+     */
+    boolean hasResume(Resume resume);
+
+    /**
+     * Deletes the given resume.
+     * The resume must exist in the resume book.
+     */
+    void deleteResume(Resume resume);
+
+    /**
+     * Adds the given resume.
+     * {@code resume} must not already exist in the resume book.
+     */
+    void addResume(Resume resume);
+
+    /**
+     * Replaces the given resume {@code target} with {@code editedResume}.
+     * {@code target} must exist in the resume book.
+     * The identity of {@code editedResume} must not be the same as another existing resume in the resume book.
+     */
+    void setResume(Resume target, Resume editedResume);
+
+    /**
+     * Updates the List as the resume list.
+     */
+    void setResumeToDisplay();
+
+    //=========== Item Lists ================================================================================
 
     /** Returns an unmodifiable view of the filtered item list */
     ObservableList<Item> getFilteredItemList();
@@ -85,8 +127,14 @@ public interface Model {
      */
     void updateFilteredItemList(Predicate<Item> predicate);
 
-    /**
-     * Updates the List as the list with specified type.
-     */
-    void setItemsToDisplay(String type);
+    //// STUBS
+    public boolean hasItem(Item item);
+
+    public void addItem(Item item);
+
+    public void deleteItem(Item item);
+
+    public void setItem(Item target, Item edit);
+
+    public void setItemsToDisplay(String type);
 }
