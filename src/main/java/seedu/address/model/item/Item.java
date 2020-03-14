@@ -86,7 +86,7 @@ public class Item {
      * @return true if the itemType matches any of the known item types.
      */
     public static boolean isValidItemType(String itemType) {
-        String[] correctFormats = new String[] {"pd", "res"};
+        String[] correctFormats = new String[] {"int", "res"};
         for (String correctFormat: correctFormats) {
             if (itemType.equals(correctFormat)) {
                 return true;
