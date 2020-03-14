@@ -13,7 +13,7 @@ public class AddInternshipCommand extends AddCommand {
     private final Internship toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Person}.
      */
     public AddInternshipCommand(Internship item) {
         requireNonNull(item);

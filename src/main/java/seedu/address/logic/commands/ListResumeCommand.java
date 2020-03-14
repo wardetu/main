@@ -6,7 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import seedu.address.model.Model;
 
 /**
- * Command to list all Resumes
+ * Command to list all Resumes.
  */
 public class ListResumeCommand extends ListCommand {
 
