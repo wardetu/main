@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddResumeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.PersonalDetail;
 import seedu.address.model.item.Resume;
@@ -56,7 +57,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             PersonalDetail personalDetail = new PersonalDetail(name, phone, email, address, tagList);
 
-            return new AddCommand(personalDetail);
+            return new AddResumeCommand(new Resume(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()),
+                    ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG))));
         } else {
             // itemType.equals("res")
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
@@ -69,7 +71,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             Resume resume = new Resume(name, tagList);
 
-            return new AddCommand(resume);
+            return new AddResumeCommand(resume);
         }
     }
 

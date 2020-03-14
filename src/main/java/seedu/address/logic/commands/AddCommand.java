@@ -15,11 +15,11 @@ import seedu.address.model.item.Item;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public abstract class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an Item to the address book. "
             + "Parameters: "
             + PREFIX_ITEM + "TYPE "
             + PREFIX_NAME + "NAME "
@@ -28,8 +28,8 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ITEM + "pd "
-            + PREFIX_NAME + "John Doe "
+            + PREFIX_ITEM + "res "
+            + PREFIX_NAME + "Resume 1 "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
@@ -39,32 +39,4 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New %1$s added: %2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private final Item toAdd;
-
-    /**
-     * Creates an AddCommand to add the specified {@code Person}
-     */
-    public AddCommand(Item item) {
-        requireNonNull(item);
-        toAdd = item;
-    }
-
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-
-        if (model.hasItem(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.addItem(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType(), toAdd));
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
-    }
 }
