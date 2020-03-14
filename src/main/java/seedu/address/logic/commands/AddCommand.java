@@ -41,6 +41,11 @@ public class AddCommand extends Command {
 
     private final Item toAdd;
 
+    // Default constructor for stubbing purposes
+    public AddCommand() {
+        toAdd = null;
+    }
+
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
