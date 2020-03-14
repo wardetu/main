@@ -12,8 +12,8 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.stubs.AddInternshipCommandStub;
-import seedu.address.logic.commands.stubs.AddResumeCommandStub;
+import seedu.address.logic.commands.AddInternshipCommand;
+import seedu.address.logic.commands.AddResumeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Resume;
@@ -57,7 +57,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             Resume resume = new Resume(name, tagList);
 
-            return new AddResumeCommandStub(resume);
+            return new AddResumeCommand(resume);
         case ("int"):
             // This may change, so I will leave it here first despite the duplication
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
@@ -69,10 +69,9 @@ public class AddCommandParser implements Parser<AddCommand> {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            Internship internship = new Internship(name, "role", new Time("from"), new Time("to"),
+            Internship internship = new Internship(name, "role", new Time("02-2019"), new Time("05-2020"),
                     "decription", tagList);
-
-            return new AddInternshipCommandStub(internship);
+            return new AddInternshipCommand(internship);
         default:
             // Should not have reached here
             // TODO: Use a better Exception here

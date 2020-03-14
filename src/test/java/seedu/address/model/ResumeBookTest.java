@@ -23,11 +23,17 @@ package seedu.address.model;
 //import seedu.address.testutil.PersonalDetailBuilder;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Resume;
 import seedu.address.model.item.UniqueItemList;
+import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Time;
 
 public class ResumeBookTest {
     /*
@@ -123,6 +129,18 @@ public class ResumeBookTest {
         public UniqueItemList getPersonalDetailList() {
             return resumes;
         }
+
+        @Override
+        public Resume getResume(Index index) {
+            return new Resume(new Name("Resume 1"), new HashSet<>());
+        }
+
+        @Override
+        public Internship getInternship(Index index) {
+            return new Internship(new Name("Company 1"), "Software Engineer", new Time("02-2019"),
+                    new Time("05-2020"), "I did nothing", new HashSet<>());
+        }
+
     }
 
 }

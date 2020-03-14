@@ -3,8 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.stubs.ListInternshipCommandStub;
-import seedu.address.logic.commands.stubs.ListResumeCommandStub;
+import seedu.address.logic.commands.ListInternshipCommand;
+import seedu.address.logic.commands.ListResumeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -28,9 +28,9 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         switch(itemType) {
         case ("res"):
-            return new ListResumeCommandStub();
+            return new ListResumeCommand();
         case ("int"):
-            return new ListInternshipCommandStub();
+            return new ListInternshipCommand();
         default:
             // Should not have reached here
             // TODO: Use a better Exception here
