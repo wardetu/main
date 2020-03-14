@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Resume;
@@ -53,7 +54,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     // STUB
-    public void setItemsToDisplay(String type) {};
+    public void setItemsToDisplay(String type) {}
 
     /**
      * Replaces the contents of the item list to the content of the internship list.
@@ -166,6 +167,15 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     public void removeResume(Resume key) {
         resumes.remove(key);
+    }
+
+    public Resume getResume(Index index) {
+        return (Resume) resumes.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public Internship getInternship(Index index) {
+        return (Internship) internships.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
     //// util methods

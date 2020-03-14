@@ -7,4 +7,5 @@ public class DeleteInternshipCommand extends DeleteCommand {
     public DeleteInternshipCommand(Index targetIndex) {
         super(targetIndex);
     }
+
 }

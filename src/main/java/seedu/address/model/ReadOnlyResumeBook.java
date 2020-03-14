@@ -1,7 +1,10 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Resume;
 import seedu.address.model.item.UniqueItemList;
 
 /**
@@ -29,4 +32,8 @@ public interface ReadOnlyResumeBook {
 
     ///STUB
     UniqueItemList getPersonalDetailList();
+
+    Resume getResume(Index index);
+
+    Internship getInternship(Index index);
 }

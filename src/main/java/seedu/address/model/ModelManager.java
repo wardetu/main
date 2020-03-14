@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Resume;
@@ -121,6 +122,11 @@ public class ModelManager implements Model {
         resumeBook.setInternshipToDisplay();
     }
 
+    @Override
+    public Internship getInternship(Index index) {
+        return resumeBook.getInternship(index);
+    }
+
     //=========== Resume ================================================================================
 
     @Override
@@ -150,6 +156,11 @@ public class ModelManager implements Model {
     @Override
     public void setResumeToDisplay() {
         resumeBook.setResumeToDisplay();
+    }
+
+    @Override
+    public Resume getResume(Index index) {
+        return resumeBook.getResume(index);
     }
 
     //=========== Filtered Item List Accessors =============================================================
@@ -200,6 +211,6 @@ public class ModelManager implements Model {
 
     public void setItem(Item target, Item edit) {}
 
-    public void setItemsToDisplay(String type) {};
+    public void setItemsToDisplay(String type) {}
 
 }

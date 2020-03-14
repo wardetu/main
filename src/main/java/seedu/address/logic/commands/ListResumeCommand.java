@@ -10,7 +10,7 @@ public class ListResumeCommand extends ListCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setItemsToDisplay("res");
+        model.setResumeToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult("", String.format(MESSAGE_SUCCESS, "Resume"));
     }

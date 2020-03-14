@@ -2,17 +2,17 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.item.Resume;
+import seedu.address.model.item.Internship;
 
 import static java.util.Objects.requireNonNull;
 
 public class AddInternshipCommand extends AddCommand{
-    private final Resume toAdd;
+    private final Internship toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddInternshipCommand(Resume item) {
+    public AddInternshipCommand(Internship item) {
         requireNonNull(item);
         toAdd = item;
     }
@@ -21,11 +21,14 @@ public class AddInternshipCommand extends AddCommand{
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasItem(toAdd)) {
+        if (model.hasInternship(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addItem(toAdd);
+        model.addInternship(toAdd);
+        model.setInternshipToDisplay();
+
+        model.addInternship(toAdd);
         return new CommandResult(toAdd.toString(),
                 String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType(), toAdd));
     }

@@ -10,7 +10,7 @@ public class ListInternshipCommand extends ListCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setItemsToDisplay("int");
+        model.setInternshipToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult("", String.format(MESSAGE_SUCCESS, "Internship"));
     }

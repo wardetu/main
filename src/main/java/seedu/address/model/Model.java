@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Resume;
@@ -85,6 +86,8 @@ public interface Model {
      */
     void setInternshipToDisplay();
 
+    Internship getInternship(Index index);
+
     //=========== Resumes ================================================================================
 
     /**
@@ -116,6 +119,8 @@ public interface Model {
      */
     void setResumeToDisplay();
 
+    Resume getResume(Index index);
+
     //=========== Item Lists ================================================================================
 
     /** Returns an unmodifiable view of the filtered item list */
@@ -128,13 +133,13 @@ public interface Model {
     void updateFilteredItemList(Predicate<Item> predicate);
 
     //// STUBS
-    public boolean hasItem(Item item);
+    boolean hasItem(Item item);
 
-    public void addItem(Item item);
+    void addItem(Item item);
 
-    public void deleteItem(Item item);
+    void deleteItem(Item item);
 
-    public void setItem(Item target, Item edit);
+    void setItem(Item target, Item edit);
 
-    public void setItemsToDisplay(String type);
+    void setItemsToDisplay(String type);
 }

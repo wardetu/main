@@ -42,7 +42,7 @@ public abstract class DeleteCommand extends Command {
         Item itemToDelete = lastShownList.get(targetIndex.getZeroBased());
 
         Item personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteItem(personToDelete);
+//        model.deleteItem(personToDelete);
         return new CommandResult(itemToDelete.toString(),
                 String.format(MESSAGE_DELETE_PERSON_SUCCESS, itemToDelete));
     }
