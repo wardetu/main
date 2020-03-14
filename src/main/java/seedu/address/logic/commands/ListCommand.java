@@ -17,6 +17,11 @@ public class ListCommand extends Command {
 
     private Type itemType;
 
+    // Default constructor that is somehow required for stubbing purposes
+    public ListCommand() {
+
+    }
+
     public ListCommand(String itemType) {
         this.itemType = new Type(itemType);
     }
