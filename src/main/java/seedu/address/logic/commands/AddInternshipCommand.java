@@ -1,12 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
 
-import static java.util.Objects.requireNonNull;
-
-public class AddInternshipCommand extends AddCommand{
+/**
+ * Adds a Internship Item to the address book.
+ */
+public class AddInternshipCommand extends AddCommand {
     private final Internship toAdd;
 
     /**
@@ -28,7 +31,6 @@ public class AddInternshipCommand extends AddCommand{
         model.addInternship(toAdd);
         model.setInternshipToDisplay();
 
-        model.addInternship(toAdd);
         return new CommandResult(toAdd.toString(),
                 String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType(), toAdd));
     }

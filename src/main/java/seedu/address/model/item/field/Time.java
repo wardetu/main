@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Time {
 
     public static final String MESSAGE_CONSTRAINTS = "Time should be in the format MM-yyyy";
-    public static final String VALIDATION_REGEX = "^(1[0-2]|0[1-9])/[0-9]{4}$";
+    public static final String VALIDATION_REGEX = "^(1[0-2]|0[1-9])-[0-9]{4}$";
     public final String value;
 
     /**

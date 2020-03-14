@@ -6,6 +6,7 @@ import java.util.Set;
 
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.Type;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,6 +23,7 @@ public class Internship extends Item {
     public Internship(Name name, String role, Time from, Time to, String description, Set<Tag> tags) {
         super(name, tags);
         requireAllNonNull(role, from, to, description);
+        this.type = new Type("int");
         this.role = role;
         this.from = from;
         this.to = to;
