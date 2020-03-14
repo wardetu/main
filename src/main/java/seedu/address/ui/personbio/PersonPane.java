@@ -28,6 +28,5 @@ public class PersonPane extends UiPart<Region> {
     public PersonPane(Image img) {
         super(FXML);
 
-        Item person = new Internship(new Name("ABC"), );
     }
 }
