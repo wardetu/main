@@ -6,6 +6,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListInternshipCommand;
 import seedu.address.logic.commands.ListResumeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.item.Item;
 
 /**
  * Parses input arguments and creates a new ListCommand object
@@ -21,7 +22,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM);
 
         if (!argMultimap.getValue(PREFIX_ITEM).isPresent() || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException("You are required to specify Item type!");
+            throw new ParseException(Item.MESSAGE_CONSTRAINTS);
         }
 
         String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());

@@ -15,7 +15,7 @@ public class CliSyntax {
     /* Items */
     public static final Prefix PREFIX_ITEM = new Prefix("i/");
     public static final Prefix PREFIX_NAME = new Prefix("n/");
-    public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_TAG = new Prefix("#/");
 
     /* Internship */
     public static final Prefix PREFIX_FROM = new Prefix("f/");
