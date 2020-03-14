@@ -14,7 +14,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
+import seedu.address.model.item.Skill;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -100,11 +102,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteInternship(Internship target) {
-        resumeBook.removeInternship(target);
-    }
-
-    @Override
     public void addInternship(Internship internship) {
         resumeBook.addInternship(internship);
         updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
@@ -113,14 +110,14 @@ public class ModelManager implements Model {
     @Override
     public void setInternship(Internship target, Internship editedInternship) {
         requireAllNonNull(target, editedInternship);
-
         resumeBook.setInternship(target, editedInternship);
     }
 
     @Override
-    public void setInternshipToDisplay() {
-        resumeBook.setInternshipToDisplay();
+    public void deleteInternship(Internship key) {
+        resumeBook.deleteInternship(key);
     }
+
 
     @Override
     public Internship getInternship(Index index) {
@@ -131,17 +128,97 @@ public class ModelManager implements Model {
         return resumeBook.getInternshipSize();
     }
 
+    @Override
+    public void setInternshipToDisplay() {
+        resumeBook.setInternshipToDisplay();
+    }
+
+    //=========== Projects ================================================================================
+
+    @Override
+    public boolean hasProject(Project project) {
+        requireNonNull(project);
+        return resumeBook.hasProject(project);
+    }
+
+    @Override
+    public void addProject(Project project) {
+        resumeBook.addProject(project);
+        updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+    }
+
+    @Override
+    public void setProject(Project target, Project editedProject) {
+        requireAllNonNull(target, editedProject);
+        resumeBook.setProject(target, editedProject);
+    }
+
+    @Override
+    public void deleteProject(Project key) {
+        resumeBook.deleteProject(key);
+    }
+
+    @Override
+    public Project getProject(Index index) {
+        return resumeBook.getProject(index);
+    }
+
+    @Override
+    public int getProjectSize() {
+        return resumeBook.getProjectSize();
+    }
+
+    @Override
+    public void setProjectToDisplay() {
+        resumeBook.setProjectToDisplay();
+    }
+
+    //=========== Skill ================================================================================
+
+    @Override
+    public boolean hasSkill(Skill skill) {
+        requireNonNull(skill);
+        return resumeBook.hasSkill(skill);
+    }
+
+    @Override
+    public void addSkill(Skill skill) {
+        resumeBook.addSkill(skill);
+        updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+    }
+
+    @Override
+    public void setSkill(Skill target, Skill editedSkill) {
+        requireAllNonNull(target, editedSkill);
+        resumeBook.setSkill(target, editedSkill);
+    }
+
+    @Override
+    public void deleteSkill(Skill key) {
+        resumeBook.deleteSkill(key);
+    }
+
+    @Override
+    public Skill getSkill(Index index) {
+        return resumeBook.getSkill(index);
+    }
+
+    @Override
+    public int getSkillSize() {
+        return resumeBook.getSkillSize();
+    }
+
+    @Override
+    public void setSkillToDisplay() {
+        resumeBook.setSkillToDisplay();
+    }
+
     //=========== Resume ================================================================================
 
     @Override
     public boolean hasResume(Resume resume) {
         requireNonNull(resume);
         return resumeBook.hasResume(resume);
-    }
-
-    @Override
-    public void deleteResume(Resume target) {
-        resumeBook.removeResume(target);
     }
 
     @Override
@@ -158,8 +235,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setResumeToDisplay() {
-        resumeBook.setResumeToDisplay();
+    public void deleteResume(Resume target) {
+        resumeBook.deleteResume(target);
     }
 
     @Override
@@ -170,6 +247,11 @@ public class ModelManager implements Model {
     @Override
     public int getResumeSize() {
         return resumeBook.getResumeSize();
+    }
+
+    @Override
+    public void setResumeToDisplay() {
+        resumeBook.setResumeToDisplay();
     }
 
     //=========== Filtered Item List Accessors =============================================================

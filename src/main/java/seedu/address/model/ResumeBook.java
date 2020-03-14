@@ -6,7 +6,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
+import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
 
 /**
@@ -18,6 +20,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
     // Should be all caps but check style complain
     private final UniqueItemList itemsToDisplay;
     private final UniqueItemList internships;
+    private final UniqueItemList projects;
+    private final UniqueItemList skills;
     private final UniqueItemList resumes;
 
     /*
@@ -30,6 +34,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
     {
         itemsToDisplay = new UniqueItemList();
         internships = new UniqueItemList();
+        projects = new UniqueItemList();
+        skills = new UniqueItemList();
         resumes = new UniqueItemList();
     }
 
@@ -43,7 +49,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
+    //=========== Replace display list =====================================================================
 
     /**
      * Replaces the contents of the item list with {@code items}.
@@ -64,18 +70,50 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     /**
+     * Replaces the contents of the item list to the content of the project list.
+     */
+    public void setProjectToDisplay() {
+        setItemsToDisplay(projects);
+    }
+
+    /**
+     * Replaces the contents of the item list to the content of the skill list.
+     */
+    public void setSkillToDisplay() {
+        setItemsToDisplay(skills);
+    }
+
+    /**
      * Replaces the contents of the item list to the content of the resume list.
      */
     public void setResumeToDisplay() {
         setItemsToDisplay(resumes);
     }
 
+    //=========== Overwrite list ================================================================================
+
     /**
      * Replaces the contents of the internship list with {@code internships}.
-     * {@code internship} must not contain duplicate items.
+     * {@code internships} must not contain duplicate items.
      */
     public void setInternships(UniqueItemList internships) {
         this.internships.setItems(internships);
+    }
+
+    /**
+     * Replaces the contents of the project list with {@code projects}.
+     * {@code projects} must not contain duplicate items.
+     */
+    public void setProjects(UniqueItemList projects) {
+        this.projects.setItems(projects);
+    }
+
+    /**
+     * Replaces the contents of the skill list with {@code skills}.
+     * {@code skills} must not contain duplicate items.
+     */
+    public void setSkills(UniqueItemList skills) {
+        this.skills.setItems(skills);
     }
 
     /**
@@ -92,10 +130,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public void resetData(ReadOnlyResumeBook newData) {
         requireNonNull(newData);
         setInternships(newData.getInternshipList());
+        setProjects(newData.getProjectList());
+        setSkills(newData.getSkillList());
         setResumes(newData.getResumeList());
     }
-
-    //// item-level operations
 
     //=========== Internships ================================================================================
 
@@ -129,8 +167,110 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Removes {@code key} from this {@code ResumeBook}.
      * {@code key} must exist in the resume book.
      */
-    public void removeInternship(Internship key) {
+    public void deleteInternship(Internship key) {
         internships.remove(key);
+    }
+
+    @Override
+    public Internship getInternship(Index index) {
+        return (Internship) internships.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public int getInternshipSize() {
+        return internships.getSize();
+    }
+
+    //=========== Projects ================================================================================
+
+    /**
+     * Returns true if a project with the same identity as {@code project} exists in the resume book.
+     */
+    public boolean hasProject(Project project) {
+        requireNonNull(project);
+        return projects.contains(project);
+    }
+
+    /**
+     * Adds a project to the resume book.
+     * The project must not already exist in the resume book.
+     */
+    public void addProject(Project project) {
+        requireNonNull(project);
+        projects.add(project);
+    }
+
+    /**
+     * Replaces the given project {@code target} in the list with {@code editedProject}.
+     * {@code target} must exist in the resume book.
+     * The identity of {@code editedProject} must not be the same as another existing project in the resume book.
+     */
+    public void setProject(Project target, Project editedProject) {
+        projects.setItem(target, editedProject);
+    }
+
+    /**
+     * Removes {@code key} from this {@code ResumeBook}.
+     * {@code key} must exist in the resume book.
+     */
+    public void deleteProject(Project key) {
+        projects.remove(key);
+    }
+
+    @Override
+    public Project getProject(Index index) {
+        return (Project) projects.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public int getProjectSize() {
+        return projects.getSize();
+    }
+
+    //=========== Skills ================================================================================
+
+    /**
+     * Returns true if a skill with the same identity as {@code skill} exists in the resume book.
+     */
+    public boolean hasSkill(Skill skill) {
+        requireNonNull(skill);
+        return skills.contains(skill);
+    }
+
+    /**
+     * Adds a skill to the resume book.
+     * The skill must not already exist in the resume book.
+     */
+    public void addSkill(Skill skill) {
+        requireNonNull(skill);
+        skills.add(skill);
+    }
+
+    /**
+     * Replaces the given skill {@code target} in the list with {@code editedSkill}.
+     * {@code target} must exist in the resume book.
+     * The identity of {@code editedSkill} must not be the same as another existing skill in the resume book.
+     */
+    public void setSkill(Skill target, Skill editedSkill) {
+        skills.setItem(target, editedSkill);
+    }
+
+    /**
+     * Removes {@code key} from this {@code ResumeBook}.
+     * {@code key} must exist in the resume book.
+     */
+    public void deleteSkill(Skill key) {
+        skills.remove(key);
+    }
+
+    @Override
+    public Skill getSkill(Index index) {
+        return (Skill) skills.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public int getSkillSize() {
+        return skills.getSize();
     }
 
     //=========== Resumes ================================================================================
@@ -165,28 +305,21 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Removes {@code key} from this {@code ResumeBook}.
      * {@code key} must exist in the resume book.
      */
-    public void removeResume(Resume key) {
+    public void deleteResume(Resume key) {
         resumes.remove(key);
     }
 
+    @Override
     public Resume getResume(Index index) {
         return (Resume) resumes.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
+    @Override
     public int getResumeSize() {
         return resumes.getSize();
     }
 
-    public int getInternshipSize() {
-        return internships.getSize();
-    }
-
-    @Override
-    public Internship getInternship(Index index) {
-        return (Internship) internships.asUnmodifiableObservableList().get(index.getZeroBased());
-    }
-
-    //// util methods
+    //=========== Util methods ================================================================================
 
     @Override
     public String toString() {
@@ -205,6 +338,16 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
+    public UniqueItemList getProjectList() {
+        return projects;
+    }
+
+    @Override
+    public UniqueItemList getSkillList() {
+        return skills;
+    }
+
+    @Override
     public UniqueItemList getResumeList() {
         return resumes;
     }
@@ -215,6 +358,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
                 || (other instanceof ResumeBook // instanceof handles nulls
                 && itemsToDisplay.equals(((ResumeBook) other).itemsToDisplay))
                 && internships.equals(((ResumeBook) other).internships)
+                && projects.equals(((ResumeBook) other).projects)
+                && skills.equals(((ResumeBook) other).skills)
                 && resumes.equals(((ResumeBook) other).resumes);
     }
 
@@ -231,8 +376,6 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return false;
     }
     public void addItem(Item item) {}
-
     public void deleteItem(Item item) {}
-
     public void setItem(Item target, Item edit) {}
 }
