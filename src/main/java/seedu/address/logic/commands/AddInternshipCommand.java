@@ -25,8 +25,8 @@ public class AddInternshipCommand extends AddCommand{
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-//        model.addItem(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType(), toAdd));
+        return new CommandResult(toAdd.toString(),
+                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType(), toAdd));
     }
 
     @Override

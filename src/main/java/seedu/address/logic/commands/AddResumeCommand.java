@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.item.Item;
 import seedu.address.model.item.Resume;
 
 import static java.util.Objects.requireNonNull;
@@ -27,8 +26,8 @@ public class AddResumeCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-//        model.addItem(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType(), toAdd));
+        return new CommandResult(toAdd.toString(),
+                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType(), toAdd));
     }
 
     @Override

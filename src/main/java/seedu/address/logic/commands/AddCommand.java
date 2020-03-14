@@ -1,16 +1,11 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.item.Item;
 
 /**
  * Adds a person to the address book.
@@ -26,7 +21,7 @@ public abstract class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]....\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ITEM + "res "
             + PREFIX_NAME + "Resume 1 "
@@ -38,5 +33,4 @@ public abstract class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New %1$s added: %2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-
 }
