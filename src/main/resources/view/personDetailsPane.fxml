@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView>
+        <columns>
+          <TableColumn fx:id="field" maxWidth="150.0" minWidth="150.0" text="Field" />
+          <TableColumn fx:id="data" prefWidth="100.0" text="Data" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>
