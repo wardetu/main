@@ -12,13 +12,12 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.stubs.AddInternshipCommandStub;
+import seedu.address.logic.commands.stubs.AddResumeCommandStub;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.item.PersonalDetail;
+import seedu.address.model.item.Internship;
 import seedu.address.model.item.Resume;
-import seedu.address.model.item.field.Address;
-import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Name;
-import seedu.address.model.item.field.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,34 +41,39 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
-        if (itemType.equals("pd")) {
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
-                    || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-            }
+        Name name;
+        Set<Tag> tagList;
 
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-            Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            PersonalDetail personalDetail = new PersonalDetail(name, phone, email, address, tagList);
-
-            return new AddCommand(personalDetail);
-        } else {
-            // itemType.equals("res")
+        switch(itemType) {
+        case ("res"):
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
             Resume resume = new Resume(name, tagList);
 
-            return new AddCommand(resume);
+            return new AddResumeCommandStub(resume);
+        case ("int"):
+            // This may change, so I will leave it here first despite the duplication
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
+                    || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
+
+            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+            Internship internship = new Internship(name, tagList);
+
+            return new AddInternshipCommandStub(internship);
+        default:
+            // Should not have reached here
+            // TODO: Use a better Exception here
+            throw new ParseException("The item type is not detected! Something is wrong");
         }
     }
 
