@@ -31,6 +31,6 @@ public abstract class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New %1$s added: %2$s";
+    public static final String MESSAGE_SUCCESS = " New %1$s added:\n%2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 }

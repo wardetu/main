@@ -122,11 +122,12 @@ public abstract class Item {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Name: ")
-                .append(getName())
+                .append(getName() + "\n")
                 .append(" ID: ")
-                .append(getId())
+                .append(getId() + "\n")
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append("\n");
         return builder.toString();
     }
 }

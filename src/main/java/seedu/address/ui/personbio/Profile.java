@@ -11,7 +11,7 @@ import seedu.address.ui.UiPart;
  * Ui for user profile with user picture, name and description.
  */
 public class Profile extends UiPart<Region> {
-    private static final String FXML = "Avatar.fxml";
+    private static final String FXML = "Profile.fxml";
 
     @FXML
     private ImageView profilePicture;

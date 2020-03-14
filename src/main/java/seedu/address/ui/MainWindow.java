@@ -9,6 +9,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +17,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.personbio.PersonDetailPane;
+import seedu.address.ui.personbio.PersonPane;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -35,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ItemDisplay itemDisplay;
+    private PersonPane person;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -54,6 +58,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private VBox profilePlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -117,6 +123,9 @@ public class MainWindow extends UiPart<Stage> {
 
         itemDisplay = new ItemDisplay();
         itemDisplayPlaceholder.getChildren().add(itemDisplay.getRoot());
+
+        person = new PersonPane();
+        profilePlaceholder.getChildren().add(person.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
