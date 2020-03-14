@@ -32,6 +32,6 @@ public class ListCommand extends Command {
         requireNonNull(model);
         model.setItemsToDisplay(itemType.getAlias());
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, itemType.getFullType()));
+        return new CommandResult("", String.format(MESSAGE_SUCCESS, itemType.getFullType()));
     }
 }

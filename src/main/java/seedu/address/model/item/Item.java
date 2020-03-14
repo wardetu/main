@@ -15,17 +15,16 @@ import seedu.address.model.tag.Tag;
  * Represents an Item in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Item {
+public abstract class Item {
 
-    // class-level fields
+    // Class-level fields
     protected static int itemCount = 0;
 
-    // item-level fields
-    protected Type type = null;
-    protected String information = "";
-    protected final int id;
+    // Item-level fields
 
     // Identity fields
+    protected Type type = null;
+    protected final int id;
     private final Name name;
 
     // Data fields
@@ -50,9 +49,7 @@ public class Item {
         return id;
     }
 
-    public String getInfo() {
-        return information;
-    }
+    public abstract String getSummary();
 
     public Name getName() {
         return name;
@@ -122,9 +119,10 @@ public class Item {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getId())
-                .append(" Name: ")
+        builder.append(" Name: ")
                 .append(getName())
+                .append(" ID: ")
+                .append(getId())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
