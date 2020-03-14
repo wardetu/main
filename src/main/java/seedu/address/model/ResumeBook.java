@@ -92,7 +92,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     public boolean hasItem(Item item) {
         requireNonNull(item);
-        switch (item.getType()) {
+        switch (item.getType().getAlias()) {
 
         case typeResume:
             return resumes.contains(item);
@@ -109,7 +109,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     public void addItem(Item item) {
         requireNonNull(item);
-        switch (item.getType()) {
+        switch (item.getType().getAlias()) {
 
         case typeResume:
             resumes.add(item);
@@ -130,7 +130,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * The identity of {@code editedItem} must not be the same as another existing item in the resume book.
      */
     public void setItem(Item target, Item editedItem) {
-        switch (editedItem.getType()) {
+        switch (editedItem.getType().getAlias()) {
 
         case typeResume:
             personalDetails.setItem(target, editedItem);
@@ -150,7 +150,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * {@code key} must exist in the resume book.
      */
     public void removeItem(Item key) {
-        switch (key.getType()) {
+        switch (key.getType().getAlias()) {
 
         case typeResume:
             resumes.remove(key);

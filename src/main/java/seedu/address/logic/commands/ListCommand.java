@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import seedu.address.model.Model;
+import seedu.address.model.item.field.Type;
 
 /**
  * Lists all persons in the address book to the user.
@@ -12,20 +13,20 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS = "Listed all %1$s items";
 
-    private String itemType;
+    private Type itemType;
 
     public ListCommand(String itemType) {
-        this.itemType = itemType;
+        this.itemType = new Type(itemType);
     }
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setItemsToDisplay(itemType);
+        model.setItemsToDisplay(itemType.getAlias());
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, itemType.getFullType()));
     }
 }

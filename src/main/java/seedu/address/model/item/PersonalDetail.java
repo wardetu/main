@@ -8,6 +8,7 @@ import seedu.address.model.item.field.Address;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Type;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,7 +28,7 @@ public class PersonalDetail extends Item {
     public PersonalDetail(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         super(name, tags);
         requireAllNonNull(phone, email, address);
-        this.type = "pd";
+        this.type = new Type("pd");
         this.phone = phone;
         this.email = email;
         this.address = address;
