@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.stubs.ListInternshipCommandStub;
+import seedu.address.logic.commands.stubs.ListResumeCommandStub;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -24,6 +26,15 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
-        return new ListCommand(itemType);
+        switch(itemType) {
+        case ("res"):
+            return new ListResumeCommandStub();
+        case ("int"):
+            return new ListInternshipCommandStub();
+        default:
+            // Should not have reached here
+            // TODO: Use a better Exception here
+            throw new ParseException("The item type is not detected! Something is wrong");
+        }
     }
 }
