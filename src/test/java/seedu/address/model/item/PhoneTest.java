@@ -1,12 +1,12 @@
 package seedu.address.model.item;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+/*import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Phone;*/
 
 public class PhoneTest {
 /*

@@ -22,8 +22,15 @@ package seedu.address.model;
 //import seedu.address.model.item.exceptions.DuplicateItemException;
 //import seedu.address.testutil.PersonalDetailBuilder;
 
+import java.util.Collection;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.item.Item;
+import seedu.address.model.item.UniqueItemList;
+
 public class ResumeBookTest {
-/*
+    /*
     private final ResumeBook resumeBook = new ResumeBook();
 
     @Test
@@ -87,51 +94,21 @@ public class ResumeBookTest {
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class ResumeBookStub implements ReadOnlyResumeBook {
-        private final ObservableList<Item> personalDetails = FXCollections.observableArrayList();
-        private final ObservableList<Item> educations = FXCollections.observableArrayList();
-        private final ObservableList<Item> achievements = FXCollections.observableArrayList();
-        private final ObservableList<Item> projects = FXCollections.observableArrayList();
-        private final ObservableList<Item> internships = FXCollections.observableArrayList();
-        private final ObservableList<Item> skills = FXCollections.observableArrayList();
-        private final ObservableList<Item> resumes = FXCollections.observableArrayList();
+        private final ObservableList<Item> itemsToDisplay = FXCollections.observableArrayList();
+        private final UniqueItemList personalDetails = new UniqueItemList();
 
-        ResumeBookStub(Collection<Item> personalDetails) {
-            this.personalDetails.setAll(personalDetails);
+        ResumeBookStub(Collection<Item> itemsToDisplay) {
+            this.itemsToDisplay.setAll(itemsToDisplay);
         }
 
         @Override
-        public ObservableList<Item> getPersonalDetailList() {
+        public ObservableList<Item> getItemToDisplayList() {
+            return itemsToDisplay;
+        }
+
+        @Override
+        public UniqueItemList getPersonalDetailList() {
             return personalDetails;
-        }
-
-        @Override
-        public ObservableList<Item> getEducationList() {
-            return educations;
-        }
-
-        @Override
-        public ObservableList<Item> getAchievementList() {
-            return achievements;
-        }
-
-        @Override
-        public ObservableList<Item> getProjectList() {
-            return projects;
-        }
-
-        @Override
-        public ObservableList<Item> getInternshipList() {
-            return internships;
-        }
-
-        @Override
-        public ObservableList<Item> getSkillList() {
-            return skills;
-        }
-
-        @Override
-        public ObservableList<Item> getResumeList() {
-            return resumes;
         }
     }
 

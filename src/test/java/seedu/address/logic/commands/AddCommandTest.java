@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
+/*import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,7 +22,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.ResumeBook;
 
 import seedu.address.model.item.Item;
-import seedu.address.testutil.PersonalDetailBuilder;
+import seedu.address.testutil.PersonalDetailBuilder;*/
 
 public class AddCommandTest {
 //    TO DO: RESUME TESTS
@@ -48,7 +48,8 @@ public class AddCommandTest {
 //        AddCommand addCommand = new AddCommand(validItem);
 //        ModelStub modelStub = new ModelStubWithPerson(validItem);
 //
-//        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+//        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON,
+//        () -> addCommand.execute(modelStub));
 //    }
 //
 //    @Test

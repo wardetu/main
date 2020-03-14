@@ -14,11 +14,18 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
+    private String itemType;
+
+    public ListCommand(String itemType) {
+        this.itemType = itemType;
+    }
+
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonalDetailList(PREDICATE_SHOW_ALL_ITEMS);
+        model.setItemsToDisplay(itemType);
+        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult("", MESSAGE_SUCCESS);
     }
 }

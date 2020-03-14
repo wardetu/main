@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+/*import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersonalDetails.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ResumeBook;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.UserPrefs;*/
 
 public class ClearCommandTest {
 // TODO: RESUME TESTS

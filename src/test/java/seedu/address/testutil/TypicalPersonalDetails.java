@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+/*import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -16,14 +16,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.ResumeBook;
-import seedu.address.model.item.PersonalDetail;
+import seedu.address.model.item.PersonalDetail;*/
 
 /**
  * A utility class containing a list of {@code PersonalDetail} objects to be used in tests.
  */
 public class TypicalPersonalDetails {
 
-    public static final PersonalDetail ALICE = new PersonalDetailBuilder().withName("Alice Pauline")
+    /*public static final PersonalDetail ALICE = new PersonalDetailBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends").build();
@@ -61,18 +61,18 @@ public class TypicalPersonalDetails {
 
     private TypicalPersonalDetails() {} // prevents instantiation
 
-    /**
+    *//**
      * Returns an {@code AddressBook} with all the typical personal details.
-     */
+     *//*
     public static ResumeBook getTypicalAddressBook() {
         ResumeBook ab = new ResumeBook();
         for (PersonalDetail pd : getTypicalPersonalDetails()) {
-            ab.addPersonalDetail(pd);
+            ab.addItem(pd);
         }
         return ab;
     }
 
     public static List<PersonalDetail> getTypicalPersonalDetails() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
-    }
+    }*/
 }

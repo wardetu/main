@@ -31,7 +31,7 @@ public interface Logic {
     ReadOnlyResumeBook getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Item> getFilteredPersonList();
+    ObservableList<Item> getFilteredItemList();
 
     /**
      * Returns the user prefs' address book file path.
