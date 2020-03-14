@@ -31,7 +31,7 @@ public class Type {
         case ("proj"):
             return "Project";
         default:
-            return "Not a type";
+            return "Not a valid type";
         }
     }
 }

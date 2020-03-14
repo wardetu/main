@@ -8,7 +8,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
+import seedu.address.model.item.Skill;
 
 /**
  * The API of the Model component.
@@ -63,12 +65,6 @@ public interface Model {
     boolean hasInternship(Internship internship);
 
     /**
-     * Deletes the given internship.
-     * The internship must exist in the resume book.
-     */
-    void deleteInternship(Internship internship);
-
-    /**
      * Adds the given internship.
      * {@code internship} must not already exist in the resume book.
      */
@@ -82,11 +78,113 @@ public interface Model {
     void setInternship(Internship target, Internship editedInternship);
 
     /**
+     * Deletes the given internship.
+     * The internship must exist in the resume book.
+     */
+    void deleteInternship(Internship internship);
+
+    /**
+     * Return an Internship item at the specified index from the internship list.
+     * @param index
+     * @return Internship item at {@code index}
+     */
+    Internship getInternship(Index index);
+
+    /**
+     * Return the size of the internship list.
+     */
+    int getInternshipSize();
+
+    /**
      * Updates the List as the internship list.
      */
     void setInternshipToDisplay();
 
-    Internship getInternship(Index index);
+    //=========== Projects ================================================================================
+
+    /**
+     * Returns true if a project with the same identity as {@code project} exists in the resume book.
+     */
+    public boolean hasProject(Project project);
+
+    /**
+     * Adds a project to the resume book.
+     * The project must not already exist in the resume book.
+     */
+    public void addProject(Project project);
+
+    /**
+     * Replaces the given project {@code target} in the list with {@code editedProject}.
+     * {@code target} must exist in the resume book.
+     * The identity of {@code editedProject} must not be the same as another existing project in the resume book.
+     */
+    public void setProject(Project target, Project editedProject);
+
+    /**
+     * Removes {@code key} from this {@code ResumeBook}.
+     * {@code key} must exist in the resume book.
+     */
+    public void deleteProject(Project key);
+
+    /**
+     * Return a Project item at the specified index from the project list.
+     * @param index
+     * @return Project item at {@code index}
+     */
+    Project getProject(Index index);
+
+    /**
+     * Return the size of the project list.
+     */
+    int getProjectSize();
+
+    /**
+     * Updates the List as the project list.
+     */
+    void setProjectToDisplay();
+
+    //=========== Skills ================================================================================
+
+    /**
+     * Returns true if a skill with the same identity as {@code skill} exists in the resume book.
+     */
+    public boolean hasSkill(Skill skill);
+
+    /**
+     * Adds a skill to the resume book.
+     * The skill must not already exist in the resume book.
+     */
+    public void addSkill(Skill skill);
+
+    /**
+     * Replaces the given skill {@code target} in the list with {@code editedSkill}.
+     * {@code target} must exist in the resume book.
+     * The identity of {@code editedSkill} must not be the same as another existing skill in the resume book.
+     */
+    public void setSkill(Skill target, Skill editedSkill);
+
+    /**
+     * Removes {@code key} from this {@code ResumeBook}.
+     * {@code key} must exist in the resume book.
+     */
+    public void deleteSkill(Skill key);
+
+    /**
+     * Return a Skill item at the specified index from the skill list.
+     * @param index
+     * @return Skill item at {@code index}
+     */
+    Skill getSkill(Index index);
+
+    /**
+     * Return the size of the skill list.
+     */
+    int getSkillSize();
+
+    /**
+     * Updates the List as the skill list.
+     */
+    void setSkillToDisplay();
 
     //=========== Resumes ================================================================================
 
@@ -94,12 +192,6 @@ public interface Model {
      * Returns true if a resume with the same identity as {@code resume} exists in the resume book.
      */
     boolean hasResume(Resume resume);
-
-    /**
-     * Deletes the given resume.
-     * The resume must exist in the resume book.
-     */
-    void deleteResume(Resume resume);
 
     /**
      * Adds the given resume.
@@ -115,13 +207,27 @@ public interface Model {
     void setResume(Resume target, Resume editedResume);
 
     /**
+     * Deletes the given resume.
+     * The resume must exist in the resume book.
+     */
+    void deleteResume(Resume resume);
+
+    /**
+     * Return a Resume item at the specified index from the resume list.
+     * @param index
+     * @return Resume item at {@code index}
+     */
+    Resume getResume(Index index);
+
+    /**
+     * Return the size of the resume list.
+     */
+    int getResumeSize();
+
+    /**
      * Updates the List as the resume list.
      */
     void setResumeToDisplay();
-
-    Resume getResume(Index index);
-
-    int getResumeSize();
 
     //=========== Item Lists ================================================================================
 
