@@ -127,6 +127,10 @@ public class ModelManager implements Model {
         return resumeBook.getInternship(index);
     }
 
+    public int getInternshipSize() {
+        return resumeBook.getInternshipSize();
+    }
+
     //=========== Resume ================================================================================
 
     @Override
@@ -161,6 +165,11 @@ public class ModelManager implements Model {
     @Override
     public Resume getResume(Index index) {
         return resumeBook.getResume(index);
+    }
+
+    @Override
+    public int getResumeSize() {
+        return resumeBook.getResumeSize();
     }
 
     //=========== Filtered Item List Accessors =============================================================

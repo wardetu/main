@@ -121,6 +121,8 @@ public interface Model {
 
     Resume getResume(Index index);
 
+    int getResumeSize();
+
     //=========== Item Lists ================================================================================
 
     /** Returns an unmodifiable view of the filtered item list */

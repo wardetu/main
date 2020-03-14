@@ -173,6 +173,14 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return (Resume) resumes.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
+    public int getResumeSize() {
+        return resumes.getSize();
+    }
+
+    public int getInternshipSize() {
+        return internships.getSize();
+    }
+
     @Override
     public Internship getInternship(Index index) {
         return (Internship) internships.asUnmodifiableObservableList().get(index.getZeroBased());
