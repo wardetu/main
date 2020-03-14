@@ -154,7 +154,7 @@ public class ResumeBookTest {
 
         @Override
         public Project getProject(Index index) {
-            return new Project(new Name("Project 1"), new Time("01-2020"), new Website("wwww.website.com"),
+            return new Project(new Name("Project 1"), new Time("01-2020"), new Website("www.website.com"),
                     "I did nothing", new HashSet<>());
         }
 
