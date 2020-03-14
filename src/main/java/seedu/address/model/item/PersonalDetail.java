@@ -17,6 +17,9 @@ import seedu.address.model.tag.Tag;
  */
 public class PersonalDetail extends Item {
 
+    // Identity fields
+    private final Type type;
+
     // Data fields
     private final Phone phone;
     private final Email email;
@@ -27,7 +30,7 @@ public class PersonalDetail extends Item {
      */
     public PersonalDetail(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         super(name, tags);
-        requireAllNonNull(phone, email, address);
+        requireAllNonNull(name, phone, email, address, tags);
         this.type = new Type("pd");
         this.phone = phone;
         this.email = email;
@@ -53,6 +56,11 @@ public class PersonalDetail extends Item {
     public boolean isSame(PersonalDetail otherPerson) {
         return isSame(otherPerson)
                 && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+    }
+
+    @Override
+    public String getSummary() {
+        return "";
     }
 
     @Override

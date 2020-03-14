@@ -13,4 +13,9 @@ public class Project extends Item {
     public Project(Name name, Set<Tag> tags) {
         super(name, tags);
     }
+
+    @Override
+    public String getSummary() {
+        return "";
+    }
 }

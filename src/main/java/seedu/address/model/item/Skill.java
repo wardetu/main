@@ -14,4 +14,8 @@ public class Skill extends Item {
         super(name, tags);
     }
 
+    @Override
+    public String getSummary() {
+        return "";
+    }
 }

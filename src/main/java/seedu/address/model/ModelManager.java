@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Resume;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -88,34 +90,72 @@ public class ModelManager implements Model {
         return resumeBook;
     }
 
+    //=========== Internships ================================================================================
+
     @Override
-    public boolean hasItem(Item item) {
-        requireNonNull(item);
-        return resumeBook.hasItem(item);
+    public boolean hasInternship(Internship internship) {
+        requireNonNull(internship);
+        return resumeBook.hasInternship(internship);
     }
 
     @Override
-    public void deleteItem(Item target) {
-        resumeBook.removeItem(target);
+    public void deleteInternship(Internship target) {
+        resumeBook.removeInternship(target);
     }
 
     @Override
-    public void addItem(Item item) {
-        resumeBook.addItem(item);
+    public void addInternship(Internship internship) {
+        resumeBook.addInternship(internship);
         updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
     }
 
     @Override
-    public void setItem(Item target, Item editedItem) {
-        requireAllNonNull(target, editedItem);
+    public void setInternship(Internship target, Internship editedInternship) {
+        requireAllNonNull(target, editedInternship);
 
-        resumeBook.setItem(target, editedItem);
+        resumeBook.setInternship(target, editedInternship);
+    }
+
+    @Override
+    public void setInternshipToDisplay() {
+        resumeBook.setInternshipToDisplay();
+    }
+
+    //=========== Resume ================================================================================
+
+    @Override
+    public boolean hasResume(Resume resume) {
+        requireNonNull(resume);
+        return resumeBook.hasResume(resume);
+    }
+
+    @Override
+    public void deleteResume(Resume target) {
+        resumeBook.removeResume(target);
+    }
+
+    @Override
+    public void addResume(Resume resume) {
+        resumeBook.addResume(resume);
+        updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+    }
+
+    @Override
+    public void setResume(Resume target, Resume editedResume) {
+        requireAllNonNull(target, editedResume);
+
+        resumeBook.setResume(target, editedResume);
+    }
+
+    @Override
+    public void setResumeToDisplay() {
+        resumeBook.setResumeToDisplay();
     }
 
     //=========== Filtered Item List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Item} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -127,11 +167,6 @@ public class ModelManager implements Model {
     public void updateFilteredItemList(Predicate<Item> predicate) {
         requireNonNull(predicate);
         filteredItems.setPredicate(predicate);
-    }
-
-    @Override
-    public void setItemsToDisplay(String type) {
-        resumeBook.setItemsToDisplay(type);
     }
 
     @Override
@@ -152,5 +187,19 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredItems.equals(other.filteredItems);
     }
+
+
+    //// STUBS
+    public boolean hasItem(Item item) {
+        return false;
+    }
+
+    public void addItem(Item item) {}
+
+    public void deleteItem(Item item) {}
+
+    public void setItem(Item target, Item edit) {}
+
+    public void setItemsToDisplay(String type) {};
 
 }

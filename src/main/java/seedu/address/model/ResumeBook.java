@@ -3,7 +3,9 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Resume;
 import seedu.address.model.item.UniqueItemList;
 
 /**
@@ -13,10 +15,8 @@ import seedu.address.model.item.UniqueItemList;
 public class ResumeBook implements ReadOnlyResumeBook {
 
     // Should be all caps but check style complain
-    private final String typePersonalDetail = "pd";
-    private final String typeResume = "res";
     private final UniqueItemList itemsToDisplay;
-    private final UniqueItemList personalDetails;
+    private final UniqueItemList internships;
     private final UniqueItemList resumes;
 
     /*
@@ -28,7 +28,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     {
         itemsToDisplay = new UniqueItemList();
-        personalDetails = new UniqueItemList();
+        internships = new UniqueItemList();
         resumes = new UniqueItemList();
     }
 
@@ -52,29 +52,37 @@ public class ResumeBook implements ReadOnlyResumeBook {
         this.itemsToDisplay.setItems(itemsToDisplay);
     }
 
+    // STUB
+    public void setItemsToDisplay(String type) {};
+
     /**
-     * Replaces the contents of the item list of type {@code type}.
+     * Replaces the contents of the item list to the content of the internship list.
      */
-    public void setItemsToDisplay(String type) {
-        switch (type) {
-        case typePersonalDetail:
-            setItemsToDisplay(personalDetails);
-            break;
-        case typeResume:
-            setItemsToDisplay(resumes);
-            break;
-        default:
-            // Redundant call first, to be replaced with an exception
-            setItemsToDisplay(resumes);
-        }
+    public void setInternshipToDisplay() {
+        setItemsToDisplay(internships);
     }
 
     /**
-     * Replaces the contents of the personal detail list with {@code personalDetails}.
-     * {@code personalDetails} must not contain duplicate items.
+     * Replaces the contents of the item list to the content of the resume list.
      */
-    public void setPersonalDetails(UniqueItemList personalDetails) {
-        this.personalDetails.setItems(personalDetails);
+    public void setResumeToDisplay() {
+        setItemsToDisplay(resumes);
+    }
+
+    /**
+     * Replaces the contents of the internship list with {@code internships}.
+     * {@code internship} must not contain duplicate items.
+     */
+    public void setInternships(UniqueItemList internships) {
+        this.internships.setItems(internships);
+    }
+
+    /**
+     * Replaces the contents of the resume list with {@code resumes}.
+     * {@code resumes} must not contain duplicate items.
+     */
+    public void setResumes(UniqueItemList resumes) {
+        this.resumes.setItems(resumes);
     }
 
     /**
@@ -82,87 +90,82 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     public void resetData(ReadOnlyResumeBook newData) {
         requireNonNull(newData);
-        setPersonalDetails(newData.getPersonalDetailList());
+        setInternships(newData.getInternshipList());
+        setResumes(newData.getResumeList());
     }
 
     //// item-level operations
 
-    /**
-     * Returns true if an item with the same identity as {@code person} exists in the resume book.
-     */
-    public boolean hasItem(Item item) {
-        requireNonNull(item);
-        switch (item.getType().getAlias()) {
+    //=========== Internships ================================================================================
 
-        case typeResume:
-            return resumes.contains(item);
-        case typePersonalDetail:
-            return personalDetails.contains(item);
-        default:
-            return itemsToDisplay.contains(item);
-        }
+    /**
+     * Returns true if an internship with the same identity as {@code internship} exists in the resume book.
+     */
+    public boolean hasInternship(Internship internship) {
+        requireNonNull(internship);
+        return internships.contains(internship);
     }
 
     /**
-     * Adds an item to the resume book.
-     * The item must not already exist in the resume book.
+     * Adds an internship to the resume book.
+     * The internship must not already exist in the resume book.
      */
-    public void addItem(Item item) {
-        requireNonNull(item);
-        switch (item.getType().getAlias()) {
-
-        case typeResume:
-            resumes.add(item);
-            setItemsToDisplay(resumes);
-            break;
-        case typePersonalDetail:
-            personalDetails.add(item);
-            setItemsToDisplay(personalDetails);
-            break;
-        default:
-            itemsToDisplay.add(item);
-        }
+    public void addInternship(Internship internship) {
+        requireNonNull(internship);
+        internships.add(internship);
     }
 
     /**
-     * Replaces the given item {@code target} in the list with {@code editedItem}.
+     * Replaces the given internship {@code target} in the list with {@code editedInternship}.
      * {@code target} must exist in the resume book.
-     * The identity of {@code editedItem} must not be the same as another existing item in the resume book.
+     * The identity of {@code editedInternship} must not be the same as another existing internship in the resume book.
      */
-    public void setItem(Item target, Item editedItem) {
-        switch (editedItem.getType().getAlias()) {
-
-        case typeResume:
-            personalDetails.setItem(target, editedItem);
-            setItemsToDisplay(resumes);
-            break;
-        case typePersonalDetail:
-            personalDetails.setItem(target, editedItem);
-            setItemsToDisplay(personalDetails);
-            break;
-        default:
-            itemsToDisplay.setItem(target, editedItem);
-        }
+    public void setInternship(Internship target, Internship editedInternship) {
+        internships.setItem(target, editedInternship);
     }
 
     /**
      * Removes {@code key} from this {@code ResumeBook}.
      * {@code key} must exist in the resume book.
      */
-    public void removeItem(Item key) {
-        switch (key.getType().getAlias()) {
+    public void removeInternship(Internship key) {
+        internships.remove(key);
+    }
 
-        case typeResume:
-            resumes.remove(key);
-            setItemsToDisplay(resumes);
-            break;
-        case typePersonalDetail:
-            personalDetails.remove(key);
-            setItemsToDisplay(personalDetails);
-            break;
-        default:
-            itemsToDisplay.remove(key);
-        }
+    //=========== Resumes ================================================================================
+
+    /**
+     * Returns true if a resume with the same identity as {@code resume} exists in the resume book.
+     */
+    public boolean hasResume(Resume resume) {
+        requireNonNull(resume);
+        return resumes.contains(resume);
+    }
+
+    /**
+     * Adds a resume to the resume book.
+     * The resume must not already exist in the resume book.
+     */
+    public void addResume(Resume resume) {
+        requireNonNull(resume);
+        resumes.add(resume);
+    }
+
+    /**
+     * Replaces the given resume {@code target} in the list with {@code editedResume}.
+     * {@code target} must exist in the resume book.
+     * The identity of {@code editedResume} must not be the same as another existing resume in the resume book.
+     */
+    public void setResume(Resume target, Resume editedResume) {
+        resumes.setItem(target, editedResume);
+    }
+
+    /**
+     * Removes {@code key} from this {@code ResumeBook}.
+     * {@code key} must exist in the resume book.
+     */
+    public void removeResume(Resume key) {
+        resumes.remove(key);
     }
 
     //// util methods
@@ -179,8 +182,13 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public UniqueItemList getPersonalDetailList() {
-        return personalDetails;
+    public UniqueItemList getInternshipList() {
+        return internships;
+    }
+
+    @Override
+    public UniqueItemList getResumeList() {
+        return resumes;
     }
 
     @Override
@@ -188,11 +196,25 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return other == this // short circuit if same object
                 || (other instanceof ResumeBook // instanceof handles nulls
                 && itemsToDisplay.equals(((ResumeBook) other).itemsToDisplay))
-                && personalDetails.equals(((ResumeBook) other).personalDetails);
+                && internships.equals(((ResumeBook) other).internships)
+                && resumes.equals(((ResumeBook) other).resumes);
     }
 
     @Override
     public int hashCode() {
         return itemsToDisplay.hashCode();
     }
+
+    //STUBS
+    public UniqueItemList getPersonalDetailList() {
+        return new UniqueItemList();
+    }
+    public boolean hasItem(Item item) {
+        return false;
+    }
+    public void addItem(Item item) {}
+
+    public void deleteItem(Item item) {}
+
+    public void setItem(Item target, Item edit) {}
 }
