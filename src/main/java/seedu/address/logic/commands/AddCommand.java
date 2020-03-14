@@ -26,7 +26,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]....\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ITEM + "pd "
             + PREFIX_NAME + "John Doe "
@@ -58,7 +58,9 @@ public class AddCommand extends Command {
         }
 
         model.addItem(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType(), toAdd));
+
+        return new CommandResult(toAdd.toString(), String.format(MESSAGE_SUCCESS,
+                toAdd.getType().getFullType(), toAdd));
     }
 
     @Override
