@@ -18,6 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -64,10 +65,12 @@ public class AddCommandParser implements Parser<AddCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 
+            // TODO: Parse the correct things
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            Internship internship = new Internship(name, tagList);
+            Internship internship = new Internship(name, "role", new Time("from"), new Time("to"),
+                    "decription", tagList);
 
             return new AddInternshipCommandStub(internship);
         default:
