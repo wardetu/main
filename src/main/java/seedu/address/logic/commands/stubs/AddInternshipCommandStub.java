@@ -4,7 +4,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.item.Internship;
 
 /**
- * a stub class for addinternshipcommand.
+ * A stub class for AddInternshipCommand.
  */
 public class AddInternshipCommandStub extends AddCommand {
     private Internship internship;
