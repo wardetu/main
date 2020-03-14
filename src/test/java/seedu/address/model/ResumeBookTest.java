@@ -94,8 +94,10 @@ public class ResumeBookTest {
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class ResumeBookStub implements ReadOnlyResumeBook {
+
         private final ObservableList<Item> itemsToDisplay = FXCollections.observableArrayList();
-        private final UniqueItemList personalDetails = new UniqueItemList();
+        private final UniqueItemList internships = new UniqueItemList();
+        private final UniqueItemList resumes = new UniqueItemList();
 
         ResumeBookStub(Collection<Item> itemsToDisplay) {
             this.itemsToDisplay.setAll(itemsToDisplay);
@@ -107,8 +109,19 @@ public class ResumeBookTest {
         }
 
         @Override
+        public UniqueItemList getInternshipList() {
+            return internships;
+        }
+
+        @Override
+        public UniqueItemList getResumeList() {
+            return resumes;
+        }
+
+        // STUB
+        @Override
         public UniqueItemList getPersonalDetailList() {
-            return personalDetails;
+            return resumes;
         }
     }
 

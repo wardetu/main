@@ -16,9 +16,17 @@ public interface ReadOnlyResumeBook {
     ObservableList<Item> getItemToDisplayList();
 
     /**
-     * Returns an unmodifiable view of the current personal detail list.
-     * This list will not contain any duplicate personal detail.
+     * Returns an unmodifiable view of the current internship list.
+     * This list will not contain any duplicate internship.
      */
-    UniqueItemList getPersonalDetailList();
+    UniqueItemList getInternshipList();
 
+    /**
+     * Returns an unmodifiable view of the current resume list.
+     * This list will not contain any duplicate resume.
+     */
+    UniqueItemList getResumeList();
+
+    ///STUB
+    UniqueItemList getPersonalDetailList();
 }
