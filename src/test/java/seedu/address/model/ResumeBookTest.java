@@ -23,11 +23,21 @@ package seedu.address.model;
 //import seedu.address.testutil.PersonalDetailBuilder;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Level;
+import seedu.address.model.item.Project;
+import seedu.address.model.item.Resume;
+import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
+import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.Website;
 
 public class ResumeBookTest {
     /*
@@ -94,8 +104,12 @@ public class ResumeBookTest {
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class ResumeBookStub implements ReadOnlyResumeBook {
+
         private final ObservableList<Item> itemsToDisplay = FXCollections.observableArrayList();
-        private final UniqueItemList personalDetails = new UniqueItemList();
+        private final UniqueItemList internships = new UniqueItemList();
+        private final UniqueItemList projects = new UniqueItemList();
+        private final UniqueItemList skills = new UniqueItemList();
+        private final UniqueItemList resumes = new UniqueItemList();
 
         ResumeBookStub(Collection<Item> itemsToDisplay) {
             this.itemsToDisplay.setAll(itemsToDisplay);
@@ -107,9 +121,73 @@ public class ResumeBookTest {
         }
 
         @Override
-        public UniqueItemList getPersonalDetailList() {
-            return personalDetails;
+        public UniqueItemList getInternshipList() {
+            return internships;
         }
+
+        @Override
+        public UniqueItemList getProjectList() {
+            return projects;
+        }
+
+        @Override
+        public UniqueItemList getSkillList() {
+            return skills;
+        }
+
+        @Override
+        public UniqueItemList getResumeList() {
+            return resumes;
+        }
+
+        // STUB
+        @Override
+        public UniqueItemList getPersonalDetailList() {
+            return resumes;
+        }
+
+        @Override
+        public Internship getInternship(Index index) {
+            return new Internship(new Name("Company 1"), "Software Engineer", new Time("02-2019"),
+                    new Time("05-2020"), "I did nothing", new HashSet<>());
+        }
+
+        @Override
+        public Project getProject(Index index) {
+            return new Project(new Name("Project 1"), new Time("01-2020"), new Website("wwww.website.com"),
+                    "I did nothing", new HashSet<>());
+        }
+
+        @Override
+        public Skill getSkill(Index index) {
+            return new Skill(new Name("Useless skill 1"), Level.ADVANCED, new HashSet<>());
+        }
+
+        @Override
+        public Resume getResume(Index index) {
+            return new Resume(new Name("Resume 1"), new HashSet<>());
+        }
+
+        @Override
+        public int getInternshipSize() {
+            return 1;
+        }
+
+        @Override
+        public int getProjectSize() {
+            return 1;
+        }
+
+        @Override
+        public int getSkillSize() {
+            return 1;
+        }
+
+        @Override
+        public int getResumeSize() {
+            return 1;
+        }
+
     }
 
 }

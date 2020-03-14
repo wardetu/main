@@ -121,6 +121,10 @@ public class UniqueItemList implements Iterable<Item> {
         return internalList.hashCode();
     }
 
+    public int getSize() {
+        return internalList.size();
+    }
+
     /**
      * Returns true if {@code persons} contains only unique persons.
      */

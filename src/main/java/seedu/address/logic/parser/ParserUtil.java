@@ -14,6 +14,7 @@ import seedu.address.model.item.field.Address;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -124,7 +125,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses an {@code String itemType} into a {@code String}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
@@ -138,4 +139,18 @@ public class ParserUtil {
         return trimmedItemType;
     }
 
+    /**
+     * Parses a {@code String time} in MM-YYYY format into a {@code Time}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Time parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (!Time.isValidTime(trimmedTime)) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        }
+        return new Time(trimmedTime);
+    }
 }

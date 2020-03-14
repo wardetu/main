@@ -1,24 +1,26 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddInternshipCommand;
+import seedu.address.logic.commands.AddResumeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.item.PersonalDetail;
+import seedu.address.model.item.Internship;
+import seedu.address.model.item.Item;
 import seedu.address.model.item.Resume;
-import seedu.address.model.item.field.Address;
-import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Name;
-import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,43 +35,51 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_ITEM);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG, PREFIX_ITEM, PREFIX_FROM, PREFIX_TO,
+                        PREFIX_ROLE, PREFIX_DESCRIPTION);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ITEM) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException("You are required to specify Item type!");
+            throw new ParseException(Item.MESSAGE_CONSTRAINTS);
         }
 
         String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
-        if (itemType.equals("pd")) {
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
-                    || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-            }
+        Name name;
+        Set<Tag> tagList;
+        String description;
 
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-            Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            PersonalDetail personalDetail = new PersonalDetail(name, phone, email, address, tagList);
-
-            return new AddCommand(personalDetail);
-        } else {
-            // itemType.equals("res")
+        switch(itemType) {
+        case ("res"):
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
             Resume resume = new Resume(name, tagList);
 
-            return new AddCommand(resume);
+            return new AddResumeCommand(resume);
+        case ("int"):
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FROM, PREFIX_ROLE, PREFIX_ROLE, PREFIX_DESCRIPTION)
+                    || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
+
+            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            Time from = ParserUtil.parseTime(argMultimap.getValue(PREFIX_FROM).get());
+            Time to = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TO).get());
+            String role = argMultimap.getValue(PREFIX_ROLE).get().trim();
+            description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
+            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+            Internship internship = new Internship(name, role, from, to, description, tagList);
+            return new AddInternshipCommand(internship);
+        default:
+            // Should not have reached here
+            // TODO: Use a better Exception here
+            throw new ParseException("The item type is not detected! Something is wrong");
         }
     }
 
