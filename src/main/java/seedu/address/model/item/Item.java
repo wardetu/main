@@ -17,6 +17,8 @@ import seedu.address.model.tag.Tag;
  */
 public abstract class Item {
 
+    public static final String MESSAGE_CONSTRAINTS = "You are required to specify an item type! For example: i/ res";
+
     // Class-level fields
     protected static int itemCount = 0;
 
