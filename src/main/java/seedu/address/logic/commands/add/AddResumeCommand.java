@@ -1,13 +1,9 @@
 package seedu.address.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,8 +15,6 @@ import seedu.address.model.item.Resume;
  */
 public class AddResumeCommand extends AddCommand {
 
-    private final Resume toAdd;
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a resume to the address book. "
             + "Parameters: "
             + PREFIX_ITEM + "TYPE "
@@ -31,6 +25,8 @@ public class AddResumeCommand extends AddCommand {
             + PREFIX_NAME + "Resume 1 "
             + PREFIX_TAG + "frontend "
             + PREFIX_TAG + "tech";
+
+    private final Resume toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code resume}

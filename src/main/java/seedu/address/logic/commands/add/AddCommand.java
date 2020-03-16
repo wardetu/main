@@ -1,10 +1,10 @@
 package seedu.address.logic.commands.add;
 
-import seedu.address.logic.commands.Command;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import seedu.address.logic.commands.Command;
 
 /**
  * Adds a Item to the address book.

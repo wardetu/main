@@ -2,6 +2,9 @@ package seedu.address.logic.commands.edit;
 
 import seedu.address.commons.core.index.Index;
 
+/**
+ * Edits a Skill Item in the address book.
+ */
 public class EditSkillCommand extends EditCommand {
     /**
      * @param index                of the person in the filtered person list to edit

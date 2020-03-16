@@ -15,10 +15,9 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
 
 /**
- * Adds a Internship Item to the address book.
+ * Adds an Internship Item to the address book.
  */
 public class AddInternshipCommand extends AddCommand {
-    private final Internship toAdd;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an internship to the address book. "
             + "Parameters: "
@@ -38,6 +37,8 @@ public class AddInternshipCommand extends AddCommand {
             + PREFIX_DESCRIPTION + "I did work, made money. "
             + PREFIX_TAG + "frontend "
             + PREFIX_TAG + "tech";
+
+    private final Internship toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code internship}.

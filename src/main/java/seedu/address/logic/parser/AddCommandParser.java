@@ -64,7 +64,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         case ("int"):
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FROM, PREFIX_ROLE, PREFIX_ROLE, PREFIX_DESCRIPTION)
                     || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInternshipCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddInternshipCommand.MESSAGE_USAGE));
             }
 
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
