@@ -2,6 +2,9 @@ package seedu.address.ui.personbio;
 
 import javafx.beans.property.SimpleStringProperty;
 
+/**
+ * A class to represent the pair of field and data for each row of the personal detail table.
+ */
 public class FieldDataPair {
     private final SimpleStringProperty field;
     private final SimpleStringProperty data;

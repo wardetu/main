@@ -6,17 +6,25 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.text.Font?>
 
 <HBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="profilePicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-      <ScrollPane fitToWidth="true" HBox.hgrow="ALWAYS">
+      <ScrollPane fitToWidth="true" styleClass="scroll-pane" HBox.hgrow="ALWAYS">
          <content>
-            <VBox>
+            <VBox maxHeight="Infinity">
                <children>
-                  <Label fx:id="name" text="Label" />
-                  <Label fx:id="description" text="Label" />
+                  <Label fx:id="name" styleClass="name" lineSpacing="5.0" maxHeight="Infinity" text="Label" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </VBox.margin>
+                     </Label>
+                  <Label fx:id="description" styleClass="description" lineSpacing="5.0" maxHeight="Infinity"
+                         text="Label" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </VBox.margin></Label>
                </children>
             </VBox>
          </content>

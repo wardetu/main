@@ -6,11 +6,15 @@
 
 <VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView fx:id="tableView">
+      <TableView fx:id="tableView" styleClass="scroll-pane" VBox.vgrow="ALWAYS">
         <columns>
-          <TableColumn fx:id="field" maxWidth="150.0" minWidth="150.0" text="Field" />
-          <TableColumn fx:id="data" prefWidth="100.0" resizable="false" text="Data" />
+          <TableColumn fx:id="field" maxWidth="150.0" minWidth="120.0" text="Field" reorderable="false"
+                       sortable="false"/>
+          <TableColumn fx:id="data" text="Data" reorderable="false" sortable="false"/>
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
    </children>
 </VBox>

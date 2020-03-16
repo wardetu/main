@@ -17,7 +17,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.ui.personbio.PersonDetailPane;
 import seedu.address.ui.personbio.PersonPane;
 
 /**

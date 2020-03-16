@@ -13,6 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 import seedu.address.ui.UiPart;
 
+/**
+ * Table to display all personal details
+ */
 public class PersonDetailPane extends UiPart<Region> {
     private static final String FXML = "PersonDetailsPane.fxml";
     private static final List<String> LABELS = new ArrayList<String>(List.of("Name:", "Phone:", "Email:", "Github:",
@@ -29,6 +32,19 @@ public class PersonDetailPane extends UiPart<Region> {
     @FXML
     private TableColumn<String, String> data;
 
+    /**
+     * Constructs a personal detail pane with a complete user profile.
+     * @param name
+     * @param phone
+     * @param email
+     * @param github
+     * @param university
+     * @param major
+     * @param time
+     * @param to
+     * @param cap
+     * @param tag
+     */
     public PersonDetailPane(String name, String phone, String email, String github, String university, String major,
                             String time, String to, String cap, String tag) {
         super(FXML);
