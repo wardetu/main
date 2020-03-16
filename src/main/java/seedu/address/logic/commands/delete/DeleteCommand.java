@@ -1,6 +1,7 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.delete;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
