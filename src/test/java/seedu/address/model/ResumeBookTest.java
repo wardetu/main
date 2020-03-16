@@ -31,13 +31,18 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Level;
+import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
+import seedu.address.model.item.field.Email;
+import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
+import seedu.address.model.tag.Tag;
 
 public class ResumeBookTest {
     /*
@@ -104,7 +109,9 @@ public class ResumeBookTest {
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class ResumeBookStub implements ReadOnlyResumeBook {
-
+        private Person user = new Person(new Name("Default name"), new Phone("000"), new Email("000@gmail.com"),
+                new Github("000"), "Default university", "Default major",
+                new Time("12-9999"), new Time("12-9999"), 5.0, new HashSet<Tag>());
         private final ObservableList<Item> itemsToDisplay = FXCollections.observableArrayList();
         private final UniqueItemList internships = new UniqueItemList();
         private final UniqueItemList projects = new UniqueItemList();
@@ -113,6 +120,11 @@ public class ResumeBookTest {
 
         ResumeBookStub(Collection<Item> itemsToDisplay) {
             this.itemsToDisplay.setAll(itemsToDisplay);
+        }
+
+        @Override
+        public Person getUser() {
+            return user;
         }
 
         @Override
@@ -148,13 +160,13 @@ public class ResumeBookTest {
 
         @Override
         public Internship getInternship(Index index) {
-            return new Internship(new Name("Company 1"), "Software Engineer", new Time("02-2019"),
-                    new Time("05-2020"), "I did nothing", new HashSet<>());
+            return new Internship(new Name("Company 1"), "Software Engineer", (new Time("02-2019")).toString(), (
+                    new Time("05-2020")).toString(), "I did nothing", new HashSet<>());
         }
 
         @Override
         public Project getProject(Index index) {
-            return new Project(new Name("Project 1"), new Time("01-2020"), new Website("wwww.website.com"),
+            return new Project(new Name("Project 1"), new Time("01-2020"), new Website("www.website.com"),
                     "I did nothing", new HashSet<>());
         }
 
