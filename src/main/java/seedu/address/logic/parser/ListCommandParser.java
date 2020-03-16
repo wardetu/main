@@ -2,9 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListInternshipCommand;
-import seedu.address.logic.commands.ListResumeCommand;
+import seedu.address.logic.commands.list.ListCommand;
+import seedu.address.logic.commands.list.ListInternshipCommand;
+import seedu.address.logic.commands.list.ListResumeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 
