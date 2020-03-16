@@ -2,14 +2,23 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
+import seedu.address.model.item.field.Email;
+import seedu.address.model.item.field.Github;
+import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Time;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the resume-book level
@@ -18,6 +27,7 @@ import seedu.address.model.item.UniqueItemList;
 public class ResumeBook implements ReadOnlyResumeBook {
 
     // Should be all caps but check style complain
+    private Person user;
     private final UniqueItemList itemsToDisplay;
     private final UniqueItemList internships;
     private final UniqueItemList projects;
@@ -32,6 +42,9 @@ public class ResumeBook implements ReadOnlyResumeBook {
      *   among constructors.
      */
     {
+        user = new Person(new Name("Default name"), new Phone("000"), new Email("000@gmail.com"),
+                new Github("000"), "Default university", "Default major",
+                new Time("12-9999"), new Time("12-9999"), 5.0, new HashSet<Tag>());
         itemsToDisplay = new UniqueItemList();
         internships = new UniqueItemList();
         projects = new UniqueItemList();
@@ -90,7 +103,13 @@ public class ResumeBook implements ReadOnlyResumeBook {
         setItemsToDisplay(resumes);
     }
 
-    //=========== Overwrite list ================================================================================
+    //=========== Overwrite data ================================================================================
+    /**
+     * Replaces the user profile detail with that of {@code person}.
+     */
+    public void setUser(Person person) {
+        this.user = person;
+    }
 
     /**
      * Replaces the contents of the internship list with {@code internships}.
@@ -129,6 +148,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     public void resetData(ReadOnlyResumeBook newData) {
         requireNonNull(newData);
+        setUser(newData.getUser());
         setInternships(newData.getInternshipList());
         setProjects(newData.getProjectList());
         setSkills(newData.getSkillList());
@@ -328,6 +348,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
+    public Person getUser() {
+        return this.user;
+    }
+
+    @Override
     public ObservableList<Item> getItemToDisplayList() {
         return itemsToDisplay.asUnmodifiableObservableList();
     }
@@ -356,6 +381,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ResumeBook // instanceof handles nulls
+                && user.equals(((ResumeBook) other).user)
                 && itemsToDisplay.equals(((ResumeBook) other).itemsToDisplay))
                 && internships.equals(((ResumeBook) other).internships)
                 && projects.equals(((ResumeBook) other).projects)
