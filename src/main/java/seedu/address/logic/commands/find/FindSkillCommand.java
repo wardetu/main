@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.find;
 
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 
