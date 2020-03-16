@@ -4,33 +4,32 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.item.Resume;
+import seedu.address.model.item.Project;
 
 /**
- * Adds a Resume Item to the address book.
+ * Adds a Project Item to the address book.
  */
-public class AddResumeCommand extends AddCommand {
-
-    private final Resume toAdd;
+public class AddProjectCommand extends AddCommand {
+    private final Project toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code resume}
+     * Creates an AddCommand to add the specified {@code project}.
      */
-    public AddResumeCommand(Resume resume) {
-        requireNonNull(resume);
-        toAdd = resume;
+    public AddProjectCommand(Project project) {
+        requireNonNull(project);
+        toAdd = project;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasResume(toAdd)) {
+        if (model.hasProject(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addResume(toAdd);
-        model.setResumeToDisplay();
+        model.addProject(toAdd);
+        model.setProjectToDisplay();
 
         return new CommandResult(toAdd.toString(),
                 String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType(), toAdd));
@@ -39,7 +38,7 @@ public class AddResumeCommand extends AddCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddResumeCommand // instanceof handles nulls
-                && toAdd.equals(((AddResumeCommand) other).toAdd));
+                || (other instanceof AddProjectCommand // instanceof handles nulls
+                && toAdd.equals(((AddProjectCommand) other).toAdd));
     }
 }

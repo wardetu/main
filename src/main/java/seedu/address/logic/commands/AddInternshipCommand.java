@@ -13,11 +13,11 @@ public class AddInternshipCommand extends AddCommand {
     private final Internship toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}.
+     * Creates an AddCommand to add the specified {@code internship}.
      */
-    public AddInternshipCommand(Internship item) {
-        requireNonNull(item);
-        toAdd = item;
+    public AddInternshipCommand(Internship internship) {
+        requireNonNull(internship);
+        toAdd = internship;
     }
 
     @Override

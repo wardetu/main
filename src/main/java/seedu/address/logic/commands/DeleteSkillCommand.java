@@ -1,19 +1,19 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.item.Resume;
+import seedu.address.model.item.Skill;
+
+import static java.util.Objects.requireNonNull;
 
 /**
- * Deletes a Resume item.
+ * Deletes a Skill item.
  */
-public class DeleteResumeCommand extends DeleteCommand {
+public class DeleteSkillCommand extends DeleteCommand {
 
-    public DeleteResumeCommand(Index targetIndex) {
+    public DeleteSkillCommand(Index targetIndex) {
         super(targetIndex);
     }
 
@@ -21,14 +21,14 @@ public class DeleteResumeCommand extends DeleteCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (targetIndex.getZeroBased() >= model.getResumeSize()) {
+        if (targetIndex.getZeroBased() >= model.getSkillSize()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Resume toDelete = model.getResume(targetIndex);
+        Skill toDelete = model.getSkill(targetIndex);
 
-        model.deleteResume(toDelete);
-        model.setResumeToDisplay();
+        model.deleteSkill(toDelete);
+        model.setSkillToDisplay();
 
         return new CommandResult(toDelete.toString(),
                 String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete));
@@ -37,7 +37,7 @@ public class DeleteResumeCommand extends DeleteCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteResumeCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteResumeCommand) other).targetIndex)); // state check
+                || (other instanceof DeleteSkillCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteSkillCommand) other).targetIndex)); // state check
     }
 }

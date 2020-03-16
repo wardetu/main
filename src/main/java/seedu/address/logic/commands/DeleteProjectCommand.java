@@ -6,14 +6,14 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.item.Resume;
+import seedu.address.model.item.Project;
 
 /**
- * Deletes a Resume item.
+ * Deletes a Project item.
  */
-public class DeleteResumeCommand extends DeleteCommand {
+public class DeleteProjectCommand extends DeleteCommand {
 
-    public DeleteResumeCommand(Index targetIndex) {
+    public DeleteProjectCommand(Index targetIndex) {
         super(targetIndex);
     }
 
@@ -21,14 +21,14 @@ public class DeleteResumeCommand extends DeleteCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (targetIndex.getZeroBased() >= model.getResumeSize()) {
+        if (targetIndex.getZeroBased() >= model.getProjectSize()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Resume toDelete = model.getResume(targetIndex);
+        Project toDelete = model.getProject(targetIndex);
 
-        model.deleteResume(toDelete);
-        model.setResumeToDisplay();
+        model.deleteProject(toDelete);
+        model.setProjectToDisplay();
 
         return new CommandResult(toDelete.toString(),
                 String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete));
@@ -37,7 +37,7 @@ public class DeleteResumeCommand extends DeleteCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteResumeCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteResumeCommand) other).targetIndex)); // state check
+                || (other instanceof DeleteProjectCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteProjectCommand) other).targetIndex)); // state check
     }
 }
