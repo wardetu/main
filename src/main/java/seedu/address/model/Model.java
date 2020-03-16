@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
@@ -56,6 +57,13 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyResumeBook getResumeBook();
+
+    //=========== User ================================================================================
+
+    /**
+     * Replaces the current user with {@code person}.
+     */
+    void setUser(Person person);
 
     //=========== Internships ================================================================================
 
