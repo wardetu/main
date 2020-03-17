@@ -28,6 +28,7 @@ public class EditResumeDescriptor extends EditItemDescriptor {
     /**
      * Returns true if at least one field is edited.
      */
+    @Override
     public boolean isAnyFieldEdited() {
         return CollectionUtil.isAnyNonNull(name, tags);
     }

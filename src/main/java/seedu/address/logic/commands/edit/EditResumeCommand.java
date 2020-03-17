@@ -8,9 +8,9 @@ import seedu.address.commons.core.index.Index;
 public class EditResumeCommand extends EditCommand {
     /**
      * @param index                of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param editResumeDescriptor details to edit the resume with
      */
-    public EditResumeCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        super(index, editPersonDescriptor);
+    public EditResumeCommand(Index index, EditResumeDescriptor editResumeDescriptor) {
+        super(index, editResumeDescriptor);
     }
 }
