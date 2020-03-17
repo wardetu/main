@@ -18,18 +18,11 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.delete.DeleteCommand;
 import seedu.address.logic.commands.delete.DeleteResumeCommand;
-import seedu.address.logic.commands.edit.EditCommand;
-import seedu.address.logic.commands.edit.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.edit.EditInternshipCommand;
 import seedu.address.logic.commands.find.FindCommand;
 import seedu.address.logic.commands.find.FindInternshipCommand;
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.item.PersonalDetail;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 
