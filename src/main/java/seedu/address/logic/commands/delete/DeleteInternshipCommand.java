@@ -1,9 +1,10 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.delete;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
@@ -25,12 +26,13 @@ public class DeleteInternshipCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Internship internshipToDelete = model.getInternship(targetIndex);
+        Internship toDelete = model.getInternship(targetIndex);
 
-        model.deleteInternship(internshipToDelete);
+        model.deleteInternship(toDelete);
+        model.setInternshipToDisplay();
 
-        return new CommandResult(internshipToDelete.toString(),
-                String.format(MESSAGE_DELETE_PERSON_SUCCESS, internshipToDelete));
+        return new CommandResult(toDelete.toString(),
+                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete));
     }
 
     @Override

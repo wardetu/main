@@ -31,7 +31,7 @@ import static seedu.address.testutil.TypicalPersonalDetails.BOB;*/
 
 /*import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.field.Address;
 import seedu.address.model.item.field.Email;
