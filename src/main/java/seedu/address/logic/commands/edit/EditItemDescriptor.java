@@ -1,9 +1,14 @@
 package seedu.address.logic.commands.edit;
 
 import java.util.Optional;
+
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.item.field.Name;
 
+/**
+ * Stores the details to edit the item with. Each non-empty field value will replace the
+ * corresponding field value of the item.
+ */
 public class EditItemDescriptor {
     protected Name name;
 
