@@ -8,6 +8,7 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Type;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * The Internship item.
@@ -22,13 +23,7 @@ public class Internship extends Item {
     private String description;
 
     public Internship(Name name, String role, String from, String to, String description, Set<Tag> tags) {
-        super(name, tags);
-        requireAllNonNull(role, from, to, description);
-        this.type = Type.generate("int");
-        this.role = role;
-        this.from = from;
-        this.to = to;
-        this.description = description;
+        this(name, role, from, to, description, tags, ItemUtil.yieldId("int"));
     }
     public Internship(Name name, String role, Time from, Time to, String description, Set<Tag> tags, int id) {
         this(name, role, from.toString(), to.toString(), description, tags, id );

@@ -15,6 +15,7 @@ import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.PersonalDetail;
 import seedu.address.model.item.Resume;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -77,6 +78,9 @@ class JsonSerializableResumeBook {
      */
     public ResumeBook toModelType() throws IllegalValueException {
         ResumeBook addressBook = new ResumeBook();
+
+
+        // TODO: remove the PersonalDetail part
         for (JsonAdaptedPersonalDetail jsonAdaptedPerson : persons) {
             Item person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasItem(person)) {
@@ -85,21 +89,28 @@ class JsonSerializableResumeBook {
             addressBook.addItem(person);
         }
 
+        int maxIdValue = -1;
         for (JsonAdaptedResume jsonAdaptedResume : resumes) {
             Resume resume = jsonAdaptedResume.toModelType();
             if (addressBook.hasItem(resume)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addResume(resume);
+            maxIdValue = Math.max(maxIdValue, resume.getId());
         }
+        ItemUtil.setBaseIdOfItemType("res", maxIdValue + 1);
 
+        maxIdValue = -1;
         for (JsonAdaptedInternship jsonAdaptedInternship : internships) {
             Internship internship = jsonAdaptedInternship.toModelType();
             if (addressBook.hasItem(internship)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addInternship(internship);
+            maxIdValue = Math.max(maxIdValue, internship.getId());
         }
+        ItemUtil. setBaseIdOfItemType("int", maxIdValue + 1);
+
         return addressBook;
     }
 
