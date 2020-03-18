@@ -31,7 +31,7 @@ public class Internship extends Item {
         this.description = description;
     }
     public Internship(Name name, String role, Time from, Time to, String description, Set<Tag> tags, int id) {
-        this(name, role, from.toString(), to.toString(), description, tags, id );
+        this(name, role, from.toString(), to.toString(), description, tags, id);
     }
 
     public Internship(Name name, String role, String from, String to, String description, Set<Tag> tags, int id) {
@@ -77,7 +77,8 @@ public class Internship extends Item {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(super.toString())
-                .append(getSummary())
+                .append(getSummary() + "\n")
+                .append(" Description: ")
                 .append(getDescription());
         return builder.toString();
     }
