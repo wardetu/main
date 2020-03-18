@@ -53,20 +53,20 @@ public abstract class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    private final Index index;
+    protected final Index index;
     // TODO: Change the name to editItemDescriptor
-    private final EditItemDescriptor editPersonDescriptor;
+    protected final EditItemDescriptor editItemDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param editItemDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditItemDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditItemDescriptor editItemDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editItemDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditItemDescriptor(editPersonDescriptor);
+        this.editItemDescriptor = new EditItemDescriptor(editItemDescriptor);
     }
 
     @Override
@@ -79,7 +79,7 @@ public abstract class EditCommand extends Command {
         }
 
         Item personToEdit = lastShownList.get(index.getZeroBased());
-        //PersonalDetail editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        //PersonalDetail editedPerson = createEditedPerson(personToEdit, editItemDescriptor);
         PersonalDetail editedPerson = new PersonalDetail(new Name("abc"), new Phone("000"), new Email("000@gmail.com"),
                 new Address("000"), new HashSet<>());
         if (!personToEdit.isSame(editedPerson) && model.hasItem(editedPerson)) {
@@ -93,17 +93,17 @@ public abstract class EditCommand extends Command {
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editItemDescriptor}.
      */
     private static PersonalDetail createEditedPerson(PersonalDetail personToEdit,
-                                                     EditPersonDescriptor editPersonDescriptor) {
+                                                     EditPersonDescriptor editItemDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editItemDescriptor.getName().orElse(personToEdit.getName());
+        Phone updatedPhone = editItemDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Email updatedEmail = editItemDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Address updatedAddress = editItemDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Set<Tag> updatedTags = editItemDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new PersonalDetail(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
@@ -123,7 +123,7 @@ public abstract class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editItemDescriptor.equals(e.editItemDescriptor);
     }
 
     /**
