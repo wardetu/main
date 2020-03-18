@@ -1,9 +1,10 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.delete;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Resume;
@@ -25,13 +26,13 @@ public class DeleteResumeCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Resume resumeToDelete = model.getResume(targetIndex);
+        Resume toDelete = model.getResume(targetIndex);
 
-        model.deleteResume(resumeToDelete);
+        model.deleteResume(toDelete);
         model.setResumeToDisplay();
 
-        return new CommandResult(resumeToDelete.toString(),
-                String.format(MESSAGE_DELETE_PERSON_SUCCESS, resumeToDelete));
+        return new CommandResult(toDelete.toString(),
+                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete));
     }
 
     @Override

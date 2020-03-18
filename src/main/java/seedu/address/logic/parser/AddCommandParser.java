@@ -12,9 +12,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddInternshipCommand;
-import seedu.address.logic.commands.AddResumeCommand;
+import seedu.address.logic.commands.add.AddCommand;
+import seedu.address.logic.commands.add.AddInternshipCommand;
+import seedu.address.logic.commands.add.AddResumeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
@@ -52,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         case ("res"):
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                     || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddResumeCommand.MESSAGE_USAGE));
             }
 
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -64,7 +64,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         case ("int"):
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FROM, PREFIX_TO, PREFIX_ROLE, PREFIX_DESCRIPTION)
                     || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddInternshipCommand.MESSAGE_USAGE));
             }
 
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
