@@ -109,7 +109,7 @@ class JsonSerializableResumeBook {
             addressBook.addInternship(internship);
             maxIdValue = Math.max(maxIdValue, internship.getId());
         }
-        ItemUtil. setBaseIdOfItemType("int", maxIdValue + 1);
+        ItemUtil.setBaseIdOfItemType("int", maxIdValue + 1);
 
         return addressBook;
     }

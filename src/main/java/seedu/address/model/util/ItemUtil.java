@@ -19,8 +19,7 @@ public class ItemUtil {
             int value = idGenerator.get(itemType);
             idGenerator.put(itemType, value + 1);
             return value;
-        }
-        else {
+        } else {
             idGenerator.put(itemType, 1);
             return 0;
         }

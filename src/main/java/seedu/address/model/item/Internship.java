@@ -26,7 +26,7 @@ public class Internship extends Item {
         this(name, role, from, to, description, tags, ItemUtil.yieldId("int"));
     }
     public Internship(Name name, String role, Time from, Time to, String description, Set<Tag> tags, int id) {
-        this(name, role, from.toString(), to.toString(), description, tags, id );
+        this(name, role, from.toString(), to.toString(), description, tags, id);
     }
 
     public Internship(Name name, String role, String from, String to, String description, Set<Tag> tags, int id) {
