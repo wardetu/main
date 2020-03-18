@@ -7,10 +7,10 @@ import seedu.address.commons.core.index.Index;
  */
 public class EditInternshipCommand extends EditCommand {
     /**
-     * @param index                of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index                of the person in the filtered internship list to edit
+     * @param editInternshipDescriptor details to edit the internship with
      */
-    public EditInternshipCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        super(index, editPersonDescriptor);
+    public EditInternshipCommand(Index index, EditInternshipDescriptor editInternshipDescriptor) {
+        super(index, editInternshipDescriptor);
     }
 }
