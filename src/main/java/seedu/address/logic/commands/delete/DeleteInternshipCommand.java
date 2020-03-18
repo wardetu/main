@@ -22,7 +22,7 @@ public class DeleteInternshipCommand extends DeleteCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (targetIndex.getZeroBased() >= model.getResumeSize()) {
+        if (targetIndex.getZeroBased() >= model.getInternshipSize()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
