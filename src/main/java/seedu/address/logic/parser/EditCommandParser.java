@@ -88,6 +88,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
                 editInternshipDescriptor.setDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get().trim());
             }
+            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editInternshipDescriptor::setTags);
 
             if (!editInternshipDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

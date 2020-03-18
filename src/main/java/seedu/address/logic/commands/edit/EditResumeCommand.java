@@ -18,7 +18,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
  * Edits a Resume Item in the address book.
  */
 public class EditResumeCommand extends EditCommand {
-    private static String MESSAGE_EDIT_RESUME_SUCCESS = "Edited Person: %1$s";
+    private static String MESSAGE_EDIT_RESUME_SUCCESS = "Edited Resume: %1$s";
     private EditResumeDescriptor editResumeDescriptor;
     /**
      * @param index                of the person in the filtered person list to edit
