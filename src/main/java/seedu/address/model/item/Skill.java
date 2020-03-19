@@ -23,6 +23,13 @@ public class Skill extends Item {
         this.level = level;
     }
 
+    public Skill(Name name, Level level, Set<Tag> tags, int id) {
+        super(name, id, tags);
+        requireNonNull(level);
+        this.type = Type.generate("ski");
+        this.level = level;
+    }
+
     public Level getLevel() {
         return this.level;
     }
