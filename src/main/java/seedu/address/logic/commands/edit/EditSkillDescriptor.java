@@ -8,6 +8,10 @@ import java.util.Set;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Stores the details to edit the skill with. Each non-empty field value will replace the
+ * corresponding field value of the skill.
+ */
 public class EditSkillDescriptor extends EditItemDescriptor {
     private Set<Tag> tags;
 
