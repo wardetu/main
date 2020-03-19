@@ -23,7 +23,7 @@ public class DeleteResumeCommand extends DeleteCommand {
         requireNonNull(model);
 
         if (targetIndex.getZeroBased() >= model.getResumeSize()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
         Resume toDelete = model.getResume(targetIndex);
@@ -32,7 +32,7 @@ public class DeleteResumeCommand extends DeleteCommand {
         model.setResumeToDisplay();
 
         return new CommandResult(toDelete.toString(),
-                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete));
+                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()));
     }
 
     @Override

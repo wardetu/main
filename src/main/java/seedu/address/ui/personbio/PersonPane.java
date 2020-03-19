@@ -1,5 +1,6 @@
 package seedu.address.ui.personbio;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -33,10 +34,9 @@ public class PersonPane extends UiPart<Region> {
     /**
      * Constructs the entire person pane with profile and personal details table.
      */
-    public PersonPane() {
+    public PersonPane(ObservableList<Person> person) {
         super(FXML);
-        resumeBook = new ResumeBook();
-        this.user = resumeBook.getUser();
+        this.user = person.get(0);
 
         String name = this.user.getName().toString();
         String phone = this.user.getPhone().toString();
@@ -52,6 +52,7 @@ public class PersonPane extends UiPart<Region> {
         Profile profile = new Profile(profilePic, "Nham Hung",
                 "What if Newton discovered gravity from a durian?");
         profilePlaceholder.getChildren().add(profile.getRoot());
+
         studentProfile = new PersonDetailPane(name, phone, email, github, university, major, from,
                 to, cap);
         personDetailsPlaceholder.getChildren().add(studentProfile.getRoot());

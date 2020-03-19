@@ -21,7 +21,6 @@ public abstract class ViewCommand extends Command {
         this.targetIndex = null;
     }
 
-
     public ViewCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }

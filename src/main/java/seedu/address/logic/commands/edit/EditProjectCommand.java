@@ -1,6 +1,9 @@
 package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.Set;
@@ -20,7 +23,12 @@ import seedu.address.model.tag.Tag;
  * Edits a Project Item in the address book.
  */
 public class EditProjectCommand extends EditCommand {
-
+    private static final String EXAMPLE = "Example: "
+            + COMMAND_WORD + " 1 "
+            + PREFIX_ITEM + " proj "
+            + PREFIX_NAME + " LaundryBot "
+            + PREFIX_TIME + " 02-2022";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + EXAMPLE;
     private static final String MESSAGE_EDIT_PROJECT_SUCCESS = "Edited Project: %1$s";
 
     private EditProjectDescriptor editProjectDescriptor;
@@ -39,7 +47,7 @@ public class EditProjectCommand extends EditCommand {
         requireNonNull(model);
 
         if (index.getZeroBased() >= model.getProjectSize()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
         Project toEdit = model.getProject(index);

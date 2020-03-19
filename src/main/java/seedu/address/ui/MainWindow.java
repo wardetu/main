@@ -123,7 +123,7 @@ public class MainWindow extends UiPart<Stage> {
         itemDisplay = new ItemDisplay();
         itemDisplayPlaceholder.getChildren().add(itemDisplay.getRoot());
 
-        person = new PersonPane();
+        person = new PersonPane(logic.getUserList());
         profilePlaceholder.getChildren().add(person.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -193,7 +193,10 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Item Display: " + commandResult.getDataToUser());
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            itemDisplay.setDataFeedbackToUser(commandResult.getDataToUser());
+
+            if (!commandResult.getDataToUser().equals("")) {
+                itemDisplay.setDataFeedbackToUser(commandResult.getDataToUser());
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -207,7 +210,6 @@ public class MainWindow extends UiPart<Stage> {
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
-            itemDisplay.setDataFeedbackToUser(e.getMessage());
             throw e;
         }
     }

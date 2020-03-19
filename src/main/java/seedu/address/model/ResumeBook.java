@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
@@ -32,6 +33,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     private final UniqueItemList projects;
     private final UniqueItemList skills;
     private final UniqueItemList resumes;
+    private final ObservableList<Person> person;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -49,6 +51,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
         projects = new UniqueItemList();
         skills = new UniqueItemList();
         resumes = new UniqueItemList();
+        person = FXCollections.observableArrayList();
+        person.add(user);
     }
 
     public ResumeBook() {}
@@ -102,12 +106,20 @@ public class ResumeBook implements ReadOnlyResumeBook {
         setItemsToDisplay(resumes);
     }
 
+    /**
+     * Replace the contents of user profile panel with the content of updated user profile.
+     */
+    public void setUserToDisplay() {
+
+    }
+
     //=========== Overwrite data ================================================================================
     /**
      * Replaces the user profile detail with that of {@code person}.
      */
-    public void setUser(Person person) {
-        this.user = person;
+    public void setUser(Person user) {
+        this.person.removeAll();
+        this.person.add(user);
     }
 
     /**
@@ -354,6 +366,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
     @Override
     public ObservableList<Item> getItemToDisplayList() {
         return itemsToDisplay.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Person> getUserToDisplayList() {
+        return person;
     }
 
     @Override
