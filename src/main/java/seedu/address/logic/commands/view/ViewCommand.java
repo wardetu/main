@@ -3,6 +3,9 @@ package seedu.address.logic.commands.view;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 
+/**
+ * Views the details of an item in the ResuMe application.
+ */
 public abstract class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";

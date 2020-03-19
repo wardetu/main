@@ -10,6 +10,9 @@ import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 
+/**
+ * Parses input arguments and creates a new ViewCommand object
+ */
 public class ViewCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the ViewCommand

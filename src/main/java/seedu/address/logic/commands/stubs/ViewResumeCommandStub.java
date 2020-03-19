@@ -5,6 +5,9 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.model.Model;
 
+/**
+ * Stub for ViewResumeCommand.
+ */
 public class ViewResumeCommandStub extends ViewCommand {
     private Index targetIndex;
 
