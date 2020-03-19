@@ -2,10 +2,15 @@ package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.Collections;
@@ -36,20 +41,22 @@ public abstract class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the item identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Parameters: INDEX "
+            + "[" + PREFIX_ITEM + " TYPE] "
+            + "[ PREFIX/ OTHER PREFIX DATA]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_ITEM + " int "
+            + PREFIX_NAME + " Google "
+            + PREFIX_FROM + " 03-2019 "
+            + PREFIX_TO + " 06-2019 "
+            + PREFIX_ROLE + " Intern "
+            + PREFIX_DESCRIPTION + " Do things and get paid."
+            + PREFIX_TAG + " frontend ";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
@@ -88,7 +95,7 @@ public abstract class EditCommand extends Command {
 
         model.setItem(personToEdit, editedPerson);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        return new CommandResult(personToEdit.toString(), String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEdit));
+        return new CommandResult(personToEdit.toString(), String.format(MESSAGE_EDIT_ITEM_SUCCESS, personToEdit));
     }
 
     /**
