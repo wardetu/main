@@ -1,17 +1,20 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.ResumeEditCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.item.Item;
-
-import java.util.Optional;
-import java.util.stream.Stream;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RESUME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
+import java.util.stream.Stream;
+
+import seedu.address.logic.commands.ResumeEditCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+
+
+/**
+ * Parser class for the {@code ResumeEditCommand}
+ */
 public class ResumeEditParser implements Parser<ResumeEditCommand> {
 
     @Override

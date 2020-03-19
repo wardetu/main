@@ -1,14 +1,16 @@
 package seedu.address.logic.commands;
 
-import seedu.address.MainApp;
-import seedu.address.commons.core.LogsCenter;
+import java.util.Arrays;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Resume;
 
-import java.util.Arrays;
-import java.util.logging.Logger;
 
+
+/**
+ * Adding component items to the {@code Resume} items
+ */
 public class ResumeEditCommand extends Command {
 
     public static final String COMMAND_WORD = "redit";
@@ -16,7 +18,7 @@ public class ResumeEditCommand extends Command {
     public final String internships;
     public final String projects;
     public final String skills;
-    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+
     public ResumeEditCommand(String resumes, String internships, String projects, String skills) {
         this.resumes = resumes;
         this.internships = internships;
@@ -28,7 +30,7 @@ public class ResumeEditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         if (resumes.split("\\s+").length == 0) {
             throw new CommandException("Zero resume");
-        } else if (resumes.split("\\s+").length> 1) {
+        } else if (resumes.split("\\s+").length > 1) {
             throw new CommandException("Too many arguments");
         }
         try {
@@ -43,9 +45,10 @@ public class ResumeEditCommand extends Command {
                 internshipIndices = new int[0];
             } else {
                 internshipIndices = Arrays.stream(internships.split("\\s+"))
-                            .map(Integer::parseInt)
-                            .mapToInt(Integer::intValue)
-                            .toArray();
+                        .map(Integer::parseInt)
+                        .mapToInt(Integer::intValue)
+                        .filter(i -> model.hasInternshipId(i))
+                        .toArray();
             }
 
 
@@ -57,6 +60,7 @@ public class ResumeEditCommand extends Command {
                 projectIndices = Arrays.stream(projects.split("\\s+"))
                         .map(Integer::parseInt)
                         .mapToInt(Integer::intValue)
+                        .filter(i -> model.hasProjectId(i))
                         .toArray();
             }
 
@@ -68,9 +72,9 @@ public class ResumeEditCommand extends Command {
                 skillIndices = Arrays.stream(skills.split("\\s+"))
                         .map(Integer::parseInt)
                         .mapToInt(Integer::intValue)
+                        .filter(i -> model.hasSkillId(i))
                         .toArray();
             }
-            logger.info("got here");
             if (!model.hasResumeId(resumeIndex)) {
                 throw new CommandException("No item");
             }
@@ -80,7 +84,6 @@ public class ResumeEditCommand extends Command {
         } catch (NumberFormatException e) {
             throw new CommandException(e.getMessage());
         }
-
 
     }
 }
