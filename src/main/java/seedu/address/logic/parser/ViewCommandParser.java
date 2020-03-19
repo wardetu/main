@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.commands.view.ViewInternshipCommand;
+import seedu.address.logic.commands.view.ViewProjectCommand;
 import seedu.address.logic.commands.view.ViewResumeCommand;
+import seedu.address.logic.commands.view.ViewSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 
@@ -34,10 +36,14 @@ public class ViewCommandParser {
             String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
             switch(itemType) {
-            case("res"):
+            case "res":
                 return new ViewResumeCommand(index);
-            case("int"):
+            case "int":
                 return new ViewInternshipCommand(index);
+            case "proj":
+                return new ViewProjectCommand(index);
+            case "ski":
+                return new ViewSkillCommand(index);
             default:
                 // Should not have reached here
                 // TODO: Use a better Exception here
