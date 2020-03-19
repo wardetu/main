@@ -49,5 +49,5 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    ObservableList<Person> getUserList();
+    Person getUser();
 }

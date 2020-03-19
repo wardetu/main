@@ -28,7 +28,6 @@ public class ModelManager implements Model {
     private final ResumeBook resumeBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Item> filteredItems;
-    private final FilteredList<Person> userList;
 
     /**
      * Initializes a ModelManager with the given resumeBook and userPrefs.
@@ -42,7 +41,6 @@ public class ModelManager implements Model {
         this.resumeBook = new ResumeBook(resumeBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredItems = new FilteredList<>(this.resumeBook.getItemToDisplayList());
-        userList = new FilteredList<>(this.resumeBook.getUserToDisplayList());
     }
 
     public ModelManager() {
@@ -101,11 +99,6 @@ public class ModelManager implements Model {
     @Override
     public void setUser(Person person) {
         resumeBook.setUser(person);
-    }
-
-    @Override
-    public void setUserToDisplay() {
-        resumeBook.setUserToDisplay();
     }
 
     @Override
@@ -285,10 +278,6 @@ public class ModelManager implements Model {
         return filteredItems;
     }
 
-    public ObservableList<Person> getUserList() {
-        return userList;
-    }
-
     @Override
     public void updateFilteredItemList(Predicate<Item> predicate) {
         requireNonNull(predicate);
@@ -313,7 +302,6 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredItems.equals(other.filteredItems);
     }
-
 
     //// STUBS
     public boolean hasItem(Item item) {
