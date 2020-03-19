@@ -41,7 +41,7 @@ class JsonSerializableResumeBook {
                                       @JsonProperty("internships") List<JsonAdaptedInternship> internships,
                                       @JsonProperty("skills") List<JsonAdaptedSkill> skills,
                                       @JsonProperty("projects") List<JsonAdaptedProject> projects) {
-        this.user =user;
+        this.user = user;
         this.resumes.addAll(resumes);
         this.internships.addAll(internships);
         this.skills.addAll(skills);
