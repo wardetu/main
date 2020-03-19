@@ -24,9 +24,9 @@ import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 
-public class AddressBookParserTest {
+public class ResumeBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final ResumeBookParser parser = new ResumeBookParser();
 
     /*  @Test
     public void parseCommand_add() throws Exception {
