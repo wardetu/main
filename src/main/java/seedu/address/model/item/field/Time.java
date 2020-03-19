@@ -37,7 +37,7 @@ public class Time {
 
     /**
      * Formats {@code Time} to "MMM yyyy" format.
-     * @return formatted {@String}
+     * @return formatted {@String}.
      */
     public String format() throws ParseException {
         String pattern = "MMM yyyy";
