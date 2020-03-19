@@ -14,6 +14,7 @@ import seedu.address.model.ResumeBook;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Resume;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -73,21 +74,28 @@ class JsonSerializableResumeBook {
         Person person = user.toModelType();
         resumeBook.setUser(person);
 
+        int maxIdValue = -1;
         for (JsonAdaptedResume jsonAdaptedResume : resumes) {
             Resume resume = jsonAdaptedResume.toModelType();
             if (resumeBook.hasItem(resume)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             resumeBook.addResume(resume);
+            maxIdValue = Math.max(maxIdValue, resume.getId());
         }
+        ItemUtil.setBaseIdOfItemType("res", maxIdValue + 1);
 
+        maxIdValue = -1;
         for (JsonAdaptedInternship jsonAdaptedInternship : internships) {
             Internship internship = jsonAdaptedInternship.toModelType();
             if (resumeBook.hasItem(internship)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             resumeBook.addInternship(internship);
+            maxIdValue = Math.max(maxIdValue, internship.getId());
         }
+        ItemUtil.setBaseIdOfItemType("int", maxIdValue + 1);
+
         return resumeBook;
     }
 

@@ -6,11 +6,13 @@ import java.util.TreeSet;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Type;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * The Resume item.
  */
 public class Resume extends Item {
+
 
     // Item-level fields
 
@@ -20,9 +22,9 @@ public class Resume extends Item {
     private final TreeSet<Integer> skills = new TreeSet<>();
 
     public Resume(Name name, Set<Tag> tags) {
-        super(name, tags);
-        this.type = Type.generate("res");
+        this(name, ItemUtil.yieldId("res"), tags);
     }
+
     public Resume(Name name, int id, Set<Tag> tags) {
         super(name, id, tags);
         this.type = Type.generate("res");

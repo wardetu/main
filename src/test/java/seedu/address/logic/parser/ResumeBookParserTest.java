@@ -24,9 +24,9 @@ import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 
-public class AddressBookParserTest {
+public class ResumeBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final ResumeBookParser parser = new ResumeBookParser();
 
     /*  @Test
     public void parseCommand_add() throws Exception {
@@ -40,6 +40,16 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
+
+    // TODO: I thought the test would be identical to DeleteCommand but turns out not really..
+    /*
+    @Test
+    public void parseCommand_view() throws Exception {
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+                ViewResumeCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " i/ res");
+        assertEquals(new ViewResumeCommand(INDEX_FIRST_PERSON), command);
+    }
+     */
 
     @Test
     public void parseCommand_delete() throws Exception {

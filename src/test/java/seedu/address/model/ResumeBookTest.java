@@ -159,8 +159,8 @@ public class ResumeBookTest {
 
         @Override
         public Internship getInternship(Index index) {
-            return new Internship(new Name("Company 1"), "Software Engineer", (new Time("02-2019")).toString(), (
-                    new Time("05-2020")).toString(), "I did nothing", new HashSet<>());
+            return new Internship(new Name("Company 1"), "Software Engineer", new Time("02-2019"),
+                    new Time("05-2020"), "I did nothing", new HashSet<>());
         }
 
         @Override

@@ -74,8 +74,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             String role = argMultimap.getValue(PREFIX_ROLE).get().trim();
             description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            Internship internship = new Internship(name, role, from.toString(), to.toString(), description, tagList);
+            // TODO: handle this toString() thingy better
+            Internship internship = new Internship(name, role, from, to, description, tagList);
             return new AddInternshipCommand(internship);
         default:
             // Should not have reached here

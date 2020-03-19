@@ -1,7 +1,7 @@
 package seedu.address.model.item.field;
 
 /**
- *  Represents a Skill proficiency level
+ *  Represents a Skill proficiency level.
  */
 public enum Level {
     BASIC(1),
