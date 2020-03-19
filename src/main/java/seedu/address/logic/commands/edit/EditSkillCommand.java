@@ -10,7 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.item.Level;
+import seedu.address.model.item.field.Level;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
@@ -27,7 +27,7 @@ public class EditSkillCommand extends EditCommand {
      * @param editResumeDescriptor details to edit the resume with
      */
     public EditSkillCommand(Index index, EditResumeDescriptor editResumeDescriptor) {
-        super(index, editResumeDescriptor);
+        super(index);
         this.editResumeDescriptor = editResumeDescriptor;
     }
 

@@ -30,7 +30,7 @@ public class EditProjectCommand extends EditCommand {
      * @param editProjectDescriptor details to edit the resume with
      */
     public EditProjectCommand(Index index, EditProjectDescriptor editProjectDescriptor) {
-        super(index, editProjectDescriptor);
+        super(index);
         this.editProjectDescriptor = editProjectDescriptor;
     }
 

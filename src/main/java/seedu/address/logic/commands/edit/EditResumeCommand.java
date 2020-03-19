@@ -25,7 +25,7 @@ public class EditResumeCommand extends EditCommand {
      * @param editResumeDescriptor details to edit the resume with
      */
     public EditResumeCommand(Index index, EditResumeDescriptor editResumeDescriptor) {
-        super(index, editResumeDescriptor);
+        super(index);
         this.editResumeDescriptor = editResumeDescriptor;
     }
 

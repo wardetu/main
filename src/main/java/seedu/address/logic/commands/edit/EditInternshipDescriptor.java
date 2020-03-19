@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -14,8 +15,8 @@ import seedu.address.model.tag.Tag;
  */
 public class EditInternshipDescriptor extends EditItemDescriptor {
     private String role;
-    private String from;
-    private String to;
+    private Time from;
+    private Time to;
     private String description;
     private Set<Tag> tags;
 
@@ -34,19 +35,19 @@ public class EditInternshipDescriptor extends EditItemDescriptor {
         setTags(toCopy.tags);
     }
 
-    public void setFrom(String from) {
+    public void setFrom(Time from) {
         this.from = from;
     }
 
-    public Optional<String> getFrom() {
+    public Optional<Time> getFrom() {
         return Optional.ofNullable(from);
     }
 
-    public void setTo(String to) {
+    public void setTo(Time to) {
         this.to = to;
     }
 
-    public Optional<String> getTo() {
+    public Optional<Time> getTo() {
         return Optional.ofNullable(to);
     }
 

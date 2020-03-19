@@ -53,63 +53,17 @@ public abstract class EditCommand extends Command {
             + PREFIX_DESCRIPTION + " Do things and get paid."
             + PREFIX_TAG + " frontend ";
 
-    public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     protected final Index index;
-    // TODO: Change the name to editItemDescriptor
-    protected final EditItemDescriptor editItemDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
-     * @param editItemDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditItemDescriptor editItemDescriptor) {
+    public EditCommand(Index index) {
         requireNonNull(index);
-        requireNonNull(editItemDescriptor);
 
         this.index = index;
-        this.editItemDescriptor = new EditItemDescriptor(editItemDescriptor);
-    }
-
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Item> lastShownList = model.getFilteredItemList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Item personToEdit = lastShownList.get(index.getZeroBased());
-        //PersonalDetail editedPerson = createEditedPerson(personToEdit, editItemDescriptor);
-        PersonalDetail editedPerson = new PersonalDetail(new Name("abc"), new Phone("000"), new Email("000@gmail.com"),
-                new Address("000"), new HashSet<>());
-        if (!personToEdit.isSame(editedPerson) && model.hasItem(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.setItem(personToEdit, editedPerson);
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        return new CommandResult(personToEdit.toString(), String.format(MESSAGE_EDIT_ITEM_SUCCESS, personToEdit));
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editItemDescriptor}.
-     */
-    private static PersonalDetail createEditedPerson(PersonalDetail personToEdit,
-                                                     EditPersonDescriptor editItemDescriptor) {
-        assert personToEdit != null;
-
-        Name updatedName = editItemDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editItemDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editItemDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editItemDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editItemDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new PersonalDetail(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -126,111 +80,6 @@ public abstract class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
-                && editItemDescriptor.equals(e.editItemDescriptor);
-    }
-
-    /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
-     */
-    public static class EditPersonDescriptor {
-        private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
-        private Set<Tag> tags;
-
-        public EditPersonDescriptor() {}
-
-        /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
-        }
-
-        public void setName(Name name) {
-            this.name = name;
-        }
-
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
-        }
-
-        public void setPhone(Phone phone) {
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
-        }
-
-        public void setEmail(Email email) {
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
-        }
-
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            // short circuit if same object
-            if (other == this) {
-                return true;
-            }
-
-            // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
-                return false;
-            }
-
-            // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
-
-            return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
-        }
+        return index.equals(e.index);
     }
 }

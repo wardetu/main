@@ -12,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,7 +29,7 @@ public class EditInternshipCommand extends EditCommand {
      * @param editInternshipDescriptor details to edit the resume with
      */
     public EditInternshipCommand(Index index, EditInternshipDescriptor editInternshipDescriptor) {
-        super(index, editInternshipDescriptor);
+        super(index);
         this.editInternshipDescriptor = editInternshipDescriptor;
     }
 
@@ -59,8 +60,8 @@ public class EditInternshipCommand extends EditCommand {
     private static Internship createEditedInternship(
             Internship toEdit, EditInternshipDescriptor editInternshipDescriptor) {
         Name updatedName = editInternshipDescriptor.getName().orElse(toEdit.getName());
-        String updatedFrom = editInternshipDescriptor.getFrom().orElse(toEdit.getFrom());
-        String updatedTo = editInternshipDescriptor.getTo().orElse(toEdit.getTo());
+        Time updatedFrom = editInternshipDescriptor.getFrom().orElse(toEdit.getFrom());
+        Time updatedTo = editInternshipDescriptor.getTo().orElse(toEdit.getTo());
         String updatedDesc = editInternshipDescriptor.getDescription().orElse(toEdit.getDescription());
         String updatedRole = editInternshipDescriptor.getRole().orElse(toEdit.getRole());
         Set<Tag> updatedTags = editInternshipDescriptor.getTags().orElse(toEdit.getTags());
