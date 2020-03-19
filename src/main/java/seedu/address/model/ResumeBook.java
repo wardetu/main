@@ -2,8 +2,6 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
@@ -19,7 +17,6 @@ import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
-import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the resume-book level
@@ -46,7 +43,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     {
         user = new Person(new Name("Default name"), new Phone("000"), new Email("000@gmail.com"),
                 new Github("000"), "Default university", "Default major",
-                new Time("12-9999"), new Time("12-9999"), 5.0, new HashSet<Tag>());
+                new Time("12-9999"), new Time("12-9999"), 5.0);
         itemsToDisplay = new UniqueItemList();
         internships = new UniqueItemList();
         projects = new UniqueItemList();

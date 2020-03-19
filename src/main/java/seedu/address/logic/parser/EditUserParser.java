@@ -27,6 +27,9 @@ import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Parser for EditUserCommand.
+ */
 public class EditUserParser implements Parser<EditUserCommand> {
 
     /**

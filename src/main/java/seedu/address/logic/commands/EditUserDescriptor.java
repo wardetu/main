@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.item.field.Email;
@@ -9,8 +8,10 @@ import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
-import seedu.address.model.tag.Tag;
 
+/**
+ * Descriptor for EditUserCommand.
+ */
 public class EditUserDescriptor {
     private Name name;
     private Phone phone;
@@ -21,7 +22,6 @@ public class EditUserDescriptor {
     private Time from;
     private Time to;
     private double cap;
-    private Set<Tag> tags;
 
     public EditUserDescriptor() {}
 
@@ -39,7 +39,6 @@ public class EditUserDescriptor {
         setFrom(toCopy.from);
         setTo(toCopy.to);
         setCap(toCopy.cap);
-        setTag(toCopy.tags);
     }
 
     public void setName(Name name) {
@@ -113,14 +112,6 @@ public class EditUserDescriptor {
 
     public Optional<Double> getCap() {
         return Optional.ofNullable(cap);
-    }
-
-    public void setTag(Set<Tag> tags) {
-        this.tags = tags;
-    }
-
-    public Optional<Set<Tag>> getTagSet() {
-        return Optional.ofNullable(tags);
     }
 
     /**

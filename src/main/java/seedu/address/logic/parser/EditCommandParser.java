@@ -80,14 +80,15 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editInternshipDescriptor.setRole(argMultimap.getValue(PREFIX_ROLE).get().trim());
             }
             if (argMultimap.getValue(PREFIX_FROM).isPresent()) {
-                editInternshipDescriptor.setFrom(argMultimap.getValue(PREFIX_FROM).get().trim());
+                editInternshipDescriptor.setFrom(ParserUtil.parseTime(argMultimap.getValue(PREFIX_FROM).get().trim()));
             }
             if (argMultimap.getValue(PREFIX_TO).isPresent()) {
-                editInternshipDescriptor.setTo(argMultimap.getValue(PREFIX_TO).get().trim());
+                editInternshipDescriptor.setTo(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TO).get().trim()));
             }
             if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
                 editInternshipDescriptor.setDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get().trim());
             }
+            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editInternshipDescriptor::setTags);
 
             if (!editInternshipDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

@@ -7,7 +7,9 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.find.FindCommand;
 import seedu.address.logic.commands.find.FindInternshipCommand;
+import seedu.address.logic.commands.find.FindProjectCommand;
 import seedu.address.logic.commands.find.FindResumeCommand;
+import seedu.address.logic.commands.find.FindSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
@@ -44,6 +46,11 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindResumeCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         case "int":
             return new FindInternshipCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        case "proj":
+            return new FindProjectCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        case "ski":
+            return new FindSkillCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+
         default:
             // Should not have reached here
             // TODO: Use a better Exception here

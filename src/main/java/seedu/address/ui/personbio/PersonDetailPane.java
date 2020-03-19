@@ -19,7 +19,7 @@ import seedu.address.ui.UiPart;
 public class PersonDetailPane extends UiPart<Region> {
     private static final String FXML = "PersonDetailsPane.fxml";
     private static final List<String> LABELS = new ArrayList<String>(List.of("Name:", "Phone:", "Email:", "Github:",
-            "University:", "Major:", "From:", "To:", "CAP:", "Tags:"));
+            "University:", "Major:", "From:", "To:", "CAP:"));
 
     private ObservableList<FieldDataPair> list;
 
@@ -43,16 +43,14 @@ public class PersonDetailPane extends UiPart<Region> {
      * @param time
      * @param to
      * @param cap
-     * @param tag
      */
     public PersonDetailPane(String name, String phone, String email, String github, String university, String major,
-                            String time, String to, String cap, String tag) {
+                            String time, String to, String cap) {
         super(FXML);
         field.setCellValueFactory(new PropertyValueFactory<String, String>("field"));
         data.setCellValueFactory(new PropertyValueFactory<String, String>("data"));
         list = FXCollections.observableArrayList();
-        List<String> data = new ArrayList<String>(List.of(name, phone, email, github, university, major, time, to, cap,
-                tag));
+        List<String> data = new ArrayList<>(List.of(name, phone, email, github, university, major, time, to, cap));
         Iterator<String> iter = data.iterator();
         LABELS.forEach(label -> {
             list.add(new FieldDataPair(label, iter.next()));
