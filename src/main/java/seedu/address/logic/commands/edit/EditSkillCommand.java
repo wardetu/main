@@ -24,7 +24,6 @@ public class EditSkillCommand extends EditCommand {
     private static final String MESSAGE_EDIT_RESUME_SUCCESS = "Edited Skill: %1$s";
 
     private EditSkillDescriptor editSkillDescriptor;
-    
     /**
      * @param index                of the person in the filtered person list to edit
      * @param editSkillDescriptor details to edit the skill with
