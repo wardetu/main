@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.Set;
@@ -20,7 +22,11 @@ import seedu.address.model.tag.Tag;
  * TODO: CONNECT LEVEL TO SKILL
  */
 public class EditSkillCommand extends EditCommand {
-
+    private static final String EXAMPLE = "Example: "
+            + COMMAND_WORD + " 1 "
+            + PREFIX_ITEM + " ski "
+            + PREFIX_NAME + " Software Engineering";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + EXAMPLE;
     private static final String MESSAGE_EDIT_SKILL_SUCCESS = "Edited Skill: %1$s";
 
     private EditSkillDescriptor editSkillDescriptor;
