@@ -31,7 +31,7 @@ public class AddProjectCommand extends AddCommand {
             + PREFIX_ITEM + "proj "
             + PREFIX_NAME + "Duke "
             + PREFIX_TIME + "06-2020 "
-            + PREFIX_WEBSITE + "abc.github.io/main"
+            + PREFIX_WEBSITE + "abc.github.io "
             + PREFIX_DESCRIPTION + "For a little module named CS2103T. "
             + PREFIX_TAG + "java "
             + PREFIX_TAG + "tech";
