@@ -27,7 +27,7 @@ public class EditProjectCommand extends EditCommand {
 
     /**
      * @param index                of the person in the filtered person list to edit
-     * @param editProjectDescriptor details to edit the resume with
+     * @param editProjectDescriptor details to edit the project with
      */
     public EditProjectCommand(Index index, EditProjectDescriptor editProjectDescriptor) {
         super(index);
@@ -53,7 +53,7 @@ public class EditProjectCommand extends EditCommand {
     }
 
     /**
-     * Creates the edited Project item from the internship to be edited and the descriptor.
+     * Creates the edited Project item from the project to be edited and the descriptor.
      * @param toEdit Project item to be edited
      * @param editProjectDescriptor Descriptor parsed from input of user
      * @return Edited Project item.

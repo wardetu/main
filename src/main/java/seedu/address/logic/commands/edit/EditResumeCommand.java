@@ -48,8 +48,8 @@ public class EditResumeCommand extends EditCommand {
     }
 
     /**
-     * Creates the edited Resume item from the internship to be edited and the descriptor.
-     * @param toEdit Internship item to be edited
+     * Creates the edited Resume item from the resume to be edited and the descriptor.
+     * @param toEdit resume item to be edited
      * @param editResumeDescriptor Descriptor parsed from input of user
      * @return Edited Resume item.
      */

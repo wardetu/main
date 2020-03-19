@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.item.field.Level;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -14,6 +15,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditSkillDescriptor extends EditItemDescriptor {
     private Set<Tag> tags;
+    private Level level;
 
     public EditSkillDescriptor() {}
 
@@ -24,6 +26,7 @@ public class EditSkillDescriptor extends EditItemDescriptor {
     public EditSkillDescriptor(EditSkillDescriptor toCopy) {
         setName(toCopy.name);
         setTags(toCopy.tags);
+        setLevel(toCopy.level);
     }
 
     /**
@@ -32,6 +35,14 @@ public class EditSkillDescriptor extends EditItemDescriptor {
     @Override
     public boolean isAnyFieldEdited() {
         return CollectionUtil.isAnyNonNull(name, tags);
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+
+    public Optional<Level> getLevel() {
+        return Optional.ofNullable(level);
     }
 
     /**

@@ -20,15 +20,18 @@ import seedu.address.model.tag.Tag;
  * TODO: CONNECT LEVEL TO SKILL
  */
 public class EditSkillCommand extends EditCommand {
+
     private static final String MESSAGE_EDIT_RESUME_SUCCESS = "Edited Skill: %1$s";
-    private EditResumeDescriptor editResumeDescriptor;
+
+    private EditSkillDescriptor editSkillDescriptor;
+    
     /**
      * @param index                of the person in the filtered person list to edit
-     * @param editResumeDescriptor details to edit the resume with
+     * @param editSkillDescriptor details to edit the skill with
      */
-    public EditSkillCommand(Index index, EditResumeDescriptor editResumeDescriptor) {
+    public EditSkillCommand(Index index, EditSkillDescriptor editSkillDescriptor) {
         super(index);
-        this.editResumeDescriptor = editResumeDescriptor;
+        this.editSkillDescriptor = editSkillDescriptor;
     }
 
     @Override
@@ -41,7 +44,7 @@ public class EditSkillCommand extends EditCommand {
 
         Skill toEdit = model.getSkill(index);
 
-        Skill editedSkill = createEditedResume(toEdit, editResumeDescriptor);
+        Skill editedSkill = createEditedSkill(toEdit, editSkillDescriptor);
 
         model.setSkill(toEdit, editedSkill);
         model.setSkillToDisplay();
@@ -50,15 +53,16 @@ public class EditSkillCommand extends EditCommand {
     }
 
     /**
-     * Creates the edited Skill item from the internship to be edited and the descriptor.
+     * Creates the edited Skill item from the skill to be edited and the descriptor.
      * @param toEdit Skill item to be edited
-     * @param editResumeDescriptor Descriptor parsed from input of user
+     * @param editSkillDescriptor Descriptor parsed from input of user
      * @return Edited Skill item.
      */
-    private static Skill createEditedResume(Skill toEdit, EditResumeDescriptor editResumeDescriptor) {
-        Name updatedName = editResumeDescriptor.getName().orElse(toEdit.getName());
-        Set<Tag> updatedTags = editResumeDescriptor.getTags().orElse(toEdit.getTags());
+    private static Skill createEditedSkill(Skill toEdit, EditSkillDescriptor editSkillDescriptor) {
+        Name updatedName = editSkillDescriptor.getName().orElse(toEdit.getName());
+        Level level = editSkillDescriptor.getLevel().orElse(toEdit.getLevel());
+        Set<Tag> updatedTags = editSkillDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
-        return new Skill(updatedName, Level.BASIC, updatedTags, id);
+        return new Skill(updatedName, level, updatedTags, id);
     }
 }
