@@ -12,7 +12,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.ResumeBook;
 import seedu.address.model.item.Internship;
-import seedu.address.model.item.Item;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -41,7 +40,7 @@ class JsonSerializableResumeBook {
                                       @JsonProperty("resumes") List<JsonAdaptedResume> resumes,
                                       @JsonProperty("internships") List<JsonAdaptedInternship> internships,
                                       @JsonProperty("skills") List<JsonAdaptedSkill> skills,
-                                      @JsonProperty("projects") List<JsonAdaptedProject> projects), {
+                                      @JsonProperty("projects") List<JsonAdaptedProject> projects) {
         this.user = user;
         this.resumes.addAll(resumes);
         this.internships.addAll(internships);
