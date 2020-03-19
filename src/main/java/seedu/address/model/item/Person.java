@@ -102,13 +102,16 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Phone: ").append(getPhone())
-                .append(" Email: ").append(getEmail())
-                .append(" Github: ").append(getGithub())
-                .append(" University: ").append(getUniversity())
-                .append(" Major: ").append(getMajor())
-                .append(" Tags: ");
+        builder.append(getName()).append("\n")
+                .append(getPhone()).append(" | ")
+                .append(getEmail()).append(" | ")
+                .append(getGithub()).append("\n")
+                .append(getUniversity()).append(" | ")
+                .append(getFrom()).append(" - ")
+                .append(getTo()).append("\n")
+                .append("Major: ").append(getMajor()).append(" | ")
+                .append("CAP: ").append(getCap()).append("\n")
+                .append("Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
