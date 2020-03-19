@@ -34,7 +34,7 @@ public class EditResumeCommand extends EditCommand {
         requireNonNull(model);
 
         if (index.getZeroBased() >= model.getResumeSize()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
         Resume toEdit = model.getResume(index);

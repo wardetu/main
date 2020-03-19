@@ -38,7 +38,7 @@ public class EditInternshipCommand extends EditCommand {
         requireNonNull(model);
 
         if (index.getZeroBased() >= model.getInternshipSize()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
         Internship toEdit = model.getInternship(index);
