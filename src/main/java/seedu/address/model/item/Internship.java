@@ -72,7 +72,8 @@ public class Internship extends Item {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(super.toString())
-                .append(getSummary())
+                .append(getSummary() + "\n")
+                .append(" Description: ")
                 .append(getDescription());
         return builder.toString();
     }

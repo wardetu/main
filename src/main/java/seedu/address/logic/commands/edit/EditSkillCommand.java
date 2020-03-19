@@ -10,7 +10,8 @@ public class EditSkillCommand extends EditCommand {
      * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditSkillCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    // TODO: Change variable name
+    public EditSkillCommand(Index index, EditItemDescriptor editPersonDescriptor) {
         super(index, editPersonDescriptor);
     }
 }

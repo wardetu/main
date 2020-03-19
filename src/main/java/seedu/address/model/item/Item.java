@@ -122,12 +122,13 @@ public abstract class Item {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("\n Name: ")
-                .append(getName())
-                .append("\n ID: ")
-                .append(getId())
-                .append("\n Tags: ");
+        builder.append(" Name: ")
+                .append(getName() + "\n")
+                .append(" ID: ")
+                .append(getId() + "\n")
+                .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append("\n");
         return builder.toString();
     }
 }
