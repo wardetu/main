@@ -23,7 +23,7 @@ public class ViewSkillCommand extends ViewCommand {
         requireNonNull(model);
 
         if (targetIndex.getZeroBased() >= model.getSkillSize()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
         Skill toView = model.getSkill(targetIndex);

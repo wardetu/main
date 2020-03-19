@@ -23,7 +23,7 @@ public class ViewInternshipCommand extends ViewCommand {
         requireNonNull(model);
 
         if (targetIndex.getZeroBased() >= model.getInternshipSize()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
         Internship toView = model.getInternship(targetIndex);

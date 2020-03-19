@@ -23,7 +23,7 @@ public class ViewProjectCommand extends ViewCommand {
         requireNonNull(model);
 
         if (targetIndex.getZeroBased() >= model.getProjectSize()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
         Project toView = model.getProject(targetIndex);

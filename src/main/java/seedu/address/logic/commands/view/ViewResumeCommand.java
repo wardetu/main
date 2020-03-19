@@ -23,7 +23,7 @@ public class ViewResumeCommand extends ViewCommand {
         requireNonNull(model);
 
         if (targetIndex.getZeroBased() >= model.getResumeSize()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
         Resume toView = model.getResume(targetIndex);
