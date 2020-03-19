@@ -17,14 +17,14 @@ class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
-    private final Github github;
+    private final String name;
+    private final String phone;
+    private final String email;
+    private final String github;
     private final String university;
     private final String major;
-    private final Time from;
-    private final Time to;
+    private final String from;
+    private final String to;
     private final double cap;
 
     /**
@@ -36,14 +36,14 @@ class JsonAdaptedPerson {
                              @JsonProperty("university") String university, @JsonProperty("major") String major,
                              @JsonProperty("from") String from, @JsonProperty("to") String to,
                              @JsonProperty("cap") String cap) {
-        this.name = new Name(name);
-        this.phone = new Phone(phone);
-        this.email = new Email(email);
-        this.github = new Github(github);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.github = github;
         this.university = university;
         this.major = major;
-        this.from = new Time(from);
-        this.to = new Time(to);
+        this.from = from;
+        this.to = to;
         this.cap = Double.valueOf(cap);
     }
 
@@ -51,14 +51,14 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        name = source.getName();
-        phone = source.getPhone();
-        email = source.getEmail();
-        github = source.getGithub();
+        name = source.getName().toString();
+        phone = source.getPhone().toString();
+        email = source.getEmail().toString();
+        github = source.getGithub().toString();
         university = source.getUniversity();
         major = source.getMajor();
-        from = source.getFrom();
-        to = source.getTo();
+        from = source.getFrom().toString();
+        to = source.getTo().toString();
         cap = source.getCap();
     }
 
@@ -66,6 +66,7 @@ class JsonAdaptedPerson {
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      */
     public Person toModelType() {
-        return new Person(name, phone, email, github, university, major, from, to, cap);
+        return new Person(new Name(name), new Phone(phone), new Email(email), new Github(github), university, major,
+                new Time(from), new Time(to), cap);
     }
 }
