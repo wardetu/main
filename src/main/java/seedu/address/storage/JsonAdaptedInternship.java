@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,8 +21,8 @@ public class JsonAdaptedInternship {
 
     private final String name;
     private final int id;
-    private final String from;
-    private final String to;
+    private final Time from;
+    private final Time to;
     private final String role;
     private final String description;
 
@@ -34,8 +35,8 @@ public class JsonAdaptedInternship {
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.id = id;
-        this.from = from;
-        this.to = to;
+        this.from = new Time(from);
+        this.to = new Time(to);
         this.role = role;
         this.description = description;
         if (tags != null) {
