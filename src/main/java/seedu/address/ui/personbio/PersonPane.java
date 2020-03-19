@@ -58,6 +58,7 @@ public class PersonPane extends UiPart<Region> {
 
     public void setProfile(Person updatedUser) {
         personDetailsPlaceholder.getChildren().clear();
+        profilePlaceholder.getChildren().clear();
         String name = updatedUser.getName().toString();
         String phone = updatedUser.getPhone().toString();
         String email = updatedUser.getEmail().toString();
@@ -69,5 +70,9 @@ public class PersonPane extends UiPart<Region> {
         String cap = String.valueOf(updatedUser.getCap());
         personDetailsPlaceholder.getChildren().add(new PersonDetailPane(name, phone, email, github, university,
                  major, from, to, cap).getRoot());
+        profilePic = new Image(MainApp.class.getResourceAsStream(filePath));
+        Profile profile = new Profile(profilePic, name,
+                "What if Newton discovered gravity from a durian?");
+        profilePlaceholder.getChildren().add(profile.getRoot());
     }
 }
