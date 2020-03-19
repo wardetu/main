@@ -11,7 +11,6 @@ import static java.util.Objects.requireNonNull;
  * Finds Skill Items in the address book matching a keyword.
  */
 public class FindSkillCommand extends FindCommand {
-
     public FindSkillCommand(NameContainsKeywordsPredicate predicate) {
         super(predicate);
     }
