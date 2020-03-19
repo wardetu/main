@@ -4,9 +4,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.stubs.ViewInternshipCommandStub;
-import seedu.address.logic.commands.stubs.ViewResumeCommandStub;
 import seedu.address.logic.commands.view.ViewCommand;
+import seedu.address.logic.commands.view.ViewInternshipCommand;
+import seedu.address.logic.commands.view.ViewResumeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 
@@ -35,9 +35,9 @@ public class ViewCommandParser {
 
             switch(itemType) {
             case("res"):
-                return new ViewResumeCommandStub(index);
+                return new ViewResumeCommand(index);
             case("int"):
-                return new ViewInternshipCommandStub(index);
+                return new ViewInternshipCommand(index);
             default:
                 // Should not have reached here
                 // TODO: Use a better Exception here

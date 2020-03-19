@@ -46,8 +46,8 @@ public class ResumeBookParserTest {
     @Test
     public void parseCommand_view() throws Exception {
         ViewCommand command = (ViewCommand) parser.parseCommand(
-                ViewResumeCommandStub.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " i/ res");
-        assertEquals(new ViewResumeCommandStub(INDEX_FIRST_PERSON), command);
+                ViewResumeCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " i/ res");
+        assertEquals(new ViewResumeCommand(INDEX_FIRST_PERSON), command);
     }
      */
 
