@@ -69,7 +69,6 @@ public class AddCommandParser implements Parser<AddCommand> {
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
             Resume resume = new Resume(name, tagList);
-
             return new AddResumeCommand(resume);
 
         case ("int"):
@@ -100,9 +99,10 @@ public class AddCommandParser implements Parser<AddCommand> {
             Website website = ParserUtil.parseWebsite(argMultimap.getValue(PREFIX_WEBSITE).get());
             description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-            Project project = new Project(name, time, website, description, tagList);
 
+            Project project = new Project(name, time, website, description, tagList);
             return new AddProjectCommand(project);
+
         case("ski"):
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LEVEL) || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -111,6 +111,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
             Skill skill = new Skill(name, level, tagList);
             return new AddSkillCommand(skill);
 
