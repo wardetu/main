@@ -118,6 +118,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editProjectDescriptor::setTags);
 
+            if (!editProjectDescriptor.isAnyFieldEdited()) {
+                throw new ParseException(EditProjectCommand.MESSAGE_NOT_EDITED);
+            }
+
             return new EditProjectCommand(index, editProjectDescriptor);
         case "ski":
             EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptor();
@@ -128,6 +132,10 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editSkillDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_LEVEL).get()));
             }
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editSkillDescriptor::setTags);
+
+            if (!editSkillDescriptor.isAnyFieldEdited()) {
+                throw new ParseException(EditSkillCommand.MESSAGE_NOT_EDITED);
+            }
 
             return new EditSkillCommand(index, editSkillDescriptor);
         default:
