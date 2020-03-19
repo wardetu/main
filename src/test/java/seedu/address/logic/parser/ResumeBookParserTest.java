@@ -21,8 +21,6 @@ import seedu.address.logic.commands.delete.DeleteResumeCommand;
 import seedu.address.logic.commands.find.FindCommand;
 import seedu.address.logic.commands.find.FindInternshipCommand;
 import seedu.address.logic.commands.list.ListCommand;
-import seedu.address.logic.commands.stubs.ViewResumeCommandStub;
-import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 
