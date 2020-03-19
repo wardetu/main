@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEBSITE;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -29,7 +30,8 @@ public class AddProjectCommand extends AddCommand {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ITEM + "proj "
             + PREFIX_NAME + "Duke "
-            + PREFIX_FROM + "06-2020 "
+            + PREFIX_TIME + "06-2020 "
+            + PREFIX_WEBSITE + "abc.github.io "
             + PREFIX_DESCRIPTION + "For a little module named CS2103T. "
             + PREFIX_TAG + "java "
             + PREFIX_TAG + "tech";
@@ -56,7 +58,7 @@ public class AddProjectCommand extends AddCommand {
         model.setProjectToDisplay();
 
         return new CommandResult(toAdd.toString(),
-                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType(), toAdd));
+                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()));
     }
 
     @Override

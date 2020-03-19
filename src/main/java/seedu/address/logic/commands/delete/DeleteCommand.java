@@ -16,7 +16,7 @@ public abstract class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) i/ (item type)\n"
             + "Example: " + COMMAND_WORD + " 1 i/ res";
 
-    public static final String MESSAGE_DELETE_ITEM_SUCCESS = "Deleted Item: %1$s";
+    public static final String MESSAGE_DELETE_ITEM_SUCCESS = "Deleted %1$s item";
 
     protected final Index targetIndex;
 

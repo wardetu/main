@@ -42,6 +42,9 @@ public class Skill extends Item {
 
     @Override
     public String toString() {
-        return getSummary();
+        final StringBuilder builder = new StringBuilder();
+        builder.append(super.toString()).append("\n")
+                .append(getSummary());
+        return builder.toString();
     }
 }
