@@ -1,5 +1,10 @@
 package seedu.address.logic.commands.edit;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
+
+import java.util.Set;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
@@ -9,17 +14,15 @@ import seedu.address.model.item.Internship;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
 
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
-
 /**
  * Edits an Internship Item in the address book.
  */
 public class EditInternshipCommand extends EditCommand {
-    private static String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
+
+    private static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
+
     private EditInternshipDescriptor editInternshipDescriptor;
+
     /**
      * @param index                of the person in the filtered person list to edit
      * @param editInternshipDescriptor details to edit the resume with
@@ -41,17 +44,18 @@ public class EditInternshipCommand extends EditCommand {
 
         Internship editedResume = createEditedInternship(toEdit, editInternshipDescriptor);
 
-        // A bit weird to ask this since we always compare by id
-//        if (!toEdit.isSame(editedResume) && model.hasItem(editedResume)) {
-//            throw new CommandException(MESSAGE_DUPLICATE_RESUME);
-//        }
-
         model.setInternship(toEdit, editedResume);
         model.setInternshipToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult(editedResume.toString(), String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedResume));
     }
 
+    /**
+     * Creates the edited Internship item from the internship to be edited and the descriptor.
+     * @param toEdit Internship item to be edited
+     * @param editInternshipDescriptor Descriptor parsed from input of user
+     * @return Edited Internship item.
+     */
     private static Internship createEditedInternship(
             Internship toEdit, EditInternshipDescriptor editInternshipDescriptor) {
         Name updatedName = editInternshipDescriptor.getName().orElse(toEdit.getName());
