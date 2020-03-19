@@ -116,6 +116,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
                 editProjectDescriptor.setDescription(argMultimap.getValue(PREFIX_TIME).get().trim());
             }
+            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editProjectDescriptor::setTags);
 
             return new EditProjectCommand(index, editProjectDescriptor);
         case "ski":
@@ -126,9 +127,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
                 editSkillDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_LEVEL).get()));
             }
-            if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-                editSkillDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_TAG).get()));
-            }
+            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editSkillDescriptor::setTags);
 
             return new EditSkillCommand(index, editSkillDescriptor);
         default:
