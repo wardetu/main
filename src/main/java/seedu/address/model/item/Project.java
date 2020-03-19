@@ -9,6 +9,7 @@ import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Type;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * The Project item.
@@ -21,7 +22,16 @@ public class Project extends Item {
     private String description;
 
     public Project(Name name, Time time, Website website, String description, Set<Tag> tags) {
-        super(name, tags);
+        super(name, ItemUtil.yieldId("proj"), tags);
+        requireAllNonNull(time, website, description);
+        this.type = Type.generate("proj");
+        this.time = time;
+        this.website = website;
+        this.description = description;
+    }
+
+    public Project(Name name, Time time, Website website, String description, Set<Tag> tags, int id) {
+        super(name, id, tags);
         requireAllNonNull(time, website, description);
         this.type = Type.generate("proj");
         this.time = time;
