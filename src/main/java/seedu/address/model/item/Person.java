@@ -7,7 +7,6 @@ import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
-import seedu.address.model.item.field.Type;
 
 /**
  * Represents a Person in the address book.
