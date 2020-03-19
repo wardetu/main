@@ -6,24 +6,27 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.item.field.Level;
 import seedu.address.model.tag.Tag;
 
 /**
- * Stores the details to edit the resume with. Each non-empty field value will replace the
- * corresponding field value of the resume.
+ * Stores the details to edit the skill with. Each non-empty field value will replace the
+ * corresponding field value of the skill.
  */
-public class EditResumeDescriptor extends EditItemDescriptor {
+public class EditSkillDescriptor extends EditItemDescriptor {
     private Set<Tag> tags;
+    private Level level;
 
-    public EditResumeDescriptor() {}
+    public EditSkillDescriptor() {}
 
     /**
      * Copy constructor.
      * A defensive copy of {@code tags} is used internally.
      */
-    public EditResumeDescriptor(EditResumeDescriptor toCopy) {
+    public EditSkillDescriptor(EditSkillDescriptor toCopy) {
         setName(toCopy.name);
         setTags(toCopy.tags);
+        setLevel(toCopy.level);
     }
 
     /**
@@ -32,6 +35,14 @@ public class EditResumeDescriptor extends EditItemDescriptor {
     @Override
     public boolean isAnyFieldEdited() {
         return CollectionUtil.isAnyNonNull(name, tags);
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+
+    public Optional<Level> getLevel() {
+        return Optional.ofNullable(level);
     }
 
     /**
@@ -59,12 +70,12 @@ public class EditResumeDescriptor extends EditItemDescriptor {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditResumeDescriptor)) {
+        if (!(other instanceof EditSkillDescriptor)) {
             return false;
         }
 
         // state check
-        EditResumeDescriptor e = (EditResumeDescriptor) other;
+        EditSkillDescriptor e = (EditSkillDescriptor) other;
 
         return getName().equals(e.getName())
                 && getTags().equals(e.getTags());

@@ -41,6 +41,16 @@ public class ResumeBookParserTest {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
+    // TODO: I thought the test would be identical to DeleteCommand but turns out not really..
+    /*
+    @Test
+    public void parseCommand_view() throws Exception {
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+                ViewResumeCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " i/ res");
+        assertEquals(new ViewResumeCommand(INDEX_FIRST_PERSON), command);
+    }
+     */
+
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
