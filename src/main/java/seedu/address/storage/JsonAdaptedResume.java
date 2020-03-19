@@ -14,8 +14,9 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
 
 
+
 /**
- * asdad
+ * Jackson-friendly version of {@link Resume}.
  */
 public class JsonAdaptedResume {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
@@ -27,11 +28,7 @@ public class JsonAdaptedResume {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * asdasd
-     * @param name asda
-     * @param id adasd
-     * @param internshipIndices a
-     * @param tags asd
+     * Constructs a {@code JsonAdaptedResume} with the given details.
      */
     @JsonCreator
     public JsonAdaptedResume(@JsonProperty("name") String name, @JsonProperty("id") int id,
@@ -48,8 +45,7 @@ public class JsonAdaptedResume {
     }
 
     /**
-     * Construct
-     * @param res filelr
+     * Converts a given {@code Resume} into this class for Jackson use.
      */
     public JsonAdaptedResume(Resume res) {
         this.name = res.getName().fullName;
@@ -60,16 +56,13 @@ public class JsonAdaptedResume {
     }
 
     /**
-     * asdasd
-     * @return sadasd
-     * @throws IllegalValueException adasd
+     * Converts this Jackson-friendly adapted person object into the model's {@code Resume} object.
      */
     public Resume toModelType() throws IllegalValueException {
         final List<Tag> tags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             tags.add(tag.toModelType());
         }
-
         Resume resume = new Resume(new Name(name), id, Set.copyOf(tags));
         for (int internship : internshipIndices) {
             resume.addInternships(internship);

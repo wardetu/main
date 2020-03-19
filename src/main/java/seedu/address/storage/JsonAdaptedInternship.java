@@ -15,19 +15,22 @@ import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
 /**
- * asdad
+ * Jackson-friendly version of {@link Internship}.
  */
 public class JsonAdaptedInternship {
 
     private final String name;
     private final int id;
-    private final Time from;
-    private final Time to;
+    private final String from;
+    private final String to;
     private final String role;
     private final String description;
 
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
+    /**
+     * Constructs a {@code JsonAdaptedInternship} with the given details.
+     */
     @JsonCreator
     public JsonAdaptedInternship(@JsonProperty("name") String name, @JsonProperty("id") int id,
                              @JsonProperty("from") String from, @JsonProperty("to") String to,
@@ -35,8 +38,8 @@ public class JsonAdaptedInternship {
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.id = id;
-        this.from = new Time(from);
-        this.to = new Time(to);
+        this.from = from;
+        this.to = to;
         this.role = role;
         this.description = description;
         if (tags != null) {
@@ -44,25 +47,24 @@ public class JsonAdaptedInternship {
         }
     }
 
+
     /**
-     * adad
-     * @param internship adsasd
+     * Converts a given {@code Internship} into this class for Jackson use.
      */
     public JsonAdaptedInternship(Internship internship) {
         this.name = internship.getName().fullName;
         this.id = internship.getId();
-        this.from = internship.getFrom();
-        this.to = internship.getTo();
+        this.from = internship.getFrom().toString();
+        this.to = internship.getTo().toString();
         this.role = internship.getRole();
         this.description = internship.getDescription();
         tagged.addAll(internship.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
 
     }
 
+
     /**
-     * asdasd
-     * @return adad
-     * @throws IllegalValueException adsasd
+     * Converts this Jackson-friendly adapted person object into the model's {@code Internship} object.
      */
     public Internship toModelType() throws IllegalValueException {
         final List<Tag> tags = new ArrayList<>();
@@ -70,7 +72,7 @@ public class JsonAdaptedInternship {
             tags.add(tag.toModelType());
         }
 
-        return new Internship(new Name(name), role, from, to, description, Set.copyOf(tags), id);
+        return new Internship(new Name(name), role, new Time(from), new Time(to), description, Set.copyOf(tags), id);
 
     }
 }

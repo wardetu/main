@@ -15,8 +15,9 @@ import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 
+
 /**
- * asdad
+ * Jackson-friendly version of {@link Project}.
  */
 public class JsonAdaptedProject {
 
@@ -29,6 +30,9 @@ public class JsonAdaptedProject {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
 
+    /**
+     * Constructs a {@code JsonAdaptedProject} with the given details.
+     */
     @JsonCreator
     public JsonAdaptedProject(@JsonProperty("name") String name, @JsonProperty("id") int id,
                               @JsonProperty("time") String time, @JsonProperty("website") String website,
@@ -45,8 +49,7 @@ public class JsonAdaptedProject {
     }
 
     /**
-     * adad
-     * @param project adsasd
+     * Converts a given {@code Project} into this class for Jackson use.
      */
     public JsonAdaptedProject(Project project) {
         this.name = project.getName().fullName;
@@ -58,10 +61,9 @@ public class JsonAdaptedProject {
 
     }
 
+
     /**
-     * asdasd
-     * @return adad
-     * @throws IllegalValueException adsasd
+     * Converts this Jackson-friendly adapted person object into the model's {@code Project} object.
      */
     public Project toModelType() throws IllegalValueException {
         final List<Tag> tags = new ArrayList<>();

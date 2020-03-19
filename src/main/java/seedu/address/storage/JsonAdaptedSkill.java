@@ -14,8 +14,9 @@ import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
 
+
 /**
- * asdad
+ * Jackson-friendly version of {@link Skill}.
  */
 public class JsonAdaptedSkill {
 
@@ -25,6 +26,9 @@ public class JsonAdaptedSkill {
 
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
+    /**
+     * Constructs a {@code JsonAdaptedSkill} with the given details.
+     */
     @JsonCreator
     public JsonAdaptedSkill(@JsonProperty("name") String name, @JsonProperty("id") int id,
                                  @JsonProperty("level") String level, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
@@ -37,8 +41,7 @@ public class JsonAdaptedSkill {
     }
 
     /**
-     * adad
-     * @param skill adsasd
+     * Converts a given {@code Skill} into this class for Jackson use.
      */
     public JsonAdaptedSkill(Skill skill) {
         this.name = skill.getName().fullName;
@@ -48,10 +51,9 @@ public class JsonAdaptedSkill {
 
     }
 
+
     /**
-     * asdasd
-     * @return adad
-     * @throws IllegalValueException adsasd
+     * Converts this Jackson-friendly adapted person object into the model's {@code Skill} object.
      */
     public Skill toModelType() throws IllegalValueException {
         final List<Tag> tags = new ArrayList<>();
