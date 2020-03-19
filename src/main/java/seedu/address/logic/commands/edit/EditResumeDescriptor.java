@@ -9,8 +9,8 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.Tag;
 
 /**
- * Stores the details to edit the person with. Each non-empty field value will replace the
- * corresponding field value of the person.
+ * Stores the details to edit the resume with. Each non-empty field value will replace the
+ * corresponding field value of the resume.
  */
 public class EditResumeDescriptor extends EditItemDescriptor {
     private Set<Tag> tags;

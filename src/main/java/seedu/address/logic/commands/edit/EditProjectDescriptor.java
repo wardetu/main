@@ -6,56 +6,40 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 
 /**
- * Stores the details to edit the internship with. Each non-empty field value will replace the
- * corresponding field value of the internship.
+ * Stores the details to edit the project with. Each non-empty field value will replace the
+ * corresponding field value of the project.
  */
-public class EditInternshipDescriptor extends EditItemDescriptor {
-    private String role;
-    private String from;
-    private String to;
+public class EditProjectDescriptor extends EditItemDescriptor {
+    private Time time;
+    private Website website;
     private String description;
     private Set<Tag> tags;
 
-    public EditInternshipDescriptor() {}
+    public EditProjectDescriptor() {}
 
     /**
      * Copy constructor.
      * A defensive copy of {@code tags} is used internally.
      */
-    public EditInternshipDescriptor(EditInternshipDescriptor toCopy) {
+    public EditProjectDescriptor(EditProjectDescriptor toCopy) {
         setName(toCopy.name);
-        setRole(toCopy.role);
-        setFrom(toCopy.from);
-        setTo(toCopy.to);
+        setTime(toCopy.time);
         setDescription(toCopy.description);
+        setWebsite(toCopy.website);
         setTags(toCopy.tags);
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setTime(Time to) {
+        this.time = to;
     }
 
-    public Optional<String> getFrom() {
-        return Optional.ofNullable(from);
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    public Optional<String> getTo() {
-        return Optional.ofNullable(to);
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public Optional<String> getRole() {
-        return Optional.ofNullable(role);
+    public Optional<Time> getTime() {
+        return Optional.ofNullable(time);
     }
 
     public void setDescription(String description) {
@@ -83,12 +67,20 @@ public class EditInternshipDescriptor extends EditItemDescriptor {
         return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
     }
 
+    public void setWebsite(Website website) {
+        this.website = website;
+    }
+
+    public Optional<Website> getWebsite() {
+        return Optional.ofNullable(website);
+    }
+
     /**
      * Returns true if at least one field is edited.
      */
     @Override
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(name, role, from, to, description);
+        return CollectionUtil.isAnyNonNull(name, website, time, description);
     }
 
     @Override
@@ -99,19 +91,17 @@ public class EditInternshipDescriptor extends EditItemDescriptor {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditInternshipDescriptor)) {
+        if (!(other instanceof EditProjectDescriptor)) {
             return false;
         }
 
         // state check
-        EditInternshipDescriptor e = (EditInternshipDescriptor) other;
+        EditProjectDescriptor e = (EditProjectDescriptor) other;
 
         return getName().equals(e.getName())
-                && getRole().equals(e.getRole())
-                && getFrom().equals(e.getFrom())
-                && getTo().equals(e.getTo())
+                && getTime().equals(e.getTime())
+                && getWebsite().equals(e.getWebsite())
                 && getDescription().equals(e.getDescription())
                 && getTags().equals(e.getTags());
-
     }
 }
