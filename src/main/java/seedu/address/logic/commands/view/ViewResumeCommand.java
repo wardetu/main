@@ -5,7 +5,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 
 /**
- * Stub for ViewResumeCommand.
+ * The command for viewing the details of a Resume item.
  */
 public class ViewResumeCommand extends ViewCommand {
     private Index targetIndex;
