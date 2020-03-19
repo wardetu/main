@@ -18,18 +18,15 @@ public class Internship extends Item {
     // Data fields
     // TODO: convert from and to back to Time
     private String role;
-    private String from;
-    private String to;
+    private Time from;
+    private Time to;
     private String description;
 
-    public Internship(Name name, String role, String from, String to, String description, Set<Tag> tags) {
+    public Internship(Name name, String role, Time from, Time to, String description, Set<Tag> tags) {
         this(name, role, from, to, description, tags, ItemUtil.yieldId("int"));
     }
-    public Internship(Name name, String role, Time from, Time to, String description, Set<Tag> tags, int id) {
-        this(name, role, from.toString(), to.toString(), description, tags, id);
-    }
 
-    public Internship(Name name, String role, String from, String to, String description, Set<Tag> tags, int id) {
+    public Internship(Name name, String role, Time from, Time to, String description, Set<Tag> tags, int id) {
         super(name, id, tags);
         requireAllNonNull(role, from, to, description);
         this.type = Type.generate("int");
@@ -44,11 +41,11 @@ public class Internship extends Item {
         return this.role;
     }
 
-    public String getFrom() {
+    public Time getFrom() {
         return this.from;
     }
 
-    public String getTo() {
+    public Time getTo() {
         return this.to;
     }
 
