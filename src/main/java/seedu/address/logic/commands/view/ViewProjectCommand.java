@@ -22,7 +22,7 @@ public class ViewProjectCommand extends ViewCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (targetIndex.getZeroBased() >= model.getInternshipSize()) {
+        if (targetIndex.getZeroBased() >= model.getProjectSize()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
