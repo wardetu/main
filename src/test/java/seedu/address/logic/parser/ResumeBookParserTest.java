@@ -21,6 +21,8 @@ import seedu.address.logic.commands.delete.DeleteResumeCommand;
 import seedu.address.logic.commands.find.FindCommand;
 import seedu.address.logic.commands.find.FindInternshipCommand;
 import seedu.address.logic.commands.list.ListCommand;
+import seedu.address.logic.commands.stubs.ViewResumeCommandStub;
+import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 
@@ -40,6 +42,16 @@ public class ResumeBookParserTest {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
+
+    // TODO: I thought the test would be identical to DeleteCommand but turns out not really..
+    /*
+    @Test
+    public void parseCommand_view() throws Exception {
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+                ViewResumeCommandStub.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " i/ res");
+        assertEquals(new ViewResumeCommandStub(INDEX_FIRST_PERSON), command);
+    }
+     */
 
     @Test
     public void parseCommand_delete() throws Exception {
