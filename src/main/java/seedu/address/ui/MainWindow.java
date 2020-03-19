@@ -123,7 +123,7 @@ public class MainWindow extends UiPart<Stage> {
         itemDisplay = new ItemDisplay();
         itemDisplayPlaceholder.getChildren().add(itemDisplay.getRoot());
 
-        person = new PersonPane();
+        person = new PersonPane(logic.getUserList());
         profilePlaceholder.getChildren().add(person.getRoot());
 
         resultDisplay = new ResultDisplay();

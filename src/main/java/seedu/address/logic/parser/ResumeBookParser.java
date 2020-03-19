@@ -13,6 +13,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.delete.DeleteCommand;
 import seedu.address.logic.commands.edit.EditCommand;
+import seedu.address.logic.commands.EditUserCommand;
 import seedu.address.logic.commands.find.FindCommand;
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -67,6 +68,9 @@ public class ResumeBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case EditUserCommand.COMMAND_WORD: //"me"
+            return new EditUserParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

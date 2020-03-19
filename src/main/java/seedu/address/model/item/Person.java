@@ -10,6 +10,7 @@ import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.Type;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -17,7 +18,9 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
-
+    
+    private final Type type;
+    
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -37,6 +40,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Github github,
                   String university, String major, Time from, Time to, double cap, Set<Tag> tags) {
+        this.type = Type.generate("bio");
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,6 +51,10 @@ public class Person {
         this.to = to;
         this.cap = cap;
         this.tags.addAll(tags);
+    }
+
+    public Type getType() {
+        return this.type;
     }
 
     public Name getName() {
