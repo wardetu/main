@@ -23,7 +23,7 @@ public class AddSkillCommand extends AddCommand {
             + PREFIX_LEVEL + "LEVEL "
             + "[" + PREFIX_TAG + "TAG]....\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ITEM + "proj "
+            + PREFIX_ITEM + "ski "
             + PREFIX_NAME + "Git and Github "
             + PREFIX_LEVEL + "INTERMEDIATE "
             + PREFIX_TAG + "VCS "
@@ -51,7 +51,7 @@ public class AddSkillCommand extends AddCommand {
         model.setSkillToDisplay();
 
         return new CommandResult(toAdd.toString(),
-                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType(), toAdd));
+                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()));
     }
 
     @Override

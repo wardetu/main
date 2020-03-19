@@ -48,7 +48,7 @@ public class AddResumeCommand extends AddCommand {
         model.setResumeToDisplay();
 
         return new CommandResult(toAdd.toString(),
-                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType(), toAdd));
+                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()));
     }
 
     @Override

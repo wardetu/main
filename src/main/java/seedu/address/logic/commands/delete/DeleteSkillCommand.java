@@ -23,7 +23,7 @@ public class DeleteSkillCommand extends DeleteCommand {
         requireNonNull(model);
 
         if (targetIndex.getZeroBased() >= model.getSkillSize()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
         Skill toDelete = model.getSkill(targetIndex);
@@ -32,7 +32,7 @@ public class DeleteSkillCommand extends DeleteCommand {
         model.setSkillToDisplay();
 
         return new CommandResult(toDelete.toString(),
-                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete));
+                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()));
     }
 
     @Override

@@ -74,7 +74,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editResumeDescriptor::setTags);
 
             if (!editResumeDescriptor.isAnyFieldEdited()) {
-                throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+                throw new ParseException(EditResumeCommand.MESSAGE_NOT_EDITED);
             }
 
             return new EditResumeCommand(index, editResumeDescriptor);
@@ -98,7 +98,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editInternshipDescriptor::setTags);
 
             if (!editInternshipDescriptor.isAnyFieldEdited()) {
-                throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+                throw new ParseException(EditInternshipCommand.MESSAGE_NOT_EDITED);
             }
 
             return new EditInternshipCommand(index, editInternshipDescriptor);

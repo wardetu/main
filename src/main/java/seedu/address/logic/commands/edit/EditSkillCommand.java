@@ -44,7 +44,7 @@ public class EditSkillCommand extends EditCommand {
         requireNonNull(model);
 
         if (index.getZeroBased() >= model.getSkillSize()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
         Skill toEdit = model.getSkill(index);

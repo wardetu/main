@@ -60,7 +60,7 @@ public class AddInternshipCommand extends AddCommand {
         model.setInternshipToDisplay();
 
         return new CommandResult(toAdd.toString(),
-                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType(), toAdd));
+                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()));
     }
 
     @Override
