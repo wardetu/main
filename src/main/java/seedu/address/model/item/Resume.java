@@ -30,7 +30,7 @@ public class Resume extends Item {
         this.type = Type.generate("res");
     }
 
-    public void addInternships(int value) {
+    public void addInternship(int value) {
         internships.add(value);
     }
 
@@ -45,6 +45,10 @@ public class Resume extends Item {
         return this.internships;
     }
 
+    public void addProject(int value) {
+        projects.add(value);
+    }
+
     public TreeSet<Integer> getProjects() {
         return this.projects;
     }
@@ -54,6 +58,10 @@ public class Resume extends Item {
         for (int i : values) {
             projects.add(i);
         }
+    }
+
+    public void addSkill(int value) {
+        skills.add(value);
     }
 
     public TreeSet<Integer> getSkills() {

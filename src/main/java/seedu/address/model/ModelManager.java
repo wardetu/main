@@ -346,4 +346,19 @@ public class ModelManager implements Model {
 
     public void setItemsToDisplay(String type) {}
 
+    @Override
+    public boolean hasInternshipId(int i) {
+        return resumeBook.hasInternshipId(i);
+    }
+
+    @Override
+    public boolean hasProjectId(int i) {
+        return resumeBook.hasProjectId(i);
+    }
+
+    @Override
+    public boolean hasSkillId(int i) {
+        return resumeBook.hasSkillId(i);
+    }
+
 }

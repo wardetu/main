@@ -18,8 +18,6 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 
-import java.util.List;
-
 /**
  * Wraps all data at the resume-book level
  * Duplicates are not allowed (by .isSame comparison)
@@ -199,7 +197,12 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * {@code key} must exist in the resume book.
      */
     public void deleteInternship(Internship key) {
+        int id = key.getId();
         internships.remove(key);
+        for (Item item : resumes) {
+            Resume resume = (Resume) item;
+            resume.getInternships().remove(id);
+        }
     }
 
     @Override
@@ -245,7 +248,12 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * {@code key} must exist in the resume book.
      */
     public void deleteProject(Project key) {
+        int id = key.getId();
         projects.remove(key);
+        for (Item item : resumes) {
+            Resume resume = (Resume) item;
+            resume.getProjects().remove(id);
+        }
     }
 
     @Override
@@ -291,7 +299,12 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * {@code key} must exist in the resume book.
      */
     public void deleteSkill(Skill key) {
+        int id = key.getId();
         skills.remove(key);
+        for (Item item : resumes) {
+            Resume resume = (Resume) item;
+            resume.getSkills().remove(id);
+        }
     }
 
     @Override
@@ -413,7 +426,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public UniqueItemList getPersonalDetailList() {
         return new UniqueItemList();
     }
-
+    //----------------------------NEW METHODS--------------------------------------------------------
     @Override
     public void editResume(Resume target, int[] internshipIndices, int[] projectIndices,
                            int[] skillIndices) {
@@ -439,8 +452,38 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     @Override
     public boolean hasResumeId(int resumeIndex) {
-        for (Item res : resumes) {
-            if (res.getId() == resumeIndex) {
+        for (Item item : resumes) {
+            if (item.getId() == resumeIndex) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasInternshipId(int i) {
+        for (Item item : internships) {
+            if (item.getId() == i) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasProjectId(int i) {
+        for (Item item : projects) {
+            if (item.getId() == i) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasSkillId(int i) {
+        for (Item item : skills) {
+            if (item.getId() == i) {
                 return true;
             }
         }

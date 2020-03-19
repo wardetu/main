@@ -285,4 +285,7 @@ public interface Model {
 
     void setItemsToDisplay(String type);
 
+    boolean hasInternshipId(int i);
+    boolean hasProjectId(int i);
+    boolean hasSkillId(int i);
 }
