@@ -13,8 +13,6 @@ import seedu.address.model.item.Resume;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
 
-
-
 /**
  * Jackson-friendly version of {@link Resume}.
  */

@@ -35,6 +35,7 @@ public class Resume extends Item {
     }
 
     public void setInternships(int... values) {
+        internships.clear();
         for (int i : values) {
             internships.add(i);
         }
@@ -48,8 +49,22 @@ public class Resume extends Item {
         return this.projects;
     }
 
+    public void setProjects(int... values) {
+        projects.clear();
+        for (int i : values) {
+            projects.add(i);
+        }
+    }
+
     public TreeSet<Integer> getSkills() {
         return this.skills;
+    }
+
+    public void setSkills(int... values) {
+        skills.clear();
+        for (int i : values) {
+            skills.add(i);
+        }
     }
 
     @Override

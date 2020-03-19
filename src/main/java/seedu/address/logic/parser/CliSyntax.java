@@ -32,4 +32,10 @@ public class CliSyntax {
     /* Skill */
     public static final Prefix PREFIX_LEVEL = new Prefix("l/");
 
+    /* Prefixes for different item types (except resume) */
+    public static final Prefix PREFIX_INTERNSHIP = new Prefix("int/");
+    public static final Prefix PREFIX_PROJECT = new Prefix("proj/");
+    public static final Prefix PREFIX_RESUME = new Prefix("res/");
+    public static final Prefix PREFIX_SKILL = new Prefix("ski/");
+
 }

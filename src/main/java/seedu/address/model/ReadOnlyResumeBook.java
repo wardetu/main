@@ -10,6 +10,8 @@ import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
 
+import java.util.List;
+
 /**
  * Unmodifiable view of a resume book
  */
@@ -105,4 +107,12 @@ public interface ReadOnlyResumeBook {
 
     ///STUB
     UniqueItemList getPersonalDetailList();
+
+    /**
+     * HOLDER
+     */
+    void editResume(Resume target, int[] internshipIndices, int[] projectIndices, int[] skillIndices);
+    Resume getResumeByIndex(int resumeIndex);
+    boolean hasResumeId(int resumeIndex);
+
 }

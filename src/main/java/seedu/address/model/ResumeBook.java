@@ -17,6 +17,8 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 
+import java.util.List;
+
 /**
  * Wraps all data at the resume-book level
  * Duplicates are not allowed (by .isSame comparison)
@@ -395,10 +397,45 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public UniqueItemList getPersonalDetailList() {
         return new UniqueItemList();
     }
+
+    @Override
+    public void editResume(Resume target, int[] internshipIndices, int[] projectIndices,
+                           int[] skillIndices) {
+        if (internshipIndices != null) {
+            target.setInternships(internshipIndices);
+        }
+        if (projectIndices != null) {
+            target.setProjects(projectIndices);
+        }
+        if (skillIndices != null) {
+            target.setSkills(skillIndices);
+        }
+    }
+
+    public Resume getResumeByIndex(int index) {
+        for (Item res : resumes) {
+            if (res.getId() == index) {
+                return (Resume) res;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean hasResumeId(int resumeIndex) {
+        for (Item res : resumes) {
+            if (res.getId() == resumeIndex) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean hasItem(Item item) {
         return false;
     }
     public void addItem(Item item) {}
     public void deleteItem(Item item) {}
     public void setItem(Item target, Item edit) {}
+
 }
