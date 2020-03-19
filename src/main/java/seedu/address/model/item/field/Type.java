@@ -34,8 +34,6 @@ public class Type {
             return "Internship";
         case ("proj"):
             return "Project";
-        case ("bio"):
-            return "User";
         default:
             return "Not a valid type";
         }

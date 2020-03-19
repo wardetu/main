@@ -15,7 +15,6 @@ import seedu.address.model.item.field.Type;
  */
 public class Person {
     // Identity fields
-    private final Type type;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -33,7 +32,6 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Github github, String university, String major, Time from,
                   Time to, double cap) {
-        this.type = Type.generate("bio");
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -43,10 +41,6 @@ public class Person {
         this.from = from;
         this.to = to;
         this.cap = cap;
-    }
-
-    public Type getType() {
-        return this.type;
     }
 
     public Name getName() {
