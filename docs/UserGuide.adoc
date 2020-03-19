@@ -1,36 +1,75 @@
-= ResuMe - User Guide
-:site-section: UserGuide
-:toc:
-:toc-title:
-:toc-placement: preamble
-:sectnums:
-:imagesDir: images
-:stylesDir: stylesheets
-:xrefstyle: full
-:experimental:
-ifdef::env-github[]
-:tip-caption: :bulb:
-:note-caption: :information_source:
-endif::[]
-:repoURL: https://github.com/AY1920S2-CS2103T-F10-1/main
+== ResuMe User Guide
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team F10-1` Since: `Jan 2020``
 
-== Introduction
+1.  link:#introduction[Introduction]
+2.  link:#quick-start[Quick Start]
+3.  link:#features[Features]
++
+3.1. Viewing help : link:#viewing-help[help]
++
+3.2. Listing all items: link:#[list]
++
+3.3. Adding an item: link:#[add]
++
+3.4. Editing an item: link:#[edit]
++
+3.5. Locating items by name: link:#[find]
++
+3.6. Deleting an item: link:#[delete]
++
+3.7. Viewing an item in details: link:#[view]
++
+3.8. Editing a resume: link:#redit[redit]
++
+3.9. Previewing a resume: link:#[rpreview]
++
+3.10. Generating a resume: link:#rgen[rgen]
++
+3.11. Exiting the program : link:#exit[exit]
++
+3.12. Saving the link:#[data]
++
+3.13. Encrypting data files [coming in link:#[v2.0]]
+4.  link:#faq[FAQ]
+5.  link:#5command-summary[Command Summary]
+
+== 1. Introduction
 
 *ResuMe* is for those who *prefer to use a desktop app for managing
 resumes*. More importantly, *ResuMe* is *optimized for those who prefer
 to work with a Command Line Interface* (CLI) while still having the
 benefits of a Graphical User Interface (GUI). If you can type fast,
 *ResuMe* can get your resume management tasks done faster than
-traditional GUI apps. Interested? Jump to the Section 2, “Quick Start”
+traditional GUI apps. Interested? Jump to the Section 2, `Quick Start`
 to get started. Enjoy!
 
-== Quick Start
+ResuMe allows management of different items and they must be one of the
+4 item types:
+
+[source,sh]
+[cols="10%,10%,20%,60%",options="header",]
+|=======================================================================
+|No. |Alias |Item type |Attributes
+|1 |int |internship |id, name, position, from, to, description, tag
+
+|2 |proj |project |id, name, from, to, description, tag
+
+|3 |ski |skill |id, name, level, tag
+
+|4 |res |resume |id, name, description, tag
+|=======================================================================
+
+As you may have noticed from number 4, we are able to manage different resumes as well.
+Items from number 1 to 3 can be shared across different resumes.
+
+The following is the GUI for our application:
+
+== 2. Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `resumebook.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your Resume Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -39,145 +78,295 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* **`list`**`i/res` : lists all resumes
+* **`add`**`i/res n/Software Engineering Resume #/SE #frontend`: adds a resume named `Software Engineering Resume`.
+* **`delete`**`1 i/res` : deletes the 1st resume shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
 
-[[Features]]
-== Features
+== 3. Features
 
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/TYPE n/NAME`,
+`TYPE` and `NAME` are parameters which can be used as `add i/proj n/Orbital`.
+* Items in square brackets are optional e.g `n/NAME [#/TAG]` can be used as `n/Orbital #/SE` or as `n/Orbital`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[\#/TAG]...`
+can be used as (i.e. 0 times), `#/friend`, `\#/friend`, `#/family` etc.
+* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE`,
+`p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
-=== Viewing help : `help`
-
+=== 3.1. Viewing help : `help`
+----
+Lists out the function and usage of each command.
+----
 Format: `help`
 
-=== Adding a person: `add`
+=== 3.2. Listing all items : `list`
+----
+List items in the storage.
+----
+Format: `list i/TYPE`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+****
+* List items that have type matches the `TYPE` argument.
+* Listed items are in short form, only showing their name, `ID`, `tags` and a short summary.
+To view items in full details, use `view`.
+****
 
-[TIP]
-A person can have any number of tags (including 0)
+=== 3.3. Adding an item: `add`
+----
+Adds an item to the ResuMe application.
+----
+Format: `add i/TYPE n/NAME ATTRIBUTE/VALUE]... [#/TAG]...`
+
+[width="100%",cols="16%,84%",options="header",]
+|=======================================================================
+|Type |Format
+|Internship |`add i/int n/COMPANY NAME r/ROLE f/FROM t/TO d/DESCRIPTION [#/TAG]...`
+
+|Project |`add i/proj n/PROJECT NAME t/TIME w/WEBSITE d/DESCRIPTION [#/TAG]....`
+
+|Skill |`add i/ski n/SKILL NAME l/LEVEL [#/TAG]....`
+
+|Resume |`add i/res n/NAME [#/TAG]...`
+|=======================================================================
+
+****
+* Name is a *compulsory* field of add command, while other attributes
+are _optional_.
+* Other optional attributes depend on the type of the item. Eg. project
+items will have `FROM, TO, DESCRIPTION`.
+* Any item, excluding tags, could have any number of tags _(including
+0)_.
+* A unique `ID` is generated, and will be used to uniquely identify the
+item in the later commands.
+****
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add i/proj n/Duke t/06-2020 w/abc.github.io d/For a little module named CS2103T. #/java #/tech`
+* `add i/ski n/Git and Github l/INTERMEDIATE #/VCS #/tech`
 
-=== Listing all persons : `list`
+=== 3.4. Editing a person : `edit`
 
-Shows a list of all persons in the address book. +
-Format: `list`
+----
+Edits an existing item in the ResuMe application.
+----
+Format: `edit INDEX i/TYPE [ATTRIBUTE/VALUE]... [#/TAG]...`
 
-=== Editing a person : `edit`
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+[width="100%",cols="16%,84%",options="header",]
+|=======================================================================
+|Type |Format
+|Internship |`edit INDEX i/int [n/COMPANY NAME] [r/ROLE] [f/FROM] [t/TO] [d/DESCRIPTION] [#/TAG]...`
+
+|Project |`edit INDEX i/proj [n/PROJECT NAME] [t/TIME] [w/WEBSITE] [d/DESCRIPTION] [#/TAG]....`
+
+|Skill |`edit INDEX i/ski [n/SKILL NAME] [l/LEVEL] [#/TAG]....`
+
+|Resume |`edit INDEX i/res [n/NAME] [#/TAG]...`
+|=======================================================================
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
+* Edits the item of type `TYPE` with the specified `ID`. The `ID` refers
+to the unique identification number given to the item when it was first
+added. The `ID` must be a *positive integer* that identifies an existing
+item.
+* At least *one* of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* When editing tags, existing tags of the person will be removed. i.e
+adding of tags is not cumulative.
+* You can remove *all* the person’s tags by typing `#/` without
+specifying any tags after it.
 ****
-
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 i/res n/Resume 1` +
+Edits the name of the 1st resume to be `Resume 1`.
+* `edit 2 i/ski l/ADVANCED #/` +
+Edits the level of the 2nd skill to be `ADVANCED` and clears all existing tags.
 
-=== Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords. +
+=== 3.5. Locating persons by name: `find`
+----
+Finds items in the ResuMe application whose names contain the specified keyword(s).
+----
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* At least one keyword must be provided.
+* The search is *case insensitive*. > e.g. orbital will match Orbital
+* The *order* of the keywords does *not* matter. > e.g. Orbital CP2106
+will match CP2106 Orbital
+* If the `TYPE` is not specified. The program will search across *_all_*
+items.
+* Only *_full_* words will be matched. > e.g. CP210 will not match
+CP2106*
 ****
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `find Software` +
+Returns `software` and `Software`
+* `find Shopee Front-end` +
+Returns any items having names `Shopee` or `Front-end`
 
-// tag::delete[]
-=== Deleting a person : `delete`
+=== 3.6. Deleting a person : `delete`
 
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
+----
+Deletes an existing item in the ResuMe application
+----
+Format: `delete INDEX i/TYPE`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
+* Deletes the item of type `TYPE` with the specified `INDEX`. The `INDEX`
+refers to the index of the item in the respective item list. `INDEX` must be a valid index of the list.
+* Once the item with the specified `INDEX` is deleted,
+the list will automatically update to show the new indices of its items.
 ****
 
 Examples:
 
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
+* `delete 2 i/res` +
+Deletes the 2nd resume in the resume book.
 
-// end::delete[]
-=== Clearing all entries : `clear`
+=== 3.7. Viewing an item in details: `view`
 
-Clears all entries from the address book. +
-Format: `clear`
+----
+Shows all items in an existing resume.
+----
+Format: `view INDEX i/TYPE`
 
-=== Exiting the program : `exit`
+Examples:
 
-Exits the program. +
+* `view 2 i/res` +
+View the 2nd resume in the resume book.
+
+=== 3.8. Editing a resume: `redit`
+----
+Edits an existing resume in the ResuMe application
+----
+Format:
+`redit RESUME_ID TYPE/[ITEM_ID...] [MORE_TYPE/[ITEM_ID...]]... [#/TAG]...`
+
+****
+* Edits the resume with the specified `RESUME_ID`. The `RESUME_ID`
+refers to the unique identification number given to the item when it was
+first added. The `ITEM_ID` and `RESUME_ID` must be a positive integer
+that identifies an existing item of that type.
+* The `TYPE` to be edited cannot be resume(`res`) and at least one
+`TYPE` must be provided.
+* For each `TYPE`, existing values will be updated to the input values.
+* You can add multiple items of a certain type to a resume by chaining
+`ITEM_ID` after `TYPE/` e.g. `proj/ 123 109`
+* You can remove all the resumes’ tags by typing `#/` without specifying
+any tags after it. Similarly, you can remove all items of type `TYPE` by
+typing `TYPE/` without specifying any `ITEM_ID` after it.
+****
+
+Examples:
+
+* `redit 135 proj/9823 int/102 201` +
+Edits the resume of
+`RESUME_ID` 135, overriding project content with project item of `ITEM_ID` 9823,
+internship content with internship items of `ITEM_ID` 102 and 201.
+Content of other item types in the resume remain unchanged.
+
+* `redit 148 int/ proj/ ski/` +
+Edits the resume of `RESUME_ID` 135,
+overriding internship content, project content and skill content with empty string.
+This effectively deletes all internship, project and skill items from the resume.
+Content of other item types in the resume remain unchanged.
+
+=== 3.9. Previewing a resume: `rpreview`
+----
+Previews the resume in string format.
+----
+Format: `rpreview RESUME_ID`
+
+Examples:
+
+* `rpreview 135` +
+Shows the text format of the resume with `RESUME_ID` 135.
+
+=== 3.10. Generating a resume: rgen
+
+----
+Generates a .pdf file from an existing resume object.
+----
+Format: `rgen RESUME_ID`
+
+****
+* Generates a `.pdf` file from resume object with id `RESUME_ID`.
+* The `RESUME_ID` must be a positive integer that identifies an existing item.
+****
+
+Examples:
+
+* `rgen 1234` +
+Generates a `.pdf` file from resume object with `RESUME_ID` 1234.
+
+=== 3.11. Exiting the program : `exit`
+----
+Exits the program.
+----
+
 Format: `exit`
 
-=== Saving the data
+=== 3.12. Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+ResuMe data is saved in the hard disk automatically after any command
+that changes the data. There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+=== 3.13. Encrypting data files `[coming in v2.0]`
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
-== FAQ
+== 4. FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+____
+*Q:* What is the difference between `redit` and `edit i/res`? +
 
-== Command Summary
+*A:* `redit` is used when you want to add/remove certain items from your
+resume. Meanwhile, `edit i/res` is used when you want to edit attributes of the
+resume, like its name or tags.
+____
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
+____
+*Q:* How do I transfer my data to another Computer? +
+
+*A:* Install the app in the other computer and overwrite the empty data
+file it creates with the file that contains the data of your previous
+Address Book folder.
+____
+
+== 5. Command Summary
+
 * *Help* : `help`
+
+* *List* : `list`
+
+* *Add* `add i/TYPE n/NAME ATTRIBUTE/VALUE]... [#/TAG]...` +
+e.g. `add i/proj n/Duke t/06-2020 w/abc.github.io d/For a little module named CS2103T. #/java #/tech`
+
+* *Edit* : `edit INDEX i/TYPE [ATTRIBUTE/VALUE]... [#/TAG]...` +
+e.g. `edit 2 i/ski l/ADVANCED #/`
+
+* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
+e.g. `find Software`
+
+* *Delete* : `delete INDEX i/TYPE` +
+e.g. `delete 3 i/res`
+
+* *Edit Resume* : `redit RESUME_ID TYPE/[ITEM_ID...] [MORE_TYPE/[ITEM_ID...]]... [#/TAG]...`
+e.g. `redit 135 proj/9823 int/102 201` +
+
+* *Preview Resume* : `rpreview RESUME_ID` +
+e.g. `rpreview 234`
+
+* *Generate Resume* : `rgen RESUME_ID` +
+e.g. `rgen 21`

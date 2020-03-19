@@ -9,6 +9,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.personbio.PersonPane;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +36,8 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ItemDisplay itemDisplay;
+    private PersonPane person;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -48,7 +52,13 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane resultDisplayPlaceholder;
 
     @FXML
+    private StackPane itemDisplayPlaceholder;
+
+    @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private VBox profilePlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -107,8 +117,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredItemList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        itemDisplay = new ItemDisplay();
+        itemDisplayPlaceholder.getChildren().add(itemDisplay.getRoot());
+
+        person = new PersonPane(logic.getUserList());
+        profilePlaceholder.getChildren().add(person.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -118,6 +134,7 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
     }
 
     /**
@@ -173,7 +190,13 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
+            logger.info("Item Display: " + commandResult.getDataToUser());
+
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (!commandResult.getDataToUser().equals("")) {
+                itemDisplay.setDataFeedbackToUser(commandResult.getDataToUser());
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
