@@ -55,13 +55,10 @@ public class Resume extends Item {
     @Override
     public String getSummary() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("\n")
-                .append(getInternships().size())
-                .append(" internship(s) ")
-                .append("\n")
+        builder.append(getInternships().size())
+                .append(" internship(s), ")
                 .append(getProjects().size())
-                .append(" project(s) ")
-                .append("\n")
+                .append(" project(s), ")
                 .append(getSkills().size())
                 .append(" skill(s).");
         return builder.toString();
@@ -70,7 +67,8 @@ public class Resume extends Item {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(super.toString())
+        builder.append("Resume: ")
+                .append(super.toString()).append("\n")
                 .append(getSummary());
         return builder.toString();
     }
