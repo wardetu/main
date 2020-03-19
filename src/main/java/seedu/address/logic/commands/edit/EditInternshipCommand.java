@@ -37,18 +37,19 @@ public class EditInternshipCommand extends EditCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (index.getZeroBased() >= model.getResumeSize()) {
+        if (index.getZeroBased() >= model.getInternshipSize()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Internship toEdit = model.getInternship(index);
 
-        Internship editedResume = createEditedInternship(toEdit, editInternshipDescriptor);
+        Internship editedInternship = createEditedInternship(toEdit, editInternshipDescriptor);
 
-        model.setInternship(toEdit, editedResume);
+        model.setInternship(toEdit, editedInternship);
         model.setInternshipToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        return new CommandResult(editedResume.toString(), String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedResume));
+        return new CommandResult(editedInternship.toString(),
+                String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship));
     }
 
     /**

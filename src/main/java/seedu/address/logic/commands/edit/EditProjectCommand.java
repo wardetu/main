@@ -38,7 +38,7 @@ public class EditProjectCommand extends EditCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (index.getZeroBased() >= model.getResumeSize()) {
+        if (index.getZeroBased() >= model.getProjectSize()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 

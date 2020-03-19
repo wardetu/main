@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditSkillCommand extends EditCommand {
 
-    private static final String MESSAGE_EDIT_RESUME_SUCCESS = "Edited Skill: %1$s";
+    private static final String MESSAGE_EDIT_SKILL_SUCCESS = "Edited Skill: %1$s";
 
     private EditSkillDescriptor editSkillDescriptor;
     /**
@@ -48,7 +48,7 @@ public class EditSkillCommand extends EditCommand {
         model.setSkill(toEdit, editedSkill);
         model.setSkillToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        return new CommandResult(editedSkill.toString(), String.format(MESSAGE_EDIT_RESUME_SUCCESS, editedSkill));
+        return new CommandResult(editedSkill.toString(), String.format(MESSAGE_EDIT_SKILL_SUCCESS, editedSkill));
     }
 
     /**
