@@ -65,6 +65,19 @@ public interface Model {
      */
     void setUser(Person person);
 
+    public ObservableList<Person> getUserList();
+
+    /**
+     * Updates the user profile as this user.
+     */
+    void setUserToDisplay();
+
+    /**
+     * @return Person in the model.
+     */
+    Person getUser();
+
+
     //=========== Internships ================================================================================
 
     /**
@@ -258,4 +271,5 @@ public interface Model {
     void setItem(Item target, Item edit);
 
     void setItemsToDisplay(String type);
+
 }
