@@ -3,6 +3,10 @@ package seedu.address.model.item.field;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Represents an Item's time (start/end date) in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
@@ -31,9 +35,24 @@ public class Time {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Formats {@code Time} to "MMM yyyy" format.
+     * @return formatted {@String}.
+     */
+    public String format() throws ParseException {
+        String pattern = "MMM yyyy";
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        Date date = format.parse(this.value);
+        return date.toString();
+    }
+
     @Override
     public String toString() {
-        return value;
+        try {
+            return format();
+        } catch (ParseException e) {
+            return this.value;
+        }
     }
 
     @Override

@@ -12,8 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.ResumeBook;
 import seedu.address.model.item.Internship;
-import seedu.address.model.item.Item;
-import seedu.address.model.item.PersonalDetail;
+import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
@@ -27,7 +26,7 @@ class JsonSerializableResumeBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
-    private final List<JsonAdaptedPersonalDetail> persons = new ArrayList<>();
+    private final JsonAdaptedPerson user;
     private final List<JsonAdaptedResume> resumes = new ArrayList<>();
     private final List<JsonAdaptedInternship> internships = new ArrayList<>();
     private final List<JsonAdaptedSkill> skills = new ArrayList<>();
@@ -37,19 +36,17 @@ class JsonSerializableResumeBook {
      * Constructs a {@code JsonSerializableResumeBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableResumeBook(@JsonProperty("persons") List<JsonAdaptedPersonalDetail> persons,
+    public JsonSerializableResumeBook(@JsonProperty("user") JsonAdaptedPerson user,
                                       @JsonProperty("resumes") List<JsonAdaptedResume> resumes,
                                       @JsonProperty("internships") List<JsonAdaptedInternship> internships,
                                       @JsonProperty("skills") List<JsonAdaptedSkill> skills,
                                       @JsonProperty("projects") List<JsonAdaptedProject> projects) {
-        this.persons.addAll(persons);
+        this.user =user;
         this.resumes.addAll(resumes);
         this.internships.addAll(internships);
         this.skills.addAll(skills);
         this.projects.addAll(projects);
     }
-
-
 
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
@@ -57,13 +54,7 @@ class JsonSerializableResumeBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableResumeBook}.
      */
     public JsonSerializableResumeBook(ReadOnlyResumeBook source) {
-        persons.addAll(source
-                .getPersonalDetailList()
-                .asUnmodifiableObservableList()
-                .stream()
-                .map(x -> (PersonalDetail) x)
-                .map(JsonAdaptedPersonalDetail::new)
-                .collect(Collectors.toList()));
+        user = new JsonAdaptedPerson(source.getUser());
         resumes.addAll(source
                 .getResumeList()
                 .asUnmodifiableObservableList()
@@ -101,25 +92,17 @@ class JsonSerializableResumeBook {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public ResumeBook toModelType() throws IllegalValueException {
-        ResumeBook addressBook = new ResumeBook();
-
-
-        // TODO: remove the PersonalDetail part
-        for (JsonAdaptedPersonalDetail jsonAdaptedPerson : persons) {
-            Item person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasItem(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-            }
-            addressBook.addItem(person);
-        }
+        ResumeBook resumeBook = new ResumeBook();
+        Person person = user.toModelType();
+        resumeBook.setUser(person);
 
         int maxIdValue = -1;
         for (JsonAdaptedResume jsonAdaptedResume : resumes) {
             Resume resume = jsonAdaptedResume.toModelType();
-            if (addressBook.hasItem(resume)) {
+            if (resumeBook.hasItem(resume)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addResume(resume);
+            resumeBook.addResume(resume);
             maxIdValue = Math.max(maxIdValue, resume.getId());
         }
         ItemUtil.setBaseIdOfItemType("res", maxIdValue + 1);
@@ -127,10 +110,10 @@ class JsonSerializableResumeBook {
         maxIdValue = -1;
         for (JsonAdaptedInternship jsonAdaptedInternship : internships) {
             Internship internship = jsonAdaptedInternship.toModelType();
-            if (addressBook.hasItem(internship)) {
+            if (resumeBook.hasItem(internship)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addInternship(internship);
+            resumeBook.addInternship(internship);
             maxIdValue = Math.max(maxIdValue, internship.getId());
         }
         ItemUtil.setBaseIdOfItemType("int", maxIdValue + 1);
@@ -138,10 +121,10 @@ class JsonSerializableResumeBook {
         maxIdValue = -1;
         for (JsonAdaptedProject jsonAdaptedProject : projects) {
             Project project = jsonAdaptedProject.toModelType();
-            if (addressBook.hasItem(project)) {
+            if (resumeBook.hasItem(project)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addProject(project);
+            resumeBook.addProject(project);
             maxIdValue = Math.max(maxIdValue, project.getId());
         }
         ItemUtil.setBaseIdOfItemType("proj", maxIdValue + 1);
@@ -149,15 +132,14 @@ class JsonSerializableResumeBook {
         maxIdValue = -1;
         for (JsonAdaptedSkill jsonAdaptedSkill : skills) {
             Skill skill = jsonAdaptedSkill.toModelType();
-            if (addressBook.hasItem(skill)) {
+            if (resumeBook.hasItem(skill)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addSkill(skill);
+            resumeBook.addSkill(skill);
             maxIdValue = Math.max(maxIdValue, skill.getId());
         }
         ItemUtil.setBaseIdOfItemType("ski", maxIdValue + 1);
 
-        return addressBook;
+        return resumeBook;
     }
-
 }

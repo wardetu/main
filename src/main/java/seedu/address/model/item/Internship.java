@@ -56,11 +56,8 @@ public class Internship extends Item {
     @Override
     public String getSummary() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Role: ")
-                .append(getRole())
-                .append(" From: ")
-                .append(getFrom())
-                .append(" To: ")
+        builder.append("Role: ").append(getRole()).append("\n")
+                .append(getFrom()).append(" - ")
                 .append(getTo());
         return builder.toString();
     }
@@ -68,9 +65,8 @@ public class Internship extends Item {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(super.toString())
-                .append(getSummary() + "\n")
-                .append(" Description: ")
+        builder.append("Company: ").append(super.toString()).append("\n")
+                .append(getSummary()).append("\n")
                 .append(getDescription());
         return builder.toString();
     }

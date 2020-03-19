@@ -30,7 +30,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.Level;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -38,11 +37,11 @@ import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
+import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
-import seedu.address.model.tag.Tag;
 
 public class ResumeBookTest {
     /*
@@ -111,7 +110,7 @@ public class ResumeBookTest {
     private static class ResumeBookStub implements ReadOnlyResumeBook {
         private Person user = new Person(new Name("Default name"), new Phone("000"), new Email("000@gmail.com"),
                 new Github("000"), "Default university", "Default major",
-                new Time("12-9999"), new Time("12-9999"), 5.0, new HashSet<Tag>());
+                new Time("12-9999"), new Time("12-9999"), 5.0);
         private final ObservableList<Item> itemsToDisplay = FXCollections.observableArrayList();
         private final UniqueItemList internships = new UniqueItemList();
         private final UniqueItemList projects = new UniqueItemList();

@@ -21,7 +21,6 @@ public class Project extends Item {
     private Website website;
     private String description;
 
-
     public Project(Name name, Time time, Website website, String description, Set<Tag> tags) {
         this(name, time, website, description, tags, ItemUtil.yieldId("proj"));
     }
@@ -50,7 +49,7 @@ public class Project extends Item {
     @Override
     public String getSummary() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Time: ")
+        builder.append("Time: ")
                 .append(getTime());
         return builder.toString();
     }
@@ -58,10 +57,9 @@ public class Project extends Item {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(super.toString())
-                .append(getSummary())
-                .append(" Website: ")
-                .append(getWebsite())
+        builder.append("Project: ").append(super.toString()).append("\n")
+                .append(getSummary()).append("\n")
+                .append(getWebsite()).append("\n")
                 .append(getDescription());
         return builder.toString();
     }

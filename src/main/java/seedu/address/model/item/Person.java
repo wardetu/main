@@ -1,16 +1,12 @@
 package seedu.address.model.item;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -30,13 +26,12 @@ public class Person {
     private final Time from;
     private final Time to;
     private final double cap;
-    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Github github,
-                  String university, String major, Time from, Time to, double cap, Set<Tag> tags) {
+                  String university, String major, Time from, Time to, double cap) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -46,7 +41,6 @@ public class Person {
         this.from = from;
         this.to = to;
         this.cap = cap;
-        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -85,31 +79,24 @@ public class Person {
         return cap;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, github, university, major, from, to, cap, tags);
+        return Objects.hash(name, phone, email, github, university, major, from, to, cap);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Phone: ").append(getPhone())
-                .append(" Email: ").append(getEmail())
-                .append(" Github: ").append(getGithub())
-                .append(" University: ").append(getUniversity())
-                .append(" Major: ").append(getMajor())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+        builder.append(getName()).append("\n")
+                .append(getPhone()).append(" | ")
+                .append(getEmail()).append(" | ")
+                .append(getGithub()).append("\n")
+                .append(getUniversity()).append(" | ")
+                .append(getFrom()).append(" - ")
+                .append(getTo()).append("\n")
+                .append("Major: ").append(getMajor()).append(" | ")
+                .append("CAP: ").append(getCap());
         return builder.toString();
     }
 }

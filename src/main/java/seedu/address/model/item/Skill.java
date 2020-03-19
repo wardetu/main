@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Set;
 
+import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Type;
 import seedu.address.model.tag.Tag;
@@ -20,6 +21,7 @@ public class Skill extends Item {
     public Skill(Name name, Level level, Set<Tag> tags) {
         this(name, level, tags, ItemUtil.yieldId("ski"));
     }
+
     public Skill(Name name, Level level, Set<Tag> tags, int id) {
         super(name, id, tags);
         requireNonNull(level);
@@ -34,8 +36,7 @@ public class Skill extends Item {
     @Override
     public String getSummary() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Level: ")
-                .append(getLevel());
+        builder.append("Level: ").append(getLevel());
         return builder.toString();
     }
 
