@@ -5,7 +5,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 
 /**
- * Stub for ViewInternshipCommand.
+ * The command for viewing the details of an Internship item.
  */
 public class ViewInternshipCommand extends ViewCommand {
     private Index targetIndex;

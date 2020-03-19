@@ -5,12 +5,12 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 
 /**
- * The command for viewing the details of a Resume item.
+ * The command for viewing the details of a Skill item.
  */
-public class ViewResumeCommand extends ViewCommand {
+public class ViewSkillCommand extends ViewCommand {
     private Index targetIndex;
 
-    public ViewResumeCommand(Index targetIndex) {
+    public ViewSkillCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
