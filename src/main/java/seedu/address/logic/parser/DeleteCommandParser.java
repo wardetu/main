@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.delete.DeleteCommand;
 import seedu.address.logic.commands.delete.DeleteInternshipCommand;
+import seedu.address.logic.commands.delete.DeleteProjectCommand;
 import seedu.address.logic.commands.delete.DeleteResumeCommand;
+import seedu.address.logic.commands.delete.DeleteSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 
@@ -33,11 +35,16 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
             String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
-            switch(itemType) {
-            case("res"):
+            switch (itemType) {
+            case "res":
                 return new DeleteResumeCommand(index);
-            case("int"):
+            case "int":
                 return new DeleteInternshipCommand(index);
+            case "proj":
+                return new DeleteProjectCommand(index);
+            case "ski":
+                return new DeleteSkillCommand(index);
+
             default:
                 // Should not have reached here
                 // TODO: Use a better Exception here
