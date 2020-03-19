@@ -1,6 +1,5 @@
 package seedu.address.ui.personbio;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -32,11 +31,11 @@ public class PersonPane extends UiPart<Region> {
     private VBox personDetailsPlaceholder;
 
     /**
-     * Constructs the entire person pane with profile and personal details table.
-     */
-    public PersonPane(ObservableList<Person> person) {
+    * Constructs the entire person pane with profile and personal details table.
+    */
+    public PersonPane(Person user) {
         super(FXML);
-        this.user = person.get(0);
+        this.user = user;
 
         String name = this.user.getName().toString();
         String phone = this.user.getPhone().toString();
@@ -53,8 +52,22 @@ public class PersonPane extends UiPart<Region> {
                 "What if Newton discovered gravity from a durian?");
         profilePlaceholder.getChildren().add(profile.getRoot());
 
-        studentProfile = new PersonDetailPane(name, phone, email, github, university, major, from,
-                to, cap);
+        studentProfile = new PersonDetailPane(name, phone, email, github, university, major, from, to, cap);
         personDetailsPlaceholder.getChildren().add(studentProfile.getRoot());
+    }
+
+    public void setProfile(Person updatedUser) {
+        personDetailsPlaceholder.getChildren().clear();
+        String name = updatedUser.getName().toString();
+        String phone = updatedUser.getPhone().toString();
+        String email = updatedUser.getEmail().toString();
+        String github = updatedUser.getGithub().toString();
+        String university = updatedUser.getUniversity();
+        String major = updatedUser.getMajor();
+        String from = updatedUser.getFrom().toString();
+        String to = updatedUser.getTo().toString();
+        String cap = String.valueOf(updatedUser.getCap());
+        personDetailsPlaceholder.getChildren().add(new PersonDetailPane(name, phone, email, github, university,
+                 major, from, to, cap).getRoot());
     }
 }

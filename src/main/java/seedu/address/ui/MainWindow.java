@@ -123,7 +123,7 @@ public class MainWindow extends UiPart<Stage> {
         itemDisplay = new ItemDisplay();
         itemDisplayPlaceholder.getChildren().add(itemDisplay.getRoot());
 
-        person = new PersonPane(logic.getUserList());
+        person = new PersonPane(logic.getUser());
         profilePlaceholder.getChildren().add(person.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -193,6 +193,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Item Display: " + commandResult.getDataToUser());
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            person.setProfile(logic.getUser());
 
             if (!commandResult.getDataToUser().equals("")) {
                 itemDisplay.setDataFeedbackToUser(commandResult.getDataToUser());
