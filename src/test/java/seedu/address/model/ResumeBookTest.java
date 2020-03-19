@@ -171,7 +171,7 @@ public class ResumeBookTest {
 
         @Override
         public Skill getSkill(Index index) {
-            return new Skill(new Name("Useless skill 1"), Level.ADVANCED, new HashSet<>());
+            return new Skill(new Name("Useless skill 1"), Level.ADVANCED, new HashSet<>(), -1);
         }
 
         @Override

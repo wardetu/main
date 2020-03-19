@@ -48,7 +48,6 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         Optional<JsonSerializableResumeBook> jsonAddressBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableResumeBook.class);
         if (!jsonAddressBook.isPresent()) {
-            logger.info("Fuck");
             return Optional.empty();
         }
 
