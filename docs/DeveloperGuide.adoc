@@ -187,6 +187,28 @@ image::ReditWantSomeThings.png[]
 ** Pros: Some methods in `EditCommand` may be able to inherited by `ResumeEditCommand`, reducing code duplication
 ** Cons: The functionality of `ResumeEditCommand` may be limited, and could have been combined with `EditCommand` entirely.
 
+=== Implementation of `Command` classes
+==== Current Implementation
+Currently, there are several objects which are subclasses of `Item`, namely `Resume`, `Internship`, `Skill`, etc. 
+
+For every of the `XYZCommand`, we would have one that corresponds to the `Item`. For example, we have `AddInternshipCommand` and `AddSkillCommand`. 
+
+// TODO: Add class diagram here
+
+This implies that the number of classes that needs to be written is the number of different commands times the different number of items.
+
+==== Design Considerations
+===== Aspect: Whether to separate the `XYZCommand` into many `XYZItemCommand`
+* ** Alternative 1 (current choice):** `XYZCommand` is separated into many `XYZItemCommand`
+
+Pros: More OOP. The behaviour of an `XYZItemCommand` becomes more flexible and can be easily changed as required.
+Cons: Many classes have to be maintained.
+
+* ** Alternative 2: ** Do not separate `XYZCommand`
+
+Pros: Only one command is required, regardless of number of items.
+Cons: The `execute` method inside this class can potentially be very long due to the need for handling the different item types.
+
 
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
