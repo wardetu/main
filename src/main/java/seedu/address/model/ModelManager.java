@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
@@ -91,6 +92,18 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyResumeBook getResumeBook() {
         return resumeBook;
+    }
+
+    //=========== User ================================================================================
+
+    @Override
+    public void setUser(Person person) {
+        resumeBook.setUser(person);
+    }
+
+    @Override
+    public Person getUser() {
+        return resumeBook.getUser();
     }
 
     //=========== Internships ================================================================================
@@ -227,11 +240,29 @@ public class ModelManager implements Model {
         updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
     }
 
+
+
     @Override
     public void setResume(Resume target, Resume editedResume) {
         requireAllNonNull(target, editedResume);
 
         resumeBook.setResume(target, editedResume);
+    }
+
+    @Override
+    public void editResume(Resume target, int[] internshipIndices, int[] projectIndices,
+                           int[] skillIndices) {
+        resumeBook.editResume(target, internshipIndices, projectIndices, skillIndices);
+    }
+
+    @Override
+    public Resume getResumeByIndex(int index) {
+        return resumeBook.getResumeByIndex(index);
+    }
+
+    @Override
+    public boolean hasResumeId(int resumeIndex) {
+        return resumeBook.hasResumeId(resumeIndex);
     }
 
     @Override
@@ -290,7 +321,6 @@ public class ModelManager implements Model {
                 && filteredItems.equals(other.filteredItems);
     }
 
-
     //// STUBS
     public boolean hasItem(Item item) {
         return false;
@@ -303,5 +333,20 @@ public class ModelManager implements Model {
     public void setItem(Item target, Item edit) {}
 
     public void setItemsToDisplay(String type) {}
+
+    @Override
+    public boolean hasInternshipId(int i) {
+        return resumeBook.hasInternshipId(i);
+    }
+
+    @Override
+    public boolean hasProjectId(int i) {
+        return resumeBook.hasProjectId(i);
+    }
+
+    @Override
+    public boolean hasSkillId(int i) {
+        return resumeBook.hasSkillId(i);
+    }
 
 }

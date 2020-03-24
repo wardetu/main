@@ -1,24 +1,35 @@
 @startuml
 !include style.puml
-skinparam arrowThickness 1.1
+skinparam arrowThickness 1.5
 skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
 
 Interface Storage <<Interface>>
 Interface UserPrefsStorage <<Interface>>
-Interface AddressBookStorage <<Interface>>
+Interface ResumeBookStorage <<Interface>>
 
 Class StorageManager
 Class JsonUserPrefsStorage
-Class JsonAddressBookStorage
+Class JsonResumeBookStorage
 
-StorageManager .left.|> Storage
-StorageManager o-right-> UserPrefsStorage
-StorageManager o--> AddressBookStorage
+StorageManager .up.|> Storage
+StorageManager o-left-> UserPrefsStorage
+StorageManager o-> ResumeBookStorage
 
-JsonUserPrefsStorage .left.|> UserPrefsStorage
-JsonAddressBookStorage .left.|> AddressBookStorage
-JsonAddressBookStorage .down.> JsonSerializableAddressBookStorage
-JsonSerializableAddressBookStorage .right.> JsonSerializablePerson
-JsonSerializablePerson .right.> JsonAdaptedTag
+JsonUserPrefsStorage .up.|> UserPrefsStorage
+JsonResumeBookStorage .up.|> ResumeBookStorage
+JsonResumeBookStorage .down.> JsonSerializableResumeBook
+
+JsonSerializableResumeBook .right.> JsonSerializablePerson
+JsonSerializableResumeBook .down.> JsonSerializableInternship
+JsonSerializableResumeBook .down.> JsonSerializableProject
+JsonSerializableResumeBook .down.> JsonSerializableResume
+JsonSerializableResumeBook .down.> JsonSerializableSkill
+
+JsonSerializableInternship .down.> JsonAdaptedTag
+JsonSerializableProject .down.> JsonAdaptedTag
+JsonSerializableResume .down.> JsonAdaptedTag
+JsonSerializableSkill .down.> JsonAdaptedTag
+
 @enduml
+

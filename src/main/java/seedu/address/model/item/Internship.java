@@ -8,6 +8,7 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Type;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * The Internship item.
@@ -17,24 +18,15 @@ public class Internship extends Item {
     // Data fields
     // TODO: convert from and to back to Time
     private String role;
-    private String from;
-    private String to;
+    private Time from;
+    private Time to;
     private String description;
 
-    public Internship(Name name, String role, String from, String to, String description, Set<Tag> tags) {
-        super(name, tags);
-        requireAllNonNull(role, from, to, description);
-        this.type = Type.generate("int");
-        this.role = role;
-        this.from = from;
-        this.to = to;
-        this.description = description;
-    }
-    public Internship(Name name, String role, Time from, Time to, String description, Set<Tag> tags, int id) {
-        this(name, role, from.toString(), to.toString(), description, tags, id );
+    public Internship(Name name, String role, Time from, Time to, String description, Set<Tag> tags) {
+        this(name, role, from, to, description, tags, ItemUtil.yieldId("int"));
     }
 
-    public Internship(Name name, String role, String from, String to, String description, Set<Tag> tags, int id) {
+    public Internship(Name name, String role, Time from, Time to, String description, Set<Tag> tags, int id) {
         super(name, id, tags);
         requireAllNonNull(role, from, to, description);
         this.type = Type.generate("int");
@@ -49,11 +41,11 @@ public class Internship extends Item {
         return this.role;
     }
 
-    public String getFrom() {
+    public Time getFrom() {
         return this.from;
     }
 
-    public String getTo() {
+    public Time getTo() {
         return this.to;
     }
 
@@ -64,11 +56,8 @@ public class Internship extends Item {
     @Override
     public String getSummary() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Role: ")
-                .append(getRole())
-                .append(" From: ")
-                .append(getFrom())
-                .append(" To: ")
+        builder.append("Role: ").append(getRole()).append("\n")
+                .append(getFrom()).append(" - ")
                 .append(getTo());
         return builder.toString();
     }
@@ -76,8 +65,8 @@ public class Internship extends Item {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(super.toString())
-                .append(getSummary())
+        builder.append("Company: ").append(super.toString()).append("\n")
+                .append(getSummary()).append("\n")
                 .append(getDescription());
         return builder.toString();
     }

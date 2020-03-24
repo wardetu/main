@@ -10,11 +10,12 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.ResumeBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Person;
 import seedu.address.storage.Storage;
 
 /**
@@ -26,12 +27,12 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final ResumeBookParser resumeBookParser;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        resumeBookParser = new ResumeBookParser();
     }
 
     @Override
@@ -39,7 +40,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = resumeBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
@@ -59,6 +60,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Item> getFilteredItemList() {
         return model.getFilteredItemList();
+    }
+
+    @Override
+    public Person getUser() {
+        return model.getUser();
     }
 
     @Override

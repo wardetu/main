@@ -9,6 +9,7 @@ import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Type;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * The Project item.
@@ -21,7 +22,11 @@ public class Project extends Item {
     private String description;
 
     public Project(Name name, Time time, Website website, String description, Set<Tag> tags) {
-        super(name, tags);
+        this(name, time, website, description, tags, ItemUtil.yieldId("proj"));
+    }
+
+    public Project(Name name, Time time, Website website, String description, Set<Tag> tags, int id) {
+        super(name, id, tags);
         requireAllNonNull(time, website, description);
         this.type = Type.generate("proj");
         this.time = time;
@@ -44,7 +49,7 @@ public class Project extends Item {
     @Override
     public String getSummary() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Time: ")
+        builder.append("Time: ")
                 .append(getTime());
         return builder.toString();
     }
@@ -52,10 +57,9 @@ public class Project extends Item {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(super.toString())
-                .append(getSummary())
-                .append(" Website: ")
-                .append(getWebsite())
+        builder.append("Project: ").append(super.toString()).append("\n")
+                .append(getSummary()).append("\n")
+                .append(getWebsite()).append("\n")
                 .append(getDescription());
         return builder.toString();
     }

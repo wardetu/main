@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
@@ -14,7 +15,13 @@ import seedu.address.model.item.UniqueItemList;
  */
 public interface ReadOnlyResumeBook {
 
-    //=========== Get List Operations ======================================================================
+    //=========== Get Detail Operations ======================================================================
+
+    /**
+     * Returns the user of the resume book.
+     * @return {@code Person} item representing the user.
+     */
+    Person getUser();
 
     /**
      * Returns an unmodifiable view of the current items list.
@@ -98,4 +105,17 @@ public interface ReadOnlyResumeBook {
 
     ///STUB
     UniqueItemList getPersonalDetailList();
+
+    /**
+     * HOLDER
+     */
+    void editResume(Resume target, int[] internshipIndices, int[] projectIndices, int[] skillIndices);
+    Resume getResumeByIndex(int resumeIndex);
+    boolean hasResumeId(int resumeIndex);
+
+    boolean hasInternshipId(int i);
+
+    boolean hasProjectId(int i);
+
+    boolean hasSkillId(int i);
 }

@@ -8,7 +8,7 @@ package seedu.address.logic.parser;
 //
 //import org.junit.jupiter.api.Test;
 //
-//import seedu.address.logic.commands.FindCommand;
+//import seedu.address.logic.commands.find.FindCommand;
 //import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {

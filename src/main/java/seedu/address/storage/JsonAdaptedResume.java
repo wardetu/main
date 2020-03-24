@@ -13,9 +13,8 @@ import seedu.address.model.item.Resume;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
 
-
 /**
- * asdad
+ * Jackson-friendly version of {@link Resume}.
  */
 public class JsonAdaptedResume {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
@@ -24,18 +23,18 @@ public class JsonAdaptedResume {
     private final int id;
 
     private final List<Integer> internshipIndices = new ArrayList<>();
+    private final List<Integer> projectIndices = new ArrayList<>();
+    private final List<Integer> skillIndices = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * asdasd
-     * @param name asda
-     * @param id adasd
-     * @param internshipIndices a
-     * @param tags asd
+     * Constructs a {@code JsonAdaptedResume} with the given details.
      */
     @JsonCreator
     public JsonAdaptedResume(@JsonProperty("name") String name, @JsonProperty("id") int id,
                              @JsonProperty("internships") List<Integer> internshipIndices,
+                             @JsonProperty("projects") List<Integer> projectIndices,
+                             @JsonProperty("skills") List<Integer> skillIndices,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.id = id;
@@ -45,34 +44,46 @@ public class JsonAdaptedResume {
         if (internshipIndices != null) {
             this.internshipIndices.addAll(internshipIndices);
         }
+        if (projectIndices != null) {
+            this.internshipIndices.addAll(projectIndices);
+        }
+        if (skillIndices != null) {
+            this.internshipIndices.addAll(skillIndices);
+        }
     }
 
     /**
-     * Construct
-     * @param res filelr
+     * Converts a given {@code Resume} into this class for Jackson use.
      */
     public JsonAdaptedResume(Resume res) {
         this.name = res.getName().fullName;
         this.id = res.getId();
         tagged.addAll(res.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
         internshipIndices.addAll(res.getInternships());
+        projectIndices.addAll(res.getProjects());
+        skillIndices.addAll(res.getSkills());
 
     }
 
     /**
-     * asdasd
-     * @return sadasd
-     * @throws IllegalValueException adasd
+     * Converts this Jackson-friendly adapted person object into the model's {@code Resume} object.
      */
     public Resume toModelType() throws IllegalValueException {
         final List<Tag> tags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             tags.add(tag.toModelType());
         }
-
         Resume resume = new Resume(new Name(name), id, Set.copyOf(tags));
         for (int internship : internshipIndices) {
-            resume.addInternships(internship);
+            resume.addInternship(internship);
+        }
+
+        for (int project : projectIndices) {
+            resume.addProject(project);
+        }
+
+        for (int skill : skillIndices) {
+            resume.addSkill(skill);
         }
         return resume;
     }

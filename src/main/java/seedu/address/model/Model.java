@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
@@ -56,6 +57,19 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyResumeBook getResumeBook();
+
+    //=========== User ================================================================================
+
+    /**
+     * Replaces the current user with {@code person}.
+     */
+    void setUser(Person person);
+
+    /**
+     * @return Person in the model.
+     */
+    Person getUser();
+
 
     //=========== Internships ================================================================================
 
@@ -206,6 +220,19 @@ public interface Model {
      */
     void setResume(Resume target, Resume editedResume);
 
+    // TODO: update this
+    /**
+     * Edits the content of given resume {@code target} identified by its actual id, as opposed to positional id in
+     * the current list. Sets
+     *
+     */
+    void editResume(Resume target, int[] internshipIndices, int[] projectIndices,
+                    int[] skillIndices);
+
+
+    Resume getResumeByIndex(int resumeIndex);
+    boolean hasResumeId(int resumeIndex);
+
     /**
      * Deletes the given resume.
      * The resume must exist in the resume book.
@@ -250,4 +277,8 @@ public interface Model {
     void setItem(Item target, Item edit);
 
     void setItemsToDisplay(String type);
+
+    boolean hasInternshipId(int i);
+    boolean hasProjectId(int i);
+    boolean hasSkillId(int i);
 }

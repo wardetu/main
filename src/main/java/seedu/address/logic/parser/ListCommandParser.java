@@ -2,9 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListInternshipCommand;
-import seedu.address.logic.commands.ListResumeCommand;
+import seedu.address.logic.commands.list.ListCommand;
+import seedu.address.logic.commands.list.ListInternshipCommand;
+import seedu.address.logic.commands.list.ListProjectCommand;
+import seedu.address.logic.commands.list.ListResumeCommand;
+import seedu.address.logic.commands.list.ListSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 
@@ -28,10 +30,14 @@ public class ListCommandParser implements Parser<ListCommand> {
         String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
         switch(itemType) {
-        case ("res"):
-            return new ListResumeCommand();
         case ("int"):
             return new ListInternshipCommand();
+        case ("proj"):
+            return new ListProjectCommand();
+        case ("res"):
+            return new ListResumeCommand();
+        case ("ski"):
+            return new ListSkillCommand();
         default:
             // Should not have reached here
             // TODO: Use a better Exception here
