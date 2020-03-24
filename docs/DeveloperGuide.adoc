@@ -153,6 +153,28 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+=== [Proposed] Resume Edit feature
+==== Proposed Implementation
+The Resume Edit feature or `redit` allows users to edit which `Item` belongs to the `Resume` (for example, adding a `Skill` item or removing an `Internship` item).
+It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`. 
+
+The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`. 
+Therefore, like any other `Command` classes, it will have an `execute` method. 
+
+The following screenshot illustrates what happens when we use `redit` to add item into the resume. The numbers in the command represent the index of the item in the list. After the end of the command, the number of item in the resume would have increased. 
+
+image::ReditAddIntoResume.png[]
+
+For modifications and removal of item from the resume, all we have to do is to run the same command again, specifying which item we want to *retain* in the resume.
+
+The following screenshot illustrates what happens if you want to remove all the items in the resume, starting from a an already-filled resume:
+
+image::ReditRemoveEverything.png[]
+
+And the following screenshot illustrates what happens if you want to remove some items:
+
+image::ReditWantSomeThings.png[]
+
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
