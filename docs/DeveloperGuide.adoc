@@ -175,6 +175,19 @@ And the following screenshot illustrates what happens if you want to remove some
 
 image::ReditWantSomeThings.png[]
 
+==== Design Considerations
+===== Aspect: Whether `ResumeEditCommand` should extend `EditCommand`
+* ** Alternative 1 (current choice):** `ResumeEditCommand` does not extend `EditCommand`, but extends `Command`. This design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the resume such as its name, while `redit` is supposed to change the content that the resume holds.
+
+** Pros: Better clarity in expressing that `redit` and `edit` are different commands.
+** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`.
+
+* ** Alternative 2:** `ResumeEditCommand` extends `EditCommand`
+
+** Pros: Some methods in `EditCommand` may be able to inherited by `ResumeEditCommand`, reducing code duplication
+** Cons: The functionality of `ResumeEditCommand` may be limited, and could have been combined with `EditCommand` entirely.
+
+
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
