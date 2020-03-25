@@ -230,8 +230,6 @@ classes that inherits from `Command`.
 .Component XYZCommand are independent of `Type` whereas ABCCommands are dependent on `Type`.
 image::CommandClassDiagram.png[]
 
-In this
-
 ==== Design Considerations
 ===== Aspect: Whether to separate the `ABCCommand` that is dependent on type into many `ABCItemCommand`
 * ** Alternative 1 (current choice):** `ABCCommand` is separated into many `ABCItemCommand`.
