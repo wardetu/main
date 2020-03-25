@@ -248,7 +248,7 @@ ie. `AddItem` can add `Internship` to the `Internship` list, or add `Skill` to `
 In the end, we went with our current design because it allows for each command type to only have one distinct job. Which
 is more in line with object oriented programming paradigms instead of having one class that would call different update
 methods in the model depending on the `Type` passed into it. Moreover, this reduces double work as `Parser` will not have to
-parse `Type` in user input, then only to be switch-cased again in `XYZCommand`.
+parse `Type` in user input, then only to be switch-cased again in `ABCCommand`.
 
 === Me Feature
 This feature allows user to make changes and updates his/her user profile which is reflected by the user profile panel.

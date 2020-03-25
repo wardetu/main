@@ -9,17 +9,17 @@ package Command {
 Class "{abstract}\nCommand" as Command
 Class XYZCommand
 Class "{abstract}\nABCCommand" as ABCCommand
-Class XYZInternshipCommand
-Class XYZSkillCommand
-Class XYZResumeCommand
-Class XYZProjectCommand
+Class ABCInternshipCommand
+Class ABCSkillCommand
+Class ABCResumeCommand
+Class ABCProjectCommand
 
 }
 
-XYZInternshipCommand -up-|> ABCCommand
-XYZSkillCommand -up-|> ABCCommand
-XYZResumeCommand -up-|> ABCCommand
-XYZProjectCommand -up-|> ABCCommand
+ABCInternshipCommand -up-|> ABCCommand
+ABCSkillCommand -up-|> ABCCommand
+ABCResumeCommand -up-|> ABCCommand
+ABCProjectCommand -up-|> ABCCommand
 ABCCommand -up-|> Command
 XYZCommand -up-|> Command
 
