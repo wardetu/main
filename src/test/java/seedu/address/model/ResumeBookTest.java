@@ -163,11 +163,6 @@ public class ResumeBookTest {
         }
 
         @Override
-        public void editResume(Resume target, int[] internshipIndices, int[] projectIndices, int[] skillIndices) {
-
-        }
-
-        @Override
         public Resume getResumeByIndex(int resumeIndex) {
             return null;
         }
