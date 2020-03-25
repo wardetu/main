@@ -106,11 +106,6 @@ public interface ReadOnlyResumeBook {
     ///STUB
     UniqueItemList getPersonalDetailList();
 
-    /**
-     * HOLDER
-     */
-    void editResume(Resume target, int[] internshipIndices, int[] projectIndices, int[] skillIndices);
-    Resume getResumeByIndex(int resumeIndex);
     boolean hasResumeId(int resumeIndex);
 
     boolean hasInternshipId(int i);
