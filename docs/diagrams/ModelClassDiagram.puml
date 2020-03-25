@@ -5,52 +5,83 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
 Interface Model <<Interface>>
 Interface ObservableList <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Interface ReadOnlyResumeBook <<Interface>>
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
+Class ResumeBook
+Class ReadOnlyResumeBook
+Class UniqueItemList
 
-Package Person {
+Package User {
 Class Person
-Class Address
-Class Email
-Class Name
+Package UserField {
 Class Phone
-Class UniquePersonList
+Class Email
+Class Github
+Class University
+}
 }
 
-Package Tag {
+Package Item {
+Class Item
+Class Resume
+Class Internship
+Class Project
+Class Skill
+
+Package ItemField {
+Class Type
+Class Description
+Class Website
+Class Level
 Class Tag
 }
 }
 
+Package SharedField {
+Class Name
+Class Time
+}
+
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
+HiddenOutside .d.> Model
+Model .u.> ObservableList
+ModelManager .u.> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+ModelManager o-l-> "1" UserPrefs
+UserPrefs .l.|> ReadOnlyUserPrefs
 
-ModelManager .up.|> Model
-Model .right.> ObservableList
-ModelManager o--> "1" AddressBook
-ModelManager o-left-> "1" UserPrefs
-UserPrefs .up.|> ReadOnlyUserPrefs
+ModelManager o-r-> "1" ResumeBook
+ResumeBook .u.|> ReadOnlyResumeBook
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList o--> "*" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+ResumeBook *-d-> "1" Person
+Person *---> "1" Name
+Person *---> "2" Time
+Person *---> "1" Phone
+Person *---> "1" Email
+Person *---> "1" Github
+Person *---> "1" University
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+ResumeBook *--> "4" UniqueItemList
+UniqueItemList o--> "*" Item
 
-ModelManager -->"1" Person : filtered list
+Item *---> "1" Name
+Item *---> "*" Time
+Item *---> "1" Type
+Item *---> "1" Description
+Item *---> "*" Tag
+
+Project ..|> Item
+Skill ..|> Item
+Resume ..|> Item
+Internship ..|> Item
+
+Project *-> "1" Website
+Skill *-> "1" Level
+
+}
 @enduml
