@@ -281,7 +281,24 @@ overriding internship content, project content and skill content with empty stri
 This effectively deletes all internship, project and skill items from the resume.
 Content of other item types in the resume remain unchanged.
 
-=== 3.9. Previewing a resume: `rpreview`
+=== 3.9. Undo a command: `undo`
+****
+* Undoes the previous command and restores the state of the application to before that command is performed.
+* Successive undo commands will bring the application state further back.
+* Do note that commands that make no change to the application state, like `list` or `view`, cannot be undone.
+* You cannot undo if there is no previous state to return to.
+****
+
+=== 3.10. Redo a command: `redo`
+****
+* Redoes the immediately previous undone command and brings the application state to after the performing of that
+command.
+* If a new command is performed after `undo`, then all redo states will be deleted and you will not be able to go
+to these states.
+* You cannot redo if there is no forward state to go to.
+****
+
+=== 3.11. Previewing a resume: `rpreview`
 ----
 Previews the resume in string format.
 ----
@@ -292,7 +309,7 @@ Examples:
 * `rpreview 135` +
 Shows the text format of the resume with `RESUME_ID` 135.
 
-=== 3.10. Generating a resume: rgen
+=== 3.12. Generating a resume: rgen
 
 ----
 Generates a .pdf file from an existing resume object.
@@ -309,19 +326,19 @@ Examples:
 * `rgen 1234` +
 Generates a `.pdf` file from resume object with `RESUME_ID` 1234.
 
-=== 3.11. Exiting the program : `exit`
+=== 3.13. Exiting the program : `exit`
 ----
 Exits the program.
 ----
 
 Format: `exit`
 
-=== 3.12. Saving the data
+=== 3.14. Saving the data
 
 ResuMe data is saved in the hard disk automatically after any command
 that changes the data. There is no need to save manually.
 
-=== 3.13. Encrypting data files `[coming in v2.0]`
+=== 3.15. Encrypting data files `[coming in v2.0]`
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
@@ -364,6 +381,10 @@ e.g. `delete 3 i/res`
 
 * *Edit Resume* : `redit RESUME_ID TYPE/[ITEM_ID...] [MORE_TYPE/[ITEM_ID...]]... [#/TAG]...`
 e.g. `redit 135 proj/9823 int/102 201` +
+
+* *Undo* : `undo` +
+
+* *Redo* : `redo` +
 
 * *Preview Resume* : `rpreview RESUME_ID` +
 e.g. `rpreview 234`
