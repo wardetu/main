@@ -79,7 +79,7 @@ image::UiClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ItemDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -87,6 +87,7 @@ The `UI` component,
 
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
+* Responds to events raised by various commands and the UI can be updated accordingly.
 
 [[Design-Logic]]
 === Logic component
@@ -98,13 +99,13 @@ image::LogicClassDiagram.png[]
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `ResumeBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person).
+.  The command execution can affect the `Model` (e.g. adding a new resume).
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 .  In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1 i/ res")` API call.
 
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeleteSequenceDiagram.png[]
@@ -142,12 +143,12 @@ image::StorageClassDiagram.png[]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in json format and read it back.
+* can save the Resume Book data in json format and read it back.
 
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.resumebook.commons` package.
 
 == Implementation
 
@@ -195,41 +196,128 @@ Detailed steps are shown in the sequence diagram below:
 
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
-==== Proposed Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
+=== [Proposed] Resume Edit feature
+==== Proposed Implementation
+The Resume Edit feature or `redit` allows users to edit which `Item` belongs to the `Resume` (for example, adding a `Skill` item or removing an `Internship` item).
+It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`.
+
+The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`.
+Therefore, like any other `Command` classes, it will have an `execute` method.
+
+The following screenshot illustrates what happens when we use `redit` to add item into the resume. The numbers in the command represent the index of the item in the list. After the end of the command, the number of item in the resume would have increased.
+
+image::ReditAddIntoResume.png[]
+
+For modifications and removal of item from the resume, all we have to do is to run the same command again, specifying which item we want to *retain* in the resume.
+
+The following screenshot illustrates what happens if you want to remove all the items in the resume, starting from a an already-filled resume:
+
+image::ReditRemoveEverything.png[]
+
+And the following screenshot illustrates what happens if you want to remove some items:
+
+image::ReditWantSomeThings.png[]
+
+==== Design Considerations
+===== Aspect: Whether `ResumeEditCommand` should extend `EditCommand`
+* ** Alternative 1 (current choice):** `ResumeEditCommand` does not extend `EditCommand`, but extends `Command`. This design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the resume such as its name, while `redit` is supposed to change the content that the resume holds.
+
+** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Pricniple is observed.
+** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may be confusing to have both `redit` and `edit`.
+
+* ** Alternative 2:** `ResumeEditCommand` extends `EditCommand`
+
+** Pros: Some methods in `EditCommand` may be able to inherited by `ResumeEditCommand`, reducing code duplication.
+** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely.
+
+=== Implementation of `Command` classes
+==== Current Implementation
+Currently, there are several objects which are subclasses of `Item`, namely `Resume`, `Internship`, `Skill`, etc.
+
+For every of the `XYZCommand`, we would have one that corresponds to the `Item`. For example, we have `AddInternshipCommand` and `AddSkillCommand`.
+
+// TODO: Add class diagram here
+
+This implies that the number of classes that needs to be written is the number of different commands times the different number of items.
+
+==== Design Considerations
+===== Aspect: Whether to separate the `XYZCommand` into many `XYZItemCommand`
+* ** Alternative 1 (current choice):** `XYZCommand` is separated into many `XYZItemCommand`
+
+** Pros: More OOP. The behaviour of an `XYZItemCommand` becomes more flexible and can be easily changed as required.
+** Cons: Many classes have to be maintained.
+
+* ** Alternative 2: ** Do not separate `XYZCommand`
+
+** Pros: Only one command is required, regardless of number of items.
+** Cons: The `execute` method inside this class can potentially be very long due to the need for handling the different item types.
+
+=== Me Feature
+This feature allows user to make changes and updates his/her user profile which is reflected by the user profile panel.
+
+==== Edit User Main Data
+It allows one specific user to modify and update user information that includes `name`, `phone`, `email1`, `github`,
+`university`, `major`, `from`, `to`, `cap`.
+
+Below is an example usage scenario and how the edit user data command works.
+
+* User launches the application for the first time. The User Profile and Data will be initialized with the initial json
+data stored.
+
+* User executes `me n/NAME p/PHONE e/EMAIL g/GITHUB u/UNIVERSITY m/MAJOR f/FROM t/TO c/CAP` so as to update the Person
+object currently stored in Model as well as Storage.
+
+* The Ui User Data table will be updated accordingly.
+
+The following sequence diagram shows how the `me` feature allows user to edit the user profile.
+
+==== Edit User Profile
+It allows the specific user to input and update his/her user profile picture and receives motivational quotes.
+
+==== Set Personal Reminders
+It allows the user to set reminders as well as taking notes for him/herself to further customize his/her interaction
+with the app.
+
+==== Change Background and Font Color
+
+// tag::undoredo[]
+=== Undo/Redo feature
+==== Implementation
+
+The undo/redo mechanism is facilitated by `VersionedResumeBook`.
+It extends `ResumeBook` with an undo/redo history, stored internally as an `ResumeBookStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone address book state from its history.
+* `VersionedResumeBook#commit()` -- Saves the current resume book state in its history.
+* `VersionedResumeBook#undo()` -- Restores the previous resume book state from its history.
+* `VersionedResumeBook#redo()` -- Restores a previously undone resume book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitResumeBook()`, `Model#undoResumeBook()` and `Model#redoResumeBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedResumeBook` will be initialized with the initial resume book state, and the `currentStatePointer` pointing to that single resume book state.
 
 image::UndoRedoState0.png[]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5 i/ res` command to delete the 5th resume in the resume book. The `delete` command calls `Model#commitResumeBook()`, causing the modified state of the resume book after the `delete 5 i/ res` command executes to be saved in the `resumeBookStateList`, and the `currentStatePointer` is shifted to the newly inserted resume book state.
 
 image::UndoRedoState1.png[]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add i/ res n/ Summer Resume ...` to add a new resume. The `add` command also calls `Model#commitResumeBook()`, causing another modified resume book state to be saved into the `resumeBookStateList`.
 
 image::UndoRedoState2.png[]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+If a command fails its execution, it will not call `Model#commitResumeBook()`, so the resume book state will not be saved into the `resumeBookStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the resume was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoResumeBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous resume book state, and restores the resume book to that state.
 
 image::UndoRedoState3.png[]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial resume book state, then there are no previous resume book states to restore. The `undo` command uses `Model#canUndoResumeBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
@@ -237,16 +325,16 @@ image::UndoSequenceDiagram.png[]
 
 NOTE: The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite -- it calls `Model#redoResumeBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the resume book to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `resumeBookStateList.size() - 1`, pointing to the latest resume book state, then there are no undone resume book states to restore. The `redo` command uses `Model#canRedoResumeBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list i/ res`. Commands that do not modify the resume book, such as `list`, will usually not call `Model#commitResumeBook()`, `Model#undoResumeBook()` or `Model#redoResumeBook()`. Thus, the `resumeBookStateList` remains unchanged.
 
 image::UndoRedoState4.png[]
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitResumeBook()`. Since the `currentStatePointer` is not pointing at the end of the `resumeBookStateList`, all resume book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add i/ res ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoState5.png[]
 
@@ -258,21 +346,27 @@ image::CommitActivityDiagram.png[]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-** Pros: Easy to implement.
+* **Alternative 1 (current choice):** Saves the entire resume book.
+** Pros: Easy to implement. Easy to understand.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
+** Pros: Will use less memory (e.g. for `delete`, just save the item being deleted).
+** Cons: We must ensure that the implementation of each individual command is correct. It is further complicated by the fact that
+there is an `add`, `delete`, and `edit` command for each of item type. Also, Separation of Concerns Principle is violated as in essence, the `undo()` method of a command
+is doing more than what the command is responsible for, e.g. undoing a `delete` command is essentially performing an `add` command.
+
 
 ===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
-* **Alternative 2:** Use `HistoryManager` for undo/redo
-** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
-** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
+* **Alternative 1 (current choice):** Use a list to store the history of resume book states.
+** Pros: Very straightforward. Developers, even the novice ones, can easily understand and pick up if they wish to improve upon our application.
+** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedResumeBook`.
+* **Alternative 2:** Use `HistoryManager` for undo/redo. `HistoryManager` will contain two stacks: `UndoStack` and `RedoStack`. We push a command into the former stack
+when it is executed; when an `undo` is performed, we pop the top of the `UndoStack` and store the command in the `RedoStack`.
+** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase. We also just need to store the history of commands as opposed to the entire
+resume book.
+** Cons: Handling of the stacks can be confusing, especially since there are commands that make no change to the model and thus are not (and should not be) stored. `edit` and `delete` require
+the old-versioned item to be stored as well so that it can be restored while `add` does not, thereby affecting consistency.
 // end::undoredo[]
 
 // tag::dataencryption[]

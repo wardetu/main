@@ -8,7 +8,8 @@ import seedu.address.model.Model;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 
 /**
- * Finds Internship Items in the address book matching a keyword.
+ * Finds {@code Internship} items in the address book whose name contains the keyword.
+ * Keyword matching is case-insensitive.
  */
 public class FindInternshipCommand extends FindCommand {
     public FindInternshipCommand(NameContainsKeywordsPredicate predicate) {
