@@ -265,10 +265,10 @@ which return the content of the `Resume` in textual format.
 
 Given below is an example usage scenario:
 
-Step 1. The user launches ResuMé. After loading data from storage to the application memory, the list of resumes in the
-ResumeBook could either contain some resumes, or is empty.
+Step 1. The user launches the ResuMe application. After loading data from storage to the application memory, the list of
+resumes in the ResumeBook could either contain some resumes, or is empty.
 
-Step 2. The user executes `rpreview INDEX`. If the specified resume index is out of bound, ResuMé throws an error message.
+Step 2. The user executes `rpreview INDEX`. If the specified resume index is out of bound, ResuMe throws an error message.
 
 Step 3. The application retrieves the correct `Resume` item and call `getPreview()` on that resume.
 
@@ -291,6 +291,13 @@ such that it automatically updates when the content of the `Resume` item is edit
 ** Cons: Too many panels could be confusing for the user to navigate. The space is also often wasted since user does not
 need to use `rpreview` regularly.
 
+****
+*Conclusion:* Given that the application already has quite a number of panels (User Profile, Command Input,
+Command Result, Item Detail and List View), alternative 1 is chosen to minimise the layout and improve on user experience.
+The Command Result panel will display a confirmation message for any successful item edit, hence the user will not need
+to call `rpreview` after each edit, reducing the number of switches between views.
+****
+
 ==== rgen: generate a .pdf file from a `Resume`
 ===== Proposed Implementation
 This feature utilises the external *iText* library. When using `rgen`, the user could specify the desired name of
@@ -306,11 +313,11 @@ are in the `UniqueItemList`. When an `Item` is inserted, it is correctly formatt
 
 Given below is an example usage scenario:
 
-Step 1. The user launches ResuMé. After loading data from storage to the application memory, the list of resumes in the
+Step 1. The user launches ResuMe. After loading data from storage to the application memory, the list of resumes in the
 ResumeBook could either contain some resumes, or is empty.
 
 Step 2. The user executes `rgen INDEX n/ FILE_NAME`. If the specified resume index is out of bound,
-ResuMé throws an error message.
+ResuMe throws an error message.
 
 Step 3. The application retrieves the correct `Resume` item, create a new .pdf file and populates it with the corresponding
 items inside the `Resume`.
@@ -338,6 +345,12 @@ consistent with any item update.
 `rgen` implemented this way is also static, and might not reflect the most updated content if there are item changes
 after `rpreview` is called.
 
+****
+*Conclusion:* Alternative 1 is chosen because each resume is not likely to hold more than 20 items, hence the cost
+of reading its content twice (once during `rpreview` and once during `rgen`) is relatively small. Choosing alternative 1
+will further allows the application to have more control when formatting the output file, and leaving room for potential
+extended features (e.g. allow user to choose from a variety of pre-defined resume templates).
+****
 // end::export[]
 
 // tag::undoredo[]
