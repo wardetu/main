@@ -1,40 +1,22 @@
-== ResuMe User Guide
+= ResuMe - User Guide
+:site-section: UserGuide
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
+:imagesDir: images
+:stylesDir: stylesheets
+:xrefstyle: full
+:experimental:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+endif::[]
+:repoURL: https://github.com/AY1920S2-CS2103T-F10-1/main
 
-By: `Team F10-1` Since: `Jan 2020``
+By: `Team F10-1`      Since: `Jan 2020`      Licence: `MIT`
 
-1.  link:#introduction[Introduction]
-2.  link:#quick-start[Quick Start]
-3.  link:#features[Features]
-+
-3.1. Viewing help : link:#viewing-help[help]
-+
-3.2. Listing all items: link:#[list]
-+
-3.3. Adding an item: link:#[add]
-+
-3.4. Editing an item: link:#[edit]
-+
-3.5. Locating items by name: link:#[find]
-+
-3.6. Deleting an item: link:#[delete]
-+
-3.7. Viewing an item in details: link:#[view]
-+
-3.8. Editing a resume: link:#redit[redit]
-+
-3.9. Previewing a resume: link:#[rpreview]
-+
-3.10. Generating a resume: link:#rgen[rgen]
-+
-3.11. Exiting the program : link:#exit[exit]
-+
-3.12. Saving the link:#[data]
-+
-3.13. Encrypting data files [coming in link:#[v2.0]]
-4.  link:#faq[FAQ]
-5.  link:#5command-summary[Command Summary]
-
-== 1. Introduction
+== Introduction
 
 *ResuMe* is for those who *prefer to use a desktop app for managing
 resumes*. More importantly, *ResuMe* is *optimized for those who prefer
@@ -65,7 +47,7 @@ Items from number 1 to 3 can be shared across different resumes.
 
 The following is the GUI for our application:
 
-== 2. Quick Start
+== Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
 .  Download the latest `resumebook.jar` link:{repoURL}/releases[here].
@@ -78,38 +60,38 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* **`list`**`i/res` : lists all resumes
-* **`add`**`i/res n/Software Engineering Resume #/SE #frontend`: adds a resume named `Software Engineering Resume`.
-* **`delete`**`1 i/res` : deletes the 1st resume shown in the current list
+* **`list`**`i/ res` : lists all resumes
+* **`add`**`i/ res n/ Software Engineering Resume #/SE #frontend`: adds a resume named `Software Engineering Resume`.
+* **`delete`**`1 i/ res` : deletes the 1st resume shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
 
-== 3. Features
+== Features
 
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/TYPE n/NAME`,
-`TYPE` and `NAME` are parameters which can be used as `add i/proj n/Orbital`.
-* Items in square brackets are optional e.g `n/NAME [#/TAG]` can be used as `n/Orbital #/SE` or as `n/Orbital`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[\#/TAG]...`
-can be used as (i.e. 0 times), `#/friend`, `\#/friend`, `#/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE`,
-`p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/ TYPE n/ NAME`,
+`TYPE` and `NAME` are parameters which can be used as `add i/ proj n/ Orbital`.
+* Items in square brackets are optional e.g `n/ NAME [#/TAG]` can be used as `n/ Orbital #/ SE` or as `n/ Orbital`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[\#/ TAG]...`
+can be used as (i.e. 0 times), `#/ friend`, `\#/ friend`, `#/ family` etc.
+* Parameters can be in any order e.g. if the command specifies `n/ NAME p/ PHONE`,
+`p/ PHONE_NUMBER n/ NAME` is also acceptable.
 ====
 
-=== 3.1. Viewing help : `help`
+=== Viewing help : `help`
 ----
 Lists out the function and usage of each command.
 ----
 Format: `help`
 
-=== 3.2. Listing all items : `list`
+=== Listing all items : `list`
 ----
 List items in the storage.
 ----
-Format: `list i/TYPE`
+Format: `list i/ TYPE`
 
 ****
 * List items that have type matches the `TYPE` argument.
@@ -117,22 +99,22 @@ Format: `list i/TYPE`
 To view items in full details, use `view`.
 ****
 
-=== 3.3. Adding an item: `add`
+=== Adding an item: `add`
 ----
 Adds an item to the ResuMe application.
 ----
-Format: `add i/TYPE n/NAME ATTRIBUTE/VALUE]... [#/TAG]...`
+Format: `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...`
 
 [width="100%",cols="16%,84%",options="header",]
 |=======================================================================
 |Type |Format
-|Internship |`add i/int n/COMPANY NAME r/ROLE f/FROM t/TO d/DESCRIPTION [#/TAG]...`
+|Internship |`add i/ int n/ COMPANY NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
 
-|Project |`add i/proj n/PROJECT NAME t/TIME w/WEBSITE d/DESCRIPTION [#/TAG]....`
+|Project |`add i/ proj n/ PROJECT NAME t/ TIME w/ WEBSITE d/ DESCRIPTION [#/ TAG]....`
 
-|Skill |`add i/ski n/SKILL NAME l/LEVEL [#/TAG]....`
+|Skill |`add i/ ski n/ SKILL NAME l/ LEVEL [#/ TAG]....`
 
-|Resume |`add i/res n/NAME [#/TAG]...`
+|Resume |`add i/ res n/ NAME [#/ TAG]...`
 |=======================================================================
 
 ****
@@ -148,27 +130,27 @@ item in the later commands.
 
 Examples:
 
-* `add i/proj n/Duke t/06-2020 w/abc.github.io d/For a little module named CS2103T. #/java #/tech`
-* `add i/ski n/Git and Github l/INTERMEDIATE #/VCS #/tech`
+* `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
+* `add i/ ski n/ Git and Github l/ INTERMEDIATE #/ VCS #/ tech`
 
-=== 3.4. Editing a person : `edit`
+=== Editing a person : `edit`
 
 ----
 Edits an existing item in the ResuMe application.
 ----
-Format: `edit INDEX i/TYPE [ATTRIBUTE/VALUE]... [#/TAG]...`
+Format: `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...`
 
 
 [width="100%",cols="16%,84%",options="header",]
 |=======================================================================
 |Type |Format
-|Internship |`edit INDEX i/int [n/COMPANY NAME] [r/ROLE] [f/FROM] [t/TO] [d/DESCRIPTION] [#/TAG]...`
+|Internship |`edit INDEX i/ int [n/ COMPANY NAME] [r/ ROLE] [f/ FROM] [t/ TO] [d/ DESCRIPTION] [#/ TAG]...`
 
-|Project |`edit INDEX i/proj [n/PROJECT NAME] [t/TIME] [w/WEBSITE] [d/DESCRIPTION] [#/TAG]....`
+|Project |`edit INDEX i/ proj [n/ PROJECT NAME] [t/ TIME] [w/ WEBSITE] [d/ DESCRIPTION] [#/ TAG]....`
 
-|Skill |`edit INDEX i/ski [n/SKILL NAME] [l/LEVEL] [#/TAG]....`
+|Skill |`edit INDEX i/ ski [n/ SKILL NAME] [l/ LEVEL] [#/ TAG]....`
 
-|Resume |`edit INDEX i/res [n/NAME] [#/TAG]...`
+|Resume |`edit INDEX i/ res [n/ NAME] [#/ TAG]...`
 |=======================================================================
 
 ****
@@ -185,12 +167,12 @@ specifying any tags after it.
 ****
 Examples:
 
-* `edit 1 i/res n/Resume 1` +
+* `edit 1 i/ res n/ Resume 1` +
 Edits the name of the 1st resume to be `Resume 1`.
-* `edit 2 i/ski l/ADVANCED #/` +
+* `edit 2 i/ ski l/ ADVANCED #/` +
 Edits the level of the 2nd skill to be `ADVANCED` and clears all existing tags.
 
-=== 3.5. Locating persons by name: `find`
+=== Locating persons by name: `find`
 ----
 Finds items in the ResuMe application whose names contain the specified keyword(s).
 ----
@@ -214,12 +196,12 @@ Returns `software` and `Software`
 * `find Shopee Front-end` +
 Returns any items having names `Shopee` or `Front-end`
 
-=== 3.6. Deleting a person : `delete`
+=== Deleting a person : `delete`
 
 ----
 Deletes an existing item in the ResuMe application
 ----
-Format: `delete INDEX i/TYPE`
+Format: `delete INDEX i/ TYPE`
 
 ****
 * Deletes the item of type `TYPE` with the specified `INDEX`. The `INDEX`
@@ -230,27 +212,27 @@ the list will automatically update to show the new indices of its items.
 
 Examples:
 
-* `delete 2 i/res` +
+* `delete 2 i/ res` +
 Deletes the 2nd resume in the resume book.
 
-=== 3.7. Viewing an item in details: `view`
+=== Viewing an item in details: `view`
 
 ----
 Shows all items in an existing resume.
 ----
-Format: `view INDEX i/TYPE`
+Format: `view INDEX i/ TYPE`
 
 Examples:
 
-* `view 2 i/res` +
+* `view 2 i/ res` +
 View the 2nd resume in the resume book.
 
-=== 3.8. Editing a resume: `redit`
+=== Editing a resume: `redit`
 ----
 Edits an existing resume in the ResuMe application
 ----
 Format:
-`redit RESUME_ID TYPE/[ITEM_ID...] [MORE_TYPE/[ITEM_ID...]]... [#/TAG]...`
+`redit RESUME_ID TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]... [#/ TAG]...`
 
 ****
 * Edits the resume with the specified `RESUME_ID`. The `RESUME_ID`
@@ -269,7 +251,7 @@ typing `TYPE/` without specifying any `ITEM_ID` after it.
 
 Examples:
 
-* `redit 135 proj/9823 int/102 201` +
+* `redit 135 proj/ 9823 int/ 102 201` +
 Edits the resume of
 `RESUME_ID` 135, overriding project content with project item of `ITEM_ID` 9823,
 internship content with internship items of `ITEM_ID` 102 and 201.
@@ -281,7 +263,7 @@ overriding internship content, project content and skill content with empty stri
 This effectively deletes all internship, project and skill items from the resume.
 Content of other item types in the resume remain unchanged.
 
-=== 3.9. Previewing a resume: `rpreview`
+=== Previewing a resume: `rpreview`
 ----
 Previews the resume in string format.
 ----
@@ -292,7 +274,7 @@ Examples:
 * `rpreview 135` +
 Shows the text format of the resume with `RESUME_ID` 135.
 
-=== 3.10. Generating a resume: rgen
+=== Generating a resume: rgen
 
 ----
 Generates a .pdf file from an existing resume object.
@@ -309,24 +291,24 @@ Examples:
 * `rgen 1234` +
 Generates a `.pdf` file from resume object with `RESUME_ID` 1234.
 
-=== 3.11. Exiting the program : `exit`
+=== Exiting the program : `exit`
 ----
 Exits the program.
 ----
 
 Format: `exit`
 
-=== 3.12. Saving the data
+=== Saving the data
 
 ResuMe data is saved in the hard disk automatically after any command
 that changes the data. There is no need to save manually.
 
-=== 3.13. Encrypting data files `[coming in v2.0]`
+=== Encrypting data files `[coming in v2.0]`
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
-== 4. FAQ
+== FAQ
 
 ____
 *Q:* What is the difference between `redit` and `edit i/res`? +
@@ -344,26 +326,26 @@ file it creates with the file that contains the data of your previous
 Address Book folder.
 ____
 
-== 5. Command Summary
+== Command Summary
 
 * *Help* : `help`
 
 * *List* : `list`
 
-* *Add* `add i/TYPE n/NAME ATTRIBUTE/VALUE]... [#/TAG]...` +
-e.g. `add i/proj n/Duke t/06-2020 w/abc.github.io d/For a little module named CS2103T. #/java #/tech`
+* *Add* `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...` +
+e.g. `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
 
-* *Edit* : `edit INDEX i/TYPE [ATTRIBUTE/VALUE]... [#/TAG]...` +
-e.g. `edit 2 i/ski l/ADVANCED #/`
+* *Edit* : `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...` +
+e.g. `edit 2 i/ ski l/ ADVANCED #/`
 
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Software`
 
-* *Delete* : `delete INDEX i/TYPE` +
+* *Delete* : `delete INDEX i/ TYPE` +
 e.g. `delete 3 i/res`
 
-* *Edit Resume* : `redit RESUME_ID TYPE/[ITEM_ID...] [MORE_TYPE/[ITEM_ID...]]... [#/TAG]...`
-e.g. `redit 135 proj/9823 int/102 201` +
+* *Edit Resume* : `redit RESUME_ID TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]... [#/ TAG]...`
+e.g. `redit 135 proj/ 9823 int/ 102 201` +
 
 * *Preview Resume* : `rpreview RESUME_ID` +
 e.g. `rpreview 234`
