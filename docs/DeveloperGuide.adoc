@@ -64,12 +64,23 @@ image::LogicClassDiagram.png[]
 [discrete]
 ==== How the architecture components interact with each other
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1 i/ ski`.
 
-.Component interactions for `delete 1` command
+.Component interactions for `delete 1 i/ ski` command
+
 image::ArchitectureSequenceDiagram.png[]
 
+[discrete]
+==== How the architecture components interact at start up
+
+The _Sequence Diagram_ below shows how the components interact with each other at start up.
+
+.Component interactions for initialisation
+
+image::ArchitectureInitSequenceDiagram.png[]
+
 The sections below give more details of each component.
+
 
 [[Design-Ui]]
 === UI component
@@ -190,25 +201,40 @@ image::ReditWantSomeThings.png[]
 
 === Implementation of `Command` classes
 ==== Current Implementation
-Currently, there are several objects which are subclasses of `Item`, namely `Resume`, `Internship`, `Skill`, etc.
+Currently, there are several objects which are subclasses of `Item`, namely `Resume`, `Internship`, `Skill`, and `Project`.
 
-For every of the `XYZCommand`, we would have one that corresponds to the `Item`. For example, we have `AddInternshipCommand` and `AddSkillCommand`.
+Commands that are dependent on item `Type`, namely `EditCommand`, `AddCommand`, `DeleteCommand`, `FindCommand`,
+`ListCommand`, and `ViewCommand` are implemented as abstract classes that inherits from `Command` and would have a
+concrete classes that corresponds to each item `Type`. For example, `AddCommand` is an abstract class that
+`AddInternshipCommand` and `AddSkillCommand` inherits from.
 
-// TODO: Add class diagram here
+Commands that are not dependent on item `Type` (eg. `EditUserCommand`, `HelpCommand`) are implemented as concrete
+classes that inherits from `Command`.
 
-This implies that the number of classes that needs to be written is the number of different commands times the different number of items.
+.Component XYZCommand are independent of `Type` whereas ABCCommands are dependent on `Type`.
+image::CommandClassDiagram.png[]
+
+In this
 
 ==== Design Considerations
-===== Aspect: Whether to separate the `XYZCommand` into many `XYZItemCommand`
-* ** Alternative 1 (current choice):** `XYZCommand` is separated into many `XYZItemCommand`
+===== Aspect: Whether to separate the `ABCCommand` that is dependent on type into many `ABCItemCommand`
+* ** Alternative 1 (current choice):** `ABCCommand` is separated into many `ABCItemCommand`.
 
-** Pros: More OOP. The behaviour of an `XYZItemCommand` becomes more flexible and can be easily changed as required.
+** Pros: More OOP. Flexible behaviour of an `ABCItemCommand` becomes and can be easily changed as required. No
+casing required. Each `ABCItemCommand` has it's own and distinct functionality.
 ** Cons: Many classes have to be maintained.
 
-* ** Alternative 2: ** Do not separate `XYZCommand`
+* ** Alternative 2: ** Do not separate `ABCCommand`.
 
-** Pros: Only one command is required, regardless of number of items.
-** Cons: The `execute` method inside this class can potentially be very long due to the need for handling the different item types.
+** Pros: Only one command is required, regardless of number of items. Low overhead.
+** Cons: Very long `execute` due to the need for handling the different item types. Item `Type` would also need to be stored.
+Undesirable variable functionality of `execute` command depending on the `Type` field despite it being from the same class.
+ie. `AddItem` can add `Internship` to the `Internship` list, or add `Skill` to `Skill` list.
+
+In the end, we went with our current design because it allows for each command type to only have one distinct job. Which
+is more in line with object oriented programming paradigms instead of having one class that would call different update
+methods in the model depending on the `Type` passed into it. Moreover, this reduces double work as `Parser` will not have to
+parse `Type` in user input, then only to be switch-cased again in `XYZCommand`.
 
 === Me Feature
 This feature allows user to make changes and updates his/her user profile which is reflected by the user profile panel.
