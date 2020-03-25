@@ -189,9 +189,9 @@ image::ReditWantSomeThings.png[]
 
 === Implementation of `Command` classes
 ==== Current Implementation
-Currently, there are several objects which are subclasses of `Item`, namely `Resume`, `Internship`, `Skill`, etc. 
+Currently, there are several objects which are subclasses of `Item`, namely `Resume`, `Internship`, `Skill`, etc.
 
-For every of the `XYZCommand`, we would have one that corresponds to the `Item`. For example, we have `AddInternshipCommand` and `AddSkillCommand`. 
+For every of the `XYZCommand`, we would have one that corresponds to the `Item`. For example, we have `AddInternshipCommand` and `AddSkillCommand`.
 
 // TODO: Add class diagram here
 
