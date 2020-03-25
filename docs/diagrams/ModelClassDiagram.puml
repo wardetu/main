@@ -48,21 +48,17 @@ Class Time
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
-Model ..> ObservableList
-ModelManager ..|> Model
+HiddenOutside .d.> Model
+Model .u.> ObservableList
+ModelManager .u.> Model
 
-ModelManager o-right-> "1" UserPrefs
-UserPrefs .right.|> ReadOnlyUserPrefs
+ModelManager o-l-> "1" UserPrefs
+UserPrefs .l.|> ReadOnlyUserPrefs
 
-ModelManager o--> "1" ResumeBook
-ResumeBook ..|> ReadOnlyResumeBook
+ModelManager o-r-> "1" ResumeBook
+ResumeBook .u.|> ReadOnlyResumeBook
 
-ModelManager -> "1" Item: filtered list
-ResumeBook *--> "4" UniqueItemList
-UniqueItemList o--> "*" Item
-
-ResumeBook *-> "1" Person
+ResumeBook *-d-> "1" Person
 Person *---> "1" Name
 Person *---> "2" Time
 Person *---> "1" Phone
@@ -70,16 +66,19 @@ Person *---> "1" Email
 Person *---> "1" Github
 Person *---> "1" University
 
+ResumeBook *--> "4" UniqueItemList
+UniqueItemList o--> "*" Item
+
 Item *---> "1" Name
 Item *---> "*" Time
 Item *---> "1" Type
 Item *---> "1" Description
 Item *---> "*" Tag
 
-Project ...|> Item
-Skill ...|> Item
-Resume ...|> Item
-Internship ...|> Item
+Project ..|> Item
+Skill ..|> Item
+Resume ..|> Item
+Internship ..|> Item
 
 Project *-> "1" Website
 Skill *-> "1" Level
