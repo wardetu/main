@@ -8,7 +8,8 @@ import seedu.address.model.Model;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 
 /**
- * Finds Resume Items in the address book matching a keyword.
+ * Finds {@code Resume} items in the address book whose name contains the keyword.
+ * Keyword matching is case-insensitive.
  */
 public class FindResumeCommand extends FindCommand {
     public FindResumeCommand(NameContainsKeywordsPredicate predicate) {

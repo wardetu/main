@@ -248,6 +248,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Resume getResumeByIndex(int index) {
+        return resumeBook.getResumeByIndex(index);
+    }
+
+    @Override
+    public boolean hasResumeId(int resumeIndex) {
+        return resumeBook.hasResumeId(resumeIndex);
+    }
+
+    @Override
     public void deleteResume(Resume target) {
         resumeBook.deleteResume(target);
     }
@@ -315,5 +325,20 @@ public class ModelManager implements Model {
     public void setItem(Item target, Item edit) {}
 
     public void setItemsToDisplay(String type) {}
+
+    @Override
+    public boolean hasInternshipId(int i) {
+        return resumeBook.hasInternshipId(i);
+    }
+
+    @Override
+    public boolean hasProjectId(int i) {
+        return resumeBook.hasProjectId(i);
+    }
+
+    @Override
+    public boolean hasSkillId(int i) {
+        return resumeBook.hasSkillId(i);
+    }
 
 }

@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.commands.Command;
 
 /**
- * Adds a Item to the address book.
+ * Adds an Item to the address book.
  */
 public abstract class AddCommand extends Command {
 

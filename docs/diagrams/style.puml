@@ -25,7 +25,7 @@
 !define MODEL_COLOR_T3 #7B000E
 !define MODEL_COLOR_T4 #51000A
 
-!define STORAGE_COLOR #A38300
+!define STORAGE_COLOR #234567
 !define STORAGE_COLOR_T1 #FFE374
 !define STORAGE_COLOR_T2 #EDC520
 !define STORAGE_COLOR_T3 #806600
@@ -33,7 +33,7 @@
 
 !define USER_COLOR #000000
 
-skinparam BackgroundColor #FFFFFFF
+skinparam BackgroundColor #DDDDDDD
 
 skinparam Shadowing false
 

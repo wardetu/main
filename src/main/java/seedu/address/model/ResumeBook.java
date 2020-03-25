@@ -192,7 +192,12 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * {@code key} must exist in the resume book.
      */
     public void deleteInternship(Internship key) {
+        int id = key.getId();
         internships.remove(key);
+        for (Item item : resumes) {
+            Resume resume = (Resume) item;
+            resume.getInternships().remove(id);
+        }
     }
 
     @Override
@@ -238,7 +243,12 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * {@code key} must exist in the resume book.
      */
     public void deleteProject(Project key) {
+        int id = key.getId();
         projects.remove(key);
+        for (Item item : resumes) {
+            Resume resume = (Resume) item;
+            resume.getProjects().remove(id);
+        }
     }
 
     @Override
@@ -284,7 +294,12 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * {@code key} must exist in the resume book.
      */
     public void deleteSkill(Skill key) {
+        int id = key.getId();
         skills.remove(key);
+        for (Item item : resumes) {
+            Resume resume = (Resume) item;
+            resume.getSkills().remove(id);
+        }
     }
 
     @Override
@@ -402,6 +417,56 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public UniqueItemList getPersonalDetailList() {
         return new UniqueItemList();
     }
+
+    public Resume getResumeByIndex(int index) {
+        for (Item res : resumes) {
+            if (res.getId() == index) {
+                return (Resume) res;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean hasResumeId(int resumeIndex) {
+        for (Item item : resumes) {
+            if (item.getId() == resumeIndex) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasInternshipId(int i) {
+        for (Item item : internships) {
+            if (item.getId() == i) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasProjectId(int i) {
+        for (Item item : projects) {
+            if (item.getId() == i) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasSkillId(int i) {
+        for (Item item : skills) {
+            if (item.getId() == i) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean hasItem(Item item) {
         return false;
     }
