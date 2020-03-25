@@ -417,20 +417,6 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public UniqueItemList getPersonalDetailList() {
         return new UniqueItemList();
     }
-    //----------------------------NEW METHODS--------------------------------------------------------
-    @Override
-    public void editResume(Resume target, int[] internshipIndices, int[] projectIndices,
-                           int[] skillIndices) {
-        if (internshipIndices != null) {
-            target.setInternships(internshipIndices);
-        }
-        if (projectIndices != null) {
-            target.setProjects(projectIndices);
-        }
-        if (skillIndices != null) {
-            target.setSkills(skillIndices);
-        }
-    }
 
     public Resume getResumeByIndex(int index) {
         for (Item res : resumes) {
