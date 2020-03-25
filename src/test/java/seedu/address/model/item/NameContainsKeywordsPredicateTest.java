@@ -1,6 +1,6 @@
 package seedu.address.model.item;
 
-/*import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -10,10 +10,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
-import seedu.address.testutil.PersonalDetailBuilder;*/
+import seedu.address.testutil.InternshipBuilder;
+import seedu.address.testutil.ProjectBuilder;
+import seedu.address.testutil.ResumeBuilder;
+import seedu.address.testutil.SkillBuilder;
 
 public class NameContainsKeywordsPredicateTest {
-/*
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
@@ -42,37 +44,36 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        assertTrue(predicate.test(new PersonalDetailBuilder().withName("Alice Bob").build()));
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("AWS"));
+        assertTrue(predicate.test(new InternshipBuilder().withName("AWS Software Engineering").build()));
 
         // Multiple keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new PersonalDetailBuilder().withName("Alice Bob").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("UX", "UI"));
+        assertTrue(predicate.test(new SkillBuilder().withName("UX UI").build()));
 
         // Only one matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        assertTrue(predicate.test(new PersonalDetailBuilder().withName("Alice Carol").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Orbital", "Mobile"));
+        assertTrue(predicate.test(new ProjectBuilder().withName("Orbital Project").build()));
 
         // Mixed-case keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new PersonalDetailBuilder().withName("Alice Bob").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("reSuMe", "soFtwaRe"));
+        assertTrue(predicate.test(new ResumeBuilder().withName("Software Engineering Resume").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonalDetailBuilder().withName("Alice").build()));
+        assertFalse(predicate.test(new ProjectBuilder().withName("Orbital").build()));
 
         // Non-matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new PersonalDetailBuilder().withName("Alice Bob").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Github"));
+        assertFalse(predicate.test(new SkillBuilder().withName("Adobe Photoshop").build()));
 
-        // Keywords match phone, email and address, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonalDetailBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
+        // Keywords match role, from, to and description, but does not match name
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("intern", "05-2020", "08-2020", "helloImHai"));
+        assertFalse(predicate.test(new InternshipBuilder().withName("Ninja Van").withRole("intern")
+                .withFrom("05-2020").withTo("08-2020").withDescription("helloImHai").build()));
     }
 
- */
 }

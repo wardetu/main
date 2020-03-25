@@ -33,6 +33,10 @@ public class Skill extends Item {
         return this.level;
     }
 
+    public void setLevel(String level) {
+        this.level = Level.valueOf(level);
+    }
+
     @Override
     public String getSummary() {
         final StringBuilder builder = new StringBuilder();
