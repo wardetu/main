@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ResumeBookParser" as ResumeBookParser LOGIC_COLOR
+participant ":GenerateCommandParser" as GenerateCommandParser LOGIC_COLOR
+participant "d:GenerateCommand" as GenerateCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+
+[-> LogicManager : execute("rgen 1 n/ SE Resume")
+activate LogicManager
+
+LogicManager -> ResumeBookParser : parseCommand("rgen 1 n/ SE Resesume")
+activate ResumeBookParser
+
+create GenerateCommandParser
+ResumeBookParser -> GenerateCommandParser
+activate GenerateCommandParser
+
+GenerateCommandParser --> ResumeBookParser
+deactivate GenerateCommandParser
+
+ResumeBookParser -> GenerateCommandParser : parse("1 n/ SE Resume")
+activate GenerateCommandParser
+
+create GenerateCommand
+GenerateCommandParser -> GenerateCommand
+activate GenerateCommand
+
+GenerateCommand --> GenerateCommandParser : c
+deactivate GenerateCommand
+
+GenerateCommandParser --> ResumeBookParser : c
+deactivate GenerateCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+GenerateCommandParser -[hidden]-> ResumeBookParser
+destroy GenerateCommandParser
+
+ResumeBookParser --> LogicManager : c
+deactivate ResumeBookParser
+
+LogicManager -> GenerateCommand : execute()
+activate GenerateCommand
+
+GenerateCommand -> GenerateCommand : create("SE Resume")
+activate GenerateCommand
+GenerateCommand --> GenerateCommand : f
+deactivate GenerateCommand
+
+loop until all items are inserted
+GenerateCommand -> GenerateCommand : insertItem()
+activate GenerateCommand
+GenerateCommand --> GenerateCommand
+deactivate GenerateCommand
+end
+
+create CommandResult
+GenerateCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> GenerateCommand
+deactivate CommandResult
+
+GenerateCommand --> LogicManager : result
+deactivate GenerateCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

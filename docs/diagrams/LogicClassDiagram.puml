@@ -21,6 +21,7 @@ package Command {
 Class XYZCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
+Class XYZItemCommand
 }
 
 Interface Logic <<Interface>>
@@ -49,11 +50,13 @@ XYZCommandParser ..> ParserUtil
 ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
+XYZItemCommand -left-|> XYZCommand
 LogicManager .left.> Command : executes >
 
 LogicManager --> Model
 Command .right.> Model
-note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+note right of XYZItemCommand: XYZItemCommand = AddInternshipCommand, \n FindResumeCommand, etc
+
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
