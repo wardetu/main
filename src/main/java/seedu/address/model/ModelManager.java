@@ -240,19 +240,11 @@ public class ModelManager implements Model {
         updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
     }
 
-
-
     @Override
     public void setResume(Resume target, Resume editedResume) {
         requireAllNonNull(target, editedResume);
 
         resumeBook.setResume(target, editedResume);
-    }
-
-    @Override
-    public void editResume(Resume target, int[] internshipIndices, int[] projectIndices,
-                           int[] skillIndices) {
-        resumeBook.editResume(target, internshipIndices, projectIndices, skillIndices);
     }
 
     @Override
