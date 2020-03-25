@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-F10-1/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team F10-1`      Since: `Jan 2020`
 
 == Setting up
 
@@ -64,12 +64,23 @@ image::LogicClassDiagram.png[]
 [discrete]
 ==== How the architecture components interact with each other
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1 i/ ski`.
 
-.Component interactions for `delete 1` command
+.Component interactions for `delete 1 i/ ski` command
+
 image::ArchitectureSequenceDiagram.png[]
 
+[discrete]
+==== How the architecture components interact at start up
+
+The _Sequence Diagram_ below shows how the components interact with each other at start up.
+
+.Component interactions for initialisation
+
+image::ArchitectureInitSequenceDiagram.png[]
+
 The sections below give more details of each component.
+
 
 [[Design-Ui]]
 === UI component
@@ -115,6 +126,7 @@ NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X
 [[Design-Model]]
 === Model component
 
+// TODO: Fix diagram layout
 .Structure of the Model Component
 image::ModelClassDiagram.png[]
 
@@ -123,12 +135,12 @@ image::ModelClassDiagram.png[]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the Resume Book data.
+* exposes an unmodifiable `ObservableList<Item>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `Resume Book`, which `Item` can reference. This would allow `Resume Book` to only require one `Tag` object per unique `Tag`, instead of each `Item` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:BetterModelClassDiagram.png[]
 
@@ -162,19 +174,30 @@ It is not to be confused with the `edit` command, which simply modifies the fiel
 The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`.
 Therefore, like any other `Command` classes, it will have an `execute` method.
 
+===== Adding into the resume
 The following screenshot illustrates what happens when we use `redit` to add item into the resume. The numbers in the command represent the index of the item in the list. After the end of the command, the number of item in the resume would have increased.
 
-image::ReditAddIntoResume.png[]
+image::ReditAddIntoResume.png[][AddIntoResume,442,337]
 
 For modifications and removal of item from the resume, all we have to do is to run the same command again, specifying which item we want to *retain* in the resume.
 
-The following screenshot illustrates what happens if you want to remove all the items in the resume, starting from a an already-filled resume:
+===== Removing all from the resume
+The following sreenshot illustrates what happens if you want to remove all the items in the resume, starting from a an already-filled resume:
 
-image::ReditRemoveEverything.png[]
+image::ReditRemoveEverything.png[][RemoveEverything,442,337]
 
+===== Removing some from the resume
 And the following screenshot illustrates what happens if you want to remove some items:
 
-image::ReditWantSomeThings.png[]
+image::ReditWantSomeThings.png[][WantSomeThings,442,337]
+
+===== Changing content using tags
+On top of these methods to change the content of the resume, `redit` can also make changes to the resume by making use of tags.
+Regardless of what the original content is, after running the command, the resume will then only have items with the desired tags.
+
+An example is shown in the following screenshot:
+
+image::ReditTags.png[][ReditWithTags,442,337]
 
 ==== Design Considerations
 ===== Aspect: Whether `ResumeEditCommand` should extend `EditCommand`
@@ -183,32 +206,54 @@ image::ReditWantSomeThings.png[]
 ** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Pricniple is observed.
 ** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may be confusing to have both `redit` and `edit`.
 
+image::ResumeEditCommandAlt1.png[]
+
 * ** Alternative 2:** `ResumeEditCommand` extends `EditCommand`
 
 ** Pros: Some methods in `EditCommand` may be able to inherited by `ResumeEditCommand`, reducing code duplication.
 ** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely.
 
+image::ResumeEditCommandAlt2.png[]
+
 === Implementation of `Command` classes
 ==== Current Implementation
-Currently, there are several objects which are subclasses of `Item`, namely `Resume`, `Internship`, `Skill`, etc.
+Currently, there are several object `Type` which are subclasses of `Item`, namely `Resume`, `Internship`, `Skill`,
+and `Project`.
 
-For every of the `XYZCommand`, we would have one that corresponds to the `Item`. For example, we have `AddInternshipCommand` and `AddSkillCommand`.
+Commands that are dependent on item `Type`, namely `EditCommand`, `AddCommand`, `DeleteCommand`, `FindCommand`,
+`ListCommand`, and `ViewCommand` are implemented as abstract classes that inherits from `Command` and would have a
+concrete classes that corresponds to each item `Type`. For example, `AddCommand` is an abstract class that
+`AddInternshipCommand` and `AddSkillCommand` inherits from.
 
-// TODO: Add class diagram here
+Commands that are not dependent on item `Type` (eg. `EditUserCommand`, `HelpCommand`) are implemented as concrete
+classes that inherits from `Command`.
 
-This implies that the number of classes that needs to be written is the number of different commands times the different number of items.
+.Component `XYZCommand` is independent of `Type` whereas `ABCCommand` is dependent on `Type`.
+image::CommandClassDiagram.png[]
 
 ==== Design Considerations
-===== Aspect: Whether to separate the `XYZCommand` into many `XYZItemCommand`
-* ** Alternative 1 (current choice):** `XYZCommand` is separated into many `XYZItemCommand`
+===== Aspect: Whether to separate the `ABCCommand` that is dependent on type into many `ABCItemCommand`
+* ** Alternative 1 (current choice):** `ABCCommand` is separated into many `ABCItemCommand`.
 
-** Pros: More OOP. The behaviour of an `XYZItemCommand` becomes more flexible and can be easily changed as required.
+** Pros: More OOP. Flexible behaviour of `ABCItemCommand` and can be easily changed as required. No
+casing required. Each `ABCItemCommand` has it's own and distinct functionality.
 ** Cons: Many classes have to be maintained.
 
-* ** Alternative 2: ** Do not separate `XYZCommand`
+* ** Alternative 2: ** Do not separate `ABCCommand`.
 
-** Pros: Only one command is required, regardless of number of items.
-** Cons: The `execute` method inside this class can potentially be very long due to the need for handling the different item types.
+** Pros: Only one command is required, regardless of number of items. Low overhead.
+** Cons: Long `execute` method due to the need for handling the different item types. Item `Type` would also need to be stored.
+Undesirable variable functionality of `execute` command depending on the `Type` field despite it being from the same class.
+ie. `AddItem` can add `Internship` to the `Internship` list, or add `Skill` to `Skill` list.
+
+****
+*Conclusion:* We went with our current design because it allows for each command type to only have one distinct job which
+is more in line with the object oriented programming paradigm of Single Responsibility Principle. Instead of having one single
+class that that would need to change if implementation of any of the `Type` changes, our implementation ensures that
+our many command classes would only have a single reason to change. Moreover, our current implementation also
+reduces double work as `Parser` will not have to parse `Type` in the user input to create the `ABCCommand`, then only to
+be switch-cased again in `ABCCommand`.
+****
 
 === Me Feature
 This feature allows a user to make changes and updates his/her user profile which is reflected by the user profile panel.
@@ -305,6 +350,106 @@ with the app.
 
 ==== Change Background and Font Color
 This allows the user to change the background and font color using rgb or hex color codes.
+
+// tag::export[]
+=== [Proposed] Export Resume feature
+The Export Resume feature supports two main actions: previewing the content of a `Resume` item, and
+then exporting it as a .pdf file.
+
+==== rpreview: preview a `Resume`
+===== Proposed Implementation
+`rpreview` is supported by the new `Command`, `ResumePreviewCommand` and the additional method `Resume#getPreview()`
+which return the content of the `Resume` in textual format.
+
+Given below is an example usage scenario:
+
+Step 1. The user launches the ResuMe application. After loading data from storage to the application memory, the list of
+resumes in the ResumeBook could either contain some resumes, or is empty.
+
+Step 2. The user executes `rpreview INDEX`. If the specified resume index is out of bound, ResuMe throws an error message.
+
+Step 3. The application retrieves the correct `Resume` item and call `getPreview()` on that resume.
+
+The following activity diagram summarises what happens when a user executes `rpreview` command:
+
+image::ExportPreviewActivityDiagram.png[]
+
+
+===== Design Considerations
+===== Aspect: Where `rpreview` is displayed
+
+* *Alternative 1 (current choice):* Display in the same panel as `view`
+** Pros: No significant change to UI component.
+** Cons: Multiple commands needed if user finds out about a typo in an item, wants to view the item in details,
+fix the typo and then check the preview again to ensure there is no more error.
+
+* *Alternative 2:* Create a separate UI panel to display the resume preview. Additionally, this panel could be implemented
+such that it automatically updates when the content of the `Resume` item is edited.
+** Pros: User can see the resume preview and the item detail panels at the same time, hence saving time switching between views.
+** Cons: Too many panels could be confusing for the user to navigate. The space is also often wasted since user does not
+need to use `rpreview` regularly.
+
+****
+*Conclusion:* Given that the application already has quite a number of panels (User Profile, Command Input,
+Command Result, Item Detail and List View), alternative 1 is chosen to minimise the layout and improve on user experience.
+The Command Result panel will display a confirmation message for any successful item edit, hence the user will not need
+to call `rpreview` after each edit, reducing the number of switches between views.
+****
+
+==== rgen: generate a .pdf file from a `Resume`
+===== Proposed Implementation
+This feature utilises the external *iText* library. When using `rgen`, the user could specify the desired name of
+the generated file, which will be saved in the root directory of the project.
+
+`rgen` implements the following operations:
+
+* `create(String)` and `create()` - initialises the .pdf file, either with the input `String` name specified by the user,
+or with the same name as the `Resume` name if the file name is not specified.
+* `addSection(String)` - starts a new section with the `String` name (e.g. "Internship").
+* `populateSection(UniqueItemList)` and `insertItem(Item)` - populates the section with items in the same order as they
+are in the `UniqueItemList`. When an `Item` is inserted, it is correctly formatted depending on the item type.
+
+Given below is an example usage scenario:
+
+Step 1. The user launches ResuMe. After loading data from storage to the application memory, the list of resumes in the
+ResumeBook could either contain some resumes, or is empty.
+
+Step 2. The user executes `rgen INDEX n/ FILE_NAME`. If the specified resume index is out of bound,
+ResuMe throws an error message.
+
+Step 3. The application retrieves the correct `Resume` item, create a new .pdf file and populates it with the corresponding
+items inside the `Resume`.
+
+The following activity diagram summarises what happens when a user executes `rgen` command:
+
+image::ExportActivityDiagram.png[]
+
+Detailed steps are shown in the sequence diagram below:
+
+image::ExportSequenceDiagram.png[, 1000]
+
+==== Design Considerations
+===== Aspect: How `rgen` executes
+
+* *Alternative 1 (current choice):* Generate .pdf file by iteratively reading and inserting details of `Item` from inside the `Resume` itself.
+** Pros: Better control of the output layout, as the position and formatting of each section could be set individually.
+Additionaly, `rgen` is dynamic, in the sense that even without calling `rpreview` every time, the generated file will be
+consistent with any item update.
+** Cons: Coupled with `rpreview`, the content of a `Resume` must be read twice every time the user wishes to export.
+
+* *Alternative 2:* Generate .pdf file directly from the previewed text output by `rpreview`
+** Pros: Faster `rgen`
+** Cons: Limited formatting options (font and font size at most) since the whole document is input as one long string.
+`rgen` implemented this way is also static, and might not reflect the most updated content if there are item changes
+after `rpreview` is called.
+
+****
+*Conclusion:* Alternative 1 is chosen because each resume is not likely to hold more than 20 items, hence the cost
+of reading its content twice (once during `rpreview` and once during `rgen`) is relatively small. Choosing alternative 1
+will further allows the application to have more control when formatting the output file, and leaving room for potential
+extended features (e.g. allow user to choose from a variety of pre-defined resume templates).
+****
+// end::export[]
 
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
