@@ -239,7 +239,7 @@ with the app.
 ==== Change Background and Font Color
 
 // tag::undoredo[]
-=== Undo/Redo feature
+=== [Proposed] Undo/Redo feature
 ==== Implementation
 
 The undo/redo mechanism is facilitated by `VersionedResumeBook`.
