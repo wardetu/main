@@ -79,7 +79,7 @@ image::UiClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ItemDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -87,6 +87,7 @@ The `UI` component,
 
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
+* Responds to events raised by various commands and the UI can be updated accordingly.
 
 [[Design-Logic]]
 === Logic component
@@ -153,8 +154,36 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+=== Me Feature
+This feature allows user to make changes and updates his/her user profile which is reflected by the user profile panel.
+
+==== Edit User Main Data
+It allows one specific user to modify and update user information that includes `name`, `phone`, `email1`, `github`,
+`university`, `major`, `from`, `to`, `cap`.
+
+Below is an example usage scenario and how the edit user data command works.
+
+* User launches the application for the first time. The User Profile and Data will be initialized with the initial json
+data stored.
+
+* User executes `me n/NAME p/PHONE e/EMAIL g/GITHUB u/UNIVERSITY m/MAJOR f/FROM t/TO c/CAP` so as to update the Person
+object currently stored in Model as well as Storage.
+
+* The Ui User Data table will be updated accordingly.
+
+The following sequence diagram shows how the `me` feature allows user to edit the user profile.
+
+==== Edit User Profile
+It allows the specific user to input and update his/her user profile picture and receives motivational quotes.
+
+==== Set Personal Reminders
+It allows the user to set reminders as well as taking notes for him/herself to further customize his/her interaction
+with the app.
+
+==== Change Background and Font Color
+
 // tag::undoredo[]
-=== [Proposed] Undo/Redo feature
+=== [Proposed] Undo/Redo Feature
 ==== Proposed Implementation
 
 The undo/redo mechanism is facilitated by `VersionedAddressBook`.
