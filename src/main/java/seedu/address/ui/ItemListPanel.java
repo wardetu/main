@@ -13,23 +13,23 @@ import seedu.address.model.item.Item;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
+public class ItemListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(ItemListPanel.class);
 
     @FXML
     private ListView<Item> personListView;
 
-    public PersonListPanel(ObservableList<Item> personList) {
+    public ItemListPanel(ObservableList<Item> personList) {
         super(FXML);
         personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        personListView.setCellFactory(listView -> new ItemListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<Item> {
+    class ItemListViewCell extends ListCell<Item> {
         @Override
         protected void updateItem(Item person, boolean empty) {
             super.updateItem(person, empty);
@@ -38,7 +38,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new ItemCard(person, getIndex() + 1).getRoot());
             }
         }
     }
