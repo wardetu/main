@@ -5,7 +5,7 @@ start
 if () then ([index out of bound])
     :throw exception;
 else ([else])
-    :export Resume to .pdf file;
+    :show preview;
 
 endif
 stop
