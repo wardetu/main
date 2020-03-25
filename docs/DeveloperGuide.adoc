@@ -246,12 +246,14 @@ casing required. Each `ABCItemCommand` has it's own and distinct functionality.
 Undesirable variable functionality of `execute` command depending on the `Type` field despite it being from the same class.
 ie. `AddItem` can add `Internship` to the `Internship` list, or add `Skill` to `Skill` list.
 
-In the end, we went with our current design because it allows for each command type to only have one distinct job which
+****
+*Conclusion:* We went with our current design because it allows for each command type to only have one distinct job which
 is more in line with the object oriented programming paradigm of Single Responsibility Principle. Instead of having one single
 class that that would need to change if implementation of any of the `Type` changes, our implementation ensures that
 our many command classes would only have a single reason to change. Moreover, our current implementation also
 reduces double work as `Parser` will not have to parse `Type` in the user input to create the `ABCCommand`, then only to
 be switch-cased again in `ABCCommand`.
+****
 
 === Me Feature
 This feature allows user to make changes and updates his/her user profile which is reflected by the user profile panel.
