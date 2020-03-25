@@ -220,6 +220,9 @@ public interface Model {
      */
     void setResume(Resume target, Resume editedResume);
 
+    Resume getResumeByIndex(int resumeIndex);
+    boolean hasResumeId(int resumeIndex);
+
     /**
      * Deletes the given resume.
      * The resume must exist in the resume book.
@@ -265,4 +268,7 @@ public interface Model {
 
     void setItemsToDisplay(String type);
 
+    boolean hasInternshipId(int i);
+    boolean hasProjectId(int i);
+    boolean hasSkillId(int i);
 }

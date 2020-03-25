@@ -13,8 +13,6 @@ import seedu.address.model.item.Resume;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
 
-
-
 /**
  * Jackson-friendly version of {@link Resume}.
  */
@@ -25,6 +23,8 @@ public class JsonAdaptedResume {
     private final int id;
 
     private final List<Integer> internshipIndices = new ArrayList<>();
+    private final List<Integer> projectIndices = new ArrayList<>();
+    private final List<Integer> skillIndices = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -33,6 +33,8 @@ public class JsonAdaptedResume {
     @JsonCreator
     public JsonAdaptedResume(@JsonProperty("name") String name, @JsonProperty("id") int id,
                              @JsonProperty("internships") List<Integer> internshipIndices,
+                             @JsonProperty("projects") List<Integer> projectIndices,
+                             @JsonProperty("skills") List<Integer> skillIndices,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.id = id;
@@ -41,6 +43,12 @@ public class JsonAdaptedResume {
         }
         if (internshipIndices != null) {
             this.internshipIndices.addAll(internshipIndices);
+        }
+        if (projectIndices != null) {
+            this.internshipIndices.addAll(projectIndices);
+        }
+        if (skillIndices != null) {
+            this.internshipIndices.addAll(skillIndices);
         }
     }
 
@@ -52,6 +60,8 @@ public class JsonAdaptedResume {
         this.id = res.getId();
         tagged.addAll(res.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
         internshipIndices.addAll(res.getInternships());
+        projectIndices.addAll(res.getProjects());
+        skillIndices.addAll(res.getSkills());
 
     }
 
@@ -65,7 +75,15 @@ public class JsonAdaptedResume {
         }
         Resume resume = new Resume(new Name(name), id, Set.copyOf(tags));
         for (int internship : internshipIndices) {
-            resume.addInternships(internship);
+            resume.addInternship(internship);
+        }
+
+        for (int project : projectIndices) {
+            resume.addProject(project);
+        }
+
+        for (int skill : skillIndices) {
+            resume.addSkill(skill);
         }
         return resume;
     }

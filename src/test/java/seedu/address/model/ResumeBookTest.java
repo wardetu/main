@@ -120,6 +120,11 @@ public class ResumeBookTest {
         ResumeBookStub(Collection<Item> itemsToDisplay) {
             this.itemsToDisplay.setAll(itemsToDisplay);
         }
+        // TODO: fix the stub methods
+        @Override
+        public boolean hasSkillId(int i) {
+            return false;
+        }
 
         @Override
         public Person getUser() {
@@ -155,6 +160,21 @@ public class ResumeBookTest {
         @Override
         public UniqueItemList getPersonalDetailList() {
             return resumes;
+        }
+
+        @Override
+        public boolean hasResumeId(int resumeIndex) {
+            return false;
+        }
+
+        @Override
+        public boolean hasInternshipId(int i) {
+            return false;
+        }
+
+        @Override
+        public boolean hasProjectId(int i) {
+            return false;
         }
 
         @Override

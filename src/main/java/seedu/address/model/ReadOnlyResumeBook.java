@@ -105,4 +105,12 @@ public interface ReadOnlyResumeBook {
 
     ///STUB
     UniqueItemList getPersonalDetailList();
+
+    boolean hasResumeId(int resumeIndex);
+
+    boolean hasInternshipId(int i);
+
+    boolean hasProjectId(int i);
+
+    boolean hasSkillId(int i);
 }
