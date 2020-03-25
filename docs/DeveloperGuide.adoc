@@ -99,13 +99,13 @@ image::LogicClassDiagram.png[]
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `ResumeBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person).
+.  The command execution can affect the `Model` (e.g. adding a new resume).
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 .  In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1 i/ res")` API call.
 
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeleteSequenceDiagram.png[]
@@ -153,6 +153,62 @@ Classes used by multiple components are in the `seedu.resumebook.commons` packag
 == Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
+
+=== [Proposed] Resume Edit feature
+==== Proposed Implementation
+The Resume Edit feature or `redit` allows users to edit which `Item` belongs to the `Resume` (for example, adding a `Skill` item or removing an `Internship` item).
+It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`.
+
+The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`.
+Therefore, like any other `Command` classes, it will have an `execute` method.
+
+The following screenshot illustrates what happens when we use `redit` to add item into the resume. The numbers in the command represent the index of the item in the list. After the end of the command, the number of item in the resume would have increased.
+
+image::ReditAddIntoResume.png[]
+
+For modifications and removal of item from the resume, all we have to do is to run the same command again, specifying which item we want to *retain* in the resume.
+
+The following screenshot illustrates what happens if you want to remove all the items in the resume, starting from a an already-filled resume:
+
+image::ReditRemoveEverything.png[]
+
+And the following screenshot illustrates what happens if you want to remove some items:
+
+image::ReditWantSomeThings.png[]
+
+==== Design Considerations
+===== Aspect: Whether `ResumeEditCommand` should extend `EditCommand`
+* ** Alternative 1 (current choice):** `ResumeEditCommand` does not extend `EditCommand`, but extends `Command`. This design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the resume such as its name, while `redit` is supposed to change the content that the resume holds.
+
+** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Pricniple is observed.
+** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may be confusing to have both `redit` and `edit`.
+
+* ** Alternative 2:** `ResumeEditCommand` extends `EditCommand`
+
+** Pros: Some methods in `EditCommand` may be able to inherited by `ResumeEditCommand`, reducing code duplication.
+** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely.
+
+=== Implementation of `Command` classes
+==== Current Implementation
+Currently, there are several objects which are subclasses of `Item`, namely `Resume`, `Internship`, `Skill`, etc.
+
+For every of the `XYZCommand`, we would have one that corresponds to the `Item`. For example, we have `AddInternshipCommand` and `AddSkillCommand`.
+
+// TODO: Add class diagram here
+
+This implies that the number of classes that needs to be written is the number of different commands times the different number of items.
+
+==== Design Considerations
+===== Aspect: Whether to separate the `XYZCommand` into many `XYZItemCommand`
+* ** Alternative 1 (current choice):** `XYZCommand` is separated into many `XYZItemCommand`
+
+** Pros: More OOP. The behaviour of an `XYZItemCommand` becomes more flexible and can be easily changed as required.
+** Cons: Many classes have to be maintained.
+
+* ** Alternative 2: ** Do not separate `XYZCommand`
+
+** Pros: Only one command is required, regardless of number of items.
+** Cons: The `execute` method inside this class can potentially be very long due to the need for handling the different item types.
 
 === Me Feature
 This feature allows user to make changes and updates his/her user profile which is reflected by the user profile panel.
