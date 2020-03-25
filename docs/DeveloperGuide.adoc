@@ -179,13 +179,13 @@ image::ReditWantSomeThings.png[]
 ===== Aspect: Whether `ResumeEditCommand` should extend `EditCommand`
 * ** Alternative 1 (current choice):** `ResumeEditCommand` does not extend `EditCommand`, but extends `Command`. This design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the resume such as its name, while `redit` is supposed to change the content that the resume holds.
 
-** Pros: Better clarity in expressing that `redit` and `edit` are different commands.
-** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`.
+** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Pricniple is observed.
+** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may be confusing to have both `redit` and `edit`.
 
 * ** Alternative 2:** `ResumeEditCommand` extends `EditCommand`
 
-** Pros: Some methods in `EditCommand` may be able to inherited by `ResumeEditCommand`, reducing code duplication
-** Cons: The functionality of `ResumeEditCommand` may be limited, and could have been combined with `EditCommand` entirely.
+** Pros: Some methods in `EditCommand` may be able to inherited by `ResumeEditCommand`, reducing code duplication.
+** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely.
 
 === Implementation of `Command` classes
 ==== Current Implementation
@@ -201,13 +201,13 @@ This implies that the number of classes that needs to be written is the number o
 ===== Aspect: Whether to separate the `XYZCommand` into many `XYZItemCommand`
 * ** Alternative 1 (current choice):** `XYZCommand` is separated into many `XYZItemCommand`
 
-Pros: More OOP. The behaviour of an `XYZItemCommand` becomes more flexible and can be easily changed as required.
-Cons: Many classes have to be maintained.
+** Pros: More OOP. The behaviour of an `XYZItemCommand` becomes more flexible and can be easily changed as required.
+** Cons: Many classes have to be maintained.
 
 * ** Alternative 2: ** Do not separate `XYZCommand`
 
-Pros: Only one command is required, regardless of number of items.
-Cons: The `execute` method inside this class can potentially be very long due to the need for handling the different item types.
+** Pros: Only one command is required, regardless of number of items.
+** Cons: The `execute` method inside this class can potentially be very long due to the need for handling the different item types.
 
 
 // tag::undoredo[]
