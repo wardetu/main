@@ -237,14 +237,64 @@ Below is an example usage scenario and how the edit user data command works.
 * User launches the application for the first time. The User Profile and Data will be initialized with the initial json
 data stored.
 
+image::user-default-data.png[]
+
 * User executes `me n/NAME p/PHONE e/EMAIL g/GITHUB u/UNIVERSITY m/MAJOR f/FROM t/TO c/CAP` so as to update the Person
 object currently stored in Model as well as Storage.
 
+ me n/Nham Hung p/91608840 e/nhamhung.gttn@gmail.com g/nhamhung u/NUS m/CS f/10-2020 t/11-2020 c/5.0
+
 * The Ui User Data Table will be updated accordingly.
 
-The following sequence diagram shows how the `me` feature allows user to edit the user profile.
+image::user-data.png[]
+
+Command sequence:
+
+1. User type `me` command in the command box.
+2. Command is executed by Logic Manager.
+3. Command is parsed by `ResumeBookParser` which identifies what type of command it is. An `EditUserParser` is returned accordingly.
+4. `EditUserParser` extracts out different components of the command into an `EditUserDescriptor` object and returns an `EditUserCommand`
+with the `EditUserDescriptor` object which contains information on which attributes of user data is updated or kept unchanged.
+5. `EditUserCommand` then calls `execute()` which first gets the existing user in Model as `userToEdit`. Then it creates a new
+`editedUser` based on `EditUserDescriptor`. It will then update the current `userToEdit` in Model with `editedUser`. Afterwards,
+a `CommandResult` is returned to Logic with data and feedback to be displayed to the user.
+6. Feedback acknowledge is displayed by `ResultDisplay`. User profile changes are displayed by JavaFx `TableView`.
+
+The following sequence diagram shows how the `me` feature allows user to edit the user profile:
 
 image::MeSequenceDiagram.png[]
+
+===== Design Considerations
+
+*Aspect: Whether `EditUserCommand` should extend `EditCommand`*
+
+* ** Alternative 1 (current choice):** `EditUserCommand` does not extend `EditCommand`, but extends `Command`
+This design is chosen because while `EditCommand` takes into account the item index as all items are stored in a list in Model, `EditUserCommand`
+only concerns with a single `Person` who is the sole user.
+
+** Pros: Reduces unnecessary overhead for `EditUserCommand`.
+** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`.
+
+* **Alternative 2: `EditUserCommand` extends `EditCommand`**
+
+** Pros: Better utilise polymorphism and perhaps can be more intuitive as it is also a command to edit.
+
+** Cons: Does not treat it as an entirely separate command with a distinct keyword `me` which is more intuitive for the user.
+
+*Aspect: Whether to have both `AddUserCommand` and `EditUserCommand`*
+
+* *Alternative 1 (current choice):* A default user data is initialized and displayed at first start-up. User can update it afterwards.
+This design is chosen because `EditUserCommand` only concerns with a single `Person` object in the Model as the sole user. Hence
+there is no need for `AddUserCommand` as `EditUserCommand` when executed always creates a new `Person` object to replace the
+existing one and update the Model and Ui accordingly.
+
+** Pros: Reduces unnecessary code duplication.
+** Cons: User may expect to have `add` command intuitively.
+
+* Alternative 2: Have both `AddUserCommand` and `EditUserCommand`
+
+** Pros: User can intuitively treat `add` as adding in a new `user` and `edit` as just modifying an existing `user`.
+** Cons: There will be code duplication and the one single user logic is not fully utilised to reduce code.
 
 ==== Store and Display Motivational Quotes
 This allows the user to input and store motivational quotes. They are then able to display them at the user profile pane.
