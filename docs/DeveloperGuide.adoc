@@ -153,37 +153,49 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::generateresume[]
-=== [Proposed] Generate Resume feature
-==== Proposed Implementation
-The Generate Resume feature or `rgen` allows users to export a specific `Resume` item as a .pdf file, using the external
-*iText* library. When using this feature, users must provide the index of the `Resume` item to be exported, as well as
-the desired name of the generated file. The exported file will be saved in the root directory of the project.
+// tag::export[]
+=== [Proposed] Export Resume feature
+The Export Resume feature supports two main actions: previewing the content of a `Resume` item in textual format, and
+then exporting it as a .pdf file.
+
+==== rpreview: preview a `Resume`
+===== Proposed Implementation
+afdsa
+
+===== Design Considerations
+afasf
+
+==== rgen: generate a .pdf file from a `Resume`
+===== Proposed Implementation
+This feature utilises the external *iText* library. When using `rgen`, the user could specify the desired name of
+the generated file, which will be saved in the root directory of the project.
 
 `rgen` implements the following operations:
 
-* `create(Template)` and `create()` - initialises the .pdf file, either using the input `Template` specified by user or
-using the default `Template` if not specified.
-* `addSection(String)` - starts a new section (e.g. "Internship").
+* `create(String)` and `create()` - initialises the .pdf file, either with the input `String` name specified by the user,
+or with the same name as the `Resume` name if the file name is not specified.
+* `addSection(String)` - starts a new section with the `String` name (e.g. "Internship").
 * `populateSection(UniqueItemList)` and `insertItem(Item)` - populates the section with items in the same order as they
-are in `UniqueItemList`. When an `Item` is inserted, it is correctly formatted depending on the item type.
+are in the `UniqueItemList`. When an `Item` is inserted, it is correctly formatted depending on the item type.
 
 Given below is an example usage scenario:
 
 Step 1. The user launches ResuMé. After loading data from storage to the application memory, the list of resumes in the
 ResumeBook could either contain some resumes, or is empty.
 
-Step 2. The user executes `rgen INDEX n\FILE_NAME [TEMPLATE_NAME]`. If any of the compulsory fields are missing, or the
-the specified resume index is out of bound, ResuMé throws an error message.
+Step 2. The user executes `rgen INDEX n\FILE_NAME [TEMPLATE_NAME]`. If the specified resume index is out of bound,
+ResuMé throws an error message.
 
 Step 3. The application retrieves the correct `Resume` item, create a new .pdf file and populates it with the corresponding
 items inside the `Resume`.
 
 The following activity diagram summarises what happens when a user executes `rgen` command:
-// TODO: Add activity diagram
+
+image::ExportActivityDiagram.png[]
 
 Detailed steps are shown in the sequence diagram below:
-// TODO: Add sequence diagram
+
+image::ExportSequenceDiagram.png[]
 
 ==== Design Considerations
 ===== Aspect:
@@ -191,7 +203,7 @@ Detailed steps are shown in the sequence diagram below:
 
 
 
-// end::generateresume[]
+// end::export[]
 
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature

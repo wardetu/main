@@ -1,0 +1,15 @@
+@startuml
+
+(*)  -right-> "Execute Command"
+
+If "" then
+-down-> [index out of bound] "throw exception"
+--> (*)
+
+else
+-right-> [else] "export Resume to .pdf file"
+-left-> (*)
+
+endif
+
+@enduml
