@@ -161,7 +161,7 @@ public class ResumeBookTest {
         public UniqueItemList getPersonalDetailList() {
             return resumes;
         }
-        
+
         @Override
         public boolean hasResumeId(int resumeIndex) {
             return false;
