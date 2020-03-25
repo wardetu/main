@@ -211,10 +211,25 @@ This implies that the number of classes that needs to be written is the number o
 ** Cons: The `execute` method inside this class can potentially be very long due to the need for handling the different item types.
 
 === Me Feature
-This feature allows user to make changes and updates his/her user profile which is reflected by the user profile panel.
+This feature allows a user to make changes and updates his/her user profile which is reflected by the user profile panel.
+At the same time, it also allows user to personalise his/her experience using the app with certain sub-features. They are
+elaborated below:
+
+* Edit user profile image
+
+* Edit user main data
+
+* Input, store and generate motivational quotes
+
+* Change background and font color
+
+* Set reminders or take notes
+
+==== Edit User Profile Image
+This allows the specific user to input and update his/her user profile picture.
 
 ==== Edit User Main Data
-It allows one specific user to modify and update user information that includes `name`, `phone`, `email1`, `github`,
+This allows one specific user to modify and update user information that includes `name`, `phone`, `email1`, `github`,
 `university`, `major`, `from`, `to`, `cap`.
 
 Below is an example usage scenario and how the edit user data command works.
@@ -225,18 +240,21 @@ data stored.
 * User executes `me n/NAME p/PHONE e/EMAIL g/GITHUB u/UNIVERSITY m/MAJOR f/FROM t/TO c/CAP` so as to update the Person
 object currently stored in Model as well as Storage.
 
-* The Ui User Data table will be updated accordingly.
+* The Ui User Data Table will be updated accordingly.
 
 The following sequence diagram shows how the `me` feature allows user to edit the user profile.
 
-==== Edit User Profile
-It allows the specific user to input and update his/her user profile picture and receives motivational quotes.
+image::MeSequenceDiagram.png[]
 
-==== Set Personal Reminders
-It allows the user to set reminders as well as taking notes for him/herself to further customize his/her interaction
+==== Store and Display Motivational Quotes
+This allows the user to input and store motivational quotes. They are then able to display them at the user profile pane.
+
+==== Set Personal Reminders and Take Notes
+This allows the user to set reminders as well as taking notes for him/herself to further customize his/her interaction
 with the app.
 
 ==== Change Background and Font Color
+This allows the user to change the background and font color using rgb or hex color codes.
 
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
