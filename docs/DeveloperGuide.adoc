@@ -241,7 +241,7 @@ casing required. Each `ABCItemCommand` has it's own and distinct functionality.
 * ** Alternative 2: ** Do not separate `ABCCommand`.
 
 ** Pros: Only one command is required, regardless of number of items. Low overhead.
-** Cons: Very long `execute` due to the need for handling the different item types. Item `Type` would also need to be stored.
+** Cons: Long `execute` method due to the need for handling the different item types. Item `Type` would also need to be stored.
 Undesirable variable functionality of `execute` command depending on the `Type` field despite it being from the same class.
 ie. `AddItem` can add `Internship` to the `Internship` list, or add `Skill` to `Skill` list.
 
