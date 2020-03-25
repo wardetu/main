@@ -156,12 +156,12 @@ This section describes some noteworthy details on how certain features are imple
 === [Proposed] Resume Edit feature
 ==== Proposed Implementation
 The Resume Edit feature or `redit` allows users to edit which `Item` belongs to the `Resume` (for example, adding a `Skill` item or removing an `Internship` item).
-It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`. 
+It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`.
 
-The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`. 
-Therefore, like any other `Command` classes, it will have an `execute` method. 
+The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`.
+Therefore, like any other `Command` classes, it will have an `execute` method.
 
-The following screenshot illustrates what happens when we use `redit` to add item into the resume. The numbers in the command represent the index of the item in the list. After the end of the command, the number of item in the resume would have increased. 
+The following screenshot illustrates what happens when we use `redit` to add item into the resume. The numbers in the command represent the index of the item in the list. After the end of the command, the number of item in the resume would have increased.
 
 image::ReditAddIntoResume.png[]
 
