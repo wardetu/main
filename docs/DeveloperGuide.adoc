@@ -234,7 +234,7 @@ image::CommandClassDiagram.png[]
 ===== Aspect: Whether to separate the `ABCCommand` that is dependent on type into many `ABCItemCommand`
 * ** Alternative 1 (current choice):** `ABCCommand` is separated into many `ABCItemCommand`.
 
-** Pros: More OOP. Flexible behaviour of an `ABCItemCommand` becomes and can be easily changed as required. No
+** Pros: More OOP. Flexible behaviour of `ABCItemCommand` and can be easily changed as required. No
 casing required. Each `ABCItemCommand` has it's own and distinct functionality.
 ** Cons: Many classes have to be maintained.
 
