@@ -278,8 +278,8 @@ such that it automatically updates when the content of the `Resume` item is edit
 need to use `rpreview` regularly.
 
 ****
-*Conclusion:* Given that the application already have quite a number of panels (User Profile, Command Input,
-Command Result, Item Detail and List View), alternative 1 was chosen to minimise the layout and improve on user experience.
+*Conclusion:* Given that the application already has quite a number of panels (User Profile, Command Input,
+Command Result, Item Detail and List View), alternative 1 is chosen to minimise the layout and improve on user experience.
 The Command Result panel will display a confirmation message for any successful item edit, hence the user will not need
 to call `rpreview` after each edit, reducing the number of switches between views.
 ****
@@ -334,7 +334,7 @@ after `rpreview` is called.
 ****
 *Conclusion:* Alternative 1 is chosen because each resume is not likely to hold more than 20 items, hence the cost
 of reading its content twice (once during `rpreview` and once during `rgen`) is relatively small. Choosing alternative 1
-will further allows the application to have more control of the formatting of the output file, and leaving room for potential
+will further allows the application to have more control when formatting the output file, and leaving room for potential
 extended features (e.g. allow user to choose from a variety of pre-defined resume templates).
 ****
 // end::export[]
