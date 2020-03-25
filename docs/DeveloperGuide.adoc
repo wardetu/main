@@ -162,20 +162,24 @@ It is not to be confused with the `edit` command, which simply modifies the fiel
 The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`.
 Therefore, like any other `Command` classes, it will have an `execute` method.
 
+===== Adding into the resume
 The following screenshot illustrates what happens when we use `redit` to add item into the resume. The numbers in the command represent the index of the item in the list. After the end of the command, the number of item in the resume would have increased.
 
 image::ReditAddIntoResume.png[][AddIntoResume,442,337]
 
 For modifications and removal of item from the resume, all we have to do is to run the same command again, specifying which item we want to *retain* in the resume.
 
-The following screenshot illustrates what happens if you want to remove all the items in the resume, starting from a an already-filled resume:
+===== Removing all from the resume
+The following sreenshot illustrates what happens if you want to remove all the items in the resume, starting from a an already-filled resume:
 
 image::ReditRemoveEverything.png[][RemoveEverything,442,337]
 
+===== Removing some from the resume
 And the following screenshot illustrates what happens if you want to remove some items:
 
 image::ReditWantSomeThings.png[][WantSomeThings,442,337]
 
+===== Changing content using tags
 On top of these methods to change the content of the resume, `redit` can also make changes to the resume by making use of tags. 
 Regardless of what the original content is, after running the command, the resume will then only have items with the desired tags.
 
