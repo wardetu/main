@@ -164,17 +164,24 @@ Therefore, like any other `Command` classes, it will have an `execute` method.
 
 The following screenshot illustrates what happens when we use `redit` to add item into the resume. The numbers in the command represent the index of the item in the list. After the end of the command, the number of item in the resume would have increased.
 
-image::ReditAddIntoResume.png[]
+image::ReditAddIntoResume.png[][AddIntoResume,442,337]
 
 For modifications and removal of item from the resume, all we have to do is to run the same command again, specifying which item we want to *retain* in the resume.
 
 The following screenshot illustrates what happens if you want to remove all the items in the resume, starting from a an already-filled resume:
 
-image::ReditRemoveEverything.png[]
+image::ReditRemoveEverything.png[][RemoveEverything,442,337]
 
 And the following screenshot illustrates what happens if you want to remove some items:
 
-image::ReditWantSomeThings.png[]
+image::ReditWantSomeThings.png[][WantSomeThings,442,337]
+
+On top of these methods to change the content of the resume, `redit` can also make changes to the resume by making use of tags. 
+Regardless of what the original content is, after running the command, the resume will then only have items with the desired tags.
+
+An example is shown in the following screenshot:
+
+image::ReditTags.png[][ReditWithTags,442,337]
 
 ==== Design Considerations
 ===== Aspect: Whether `ResumeEditCommand` should extend `EditCommand`
@@ -230,7 +237,6 @@ data stored.
 object currently stored in Model as well as Storage.
 
 * The Ui User Data table will be updated accordingly.
-
 The following sequence diagram shows how the `me` feature allows user to edit the user profile.
 
 ==== Edit User Profile
