@@ -60,9 +60,9 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* **`list`**`i/res` : lists all resumes
-* **`add`**`i/res n/Software Engineering Resume #/SE #frontend`: adds a resume named `Software Engineering Resume`.
-* **`delete`**`1 i/res` : deletes the 1st resume shown in the current list
+* **`list`**`i/ res` : lists all resumes
+* **`add`**`i/ res n/ Software Engineering Resume #/SE #frontend`: adds a resume named `Software Engineering Resume`.
+* **`delete`**`1 i/ res` : deletes the 1st resume shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -72,13 +72,13 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/TYPE n/NAME`,
-`TYPE` and `NAME` are parameters which can be used as `add i/proj n/Orbital`.
-* Items in square brackets are optional e.g `n/NAME [#/TAG]` can be used as `n/Orbital #/SE` or as `n/Orbital`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[\#/TAG]...`
-can be used as (i.e. 0 times), `#/friend`, `\#/friend`, `#/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE`,
-`p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/ TYPE n/ NAME`,
+`TYPE` and `NAME` are parameters which can be used as `add i/ proj n/ Orbital`.
+* Items in square brackets are optional e.g `n/ NAME [#/TAG]` can be used as `n/ Orbital #/ SE` or as `n/ Orbital`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[\#/ TAG]...`
+can be used as (i.e. 0 times), `#/ friend`, `\#/ friend`, `#/ family` etc.
+* Parameters can be in any order e.g. if the command specifies `n/ NAME p/ PHONE`,
+`p/ PHONE_NUMBER n/ NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
@@ -91,7 +91,7 @@ Format: `help`
 ----
 List items in the storage.
 ----
-Format: `list i/TYPE`
+Format: `list i/ TYPE`
 
 ****
 * List items that have type matches the `TYPE` argument.
@@ -103,18 +103,18 @@ To view items in full details, use `view`.
 ----
 Adds an item to the ResuMe application.
 ----
-Format: `add i/TYPE n/NAME ATTRIBUTE/VALUE]... [#/TAG]...`
+Format: `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...`
 
 [width="100%",cols="16%,84%",options="header",]
 |=======================================================================
 |Type |Format
-|Internship |`add i/int n/COMPANY NAME r/ROLE f/FROM t/TO d/DESCRIPTION [#/TAG]...`
+|Internship |`add i/ int n/ COMPANY NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
 
-|Project |`add i/proj n/PROJECT NAME t/TIME w/WEBSITE d/DESCRIPTION [#/TAG]....`
+|Project |`add i/ proj n/ PROJECT NAME t/ TIME w/ WEBSITE d/ DESCRIPTION [#/ TAG]....`
 
-|Skill |`add i/ski n/SKILL NAME l/LEVEL [#/TAG]....`
+|Skill |`add i/ ski n/ SKILL NAME l/ LEVEL [#/ TAG]....`
 
-|Resume |`add i/res n/NAME [#/TAG]...`
+|Resume |`add i/ res n/ NAME [#/ TAG]...`
 |=======================================================================
 
 ****
@@ -130,27 +130,27 @@ item in the later commands.
 
 Examples:
 
-* `add i/proj n/Duke t/06-2020 w/abc.github.io d/For a little module named CS2103T. #/java #/tech`
-* `add i/ski n/Git and Github l/INTERMEDIATE #/VCS #/tech`
+* `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
+* `add i/ ski n/ Git and Github l/ INTERMEDIATE #/ VCS #/ tech`
 
 === Editing a person : `edit`
 
 ----
 Edits an existing item in the ResuMe application.
 ----
-Format: `edit INDEX i/TYPE [ATTRIBUTE/VALUE]... [#/TAG]...`
+Format: `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...`
 
 
 [width="100%",cols="16%,84%",options="header",]
 |=======================================================================
 |Type |Format
-|Internship |`edit INDEX i/int [n/COMPANY NAME] [r/ROLE] [f/FROM] [t/TO] [d/DESCRIPTION] [#/TAG]...`
+|Internship |`edit INDEX i/ int [n/ COMPANY NAME] [r/ ROLE] [f/ FROM] [t/ TO] [d/ DESCRIPTION] [#/ TAG]...`
 
-|Project |`edit INDEX i/proj [n/PROJECT NAME] [t/TIME] [w/WEBSITE] [d/DESCRIPTION] [#/TAG]....`
+|Project |`edit INDEX i/ proj [n/ PROJECT NAME] [t/ TIME] [w/ WEBSITE] [d/ DESCRIPTION] [#/ TAG]....`
 
-|Skill |`edit INDEX i/ski [n/SKILL NAME] [l/LEVEL] [#/TAG]....`
+|Skill |`edit INDEX i/ ski [n/ SKILL NAME] [l/ LEVEL] [#/ TAG]....`
 
-|Resume |`edit INDEX i/res [n/NAME] [#/TAG]...`
+|Resume |`edit INDEX i/ res [n/ NAME] [#/ TAG]...`
 |=======================================================================
 
 ****
@@ -167,9 +167,9 @@ specifying any tags after it.
 ****
 Examples:
 
-* `edit 1 i/res n/Resume 1` +
+* `edit 1 i/ res n/ Resume 1` +
 Edits the name of the 1st resume to be `Resume 1`.
-* `edit 2 i/ski l/ADVANCED #/` +
+* `edit 2 i/ ski l/ ADVANCED #/` +
 Edits the level of the 2nd skill to be `ADVANCED` and clears all existing tags.
 
 === Locating persons by name: `find`
@@ -201,7 +201,7 @@ Returns any items having names `Shopee` or `Front-end`
 ----
 Deletes an existing item in the ResuMe application
 ----
-Format: `delete INDEX i/TYPE`
+Format: `delete INDEX i/ TYPE`
 
 ****
 * Deletes the item of type `TYPE` with the specified `INDEX`. The `INDEX`
@@ -212,7 +212,7 @@ the list will automatically update to show the new indices of its items.
 
 Examples:
 
-* `delete 2 i/res` +
+* `delete 2 i/ res` +
 Deletes the 2nd resume in the resume book.
 
 === Viewing an item in details: `view`
@@ -220,11 +220,11 @@ Deletes the 2nd resume in the resume book.
 ----
 Shows all items in an existing resume.
 ----
-Format: `view INDEX i/TYPE`
+Format: `view INDEX i/ TYPE`
 
 Examples:
 
-* `view 2 i/res` +
+* `view 2 i/ res` +
 View the 2nd resume in the resume book.
 
 === Editing a resume: `redit`
@@ -232,7 +232,7 @@ View the 2nd resume in the resume book.
 Edits an existing resume in the ResuMe application
 ----
 Format:
-`redit RESUME_ID TYPE/[ITEM_ID...] [MORE_TYPE/[ITEM_ID...]]... [#/TAG]...`
+`redit RESUME_ID TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]... [#/ TAG]...`
 
 ****
 * Edits the resume with the specified `RESUME_ID`. The `RESUME_ID`
@@ -251,7 +251,7 @@ typing `TYPE/` without specifying any `ITEM_ID` after it.
 
 Examples:
 
-* `redit 135 proj/9823 int/102 201` +
+* `redit 135 proj/ 9823 int/ 102 201` +
 Edits the resume of
 `RESUME_ID` 135, overriding project content with project item of `ITEM_ID` 9823,
 internship content with internship items of `ITEM_ID` 102 and 201.
@@ -332,20 +332,20 @@ ____
 
 * *List* : `list`
 
-* *Add* `add i/TYPE n/NAME ATTRIBUTE/VALUE]... [#/TAG]...` +
-e.g. `add i/proj n/Duke t/06-2020 w/abc.github.io d/For a little module named CS2103T. #/java #/tech`
+* *Add* `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...` +
+e.g. `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
 
-* *Edit* : `edit INDEX i/TYPE [ATTRIBUTE/VALUE]... [#/TAG]...` +
-e.g. `edit 2 i/ski l/ADVANCED #/`
+* *Edit* : `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...` +
+e.g. `edit 2 i/ ski l/ ADVANCED #/`
 
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Software`
 
-* *Delete* : `delete INDEX i/TYPE` +
+* *Delete* : `delete INDEX i/ TYPE` +
 e.g. `delete 3 i/res`
 
-* *Edit Resume* : `redit RESUME_ID TYPE/[ITEM_ID...] [MORE_TYPE/[ITEM_ID...]]... [#/TAG]...`
-e.g. `redit 135 proj/9823 int/102 201` +
+* *Edit Resume* : `redit RESUME_ID TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]... [#/ TAG]...`
+e.g. `redit 135 proj/ 9823 int/ 102 201` +
 
 * *Preview Resume* : `rpreview RESUME_ID` +
 e.g. `rpreview 234`
