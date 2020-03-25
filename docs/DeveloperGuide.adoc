@@ -183,10 +183,14 @@ image::ReditWantSomeThings.png[]
 ** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Pricniple is observed.
 ** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may be confusing to have both `redit` and `edit`.
 
+image::ResumeEditCommandAlt1.png[]
+
 * ** Alternative 2:** `ResumeEditCommand` extends `EditCommand`
 
 ** Pros: Some methods in `EditCommand` may be able to inherited by `ResumeEditCommand`, reducing code duplication.
 ** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely.
+
+image::ResumeEditCommandAlt2.png[]
 
 === Implementation of `Command` classes
 ==== Current Implementation
