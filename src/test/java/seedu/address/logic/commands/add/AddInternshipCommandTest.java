@@ -42,7 +42,7 @@ public class AddInternshipCommandTest extends AddCommandTest {
         ModelStub modelStub = new ModelStubWithInternship(validItem);
 
         assertThrows(CommandException.class,
-                AddInternshipCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+                AddInternshipCommand.MESSAGE_DUPLICATE_ITEM, () -> addCommand.execute(modelStub));
     }
 
     @Test
