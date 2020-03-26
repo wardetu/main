@@ -9,6 +9,7 @@ import seedu.address.model.item.Internship;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Internship objects.
@@ -38,6 +39,15 @@ public class InternshipBuilder {
         tags.addAll(Arrays.stream(DEFAULT_TAGS).map(Tag::new).collect(Collectors.toList()));
     }
 
+    public InternshipBuilder(Internship internshipToCopy) {
+        name = internshipToCopy.getName();
+        from = internshipToCopy.getFrom();
+        to = internshipToCopy.getTo();
+        role = internshipToCopy.getRole();
+        description = internshipToCopy.getDescription();
+        tags = new HashSet<>(internshipToCopy.getTags());
+    }
+
     /**
      * Creates a InternshipBuilder with a certain name.
      * @param name String name
@@ -45,6 +55,55 @@ public class InternshipBuilder {
      */
     public InternshipBuilder withName(String name) {
         this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Creates a InternshipBuilder with a certain role.
+     * @param role String role
+     * @return InternshipBuilder with new role
+     */
+    public InternshipBuilder withRole(String role) {
+        this.role = role;
+        return this;
+    }
+
+    /**
+     * Creates a InternshipBuilder with a certain to.
+     * @param to String to
+     * @return InternshipBuilder with new to
+     */
+    public InternshipBuilder withTo(String to) {
+        this.to = new Time(to);
+        return this;
+    }
+
+    /**
+     * Creates a InternshipBuilder with a certain from.
+     * @param from String from
+     * @return InternshipBuilder with new from
+     */
+    public InternshipBuilder withFrom(String from) {
+        this.from = new Time(from);
+        return this;
+    }
+
+
+    /**
+     * Creates a InternshipBuilder with a certain description.
+     * @param description String description
+     * @return InternshipBuilder with new description
+     */
+    public InternshipBuilder withDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Internship} that we are building.
+     */
+    public InternshipBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 

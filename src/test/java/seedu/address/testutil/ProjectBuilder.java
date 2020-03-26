@@ -10,6 +10,7 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Project objects.
@@ -36,6 +37,14 @@ public class ProjectBuilder {
         tags.addAll(Arrays.stream(DEFAULT_TAGS).map(Tag::new).collect(Collectors.toList()));
     }
 
+    public ProjectBuilder(Project projectToCopy) {
+        name = projectToCopy.getName();
+        time = projectToCopy.getTime();
+        website = projectToCopy.getWebsite();
+        description = projectToCopy.getDescription();
+        tags = new HashSet<>(projectToCopy.getTags());
+    }
+
     /**
      * Creates a ProjectBuilder with a certain name.
      * @param name String name
@@ -43,6 +52,44 @@ public class ProjectBuilder {
      */
     public ProjectBuilder withName(String name) {
         this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Creates a ProjectBuilder with a certain time.
+     * @param time String time
+     * @return ProjectBuilder with new time
+     */
+    public ProjectBuilder withTime(String time) {
+        this.time = new Time(time);
+        return this;
+    }
+
+    /**
+     * Creates a ProjectBuilder with a certain website.
+     * @param website String website
+     * @return ProjectBuilder with new website
+     */
+    public ProjectBuilder withWebsite(String website) {
+        this.website = new Website(website);
+        return this;
+    }
+
+    /**
+     * Creates a ProjectBuilder with a certain description.
+     * @param description String description
+     * @return ProjectBuilder with new desc
+     */
+    public ProjectBuilder withDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Project} that we are building.
+     */
+    public ProjectBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
