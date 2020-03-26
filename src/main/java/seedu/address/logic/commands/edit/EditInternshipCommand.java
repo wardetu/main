@@ -41,7 +41,7 @@ public class EditInternshipCommand extends EditCommand {
     private EditInternshipDescriptor editInternshipDescriptor;
 
     /**
-     * @param index                of the person in the filtered person list to edit
+     * @param index                of the internship in the filtered internship list to edit
      * @param editInternshipDescriptor details to edit the internship with
      */
     public EditInternshipCommand(Index index, EditInternshipDescriptor editInternshipDescriptor) {
