@@ -7,6 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_WEBSITE;
 
 import seedu.address.model.item.Project;
 
+/**
+ * A utility class containing a list of {@code Project} objects to be used in tests.
+ */
 public class TypicalProject {
     // Manually added - project's details found in {@code CommandTestUtil}
     public static final Project ORBITAL = new ProjectBuilder().withName(VALID_PROJECT_NAME_ORBITAL)

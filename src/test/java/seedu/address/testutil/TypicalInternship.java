@@ -8,6 +8,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TO;
 
 import seedu.address.model.item.Internship;
 
+/**
+ * A utility class containing a list of {@code Internship} objects to be used in tests.
+ */
 public class TypicalInternship {
     // Manually added - internship's details found in {@code CommandTestUtil}
     public static final Internship GOOGLE = new InternshipBuilder().withName(VALID_INTERNSHIP_NAME_GOOGLE)
