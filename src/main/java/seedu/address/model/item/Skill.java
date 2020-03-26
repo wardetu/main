@@ -52,6 +52,7 @@ public class Skill extends Item {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Skill // instanceof handles nulls
+                && getName().equals(((Skill) other).getName())
                 && level.getLevelCode() == ((Skill) other).level.getLevelCode());
     }
 }

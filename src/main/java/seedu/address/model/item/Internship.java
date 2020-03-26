@@ -75,6 +75,7 @@ public class Internship extends Item {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Internship // instanceof handles nulls
+                && getName().equals(((Internship) other).getName())
                 && role.equals(((Internship) other).role) // state check
                 && from.equals(((Internship) other).from)
                 && to.equals(((Internship) other).to)
