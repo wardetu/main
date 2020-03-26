@@ -63,4 +63,13 @@ public class Project extends Item {
                 .append(getDescription());
         return builder.toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Project // instanceof handles nulls
+                && time.equals(((Project) other).time) // state check
+                && website.equals(((Project) other).website) // state check
+                && description.equals(((Project) other).description)); // state check
+    }
 }
