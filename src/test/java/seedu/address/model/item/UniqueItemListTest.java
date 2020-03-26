@@ -20,6 +20,8 @@ package seedu.address.model.item;
 //import seedu.address.testutil.PersonalDetailBuilder;
 
 public class UniqueItemListTest {
+
+    // TODO: add this test
 /*
     private final UniqueItemList uniqueItemList = new UniqueItemList();
 
