@@ -44,7 +44,7 @@ public class AddSkillCommand extends AddCommand {
         requireNonNull(model);
 
         if (model.hasSkill(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
         model.addSkill(toAdd);
