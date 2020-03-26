@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.add.AddProjectCommand;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 import seedu.address.model.item.Project;
@@ -24,7 +24,7 @@ public class AddProjectCommandTest extends AddCommandTest {
     }
 
     @Test
-    public void execute_ProjectAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_projectAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingProjectAdded modelStub = new ModelStubAcceptingProjectAdded();
         Project validItem = new ProjectBuilder().build();
 
@@ -32,7 +32,7 @@ public class AddProjectCommandTest extends AddCommandTest {
 
         assertEquals(String.format(AddProjectCommand.MESSAGE_SUCCESS, validItem.getType().getFullType()),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validItem), modelStub.Projects);
+        assertEquals(Arrays.asList(validItem), modelStub.projects);
     }
 
     @Test
@@ -90,11 +90,11 @@ public class AddProjectCommandTest extends AddCommandTest {
      * A Model stub that always accept the Project being added.
      */
     private class ModelStubAcceptingProjectAdded extends ModelStub {
-        final ArrayList<Project> Projects = new ArrayList<>();
+        final ArrayList<Project> projects = new ArrayList<>();
 
         @Override
-        public void addProject(Project Project) {
-            Projects.add(Project);
+        public void addProject(Project project) {
+            projects.add(project);
         }
     }
 

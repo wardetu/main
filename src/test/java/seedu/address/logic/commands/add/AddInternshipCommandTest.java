@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.add.AddInternshipCommand;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 import seedu.address.model.item.Internship;
@@ -24,7 +24,7 @@ public class AddInternshipCommandTest extends AddCommandTest {
     }
 
     @Test
-    public void execute_InternshipAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_internshipAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingInternshipAdded modelStub = new ModelStubAcceptingInternshipAdded();
         Internship validItem = new InternshipBuilder().build();
 
@@ -32,7 +32,7 @@ public class AddInternshipCommandTest extends AddCommandTest {
 
         assertEquals(String.format(AddInternshipCommand.MESSAGE_SUCCESS, validItem.getType().getFullType()),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validItem), modelStub.Internships);
+        assertEquals(Arrays.asList(validItem), modelStub.internships);
     }
 
     @Test
@@ -90,11 +90,11 @@ public class AddInternshipCommandTest extends AddCommandTest {
      * A Model stub that always accept the Internship being added.
      */
     private class ModelStubAcceptingInternshipAdded extends ModelStub {
-        final ArrayList<Internship> Internships = new ArrayList<>();
+        final ArrayList<Internship> internships = new ArrayList<>();
 
         @Override
-        public void addInternship(Internship Internship) {
-            Internships.add(Internship);
+        public void addInternship(Internship internship) {
+            internships.add(internship);
         }
     }
 

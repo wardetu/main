@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.add;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
