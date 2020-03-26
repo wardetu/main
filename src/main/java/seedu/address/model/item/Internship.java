@@ -16,7 +16,6 @@ import seedu.address.model.util.ItemUtil;
 public class Internship extends Item {
 
     // Data fields
-    // TODO: convert from and to back to Time
     private String role;
     private Time from;
     private Time to;
@@ -34,7 +33,6 @@ public class Internship extends Item {
         this.from = from;
         this.to = to;
         this.description = description;
-
     }
 
     public String getRole() {
@@ -62,6 +60,18 @@ public class Internship extends Item {
         return builder.toString();
     }
 
+    /**
+     * Returns true if both internships have the same name, role, from and to.
+     * This defines a weaker notion of equality between two items.
+     */
+    @Override
+    public boolean isSame(Item otherInternship) {
+        return super.isSame(otherInternship)
+                && ((Internship) otherInternship).getRole().equals(getRole())
+                && ((Internship) otherInternship).getFrom().equals(getFrom())
+                && ((Internship) otherInternship).getTo().equals(getTo());
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
@@ -79,6 +89,7 @@ public class Internship extends Item {
                 && role.equals(((Internship) other).role) // state check
                 && from.equals(((Internship) other).from)
                 && to.equals(((Internship) other).to)
-                && description.equals(((Internship) other).description));
+                && description.equals(((Internship) other).description))
+                && getTags().equals(((Internship) other).getTags());
     }
 }

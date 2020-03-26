@@ -25,10 +25,10 @@ public abstract class Item {
     // Identity fields
     protected Type type;
     protected final int id;
-    private final Name name;
+    protected final Name name;
 
     // Data fields
-    private final Set<Tag> tags = new HashSet<>();
+    protected final Set<Tag> tags = new HashSet<>();
 
     public Item(Name name, int id, Set<Tag> tags) {
         requireAllNonNull(name, tags);
@@ -67,7 +67,7 @@ public abstract class Item {
     }
 
     /**
-     * Returns true if both items have the same name.
+     * Returns true if both items have the same name and are of the same type.
      * This defines a weaker notion of equality between two items.
      */
     public boolean isSame(Item otherItem) {
@@ -76,7 +76,8 @@ public abstract class Item {
         }
 
         return otherItem != null
-                && otherItem.getName().equals(getName());
+                && otherItem.getName().equals(getName())
+                && otherItem.getType().equals(getType());
     }
 
     /**
