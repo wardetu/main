@@ -61,7 +61,7 @@ public class ProjectBuilder {
      * @return ProjectBuilder with new time
      */
     public ProjectBuilder withTime(String time) {
-        this.time= new Time(time);
+        this.time = new Time(time);
         return this;
     }
 
