@@ -13,15 +13,13 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.add.AddResumeCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ReadOnlyResumeBook;
-import seedu.address.model.ResumeBook;
 
 import seedu.address.model.item.Resume;
 import seedu.address.testutil.ResumeBuilder;
 
 public class AddResumeCommandTest extends AddCommandTest {
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullResume_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddResumeCommand(null));
     }
 
@@ -38,7 +36,7 @@ public class AddResumeCommandTest extends AddCommandTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateResume_throwsCommandException() {
         Resume validItem = new ResumeBuilder().build();
         AddResumeCommand addCommand = new AddResumeCommand(validItem);
         ModelStub modelStub = new ModelStubWithResume(validItem);
@@ -67,7 +65,7 @@ public class AddResumeCommandTest extends AddCommandTest {
         // null -> returns false
         assertFalse(addJavaCommand.equals(null));
 
-        // different person -> returns false
+        // different resume -> returns false
         assertFalse(addJavaCommand.equals(addCCommand));
     }
 
@@ -97,11 +95,6 @@ public class AddResumeCommandTest extends AddCommandTest {
         @Override
         public void addResume(Resume resume) {
             resumes.add(resume);
-        }
-
-        @Override
-        public ReadOnlyResumeBook getResumeBook() {
-            return new ResumeBook();
         }
     }
 

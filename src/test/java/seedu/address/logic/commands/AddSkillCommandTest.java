@@ -13,15 +13,13 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.add.AddSkillCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ReadOnlyResumeBook;
-import seedu.address.model.ResumeBook;
 
 import seedu.address.model.item.Skill;
 import seedu.address.testutil.SkillBuilder;
 
 public class AddSkillCommandTest extends AddCommandTest {
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullSkill_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddSkillCommand(null));
     }
 
@@ -38,7 +36,7 @@ public class AddSkillCommandTest extends AddCommandTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateSkill_throwsCommandException() {
         Skill validItem = new SkillBuilder().build();
         AddSkillCommand addCommand = new AddSkillCommand(validItem);
         ModelStub modelStub = new ModelStubWithSkill(validItem);
@@ -49,8 +47,8 @@ public class AddSkillCommandTest extends AddCommandTest {
 
     @Test
     public void equals() {
-        Skill java = new SkillBuilder().withName("Java").build();
-        Skill c = new SkillBuilder().withName("C").build();
+        Skill java = new SkillBuilder().withName("NameA").build();
+        Skill c = new SkillBuilder().withName("NameB").build();
         AddSkillCommand addJavaCommand = new AddSkillCommand(java);
         AddSkillCommand addCCommand = new AddSkillCommand(c);
 
@@ -67,7 +65,7 @@ public class AddSkillCommandTest extends AddCommandTest {
         // null -> returns false
         assertFalse(addJavaCommand.equals(null));
 
-        // different person -> returns false
+        // different skill -> returns false
         assertFalse(addJavaCommand.equals(addCCommand));
     }
 
@@ -97,11 +95,6 @@ public class AddSkillCommandTest extends AddCommandTest {
         @Override
         public void addSkill(Skill skill) {
             skills.add(skill);
-        }
-
-        @Override
-        public ReadOnlyResumeBook getResumeBook() {
-            return new ResumeBook();
         }
     }
 
