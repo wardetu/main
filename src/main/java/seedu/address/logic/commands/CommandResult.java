@@ -11,6 +11,7 @@ public class CommandResult {
 
     private final String feedbackToUser;
     private final String dataToUser;
+    private final boolean userUpdated;
 
     /** Help information should be shown to the user. */
     private final boolean showHelp;
@@ -21,7 +22,9 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String dataToUser, String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(boolean userUpdated, String dataToUser, String feedbackToUser,
+                         boolean showHelp, boolean exit) {
+        this.userUpdated = userUpdated;
         this.dataToUser = requireNonNull(dataToUser);
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
@@ -33,7 +36,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String dataToUser, String feedbackToUser) {
-        this(dataToUser, feedbackToUser, false, false);
+        this(false, dataToUser, feedbackToUser, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -52,6 +55,14 @@ public class CommandResult {
         return exit;
     }
 
+    public boolean isUserUpdated() {
+        return userUpdated;
+    }
+
+    public boolean hasItemChanged() {
+        return dataToUser == "";
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -66,12 +77,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && userUpdated == otherCommandResult.userUpdated;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(userUpdated, dataToUser, feedbackToUser, showHelp, exit);
     }
 
 }

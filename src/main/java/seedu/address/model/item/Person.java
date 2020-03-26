@@ -2,6 +2,7 @@ package seedu.address.model.item;
 
 import java.util.Objects;
 
+import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
@@ -14,6 +15,7 @@ import seedu.address.model.item.field.Time;
  */
 public class Person {
     // Identity fields
+    private final DisplayPicture displayPicture;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -29,8 +31,9 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Github github, String university, String major, Time from,
-                  Time to, double cap) {
+    public Person(DisplayPicture displayPicture, Name name, Phone phone, Email email, Github github, String university,
+                  String major, Time from, Time to, double cap) {
+        this.displayPicture = displayPicture;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -40,6 +43,10 @@ public class Person {
         this.from = from;
         this.to = to;
         this.cap = cap;
+    }
+
+    public DisplayPicture getDisplayPicture() {
+        return displayPicture;
     }
 
     public Name getName() {
@@ -81,13 +88,14 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, github, university, major, from, to, cap);
+        return Objects.hash(displayPicture, name, phone, email, github, university, major, from, to, cap);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName()).append("\n")
+        builder.append(getDisplayPicture()).append("\n")
+                .append(getName()).append("\n")
                 .append(getPhone()).append(" | ")
                 .append(getEmail()).append(" | ")
                 .append(getGithub()).append("\n")

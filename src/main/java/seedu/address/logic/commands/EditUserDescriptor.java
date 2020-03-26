@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
@@ -13,6 +14,7 @@ import seedu.address.model.item.field.Time;
  * Descriptor for EditUserCommand.
  */
 public class EditUserDescriptor {
+    private DisplayPicture displayPicture;
     private Name name;
     private Phone phone;
     private Email email;
@@ -30,6 +32,7 @@ public class EditUserDescriptor {
      * A defensive copy of {@code tags} is used internally.
      */
     public EditUserDescriptor(EditUserDescriptor toCopy) {
+        setDisplayPicture(toCopy.displayPicture);
         setName(toCopy.name);
         setPhone(toCopy.phone);
         setEmail(toCopy.email);
@@ -39,6 +42,14 @@ public class EditUserDescriptor {
         setFrom(toCopy.from);
         setTo(toCopy.to);
         setCap(toCopy.cap);
+    }
+
+    public void setDisplayPicture(DisplayPicture displayPicture) {
+        this.displayPicture = displayPicture;
+    }
+
+    public Optional<DisplayPicture> getDisplayPicture() {
+        return Optional.ofNullable(displayPicture);
     }
 
     public void setName(Name name) {
@@ -81,7 +92,6 @@ public class EditUserDescriptor {
         return Optional.ofNullable(university);
     }
 
-
     public void setMajor(String major) {
         this.major = major;
     }
@@ -118,7 +128,7 @@ public class EditUserDescriptor {
      * Returns true if at least one field is edited.
      */
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(name, phone, email, github, university,
+        return CollectionUtil.isAnyNonNull(displayPicture, name, phone, email, github, university,
                 major, from, to, cap);
     }
 
@@ -137,7 +147,8 @@ public class EditUserDescriptor {
         // state check
         EditUserDescriptor e = (EditUserDescriptor) other;
 
-        return getName().equals(e.getName())
+        return getDisplayPicture().equals(e.getDisplayPicture())
+                && getName().equals(e.getName())
                 && getPhone().equals(e.getPhone())
                 && getEmail().equals(e.getEmail())
                 && getGithub().equals(e.getGithub())

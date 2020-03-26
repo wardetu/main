@@ -1,5 +1,5 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: linear-gradient(to top right, #1b85b8, #5a5255);
     background-color: #383838; /* Used in the default.html file */
 }
 
@@ -40,11 +40,10 @@
 }
 
 .table-view {
-    -fx-base: #879120;
-    -fx-control-inner-background: #559e83;
-    -fx-background-color: #b7d8ce;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
+    -fx-background-color: transparent !important;
+    -fx-control-inner-background: transparent !important;
+    -fx-table-cell-border-color: transparent !important;
+    -fx-table-header-border-color: transparent !important;
     -fx-padding: 5;
 }
 
@@ -54,14 +53,14 @@
 
 .table-view .column-header, .table-view .filler {
     -fx-size: 35;
-    -fx-border-width: 0 0 1 0;
+    -fx-border-width: 0 0 0 0;
     -fx-background-color: transparent;
     -fx-border-color:
         transparent
         transparent
         derive(-fx-base, 80%)
         transparent;
-    -fx-border-insets: 0 10 1 0;
+    -fx-border-insets: 0 0 0 0;
 }
 
 .table-view .column-header .label {
@@ -77,7 +76,7 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: #5a5255;
+    -fx-background-color: linear-gradient(to top right, #1b85b8, #5a5255);
     -fx-border-color: transparent transparent transparent #5a5255;
 }
 
@@ -100,15 +99,15 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: rgba(174, 105, 64, 0.65);
+    -fx-background-color: rgba(111, 174, 143, 0.65);
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #ae5a41;
+    -fx-background-color: #94aea8;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #927aae;
+    -fx-background-color: #0483ae;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -185,17 +184,17 @@
 }
 
 .grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: linear-gradient(to top right, #1b85b8, #5a5255);
     -fx-border-color: derive(#1d1d1d, 30%);
     -fx-border-width: 1px;
 }
 
 .grid-pane .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: linear-gradient(to top right, #1b85b8, #5a5255);
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: linear-gradient(to top right, #1b85b8, #5a5255);
 }
 
 .context-menu .label {
@@ -297,7 +296,7 @@
 
 .scroll-bar .thumb {
     -fx-background-color: derive(#1d1d1d, 50%);
-    -fx-background-insets: 3;
+    -fx-background-insets: 1;
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {

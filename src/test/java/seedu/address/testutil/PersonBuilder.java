@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.item.Person;
+import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
@@ -11,7 +12,7 @@ import seedu.address.model.item.field.Time;
  * A utility class to help with building Person objects.
  */
 public class PersonBuilder {
-
+    public static final String DEFAULT_DP = "/images/Duke.png";
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
@@ -22,6 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_TO = "05-2022";
     public static final double DEFAULT_CAP = 5.0;
 
+    private DisplayPicture displayPicture;
     private Name name;
     private Phone phone;
     private Email email;
@@ -33,6 +35,7 @@ public class PersonBuilder {
     private double cap;
 
     public PersonBuilder() {
+        displayPicture = new DisplayPicture(DEFAULT_DP);
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -48,6 +51,7 @@ public class PersonBuilder {
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public PersonBuilder(Person personToCopy) {
+        displayPicture = personToCopy.getDisplayPicture();
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
@@ -86,7 +90,7 @@ public class PersonBuilder {
 
 
     public Person build() {
-        return new Person(name, phone, email, github, university, major, from, to, cap);
+        return new Person(displayPicture, name, phone, email, github, university, major, from, to, cap);
     }
 
 }
