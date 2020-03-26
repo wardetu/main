@@ -3,7 +3,7 @@ package seedu.address.logic.commands.list;
 import seedu.address.logic.commands.Command;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all items in the address book to the user.
  */
 public abstract class ListCommand extends Command {
 
