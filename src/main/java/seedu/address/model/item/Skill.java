@@ -47,4 +47,11 @@ public class Skill extends Item {
                 .append(getSummary());
         return builder.toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Skill // instanceof handles nulls
+                && level.getLevelCode() == ((Skill) other).level.getLevelCode());
+    }
 }

@@ -70,4 +70,14 @@ public class Internship extends Item {
                 .append(getDescription());
         return builder.toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Internship // instanceof handles nulls
+                && role.equals(((Internship) other).role) // state check
+                && from.equals(((Internship) other).from)
+                && to.equals(((Internship) other).to)
+                && description.equals(((Internship) other).description));
+    }
 }
