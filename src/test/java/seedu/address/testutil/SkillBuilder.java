@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SkillBuilder {
     public static final String DEFAULT_NAME = "React";
-    public static final String[] DEFAULT_TAGS = {"web", "fronend"};
+    public static final String[] DEFAULT_TAGS = {"web", "frontend"};
 
     private Name name;
     private Level level;
