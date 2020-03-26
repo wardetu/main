@@ -13,14 +13,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing item in the address book.
  */
 public abstract class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the item identified "
-            + "by the index number used in the displayed person list. "
+            + "by the index number used in the displayed item list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX "
             + "[" + PREFIX_ITEM + " TYPE] "
@@ -39,7 +39,7 @@ public abstract class EditCommand extends Command {
     protected final Index index;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index of the item in the filtered item list to edit
      */
     public EditCommand(Index index) {
         requireNonNull(index);

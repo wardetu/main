@@ -1,6 +1,9 @@
 package seedu.address.testutil;
 
-import java.util.TreeSet;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.field.Name;
@@ -10,67 +13,28 @@ import seedu.address.model.tag.Tag;
  * A utility class to help with building Resume objects.
  */
 public class ResumeBuilder {
-
-    public static final String DEFAULT_NAME = "Software Engineering Resume";
-    public static final TreeSet<Integer> DEFAULT_INTERNSHIPS = new TreeSet<>();
-    public static final TreeSet<Integer> DEFAULT_PROJECTS = new TreeSet<>();
-    public static final TreeSet<Integer> DEFAULT_SKILLS = new TreeSet<>();
+    public static final String DEFAULT_NAME = "Company A";
+    public static final String[] DEFAULT_TAGS = {"backend", "naps"};
 
     private Name name;
-    private TreeSet<Integer> internships;
-    private TreeSet<Integer> projects;
-    private TreeSet<Integer> skills;
+    private Set<Tag> tags = new HashSet<>();
 
     public ResumeBuilder() {
         name = new Name(DEFAULT_NAME);
-        internships = DEFAULT_INTERNSHIPS;
-        projects = DEFAULT_PROJECTS;
-        skills = DEFAULT_SKILLS;
+        tags.addAll(Arrays.stream(DEFAULT_TAGS).map(Tag::new).collect(Collectors.toList()));
     }
 
     /**
-     * Initializes the ResumeBuilder with the data of {@code resumeToCopy}.
-     */
-    public ResumeBuilder(Resume resumeToCopy) {
-        name = resumeToCopy.getName();
-        internships = resumeToCopy.getInternships();
-        projects = resumeToCopy.getProjects();
-        skills = resumeToCopy.getSkills();
-    }
-
-    /**
-     * Sets the {@code Name} of the {@code Resume} that we are building.
+     * Creates a ResumeBuilder with a certain name.
+     * @param name String name
+     * @return ResumeBuilder with new name
      */
     public ResumeBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
 
-    /**
-     * Sets the internship list of the {@code Resume} that we are building.
-     */
-    public ResumeBuilder withInternships(TreeSet<Integer> internships) {
-        this.internships = internships;
-        return this;
-    }
-
-    /**
-     * Sets the project list of the {@code Resume} that we are building.
-     */
-    public ResumeBuilder withProjects(TreeSet<Integer> projects) {
-        this.projects = projects;
-        return this;
-    }
-
-    /**
-     * Sets the skill list of the {@code Resume} that we are building.
-     */
-    public ResumeBuilder withSkills(TreeSet<Integer> skills) {
-        this.skills = skills;
-        return this;
-    }
-
     public Resume build() {
-        return new Resume(name, new TreeSet<Tag>());
+        return new Resume(name, tags);
     }
 }
