@@ -31,7 +31,7 @@ public class EditSkillCommand extends EditCommand {
 
     private EditSkillDescriptor editSkillDescriptor;
     /**
-     * @param index                of the person in the filtered person list to edit
+     * @param index                of the skill in the filtered skill list to edit
      * @param editSkillDescriptor details to edit the skill with
      */
     public EditSkillCommand(Index index, EditSkillDescriptor editSkillDescriptor) {

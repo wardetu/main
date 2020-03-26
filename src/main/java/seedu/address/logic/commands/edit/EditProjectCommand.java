@@ -34,7 +34,7 @@ public class EditProjectCommand extends EditCommand {
     private EditProjectDescriptor editProjectDescriptor;
 
     /**
-     * @param index                of the person in the filtered person list to edit
+     * @param index                of the project in the filtered project list to edit
      * @param editProjectDescriptor details to edit the project with
      */
     public EditProjectCommand(Index index, EditProjectDescriptor editProjectDescriptor) {
