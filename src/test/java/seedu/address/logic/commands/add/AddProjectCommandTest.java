@@ -42,7 +42,7 @@ public class AddProjectCommandTest extends AddCommandTest {
         ModelStub modelStub = new ModelStubWithProject(validItem);
 
         assertThrows(CommandException.class,
-                AddProjectCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+                AddProjectCommand.MESSAGE_DUPLICATE_ITEM, () -> addCommand.execute(modelStub));
     }
 
     @Test

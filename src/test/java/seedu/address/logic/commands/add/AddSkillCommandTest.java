@@ -42,7 +42,7 @@ public class AddSkillCommandTest extends AddCommandTest {
         ModelStub modelStub = new ModelStubWithSkill(validItem);
 
         assertThrows(CommandException.class,
-                AddSkillCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+                AddSkillCommand.MESSAGE_DUPLICATE_ITEM, () -> addCommand.execute(modelStub));
     }
 
     @Test

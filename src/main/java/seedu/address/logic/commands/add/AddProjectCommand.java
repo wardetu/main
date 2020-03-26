@@ -51,7 +51,7 @@ public class AddProjectCommand extends AddCommand {
         requireNonNull(model);
 
         if (model.hasProject(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
         model.addProject(toAdd);

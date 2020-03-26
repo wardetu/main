@@ -42,7 +42,7 @@ public class AddResumeCommandTest extends AddCommandTest {
         ModelStub modelStub = new ModelStubWithResume(validItem);
 
         assertThrows(CommandException.class,
-                AddResumeCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+                AddResumeCommand.MESSAGE_DUPLICATE_ITEM, () -> addCommand.execute(modelStub));
     }
 
     @Test
