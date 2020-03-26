@@ -5,12 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEBSITE;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -44,7 +47,6 @@ public class CommandTestUtil {
 
     public static final String VALID_RESUME_NAME_SE = "Software Engineering Intern Resume";
     public static final String VALID_RESUME_NAME_ME = "Mechanical Engineering Intern Resume";
-    public static final String VALID_INTERNSHIP_NAME_GOOGLE = "Google";
     public static final String VALID_SKILL_NAME_GIT = "Git and Github";
 
     // PROJECT
@@ -59,6 +61,22 @@ public class CommandTestUtil {
     public static final String PREFIXED_DESCRIPTION = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION;
     public static final String VALID_TAG_JAVA = "Java";
     public static final String PREFIXED_TAG_JAVA = " " + PREFIX_TAG + " " + VALID_TAG_JAVA;
+
+    // INTERNSHIP
+    public static final String ITEM_TYPE_INTERNSHIP = " " + PREFIX_ITEM + " int";
+    public static final String VALID_INTERNSHIP_NAME_GOOGLE = "Google";
+    public static final String PREFIXED_NAME_GOOGLE = " " + PREFIX_NAME + " " + VALID_INTERNSHIP_NAME_GOOGLE;
+    public static final String VALID_INTERNSHIP_ROLE_FRONTEND = "Frontend Web Engineer";
+    public static final String PREFIXED_ROLE_FRONTEND = " " + PREFIX_ROLE + " " + VALID_INTERNSHIP_ROLE_FRONTEND;
+    public static final String VALID_FROM = "06-2020";
+    public static final String VALID_TO = "12-2020";
+    public static final String PREFIXED_TIME_FROM = " " + PREFIX_FROM + " " + VALID_FROM;
+    public static final String PREFIXED_TIME_TO = " " + PREFIX_TO + " " + VALID_TO;
+    public static final String VALID_INTERNSHIP_DESCRIPTION = "I did work, I made money";
+    public static final String PREFIXED_INTERNSHIP_DESCRIPTION = " " + PREFIX_DESCRIPTION + " "
+            + VALID_INTERNSHIP_DESCRIPTION;
+    public static final String VALID_TAG_FRONTEND = "Frontend";
+    public static final String PREFIXED_TAG_FRONTEND = " " + PREFIX_TAG + " " + VALID_TAG_FRONTEND;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
