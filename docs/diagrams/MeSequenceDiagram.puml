@@ -1,0 +1,83 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ResumeBookParser" as ResumeBookParser LOGIC_COLOR
+participant ":EditUserParser" as EditUserParser LOGIC_COLOR
+participant "d:EditUserCommand" as EditUserCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
+end box
+
+[-> LogicManager : execute("me n/Quoc Hung")
+activate LogicManager
+
+LogicManager -> ResumeBookParser : parseCommand("me n/Quoc Hung")
+activate ResumeBookParser
+
+create EditUserParser
+ResumeBookParser -> EditUserParser : new EditUserParser()
+activate EditUserParser
+
+EditUserParser --> ResumeBookParser
+deactivate EditUserParser
+
+ResumeBookParser -> EditUserParser : parse("me n/Quoc Hung")
+activate EditUserParser
+
+create EditUserCommand
+EditUserParser -> EditUserCommand : new EditUserCommand(editUserDescriptor)
+activate EditUserCommand
+
+EditUserCommand --> EditUserParser : d
+deactivate EditUserCommand
+
+EditUserParser --> ResumeBookParser : d
+deactivate EditUserParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditUserParser -[hidden]-> ResumeBookParser
+destroy EditUserParser
+
+ResumeBookParser --> LogicManager : d
+deactivate ResumeBookParser
+
+LogicManager -> EditUserCommand : execute()
+activate EditUserCommand
+
+EditUserCommand -> Model : getUser()
+activate Model
+
+create Person
+EditUserCommand -> Person : new Person("Quoc Hung")
+activate Person
+
+Person --> EditUserCommand : editedUser
+deactivate Person
+
+Model --> EditUserCommand : userToEdit
+deactivate Model
+
+EditUserCommand -> Model : setUser(editedUser)
+activate Model
+
+Model --> EditUserCommand
+deactivate Model
+
+create CommandResult
+EditUserCommand -> CommandResult : new CommandResult(dataToUser, feedbackToUser)
+activate CommandResult
+
+CommandResult --> EditUserCommand
+deactivate CommandResult
+
+EditUserCommand --> LogicManager : result
+deactivate EditUserCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
