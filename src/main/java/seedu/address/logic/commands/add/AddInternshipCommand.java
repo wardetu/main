@@ -53,7 +53,7 @@ public class AddInternshipCommand extends AddCommand {
         requireNonNull(model);
 
         if (model.hasInternship(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
         model.addInternship(toAdd);

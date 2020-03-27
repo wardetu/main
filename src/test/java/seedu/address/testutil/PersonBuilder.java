@@ -87,8 +87,6 @@ public class PersonBuilder {
         return this;
     }
 
-
-
     public Person build() {
         return new Person(displayPicture, name, phone, email, github, university, major, from, to, cap);
     }

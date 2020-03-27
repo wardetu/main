@@ -30,7 +30,7 @@ public class EditResumeCommand extends EditCommand {
     private static final String MESSAGE_EDIT_RESUME_SUCCESS = "Edited Resume: %1$s";
     private EditResumeDescriptor editResumeDescriptor;
     /**
-     * @param index                of the person in the filtered person list to edit
+     * @param index                of the resume in the filtered resume list to edit
      * @param editResumeDescriptor details to edit the resume with
      */
     public EditResumeCommand(Index index, EditResumeDescriptor editResumeDescriptor) {

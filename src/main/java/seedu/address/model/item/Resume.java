@@ -28,6 +28,7 @@ public class Resume extends Item {
     public Resume(Name name, int id, Set<Tag> tags) {
         super(name, id, tags);
         this.type = Type.generate("res");
+        // TODO: change Resume constructor to take in existing lists of internships, projects or skills
     }
 
     public void addInternship(int value) {

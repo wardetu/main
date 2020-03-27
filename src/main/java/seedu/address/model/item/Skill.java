@@ -33,6 +33,10 @@ public class Skill extends Item {
         return this.level;
     }
 
+    public void setLevel(String level) {
+        this.level = Level.valueOf(level);
+    }
+
     @Override
     public String getSummary() {
         final StringBuilder builder = new StringBuilder();
@@ -46,5 +50,13 @@ public class Skill extends Item {
         builder.append(super.toString()).append("\n")
                 .append(getSummary());
         return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Skill // instanceof handles nulls
+                && getName().equals(((Skill) other).getName())
+                && level.getLevelCode() == ((Skill) other).level.getLevelCode());
     }
 }

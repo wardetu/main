@@ -4,7 +4,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes an item identified using it's displayed index from the address book.
  */
 public abstract class DeleteCommand extends Command {
 
@@ -12,7 +12,7 @@ public abstract class DeleteCommand extends Command {
 
     // TODO: Double check if this command format is all right
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the item identified by the index number used in the displayed item list.\n"
             + "Parameters: INDEX (must be a positive integer) i/ (item type)\n"
             + "Example: " + COMMAND_WORD + " 1 i/ res";
 
