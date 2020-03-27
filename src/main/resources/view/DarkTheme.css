@@ -99,15 +99,15 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: rgba(111, 174, 143, 0.65);
+    -fx-background-color: rgba(43, 39, 20, 0.67);
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #94aea8;
+    -fx-background-color: rgba(22, 2, 25, 0.5);
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #0483ae;
+    -fx-background-color: rgba(20, 20, 25, 0.67);
 }
 
 .list-cell:filled:selected #cardPane {
@@ -309,11 +309,11 @@
 }
 
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 1 8 1 8;
+    -fx-padding: 1 4 1 4;
 }
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 1 8 1;
+    -fx-padding: 4 1 4 1;
 }
 
 #cardPane {

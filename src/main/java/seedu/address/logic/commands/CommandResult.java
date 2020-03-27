@@ -60,7 +60,7 @@ public class CommandResult {
     }
 
     public boolean hasItemChanged() {
-        return dataToUser == "";
+        return !dataToUser.equals("");
     }
 
     @Override
