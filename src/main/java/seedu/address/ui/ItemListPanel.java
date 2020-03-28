@@ -18,12 +18,12 @@ public class ItemListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ItemListPanel.class);
 
     @FXML
-    private ListView<Item> personListView;
-    
+    private ListView<Item> itemListView;
+
     public ItemListPanel(ObservableList<Item> itemList) {
         super(FXML);
-        personListView.setItems(itemList);
-        personListView.setCellFactory(listView -> new ItemListViewCell());
+        itemListView.setItems(itemList);
+        itemListView.setCellFactory(listView -> new ItemListViewCell());
     }
 
     /**
