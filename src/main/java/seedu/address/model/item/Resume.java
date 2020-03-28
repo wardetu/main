@@ -96,4 +96,12 @@ public class Resume extends Item {
                 .append(getSummary());
         return builder.toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Resume // instanceof handles nulls
+                && getName().equals(((Resume) other).getName())
+                && getTags().equals(((Resume) other).getTags()));
+    }
 }

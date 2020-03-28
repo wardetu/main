@@ -77,7 +77,7 @@ public abstract class Item {
 
         return otherItem != null
                 && otherItem.getName().equals(getName())
-                && otherItem.getType().equals(getType());
+                && otherItem.getType().getFullType().equals(getType().getFullType());
     }
 
     /**
