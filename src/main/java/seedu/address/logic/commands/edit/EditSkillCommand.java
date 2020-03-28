@@ -54,6 +54,8 @@ public class EditSkillCommand extends EditCommand {
         model.setSkill(toEdit, editedSkill);
         model.setSkillToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        model.commitResumeBook();
+
         return new CommandResult(editedSkill.toString(), String.format(MESSAGE_EDIT_SKILL_SUCCESS, editedSkill));
     }
 

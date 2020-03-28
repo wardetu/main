@@ -53,6 +53,7 @@ public class EditResumeCommand extends EditCommand {
         model.setResume(toEdit, editedResume);
         model.setResumeToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        model.commitResumeBook();
         return new CommandResult(editedResume.toString(), String.format(MESSAGE_EDIT_RESUME_SUCCESS, editedResume));
     }
 

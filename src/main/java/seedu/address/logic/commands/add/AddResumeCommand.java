@@ -46,6 +46,7 @@ public class AddResumeCommand extends AddCommand {
 
         model.addResume(toAdd);
         model.setResumeToDisplay();
+        model.commitResumeBook();
 
         return new CommandResult(toAdd.toString(),
                 String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()));

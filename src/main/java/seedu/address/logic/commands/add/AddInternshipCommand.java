@@ -58,6 +58,7 @@ public class AddInternshipCommand extends AddCommand {
 
         model.addInternship(toAdd);
         model.setInternshipToDisplay();
+        model.commitResumeBook();
 
         return new CommandResult(toAdd.toString(),
                 String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()));

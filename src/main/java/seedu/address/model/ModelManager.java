@@ -25,7 +25,7 @@ import seedu.address.model.item.Skill;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final ResumeBook resumeBook;
+    private final VersionedResumeBook versionedResumeBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Item> filteredItems;
 
@@ -38,9 +38,9 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with resume book: " + resumeBook + " and user prefs " + userPrefs);
 
-        this.resumeBook = new ResumeBook(resumeBook);
+        this.versionedResumeBook = new VersionedResumeBook(resumeBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredItems = new FilteredList<>(this.resumeBook.getItemToDisplayList());
+        filteredItems = new FilteredList<>(this.versionedResumeBook.getItemToDisplayList());
     }
 
     public ModelManager() {
@@ -86,24 +86,24 @@ public class ModelManager implements Model {
 
     @Override
     public void setResumeBook(ReadOnlyResumeBook resumeBook) {
-        this.resumeBook.resetData(resumeBook);
+        this.versionedResumeBook.resetData(resumeBook);
     }
 
     @Override
     public ReadOnlyResumeBook getResumeBook() {
-        return resumeBook;
+        return versionedResumeBook;
     }
 
     //=========== User ================================================================================
 
     @Override
     public void setUser(Person person) {
-        resumeBook.setUser(person);
+        versionedResumeBook.setUser(person);
     }
 
     @Override
     public Person getUser() {
-        return resumeBook.getUser();
+        return versionedResumeBook.getUser();
     }
 
     //=========== Internships ================================================================================
@@ -111,39 +111,39 @@ public class ModelManager implements Model {
     @Override
     public boolean hasInternship(Internship internship) {
         requireNonNull(internship);
-        return resumeBook.hasInternship(internship);
+        return versionedResumeBook.hasInternship(internship);
     }
 
     @Override
     public void addInternship(Internship internship) {
-        resumeBook.addInternship(internship);
+        versionedResumeBook.addInternship(internship);
         updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
     }
 
     @Override
     public void setInternship(Internship target, Internship editedInternship) {
         requireAllNonNull(target, editedInternship);
-        resumeBook.setInternship(target, editedInternship);
+        versionedResumeBook.setInternship(target, editedInternship);
     }
 
     @Override
     public void deleteInternship(Internship key) {
-        resumeBook.deleteInternship(key);
+        versionedResumeBook.deleteInternship(key);
     }
 
 
     @Override
     public Internship getInternship(Index index) {
-        return resumeBook.getInternship(index);
+        return versionedResumeBook.getInternship(index);
     }
 
     public int getInternshipSize() {
-        return resumeBook.getInternshipSize();
+        return versionedResumeBook.getInternshipSize();
     }
 
     @Override
     public void setInternshipToDisplay() {
-        resumeBook.setInternshipToDisplay();
+        versionedResumeBook.setInternshipToDisplay();
     }
 
     //=========== Projects ================================================================================
@@ -151,39 +151,39 @@ public class ModelManager implements Model {
     @Override
     public boolean hasProject(Project project) {
         requireNonNull(project);
-        return resumeBook.hasProject(project);
+        return versionedResumeBook.hasProject(project);
     }
 
     @Override
     public void addProject(Project project) {
-        resumeBook.addProject(project);
+        versionedResumeBook.addProject(project);
         updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
     }
 
     @Override
     public void setProject(Project target, Project editedProject) {
         requireAllNonNull(target, editedProject);
-        resumeBook.setProject(target, editedProject);
+        versionedResumeBook.setProject(target, editedProject);
     }
 
     @Override
     public void deleteProject(Project key) {
-        resumeBook.deleteProject(key);
+        versionedResumeBook.deleteProject(key);
     }
 
     @Override
     public Project getProject(Index index) {
-        return resumeBook.getProject(index);
+        return versionedResumeBook.getProject(index);
     }
 
     @Override
     public int getProjectSize() {
-        return resumeBook.getProjectSize();
+        return versionedResumeBook.getProjectSize();
     }
 
     @Override
     public void setProjectToDisplay() {
-        resumeBook.setProjectToDisplay();
+        versionedResumeBook.setProjectToDisplay();
     }
 
     //=========== Skill ================================================================================
@@ -191,39 +191,39 @@ public class ModelManager implements Model {
     @Override
     public boolean hasSkill(Skill skill) {
         requireNonNull(skill);
-        return resumeBook.hasSkill(skill);
+        return versionedResumeBook.hasSkill(skill);
     }
 
     @Override
     public void addSkill(Skill skill) {
-        resumeBook.addSkill(skill);
+        versionedResumeBook.addSkill(skill);
         updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
     }
 
     @Override
     public void setSkill(Skill target, Skill editedSkill) {
         requireAllNonNull(target, editedSkill);
-        resumeBook.setSkill(target, editedSkill);
+        versionedResumeBook.setSkill(target, editedSkill);
     }
 
     @Override
     public void deleteSkill(Skill key) {
-        resumeBook.deleteSkill(key);
+        versionedResumeBook.deleteSkill(key);
     }
 
     @Override
     public Skill getSkill(Index index) {
-        return resumeBook.getSkill(index);
+        return versionedResumeBook.getSkill(index);
     }
 
     @Override
     public int getSkillSize() {
-        return resumeBook.getSkillSize();
+        return versionedResumeBook.getSkillSize();
     }
 
     @Override
     public void setSkillToDisplay() {
-        resumeBook.setSkillToDisplay();
+        versionedResumeBook.setSkillToDisplay();
     }
 
     //=========== Resume ================================================================================
@@ -231,12 +231,12 @@ public class ModelManager implements Model {
     @Override
     public boolean hasResume(Resume resume) {
         requireNonNull(resume);
-        return resumeBook.hasResume(resume);
+        return versionedResumeBook.hasResume(resume);
     }
 
     @Override
     public void addResume(Resume resume) {
-        resumeBook.addResume(resume);
+        versionedResumeBook.addResume(resume);
         updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
     }
 
@@ -244,44 +244,44 @@ public class ModelManager implements Model {
     public void setResume(Resume target, Resume editedResume) {
         requireAllNonNull(target, editedResume);
 
-        resumeBook.setResume(target, editedResume);
+        versionedResumeBook.setResume(target, editedResume);
     }
 
     @Override
     public Resume getResumeByIndex(int index) {
-        return resumeBook.getResumeByIndex(index);
+        return versionedResumeBook.getResumeByIndex(index);
     }
 
     @Override
     public boolean hasResumeId(int resumeIndex) {
-        return resumeBook.hasResumeId(resumeIndex);
+        return versionedResumeBook.hasResumeId(resumeIndex);
     }
 
     @Override
     public void deleteResume(Resume target) {
-        resumeBook.deleteResume(target);
+        versionedResumeBook.deleteResume(target);
     }
 
     @Override
     public Resume getResume(Index index) {
-        return resumeBook.getResume(index);
+        return versionedResumeBook.getResume(index);
     }
 
     @Override
     public int getResumeSize() {
-        return resumeBook.getResumeSize();
+        return versionedResumeBook.getResumeSize();
     }
 
     @Override
     public void setResumeToDisplay() {
-        resumeBook.setResumeToDisplay();
+        versionedResumeBook.setResumeToDisplay();
     }
 
     //=========== Filtered Item List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Item} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedResumeBook}
      */
     @Override
     public ObservableList<Item> getFilteredItemList() {
@@ -308,10 +308,38 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return resumeBook.equals(other.resumeBook)
+        return versionedResumeBook.equals(other.versionedResumeBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredItems.equals(other.filteredItems);
     }
+
+    //=========== Undo/Redo =================================================================================
+
+    @Override
+    public boolean canUndoResumeBook() {
+        return versionedResumeBook.canUndo();
+    }
+
+    @Override
+    public boolean canRedoResumeBook() {
+        return versionedResumeBook.canRedo();
+    }
+
+    @Override
+    public void undoResumeBook() {
+        versionedResumeBook.undo();
+    }
+
+    @Override
+    public void redoResumeBook() {
+        versionedResumeBook.redo();
+    }
+
+    @Override
+    public void commitResumeBook() {
+        versionedResumeBook.commit();
+    }
+
 
     //// STUBS
     public boolean hasItem(Item item) {
@@ -328,17 +356,17 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasInternshipId(int i) {
-        return resumeBook.hasInternshipId(i);
+        return versionedResumeBook.hasInternshipId(i);
     }
 
     @Override
     public boolean hasProjectId(int i) {
-        return resumeBook.hasProjectId(i);
+        return versionedResumeBook.hasProjectId(i);
     }
 
     @Override
     public boolean hasSkillId(int i) {
-        return resumeBook.hasSkillId(i);
+        return versionedResumeBook.hasSkillId(i);
     }
 
 }

@@ -11,6 +11,8 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditUserCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.delete.DeleteCommand;
 import seedu.address.logic.commands.edit.EditCommand;
@@ -46,6 +48,7 @@ public class ResumeBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
+        //--------------Item manipulation commands-------------
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
@@ -55,14 +58,26 @@ public class ResumeBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
+
+        //-----------------Undo/Redo----------------------------
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        //-----------------Other commands-----------------------
+        case EditUserCommand.COMMAND_WORD: //"me"
+            return new EditUserParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -70,11 +85,8 @@ public class ResumeBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case EditUserCommand.COMMAND_WORD: //"me"
-            return new EditUserParser().parse(arguments);
-
-        case ViewCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

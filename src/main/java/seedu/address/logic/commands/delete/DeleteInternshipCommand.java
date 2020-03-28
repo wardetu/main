@@ -30,6 +30,7 @@ public class DeleteInternshipCommand extends DeleteCommand {
 
         model.deleteInternship(toDelete);
         model.setInternshipToDisplay();
+        model.commitResumeBook();
 
         return new CommandResult(toDelete.toString(),
                 String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()));

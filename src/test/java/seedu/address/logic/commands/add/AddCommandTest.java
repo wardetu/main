@@ -233,6 +233,31 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean canUndoResumeBook() {
+            return false;
+        }
+
+        @Override
+        public boolean canRedoResumeBook() {
+            return false;
+        }
+
+        @Override
+        public void undoResumeBook() {
+
+        }
+
+        @Override
+        public void redoResumeBook() {
+
+        }
+
+        @Override
+        public void commitResumeBook() {
+
+        }
+
+        @Override
         public boolean hasItem(Item item) {
             return false;
         }
