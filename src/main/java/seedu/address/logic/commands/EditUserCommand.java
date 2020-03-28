@@ -77,6 +77,7 @@ public class EditUserCommand extends Command {
 
         Person editedUser = new Person(name, phone, email, github, university, major, from, to, cap);
         model.setUser(editedUser);
+        model.commitResumeBook();
 
         return new CommandResult(editedUser.toString(), String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedUser));
     }

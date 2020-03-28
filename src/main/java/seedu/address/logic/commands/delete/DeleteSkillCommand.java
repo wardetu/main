@@ -30,6 +30,7 @@ public class DeleteSkillCommand extends DeleteCommand {
 
         model.deleteSkill(toDelete);
         model.setSkillToDisplay();
+        model.commitResumeBook();
 
         return new CommandResult(toDelete.toString(),
                 String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()));

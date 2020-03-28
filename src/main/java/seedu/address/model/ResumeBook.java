@@ -25,6 +25,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     // Should be all caps but check style complain
     private Person user;
+    private String displayType = "";
     private final UniqueItemList itemsToDisplay;
     private final UniqueItemList internships;
     private final UniqueItemList projects;
@@ -69,13 +70,40 @@ public class ResumeBook implements ReadOnlyResumeBook {
         this.itemsToDisplay.setItems(itemsToDisplay);
     }
 
-    // STUB
-    public void setItemsToDisplay(String type) {}
+    /**
+     * Sets the currently displayed list based on the given keyword.
+     */
+    public void setItemsToDisplay(String type) {
+        switch (type) {
+        case "int":
+            setInternshipToDisplay();
+            break;
+        case "proj":
+            setProjectToDisplay();
+            break;
+        case "ski":
+            setSkillToDisplay();
+            break;
+        case "res":
+            setResumeToDisplay();
+            break;
+        default:
+            break;
+        }
+    }
+
+    /**
+     * Returns the item type of the currently displayed list.
+     */
+    public String getDisplayType() {
+        return displayType;
+    }
 
     /**
      * Replaces the contents of the item list to the content of the internship list.
      */
     public void setInternshipToDisplay() {
+        displayType = "int";
         setItemsToDisplay(internships);
     }
 
@@ -83,6 +111,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the item list to the content of the project list.
      */
     public void setProjectToDisplay() {
+        displayType = "proj";
         setItemsToDisplay(projects);
     }
 
@@ -90,6 +119,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the item list to the content of the skill list.
      */
     public void setSkillToDisplay() {
+        displayType = "ski";
         setItemsToDisplay(skills);
     }
 
@@ -97,14 +127,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the item list to the content of the resume list.
      */
     public void setResumeToDisplay() {
+        displayType = "res";
         setItemsToDisplay(resumes);
-    }
-
-    /**
-     * Replace the contents of user profile panel with the content of updated user profile.
-     */
-    public void setUserToDisplay() {
-
     }
 
     //=========== Overwrite data ================================================================================
@@ -157,7 +181,9 @@ public class ResumeBook implements ReadOnlyResumeBook {
         setProjects(newData.getProjectList());
         setSkills(newData.getSkillList());
         setResumes(newData.getResumeList());
+        setItemsToDisplay(((ResumeBook) newData).getDisplayType());
     }
+
 
     //=========== Internships ================================================================================
 

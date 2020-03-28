@@ -56,6 +56,7 @@ public class AddProjectCommand extends AddCommand {
 
         model.addProject(toAdd);
         model.setProjectToDisplay();
+        model.commitResumeBook();
 
         return new CommandResult(toAdd.toString(),
                 String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()));

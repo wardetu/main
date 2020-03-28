@@ -49,6 +49,7 @@ public class AddSkillCommand extends AddCommand {
 
         model.addSkill(toAdd);
         model.setSkillToDisplay();
+        model.commitResumeBook();
 
         return new CommandResult(toAdd.toString(),
                 String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()));

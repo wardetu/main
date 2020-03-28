@@ -257,6 +257,32 @@ public interface Model {
      */
     void updateFilteredItemList(Predicate<Item> predicate);
 
+    //================================ Undo/Redo =============================================================
+    /**
+     * Returns true if the model has previous resume book states to restore.
+     */
+    boolean canUndoResumeBook();
+
+    /**
+     * Returns true if the model has undone resume book states to restore.
+     */
+    boolean canRedoResumeBook();
+
+    /**
+     * Restores the model's resume book to its previous state.
+     */
+    void undoResumeBook();
+
+    /**
+     * Restores the model's resume book to its previously undone state.
+     */
+    void redoResumeBook();
+
+    /**
+     * Saves the current resume book state for undo/redo.
+     */
+    void commitResumeBook();
+
     //// STUBS
     boolean hasItem(Item item);
 
