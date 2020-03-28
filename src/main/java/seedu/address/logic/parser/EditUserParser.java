@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CAP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
@@ -12,11 +13,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
 
+import java.io.File;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditUserCommand;
 import seedu.address.logic.commands.EditUserDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
@@ -37,7 +40,7 @@ public class EditUserParser implements Parser<EditUserCommand> {
     public EditUserCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argumentMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GITHUB,
+                ArgumentTokenizer.tokenize(args, PREFIX_DP, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GITHUB,
                         PREFIX_UNIVERSITY, PREFIX_MAJOR, PREFIX_FROM, PREFIX_TO, PREFIX_CAP, PREFIX_TAG);
 
         if (!argumentMultimap.getPreamble().isEmpty()) {
@@ -45,6 +48,16 @@ public class EditUserParser implements Parser<EditUserCommand> {
         }
 
         EditUserDescriptor editUserDescriptor = new EditUserDescriptor();
+
+        if (argumentMultimap.getValue(PREFIX_DP).isPresent()) {
+            String dpPath = argumentMultimap.getValue(PREFIX_DP).get();
+            DisplayPicture displayProfile = new DisplayPicture(dpPath);
+            if (isValidDisplayPicturePath(dpPath)) {
+                editUserDescriptor.setDisplayPicture(displayProfile);
+            } else {
+                editUserDescriptor.setDisplayPicture(null);
+            }
+        }
 
         if (argumentMultimap.getValue(PREFIX_NAME).isPresent()) {
             editUserDescriptor.setName(new Name(argumentMultimap.getValue(PREFIX_NAME).get()));
@@ -74,6 +87,11 @@ public class EditUserParser implements Parser<EditUserCommand> {
             editUserDescriptor.setCap(Double.valueOf(argumentMultimap.getValue(PREFIX_CAP).get()));
         }
         return new EditUserCommand(editUserDescriptor);
+    }
+
+    private static boolean isValidDisplayPicturePath(String dpPath) {
+        File file = new File(dpPath);
+        return file.exists();
     }
 
     /**

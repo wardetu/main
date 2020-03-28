@@ -39,6 +39,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_SKILL = new Prefix("ski/");
 
     /* User */
+    public static final Prefix PREFIX_DP = new Prefix("dp/");
     public static final Prefix PREFIX_GITHUB = new Prefix("g/");
     public static final Prefix PREFIX_UNIVERSITY = new Prefix("u/");
     public static final Prefix PREFIX_MAJOR = new Prefix("m/");

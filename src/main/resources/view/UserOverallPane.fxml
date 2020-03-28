@@ -4,15 +4,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-   VBox.vgrow="ALWAYS">
+<VBox prefHeight="400.0" prefWidth="400.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/11.0.1"
+      xmlns:fx="http://javafx.com/fxml/1" styleClass="pane-with-border">
    <children>
-      <HBox fx:id="profilePlaceholder" styleClass="pane-with-border" prefWidth="600.0">
+      <HBox fx:id="userProfilePlaceholder" maxWidth="400.0" styleClass="pane-with-border">
          <padding>
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
          </padding>
       </HBox>
-      <VBox fx:id="personDetailsPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+      <VBox fx:id="userDetailPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
          <padding>
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
          </padding>

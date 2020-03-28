@@ -16,8 +16,8 @@ import seedu.address.ui.UiPart;
 /**
  * Table to display all personal details
  */
-public class PersonDetailPane extends UiPart<Region> {
-    private static final String FXML = "PersonDetailsPane.fxml";
+public class UserDetailPane extends UiPart<Region> {
+    private static final String FXML = "UserDetailPane.fxml";
     private static final List<String> LABELS = new ArrayList<String>(List.of("Name:", "Phone:", "Email:", "Github:",
             "University:", "Major:", "From:", "To:", "CAP:"));
 
@@ -44,8 +44,8 @@ public class PersonDetailPane extends UiPart<Region> {
      * @param to
      * @param cap
      */
-    public PersonDetailPane(String name, String phone, String email, String github, String university, String major,
-                            String time, String to, String cap) {
+    public UserDetailPane(String dp, String name, String phone, String email, String github, String university,
+                          String major, String time, String to, String cap) {
         super(FXML);
         field.setCellValueFactory(new PropertyValueFactory<String, String>("field"));
         data.setCellValueFactory(new PropertyValueFactory<String, String>("data"));

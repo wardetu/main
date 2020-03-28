@@ -14,7 +14,7 @@ import seedu.address.model.item.Item;
  */
 public class ItemCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "ItemCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -27,7 +27,7 @@ public class ItemCard extends UiPart<Region> {
     public final Item person;
 
     @FXML
-    private HBox cardPane;
+    private HBox itemPane;
     @FXML
     private Label name;
     @FXML

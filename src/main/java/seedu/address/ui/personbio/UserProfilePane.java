@@ -10,8 +10,8 @@ import seedu.address.ui.UiPart;
 /**
  * Ui for user profile with user picture, name and description.
  */
-public class Profile extends UiPart<Region> {
-    private static final String FXML = "Profile.fxml";
+public class UserProfilePane extends UiPart<Region> {
+    private static final String FXML = "UserProfilePane.fxml";
 
     @FXML
     private ImageView profilePicture;
@@ -22,7 +22,7 @@ public class Profile extends UiPart<Region> {
     @FXML
     private Label description;
 
-    public Profile(Image profilePic, String name, String description) {
+    public UserProfilePane(Image profilePic, String name, String description) {
         super(FXML);
         this.profilePicture.setImage(profilePic);
         this.name.setText(name);

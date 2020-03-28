@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CAP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
@@ -14,6 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Person;
+import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
@@ -29,6 +31,7 @@ public class EditUserCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the user profile in our resuMeme. "
             + "Parameters: "
+            + PREFIX_DP + "DISPLAY PROFILE "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
@@ -37,8 +40,9 @@ public class EditUserCommand extends Command {
             + PREFIX_MAJOR + "MAJOR "
             + PREFIX_FROM + "FROM "
             + PREFIX_TO + "TO "
-            + PREFIX_CAP + "CAP "
+            + PREFIX_CAP + "CAP\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_DP + "/Users/nhamquochung/Desktop/test.png "
             + PREFIX_NAME + "HUNG "
             + PREFIX_PHONE + "91648888 "
             + PREFIX_EMAIL + "nhamhung.gttn@gmail.com "
@@ -55,7 +59,7 @@ public class EditUserCommand extends Command {
     private EditUserDescriptor editUserDescriptor;
 
     /**
-     * @param editUserDescriptor details to edit the person with
+     * @param editUserDescriptor details to edit the person with.
      */
     public EditUserCommand(EditUserDescriptor editUserDescriptor) {
         this.editUserDescriptor = editUserDescriptor;
@@ -65,6 +69,7 @@ public class EditUserCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person userToEdit = model.getUser();
+        DisplayPicture displayPicture = editUserDescriptor.getDisplayPicture().orElse(userToEdit.getDisplayPicture());
         Name name = editUserDescriptor.getName().orElse(userToEdit.getName());
         Phone phone = editUserDescriptor.getPhone().orElse(userToEdit.getPhone());
         Email email = editUserDescriptor.getEmail().orElse(userToEdit.getEmail());
@@ -75,9 +80,10 @@ public class EditUserCommand extends Command {
         Time to = editUserDescriptor.getTo().orElse(userToEdit.getTo());
         double cap = editUserDescriptor.getCap().orElse(userToEdit.getCap());
 
-        Person editedUser = new Person(name, phone, email, github, university, major, from, to, cap);
+        Person editedUser = new Person(displayPicture, name, phone, email, github, university, major, from, to, cap);
         model.setUser(editedUser);
 
-        return new CommandResult(editedUser.toString(), String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedUser));
+        return new CommandResult(true, editedUser.toString(), String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedUser),
+                false, false);
     }
 }

@@ -13,7 +13,7 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult("Exiting", MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
+        return new CommandResult(false, "Exiting", MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
     }
 
 }
