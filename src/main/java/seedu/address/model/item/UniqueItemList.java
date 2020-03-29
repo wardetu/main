@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -38,6 +39,17 @@ public class UniqueItemList<T extends Item> implements Iterable<T> {
     }
 
     /**
+     * Refreshes the index of all items according to the position in the list.
+     */
+    public void refreshIndex() {
+        AtomicInteger count = new AtomicInteger(0);
+        internalList.forEach(x -> {
+            x.setIndex(count.get());
+            count.getAndIncrement();
+        });
+    }
+
+    /**
      * Adds an item to the list.
      * The item must not already exist in the list.
      */
@@ -47,6 +59,7 @@ public class UniqueItemList<T extends Item> implements Iterable<T> {
             throw new DuplicateItemException();
         }
         internalList.add(toAdd);
+        refreshIndex();
     }
 
     /**
@@ -67,6 +80,7 @@ public class UniqueItemList<T extends Item> implements Iterable<T> {
         }
 
         internalList.set(index, editedItem);
+        refreshIndex();
     }
 
     /**
@@ -86,11 +100,13 @@ public class UniqueItemList<T extends Item> implements Iterable<T> {
         if (!internalList.remove(toRemove)) {
             throw new ItemNotFoundException();
         }
+        refreshIndex();
     }
 
     public void setItems(UniqueItemList<T> replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        refreshIndex();
     }
 
     /**
@@ -102,8 +118,8 @@ public class UniqueItemList<T extends Item> implements Iterable<T> {
         if (!itemsAreUnique(items)) {
             throw new DuplicateItemException();
         }
-
         internalList.setAll(items);
+        refreshIndex();
     }
 
     /**

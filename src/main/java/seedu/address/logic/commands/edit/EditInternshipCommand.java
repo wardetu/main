@@ -64,6 +64,7 @@ public class EditInternshipCommand extends EditCommand {
         model.setInternship(toEdit, editedInternship);
         model.setInternshipToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        model.commitResumeBook();
         return new CommandResult(editedInternship.toString(),
                 String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship));
     }

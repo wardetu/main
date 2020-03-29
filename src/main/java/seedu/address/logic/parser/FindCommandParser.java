@@ -13,6 +13,7 @@ import seedu.address.logic.commands.find.FindSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -42,13 +43,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
         switch (itemType) {
-        case "res":
+        case ItemUtil.RESUME_ALIAS:
             return new FindResumeCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        case "int":
+        case ItemUtil.INTERNSHIP_ALIAS:
             return new FindInternshipCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        case "proj":
+        case ItemUtil.PROJECT_ALIAS:
             return new FindProjectCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        case "ski":
+        case ItemUtil.SKILL_ALIAS:
             return new FindSkillCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
 
         default:

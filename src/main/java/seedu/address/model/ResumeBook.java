@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
@@ -17,8 +19,7 @@ import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
-
-import java.util.List;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * Wraps all data at the resume-book level
@@ -33,6 +34,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     private final UniqueItemList<Project> projects;
     private final UniqueItemList<Skill> skills;
     private final UniqueItemList<Resume> resumes;
+    private String displayType = "";
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -73,9 +75,39 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     /**
+     * Sets the currently displayed list based on the given keyword.
+     */
+    public void setItemsToDisplay(String type) {
+        switch (type) {
+        case ItemUtil.INTERNSHIP_ALIAS:
+            setInternshipToDisplay();
+            break;
+        case ItemUtil.PROJECT_ALIAS:
+            setProjectToDisplay();
+            break;
+        case ItemUtil.SKILL_ALIAS:
+            setSkillToDisplay();
+            break;
+        case ItemUtil.RESUME_ALIAS:
+            setResumeToDisplay();
+            break;
+        default:
+            break;
+        }
+    }
+
+    /**
+     * Returns the item type of the currently displayed list.
+     */
+    public String getDisplayType() {
+        return displayType;
+    }
+
+    /**
      * Replaces the contents of the item list to the content of the internship list.
      */
     public void setInternshipToDisplay() {
+        displayType = ItemUtil.INTERNSHIP_ALIAS;
         setItemsToDisplay(internships.getItemList());
     }
 
@@ -83,6 +115,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the item list to the content of the project list.
      */
     public void setProjectToDisplay() {
+        displayType = ItemUtil.PROJECT_ALIAS;
         setItemsToDisplay(projects.getItemList());
     }
 
@@ -90,6 +123,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the item list to the content of the skill list.
      */
     public void setSkillToDisplay() {
+        displayType = ItemUtil.SKILL_ALIAS;
         setItemsToDisplay(skills.getItemList());
     }
 
@@ -97,6 +131,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the item list to the content of the resume list.
      */
     public void setResumeToDisplay() {
+        displayType = ItemUtil.RESUME_ALIAS;
         setItemsToDisplay(resumes.getItemList());
     }
 
@@ -150,6 +185,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
         setProjects(newData.getProjectList());
         setSkills(newData.getSkillList());
         setResumes(newData.getResumeList());
+        setItemsToDisplay(((ResumeBook) newData).getDisplayType());
     }
 
     //=========== Internships ================================================================================
@@ -465,5 +501,4 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public boolean hasItem(Item item) {
         return false;
     }
-
 }

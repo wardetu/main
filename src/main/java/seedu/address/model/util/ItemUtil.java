@@ -7,6 +7,12 @@ import java.util.TreeMap;
  */
 public class ItemUtil {
 
+    public static final String INTERNSHIP_ALIAS = "int";
+    public static final String PROJECT_ALIAS = "proj";
+    public static final String RESUME_ALIAS = "res";
+    public static final String SKILL_ALIAS = "ski";
+
+
     private static TreeMap<String, Integer> idGenerator = new TreeMap<>();
 
     /**

@@ -19,13 +19,13 @@ public class Skill extends Item {
     private Level level;
 
     public Skill(Name name, Level level, Set<Tag> tags) {
-        this(name, level, tags, ItemUtil.yieldId("ski"));
+        this(name, level, tags, ItemUtil.yieldId(ItemUtil.SKILL_ALIAS));
     }
 
     public Skill(Name name, Level level, Set<Tag> tags, int id) {
         super(name, id, tags);
         requireNonNull(level);
-        this.type = Type.generate("ski");
+        this.type = Type.generate(ItemUtil.SKILL_ALIAS);
         this.level = level;
     }
 

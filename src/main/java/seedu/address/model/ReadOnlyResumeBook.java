@@ -24,7 +24,7 @@ public interface ReadOnlyResumeBook {
     Person getUser();
 
     /**
-     * Returns an unmodifiable view of the current items list.
+     * Returns an unmodifiable view of the current items list as an {@code ObservableList}
      * This list will not contain any duplicate items.
      */
     ObservableList<Item> getItemToDisplayList();

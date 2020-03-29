@@ -31,6 +31,7 @@ import seedu.address.logic.commands.edit.EditSkillDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -64,7 +65,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
         switch (itemType) {
-        case "res":
+        case ItemUtil.RESUME_ALIAS:
             EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptor();
             // TODO: Not sure if I should create a method inside the respective descriptors for this checking.
             // Considerations: If I add a method inside the descriptor, then potentially need dependencies
@@ -78,7 +79,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
 
             return new EditResumeCommand(index, editResumeDescriptor);
-        case "int":
+        case ItemUtil.INTERNSHIP_ALIAS:
             EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editInternshipDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
@@ -102,7 +103,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
 
             return new EditInternshipCommand(index, editInternshipDescriptor);
-        case "proj":
+        case ItemUtil.PROJECT_ALIAS:
             EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editProjectDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
@@ -123,7 +124,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
 
             return new EditProjectCommand(index, editProjectDescriptor);
-        case "ski":
+        case ItemUtil.SKILL_ALIAS:
             EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptor();
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editSkillDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));

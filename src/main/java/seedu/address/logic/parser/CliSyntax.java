@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import seedu.address.model.util.ItemUtil;
+
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
@@ -33,10 +35,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_LEVEL = new Prefix("l/");
 
     /* Prefixes for different item types */
-    public static final Prefix PREFIX_INTERNSHIP = new Prefix("int/");
-    public static final Prefix PREFIX_PROJECT = new Prefix("proj/");
-    public static final Prefix PREFIX_RESUME = new Prefix("res/");
-    public static final Prefix PREFIX_SKILL = new Prefix("ski/");
+    public static final Prefix PREFIX_INTERNSHIP = new Prefix(ItemUtil.INTERNSHIP_ALIAS + "/");
+    public static final Prefix PREFIX_PROJECT = new Prefix(ItemUtil.PROJECT_ALIAS + "/");
+    public static final Prefix PREFIX_RESUME = new Prefix(ItemUtil.RESUME_ALIAS + "/");
+    public static final Prefix PREFIX_SKILL = new Prefix(ItemUtil.SKILL_ALIAS + "/");
 
     /* User */
     public static final Prefix PREFIX_DP = new Prefix("dp/");
