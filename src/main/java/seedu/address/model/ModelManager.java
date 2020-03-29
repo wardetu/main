@@ -137,6 +137,11 @@ public class ModelManager implements Model {
         return versionedResumeBook.getInternship(index);
     }
 
+    @Override
+    public Internship getInternship(int id) {
+        return versionedResumeBook.getInternship(id);
+    }
+
     public int getInternshipSize() {
         return versionedResumeBook.getInternshipSize();
     }
@@ -177,6 +182,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Project getProject(int id) {
+        return versionedResumeBook.getProject(id);
+    }
+
+    @Override
     public int getProjectSize() {
         return versionedResumeBook.getProjectSize();
     }
@@ -214,6 +224,11 @@ public class ModelManager implements Model {
     @Override
     public Skill getSkill(Index index) {
         return versionedResumeBook.getSkill(index);
+    }
+
+    @Override
+    public Skill getSkill(int id) {
+        return versionedResumeBook.getSkill(id);
     }
 
     @Override

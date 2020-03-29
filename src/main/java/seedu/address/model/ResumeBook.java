@@ -234,6 +234,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
+    public Internship getInternship(int id) {
+        return null;
+    }
+
+    @Override
     public int getInternshipSize() {
         return internships.getSize();
     }
@@ -285,6 +290,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
+    public Project getProject(int id) {
+        return null;
+    }
+
+    @Override
     public int getProjectSize() {
         return projects.getSize();
     }
@@ -333,6 +343,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
     @Override
     public Skill getSkill(Index index) {
         return (Skill) skills.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public Skill getSkill(int id) {
+        return null;
     }
 
     @Override

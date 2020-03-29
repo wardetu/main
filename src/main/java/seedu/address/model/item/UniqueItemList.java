@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javafx.collections.FXCollections;
@@ -59,6 +60,19 @@ public class UniqueItemList implements Iterable<Item> {
         }
         internalList.add(toAdd);
         refreshIndex();
+    }
+
+    /**
+     * Gets an item by ID
+     */
+    public Optional<Item> get(int id ) {
+        Optional<Item> item = Optional.empty();
+        for (Item i: internalList) {
+            if (i.getId() == id) {
+                item = Optional.of(i);
+            }
+        }
+        return item;
     }
 
     /**
