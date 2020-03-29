@@ -25,6 +25,7 @@ public abstract class Item {
     // Identity fields
     protected Type type;
     protected final int id;
+    // Index refers to the position of the item in an item list. id is unique identifier for the item
     protected int index;
     protected final Name name;
 
