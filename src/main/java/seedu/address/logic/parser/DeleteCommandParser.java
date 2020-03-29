@@ -11,6 +11,7 @@ import seedu.address.logic.commands.delete.DeleteResumeCommand;
 import seedu.address.logic.commands.delete.DeleteSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -36,13 +37,13 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
             switch (itemType) {
-            case "res":
+            case ItemUtil.RESUME_ALIAS:
                 return new DeleteResumeCommand(index);
-            case "int":
+            case ItemUtil.INTERNSHIP_ALIAS:
                 return new DeleteInternshipCommand(index);
-            case "proj":
+            case ItemUtil.PROJECT_ALIAS:
                 return new DeleteProjectCommand(index);
-            case "ski":
+            case ItemUtil.SKILL_ALIAS:
                 return new DeleteSkillCommand(index);
 
             default:

@@ -16,6 +16,7 @@ import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * Wraps all data at the resume-book level
@@ -75,16 +76,16 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     public void setItemsToDisplay(String type) {
         switch (type) {
-        case "int":
+        case ItemUtil.INTERNSHIP_ALIAS:
             setInternshipToDisplay();
             break;
-        case "proj":
+        case ItemUtil.PROJECT_ALIAS:
             setProjectToDisplay();
             break;
-        case "ski":
+        case ItemUtil.SKILL_ALIAS:
             setSkillToDisplay();
             break;
-        case "res":
+        case ItemUtil.RESUME_ALIAS:
             setResumeToDisplay();
             break;
         default:
@@ -103,7 +104,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the item list to the content of the internship list.
      */
     public void setInternshipToDisplay() {
-        displayType = "int";
+        displayType = ItemUtil.INTERNSHIP_ALIAS;
         setItemsToDisplay(internships);
     }
 
@@ -111,7 +112,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the item list to the content of the project list.
      */
     public void setProjectToDisplay() {
-        displayType = "proj";
+        displayType = ItemUtil.PROJECT_ALIAS;
         setItemsToDisplay(projects);
     }
 
@@ -119,7 +120,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the item list to the content of the skill list.
      */
     public void setSkillToDisplay() {
-        displayType = "ski";
+        displayType = ItemUtil.SKILL_ALIAS;
         setItemsToDisplay(skills);
     }
 
@@ -127,7 +128,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the item list to the content of the resume list.
      */
     public void setResumeToDisplay() {
-        displayType = "res";
+        displayType = ItemUtil.RESUME_ALIAS;
         setItemsToDisplay(resumes);
     }
 
