@@ -18,6 +18,8 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 
+import java.util.List;
+
 /**
  * Wraps all data at the resume-book level
  * Duplicates are not allowed (by .isSame comparison)
@@ -26,11 +28,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     // Should be all caps but check style complain
     private Person user;
-    private final UniqueItemList itemsToDisplay;
-    private final UniqueItemList internships;
-    private final UniqueItemList projects;
-    private final UniqueItemList skills;
-    private final UniqueItemList resumes;
+    private final UniqueItemList<Item> itemsToDisplay;
+    private final UniqueItemList<Internship> internships;
+    private final UniqueItemList<Project> projects;
+    private final UniqueItemList<Skill> skills;
+    private final UniqueItemList<Resume> resumes;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -43,11 +45,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
         user = new Person(new DisplayPicture("/images/Duke.png"), new Name("Default name"), new Phone("000"),
                 new Email("000@gmail.com"), new Github("000"), "Default university", "Default major",
                 new Time("12-9999"), new Time("12-9999"), 0.0);
-        itemsToDisplay = new UniqueItemList();
-        internships = new UniqueItemList();
-        projects = new UniqueItemList();
-        skills = new UniqueItemList();
-        resumes = new UniqueItemList();
+        itemsToDisplay = new UniqueItemList<>();
+        internships = new UniqueItemList<>();
+        projects = new UniqueItemList<>();
+        skills = new UniqueItemList<>();
+        resumes = new UniqueItemList<>();
     }
 
     public ResumeBook() {}
@@ -66,46 +68,36 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the item list with {@code items}.
      * {@code items} must not contain duplicate items.
      */
-    public void setItemsToDisplay(UniqueItemList itemsToDisplay) {
+    public void setItemsToDisplay(List<Item> itemsToDisplay) {
         this.itemsToDisplay.setItems(itemsToDisplay);
     }
-
-    // STUB
-    public void setItemsToDisplay(String type) {}
 
     /**
      * Replaces the contents of the item list to the content of the internship list.
      */
     public void setInternshipToDisplay() {
-        setItemsToDisplay(internships);
+        setItemsToDisplay(internships.getItemList());
     }
 
     /**
      * Replaces the contents of the item list to the content of the project list.
      */
     public void setProjectToDisplay() {
-        setItemsToDisplay(projects);
+        setItemsToDisplay(projects.getItemList());
     }
 
     /**
      * Replaces the contents of the item list to the content of the skill list.
      */
     public void setSkillToDisplay() {
-        setItemsToDisplay(skills);
+        setItemsToDisplay(skills.getItemList());
     }
 
     /**
      * Replaces the contents of the item list to the content of the resume list.
      */
     public void setResumeToDisplay() {
-        setItemsToDisplay(resumes);
-    }
-
-    /**
-     * Replace the contents of user profile panel with the content of updated user profile.
-     */
-    public void setUserToDisplay() {
-
+        setItemsToDisplay(resumes.getItemList());
     }
 
     //=========== Overwrite data ================================================================================
@@ -120,7 +112,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the internship list with {@code internships}.
      * {@code internships} must not contain duplicate items.
      */
-    public void setInternships(UniqueItemList internships) {
+    public void setInternships(UniqueItemList<Internship> internships) {
         this.internships.setItems(internships);
     }
 
@@ -128,7 +120,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the project list with {@code projects}.
      * {@code projects} must not contain duplicate items.
      */
-    public void setProjects(UniqueItemList projects) {
+    public void setProjects(UniqueItemList<Project> projects) {
         this.projects.setItems(projects);
     }
 
@@ -136,7 +128,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the skill list with {@code skills}.
      * {@code skills} must not contain duplicate items.
      */
-    public void setSkills(UniqueItemList skills) {
+    public void setSkills(UniqueItemList<Skill> skills) {
         this.skills.setItems(skills);
     }
 
@@ -144,7 +136,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the contents of the resume list with {@code resumes}.
      * {@code resumes} must not contain duplicate items.
      */
-    public void setResumes(UniqueItemList resumes) {
+    public void setResumes(UniqueItemList<Resume> resumes) {
         this.resumes.setItems(resumes);
     }
 
@@ -203,7 +195,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     @Override
     public Internship getInternship(Index index) {
-        return (Internship) internships.asUnmodifiableObservableList().get(index.getZeroBased());
+        return internships.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
     @Override
@@ -254,7 +246,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     @Override
     public Project getProject(Index index) {
-        return (Project) projects.asUnmodifiableObservableList().get(index.getZeroBased());
+        return projects.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
     @Override
@@ -294,6 +286,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Removes {@code key} from this {@code ResumeBook}.
      * {@code key} must exist in the resume book.
      */
+    // TODO: FIX THIS!
     public void deleteSkill(Skill key) {
         int id = key.getId();
         skills.remove(key);
@@ -305,7 +298,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     @Override
     public Skill getSkill(Index index) {
-        return (Skill) skills.asUnmodifiableObservableList().get(index.getZeroBased());
+        return skills.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
     @Override
@@ -351,7 +344,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     @Override
     public Resume getResume(Index index) {
-        return (Resume) resumes.asUnmodifiableObservableList().get(index.getZeroBased());
+        return resumes.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
     @Override
@@ -378,22 +371,22 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public UniqueItemList getInternshipList() {
+    public UniqueItemList<Internship> getInternshipList() {
         return internships;
     }
 
     @Override
-    public UniqueItemList getProjectList() {
+    public UniqueItemList<Project> getProjectList() {
         return projects;
     }
 
     @Override
-    public UniqueItemList getSkillList() {
+    public UniqueItemList<Skill> getSkillList() {
         return skills;
     }
 
     @Override
-    public UniqueItemList getResumeList() {
+    public UniqueItemList<Resume> getResumeList() {
         return resumes;
     }
 
@@ -415,14 +408,15 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     //STUBS
-    public UniqueItemList getPersonalDetailList() {
-        return new UniqueItemList();
+    public UniqueItemList<Item> getPersonalDetailList() {
+        return new UniqueItemList<>();
     }
 
+    // TODO: THIS IS BY ID!!!
     public Resume getResumeByIndex(int index) {
-        for (Item res : resumes) {
+        for (Resume res : resumes) {
             if (res.getId() == index) {
-                return (Resume) res;
+                return res;
             }
         }
         return null;
@@ -430,7 +424,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     @Override
     public boolean hasResumeId(int resumeIndex) {
-        for (Item item : resumes) {
+        for (Resume item : resumes) {
             if (item.getId() == resumeIndex) {
                 return true;
             }
@@ -440,7 +434,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     @Override
     public boolean hasInternshipId(int i) {
-        for (Item item : internships) {
+        for (Internship item : internships) {
             if (item.getId() == i) {
                 return true;
             }
@@ -450,7 +444,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     @Override
     public boolean hasProjectId(int i) {
-        for (Item item : projects) {
+        for (Project item : projects) {
             if (item.getId() == i) {
                 return true;
             }
@@ -460,7 +454,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     @Override
     public boolean hasSkillId(int i) {
-        for (Item item : skills) {
+        for (Skill item : skills) {
             if (item.getId() == i) {
                 return true;
             }
@@ -471,8 +465,5 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public boolean hasItem(Item item) {
         return false;
     }
-    public void addItem(Item item) {}
-    public void deleteItem(Item item) {}
-    public void setItem(Item target, Item edit) {}
 
 }

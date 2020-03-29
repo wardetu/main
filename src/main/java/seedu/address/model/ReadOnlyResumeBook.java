@@ -33,31 +33,31 @@ public interface ReadOnlyResumeBook {
      * Returns an unmodifiable view of the current internship list.
      * This list will not contain any duplicate internship.
      */
-    UniqueItemList getInternshipList();
+    UniqueItemList<Internship> getInternshipList();
 
     /**
      * Returns an unmodifiable view of the current project list.
      * This list will not contain any duplicate project.
      */
-    UniqueItemList getProjectList();
+    UniqueItemList<Project> getProjectList();
 
     /**
      * Returns an unmodifiable view of the current skill list.
      * This list will not contain any duplicate skill.
      */
-    UniqueItemList getSkillList();
+    UniqueItemList<Skill> getSkillList();
 
     /**
      * Returns an unmodifiable view of the current resume list.
      * This list will not contain any duplicate resume.
      */
-    UniqueItemList getResumeList();
+    UniqueItemList<Resume> getResumeList();
 
     //=========== Query List Operations ================================================================================
 
     /**
      * Return an Internship item at the specified index from the internship list.
-     * @param index
+     * @param index index of internship
      * @return Internship item at {@code index}
      */
     Internship getInternship(Index index);
@@ -69,7 +69,7 @@ public interface ReadOnlyResumeBook {
 
     /**
      * Return a Project item at the specified index from the project list.
-     * @param index
+     * @param index index of project
      * @return Project item at {@code index}
      */
     Project getProject(Index index);
@@ -81,7 +81,7 @@ public interface ReadOnlyResumeBook {
 
     /**
      * Return a Skill item at the specified index from the skill list.
-     * @param index
+     * @param index index of skill
      * @return Skill item at {@code index}
      */
     Skill getSkill(Index index);
@@ -93,7 +93,7 @@ public interface ReadOnlyResumeBook {
 
     /**
      * Return a Resume item at the specified index from the resume list.
-     * @param index
+     * @param index index of resume
      * @return Resume item at {@code index}
      */
     Resume getResume(Index index);
@@ -104,7 +104,7 @@ public interface ReadOnlyResumeBook {
     int getResumeSize();
 
     ///STUB
-    UniqueItemList getPersonalDetailList();
+    UniqueItemList<Item> getPersonalDetailList();
 
     boolean hasResumeId(int resumeIndex);
 

@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,18 +21,18 @@ import seedu.address.model.item.exceptions.ItemNotFoundException;
  *
  * Supports a minimal set of list operations.
  *
- * @see Item#isSame(Item)
+ * @see T#isSame(T)
  */
-public class UniqueItemList implements Iterable<Item> {
+public class UniqueItemList<T extends Item> implements Iterable<T> {
 
-    private final ObservableList<Item> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Item> internalUnmodifiableList =
+    private final ObservableList<T> internalList = FXCollections.observableArrayList();
+    private final ObservableList<T> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent item as the given argument.
      */
-    public boolean contains(Item toCheck) {
+    public boolean contains(T toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSame);
     }
@@ -40,7 +41,7 @@ public class UniqueItemList implements Iterable<Item> {
      * Adds an item to the list.
      * The item must not already exist in the list.
      */
-    public void add(Item toAdd) {
+    public void add(T toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateItemException();
@@ -53,7 +54,7 @@ public class UniqueItemList implements Iterable<Item> {
      * {@code target} must exist in the list.
      * The identity of {@code editedItem} must not be the same as another existing item in the list.
      */
-    public void setItem(Item target, Item editedItem) {
+    public void setItem(T target, T editedItem) {
         requireAllNonNull(target, editedItem);
 
         int index = internalList.indexOf(target);
@@ -69,17 +70,25 @@ public class UniqueItemList implements Iterable<Item> {
     }
 
     /**
+     * Returns the list of Items that is represented in the internal list.
+     * @return List of Items
+     */
+    public List<Item> getItemList() {
+        return internalList.stream().map(x -> (Item) x).collect(Collectors.toList());
+    }
+
+    /**
      * Removes the equivalent item from the list.
      * The item must exist in the list.
      */
-    public void remove(Item toRemove) {
+    public void remove(T toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new ItemNotFoundException();
         }
     }
 
-    public void setItems(UniqueItemList replacement) {
+    public void setItems(UniqueItemList<T> replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -88,7 +97,7 @@ public class UniqueItemList implements Iterable<Item> {
      * Replaces the contents of this list with {@code items}.
      * {@code items} must not contain duplicate items.
      */
-    public void setItems(List<Item> items) {
+    public void setItems(List<T> items) {
         requireAllNonNull(items);
         if (!itemsAreUnique(items)) {
             throw new DuplicateItemException();
@@ -100,12 +109,12 @@ public class UniqueItemList implements Iterable<Item> {
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<Item> asUnmodifiableObservableList() {
+    public ObservableList<T> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
 
     @Override
-    public Iterator<Item> iterator() {
+    public Iterator<T> iterator() {
         return internalList.iterator();
     }
 
@@ -128,7 +137,7 @@ public class UniqueItemList implements Iterable<Item> {
     /**
      * Returns true if {@code persons} contains only unique persons.
      */
-    private boolean itemsAreUnique(List<Item> items) {
+    private boolean itemsAreUnique(List<T> items) {
         for (int i = 0; i < items.size() - 1; i++) {
             for (int j = i + 1; j < items.size(); j++) {
                 if (items.get(i).isSame(items.get(j))) {
