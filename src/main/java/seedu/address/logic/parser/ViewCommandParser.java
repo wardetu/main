@@ -11,6 +11,7 @@ import seedu.address.logic.commands.view.ViewResumeCommand;
 import seedu.address.logic.commands.view.ViewSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * Parses input arguments and creates a new ViewCommand object
@@ -36,13 +37,13 @@ public class ViewCommandParser {
             String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
             switch(itemType) {
-            case "res":
+            case ItemUtil.RESUME_ALIAS:
                 return new ViewResumeCommand(index);
-            case "int":
+            case ItemUtil.INTERNSHIP_ALIAS:
                 return new ViewInternshipCommand(index);
-            case "proj":
+            case ItemUtil.PROJECT_ALIAS:
                 return new ViewProjectCommand(index);
-            case "ski":
+            case ItemUtil.SKILL_ALIAS:
                 return new ViewSkillCommand(index);
             default:
                 // Should not have reached here

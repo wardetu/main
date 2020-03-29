@@ -22,12 +22,12 @@ public class Resume extends Item {
     private final TreeSet<Integer> skills = new TreeSet<>();
 
     public Resume(Name name, Set<Tag> tags) {
-        this(name, ItemUtil.yieldId("res"), tags);
+        this(name, ItemUtil.yieldId(ItemUtil.RESUME_ALIAS), tags);
     }
 
     public Resume(Name name, int id, Set<Tag> tags) {
         super(name, id, tags);
-        this.type = Type.generate("res");
+        this.type = Type.generate(ItemUtil.RESUME_ALIAS);
         // TODO: change Resume constructor to take in existing lists of internships, projects or skills
     }
 

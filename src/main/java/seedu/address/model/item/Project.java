@@ -22,13 +22,13 @@ public class Project extends Item {
     private String description;
 
     public Project(Name name, Time time, Website website, String description, Set<Tag> tags) {
-        this(name, time, website, description, tags, ItemUtil.yieldId("proj"));
+        this(name, time, website, description, tags, ItemUtil.yieldId(ItemUtil.PROJECT_ALIAS));
     }
 
     public Project(Name name, Time time, Website website, String description, Set<Tag> tags, int id) {
         super(name, id, tags);
         requireAllNonNull(time, website, description);
-        this.type = Type.generate("proj");
+        this.type = Type.generate(ItemUtil.PROJECT_ALIAS);
         this.time = time;
         this.website = website;
         this.description = description;
