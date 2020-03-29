@@ -1,7 +1,7 @@
 package seedu.address.model.item;
 
+import java.util.ArrayList;
 import java.util.Set;
-import java.util.TreeSet;
 
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Type;
@@ -17,9 +17,9 @@ public class Resume extends Item {
     // Item-level fields
 
     // Data fields
-    private final TreeSet<Integer> internships = new TreeSet<>();
-    private final TreeSet<Integer> projects = new TreeSet<>();
-    private final TreeSet<Integer> skills = new TreeSet<>();
+    private final ArrayList<Integer> internships = new ArrayList<>();
+    private final ArrayList<Integer> projects = new ArrayList<>();
+    private final ArrayList<Integer> skills = new ArrayList<>();
 
     public Resume(Name name, Set<Tag> tags) {
         this(name, ItemUtil.yieldId("res"), tags);
@@ -42,7 +42,7 @@ public class Resume extends Item {
         }
     }
 
-    public TreeSet<Integer> getInternships() {
+    public ArrayList<Integer> getInternships() {
         return this.internships;
     }
 
@@ -50,7 +50,7 @@ public class Resume extends Item {
         projects.add(value);
     }
 
-    public TreeSet<Integer> getProjects() {
+    public ArrayList<Integer> getProjects() {
         return this.projects;
     }
 
@@ -65,7 +65,7 @@ public class Resume extends Item {
         skills.add(value);
     }
 
-    public TreeSet<Integer> getSkills() {
+    public ArrayList<Integer> getSkills() {
         return this.skills;
     }
 
