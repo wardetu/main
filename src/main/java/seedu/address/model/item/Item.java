@@ -25,6 +25,8 @@ public abstract class Item {
     // Identity fields
     protected Type type;
     protected final int id;
+    // Index refers to the position of the item in an item list. id is unique identifier for the item
+    protected int index;
     protected final Name name;
 
     // Data fields
@@ -34,6 +36,7 @@ public abstract class Item {
         requireAllNonNull(name, tags);
         this.id = id;
         this.name = name;
+        this.index = 0;
         this.tags.addAll(tags);
     }
 
@@ -53,6 +56,14 @@ public abstract class Item {
     }
 
     public abstract String getSummary();
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
     public Name getName() {
         return name;
@@ -77,7 +88,7 @@ public abstract class Item {
 
         return otherItem != null
                 && otherItem.getName().equals(getName())
-                && otherItem.getType().equals(getType());
+                && otherItem.getType().getFullType().equals(getType().getFullType());
     }
 
     /**

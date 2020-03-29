@@ -38,7 +38,7 @@ public class ItemListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ItemCard(item, getIndex() + 1).getRoot());
+                setGraphic(new ItemCard(item, item.getIndex() + 1).getRoot());
             }
         }
     }

@@ -65,12 +65,20 @@ public class Project extends Item {
     }
 
     @Override
+    public boolean isSame(Item otherProject) {
+        return super.isSame(otherProject)
+                && ((Project) otherProject).getTime().equals(getTime());
+    }
+
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Project // instanceof handles nulls
                 && getName().equals(((Project) other).getName())
                 && time.equals(((Project) other).time) // state check
                 && website.equals(((Project) other).website) // state check
-                && description.equals(((Project) other).description)); // state check
+                && description.equals(((Project) other).description)) // state check
+                && getTags().equals(((Project) other).getTags());
     }
 }
