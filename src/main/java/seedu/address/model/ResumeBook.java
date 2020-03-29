@@ -322,7 +322,6 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Removes {@code key} from this {@code ResumeBook}.
      * {@code key} must exist in the resume book.
      */
-    // TODO: FIX THIS!
     public void deleteSkill(Skill key) {
         int id = key.getId();
         skills.remove(key);
