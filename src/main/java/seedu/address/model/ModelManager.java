@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -238,6 +239,11 @@ public class ModelManager implements Model {
     public void addResume(Resume resume) {
         versionedResumeBook.addResume(resume);
         updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+    }
+
+    @Override
+    public void editResume(Resume target, List<Integer> internshipIndices) {
+        versionedResumeBook.editResume(target, internshipIndices);
     }
 
     @Override

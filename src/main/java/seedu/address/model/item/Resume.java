@@ -1,7 +1,8 @@
 package seedu.address.model.item;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Type;
@@ -17,9 +18,9 @@ public class Resume extends Item {
     // Item-level fields
 
     // Data fields
-    private final TreeSet<Integer> internships = new TreeSet<>();
-    private final TreeSet<Integer> projects = new TreeSet<>();
-    private final TreeSet<Integer> skills = new TreeSet<>();
+    private List<Integer> internships = new ArrayList<>();
+    private List<Integer> projects = new ArrayList<>();
+    private List<Integer> skills = new ArrayList<>();
 
     public Resume(Name name, Set<Tag> tags) {
         this(name, ItemUtil.yieldId(ItemUtil.RESUME_ALIAS), tags);
@@ -35,14 +36,11 @@ public class Resume extends Item {
         internships.add(value);
     }
 
-    public void setInternships(int... values) {
-        internships.clear();
-        for (int i : values) {
-            internships.add(i);
-        }
+    public void setInternships(List<Integer> internships) {
+        this.internships = internships;
     }
 
-    public TreeSet<Integer> getInternships() {
+    public List<Integer> getInternships() {
         return this.internships;
     }
 
@@ -50,30 +48,24 @@ public class Resume extends Item {
         projects.add(value);
     }
 
-    public TreeSet<Integer> getProjects() {
+    public List<Integer> getProjects() {
         return this.projects;
     }
 
-    public void setProjects(int... values) {
-        projects.clear();
-        for (int i : values) {
-            projects.add(i);
-        }
+    public void setProjects(List<Integer> projects) {
+        this.projects = projects;
     }
 
     public void addSkill(int value) {
         skills.add(value);
     }
 
-    public TreeSet<Integer> getSkills() {
+    public List<Integer> getSkills() {
         return this.skills;
     }
 
-    public void setSkills(int... values) {
-        skills.clear();
-        for (int i : values) {
-            skills.add(i);
-        }
+    public void setSkills(List<Integer> skills) {
+        this.skills = skills;
     }
 
     @Override
