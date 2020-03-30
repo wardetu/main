@@ -8,6 +8,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -51,7 +52,13 @@ public class ResumeEditCommand extends Command {
         checkIndicesValidity(model);
         Resume toEdit = model.getResume(index);
         if (internshipIndices.isPresent()) {
-            model.editResume(toEdit, internshipIndices.get());
+            // Will change this to a more appropriate name
+            List<Integer> listOfId = internshipIndices
+                    .get()
+                    .stream()
+                    .map(x -> model.getInternship(Index.fromOneBased(x)).getId())
+                    .collect(Collectors.toList());
+            model.editResume(toEdit, listOfId);
         }
 
         model.setResumeToDisplay();
