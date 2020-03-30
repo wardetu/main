@@ -1,15 +1,18 @@
 package seedu.address.logic.commands;
 
+import static java.lang.System.err;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.awt.*;
+import java.io.IOException;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -37,6 +40,15 @@ public class GenerateResumeCommand extends Command {
     protected final Index targetIndex;
     protected String title;
 
+    private static final String rootPath = "export/";
+    private static final PDRectangle page = PDRectangle.A4;
+    private static final int margin = 100;
+    private static final PDFont FONT = PDType1Font.HELVETICA_BOLD;
+    private static final int HEADING_SIZE = 14;
+    private static final int BODY_SIZE = 11;
+    private static final Color MAIN_COLOR = new Color(0, 0, 0);
+    private static final Color ACCENT_COLOR = new Color(153, 0, 51);
+
     public GenerateResumeCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         title = null;
@@ -47,29 +59,45 @@ public class GenerateResumeCommand extends Command {
         this.title = resumeName.toString();
     }
 
+    public void addTitle(PDPageContentStream contentStream, String title) throws IOException {
+        contentStream.setFont(FONT, HEADING_SIZE);
+        contentStream.setNonStrokingColor(ACCENT_COLOR);
+        float stringWidth = FONT.getStringWidth(title) * HEADING_SIZE / 1000f;
+        float pageWidth = page.getWidth();
+        float xOffset = (pageWidth - stringWidth) / 2f;
+        float pageHeight = page.getHeight();
+        float yOffset = pageHeight - margin;
+        contentStream.newLineAtOffset(xOffset, yOffset);
+        contentStream.showText(title.toUpperCase());
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
 
+        // Get resume item
+        requireNonNull(model);
         if (targetIndex.getZeroBased() >= model.getResumeSize()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
-
         Resume toGenerate = model.getResume(targetIndex);
+
+        // Get title
         if (this.title == null) {
             title = toGenerate.getName().toString();
         }
-        Document pdfResume = new Document();
+
+        final PDPage singlePage = new PDPage();
         try {
-            PdfWriter writer = PdfWriter.getInstance(pdfResume, new FileOutputStream(title + ".pdf"));
-            pdfResume.open();
-            pdfResume.add(new Paragraph(title));
-            pdfResume.close();
-            writer.close();
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            final PDDocument resume = new PDDocument();
+            resume.addPage(singlePage);
+            final PDPageContentStream contentStream = new PDPageContentStream(resume, singlePage);
+            contentStream.beginText();
+            addTitle(contentStream, title);
+            contentStream.endText();
+            contentStream.close();
+            resume.save(rootPath + title + ".pdf");
+        } catch (IOException e) {
+            err.println("Exception while trying to create simple document - " + e);
         }
 
         return new CommandResult(toGenerate.toString(),
