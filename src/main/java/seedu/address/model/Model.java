@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -240,6 +241,11 @@ public interface Model {
      * The identity of {@code editedResume} must not be the same as another existing resume in the resume book.
      */
     void setResume(Resume target, Resume editedResume);
+
+    /**
+     * Updates the given resume to contain the internship, project, and skill items with the specified indices.
+     */
+    void editResume(Resume target, List<Integer> internshipIndices);
 
     boolean hasResumeId(int resumeIndex);
 
