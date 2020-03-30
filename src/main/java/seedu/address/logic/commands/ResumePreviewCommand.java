@@ -1,5 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -9,12 +15,9 @@ import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Previews a resume.
+ */
 public class ResumePreviewCommand extends Command {
 
     public static final String COMMAND_WORD = "rpreview";
@@ -50,18 +53,21 @@ public class ResumePreviewCommand extends Command {
                 .filter(Objects::nonNull)
                 .map(Internship::toString)
                 .collect(Collectors.toList());
+
         List<String> projectList = resume.getProjects()
                 .stream()
                 .map(x -> model.hasProjectId(x) ? model.getProjectById(x) : null)
                 .filter(Objects::nonNull)
                 .map(Project::toString)
                 .collect(Collectors.toList());
+
         List<String> skillsList = resume.getSkills()
                 .stream()
-                .map(x ->  model.hasSkillId(x) ? model.getSkillById(x) : null)
+                .map(x -> model.hasSkillId(x) ? model.getSkillById(x) : null)
                 .filter(Objects::nonNull)
                 .map(Skill::toString)
                 .collect(Collectors.toList());
+
         StringBuilder data = new StringBuilder(resume.toString() + "\n");
         data.append("\n=========================\n");
         data.append("INTERNSHIPS\n");

@@ -80,7 +80,7 @@ public class ResumeBookParser {
         //-----------------Other commands-----------------------
 
         case ResumePreviewCommand.COMMAND_WORD:
-            return new ResumePreviewParser().parse(arguments);
+            return new ResumePreviewCommandParser().parse(arguments);
 
         case EditUserCommand.COMMAND_WORD: //"me"
             return new EditUserParser().parse(arguments);

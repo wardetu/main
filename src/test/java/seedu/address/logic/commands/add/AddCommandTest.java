@@ -98,6 +98,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Internship getInternshipById(int id) {
+            return null;
+        }
+
+        @Override
         public int getInternshipSize() {
             return 0;
         }
@@ -129,6 +134,11 @@ public class AddCommandTest {
 
         @Override
         public Project getProject(Index index) {
+            return null;
+        }
+
+        @Override
+        public Project getProjectById(int id) {
             return null;
         }
 
@@ -168,6 +178,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Skill getSkillById(int id) {
+            return null;
+        }
+
+        @Override
         public int getSkillSize() {
             return 0;
         }
@@ -190,11 +205,6 @@ public class AddCommandTest {
         @Override
         public void setResume(Resume target, Resume editedResume) {
 
-        }
-
-        @Override
-        public Resume getResumeByIndex(int resumeIndex) {
-            return null;
         }
 
         @Override
