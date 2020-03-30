@@ -13,6 +13,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.GenerateResumeCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.ResumeEditCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.delete.DeleteCommand;
@@ -79,6 +80,9 @@ public class ResumeBookParser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+
+        case ResumeEditCommand.COMMAND_WORD:
+            return new ResumeEditCommandParser().parse(arguments);
 
         //-----------------Other commands-----------------------
         case EditUserCommand.COMMAND_WORD: //"me"
