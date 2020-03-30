@@ -66,11 +66,11 @@ public class UniqueItemList<T extends Item> implements Iterable<T> {
     /**
      * Gets an item by ID
      */
-    public Optional<Item> get(int id ) {
-        Optional<Item> item = Optional.empty();
-        for (Item i: internalList) {
+    public T getById(int id) {
+        T item = null;
+        for (T i: internalList) {
             if (i.getId() == id) {
-                item = Optional.of(i);
+                item = i;
             }
         }
         return item;

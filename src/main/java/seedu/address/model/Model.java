@@ -109,7 +109,7 @@ public interface Model {
      * @param id
      * @return Internship item with {@code index}
      */
-    Internship getInternship(int id);
+    Internship getInternshipById(int id);
 
     /**
      * Return the size of the internship list.
@@ -159,7 +159,7 @@ public interface Model {
      * @param id
      * @return Project item with {@code index}
      */
-    Project getProject(int id);
+    Project getProjectById(int id);
 
     /**
      * Return the size of the project list.
@@ -209,7 +209,7 @@ public interface Model {
      * @param id
      * @return Skill item with {@code index}
      */
-    Skill getSkill(int id);
+    Skill getSkillById(int id);
 
     /**
      * Return the size of the skill list.

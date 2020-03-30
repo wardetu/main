@@ -235,8 +235,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public Internship getInternship(int id) {
-        return null;
+    public Internship getInternshipById(int id) {
+        return internships.getById(id);
     }
 
     @Override
@@ -291,8 +291,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public Project getProject(int id) {
-        return null;
+    public Project getProjectById(int id) {
+        return projects.getById(id);
     }
 
     @Override
@@ -347,8 +347,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public Skill getSkill(int id) {
-        return null;
+    public Skill getSkillById(int id) {
+        return skills.getById(id);
     }
 
     @Override

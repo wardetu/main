@@ -138,8 +138,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Internship getInternship(int id) {
-        return versionedResumeBook.getInternship(id);
+    public Internship getInternshipById(int id) {
+        return versionedResumeBook.getInternshipById(id);
     }
 
     public int getInternshipSize() {
@@ -182,8 +182,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Project getProject(int id) {
-        return versionedResumeBook.getProject(id);
+    public Project getProjectById(int id) {
+        return versionedResumeBook.getProjectById(id);
     }
 
     @Override
@@ -227,8 +227,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Skill getSkill(int id) {
-        return versionedResumeBook.getSkill(id);
+    public Skill getSkillById(int id) {
+        return versionedResumeBook.getSkillById(id);
     }
 
     @Override
