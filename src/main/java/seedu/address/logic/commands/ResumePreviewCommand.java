@@ -1,6 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.List;
 import java.util.Objects;
@@ -23,6 +30,10 @@ public class ResumePreviewCommand extends Command {
     public static final String COMMAND_WORD = "rpreview";
     public static final String MESSAGE_SUCCESS = "Previewing successfully!";
     public static final String MESSAGE_FAILURE = "Cannot preview this resume.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Previews the details of the resume identified "
+            + "by the index number used in the displayed resume list. "
+            + "Parameters: INDEX "
+            + "Example: " + COMMAND_WORD + " 1 ";
 
     private Index index;
 
