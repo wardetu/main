@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.item.Resume;
 
 public class ResumeEditCommand extends Command {
     public static final String COMMAND_WORD = "redit";
@@ -43,8 +45,15 @@ public class ResumeEditCommand extends Command {
         }
 
         checkIndicesValidity(model);
+        Resume toEdit = model.getResume(index);
+        if (internshipIndices.isPresent()) {
+            model.editResume(toEdit, internshipIndices.get());
+        }
 
-        return null;
+        model.setResumeToDisplay();
+        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        model.commitResumeBook();
+        return new CommandResult(toEdit.toString(), "Resume is updated");
     }
 
     private void checkIndicesValidity(Model model) throws CommandException {
