@@ -59,28 +59,24 @@ class JsonSerializableResumeBook {
                 .getResumeList()
                 .asUnmodifiableObservableList()
                 .stream()
-                .map(x -> (Resume) x)
                 .map(JsonAdaptedResume::new)
                 .collect(Collectors.toList()));
         internships.addAll(source
                 .getInternshipList()
                 .asUnmodifiableObservableList()
                 .stream()
-                .map(x -> (Internship) x)
                 .map(JsonAdaptedInternship::new)
                 .collect(Collectors.toList()));
         skills.addAll(source
                 .getSkillList()
                 .asUnmodifiableObservableList()
                 .stream()
-                .map(x -> (Skill) x)
                 .map(JsonAdaptedSkill::new)
                 .collect(Collectors.toList()));
         projects.addAll(source
                 .getProjectList()
                 .asUnmodifiableObservableList()
                 .stream()
-                .map(x -> (Project) x)
                 .map(JsonAdaptedProject::new)
                 .collect(Collectors.toList()));
 

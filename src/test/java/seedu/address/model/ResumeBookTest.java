@@ -114,10 +114,10 @@ public class ResumeBookTest {
                 new Github("000"), "Default university", "Default major",
                 new Time("12-9999"), new Time("12-9999"), 5.0);
         private final ObservableList<Item> itemsToDisplay = FXCollections.observableArrayList();
-        private final UniqueItemList internships = new UniqueItemList();
-        private final UniqueItemList projects = new UniqueItemList();
-        private final UniqueItemList skills = new UniqueItemList();
-        private final UniqueItemList resumes = new UniqueItemList();
+        private final UniqueItemList<Internship> internships = new UniqueItemList<>();
+        private final UniqueItemList<Project> projects = new UniqueItemList<>();
+        private final UniqueItemList<Skill> skills = new UniqueItemList<>();
+        private final UniqueItemList<Resume> resumes = new UniqueItemList<>();
 
         ResumeBookStub(Collection<Item> itemsToDisplay) {
             this.itemsToDisplay.setAll(itemsToDisplay);
@@ -139,29 +139,29 @@ public class ResumeBookTest {
         }
 
         @Override
-        public UniqueItemList getInternshipList() {
+        public UniqueItemList<Internship> getInternshipList() {
             return internships;
         }
 
         @Override
-        public UniqueItemList getProjectList() {
+        public UniqueItemList<Project> getProjectList() {
             return projects;
         }
 
         @Override
-        public UniqueItemList getSkillList() {
+        public UniqueItemList<Skill> getSkillList() {
             return skills;
         }
 
         @Override
-        public UniqueItemList getResumeList() {
+        public UniqueItemList<Resume> getResumeList() {
             return resumes;
         }
 
         // STUB
         @Override
-        public UniqueItemList getPersonalDetailList() {
-            return resumes;
+        public UniqueItemList<Item> getPersonalDetailList() {
+            return null;
         }
 
         @Override
