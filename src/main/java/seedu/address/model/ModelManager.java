@@ -263,11 +263,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Resume getResumeByIndex(int index) {
-        return versionedResumeBook.getResumeByIndex(index);
-    }
-
-    @Override
     public boolean hasResumeId(int resumeIndex) {
         return versionedResumeBook.hasResumeId(resumeIndex);
     }

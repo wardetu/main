@@ -241,7 +241,6 @@ public interface Model {
      */
     void setResume(Resume target, Resume editedResume);
 
-    Resume getResumeByIndex(int resumeIndex);
     boolean hasResumeId(int resumeIndex);
 
     /**

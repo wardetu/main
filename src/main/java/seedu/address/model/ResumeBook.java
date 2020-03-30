@@ -462,16 +462,6 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return new UniqueItemList<>();
     }
 
-    // TODO: THIS IS BY ID!!!
-    public Resume getResumeByIndex(int index) {
-        for (Resume res : resumes) {
-            if (res.getId() == index) {
-                return res;
-            }
-        }
-        return null;
-    }
-
     @Override
     public boolean hasResumeId(int resumeIndex) {
         for (Resume item : resumes) {
