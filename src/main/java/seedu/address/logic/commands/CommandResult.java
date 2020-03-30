@@ -19,16 +19,28 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** Switch to take note*/
+    private final boolean takeNote;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(boolean userUpdated, String dataToUser, String feedbackToUser,
-                         boolean showHelp, boolean exit) {
+                         boolean showHelp, boolean exit, boolean takeNote) {
         this.userUpdated = userUpdated;
         this.dataToUser = requireNonNull(dataToUser);
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.takeNote = takeNote;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String dataToUser, String feedbackToUser, boolean takeNote) {
+        this(false, dataToUser, feedbackToUser, false, false, takeNote);
     }
 
     /**
@@ -36,7 +48,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String dataToUser, String feedbackToUser) {
-        this(false, dataToUser, feedbackToUser, false, false);
+        this(false, dataToUser, feedbackToUser, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -61,6 +73,10 @@ public class CommandResult {
 
     public boolean hasItemChanged() {
         return !dataToUser.equals("");
+    }
+
+    public boolean isTakeNote() {
+        return takeNote;
     }
 
     @Override

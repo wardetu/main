@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.note.NoteListPanel;
 import seedu.address.ui.personbio.UserOverallPane;
 
 /**
@@ -37,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private ItemDisplay itemDisplay;
     private UserOverallPane userOverallPane;
+    private NoteListPanel noteListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -188,6 +190,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+
             logger.info("Result: " + commandResult.getFeedbackToUser());
             logger.info("Item Display: " + commandResult.getDataToUser());
 
@@ -203,10 +206,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+            } else if (commandResult.isExit()) {
                 handleExit();
+            } else {
+                if (commandResult.isTakeNote()) {
+                    switchToTakeNoteView(noteListPanel);
+                } else {
+                    switchToListView(itemListPanel);
+                }
             }
 
             return commandResult;
@@ -215,5 +222,18 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Switch main display pane to the specified UI part
+     */
+    private void switchToTakeNoteView(NoteListPanel noteListPanel) {
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(noteListPanel.getRoot());
+    }
+
+    private void switchToListView(ItemListPanel itemListPanel) {
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
     }
 }

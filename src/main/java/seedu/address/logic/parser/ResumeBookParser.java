@@ -18,6 +18,7 @@ import seedu.address.logic.commands.delete.DeleteCommand;
 import seedu.address.logic.commands.edit.EditCommand;
 import seedu.address.logic.commands.find.FindCommand;
 import seedu.address.logic.commands.list.ListCommand;
+import seedu.address.logic.commands.takenote.TakeNoteCommand;
 import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -79,7 +80,13 @@ public class ResumeBookParser {
         case EditUserCommand.COMMAND_WORD: //"me"
             return new EditUserParser().parse(arguments);
 
-        case ExitCommand.COMMAND_WORD:
+        case TakeNoteCommand.COMMAND_WORD: //"note"
+            requireEmptyArguments(arguments);
+            return new TakeNoteCommand();
+
+        //-----------------Other commands-----------------------
+
+            case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
@@ -93,4 +100,16 @@ public class ResumeBookParser {
         }
     }
 
+    /**
+     * Ensures commands not meant to have trailing arguments do not have any. Trailing spaces following commands are
+     * fine and would have been trimmed off automatically by the program.
+     *
+     * @param arguments Argument inputs keyed in by the user following the command.
+     * @throws ParseException If there are additional arguments after the command.
+     */
+    private void requireEmptyArguments(String arguments) throws ParseException {
+        if (!arguments.isEmpty()) {
+            throw new ParseException("MESSAGE_ARGUMENTS_MUST_BE_EMPTY");
+        }
+    }
 }
