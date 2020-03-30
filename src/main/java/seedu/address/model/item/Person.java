@@ -85,6 +85,19 @@ public class Person {
         return cap;
     }
 
+    public String toPreview() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Name: ").append(getName()).append("\n")
+                .append("Phone: ").append(getPhone()).append(" | ")
+                .append("Email: ").append(getEmail()).append(" | ")
+                .append("Github: ").append(getGithub()).append("\n")
+                .append("University: ").append(getUniversity()).append(" | ")
+                .append("Graduating in: ").append(getTo()).append("\n")
+                .append("Major: ").append(getMajor()).append(" | ")
+                .append("CAP: ").append(getCap());
+        return builder.toString();
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own

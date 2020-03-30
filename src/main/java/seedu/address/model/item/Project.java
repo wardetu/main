@@ -2,6 +2,7 @@ package seedu.address.model.item;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
 import java.util.Set;
 
 import seedu.address.model.item.field.Name;
@@ -51,6 +52,15 @@ public class Project extends Item {
         final StringBuilder builder = new StringBuilder();
         builder.append("Time: ")
                 .append(getTime());
+        return builder.toString();
+    }
+
+    public String toPreview() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Name: ").append(getName())
+                .append("Website: ").append(getWebsite())
+                .append("Time: ").append(getTime());
+        Arrays.stream(getDescription().split("\\.")).map(x -> "- " + x.trim() +".\n").forEach(builder::append);
         return builder.toString();
     }
 

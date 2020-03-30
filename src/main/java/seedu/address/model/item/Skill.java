@@ -37,6 +37,13 @@ public class Skill extends Item {
         this.level = Level.valueOf(level);
     }
 
+    public String toPreview() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Name: ").append(getName())
+                .append("Level: ").append(getLevel());
+        return builder.toString();
+    }
+
     @Override
     public String getSummary() {
         final StringBuilder builder = new StringBuilder();

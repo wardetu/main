@@ -51,36 +51,46 @@ public class ResumePreviewCommand extends Command {
                 .stream()
                 .map(x -> model.hasInternshipId(x) ? model.getInternshipById(x) : null)
                 .filter(Objects::nonNull)
-                .map(Internship::toString)
+                .map(Internship::toPreview)
                 .collect(Collectors.toList());
 
         List<String> projectList = resume.getProjects()
                 .stream()
                 .map(x -> model.hasProjectId(x) ? model.getProjectById(x) : null)
                 .filter(Objects::nonNull)
-                .map(Project::toString)
+                .map(Project::toPreview)
                 .collect(Collectors.toList());
 
         List<String> skillsList = resume.getSkills()
                 .stream()
                 .map(x -> model.hasSkillId(x) ? model.getSkillById(x) : null)
                 .filter(Objects::nonNull)
-                .map(Skill::toString)
+                .map(Skill::toPreview)
                 .collect(Collectors.toList());
 
-        StringBuilder data = new StringBuilder(resume.toString() + "\n");
-        data.append("\n=========================\n");
-        data.append("INTERNSHIPS\n");
+        StringBuilder data = new StringBuilder(resume.getName() + "\n");
+
+        data.append("\n=========================\n")
+                .append("PERSONAL DETAILS\n")
+                .append("=========================\n\n")
+                .append(model.getUser().toPreview())
+                .append("\n\n");
+
+        data.append("=========================\n")
+                .append("INTERNSHIPS\n")
+                .append("=========================\n\n");
         for (String internship: internshipList) {
             data.append(internship).append("\n");
         }
-        data.append("\n=========================\n");
-        data.append("PROJECTS\n");
+        data.append("=========================\n")
+                .append("PROJECTS\n")
+                .append("=========================\n\n");
         for (String project: projectList) {
             data.append(project).append("\n");
         }
-        data.append("\n=========================\n");
-        data.append("SKILLS\n");
+        data.append("=========================\n")
+                .append("SKILLS\n")
+                .append("=========================\n\n");
         for (String skill: skillsList) {
             data.append(skill).append("\n");
         }
