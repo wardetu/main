@@ -35,10 +35,15 @@ public class ResumeEditCommand extends Command {
 
     protected final Index index;
     protected final Optional<List<Integer>> internshipIndices;
+    protected final Optional<List<Integer>> projectIndices;
+    protected final Optional<List<Integer>> skillsIndices;
 
-    public ResumeEditCommand(Index index, Optional<List<Integer>> internshipIndices) {
+    public ResumeEditCommand(Index index, Optional<List<Integer>> internshipIndices,
+                             Optional<List<Integer>> projectIndices, Optional<List<Integer>> skillsIndices) {
         this.index = index;
         this.internshipIndices = internshipIndices;
+        this.projectIndices = projectIndices;
+        this.skillsIndices = skillsIndices;
     }
 
     @Override
@@ -77,13 +82,31 @@ public class ResumeEditCommand extends Command {
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
                     // TODO: Use something from Message here
-                    throw new CommandException("Invalid internship index " + i + "detected");
+                    throw new CommandException("Invalid internship index " + i + " detected");
                 }
             }
         }
 
         // Projects
+        if (projectIndices.isPresent()) {
+            List<Integer> unboxedIndices = projectIndices.get();
+            for (Integer i: unboxedIndices) {
+                if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
+                    // TODO: Use something from Message here
+                    throw new CommandException("Invalid project index " + i + " detected");
+                }
+            }
+        }
 
         // Skills
+        if (skillsIndices.isPresent()) {
+            List<Integer> unboxedIndices = skillsIndices.get();
+            for (Integer i: unboxedIndices) {
+                if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
+                    // TODO: Use something from Message here
+                    throw new CommandException("Invalid skills index " + i + " detected");
+                }
+            }
+        }
     }
 }

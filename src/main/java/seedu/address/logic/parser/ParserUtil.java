@@ -197,19 +197,57 @@ public class ParserUtil {
     /**
      * Parses the Internship Indices to give the required optional
      */
-    public static Optional<List<Integer>> parseInternshipIndices(String indices) throws ParseException {
+    public static Optional<List<Integer>> parseInternshipsIndices(String indices) throws ParseException {
         if (indices == null) {
             return Optional.empty();
         } else if (indices.equals("")) {
             // Empty string will return an InvokationTargetException in the streams
-            // TODO: Investigae how this can be combined with the else block
+            // TODO: Investigate how this can be combined with the else block
             return Optional.of(new ArrayList<>());
         } else {
-            List<Integer> internshipIndices = Arrays.stream(indices.split("\\s+"))
+            List<Integer> internshipsIndices = Arrays.stream(indices.split("\\s+"))
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
 
-            return Optional.of(internshipIndices);
+            return Optional.of(internshipsIndices);
+        }
+    }
+
+    /**
+     * Parses the Projects Indices to give the required optional
+     */
+    public static Optional<List<Integer>> parseProjectsIndices(String indices) throws ParseException {
+        if (indices == null) {
+            return Optional.empty();
+        } else if (indices.equals("")) {
+            // Empty string will return an InvokationTargetException in the streams
+            // TODO: Investigate how this can be combined with the else block
+            return Optional.of(new ArrayList<>());
+        } else {
+            List<Integer> projectsIndices = Arrays.stream(indices.split("\\s+"))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+
+            return Optional.of(projectsIndices);
+        }
+    }
+
+    /**
+     * Parses the Projects Indices to give the required optional
+     */
+    public static Optional<List<Integer>> parseSkillsIndices(String indices) throws ParseException {
+        if (indices == null) {
+            return Optional.empty();
+        } else if (indices.equals("")) {
+            // Empty string will return an InvokationTargetException in the streams
+            // TODO: Investigate how this can be combined with the else block
+            return Optional.of(new ArrayList<>());
+        } else {
+            List<Integer> skillsIndices = Arrays.stream(indices.split("\\s+"))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+
+            return Optional.of(skillsIndices);
         }
     }
 }
