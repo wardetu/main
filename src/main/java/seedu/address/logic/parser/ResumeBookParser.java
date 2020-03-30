@@ -21,6 +21,9 @@ import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.commands.takenote.TakeNoteCommand;
 import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.note.AddNoteCommandParser;
+import seedu.address.logic.parser.note.DeleteNoteCommandParser;
+import seedu.address.logic.parser.note.FindNoteCommandParser;
 
 /**
  * Parses user input.
@@ -76,13 +79,22 @@ public class ResumeBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-        //-----------------Other commands-----------------------
+        //-----------------User commands-----------------------
         case EditUserCommand.COMMAND_WORD: //"me"
             return new EditUserParser().parse(arguments);
 
         case TakeNoteCommand.COMMAND_WORD: //"note"
             requireEmptyArguments(arguments);
             return new TakeNoteCommand();
+
+        case AddNoteCommand.COMMAND_WORD: //"addnote"
+            return new AddNoteCommandParser().parse(arguments);
+
+        case DeleteNoteCommand.COMMAND_WORD: //"delnote"
+            return new DeleteNoteCommandParser().parse(arguments);
+
+        case FindNoteCommand.COMMAND_WORD: //"findnote"
+            return new FindNoteCommandParser().parse(arguments);
 
         //-----------------Other commands-----------------------
 
