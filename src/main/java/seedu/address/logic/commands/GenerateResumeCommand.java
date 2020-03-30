@@ -4,7 +4,7 @@ import static java.lang.System.err;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.IOException;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -27,27 +27,25 @@ import seedu.address.model.item.field.Name;
 public class GenerateResumeCommand extends Command {
 
     public static final String COMMAND_WORD = "rgen";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Generate a pdf file from a Resume item identified by the index number used in the resume list. "
             + "If no name is provided for the output .pdf file, default name is the same as resume name.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME]\n"
             + "Example: " + COMMAND_WORD + " 1 [" + PREFIX_NAME + "MyResume";
-
     public static final String MESSAGE_GENERATE_SUCCESS = "Generated %s from %s";
+
+    private static final Color MAIN_COLOR = new Color(0, 0, 0);
+    private static final Color ACCENT_COLOR = new Color(153, 0, 51);
+    private static final int BODY_SIZE = 11;
+    private static final int HEADING_SIZE = 14;
+    private static final PDFont FONT = PDType1Font.HELVETICA_BOLD;
+    private static final int margin = 100;
+    private static final PDRectangle page = PDRectangle.A4;
+    private static final String rootPath = "export/";
 
     protected final Index targetIndex;
     protected String title;
-
-    private static final String rootPath = "export/";
-    private static final PDRectangle page = PDRectangle.A4;
-    private static final int margin = 100;
-    private static final PDFont FONT = PDType1Font.HELVETICA_BOLD;
-    private static final int HEADING_SIZE = 14;
-    private static final int BODY_SIZE = 11;
-    private static final Color MAIN_COLOR = new Color(0, 0, 0);
-    private static final Color ACCENT_COLOR = new Color(153, 0, 51);
 
     public GenerateResumeCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -59,6 +57,12 @@ public class GenerateResumeCommand extends Command {
         this.title = resumeName.toString();
     }
 
+    /**
+     * Adds title heading to the output Resume file.
+     * @param contentStream `Content Stream` to write to file.
+     * @param title title of the Resume document.
+     * @throws IOException
+     */
     public void addTitle(PDPageContentStream contentStream, String title) throws IOException {
         contentStream.setFont(FONT, HEADING_SIZE);
         contentStream.setNonStrokingColor(ACCENT_COLOR);
