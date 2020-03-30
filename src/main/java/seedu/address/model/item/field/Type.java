@@ -38,4 +38,9 @@ public class Type {
             return "Not a valid type";
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj) || this.getAlias().equals(((Type) obj).getAlias());
+    }
 }
