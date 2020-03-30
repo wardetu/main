@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
+import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
@@ -25,8 +26,8 @@ public class ResumeEditCommand extends Command {
             + PREFIX_PROJECT + " 1 ";
 
     protected final Index index;
-    protected final Optional<String> internshipIndices;
-    public ResumeEditCommand(Index index, Optional<String> internshipIndices) {
+    protected final Optional<List<Integer>> internshipIndices;
+    public ResumeEditCommand(Index index, Optional<List<Integer>> internshipIndices) {
         this.index = index;
         this.internshipIndices = internshipIndices;
     }

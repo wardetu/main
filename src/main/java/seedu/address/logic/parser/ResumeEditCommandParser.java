@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
@@ -38,7 +39,8 @@ public class ResumeEditCommandParser implements Parser<ResumeEditCommand> {
         }
 
         // Optional.empty() denotes non-existence, "" denotes that no argument specified, else some arguments specified
-        Optional<String> internshipIndices = argMultimap.getValue(PREFIX_INTERNSHIP);
+        Optional<List<Integer>> internshipIndices = ParserUtil.parseInternshipIndices(
+                argMultimap.getValue(PREFIX_INTERNSHIP).orElse(null));
 
         // Will assume correct input for now
         return new ResumeEditCommand(index, internshipIndices);
