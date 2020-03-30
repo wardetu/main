@@ -40,7 +40,7 @@ public class ResumePreviewCommand extends Command {
         String data = getDataFromResume(toPreview, model);
 
         String feedback = "Previewing resume at index " + index.getOneBased();
-        return new CommandResult(false, data, feedback, false, false);
+        return new CommandResult(data, feedback, false, true, false, false);
     }
 
     private String getDataFromResume(Resume resume, Model model) {
