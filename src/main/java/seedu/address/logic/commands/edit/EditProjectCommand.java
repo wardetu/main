@@ -56,7 +56,6 @@ public class EditProjectCommand extends EditCommand {
 
         model.setProject(toEdit, editProject);
         model.setProjectToDisplay();
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
         return new CommandResult(editProject.toString(), String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editProject));
     }
