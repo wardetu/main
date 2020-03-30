@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -196,6 +197,10 @@ public class ParserUtil {
     public static Optional<List<Integer>> parseInternshipIndices(String indices) throws ParseException {
         if (indices == null) {
             return Optional.empty();
+        } else if (indices.equals("")) {
+            // Empty string will return an InvokationTargetException in the streams
+            // TODO: Investigae how this can be combined with the else block
+            return Optional.of(new ArrayList<>());
         } else {
             List<Integer> internshipIndices = Arrays.stream(indices.split("\\s+"))
                     .map(Integer::parseInt)
