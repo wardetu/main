@@ -21,12 +21,12 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyResumeBook getSampleAddressBook() {
-        ResumeBook sampleAb = new ResumeBook();
+    public static ReadOnlyResumeBook getSampleResumeBook() {
+        ResumeBook sampleRb = new ResumeBook();
         for (Resume sampleResume : getSampleResumes()) {
-            sampleAb.addResume(sampleResume);
+            sampleRb.addResume(sampleResume);
         }
-        return sampleAb;
+        return sampleRb;
     }
 
     /**

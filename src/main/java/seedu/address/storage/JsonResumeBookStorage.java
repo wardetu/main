@@ -15,44 +15,44 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyResumeBook;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access ResumeBook data stored as a json file on the hard disk.
  */
-public class JsonAddressBookStorage implements AddressBookStorage {
+public class JsonResumeBookStorage implements ResumeBookStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonResumeBookStorage.class);
 
     private Path filePath;
 
-    public JsonAddressBookStorage(Path filePath) {
+    public JsonResumeBookStorage(Path filePath) {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getResumeBookFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyResumeBook> readAddressBook() throws DataConversionException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyResumeBook> readResumeBook() throws DataConversionException {
+        return readResumeBook(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readResumeBook()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyResumeBook> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyResumeBook> readResumeBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableResumeBook> jsonAddressBook = JsonUtil.readJsonFile(
+        Optional<JsonSerializableResumeBook> jsonResumeBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableResumeBook.class);
-        if (!jsonAddressBook.isPresent()) {
+        if (!jsonResumeBook.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonResumeBook.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -60,21 +60,21 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyResumeBook addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveResumeBook(ReadOnlyResumeBook resumeBook) throws IOException {
+        saveResumeBook(resumeBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyResumeBook)}.
+     * Similar to {@link #saveResumeBook(ReadOnlyResumeBook)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyResumeBook addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveResumeBook(ReadOnlyResumeBook resumeBook, Path filePath) throws IOException {
+        requireNonNull(resumeBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableResumeBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableResumeBook(resumeBook), filePath);
     }
 
 }
