@@ -9,6 +9,7 @@ import seedu.address.logic.commands.list.ListResumeCommand;
 import seedu.address.logic.commands.list.ListSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * Parses input arguments and creates a new ListCommand object
@@ -30,13 +31,14 @@ public class ListCommandParser implements Parser<ListCommand> {
         String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
         switch(itemType) {
-        case ("int"):
-            return new ListInternshipCommand();
-        case ("proj"):
-            return new ListProjectCommand();
-        case ("res"):
+
+        case ItemUtil.RESUME_ALIAS:
             return new ListResumeCommand();
-        case ("ski"):
+        case ItemUtil.INTERNSHIP_ALIAS:
+            return new ListInternshipCommand();
+        case ItemUtil.PROJECT_ALIAS:
+            return new ListProjectCommand();
+        case ItemUtil.SKILL_ALIAS:
             return new ListSkillCommand();
         default:
             // Should not have reached here

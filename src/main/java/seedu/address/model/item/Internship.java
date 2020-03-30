@@ -22,13 +22,13 @@ public class Internship extends Item {
     private String description;
 
     public Internship(Name name, String role, Time from, Time to, String description, Set<Tag> tags) {
-        this(name, role, from, to, description, tags, ItemUtil.yieldId("int"));
+        this(name, role, from, to, description, tags, ItemUtil.yieldId(ItemUtil.INTERNSHIP_ALIAS));
     }
 
     public Internship(Name name, String role, Time from, Time to, String description, Set<Tag> tags, int id) {
         super(name, id, tags);
         requireAllNonNull(role, from, to, description);
-        this.type = Type.generate("int");
+        this.type = Type.generate(ItemUtil.INTERNSHIP_ALIAS);
         this.role = role;
         this.from = from;
         this.to = to;

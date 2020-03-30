@@ -22,13 +22,13 @@ public class Project extends Item {
     private String description;
 
     public Project(Name name, Time time, Website website, String description, Set<Tag> tags) {
-        this(name, time, website, description, tags, ItemUtil.yieldId("proj"));
+        this(name, time, website, description, tags, ItemUtil.yieldId(ItemUtil.PROJECT_ALIAS));
     }
 
     public Project(Name name, Time time, Website website, String description, Set<Tag> tags, int id) {
         super(name, id, tags);
         requireAllNonNull(time, website, description);
-        this.type = Type.generate("proj");
+        this.type = Type.generate(ItemUtil.PROJECT_ALIAS);
         this.time = time;
         this.website = website;
         this.description = description;
@@ -65,12 +65,20 @@ public class Project extends Item {
     }
 
     @Override
+    public boolean isSame(Item otherProject) {
+        return super.isSame(otherProject)
+                && ((Project) otherProject).getTime().equals(getTime());
+    }
+
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Project // instanceof handles nulls
                 && getName().equals(((Project) other).getName())
                 && time.equals(((Project) other).time) // state check
                 && website.equals(((Project) other).website) // state check
-                && description.equals(((Project) other).description)); // state check
+                && description.equals(((Project) other).description)) // state check
+                && getTags().equals(((Project) other).getTags());
     }
 }
