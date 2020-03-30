@@ -2,6 +2,7 @@ package seedu.address.logic.commands.add;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -99,6 +100,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Optional<Internship> getInternshipById(int id) {
+            return null;
+        }
+
+        @Override
         public int getInternshipSize() {
             return 0;
         }
@@ -134,6 +140,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Optional<Project> getProjectById(int id) {
+            return null;
+        }
+
+        @Override
         public int getProjectSize() {
             return 0;
         }
@@ -165,6 +176,11 @@ public class AddCommandTest {
 
         @Override
         public Skill getSkill(Index index) {
+            return null;
+        }
+
+        @Override
+        public Optional<Skill> getSkillById(int id) {
             return null;
         }
 

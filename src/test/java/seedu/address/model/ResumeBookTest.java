@@ -24,6 +24,7 @@ package seedu.address.model;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -186,14 +187,31 @@ public class ResumeBookTest {
         }
 
         @Override
+        public Optional<Internship> getInternshipById(int id) {
+            return Optional.of(new Internship(new Name("Company 1"), "Software Engineer", new Time("02-2019"),
+                    new Time("05-2020"), "I did nothing", new HashSet<>()));
+        }
+
+        @Override
         public Project getProject(Index index) {
             return new Project(new Name("Project 1"), new Time("01-2020"), new Website("www.website.com"),
                     "I did nothing", new HashSet<>());
         }
 
         @Override
+        public Optional<Project> getProjectById(int id) {
+            return Optional.of(new Project(new Name("Project 1"), new Time("01-2020"), new Website("www.website.com"),
+                    "I did nothing", new HashSet<>()));
+        }
+
+        @Override
         public Skill getSkill(Index index) {
             return new Skill(new Name("Useless skill 1"), Level.ADVANCED, new HashSet<>(), -1);
+        }
+
+        @Override
+        public Optional<Skill> getSkillById(int id) {
+            return Optional.of(new Skill(new Name("Useless skill 1"), Level.ADVANCED, new HashSet<>(), -1));
         }
 
         @Override

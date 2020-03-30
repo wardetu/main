@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -106,6 +107,14 @@ public interface Model {
     Internship getInternship(Index index);
 
     /**
+     * Return an Internship item with the specified ID from the internship list.
+     * If no internship is found with the specified ID, `Optional.empty` is returned.
+     * @param id ID of internship
+     * @return Internship item with {@code id}
+     */
+    Optional<Internship> getInternshipById(int id);
+
+    /**
      * Return the size of the internship list.
      */
     int getInternshipSize();
@@ -149,6 +158,14 @@ public interface Model {
     Project getProject(Index index);
 
     /**
+     * Return a Project item with the specified ID from the project list.
+     * If no project is found with the specified ID, `Optional.empty` is returned.
+     * @param id ID of project
+     * @return Project item with {@code id}
+     */
+    Optional<Project> getProjectById(int id);
+
+    /**
      * Return the size of the project list.
      */
     int getProjectSize();
@@ -190,6 +207,14 @@ public interface Model {
      * @return Skill item at {@code index}
      */
     Skill getSkill(Index index);
+
+    /**
+     * Return a Skill item with the specified ID from the skill list.
+     * If no skill is found with the specified ID, `Optional.empty` is returned.
+     * @param id ID of skill
+     * @return Skill item with {@code id}
+     */
+    Optional<Skill> getSkillById(int id);
 
     /**
      * Return the size of the skill list.

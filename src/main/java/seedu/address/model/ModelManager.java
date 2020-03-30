@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -132,6 +133,11 @@ public class ModelManager implements Model {
         versionedResumeBook.deleteInternship(key);
     }
 
+    @Override
+    public Optional<Internship> getInternshipById(int id) {
+        return versionedResumeBook.getInternshipById(id);
+    }
+
 
     @Override
     public Internship getInternship(Index index) {
@@ -178,6 +184,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Optional<Project> getProjectById(int id) {
+        return versionedResumeBook.getProjectById(id);
+    }
+
+    @Override
     public int getProjectSize() {
         return versionedResumeBook.getProjectSize();
     }
@@ -218,6 +229,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Optional<Skill> getSkillById(int id) {
+        return versionedResumeBook.getSkillById(id);
+    }
+
+    @Override
     public int getSkillSize() {
         return versionedResumeBook.getSkillSize();
     }
@@ -249,7 +265,6 @@ public class ModelManager implements Model {
     @Override
     public void setResume(Resume target, Resume editedResume) {
         requireAllNonNull(target, editedResume);
-
         versionedResumeBook.setResume(target, editedResume);
     }
 

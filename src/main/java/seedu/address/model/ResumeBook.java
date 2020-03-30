@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
@@ -235,6 +236,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
+    public Optional<Internship> getInternshipById(int id) {
+        // TODO: better exception handling instead of Optional
+        for (Item item: internships) {
+            Internship internship = (Internship) item;
+            if (internship.getId() == id) {
+                return Optional.of(internship);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public int getInternshipSize() {
         return internships.getSize();
     }
@@ -286,6 +299,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
+    public Optional<Project> getProjectById(int id) {
+        // TODO: better exception handling instead of Optional
+        for (Item item: projects) {
+            Project project = (Project) item;
+            if (project.getId() == id) {
+                return Optional.of(project);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public int getProjectSize() {
         return projects.getSize();
     }
@@ -334,6 +359,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
     @Override
     public Skill getSkill(Index index) {
         return skills.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public Optional<Skill> getSkillById(int id) {
+        // TODO: better exception handling instead of Optional
+        for (Item item: skills) {
+            Skill skill = (Skill) item;
+            if (skill.getId() == id) {
+                return Optional.of(skill);
+            }
+        }
+        return Optional.empty();
     }
 
     @Override
