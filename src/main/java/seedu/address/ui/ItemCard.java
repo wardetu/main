@@ -27,7 +27,7 @@ public class ItemCard extends UiPart<Region> {
     public final Item person;
 
     @FXML
-    private HBox cardPane;
+    private HBox itemPane;
     @FXML
     private Label name;
     @FXML

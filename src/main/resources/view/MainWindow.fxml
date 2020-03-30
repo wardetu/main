@@ -39,8 +39,8 @@
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </padding>
                      <children>
-                        <StackPane fx:id="profilePlaceholder" styleClass="pane-with-border"/>
-                        <StackPane fx:id="notePlaceholder" styleClass="pane-with-border"/>
+                        <StackPane fx:id="profilePlaceholder" styleClass="pane-with-border" />
+                        <StackPane fx:id="notePlaceholder" styleClass="pane-with-border" />
                      </children>
                   </VBox>
                   <VBox fx:id="mainAppPlaceholder">
@@ -55,16 +55,17 @@
                        <items>
                           <VBox fx:id="resultAndItem">
                              <children>
-                             <StackPane fx:id="resultDisplayPlaceholder" maxHeight="200.0" minWidth="200.0" styleClass="pane-with-border">
+                             <StackPane fx:id="resultDisplayPlaceholder" maxHeight="150.0" minWidth="200.0" styleClass="pane-with-border">
                                <padding>
                                   <Insets bottom="5" left="10" right="10" top="5" />
                                </padding>
                              </StackPane>
-                         <StackPane fx:id="itemDisplayPlaceholder" minWidth="200.0" styleClass="pane-with-border">
+                         <StackPane fx:id="itemDisplayPlaceholder" maxHeight="150.0" minWidth="200.0" styleClass="pane-with-border">
                           <padding>
                             <Insets bottom="5" left="10" right="10" top="5" />
                           </padding>
                          </StackPane>
+                                    <StackPane styleClass="pane-with-border" />
                              </children>
                           </VBox>
 
@@ -72,7 +73,7 @@
                         <padding>
                           <Insets bottom="10" left="10" right="10" top="10" />
                         </padding>
-                        <StackPane fx:id="personListPanelPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
+                        <StackPane fx:id="personListPanelPlaceholder" minWidth="200" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
                       </VBox>
                        </items>
                     </SplitPane>

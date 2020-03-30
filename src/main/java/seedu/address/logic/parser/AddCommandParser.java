@@ -32,6 +32,7 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -59,7 +60,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         String description;
 
         switch (itemType) {
-        case ("res"):
+        case (ItemUtil.RESUME_ALIAS):
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddResumeCommand.MESSAGE_USAGE));
@@ -71,7 +72,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Resume resume = new Resume(name, tagList);
             return new AddResumeCommand(resume);
 
-        case ("int"):
+        case (ItemUtil.INTERNSHIP_ALIAS):
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FROM, PREFIX_TO, PREFIX_ROLE, PREFIX_DESCRIPTION)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -88,7 +89,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Internship internship = new Internship(name, role, from, to, description, tagList);
             return new AddInternshipCommand(internship);
 
-        case ("proj"):
+        case (ItemUtil.PROJECT_ALIAS):
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TIME, PREFIX_WEBSITE, PREFIX_DESCRIPTION)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -103,7 +104,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Project project = new Project(name, time, website, description, tagList);
             return new AddProjectCommand(project);
 
-        case("ski"):
+        case(ItemUtil.SKILL_ALIAS):
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LEVEL) || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddSkillCommand.MESSAGE_USAGE));

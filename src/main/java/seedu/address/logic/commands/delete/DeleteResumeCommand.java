@@ -30,6 +30,7 @@ public class DeleteResumeCommand extends DeleteCommand {
 
         model.deleteResume(toDelete);
         model.setResumeToDisplay();
+        model.commitResumeBook();
 
         return new CommandResult(toDelete.toString(),
                 String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()));

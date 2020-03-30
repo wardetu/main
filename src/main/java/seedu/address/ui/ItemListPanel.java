@@ -18,12 +18,12 @@ public class ItemListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ItemListPanel.class);
 
     @FXML
-    private ListView<Item> personListView;
+    private ListView<Item> itemListView;
 
-    public ItemListPanel(ObservableList<Item> personList) {
+    public ItemListPanel(ObservableList<Item> itemList) {
         super(FXML);
-        personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new ItemListViewCell());
+        itemListView.setItems(itemList);
+        itemListView.setCellFactory(listView -> new ItemListViewCell());
     }
 
     /**
@@ -31,14 +31,14 @@ public class ItemListPanel extends UiPart<Region> {
      */
     class ItemListViewCell extends ListCell<Item> {
         @Override
-        protected void updateItem(Item person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(Item item, boolean empty) {
+            super.updateItem(item, empty);
 
-            if (empty || person == null) {
+            if (empty || item == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ItemCard(person, getIndex() + 1).getRoot());
+                setGraphic(new ItemCard(item, item.getIndex() + 1).getRoot());
             }
         }
     }
