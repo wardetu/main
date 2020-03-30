@@ -53,6 +53,10 @@ public class NoteModel {
         return filteredNoteBook.size();
     }
 
+    public boolean contains(NoteEntry note) {
+        return noteBook.contains(note);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

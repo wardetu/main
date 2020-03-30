@@ -370,6 +370,15 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     /**
+     * Edits the resume in the resume book.
+     */
+    public void editResume(Resume target, List<Integer> internshipIndices) {
+        target.setInternships(internshipIndices);
+        // target.setProjects(projectIndices);
+        // target.setSkills(skillIndices);
+    }
+
+    /**
      * Removes {@code key} from this {@code ResumeBook}.
      * {@code key} must exist in the resume book.
      */

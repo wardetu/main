@@ -2,9 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -187,5 +192,24 @@ public class ParserUtil {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
         return new Time(trimmedTime);
+    }
+
+    /**
+     * Parses the Internship Indices to give the required optional
+     */
+    public static Optional<List<Integer>> parseInternshipIndices(String indices) throws ParseException {
+        if (indices == null) {
+            return Optional.empty();
+        } else if (indices.equals("")) {
+            // Empty string will return an InvokationTargetException in the streams
+            // TODO: Investigae how this can be combined with the else block
+            return Optional.of(new ArrayList<>());
+        } else {
+            List<Integer> internshipIndices = Arrays.stream(indices.split("\\s+"))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+
+            return Optional.of(internshipIndices);
+        }
     }
 }
