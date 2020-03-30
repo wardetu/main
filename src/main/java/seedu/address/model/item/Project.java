@@ -55,12 +55,16 @@ public class Project extends Item {
         return builder.toString();
     }
 
+    /**
+     * Gets the string representation of Project to preview.
+     * @return String representation of project
+     */
     public String toPreview() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Name: ").append(getName())
                 .append("Website: ").append(getWebsite())
                 .append("Time: ").append(getTime());
-        Arrays.stream(getDescription().split("\\.")).map(x -> "- " + x.trim() +".\n").forEach(builder::append);
+        Arrays.stream(getDescription().split("\\.")).map(x -> "- " + x.trim() + ".\n").forEach(builder::append);
         return builder.toString();
     }
 

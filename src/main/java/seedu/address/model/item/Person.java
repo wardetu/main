@@ -85,6 +85,10 @@ public class Person {
         return cap;
     }
 
+    /**
+     * Gets the string representation of Person to preview.
+     * @return String representation of person
+     */
     public String toPreview() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Name: ").append(getName()).append("\n")
