@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.add;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -189,6 +190,11 @@ public class AddCommandTest {
 
         @Override
         public void setResume(Resume target, Resume editedResume) {
+
+        }
+
+        @Override
+        public void editResume(Resume target, List<Integer> internships) {
 
         }
 

@@ -369,6 +369,9 @@ public class ResumeBook implements ReadOnlyResumeBook {
         resumes.setItem(target, editedResume);
     }
 
+    /**
+     * Edits the resume in the resume book.
+     */
     public void editResume(Resume target, List<Integer> internshipIndices) {
         target.setInternships(internshipIndices);
         // target.setProjects(projectIndices);

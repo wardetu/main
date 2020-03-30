@@ -15,6 +15,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Resume;
 
+/**
+ * Edits the content of a Resume.
+ */
 public class ResumeEditCommand extends Command {
     public static final String COMMAND_WORD = "redit";
 
@@ -31,6 +34,7 @@ public class ResumeEditCommand extends Command {
 
     protected final Index index;
     protected final Optional<List<Integer>> internshipIndices;
+
     public ResumeEditCommand(Index index, Optional<List<Integer>> internshipIndices) {
         this.index = index;
         this.internshipIndices = internshipIndices;
@@ -56,6 +60,9 @@ public class ResumeEditCommand extends Command {
         return new CommandResult(toEdit.toString(), "Resume is updated");
     }
 
+    /**
+     * Checks for whether the specified indices are valid.
+     */
     private void checkIndicesValidity(Model model) throws CommandException {
         // Internships
         if (internshipIndices.isPresent()) {

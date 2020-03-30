@@ -194,6 +194,9 @@ public class ParserUtil {
         return new Time(trimmedTime);
     }
 
+    /**
+     * Parses the Internship Indices to give the required optional
+     */
     public static Optional<List<Integer>> parseInternshipIndices(String indices) throws ParseException {
         if (indices == null) {
             return Optional.empty();
