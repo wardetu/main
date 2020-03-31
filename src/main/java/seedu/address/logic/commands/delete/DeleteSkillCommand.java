@@ -26,7 +26,7 @@ public class DeleteSkillCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Skill toDelete = model.getSkill(targetIndex);
+        Skill toDelete = model.getSkillByIndex(targetIndex);
 
         model.deleteSkill(toDelete);
         model.setSkillToDisplay();

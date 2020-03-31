@@ -50,13 +50,13 @@ public class ResumeEditCommand extends Command {
         }
 
         checkIndicesValidity(model);
-        Resume toEdit = model.getResume(index);
+        Resume toEdit = model.getResumeByIndex(index);
         if (internshipIndices.isPresent()) {
             // Will change this to a more appropriate name
             List<Integer> listOfId = internshipIndices
                     .get()
                     .stream()
-                    .map(x -> model.getInternship(Index.fromOneBased(x)).getId())
+                    .map(x -> model.getInternshipByIndex(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
             model.editResume(toEdit, listOfId);
         }

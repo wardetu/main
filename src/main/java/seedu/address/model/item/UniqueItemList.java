@@ -63,6 +63,19 @@ public class UniqueItemList<T extends Item> implements Iterable<T> {
     }
 
     /**
+     * Gets an item by ID
+     */
+    public T getById(int id) {
+        T item = null;
+        for (T i: internalList) {
+            if (i.getId() == id) {
+                item = i;
+            }
+        }
+        return item;
+    }
+
+    /**
      * Replaces the item {@code target} in the list with {@code editedItem}.
      * {@code target} must exist in the list.
      * The identity of {@code editedItem} must not be the same as another existing item in the list.

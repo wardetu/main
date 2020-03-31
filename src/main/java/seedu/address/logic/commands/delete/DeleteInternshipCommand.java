@@ -26,7 +26,7 @@ public class DeleteInternshipCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Internship toDelete = model.getInternship(targetIndex);
+        Internship toDelete = model.getInternshipByIndex(targetIndex);
 
         model.deleteInternship(toDelete);
         model.setInternshipToDisplay();

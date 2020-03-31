@@ -187,7 +187,7 @@ public class GenerateResumeCommand extends Command {
         if (targetIndex.getZeroBased() >= model.getResumeSize()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
-        Resume resumeToGenerate = model.getResume(targetIndex);
+        Resume resumeToGenerate = model.getResumeByIndex(targetIndex);
 
         // Get title
         if (this.title == null) {
@@ -212,19 +212,19 @@ public class GenerateResumeCommand extends Command {
             addTitle(contentStream, title);
             addSection(contentStream, "INTERNSHIPS");
             for (Integer id: internshipsToAdd) {
-                Internship toAdd = model.getInternshipById(id).get();
+                Internship toAdd = model.getInternshipById(id);
                 addInternship(contentStream, toAdd);
             }
 
             addSection(contentStream, "PROJECTS");
             for (Integer id: projectsToAdd) {
-                Project toAdd = model.getProjectById(id).get();
+                Project toAdd = model.getProjectById(id);
                 addProject(contentStream, toAdd);
             }
 
             addSection(contentStream, "SKILLS");
             for (Integer id: skillsToAdd) {
-                Skill toAdd = model.getSkillById(id).get();
+                Skill toAdd = model.getSkillById(id);
                 addSkill(contentStream, toAdd);
             }
             contentStream.endText();

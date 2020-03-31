@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
@@ -226,25 +225,28 @@ public class ResumeBook implements ReadOnlyResumeBook {
         internships.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getInternships().remove(id);
+            resume.getInternships().remove(Integer.valueOf(id));
         }
     }
 
     @Override
-    public Internship getInternship(Index index) {
+    public Internship getInternshipByIndex(Index index) {
         return internships.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
     @Override
-    public Optional<Internship> getInternshipById(int id) {
-        // TODO: better exception handling instead of Optional
-        for (Item item: internships) {
-            Internship internship = (Internship) item;
-            if (internship.getId() == id) {
-                return Optional.of(internship);
+    public boolean hasInternshipId(int id) {
+        for (Internship item : internships) {
+            if (item.getId() == id) {
+                return true;
             }
         }
-        return Optional.empty();
+        return false;
+    }
+
+    @Override
+    public Internship getInternshipById(int id) {
+        return internships.getById(id);
     }
 
     @Override
@@ -289,25 +291,28 @@ public class ResumeBook implements ReadOnlyResumeBook {
         projects.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getProjects().remove(id);
+            resume.getProjects().remove(Integer.valueOf(id));
         }
     }
 
     @Override
-    public Project getProject(Index index) {
+    public Project getProjectByIndex(Index index) {
         return projects.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
     @Override
-    public Optional<Project> getProjectById(int id) {
-        // TODO: better exception handling instead of Optional
-        for (Item item: projects) {
-            Project project = (Project) item;
-            if (project.getId() == id) {
-                return Optional.of(project);
+    public boolean hasProjectId(int id) {
+        for (Project item : projects) {
+            if (item.getId() == id) {
+                return true;
             }
         }
-        return Optional.empty();
+        return false;
+    }
+
+    @Override
+    public Project getProjectById(int id) {
+        return projects.getById(id);
     }
 
     @Override
@@ -352,25 +357,28 @@ public class ResumeBook implements ReadOnlyResumeBook {
         skills.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getSkills().remove(id);
+            resume.getSkills().remove(Integer.valueOf(id));
         }
     }
 
     @Override
-    public Skill getSkill(Index index) {
+    public Skill getSkillByIndex(Index index) {
         return skills.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
     @Override
-    public Optional<Skill> getSkillById(int id) {
-        // TODO: better exception handling instead of Optional
-        for (Item item: skills) {
-            Skill skill = (Skill) item;
-            if (skill.getId() == id) {
-                return Optional.of(skill);
+    public boolean hasSkillId(int id) {
+        for (Skill item : skills) {
+            if (item.getId() == id) {
+                return true;
             }
         }
-        return Optional.empty();
+        return false;
+    }
+
+    @Override
+    public Skill getSkillById(int id) {
+        return skills.getById(id);
     }
 
     @Override
@@ -424,8 +432,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public Resume getResume(Index index) {
+    public Resume getResumeByIndex(Index index) {
         return resumes.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public boolean hasResumeId(int resumeIndex) {
+        for (Resume item : resumes) {
+            if (item.getId() == resumeIndex) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -486,64 +504,5 @@ public class ResumeBook implements ReadOnlyResumeBook {
     @Override
     public int hashCode() {
         return itemsToDisplay.hashCode();
-    }
-
-    //STUBS
-    public UniqueItemList<Item> getPersonalDetailList() {
-        return new UniqueItemList<>();
-    }
-
-    // TODO: THIS IS BY ID!!!
-    public Resume getResumeByIndex(int index) {
-        for (Resume res : resumes) {
-            if (res.getId() == index) {
-                return res;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public boolean hasResumeId(int resumeIndex) {
-        for (Resume item : resumes) {
-            if (item.getId() == resumeIndex) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasInternshipId(int i) {
-        for (Internship item : internships) {
-            if (item.getId() == i) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasProjectId(int i) {
-        for (Project item : projects) {
-            if (item.getId() == i) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasSkillId(int i) {
-        for (Skill item : skills) {
-            if (item.getId() == i) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean hasItem(Item item) {
-        return false;
     }
 }

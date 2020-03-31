@@ -26,7 +26,7 @@ public class ViewProjectCommand extends ViewCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Project toView = model.getProject(targetIndex);
+        Project toView = model.getProjectByIndex(targetIndex);
         model.setProjectToDisplay();
 
         return new CommandResult(toView.toString(),

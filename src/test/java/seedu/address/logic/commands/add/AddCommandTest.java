@@ -2,7 +2,6 @@ package seedu.address.logic.commands.add;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -95,12 +94,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Internship getInternship(Index index) {
+        public Internship getInternshipByIndex(Index index) {
             return null;
         }
 
         @Override
-        public Optional<Internship> getInternshipById(int id) {
+        public Internship getInternshipById(int id) {
             return null;
         }
 
@@ -135,12 +134,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Project getProject(Index index) {
+        public Project getProjectByIndex(Index index) {
             return null;
         }
 
         @Override
-        public Optional<Project> getProjectById(int id) {
+        public Project getProjectById(int id) {
             return null;
         }
 
@@ -175,12 +174,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Skill getSkill(Index index) {
+        public Skill getSkillByIndex(Index index) {
             return null;
         }
 
         @Override
-        public Optional<Skill> getSkillById(int id) {
+        public Skill getSkillById(int id) {
             return null;
         }
 
@@ -215,11 +214,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public Resume getResumeByIndex(int resumeIndex) {
-            return null;
-        }
-
-        @Override
         public boolean hasResumeId(int resumeIndex) {
             return false;
         }
@@ -230,7 +224,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Resume getResume(Index index) {
+        public Resume getResumeByIndex(Index index) {
             return null;
         }
 

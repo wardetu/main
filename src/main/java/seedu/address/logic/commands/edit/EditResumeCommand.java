@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.Set;
 
@@ -46,13 +45,12 @@ public class EditResumeCommand extends EditCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Resume toEdit = model.getResume(index);
+        Resume toEdit = model.getResumeByIndex(index);
 
         Resume editedResume = createEditedResume(toEdit, editResumeDescriptor);
 
         model.setResume(toEdit, editedResume);
         model.setResumeToDisplay();
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
         return new CommandResult(editedResume.toString(), String.format(MESSAGE_EDIT_RESUME_SUCCESS, editedResume));
     }

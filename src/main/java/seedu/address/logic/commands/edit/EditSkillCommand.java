@@ -3,7 +3,6 @@ package seedu.address.logic.commands.edit;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.Set;
 
@@ -47,13 +46,12 @@ public class EditSkillCommand extends EditCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Skill toEdit = model.getSkill(index);
+        Skill toEdit = model.getSkillByIndex(index);
 
         Skill editedSkill = createEditedSkill(toEdit, editSkillDescriptor);
 
         model.setSkill(toEdit, editedSkill);
         model.setSkillToDisplay();
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
 
         return new CommandResult(editedSkill.toString(), String.format(MESSAGE_EDIT_SKILL_SUCCESS, editedSkill));

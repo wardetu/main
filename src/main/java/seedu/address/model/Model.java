@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -104,15 +103,16 @@ public interface Model {
      * @param index
      * @return Internship item at {@code index}
      */
-    Internship getInternship(Index index);
+    Internship getInternshipByIndex(Index index);
+
+    boolean hasInternshipId(int id);
 
     /**
-     * Return an Internship item with the specified ID from the internship list.
-     * If no internship is found with the specified ID, `Optional.empty` is returned.
-     * @param id ID of internship
+     * Return a Internship item with the specified ID from the internship list.
+     * @param id
      * @return Internship item with {@code id}
      */
-    Optional<Internship> getInternshipById(int id);
+    Internship getInternshipById(int id);
 
     /**
      * Return the size of the internship list.
@@ -155,15 +155,16 @@ public interface Model {
      * @param index
      * @return Project item at {@code index}
      */
-    Project getProject(Index index);
+    Project getProjectByIndex(Index index);
+
+    boolean hasProjectId(int id);
 
     /**
      * Return a Project item with the specified ID from the project list.
-     * If no project is found with the specified ID, `Optional.empty` is returned.
-     * @param id ID of project
+     * @param id
      * @return Project item with {@code id}
      */
-    Optional<Project> getProjectById(int id);
+    Project getProjectById(int id);
 
     /**
      * Return the size of the project list.
@@ -206,15 +207,16 @@ public interface Model {
      * @param index
      * @return Skill item at {@code index}
      */
-    Skill getSkill(Index index);
+    Skill getSkillByIndex(Index index);
+
+    boolean hasSkillId(int id);
 
     /**
      * Return a Skill item with the specified ID from the skill list.
-     * If no skill is found with the specified ID, `Optional.empty` is returned.
-     * @param id ID of skill
+     * @param id
      * @return Skill item with {@code id}
      */
-    Optional<Skill> getSkillById(int id);
+    Skill getSkillById(int id);
 
     /**
      * Return the size of the skill list.
@@ -251,9 +253,6 @@ public interface Model {
      */
     void editResume(Resume target, List<Integer> internshipIndices);
 
-    Resume getResumeByIndex(int resumeIndex);
-    boolean hasResumeId(int resumeIndex);
-
     /**
      * Deletes the given resume.
      * The resume must exist in the resume book.
@@ -265,7 +264,9 @@ public interface Model {
      * @param index
      * @return Resume item at {@code index}
      */
-    Resume getResume(Index index);
+    Resume getResumeByIndex(Index index);
+
+    boolean hasResumeId(int id);
 
     /**
      * Return the size of the resume list.
@@ -313,19 +314,4 @@ public interface Model {
      * Saves the current resume book state for undo/redo.
      */
     void commitResumeBook();
-
-    //// STUBS
-    boolean hasItem(Item item);
-
-    void addItem(Item item);
-
-    void deleteItem(Item item);
-
-    void setItem(Item target, Item edit);
-
-    void setItemsToDisplay(String type);
-
-    boolean hasInternshipId(int i);
-    boolean hasProjectId(int i);
-    boolean hasSkillId(int i);
 }

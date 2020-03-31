@@ -1,7 +1,5 @@
 package seedu.address.model;
 
-import java.util.Optional;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
@@ -62,15 +60,16 @@ public interface ReadOnlyResumeBook {
      * @param index index of internship
      * @return Internship item at {@code index}
      */
-    Internship getInternship(Index index);
+    Internship getInternshipByIndex(Index index);
+
+    boolean hasInternshipId(int id);
 
     /**
-     * Return an Internship item with the specified ID from the internship list.
-     * If no internship is found with the specified ID, `Optional.empty` is returned.
-     * @param id ID of internship
+     * Return a Internship item with the specified ID from the internship list.
+     * @param id
      * @return Internship item with {@code id}
      */
-    Optional<Internship> getInternshipById(int id);
+    Internship getInternshipById(int id);
 
     /**
      * Return the size of the internship list.
@@ -82,15 +81,16 @@ public interface ReadOnlyResumeBook {
      * @param index index of project
      * @return Project item at {@code index}
      */
-    Project getProject(Index index);
+    Project getProjectByIndex(Index index);
+
+    boolean hasProjectId(int id);
 
     /**
      * Return a Project item with the specified ID from the project list.
-     * If no project is found with the specified ID, `Optional.empty` is returned.
-     * @param id ID of project
+     * @param id
      * @return Project item with {@code id}
      */
-    Optional<Project> getProjectById(int id);
+    Project getProjectById(int id);
 
     /**
      * Return the size of the project list.
@@ -102,15 +102,16 @@ public interface ReadOnlyResumeBook {
      * @param index index of skill
      * @return Skill item at {@code index}
      */
-    Skill getSkill(Index index);
+    Skill getSkillByIndex(Index index);
+
+    boolean hasSkillId(int id);
 
     /**
      * Return a Skill item with the specified ID from the skill list.
-     * If no skill is found with the specified ID, `Optional.empty` is returned.
-     * @param id ID of skill
+     * @param id
      * @return Skill item with {@code id}
      */
-    Optional<Skill> getSkillById(int id);
+    Skill getSkillById(int id);
 
     /**
      * Return the size of the skill list.
@@ -122,21 +123,12 @@ public interface ReadOnlyResumeBook {
      * @param index index of resume
      * @return Resume item at {@code index}
      */
-    Resume getResume(Index index);
+    Resume getResumeByIndex(Index index);
+
+    boolean hasResumeId(int id);
 
     /**
      * Return the size of the resume list.
      */
     int getResumeSize();
-
-    ///STUB
-    UniqueItemList<Item> getPersonalDetailList();
-
-    boolean hasResumeId(int resumeIndex);
-
-    boolean hasInternshipId(int i);
-
-    boolean hasProjectId(int i);
-
-    boolean hasSkillId(int i);
 }

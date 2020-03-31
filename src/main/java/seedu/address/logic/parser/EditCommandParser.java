@@ -130,7 +130,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editSkillDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
             }
             if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
-                editSkillDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_LEVEL).get()));
+                editSkillDescriptor.setLevel(ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get()));
             }
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editSkillDescriptor::setTags);
 
