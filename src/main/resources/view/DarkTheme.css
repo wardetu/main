@@ -111,6 +111,8 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 2 2 2 2;
 }
 
 .list-cell:filled:even {
@@ -158,6 +160,7 @@
 .pane-with-border {
     -fx-background-color: linear-gradient(to top left, #3b444b, #434e56);
     -fx-border-top-width: 1px;
+    -fx-border-radius: 20 20 20 20;
 }
 
 .status-bar {
@@ -169,6 +172,7 @@
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
+    -fx-border-radius: 20 20 20 20;
 }
 
 .result-display .label {
@@ -381,7 +385,7 @@
     -fx-text-fill: white;
     -fx-background-color: #e085c2;
     -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
+    -fx-border-radius: 5 5 5 5;
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
@@ -390,7 +394,7 @@
     -fx-text-fill: white;
     -fx-background-color: #5a6872;
     -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
+    -fx-border-radius: 5 5 5 5;
     -fx-background-radius: 2;
     -fx-font-size: 13pt;
 }
@@ -399,7 +403,7 @@
     -fx-text-fill: white;
     -fx-background-color: #5a6872;
     -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
+    -fx-border-radius: 5 5 5 5;
     -fx-background-radius: 2;
     -fx-font-size: 13pt;
 }
