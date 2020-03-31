@@ -57,9 +57,9 @@ public class ResumeEditCommand extends Command {
         checkIndicesValidity(model);
         Resume toEdit = model.getResume(index);
 
-        List<Integer> internshipsId = toEdit.getInternships();
-        List<Integer> projectsId = toEdit.getProjects();
-        List<Integer> skillsId = toEdit.getSkills();
+        List<Integer> internshipsId = toEdit.getInternshipIds();
+        List<Integer> projectsId = toEdit.getProjectIds();
+        List<Integer> skillsId = toEdit.getSkillIds();
 
         // If any of the indices are present (user keys in the prefix), then use what the user uses
         // Else, use the one currently being used by the resume
