@@ -123,8 +123,8 @@ public class GenerateResumeCommand extends Command {
     public void addInternship(PDPageContentStream contentStream, Internship internship) throws IOException {
         String name = internship.getName().toString();
         String role = internship.getRole();
-        String from = internship.getFrom().toString();
-        String to = internship.getTo().toString();
+        String from = internship.getFrom().format();
+        String to = internship.getTo().format();
         String title = name + " | " + role + " | " + from + " - " + to;
         addItemTitle(contentStream, title);
 
@@ -140,7 +140,7 @@ public class GenerateResumeCommand extends Command {
      */
     public void addProject(PDPageContentStream contentStream, Project project) throws IOException {
         String name = project.getName().toString();
-        String time = project.getTime().toString();
+        String time = project.getTime().format();
         String website = project.getWebsite().toString();
         String title = name + " | " + time + " | " + website;
         addItemTitle(contentStream, title);

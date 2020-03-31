@@ -39,21 +39,21 @@ public class Time {
      * Formats {@code Time} to "MMM yyyy" format.
      * @return formatted {@String}.
      */
-    public String format() throws ParseException {
+    public String format() {
         SimpleDateFormat parser = new SimpleDateFormat("MM-yyyy");
-        Date date = parser.parse(this.value);
-        SimpleDateFormat formatter = new SimpleDateFormat("MMM yyyy");
-        return formatter.format(date);
+        try {
+            Date date = parser.parse(this.value);
+            SimpleDateFormat formatter = new SimpleDateFormat("MMM yyyy");
+            return formatter.format(date);
+        } catch (ParseException e) {
+            return this.value;
+        }
+
     }
 
     @Override
     public String toString() {
-        try {
-            return format();
-        } catch (ParseException e) {
-            System.out.println("error parsing date");
-            return this.value;
-        }
+        return this.value;
     }
 
     @Override
