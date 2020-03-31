@@ -209,7 +209,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public void editResume(Resume target, List<Integer> internships) {
+        public void editResume(Resume target, List<Integer> internshipsId, List<Integer> projectsId,
+                               List<Integer> skillsId) {
 
         }
 

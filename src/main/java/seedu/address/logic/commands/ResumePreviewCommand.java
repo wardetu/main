@@ -51,21 +51,21 @@ public class ResumePreviewCommand extends Command {
     }
 
     private String getDataFromResume(Resume resume, Model model) {
-        List<String> internshipList = resume.getInternships()
+        List<String> internshipList = resume.getInternshipIds()
                 .stream()
                 .map(x -> model.hasInternshipId(x) ? model.getInternshipById(x) : null)
                 .filter(Objects::nonNull)
                 .map(Internship::toPreview)
                 .collect(Collectors.toList());
 
-        List<String> projectList = resume.getProjects()
+        List<String> projectList = resume.getProjectIds()
                 .stream()
                 .map(x -> model.hasProjectId(x) ? model.getProjectById(x) : null)
                 .filter(Objects::nonNull)
                 .map(Project::toPreview)
                 .collect(Collectors.toList());
 
-        List<String> skillsList = resume.getSkills()
+        List<String> skillsList = resume.getSkillIds()
                 .stream()
                 .map(x -> model.hasSkillId(x) ? model.getSkillById(x) : null)
                 .filter(Objects::nonNull)

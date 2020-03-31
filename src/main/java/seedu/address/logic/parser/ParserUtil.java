@@ -195,21 +195,21 @@ public class ParserUtil {
     }
 
     /**
-     * Parses the Internship Indices to give the required optional
+     * Parses the Item Indices to give the required optional
      */
-    public static Optional<List<Integer>> parseInternshipIndices(String indices) throws ParseException {
+    public static Optional<List<Integer>> parseReditItemIndices(String indices) throws ParseException {
         if (indices == null) {
             return Optional.empty();
         } else if (indices.equals("")) {
             // Empty string will return an InvokationTargetException in the streams
-            // TODO: Investigae how this can be combined with the else block
+            // TODO: Investigate how this can be combined with the else block
             return Optional.of(new ArrayList<>());
         } else {
-            List<Integer> internshipIndices = Arrays.stream(indices.split("\\s+"))
+            List<Integer> mappedIndices = Arrays.stream(indices.split("\\s+"))
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
 
-            return Optional.of(internshipIndices);
+            return Optional.of(mappedIndices);
         }
     }
 }
