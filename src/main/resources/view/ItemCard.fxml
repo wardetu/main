@@ -30,12 +30,14 @@
       </HBox>
       <FlowPane fx:id="tags">
             <VBox.margin>
-               <Insets top="5.0" />
-            </VBox.margin></FlowPane>
-      <Label fx:id="summary" styleClass="cell_small_label" text="\$summary" textFill="#ddd235" wrapText="true">
+               <Insets top="5.0" left="22.0" />
+            </VBox.margin>
+      </FlowPane>
+      <Label fx:id="summary" styleClass="cell_medium_label" text="\$summary" wrapText="true">
             <VBox.margin>
-               <Insets top="5.0" />
-            </VBox.margin></Label>
+               <Insets top="5.0" left="22.0"/>
+            </VBox.margin>
+      </Label>
     </VBox>
       <rowConstraints>
          <RowConstraints />

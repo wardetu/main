@@ -75,7 +75,7 @@ public class ResumeEditCommand extends Command {
             projectsId = projectIndices
                     .get()
                     .stream()
-                    .map(x -> model.getInternship(Index.fromOneBased(x)).getId())
+                    .map(x -> model.getProject(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
         }
 
@@ -83,7 +83,7 @@ public class ResumeEditCommand extends Command {
             skillsId = skillIndices
                     .get()
                     .stream()
-                    .map(x -> model.getInternship(Index.fromOneBased(x)).getId())
+                    .map(x -> model.getSkill(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
         }
 
