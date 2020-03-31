@@ -1,14 +1,15 @@
-package seedu.address.logic.commands.takenote;
+package seedu.address.logic.commands.note;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 import seedu.address.model.note.NoteEntry;
-import seedu.address.model.note.NoteModel;
 
-public class AddNoteCommand extends NoteCommand {
-    public static final String COMMAND_WORD = "addnote";
+public class AddNoteCommand extends AddCommand {
+//    public static final String COMMAND_WORD = "note";
 
     public static final String MESSAGE_SUCCESS = "New note added!";
 
@@ -22,13 +23,13 @@ public class AddNoteCommand extends NoteCommand {
     }
 
     @Override
-    public CommandResult execute(NoteModel model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (model.contains(toAdd)) {
+        if (model.hasNoteEntry(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ERROR);
         }
         model.addNoteEntry(toAdd);
-        return new CommandResult(toAdd.toString(), MESSAGE_SUCCESS);
+        return new CommandResult(toAdd.toString(), MESSAGE_SUCCESS, true);
     }
 
     @Override

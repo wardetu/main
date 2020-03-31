@@ -19,6 +19,7 @@ import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.note.NoteEntry;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,6 +30,7 @@ public class ModelManager implements Model {
     private final VersionedResumeBook versionedResumeBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Item> filteredItems;
+    private final FilteredList<NoteEntry> filterdNoteEntries;
 
     /**
      * Initializes a ModelManager with the given resumeBook and userPrefs.
@@ -42,6 +44,7 @@ public class ModelManager implements Model {
         this.versionedResumeBook = new VersionedResumeBook(resumeBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredItems = new FilteredList<>(this.versionedResumeBook.getItemToDisplayList());
+        filterdNoteEntries = new FilteredList<>(this.versionedResumeBook.getNoteEntryToDisplayList());
     }
 
     public ModelManager() {
@@ -106,6 +109,44 @@ public class ModelManager implements Model {
     public Person getUser() {
         return versionedResumeBook.getUser();
     }
+
+    @Override
+    public boolean hasNoteEntry(NoteEntry noteEntry) {
+        requireNonNull(noteEntry);
+        return versionedResumeBook.hasNoteEntry(noteEntry);
+    }
+
+    @Override
+    public void addNoteEntry(NoteEntry noteEntry) {
+        versionedResumeBook.addNoteEntry(noteEntry);
+        updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+    }
+
+    @Override
+    public void setNoteEntry(NoteEntry target, NoteEntry editedNoteEntry) {
+        requireAllNonNull(target, editedNoteEntry);
+        versionedResumeBook.setNoteEntry(target, editedNoteEntry);
+    }
+
+    @Override
+    public void deleteNoteEntry(NoteEntry key) {
+        versionedResumeBook.deleteNoteEntry(key);
+    }
+
+    @Override
+    public NoteEntry getNoteEntry(Index index) {
+        return versionedResumeBook.getNoteEntry(index);
+    }
+
+    @Override
+    public int getNoteEntrySize() {
+        return versionedResumeBook.getNoteEntrySize();
+    }
+
+//    @Override
+//    public void setNoteEntryToDisplay() {
+//        versionedResumeBook.setNoteEntryToDisplay();
+//    }
 
     //=========== Internships ================================================================================
 
@@ -301,6 +342,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredNoteEntryList(Predicate<NoteEntry> predicate) {
+        requireNonNull(predicate);
+        filterdNoteEntries.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<NoteEntry> getFilteredNoteEntryList() {
+        return filterdNoteEntries;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -373,6 +425,11 @@ public class ModelManager implements Model {
     @Override
     public boolean hasSkillId(int i) {
         return versionedResumeBook.hasSkillId(i);
+    }
+
+    @Override
+    public boolean hasNoteEntryId(int i) {
+        return versionedResumeBook.hasNoteEntryId(i);
     }
 
 }

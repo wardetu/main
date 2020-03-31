@@ -36,6 +36,7 @@ public class DeleteResumeCommand extends DeleteCommand {
                 String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()));
     }
 
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

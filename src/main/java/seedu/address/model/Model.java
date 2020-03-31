@@ -13,6 +13,7 @@ import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.note.NoteEntry;
 
 /**
  * The API of the Model component.
@@ -20,6 +21,7 @@ import seedu.address.model.item.Skill;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
+    Predicate<NoteEntry> PREDICATE_SHOW_ALL_ENTRIES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -71,6 +73,19 @@ public interface Model {
      */
     Person getUser();
 
+    boolean hasNoteEntry(NoteEntry noteEntry);
+
+    void addNoteEntry(NoteEntry noteEntry);
+
+    void setNoteEntry(NoteEntry target, NoteEntry editedNoteEntry);
+
+    void deleteNoteEntry(NoteEntry noteEntry);
+
+    NoteEntry getNoteEntry(Index index);
+
+    int getNoteEntrySize();
+
+//    void setNoteEntryToDisplay();
 
     //=========== Internships ================================================================================
 
@@ -263,7 +278,12 @@ public interface Model {
      */
     void updateFilteredItemList(Predicate<Item> predicate);
 
-    //================================ Undo/Redo =============================================================
+    ObservableList<NoteEntry> getFilteredNoteEntryList();
+
+    public void updateFilteredNoteEntryList(Predicate<NoteEntry> predicate);
+
+
+        //================================ Undo/Redo =============================================================
     /**
      * Returns true if the model has previous resume book states to restore.
      */
@@ -303,4 +323,5 @@ public interface Model {
     boolean hasInternshipId(int i);
     boolean hasProjectId(int i);
     boolean hasSkillId(int i);
+    boolean hasNoteEntryId(int i);
 }

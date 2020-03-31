@@ -24,4 +24,5 @@ public class FindProjectCommand extends FindCommand {
         return new CommandResult("",
                 String.format(Messages.MESSAGE_ITEMS_LISTED, model.getFilteredItemList().size(), "Projects"));
     }
+
 }

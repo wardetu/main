@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +14,9 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.parser.exceptions.DateParseException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.note.Verifier;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.field.Address;
 import seedu.address.model.item.field.Email;
@@ -22,6 +25,10 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
+import seedu.address.model.note.field.DateFormat;
+import seedu.address.model.note.field.Description;
+import seedu.address.model.note.field.Place;
+import seedu.address.model.note.field.Title;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -192,6 +199,42 @@ public class ParserUtil {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
         return new Time(trimmedTime);
+    }
+
+    public static Title parseTitle(String title) throws ParseException {
+        requireNonNull(title);
+        String trimmedTitle = title.trim();
+        if (Verifier.isValidTitle(trimmedTitle)) {
+            return new Title(trimmedTitle);
+        }
+        throw new ParseException(Title.MESSAGE_CONSTRAINTS);
+    }
+
+    public static Date parseDate(String date) throws DateParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (Verifier.isNotEmpty(trimmedDate) && Verifier.isValidDate(date)) {
+            return DateFormat.convertToDate(trimmedDate);
+        }
+        throw new DateParseException();
+    }
+
+    public static Place parsePlace(String place) throws ParseException {
+        requireNonNull(place);
+        String trimmedPlace = place.trim();
+        if (Verifier.isValidPlace(trimmedPlace)) {
+            return new Place(trimmedPlace);
+        }
+        throw new ParseException(Place.MESSAGE_CONSTRAINTS);
+    }
+
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (Verifier.isValidDescription(trimmedDescription)) {
+            return new Description(trimmedDescription);
+        }
+        throw new ParseException(Description.MESSAGE_CONSTRAINTS);
     }
 
     /**

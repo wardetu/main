@@ -25,7 +25,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_ROLE = new Prefix("r/");
 
     /* Project */
-    public static final Prefix PREFIX_TIME = new Prefix("t/");
+    public static final Prefix PREFIX_TIME = new Prefix("ti/");
     public static final Prefix PREFIX_WEBSITE = new Prefix("w/");
 
     /* Common between Internship and Project */
@@ -48,7 +48,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_CAP = new Prefix("c/");
 
     /* Note */
-    public static final Prefix PREFIX_TITLE = new Prefix("t/");
-    public static final Prefix PREFIX_DATE = new Prefix("d/");
+    public static final Prefix PREFIX_TITLE = new Prefix("T/");
     public static final Prefix PREFIX_PLACE = new Prefix("p/");
 }

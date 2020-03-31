@@ -11,7 +11,7 @@ public class ItemUtil {
     public static final String PROJECT_ALIAS = "proj";
     public static final String RESUME_ALIAS = "res";
     public static final String SKILL_ALIAS = "ski";
-
+    public static final String NOTE_ALIAS = "note";
 
     private static TreeMap<String, Integer> idGenerator = new TreeMap<>();
 

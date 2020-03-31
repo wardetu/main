@@ -27,5 +27,4 @@ public class RedoCommand extends Command {
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult("", MESSAGE_SUCCESS);
     }
-
 }

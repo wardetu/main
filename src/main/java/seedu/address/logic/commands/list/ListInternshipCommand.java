@@ -18,5 +18,4 @@ public class ListInternshipCommand extends ListCommand {
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult("", String.format(MESSAGE_SUCCESS, "Internship"));
     }
-
 }

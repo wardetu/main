@@ -24,4 +24,5 @@ public class AddInternshipCommandStub extends AddCommand {
     public CommandResult execute(Model model) throws CommandException {
         return null;
     }
+
 }

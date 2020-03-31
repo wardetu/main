@@ -124,6 +124,8 @@ public class MainWindow extends UiPart<Stage> {
         itemDisplay = new ItemDisplay();
         itemDisplayPlaceholder.getChildren().add(itemDisplay.getRoot());
 
+        noteListPanel = new NoteListPanel(logic.getFilteredNoteEntryList());
+
         userOverallPane = new UserOverallPane(logic.getUser());
         profilePlaceholder.getChildren().add(userOverallPane.getRoot());
 
@@ -208,12 +210,12 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             } else if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isTakeNote()) {
+                switchToTakeNoteView();
             } else {
-                if (commandResult.isTakeNote()) {
-                    switchToTakeNoteView(noteListPanel);
-                } else {
-                    switchToListView(itemListPanel);
-                }
+                switchToListView();
             }
 
             return commandResult;
@@ -227,12 +229,12 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Switch main display pane to the specified UI part
      */
-    private void switchToTakeNoteView(NoteListPanel noteListPanel) {
+    private void switchToTakeNoteView() {
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(noteListPanel.getRoot());
     }
 
-    private void switchToListView(ItemListPanel itemListPanel) {
+    private void switchToListView() {
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
     }

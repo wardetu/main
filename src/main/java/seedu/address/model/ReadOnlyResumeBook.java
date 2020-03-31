@@ -9,6 +9,7 @@ import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
+import seedu.address.model.note.NoteEntry;
 
 /**
  * Unmodifiable view of a resume book
@@ -29,10 +30,12 @@ public interface ReadOnlyResumeBook {
      */
     ObservableList<Item> getItemToDisplayList();
 
-    /**
-     * Returns an unmodifiable view of the current internship list.
-     * This list will not contain any duplicate internship.
-     */
+    public ObservableList<NoteEntry> getNoteEntryToDisplayList();
+
+        /**
+         * Returns an unmodifiable view of the current internship list.
+         * This list will not contain any duplicate internship.
+         */
     UniqueItemList<Internship> getInternshipList();
 
     /**
@@ -52,6 +55,8 @@ public interface ReadOnlyResumeBook {
      * This list will not contain any duplicate resume.
      */
     UniqueItemList<Resume> getResumeList();
+
+    UniqueItemList<NoteEntry> getNoteEntryList();
 
     //=========== Query List Operations ================================================================================
 
@@ -103,6 +108,19 @@ public interface ReadOnlyResumeBook {
      */
     int getResumeSize();
 
+    /**
+     * Return a Skill item at the specified index from the skill list.
+     * @param index index of skill
+     * @return Skill item at {@code index}
+     */
+    NoteEntry getNoteEntry(Index index);
+
+    /**
+     * Return the size of the skill list.
+     */
+    int getNoteEntrySize();
+
+
     ///STUB
     UniqueItemList<Item> getPersonalDetailList();
 
@@ -113,4 +131,6 @@ public interface ReadOnlyResumeBook {
     boolean hasProjectId(int i);
 
     boolean hasSkillId(int i);
+
+    boolean hasNoteEntryId(int i);
 }
