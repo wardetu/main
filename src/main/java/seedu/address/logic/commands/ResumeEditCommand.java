@@ -41,7 +41,7 @@ public class ResumeEditCommand extends Command {
     public ResumeEditCommand(Index index, Optional<List<Integer>> internshipIndices,
                              Optional<List<Integer>> projectIndices, Optional<List<Integer>> skillIndices) {
         this.index = index;
-        this.internshipIndices= internshipIndices;
+        this.internshipIndices = internshipIndices;
         this.projectIndices = projectIndices;
         this.skillIndices = skillIndices;
     }
