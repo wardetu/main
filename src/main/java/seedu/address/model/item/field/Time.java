@@ -40,10 +40,10 @@ public class Time {
      * @return formatted {@String}.
      */
     public String format() throws ParseException {
-        String pattern = "MMM yyyy";
-        SimpleDateFormat format = new SimpleDateFormat(pattern);
-        Date date = format.parse(this.value);
-        return date.toString();
+        SimpleDateFormat parser = new SimpleDateFormat("MM-yyyy");
+        Date date = parser.parse(this.value);
+        SimpleDateFormat formatter = new SimpleDateFormat("MMM yyyy");
+        return formatter.format(date);
     }
 
     @Override
@@ -51,6 +51,7 @@ public class Time {
         try {
             return format();
         } catch (ParseException e) {
+            System.out.println("error parsing date");
             return this.value;
         }
     }

@@ -47,11 +47,12 @@ public class GenerateResumeCommand extends Command {
     private static final PDFont FONT_REGULAR = PDType1Font.HELVETICA;
     private static final int marginX = 64;
     private static final int marginY = 100;
-    private static final float spacing = 16;
+    private static final float spacing = 24;
     private static final PDRectangle page = PDRectangle.A4;
     private static final String rootPath = "export/";
 
     private static float curX = 0;
+    private static float curY = 0;
 
     protected final Index targetIndex;
     protected String title;
@@ -66,6 +67,17 @@ public class GenerateResumeCommand extends Command {
         this.title = resumeName.toString();
     }
 
+    public void setUp() {
+        float pageHeight = page.getHeight();
+        curY = pageHeight - marginY;
+    }
+
+    public void centerAlign(String content) throws IOException {
+        float stringWidth = FONT_BOLD.getStringWidth(content) * HEADING_SIZE / 1000f;
+        float pageWidth = page.getWidth();
+        curX = (pageWidth - stringWidth) / 2f;
+    }
+
     /**
      * Adds title heading to the output Resume file.
      * @param contentStream `Content Stream` to write to file.
@@ -75,16 +87,11 @@ public class GenerateResumeCommand extends Command {
     public void addTitle(PDPageContentStream contentStream, String title) throws IOException {
         contentStream.setFont(FONT_BOLD, HEADING_SIZE);
         contentStream.setNonStrokingColor(ACCENT_COLOR);
-        float stringWidth = FONT_BOLD.getStringWidth(title) * HEADING_SIZE / 1000f;
-        float pageWidth = page.getWidth();
-        float xOffset = (pageWidth - stringWidth) / 2f;
-        float pageHeight = page.getHeight();
-        float yOffset = pageHeight - marginY;
-        contentStream.newLineAtOffset(xOffset, yOffset);
+        setUp();
+        centerAlign(title);
+        contentStream.newLineAtOffset(curX, curY);
         contentStream.showText(title.toUpperCase());
-        curX += xOffset;
         contentStream.newLineAtOffset(-curX + marginX, 0);
-        curX = -curX + marginX;
     }
 
     /**
@@ -113,7 +120,7 @@ public class GenerateResumeCommand extends Command {
         String role = internship.getRole();
         String from = internship.getFrom().toString();
         String to = internship.getTo().toString();
-        String title = name + " | " + role + " | " + from + " | " + to;
+        String title = name + " | " + role + " | " + from + " - " + to;
         addItemTitle(contentStream, title);
 
         String description = internship.getDescription();
@@ -174,9 +181,12 @@ public class GenerateResumeCommand extends Command {
         contentStream.setNonStrokingColor(MAIN_COLOR);
         contentStream.setFont(FONT_REGULAR, BODY_SIZE);
         contentStream.setLeading(spacing);
-        contentStream.newLine();
-        contentStream.showText(description);
-        contentStream.newLine();
+
+        String[] content = description.split("\\.");
+        for (String line: content) {
+            contentStream.newLine();
+            contentStream.showText("- " + line.trim() + ".");
+        }
     }
 
     @Override
@@ -235,6 +245,7 @@ public class GenerateResumeCommand extends Command {
         }
 
         return new CommandResult(resumeToGenerate.toString(),
-                String.format(MESSAGE_GENERATE_SUCCESS, title, resumeToGenerate.getName().toString()));
+                String.format(MESSAGE_GENERATE_SUCCESS, title, resumeToGenerate.getName().toString()),
+                false, false, true, false, false);
     }
 }

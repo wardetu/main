@@ -85,6 +85,6 @@ public class EditUserCommand extends Command {
         model.commitResumeBook();
 
         return new CommandResult(editedUser.toString(), String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedUser),
-                true, false, false, false);
+                true, false, false, false, false);
     }
 }
