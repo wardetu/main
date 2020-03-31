@@ -101,33 +101,54 @@ public class ResumeEditCommand extends Command {
         // Internships
         if (internshipIndices.isPresent()) {
             List<Integer> unboxedIndices = internshipIndices.get();
+            StringBuilder invalidIndices = new StringBuilder();
+            boolean isInvalidIndexPresent = false;
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
-                    // TODO: Use something from Message here
-                    throw new CommandException("Invalid internship index " + i + " detected");
+                    isInvalidIndexPresent = true;
+                    invalidIndices.append(i.toString()).append(" ");
                 }
+            }
+
+            if (isInvalidIndexPresent) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_REDIT_ITEM_INDEX, "internship",
+                        invalidIndices.toString().trim()));
             }
         }
 
         // Projects
         if (projectIndices.isPresent()) {
             List<Integer> unboxedIndices = projectIndices.get();
+            StringBuilder invalidIndices = new StringBuilder();
+            boolean isInvalidIndexPresent = false;
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
-                    // TODO: Use something from Message here
-                    throw new CommandException("Invalid project index " + i + " detected");
+                    isInvalidIndexPresent = true;
+                    invalidIndices.append(i.toString()).append(" ");
                 }
+            }
+
+            if (isInvalidIndexPresent) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_REDIT_ITEM_INDEX, "project",
+                        invalidIndices.toString().trim()));
             }
         }
 
         // Skills
         if (skillIndices.isPresent()) {
             List<Integer> unboxedIndices = skillIndices.get();
+            StringBuilder invalidIndices = new StringBuilder();
+            boolean isInvalidIndexPresent = false;
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
-                    // TODO: Use something from Message here
-                    throw new CommandException("Invalid skills index " + i + " detected");
+                    isInvalidIndexPresent = true;
+                    invalidIndices.append(i.toString()).append(" ");
                 }
+            }
+
+            if (isInvalidIndexPresent) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_REDIT_ITEM_INDEX, "skill",
+                        invalidIndices.toString().trim()));
             }
         }
     }
