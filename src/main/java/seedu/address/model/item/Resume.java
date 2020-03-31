@@ -18,6 +18,7 @@ public class Resume extends Item {
     // Item-level fields
 
     // Data fields
+    // Would it make sense to change this to internshipIds, or something like that? To be clear what these are
     private List<Integer> internships = new ArrayList<>();
     private List<Integer> projects = new ArrayList<>();
     private List<Integer> skills = new ArrayList<>();

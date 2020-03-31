@@ -34,15 +34,15 @@ public class ResumeEditCommand extends Command {
             + PREFIX_PROJECT + " 1 ";
 
     protected final Index index;
-    protected final Optional<List<Integer>> internshipIndices;
-    protected final Optional<List<Integer>> projectIndices;
+    protected final Optional<List<Integer>> internshipsIndices;
+    protected final Optional<List<Integer>> projectsIndices;
     protected final Optional<List<Integer>> skillsIndices;
 
-    public ResumeEditCommand(Index index, Optional<List<Integer>> internshipIndices,
-                             Optional<List<Integer>> projectIndices, Optional<List<Integer>> skillsIndices) {
+    public ResumeEditCommand(Index index, Optional<List<Integer>> internshipsIndices,
+                             Optional<List<Integer>> projectsIndices, Optional<List<Integer>> skillsIndices) {
         this.index = index;
-        this.internshipIndices = internshipIndices;
-        this.projectIndices = projectIndices;
+        this.internshipsIndices = internshipsIndices;
+        this.projectsIndices = projectsIndices;
         this.skillsIndices = skillsIndices;
     }
 
@@ -56,16 +56,38 @@ public class ResumeEditCommand extends Command {
 
         checkIndicesValidity(model);
         Resume toEdit = model.getResume(index);
-        if (internshipIndices.isPresent()) {
-            // Will change this to a more appropriate name
-            List<Integer> listOfId = internshipIndices
+
+        List<Integer> internshipsId = toEdit.getInternships();
+        List<Integer> projectsId = toEdit.getProjects();
+        List<Integer> skillsId = toEdit.getSkills();
+
+        // If any of the indices are present (user keys in the prefix), then use what the user uses
+        // Else, use the one currently being used by the resume
+        if (internshipsIndices.isPresent()) {
+            internshipsId = internshipsIndices
                     .get()
                     .stream()
                     .map(x -> model.getInternship(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
-            model.editResume(toEdit, listOfId);
         }
 
+        if (projectsIndices.isPresent()) {
+            projectsId = projectsIndices
+                    .get()
+                    .stream()
+                    .map(x -> model.getInternship(Index.fromOneBased(x)).getId())
+                    .collect(Collectors.toList());
+        }
+
+        if (skillsIndices.isPresent()) {
+            skillsId = skillsIndices
+                    .get()
+                    .stream()
+                    .map(x -> model.getInternship(Index.fromOneBased(x)).getId())
+                    .collect(Collectors.toList());
+        }
+
+        model.editResume(toEdit, internshipsId, projectsId, skillsId);
         model.setResumeToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
@@ -77,8 +99,8 @@ public class ResumeEditCommand extends Command {
      */
     private void checkIndicesValidity(Model model) throws CommandException {
         // Internships
-        if (internshipIndices.isPresent()) {
-            List<Integer> unboxedIndices = internshipIndices.get();
+        if (internshipsIndices.isPresent()) {
+            List<Integer> unboxedIndices = internshipsIndices.get();
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
                     // TODO: Use something from Message here
@@ -88,8 +110,8 @@ public class ResumeEditCommand extends Command {
         }
 
         // Projects
-        if (projectIndices.isPresent()) {
-            List<Integer> unboxedIndices = projectIndices.get();
+        if (projectsIndices.isPresent()) {
+            List<Integer> unboxedIndices = projectsIndices.get();
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
                     // TODO: Use something from Message here

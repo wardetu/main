@@ -224,7 +224,7 @@ public interface Model {
     /**
      * Updates the given resume to contain the internship, project, and skill items with the specified indices.
      */
-    void editResume(Resume target, List<Integer> internshipIndices);
+    void editResume(Resume target, List<Integer> internshipsId, List<Integer> projectsId, List<Integer> skillsId);
 
     Resume getResumeByIndex(int resumeIndex);
     boolean hasResumeId(int resumeIndex);
