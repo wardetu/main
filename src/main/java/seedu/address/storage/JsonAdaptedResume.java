@@ -22,9 +22,9 @@ public class JsonAdaptedResume {
     private final String name;
     private final int id;
 
-    private final List<Integer> internshipIndices = new ArrayList<>();
-    private final List<Integer> projectIndices = new ArrayList<>();
-    private final List<Integer> skillIndices = new ArrayList<>();
+    private final List<Integer> containedInternshipIds = new ArrayList<>();
+    private final List<Integer> containedProjectIds = new ArrayList<>();
+    private final List<Integer> containedSkillIds = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -32,23 +32,23 @@ public class JsonAdaptedResume {
      */
     @JsonCreator
     public JsonAdaptedResume(@JsonProperty("name") String name, @JsonProperty("id") int id,
-                             @JsonProperty("internships") List<Integer> internshipIndices,
-                             @JsonProperty("projects") List<Integer> projectIndices,
-                             @JsonProperty("skills") List<Integer> skillIndices,
+                             @JsonProperty("internships") List<Integer> internshipIds,
+                             @JsonProperty("projects") List<Integer> projectIds,
+                             @JsonProperty("skills") List<Integer> skillIds,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.id = id;
         if (tags != null) {
             this.tagged.addAll(tags);
         }
-        if (internshipIndices != null) {
-            this.internshipIndices.addAll(internshipIndices);
+        if (internshipIds != null) {
+            this.containedInternshipIds.addAll(internshipIds);
         }
-        if (projectIndices != null) {
-            this.internshipIndices.addAll(projectIndices);
+        if (projectIds != null) {
+            this.containedProjectIds.addAll(projectIds);
         }
-        if (skillIndices != null) {
-            this.internshipIndices.addAll(skillIndices);
+        if (skillIds != null) {
+            this.containedProjectIds.addAll(skillIds);
         }
     }
 
@@ -59,9 +59,9 @@ public class JsonAdaptedResume {
         this.name = res.getName().fullName;
         this.id = res.getId();
         tagged.addAll(res.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
-        internshipIndices.addAll(res.getInternships());
-        projectIndices.addAll(res.getProjects());
-        skillIndices.addAll(res.getSkills());
+        containedInternshipIds.addAll(res.getInternshipIds());
+        containedProjectIds.addAll(res.getProjectIds());
+        containedSkillIds.addAll(res.getSkillIds());
 
     }
 
@@ -74,16 +74,16 @@ public class JsonAdaptedResume {
             tags.add(tag.toModelType());
         }
         Resume resume = new Resume(new Name(name), id, Set.copyOf(tags));
-        for (int internship : internshipIndices) {
-            resume.addInternship(internship);
+        for (int internship : containedInternshipIds) {
+            resume.addInternshipId(internship);
         }
 
-        for (int project : projectIndices) {
-            resume.addProject(project);
+        for (int project : containedProjectIds) {
+            resume.addProjectId(project);
         }
 
-        for (int skill : skillIndices) {
-            resume.addSkill(skill);
+        for (int skill : containedSkillIds) {
+            resume.addSkillId(skill);
         }
         return resume;
     }

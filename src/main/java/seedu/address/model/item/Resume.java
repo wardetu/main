@@ -18,9 +18,9 @@ public class Resume extends Item {
     // Item-level fields
 
     // Data fields
-    private List<Integer> internships = new ArrayList<>();
-    private List<Integer> projects = new ArrayList<>();
-    private List<Integer> skills = new ArrayList<>();
+    private List<Integer> internshipIds = new ArrayList<>();
+    private List<Integer> projectIds = new ArrayList<>();
+    private List<Integer> skillIds = new ArrayList<>();
 
     public Resume(Name name, Set<Tag> tags) {
         this(name, ItemUtil.yieldId(ItemUtil.RESUME_ALIAS), tags);
@@ -32,50 +32,50 @@ public class Resume extends Item {
         // TODO: change Resume constructor to take in existing lists of internships, projects or skills
     }
 
-    public void addInternship(int value) {
-        internships.add(value);
+    public void addInternshipId(int value) {
+        internshipIds.add(value);
     }
 
-    public void setInternships(List<Integer> internships) {
-        this.internships = internships;
+    public void setInternshipIds(List<Integer> internshipIds) {
+        this.internshipIds = internshipIds;
     }
 
-    public List<Integer> getInternships() {
-        return this.internships;
+    public List<Integer> getInternshipIds() {
+        return this.internshipIds;
     }
 
-    public void addProject(int value) {
-        projects.add(value);
+    public void addProjectId(int value) {
+        projectIds.add(value);
     }
 
-    public List<Integer> getProjects() {
-        return this.projects;
+    public List<Integer> getProjectIds() {
+        return this.projectIds;
     }
 
-    public void setProjects(List<Integer> projects) {
-        this.projects = projects;
+    public void setProjectIds(List<Integer> projectIds) {
+        this.projectIds = projectIds;
     }
 
-    public void addSkill(int value) {
-        skills.add(value);
+    public void addSkillId(int value) {
+        skillIds.add(value);
     }
 
-    public List<Integer> getSkills() {
-        return this.skills;
+    public List<Integer> getSkillIds() {
+        return this.skillIds;
     }
 
-    public void setSkills(List<Integer> skills) {
-        this.skills = skills;
+    public void setSkillIds(List<Integer> skillIds) {
+        this.skillIds = skillIds;
     }
 
     @Override
     public String getSummary() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getInternships().size())
+        builder.append(getInternshipIds().size())
                 .append(" internship(s), ")
-                .append(getProjects().size())
+                .append(getProjectIds().size())
                 .append(" project(s), ")
-                .append(getSkills().size())
+                .append(getSkillIds().size())
                 .append(" skill(s).");
         return builder.toString();
     }

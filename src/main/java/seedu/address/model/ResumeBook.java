@@ -225,7 +225,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
         internships.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getInternships().remove(Integer.valueOf(id));
+            resume.getInternshipIds().remove(Integer.valueOf(id));
         }
     }
 
@@ -291,7 +291,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
         projects.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getProjects().remove(Integer.valueOf(id));
+            resume.getProjectIds().remove(Integer.valueOf(id));
         }
     }
 
@@ -357,7 +357,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
         skills.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getSkills().remove(Integer.valueOf(id));
+            resume.getSkillIds().remove(Integer.valueOf(id));
         }
     }
 
@@ -417,10 +417,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
     /**
      * Edits the resume in the resume book.
      */
-    public void editResume(Resume target, List<Integer> internshipIndices) {
-        target.setInternships(internshipIndices);
-        // target.setProjects(projectIndices);
-        // target.setSkills(skillIndices);
+    public void editResume(Resume target, List<Integer> internshipsId, List<Integer> projectsId,
+                           List<Integer> skillsId) {
+        target.setInternshipIds(internshipsId);
+        target.setProjectIds(projectsId);
+        target.setSkillIds(skillsId);
     }
 
     /**

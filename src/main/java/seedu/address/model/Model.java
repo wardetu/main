@@ -251,7 +251,7 @@ public interface Model {
     /**
      * Updates the given resume to contain the internship, project, and skill items with the specified indices.
      */
-    void editResume(Resume target, List<Integer> internshipIndices);
+    void editResume(Resume target, List<Integer> internshipIds, List<Integer> projectIds, List<Integer> skillIds);
 
     /**
      * Deletes the given resume.

@@ -39,10 +39,14 @@ public class ResumeEditCommandParser implements Parser<ResumeEditCommand> {
         }
 
         // Optional.empty() denotes non-existence, "" denotes that no argument specified, else some arguments specified
-        Optional<List<Integer>> internshipIndices = ParserUtil.parseInternshipIndices(
+        Optional<List<Integer>> internshipIndices = ParserUtil.parseReditItemIndices(
                 argMultimap.getValue(PREFIX_INTERNSHIP).orElse(null));
+        Optional<List<Integer>> projectsIndices = ParserUtil.parseReditItemIndices(
+                argMultimap.getValue(PREFIX_PROJECT).orElse(null));
+        Optional<List<Integer>> skillsIndices = ParserUtil.parseReditItemIndices(
+                argMultimap.getValue(PREFIX_SKILL).orElse(null));
 
         // Will assume correct input for now
-        return new ResumeEditCommand(index, internshipIndices);
+        return new ResumeEditCommand(index, internshipIndices, projectsIndices, skillsIndices);
     }
 }
