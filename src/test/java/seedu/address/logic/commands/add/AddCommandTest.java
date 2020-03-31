@@ -274,31 +274,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasItem(Item item) {
-            return false;
-        }
-
-        @Override
-        public void addItem(Item item) {
-
-        }
-
-        @Override
-        public void deleteItem(Item item) {
-
-        }
-
-        @Override
-        public void setItem(Item target, Item edit) {
-
-        }
-
-        @Override
-        public void setItemsToDisplay(String type) {
-
-        }
-
-        @Override
         public boolean hasInternshipId(int i) {
             return false;
         }

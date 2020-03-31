@@ -72,6 +72,11 @@ public class GenerateResumeCommand extends Command {
         curY = pageHeight - marginY;
     }
 
+    /**
+     * Changes the alignment of the text to centre align.
+     * @param content the text to be aligned
+     * @throws IOException
+     */
     public void centerAlign(String content) throws IOException {
         float stringWidth = FONT_BOLD.getStringWidth(content) * HEADING_SIZE / 1000f;
         float pageWidth = page.getWidth();

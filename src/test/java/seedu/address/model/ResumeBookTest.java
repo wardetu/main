@@ -158,12 +158,6 @@ public class ResumeBookTest {
             return resumes;
         }
 
-        // STUB
-        @Override
-        public UniqueItemList<Item> getPersonalDetailList() {
-            return null;
-        }
-
         @Override
         public boolean hasResumeId(int resumeIndex) {
             return false;
