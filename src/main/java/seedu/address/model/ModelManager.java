@@ -257,8 +257,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void editResume(Resume target, List<Integer> internshipIndices) {
-        versionedResumeBook.editResume(target, internshipIndices);
+    public void editResume(Resume target, List<Integer> internshipIds, List<Integer> projectIds,
+                           List<Integer> skillIds) {
+        versionedResumeBook.editResume(target, internshipIds, projectIds, skillIds);
     }
 
     @Override
