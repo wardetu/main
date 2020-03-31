@@ -61,9 +61,9 @@ public class Project extends Item {
      */
     public String toPreview() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Name: ").append(getName())
-                .append("Website: ").append(getWebsite())
-                .append("Time: ").append(getTime());
+        builder.append("Name: ").append(getName()).append("\n")
+                .append("Website: ").append(getWebsite()).append(" ")
+                .append("Time: ").append(getTime()).append("\n");
         Arrays.stream(getDescription().split("\\.")).map(x -> "- " + x.trim() + ".\n").forEach(builder::append);
         return builder.toString();
     }

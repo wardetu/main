@@ -43,8 +43,8 @@ public class Skill extends Item {
      */
     public String toPreview() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Name: ").append(getName())
-                .append("Level: ").append(getLevel());
+        builder.append("Name: ").append(getName()).append("\n")
+                .append("Level: ").append(getLevel()).append("\n");
         return builder.toString();
     }
 
