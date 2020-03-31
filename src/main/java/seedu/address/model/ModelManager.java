@@ -138,6 +138,11 @@ public class ModelManager implements Model {
         return versionedResumeBook.getInternship(index);
     }
 
+    @Override
+    public Internship getInternshipById(int id) {
+        return versionedResumeBook.getInternshipById(id);
+    }
+
     public int getInternshipSize() {
         return versionedResumeBook.getInternshipSize();
     }
@@ -175,6 +180,11 @@ public class ModelManager implements Model {
     @Override
     public Project getProject(Index index) {
         return versionedResumeBook.getProject(index);
+    }
+
+    @Override
+    public Project getProjectById(int id) {
+        return versionedResumeBook.getProjectById(id);
     }
 
     @Override
@@ -218,6 +228,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Skill getSkillById(int id) {
+        return versionedResumeBook.getSkillById(id);
+    }
+
+    @Override
     public int getSkillSize() {
         return versionedResumeBook.getSkillSize();
     }
@@ -251,11 +266,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedResume);
 
         versionedResumeBook.setResume(target, editedResume);
-    }
-
-    @Override
-    public Resume getResumeByIndex(int index) {
-        return versionedResumeBook.getResumeByIndex(index);
     }
 
     @Override

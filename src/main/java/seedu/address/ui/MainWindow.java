@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private ItemListPanel itemListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private PreviewWindow previewWindow;
     private ItemDisplay itemDisplay;
     private UserOverallPane userOverallPane;
 
@@ -72,6 +73,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        previewWindow = new PreviewWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -160,6 +162,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handlePreview() {
+        if (!previewWindow.isShowing()) {
+            previewWindow.show();
+        } else {
+            previewWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -173,6 +187,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        previewWindow.hide();
         primaryStage.hide();
     }
 
@@ -199,6 +214,11 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.hasItemChanged()) {
                 itemDisplay.setDataFeedbackToUser(commandResult.getDataToUser());
+            }
+
+            if (commandResult.isShowPreview()) {
+                previewWindow.setPreviewText(commandResult.getDataToUser());
+                handlePreview();
             }
 
             if (commandResult.isShowHelp()) {

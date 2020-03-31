@@ -106,6 +106,13 @@ public interface Model {
     Internship getInternship(Index index);
 
     /**
+     * Return a Internship item with the specified ID from the internship list.
+     * @param id
+     * @return Internship item with {@code index}
+     */
+    Internship getInternshipById(int id);
+
+    /**
      * Return the size of the internship list.
      */
     int getInternshipSize();
@@ -147,6 +154,13 @@ public interface Model {
      * @return Project item at {@code index}
      */
     Project getProject(Index index);
+
+    /**
+     * Return a Project item with the specified ID from the project list.
+     * @param id
+     * @return Project item with {@code index}
+     */
+    Project getProjectById(int id);
 
     /**
      * Return the size of the project list.
@@ -192,6 +206,13 @@ public interface Model {
     Skill getSkill(Index index);
 
     /**
+     * Return a Skill item with the specified ID from the skill list.
+     * @param id
+     * @return Skill item with {@code index}
+     */
+    Skill getSkillById(int id);
+
+    /**
      * Return the size of the skill list.
      */
     int getSkillSize();
@@ -226,7 +247,6 @@ public interface Model {
      */
     void editResume(Resume target, List<Integer> internshipIndices);
 
-    Resume getResumeByIndex(int resumeIndex);
     boolean hasResumeId(int resumeIndex);
 
     /**

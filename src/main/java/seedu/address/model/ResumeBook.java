@@ -235,6 +235,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
+    public Internship getInternshipById(int id) {
+        return internships.getById(id);
+    }
+
+    @Override
     public int getInternshipSize() {
         return internships.getSize();
     }
@@ -286,6 +291,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
+    public Project getProjectById(int id) {
+        return projects.getById(id);
+    }
+
+    @Override
     public int getProjectSize() {
         return projects.getSize();
     }
@@ -334,6 +344,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
     @Override
     public Skill getSkill(Index index) {
         return skills.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public Skill getSkillById(int id) {
+        return skills.getById(id);
     }
 
     @Override
@@ -454,16 +469,6 @@ public class ResumeBook implements ReadOnlyResumeBook {
     //STUBS
     public UniqueItemList<Item> getPersonalDetailList() {
         return new UniqueItemList<>();
-    }
-
-    // TODO: THIS IS BY ID!!!
-    public Resume getResumeByIndex(int index) {
-        for (Resume res : resumes) {
-            if (res.getId() == index) {
-                return res;
-            }
-        }
-        return null;
     }
 
     @Override
