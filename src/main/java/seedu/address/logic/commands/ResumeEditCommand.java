@@ -34,16 +34,16 @@ public class ResumeEditCommand extends Command {
             + PREFIX_PROJECT + " 1 ";
 
     protected final Index index;
-    protected final Optional<List<Integer>> internshipsIndices;
-    protected final Optional<List<Integer>> projectsIndices;
-    protected final Optional<List<Integer>> skillsIndices;
+    protected final Optional<List<Integer>> internshipIndices;
+    protected final Optional<List<Integer>> projectIndices;
+    protected final Optional<List<Integer>> skillIndices;
 
-    public ResumeEditCommand(Index index, Optional<List<Integer>> internshipsIndices,
-                             Optional<List<Integer>> projectsIndices, Optional<List<Integer>> skillsIndices) {
+    public ResumeEditCommand(Index index, Optional<List<Integer>> internshipIndices,
+                             Optional<List<Integer>> projectIndices, Optional<List<Integer>> skillIndices) {
         this.index = index;
-        this.internshipsIndices = internshipsIndices;
-        this.projectsIndices = projectsIndices;
-        this.skillsIndices = skillsIndices;
+        this.internshipIndices= internshipIndices;
+        this.projectIndices = projectIndices;
+        this.skillIndices = skillIndices;
     }
 
     @Override
@@ -63,24 +63,24 @@ public class ResumeEditCommand extends Command {
 
         // If any of the indices are present (user keys in the prefix), then use what the user uses
         // Else, use the one currently being used by the resume
-        if (internshipsIndices.isPresent()) {
-            internshipsId = internshipsIndices
+        if (internshipIndices.isPresent()) {
+            internshipsId = internshipIndices
                     .get()
                     .stream()
                     .map(x -> model.getInternship(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
         }
 
-        if (projectsIndices.isPresent()) {
-            projectsId = projectsIndices
+        if (projectIndices.isPresent()) {
+            projectsId = projectIndices
                     .get()
                     .stream()
                     .map(x -> model.getInternship(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
         }
 
-        if (skillsIndices.isPresent()) {
-            skillsId = skillsIndices
+        if (skillIndices.isPresent()) {
+            skillsId = skillIndices
                     .get()
                     .stream()
                     .map(x -> model.getInternship(Index.fromOneBased(x)).getId())
@@ -99,8 +99,8 @@ public class ResumeEditCommand extends Command {
      */
     private void checkIndicesValidity(Model model) throws CommandException {
         // Internships
-        if (internshipsIndices.isPresent()) {
-            List<Integer> unboxedIndices = internshipsIndices.get();
+        if (internshipIndices.isPresent()) {
+            List<Integer> unboxedIndices = internshipIndices.get();
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
                     // TODO: Use something from Message here
@@ -110,8 +110,8 @@ public class ResumeEditCommand extends Command {
         }
 
         // Projects
-        if (projectsIndices.isPresent()) {
-            List<Integer> unboxedIndices = projectsIndices.get();
+        if (projectIndices.isPresent()) {
+            List<Integer> unboxedIndices = projectIndices.get();
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
                     // TODO: Use something from Message here
@@ -121,8 +121,8 @@ public class ResumeEditCommand extends Command {
         }
 
         // Skills
-        if (skillsIndices.isPresent()) {
-            List<Integer> unboxedIndices = skillsIndices.get();
+        if (skillIndices.isPresent()) {
+            List<Integer> unboxedIndices = skillIndices.get();
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
                     // TODO: Use something from Message here

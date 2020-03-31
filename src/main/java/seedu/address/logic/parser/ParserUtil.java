@@ -197,7 +197,7 @@ public class ParserUtil {
     /**
      * Parses the Item Indices to give the required optional
      */
-    public static Optional<List<Integer>> parseReditItemsIndices(String indices) throws ParseException {
+    public static Optional<List<Integer>> parseReditItemIndices(String indices) throws ParseException {
         if (indices == null) {
             return Optional.empty();
         } else if (indices.equals("")) {
