@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.Set;
 
@@ -56,7 +55,6 @@ public class EditProjectCommand extends EditCommand {
 
         model.setProject(toEdit, editProject);
         model.setProjectToDisplay();
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
         return new CommandResult(editProject.toString(), String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editProject));
     }
