@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.Set;
 
@@ -63,7 +62,6 @@ public class EditInternshipCommand extends EditCommand {
 
         model.setInternship(toEdit, editedInternship);
         model.setInternshipToDisplay();
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
         return new CommandResult(editedInternship.toString(),
                 String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship));

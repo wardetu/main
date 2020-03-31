@@ -186,14 +186,29 @@ public class ResumeBookTest {
         }
 
         @Override
+        public Internship getInternshipById(int id) {
+            return null;
+        }
+
+        @Override
         public Project getProject(Index index) {
             return new Project(new Name("Project 1"), new Time("01-2020"), new Website("www.website.com"),
                     "I did nothing", new HashSet<>());
         }
 
         @Override
+        public Project getProjectById(int id) {
+            return null;
+        }
+
+        @Override
         public Skill getSkill(Index index) {
             return new Skill(new Name("Useless skill 1"), Level.ADVANCED, new HashSet<>(), -1);
+        }
+
+        @Override
+        public Skill getSkillById(int id) {
+            return null;
         }
 
         @Override

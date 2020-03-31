@@ -225,13 +225,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
         internships.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getInternshipIds().remove(id);
+            resume.getInternshipIds().remove(Integer.valueOf(id));
         }
     }
 
     @Override
     public Internship getInternship(Index index) {
         return internships.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public Internship getInternshipById(int id) {
+        return internships.getById(id);
     }
 
     @Override
@@ -276,13 +281,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
         projects.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getProjectIds().remove(id);
+            resume.getProjectIds().remove(Integer.valueOf(id));
         }
     }
 
     @Override
     public Project getProject(Index index) {
         return projects.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public Project getProjectById(int id) {
+        return projects.getById(id);
     }
 
     @Override
@@ -327,13 +337,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
         skills.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getSkillIds().remove(id);
+            resume.getSkillIds().remove(Integer.valueOf(id));
         }
     }
 
     @Override
     public Skill getSkill(Index index) {
         return skills.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public Skill getSkillById(int id) {
+        return skills.getById(id);
     }
 
     @Override
@@ -455,16 +470,6 @@ public class ResumeBook implements ReadOnlyResumeBook {
     //STUBS
     public UniqueItemList<Item> getPersonalDetailList() {
         return new UniqueItemList<>();
-    }
-
-    // TODO: THIS IS BY ID!!!
-    public Resume getResumeByIndex(int index) {
-        for (Resume res : resumes) {
-            if (res.getId() == index) {
-                return res;
-            }
-        }
-        return null;
     }
 
     @Override
