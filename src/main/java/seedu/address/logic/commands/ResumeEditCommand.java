@@ -56,7 +56,7 @@ public class ResumeEditCommand extends Command {
 
         checkIndicesValidity(model);
 
-        Resume toEdit = model.getResume(index);
+        Resume toEdit = model.getResumeByIndex(index);
 
         List<Integer> internshipsId = toEdit.getInternshipIds();
         List<Integer> projectsId = toEdit.getProjectIds();
@@ -77,7 +77,7 @@ public class ResumeEditCommand extends Command {
             projectsId = projectIndices
                     .get()
                     .stream()
-                    .map(x -> model.getProject(Index.fromOneBased(x)).getId())
+                    .map(x -> model.getProjectByIndex(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
         }
 
@@ -85,7 +85,7 @@ public class ResumeEditCommand extends Command {
             skillsId = skillIndices
                     .get()
                     .stream()
-                    .map(x -> model.getSkill(Index.fromOneBased(x)).getId())
+                    .map(x -> model.getSkillByIndex(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
         }
 

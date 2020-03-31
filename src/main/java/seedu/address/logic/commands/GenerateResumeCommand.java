@@ -210,13 +210,13 @@ public class GenerateResumeCommand extends Command {
         }
 
         // Get internships to add
-        List<Integer> internshipsToAdd = resumeToGenerate.getInternships();
+        List<Integer> internshipsToAdd = resumeToGenerate.getInternshipIds();
 
         // Get projects to add
-        List<Integer> projectsToAdd = resumeToGenerate.getProjects();
+        List<Integer> projectsToAdd = resumeToGenerate.getProjectIds();
 
         // Get skills to add
-        List<Integer> skillsToAdd = resumeToGenerate.getSkills();
+        List<Integer> skillsToAdd = resumeToGenerate.getSkillIds();
 
         final PDPage singlePage = new PDPage();
         try {
