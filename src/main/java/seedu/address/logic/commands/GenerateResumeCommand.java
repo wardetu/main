@@ -20,6 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
+import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
@@ -55,48 +56,97 @@ public class GenerateResumeCommand extends Command {
     private static float curY = 0;
 
     protected final Index targetIndex;
-    protected String title;
+    protected String fileName;
 
     public GenerateResumeCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
-        title = null;
+        fileName = null;
     }
 
     public GenerateResumeCommand(Index targetIndex, Name resumeName) {
         this.targetIndex = targetIndex;
-        this.title = resumeName.toString();
+        this.fileName = resumeName.toString();
     }
 
-    public void setUp() {
+    public void setUp(PDPageContentStream contentStream) throws IOException {
+        contentStream.setLeading(spacing);
         float pageHeight = page.getHeight();
         curY = pageHeight - marginY;
+        curX = marginX;
+        contentStream.newLineAtOffset(curX, curY);
+    }
+
+    public void nextLine(PDPageContentStream contentStream) throws IOException {
+        contentStream.newLine();
+        curY += spacing;
+    }
+
+    public void resetX(PDPageContentStream contentStream) throws IOException {
+        float xOffSet = -curX + marginX;
+        contentStream.newLineAtOffset(xOffSet, 0);
+        curX += xOffSet;
+        System.out.println("reset X to " + curX);
     }
 
     /**
      * Changes the alignment of the text to centre align.
      * @param content the text to be aligned
+     * @return x-coordinate offset to be set
      * @throws IOException
      */
-    public void centerAlign(String content) throws IOException {
-        float stringWidth = FONT_BOLD.getStringWidth(content) * HEADING_SIZE / 1000f;
+    public void centerAlign(PDPageContentStream contentStream, String content, PDFont font, int size) throws IOException {
+        float stringWidth = font.getStringWidth(content) * size / 1000f;
         float pageWidth = page.getWidth();
-        curX = (pageWidth - stringWidth) / 2f;
+        float xOffSet = -curX + (pageWidth - stringWidth) / 2f;
+        contentStream.newLineAtOffset(xOffSet, 0);
+        curX += xOffSet;
+        System.out.println("center align X to " + curX);
     }
 
     /**
-     * Adds title heading to the output Resume file.
+     * Adds title headings to the output Resume file.
      * @param contentStream `Content Stream` to write to file.
-     * @param title title of the Resume document.
+     * @param user user of the application.
      * @throws IOException
      */
-    public void addTitle(PDPageContentStream contentStream, String title) throws IOException {
+    public void addTitle(PDPageContentStream contentStream, Person user) throws IOException {
+        setUp(contentStream);
+
         contentStream.setFont(FONT_BOLD, HEADING_SIZE);
         contentStream.setNonStrokingColor(ACCENT_COLOR);
-        setUp();
-        centerAlign(title);
-        contentStream.newLineAtOffset(curX, curY);
-        contentStream.showText(title.toUpperCase());
-        contentStream.newLineAtOffset(-curX + marginX, 0);
+        String name = user.getName().toString();
+        centerAlign(contentStream, name, FONT_BOLD, HEADING_SIZE);
+        contentStream.showText(name.toUpperCase());
+        resetX(contentStream);
+        nextLine(contentStream);
+
+        contentStream.setFont(FONT_REGULAR, BODY_SIZE);
+        contentStream.setNonStrokingColor(MAIN_COLOR);
+        String phone = user.getPhone().toString();
+        String email = user.getEmail().toString();
+        String git = user.getGithub().toString();
+        String contact = phone + "  |  " + email + "  |  " + git;
+        centerAlign(contentStream, contact, FONT_REGULAR, BODY_SIZE);
+        contentStream.showText(contact);
+        resetX(contentStream);
+        nextLine(contentStream);
+    }
+
+    public void addEducation(PDPageContentStream contentStream, Person user) throws IOException {
+        String university = user.getUniversity();
+        String from = user.getFrom().format();
+        String to = user.getTo().format();
+        String title = university + " | " + to + " - " + from;
+        addItemTitle(contentStream, title);
+
+        contentStream.setFont(FONT_REGULAR, BODY_SIZE);
+        contentStream.setNonStrokingColor(MAIN_COLOR);
+        String major = "- " + user.getMajor();
+        contentStream.showText(major);
+        nextLine(contentStream);
+        String cap = "- Cumulative Average Point: " + user.getCap();
+        contentStream.showText(cap);
+        nextLine(contentStream);
     }
 
     /**
@@ -108,10 +158,9 @@ public class GenerateResumeCommand extends Command {
     public void addSection(PDPageContentStream contentStream, String section) throws IOException {
         contentStream.setFont(FONT_BOLD, BODY_SIZE);
         contentStream.setNonStrokingColor(ACCENT_COLOR);
-        contentStream.setLeading(spacing);
-        contentStream.newLine();
-        contentStream.newLine();
+        nextLine(contentStream);
         contentStream.showText(section);
+        nextLine(contentStream);
     }
 
     /**
@@ -171,9 +220,8 @@ public class GenerateResumeCommand extends Command {
     public void addItemTitle(PDPageContentStream contentStream, String title) throws IOException {
         contentStream.setNonStrokingColor(MAIN_COLOR);
         contentStream.setFont(FONT_BOLD, BODY_SIZE);
-        contentStream.setLeading(spacing);
-        contentStream.newLine();
         contentStream.showText(title);
+        nextLine(contentStream);
     }
 
     /**
@@ -185,12 +233,11 @@ public class GenerateResumeCommand extends Command {
     public void addDescription(PDPageContentStream contentStream, String description) throws IOException {
         contentStream.setNonStrokingColor(MAIN_COLOR);
         contentStream.setFont(FONT_REGULAR, BODY_SIZE);
-        contentStream.setLeading(spacing);
 
         String[] content = description.split("\\.");
         for (String line: content) {
-            contentStream.newLine();
             contentStream.showText("- " + line.trim() + ".");
+            nextLine(contentStream);
         }
     }
 
@@ -202,11 +249,12 @@ public class GenerateResumeCommand extends Command {
         if (targetIndex.getZeroBased() >= model.getResumeSize()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
+        Person user = model.getUser();
         Resume resumeToGenerate = model.getResumeByIndex(targetIndex);
 
-        // Get title
-        if (this.title == null) {
-            title = resumeToGenerate.getName().toString();
+        // Set file name
+        if (this.fileName == null) {
+            fileName = resumeToGenerate.getName().toString();
         }
 
         // Get internships to add
@@ -224,7 +272,9 @@ public class GenerateResumeCommand extends Command {
             resume.addPage(singlePage);
             final PDPageContentStream contentStream = new PDPageContentStream(resume, singlePage);
             contentStream.beginText();
-            addTitle(contentStream, title);
+            addTitle(contentStream, user);
+            addSection(contentStream, "EDUCATION");
+            addEducation(contentStream, user);
             addSection(contentStream, "INTERNSHIPS");
             for (Integer id: internshipsToAdd) {
                 Internship toAdd = model.getInternshipById(id);
@@ -244,13 +294,13 @@ public class GenerateResumeCommand extends Command {
             }
             contentStream.endText();
             contentStream.close();
-            resume.save(rootPath + title + ".pdf");
+            resume.save(rootPath + fileName + ".pdf");
         } catch (IOException e) {
             err.println("Exception while trying to create simple document - " + e);
         }
 
         return new CommandResult(resumeToGenerate.toString(),
-                String.format(MESSAGE_GENERATE_SUCCESS, title, resumeToGenerate.getName().toString()),
+                String.format(MESSAGE_GENERATE_SUCCESS, fileName, resumeToGenerate.getName().toString()),
                 false, false, true, false, false);
     }
 }
