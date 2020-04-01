@@ -2,6 +2,7 @@ package seedu.address.model.item;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
 import java.util.Set;
 
 import seedu.address.model.item.field.Name;
@@ -70,6 +71,20 @@ public class Internship extends Item {
                 && ((Internship) otherInternship).getRole().equals(getRole())
                 && ((Internship) otherInternship).getFrom().equals(getFrom())
                 && ((Internship) otherInternship).getTo().equals(getTo());
+    }
+
+    /**
+     * Gets the string representation of Internship to preview.
+     * @return String representation of Internship
+     */
+    public String toPreview() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Company: ").append(getName()).append("\n")
+                .append("Role: ").append(getRole()).append("\n")
+                .append("From: ").append(getFrom()).append(" - ")
+                .append("To: ").append(getTo()).append("\n");
+        Arrays.stream(getDescription().split("\\.")).map(x -> "- " + x.trim() + ".\n").forEach(builder::append);
+        return builder.toString();
     }
 
     @Override

@@ -233,13 +233,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
         internships.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getInternships().remove(id);
+            resume.getInternshipIds().remove(Integer.valueOf(id));
         }
     }
 
     @Override
     public Internship getInternship(Index index) {
         return internships.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public Internship getInternshipById(int id) {
+        return internships.getById(id);
     }
 
     @Override
@@ -284,13 +289,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
         projects.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getProjects().remove(id);
+            resume.getProjectIds().remove(Integer.valueOf(id));
         }
     }
 
     @Override
     public Project getProject(Index index) {
         return projects.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public Project getProjectById(int id) {
+        return projects.getById(id);
     }
 
     @Override
@@ -335,13 +345,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
         skills.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getSkills().remove(id);
+            resume.getSkillIds().remove(Integer.valueOf(id));
         }
     }
 
     @Override
     public Skill getSkill(Index index) {
         return skills.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public Skill getSkillById(int id) {
+        return skills.getById(id);
     }
 
     @Override
@@ -380,10 +395,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
     /**
      * Edits the resume in the resume book.
      */
-    public void editResume(Resume target, List<Integer> internshipIndices) {
-        target.setInternships(internshipIndices);
-        // target.setProjects(projectIndices);
-        // target.setSkills(skillIndices);
+    public void editResume(Resume target, List<Integer> internshipsId, List<Integer> projectsId,
+                           List<Integer> skillsId) {
+        target.setInternshipIds(internshipsId);
+        target.setProjectIds(projectsId);
+        target.setSkillIds(skillsId);
     }
 
     /**
@@ -436,14 +452,14 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Removes {@code key} from this {@code ResumeBook}.
      * {@code key} must exist in the resume book.
      */
-    public void deleteNoteEntry(NoteEntry key) {
-        int id = key.getId();
-        entries.remove(key);
-        for (Item item : resumes) {
-            Resume resume = (Resume) item;
-            resume.getSkills().remove(id);
-        }
-    }
+//    public void deleteNoteEntry(NoteEntry key) {
+////        int id = key.getId();
+////        entries.remove(key);
+////        for (Item item : resumes) {
+////            Resume resume = (Resume) item;
+////            resume.getNoteEntries().remove(id);
+////        }
+////    }
 
     @Override
     public NoteEntry getNoteEntry(Index index) {
@@ -524,16 +540,6 @@ public class ResumeBook implements ReadOnlyResumeBook {
     //STUBS
     public UniqueItemList<Item> getPersonalDetailList() {
         return new UniqueItemList<>();
-    }
-
-    // TODO: THIS IS BY ID!!!
-    public Resume getResumeByIndex(int index) {
-        for (Resume res : resumes) {
-            if (res.getId() == index) {
-                return res;
-            }
-        }
-        return null;
     }
 
     @Override

@@ -2,6 +2,7 @@ package seedu.address.ui.note;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.note.NoteEntry;
@@ -14,9 +15,13 @@ public class NoteCard extends UiPart<Region> {
     private final NoteEntry noteEntry;
 
     @FXML
-    private HBox notePane;
+    private HBox noteCardPane;
     @FXML
     private Label id;
+    @FXML
+    private Label name;
+    @FXML
+    private Label tag;
     @FXML
     private Label title;
     @FXML
@@ -25,15 +30,23 @@ public class NoteCard extends UiPart<Region> {
     private Label place;
     @FXML
     private Label description;
+    @FXML
+    private ImageView checkBox;
 
     public NoteCard(NoteEntry noteEntry, int displayIndex) {
         super(FXML);
         this.noteEntry = noteEntry;
         id.setText(displayIndex + ". ");
-        title.setText("TITLE: " + noteEntry.getTitle().toString());
-        time.setText("TIME: " + noteEntry.getTime().toString());
-        place.setText("PLACE: " + noteEntry.getPlace().toString());
-        description.setText("DESCRIPTION: " + noteEntry.getDescription().toString());
+        title.setText(noteEntry.getTitle().toString());
+        name.setText(noteEntry.getName().toString());
+        time.setText(noteEntry.getTime().toString());
+        place.setText(noteEntry.getPlace().toString());
+        description.setText(noteEntry.getDescription().toString());
+//        tag.setText(noteEntry.getTags().toString());
+        tag.setText("Priority: HIGH");
+
+//        Image image = new Image("/docs/images/check-mark.png");
+//        checkBox.setImage(image);
     }
 
     @Override

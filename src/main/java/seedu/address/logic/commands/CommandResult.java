@@ -13,6 +13,9 @@ public class CommandResult {
     private final String dataToUser;
     private final boolean userUpdated;
 
+    /** Preview information about a resume. */
+    private final boolean showPreview;
+
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
@@ -25,11 +28,13 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(boolean userUpdated, String dataToUser, String feedbackToUser,
-                         boolean showHelp, boolean exit, boolean takeNote) {
+
+    public CommandResult(String dataToUser, String feedbackToUser, boolean userUpdated,
+                         boolean showPreview, boolean showHelp, boolean exit, boolean takeNote) {
         this.userUpdated = userUpdated;
         this.dataToUser = requireNonNull(dataToUser);
         this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showPreview = showPreview;
         this.showHelp = showHelp;
         this.exit = exit;
         this.takeNote = takeNote;
@@ -40,7 +45,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String dataToUser, String feedbackToUser, boolean takeNote) {
-        this(false, dataToUser, feedbackToUser, false, false, takeNote);
+        this(dataToUser, feedbackToUser, false, false, false, false, takeNote);
     }
 
     /**
@@ -48,7 +53,8 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String dataToUser, String feedbackToUser) {
-        this(false, dataToUser, feedbackToUser, false, false, false);
+
+        this(dataToUser, feedbackToUser, false, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -57,6 +63,10 @@ public class CommandResult {
 
     public String getDataToUser() {
         return dataToUser;
+    }
+
+    public boolean isShowPreview() {
+        return showPreview;
     }
 
     public boolean isShowHelp() {
@@ -94,12 +104,14 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && userUpdated == otherCommandResult.userUpdated;
+                && userUpdated == otherCommandResult.userUpdated
+                && takeNote == otherCommandResult.takeNote
+                && showPreview == otherCommandResult.showPreview;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userUpdated, dataToUser, feedbackToUser, showHelp, exit);
+        return Objects.hash(dataToUser, feedbackToUser, userUpdated, showHelp, exit, takeNote);
     }
 
 }

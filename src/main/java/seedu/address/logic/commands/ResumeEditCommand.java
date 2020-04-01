@@ -35,10 +35,15 @@ public class ResumeEditCommand extends Command {
 
     protected final Index index;
     protected final Optional<List<Integer>> internshipIndices;
+    protected final Optional<List<Integer>> projectIndices;
+    protected final Optional<List<Integer>> skillIndices;
 
-    public ResumeEditCommand(Index index, Optional<List<Integer>> internshipIndices) {
+    public ResumeEditCommand(Index index, Optional<List<Integer>> internshipIndices,
+                             Optional<List<Integer>> projectIndices, Optional<List<Integer>> skillIndices) {
         this.index = index;
         this.internshipIndices = internshipIndices;
+        this.projectIndices = projectIndices;
+        this.skillIndices = skillIndices;
     }
 
     @Override
@@ -51,16 +56,38 @@ public class ResumeEditCommand extends Command {
 
         checkIndicesValidity(model);
         Resume toEdit = model.getResume(index);
+
+        List<Integer> internshipsId = toEdit.getInternshipIds();
+        List<Integer> projectsId = toEdit.getProjectIds();
+        List<Integer> skillsId = toEdit.getSkillIds();
+
+        // If any of the indices are present (user keys in the prefix), then use what the user uses
+        // Else, use the one currently being used by the resume
         if (internshipIndices.isPresent()) {
-            // Will change this to a more appropriate name
-            List<Integer> listOfId = internshipIndices
+            internshipsId = internshipIndices
                     .get()
                     .stream()
                     .map(x -> model.getInternship(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
-            model.editResume(toEdit, listOfId);
         }
 
+        if (projectIndices.isPresent()) {
+            projectsId = projectIndices
+                    .get()
+                    .stream()
+                    .map(x -> model.getProject(Index.fromOneBased(x)).getId())
+                    .collect(Collectors.toList());
+        }
+
+        if (skillIndices.isPresent()) {
+            skillsId = skillIndices
+                    .get()
+                    .stream()
+                    .map(x -> model.getSkill(Index.fromOneBased(x)).getId())
+                    .collect(Collectors.toList());
+        }
+
+        model.editResume(toEdit, internshipsId, projectsId, skillsId);
         model.setResumeToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
@@ -74,16 +101,55 @@ public class ResumeEditCommand extends Command {
         // Internships
         if (internshipIndices.isPresent()) {
             List<Integer> unboxedIndices = internshipIndices.get();
+            StringBuilder invalidIndices = new StringBuilder();
+            boolean isInvalidIndexPresent = false;
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
-                    // TODO: Use something from Message here
-                    throw new CommandException("Invalid internship index " + i + "detected");
+                    isInvalidIndexPresent = true;
+                    invalidIndices.append(i.toString()).append(" ");
                 }
+            }
+
+            if (isInvalidIndexPresent) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_REDIT_ITEM_INDEX, "internship",
+                        invalidIndices.toString().trim()));
             }
         }
 
         // Projects
+        if (projectIndices.isPresent()) {
+            List<Integer> unboxedIndices = projectIndices.get();
+            StringBuilder invalidIndices = new StringBuilder();
+            boolean isInvalidIndexPresent = false;
+            for (Integer i: unboxedIndices) {
+                if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
+                    isInvalidIndexPresent = true;
+                    invalidIndices.append(i.toString()).append(" ");
+                }
+            }
+
+            if (isInvalidIndexPresent) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_REDIT_ITEM_INDEX, "project",
+                        invalidIndices.toString().trim()));
+            }
+        }
 
         // Skills
+        if (skillIndices.isPresent()) {
+            List<Integer> unboxedIndices = skillIndices.get();
+            StringBuilder invalidIndices = new StringBuilder();
+            boolean isInvalidIndexPresent = false;
+            for (Integer i: unboxedIndices) {
+                if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
+                    isInvalidIndexPresent = true;
+                    invalidIndices.append(i.toString()).append(" ");
+                }
+            }
+
+            if (isInvalidIndexPresent) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_REDIT_ITEM_INDEX, "skill",
+                        invalidIndices.toString().trim()));
+            }
+        }
     }
 }
