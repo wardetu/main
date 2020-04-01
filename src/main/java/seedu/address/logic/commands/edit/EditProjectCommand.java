@@ -49,7 +49,7 @@ public class EditProjectCommand extends EditCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Project toEdit = model.getProject(index);
+        Project toEdit = model.getProjectByIndex(index);
 
         Project editProject = createEditedProject(toEdit, editProjectDescriptor);
 

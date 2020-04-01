@@ -45,7 +45,7 @@ public class EditResumeCommand extends EditCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Resume toEdit = model.getResume(index);
+        Resume toEdit = model.getResumeByIndex(index);
 
         Resume editedResume = createEditedResume(toEdit, editResumeDescriptor);
 

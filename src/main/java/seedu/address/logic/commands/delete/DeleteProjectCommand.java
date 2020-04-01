@@ -26,7 +26,7 @@ public class DeleteProjectCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Project toDelete = model.getProject(targetIndex);
+        Project toDelete = model.getProjectByIndex(targetIndex);
 
         model.deleteProject(toDelete);
         model.setProjectToDisplay();

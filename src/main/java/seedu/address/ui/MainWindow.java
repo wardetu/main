@@ -208,7 +208,7 @@ public class MainWindow extends UiPart<Stage> {
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isUserUpdated()) {
+            if (commandResult.isUpdateUser()) {
                 userOverallPane.updateUserProfile(logic.getUser());
             }
 

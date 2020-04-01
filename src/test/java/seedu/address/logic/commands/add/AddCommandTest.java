@@ -94,7 +94,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Internship getInternship(Index index) {
+        public Internship getInternshipByIndex(Index index) {
             return null;
         }
 
@@ -134,7 +134,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Project getProject(Index index) {
+        public Project getProjectByIndex(Index index) {
             return null;
         }
 
@@ -174,7 +174,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Skill getSkill(Index index) {
+        public Skill getSkillByIndex(Index index) {
             return null;
         }
 
@@ -225,7 +225,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Resume getResume(Index index) {
+        public Resume getResumeByIndex(Index index) {
             return null;
         }
 
@@ -271,31 +271,6 @@ public class AddCommandTest {
 
         @Override
         public void commitResumeBook() {
-
-        }
-
-        @Override
-        public boolean hasItem(Item item) {
-            return false;
-        }
-
-        @Override
-        public void addItem(Item item) {
-
-        }
-
-        @Override
-        public void deleteItem(Item item) {
-
-        }
-
-        @Override
-        public void setItem(Item target, Item edit) {
-
-        }
-
-        @Override
-        public void setItemsToDisplay(String type) {
 
         }
 
