@@ -65,7 +65,11 @@ public class EditResumeCommand extends EditCommand {
         Name updatedName = editResumeDescriptor.getName().orElse(toEdit.getName());
         Set<Tag> updatedTags = editResumeDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
-        return new Resume(updatedName, id, updatedTags);
+        Resume editedResume = new Resume(updatedName, id, updatedTags);
+        editedResume.setInternshipIds(toEdit.getInternshipIds());
+        editedResume.setProjectIds(toEdit.getProjectIds());
+        editedResume.setSkillIds(toEdit.getSkillIds());
+        return editedResume;
     }
 
 }
