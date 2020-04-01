@@ -64,6 +64,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ReadOnlyResumeBook getStatelessResumeBook() {
+            return null;
+        }
+
+        @Override
         public void setUser(Person person) {
 
         }
