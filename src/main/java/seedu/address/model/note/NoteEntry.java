@@ -117,7 +117,7 @@ public class NoteEntry extends Item {
                 .append(getTime() + "\n")
                 .append("Place: ")
                 .append(getPlace() + "\n")
-                .append("Description ")
+                .append("Description: ")
                 .append(getDescription() + "\n");
         return builder.toString();
     }
