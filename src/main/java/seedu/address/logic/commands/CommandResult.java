@@ -9,38 +9,54 @@ import java.util.Objects;
  */
 public class CommandResult {
 
+    // TODO: OOP to make more CommandResult classes
+
     private final String feedbackToUser;
     private final String dataToUser;
-    private final boolean userUpdated;
+
+    /** Update user profile. */
+    private final boolean isUpdateUser;
 
     /** Preview information about a resume. */
-    private final boolean showPreview;
+    private final boolean isShowPreview;
+
+    /** Generate .pdf file from a resume. */
+    private final boolean isGenerate;
 
     /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    private final boolean isShowHelp;
 
     /** The application should exit. */
-    private final boolean exit;
+    private final boolean isExit;
 
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
-     */
-    public CommandResult(String dataToUser, String feedbackToUser, boolean userUpdated,
-                         boolean showPreview, boolean showHelp, boolean exit) {
-        this.userUpdated = userUpdated;
-        this.dataToUser = requireNonNull(dataToUser);
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showPreview = showPreview;
-        this.showHelp = showHelp;
-        this.exit = exit;
-    }
-
-    /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * Constructs a {@code CommandResult} with the specified {@code dataToUser} and {@code feedbackToUser},
      * and other fields set to their default value.
      */
     public CommandResult(String dataToUser, String feedbackToUser) {
-        this(dataToUser, feedbackToUser, false, false, false, false);
+        this(dataToUser, feedbackToUser,
+                false, false, false, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     * @param dataToUser data to show user.
+     * @param feedbackToUser feedback to user.
+     * @param isUpdateUser boolean value of whether the CommandResult is the result of a {@code me} command.
+     * @param isShowPreview boolean value of whether the CommandResult is the result of a {@code rpreview} command.
+     * @param isGenerate boolean value of whether the CommandResult is the result of a {@code rgen} command.
+     * @param isShowHelp boolean value of whether the CommandResult is the result of a {@code help} command.
+     * @param isExit boolean value of whether the CommandResult is the result of an {@code exit} command.
+     */
+    public CommandResult(String dataToUser, String feedbackToUser, boolean isUpdateUser, boolean isShowPreview,
+                         boolean isGenerate, boolean isShowHelp, boolean isExit) {
+        this.dataToUser = requireNonNull(dataToUser);
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.isUpdateUser = isUpdateUser;
+        this.isShowPreview = isShowPreview;
+        this.isGenerate = isGenerate;
+        this.isShowHelp = isShowHelp;
+        this.isExit = isExit;
     }
 
     public String getFeedbackToUser() {
@@ -51,20 +67,24 @@ public class CommandResult {
         return dataToUser;
     }
 
+    public boolean isUpdateUser() {
+        return isUpdateUser;
+    }
+
     public boolean isShowPreview() {
-        return showPreview;
+        return isShowPreview;
+    }
+
+    public boolean isGenerate() {
+        return isGenerate;
     }
 
     public boolean isShowHelp() {
-        return showHelp;
+        return isShowHelp;
     }
 
     public boolean isExit() {
-        return exit;
-    }
-
-    public boolean isUserUpdated() {
-        return userUpdated;
+        return isExit;
     }
 
     public boolean hasItemChanged() {
@@ -84,14 +104,14 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit
-                && userUpdated == otherCommandResult.userUpdated;
+                && isShowHelp == otherCommandResult.isShowHelp
+                && isExit == otherCommandResult.isExit
+                && isUpdateUser == otherCommandResult.isUpdateUser;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dataToUser, feedbackToUser, userUpdated, showHelp, exit);
+        return Objects.hash(dataToUser, feedbackToUser, isUpdateUser, isShowHelp, isExit);
     }
 
 }

@@ -132,10 +132,14 @@ public class ModelManager implements Model {
         versionedResumeBook.deleteInternship(key);
     }
 
+    @Override
+    public Internship getInternshipByIndex(Index index) {
+        return versionedResumeBook.getInternshipByIndex(index);
+    }
 
     @Override
-    public Internship getInternship(Index index) {
-        return versionedResumeBook.getInternship(index);
+    public boolean hasInternshipId(int id) {
+        return versionedResumeBook.hasInternshipId(id);
     }
 
     @Override
@@ -143,6 +147,7 @@ public class ModelManager implements Model {
         return versionedResumeBook.getInternshipById(id);
     }
 
+    @Override
     public int getInternshipSize() {
         return versionedResumeBook.getInternshipSize();
     }
@@ -178,8 +183,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Project getProject(Index index) {
-        return versionedResumeBook.getProject(index);
+    public Project getProjectByIndex(Index index) {
+        return versionedResumeBook.getProjectByIndex(index);
+    }
+
+    @Override
+    public boolean hasProjectId(int id) {
+        return versionedResumeBook.hasProjectId(id);
     }
 
     @Override
@@ -223,8 +233,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Skill getSkill(Index index) {
-        return versionedResumeBook.getSkill(index);
+    public Skill getSkillByIndex(Index index) {
+        return versionedResumeBook.getSkillByIndex(index);
+    }
+
+    @Override
+    public boolean hasSkillId(int id) {
+        return versionedResumeBook.hasSkillId(id);
     }
 
     @Override
@@ -265,13 +280,7 @@ public class ModelManager implements Model {
     @Override
     public void setResume(Resume target, Resume editedResume) {
         requireAllNonNull(target, editedResume);
-
         versionedResumeBook.setResume(target, editedResume);
-    }
-
-    @Override
-    public boolean hasResumeId(int resumeIndex) {
-        return versionedResumeBook.hasResumeId(resumeIndex);
     }
 
     @Override
@@ -280,8 +289,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Resume getResume(Index index) {
-        return versionedResumeBook.getResume(index);
+    public Resume getResumeByIndex(Index index) {
+        return versionedResumeBook.getResumeByIndex(index);
+    }
+
+    @Override
+    public boolean hasResumeId(int id) {
+        return versionedResumeBook.hasResumeId(id);
     }
 
     @Override
@@ -355,35 +369,6 @@ public class ModelManager implements Model {
     @Override
     public void commitResumeBook() {
         versionedResumeBook.commit();
-    }
-
-
-    //// STUBS
-    public boolean hasItem(Item item) {
-        return false;
-    }
-
-    public void addItem(Item item) {}
-
-    public void deleteItem(Item item) {}
-
-    public void setItem(Item target, Item edit) {}
-
-    public void setItemsToDisplay(String type) {}
-
-    @Override
-    public boolean hasInternshipId(int i) {
-        return versionedResumeBook.hasInternshipId(i);
-    }
-
-    @Override
-    public boolean hasProjectId(int i) {
-        return versionedResumeBook.hasProjectId(i);
-    }
-
-    @Override
-    public boolean hasSkillId(int i) {
-        return versionedResumeBook.hasSkillId(i);
     }
 
 }

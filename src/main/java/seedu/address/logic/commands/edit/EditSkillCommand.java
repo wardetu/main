@@ -46,7 +46,7 @@ public class EditSkillCommand extends EditCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Skill toEdit = model.getSkill(index);
+        Skill toEdit = model.getSkillByIndex(index);
 
         Skill editedSkill = createEditedSkill(toEdit, editSkillDescriptor);
 

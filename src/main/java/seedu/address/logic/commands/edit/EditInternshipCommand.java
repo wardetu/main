@@ -56,7 +56,7 @@ public class EditInternshipCommand extends EditCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Internship toEdit = model.getInternship(index);
+        Internship toEdit = model.getInternshipByIndex(index);
 
         Internship editedInternship = createEditedInternship(toEdit, editInternshipDescriptor);
 

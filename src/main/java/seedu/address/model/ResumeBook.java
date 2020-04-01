@@ -230,8 +230,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public Internship getInternship(Index index) {
+    public Internship getInternshipByIndex(Index index) {
         return internships.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public boolean hasInternshipId(int id) {
+        for (Internship item : internships) {
+            if (item.getId() == id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -286,8 +296,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public Project getProject(Index index) {
+    public Project getProjectByIndex(Index index) {
         return projects.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public boolean hasProjectId(int id) {
+        for (Project item : projects) {
+            if (item.getId() == id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -342,8 +362,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public Skill getSkill(Index index) {
+    public Skill getSkillByIndex(Index index) {
         return skills.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public boolean hasSkillId(int id) {
+        for (Skill item : skills) {
+            if (item.getId() == id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -403,8 +433,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public Resume getResume(Index index) {
+    public Resume getResumeByIndex(Index index) {
         return resumes.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public boolean hasResumeId(int resumeIndex) {
+        for (Resume item : resumes) {
+            if (item.getId() == resumeIndex) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -465,54 +505,5 @@ public class ResumeBook implements ReadOnlyResumeBook {
     @Override
     public int hashCode() {
         return itemsToDisplay.hashCode();
-    }
-
-    //STUBS
-    public UniqueItemList<Item> getPersonalDetailList() {
-        return new UniqueItemList<>();
-    }
-
-    @Override
-    public boolean hasResumeId(int resumeIndex) {
-        for (Resume item : resumes) {
-            if (item.getId() == resumeIndex) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasInternshipId(int i) {
-        for (Internship item : internships) {
-            if (item.getId() == i) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasProjectId(int i) {
-        for (Project item : projects) {
-            if (item.getId() == i) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasSkillId(int i) {
-        for (Skill item : skills) {
-            if (item.getId() == i) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean hasItem(Item item) {
-        return false;
     }
 }
