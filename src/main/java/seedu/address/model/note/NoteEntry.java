@@ -15,6 +15,9 @@ import seedu.address.model.note.field.Title;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 
+/**
+ * Represents a Note.
+ */
 public class NoteEntry extends Item {
     private Title title;
     private Time time;
@@ -25,6 +28,16 @@ public class NoteEntry extends Item {
         this(name, title, time, place, description, tags, ItemUtil.yieldId(ItemUtil.NOTE_ALIAS));
     }
 
+    /**
+     * Constructor for NoteEntry.
+     * @param name
+     * @param title
+     * @param time
+     * @param place
+     * @param description
+     * @param tags
+     * @param id
+     */
     public NoteEntry(Name name, Title title, Time time, Place place, Description description,
                      Set<Tag> tags, int id) {
         super(name, id, tags);
@@ -68,6 +81,10 @@ public class NoteEntry extends Item {
         return description;
     }
 
+    /**
+     * Defensive programming.
+     * @return
+     */
     public NoteEntry toCopy() {
         return new NoteEntry(getName(), getTitle(), getTime(), getPlace(), getDescription(),
                 getTags(), getId());

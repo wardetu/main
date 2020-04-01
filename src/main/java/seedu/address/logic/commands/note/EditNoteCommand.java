@@ -25,6 +25,9 @@ import seedu.address.model.note.field.Place;
 import seedu.address.model.note.field.Title;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Edit a specified NoteEntry.
+ */
 public class EditNoteCommand extends EditCommand {
 
     private static final String EXAMPLE = "Example: "
@@ -65,6 +68,12 @@ public class EditNoteCommand extends EditCommand {
                 String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedNoteEntry), true);
     }
 
+    /**
+     * Create a new NoteEntry after it has been edited.
+     * @param toEdit
+     * @param editNoteDescriptor
+     * @return
+     */
     public NoteEntry createEditedNoteEntry(NoteEntry toEdit, EditNoteDescriptor editNoteDescriptor) {
         Name updatedName = editNoteDescriptor.getName().orElse(toEdit.getName());
         Title updateTitle = editNoteDescriptor.getTitle().orElse(toEdit.getTitle());

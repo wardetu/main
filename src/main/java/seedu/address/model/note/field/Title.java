@@ -1,7 +1,7 @@
 package seedu.address.model.note.field;
 
 /**
- * Represents the title of each Note entry.
+ * Title field in a Note.
  */
 public class Title {
     public static final String MESSAGE_CONSTRAINTS = "Title has to be non-empty, contains letters and is "

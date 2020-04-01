@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.note.NoteEntry;
 
 /**
- * Deletes an Internship item.
+ * Deletes a NoteEntry item.
  */
 public class DeleteNoteCommand extends DeleteCommand {
 

@@ -198,6 +198,12 @@ public class ParserUtil {
         return new Time(trimmedTime);
     }
 
+    /**
+     * Parses a {@code String title} into a {@code Title}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code title} is invalid.
+     */
     public static Title parseTitle(String title) throws ParseException {
         requireNonNull(title);
         String trimmedTitle = title.trim();
@@ -207,7 +213,12 @@ public class ParserUtil {
         throw new ParseException(Title.MESSAGE_CONSTRAINTS);
     }
 
-
+    /**
+     * Parses a {@code String place} into a {@code Place}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code place} is invalid.
+     */
     public static Place parsePlace(String place) throws ParseException {
         requireNonNull(place);
         String trimmedPlace = place.trim();
@@ -217,6 +228,12 @@ public class ParserUtil {
         throw new ParseException(Place.MESSAGE_CONSTRAINTS);
     }
 
+    /**
+     * Parses a {@code String description} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
     public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
@@ -233,7 +250,7 @@ public class ParserUtil {
         if (indices == null) {
             return Optional.empty();
         } else if (indices.equals("")) {
-            // Empty string will return an InvokationTargetException in the streams
+            // Empty string will return an InvocationTargetException in the streams
             // TODO: Investigate how this can be combined with the else block
             return Optional.of(new ArrayList<>());
         } else {

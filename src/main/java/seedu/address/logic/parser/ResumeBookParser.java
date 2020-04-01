@@ -89,16 +89,6 @@ public class ResumeBookParser {
         case EditUserCommand.COMMAND_WORD: //"me"
             return new EditUserParser().parse(arguments);
 
-//        case TakeNoteCommand.COMMAND_WORD: //"note"
-//            requireEmptyArguments(arguments);
-//            return new TakeNoteCommand();
-
-//        case AddNoteCommand.COMMAND_WORD: //"note"
-//            return new AddCommandParser().parse(arguments);
-//
-//        case DeleteNoteCommand.COMMAND_WORD: //"delnote"
-//            return new DeleteNoteCommandParser().parse(arguments);
-
         //-----------------Other commands-----------------------
 
         case ExitCommand.COMMAND_WORD:

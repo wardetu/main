@@ -8,6 +8,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.note.NoteEntry;
 
+/**
+ * Add a NoteEntry into Note list.
+ */
 public class AddNoteCommand extends AddCommand {
 
     public static final String MESSAGE_SUCCESS = "New note added!";
@@ -16,11 +19,21 @@ public class AddNoteCommand extends AddCommand {
 
     private final NoteEntry toAdd;
 
+    /**
+     * Constructor.
+     * @param note is a NoteEntry.
+     */
     public AddNoteCommand(NoteEntry note) {
         requireNonNull(note);
         this.toAdd = note;
     }
 
+    /**
+     * Add NoteEntry to the list.
+     * @param model {@code Model} which the command should operate on.
+     * @return Command Result.
+     * @throws CommandException
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

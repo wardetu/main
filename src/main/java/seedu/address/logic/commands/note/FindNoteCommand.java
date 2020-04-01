@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.note.field.EntryTitleContainsKeywordsPredicate;
 
 /**
- * Finds {@code Internship} items in the address book whose name contains the keyword.
+ * Finds {@code NoteEntry} items in the address book whose title contains the keyword.
  * Keyword matching is case-insensitive.
  */
 public class FindNoteCommand extends FindCommand {

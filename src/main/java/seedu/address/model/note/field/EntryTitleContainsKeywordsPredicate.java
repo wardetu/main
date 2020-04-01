@@ -6,6 +6,9 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.note.NoteEntry;
 
+/**
+ * Predicate that checks for title when finding a Note.
+ */
 public class EntryTitleContainsKeywordsPredicate implements Predicate<NoteEntry> {
     private final List<String> keywords;
 

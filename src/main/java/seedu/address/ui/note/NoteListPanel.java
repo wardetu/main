@@ -11,6 +11,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.note.NoteEntry;
 import seedu.address.ui.UiPart;
 
+/**
+ * Panel containing the list of note entries.
+ */
 public class NoteListPanel extends UiPart<Region> {
     private static final String FXML = "NoteListPanel.fxml";
 
@@ -25,6 +28,9 @@ public class NoteListPanel extends UiPart<Region> {
         noteListView.setCellFactory(listView -> new NoteListViewCell());
     }
 
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code NoteEntry} using a {@code NoteCard}.
+     */
     class NoteListViewCell extends ListCell<NoteEntry> {
         @Override
         protected void updateItem(NoteEntry entry, boolean empty) {

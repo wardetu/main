@@ -14,8 +14,8 @@ import seedu.address.model.note.field.Title;
 import seedu.address.model.tag.Tag;
 
 /**
- * Stores the details to edit the internship with. Each non-empty field value will replace the
- * corresponding field value of the internship.
+ * Stores the details to edit the note with. Each non-empty field value will replace the
+ * corresponding field value of the note.
  */
 public class EditNoteDescriptor extends EditItemDescriptor {
     private Title title;

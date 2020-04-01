@@ -301,7 +301,8 @@ public interface Model {
     public void updateFilteredNoteEntryList(Predicate<NoteEntry> predicate);
 
 
-        //================================ Undo/Redo =============================================================
+    //================================ Undo/Redo =============================================================
+
     /**
      * Returns true if the model has previous resume book states to restore.
      */

@@ -8,6 +8,9 @@ import javafx.scene.layout.Region;
 import seedu.address.model.note.NoteEntry;
 import seedu.address.ui.UiPart;
 
+/**
+ * An UI component that displays information of a {@code NoteEntry}.
+ */
 public class NoteCard extends UiPart<Region> {
 
     private static final String FXML = "NoteCard.fxml";
@@ -42,11 +45,7 @@ public class NoteCard extends UiPart<Region> {
         time.setText(noteEntry.getTime().toString());
         place.setText(noteEntry.getPlace().toString());
         description.setText(noteEntry.getDescription().toString());
-//        tag.setText(noteEntry.getTags().toString());
         tag.setText("Priority: HIGH");
-
-//        Image image = new Image("/docs/images/check-mark.png");
-//        checkBox.setImage(image);
     }
 
     @Override

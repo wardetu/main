@@ -10,6 +10,9 @@ import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.model.Model;
 import seedu.address.model.note.NoteEntry;
 
+/**
+ * View a specified note.
+ */
 public class ViewNoteCommand extends ViewCommand {
 
     public ViewNoteCommand(Index targetIndex) {

@@ -7,6 +7,9 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.model.Model;
 
+/**
+ * List all notes currently in the list.
+ */
 public class ListNoteCommand extends ListCommand {
 
     @Override

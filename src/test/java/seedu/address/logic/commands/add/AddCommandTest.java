@@ -16,6 +16,7 @@ import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.note.NoteEntry;
 
 
 public class AddCommandTest {
@@ -71,6 +72,36 @@ public class AddCommandTest {
         @Override
         public Person getUser() {
             return null;
+        }
+
+        @Override
+        public boolean hasNoteEntry(NoteEntry noteEntry) {
+            return false;
+        }
+
+        @Override
+        public void addNoteEntry(NoteEntry noteEntry) {
+
+        }
+
+        @Override
+        public void setNoteEntry(NoteEntry target, NoteEntry editedNoteEntry) {
+
+        }
+
+        @Override
+        public void deleteNoteEntry(NoteEntry noteEntry) {
+
+        }
+
+        @Override
+        public NoteEntry getNoteEntry(Index index) {
+            return null;
+        }
+
+        @Override
+        public int getNoteEntrySize() {
+            return 0;
         }
 
         @Override
@@ -250,6 +281,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<NoteEntry> getFilteredNoteEntryList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredNoteEntryList(Predicate<NoteEntry> predicate) {
+
+        }
+
+        @Override
         public boolean canUndoResumeBook() {
             return false;
         }
@@ -311,6 +352,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasSkillId(int i) {
+            return false;
+        }
+
+        @Override
+        public boolean hasNoteEntryId(int i) {
             return false;
         }
     }

@@ -1,7 +1,7 @@
 package seedu.address.model.note.field;
 
 /**
- * Place
+ * Place field in a Note.
  */
 public class Place {
     public static final String MESSAGE_CONSTRAINTS = "Place can be optional but if inputed it must be a String.";

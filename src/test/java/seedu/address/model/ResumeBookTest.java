@@ -43,6 +43,7 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
+import seedu.address.model.note.NoteEntry;
 
 public class ResumeBookTest {
     /*
@@ -129,6 +130,11 @@ public class ResumeBookTest {
         }
 
         @Override
+        public boolean hasNoteEntryId(int i) {
+            return false;
+        }
+
+        @Override
         public Person getUser() {
             return user;
         }
@@ -136,6 +142,11 @@ public class ResumeBookTest {
         @Override
         public ObservableList<Item> getItemToDisplayList() {
             return itemsToDisplay;
+        }
+
+        @Override
+        public ObservableList<NoteEntry> getNoteEntryToDisplayList() {
+            return null;
         }
 
         @Override
@@ -156,6 +167,11 @@ public class ResumeBookTest {
         @Override
         public UniqueItemList<Resume> getResumeList() {
             return resumes;
+        }
+
+        @Override
+        public UniqueItemList<NoteEntry> getNoteEntryList() {
+            return null;
         }
 
         // STUB
@@ -234,6 +250,16 @@ public class ResumeBookTest {
         @Override
         public int getResumeSize() {
             return 1;
+        }
+
+        @Override
+        public NoteEntry getNoteEntry(Index index) {
+            return null;
+        }
+
+        @Override
+        public int getNoteEntrySize() {
+            return 0;
         }
 
     }

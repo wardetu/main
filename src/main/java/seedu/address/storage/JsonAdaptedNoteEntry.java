@@ -17,6 +17,9 @@ import seedu.address.model.note.field.Place;
 import seedu.address.model.note.field.Title;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Jackson-friendly version of {@link NoteEntry}.
+ */
 public class JsonAdaptedNoteEntry {
 
     private final String name;
@@ -53,6 +56,11 @@ public class JsonAdaptedNoteEntry {
         tagged.addAll(noteEntry.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
+    /**
+     * Convert Json NoteEntry to model-typed NoteEntry
+     * @return
+     * @throws IllegalValueException
+     */
     public NoteEntry toModelType() throws IllegalValueException {
         final List<Tag> tags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {

@@ -32,10 +32,10 @@ public interface ReadOnlyResumeBook {
 
     public ObservableList<NoteEntry> getNoteEntryToDisplayList();
 
-        /**
-         * Returns an unmodifiable view of the current internship list.
-         * This list will not contain any duplicate internship.
-         */
+    /**
+     * Returns an unmodifiable view of the current internship list.
+     * This list will not contain any duplicate internship.
+     */
     UniqueItemList<Internship> getInternshipList();
 
     /**

@@ -1,5 +1,8 @@
 package seedu.address.model.note.field;
 
+/**
+ * Description field in each Note object.
+ */
 public class Description {
     public static final String MESSAGE_CONSTRAINTS = "Description can be optional but once inputted it "
             + "has to be a String.";

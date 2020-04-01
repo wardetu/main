@@ -6,6 +6,9 @@ import java.util.Date;
 
 import seedu.address.logic.parser.exceptions.DateParseException;
 
+/**
+ * Format Date object.
+ */
 public class DateFormat {
 
     private static SimpleDateFormat formatter;

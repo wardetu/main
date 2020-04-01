@@ -37,9 +37,9 @@ public interface Logic {
 
     public ObservableList<NoteEntry> getFilteredNoteEntryList();
 
-        /**
-         * Returns the user prefs' address book file path.
-         */
+    /**
+     * Returns the user prefs' address book file path.
+     */
     Path getAddressBookFilePath();
 
     /**
