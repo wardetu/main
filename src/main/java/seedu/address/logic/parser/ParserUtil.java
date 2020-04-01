@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +13,6 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.parser.exceptions.DateParseException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.note.Verifier;
 import seedu.address.model.item.Item;
@@ -25,7 +23,6 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
-import seedu.address.model.note.field.DateFormat;
 import seedu.address.model.note.field.Description;
 import seedu.address.model.note.field.Place;
 import seedu.address.model.note.field.Title;
@@ -210,14 +207,6 @@ public class ParserUtil {
         throw new ParseException(Title.MESSAGE_CONSTRAINTS);
     }
 
-    public static Date parseDate(String date) throws DateParseException {
-        requireNonNull(date);
-        String trimmedDate = date.trim();
-        if (Verifier.isNotEmpty(trimmedDate) && Verifier.isValidDate(date)) {
-            return DateFormat.convertToDate(trimmedDate);
-        }
-        throw new DateParseException();
-    }
 
     public static Place parsePlace(String place) throws ParseException {
         requireNonNull(place);

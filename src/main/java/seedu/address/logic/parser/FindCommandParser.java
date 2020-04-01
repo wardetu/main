@@ -10,9 +10,11 @@ import seedu.address.logic.commands.find.FindInternshipCommand;
 import seedu.address.logic.commands.find.FindProjectCommand;
 import seedu.address.logic.commands.find.FindResumeCommand;
 import seedu.address.logic.commands.find.FindSkillCommand;
+import seedu.address.logic.commands.note.FindNoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
+import seedu.address.model.note.field.EntryTitleContainsKeywordsPredicate;
 import seedu.address.model.util.ItemUtil;
 
 /**
@@ -40,6 +42,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] nameKeywords = trimmedPreamble.split("\\s+");
 
+        String[] noteTitleKeywords = trimmedPreamble.split("\\s+");
+
         String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
         switch (itemType) {
@@ -51,7 +55,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindProjectCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         case ItemUtil.SKILL_ALIAS:
             return new FindSkillCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-
+        case ItemUtil.NOTE_ALIAS:
+            return new FindNoteCommand(new EntryTitleContainsKeywordsPredicate(Arrays.asList(noteTitleKeywords)));
         default:
             // Should not have reached here
             // TODO: Use a better Exception here

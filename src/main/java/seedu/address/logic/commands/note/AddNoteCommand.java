@@ -9,7 +9,6 @@ import seedu.address.model.Model;
 import seedu.address.model.note.NoteEntry;
 
 public class AddNoteCommand extends AddCommand {
-//    public static final String COMMAND_WORD = "note";
 
     public static final String MESSAGE_SUCCESS = "New note added!";
 

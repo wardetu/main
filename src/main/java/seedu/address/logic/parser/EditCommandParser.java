@@ -7,9 +7,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEBSITE;
 
@@ -28,6 +30,8 @@ import seedu.address.logic.commands.edit.EditResumeCommand;
 import seedu.address.logic.commands.edit.EditResumeDescriptor;
 import seedu.address.logic.commands.edit.EditSkillCommand;
 import seedu.address.logic.commands.edit.EditSkillDescriptor;
+import seedu.address.logic.commands.note.EditNoteCommand;
+import seedu.address.logic.commands.note.EditNoteDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.tag.Tag;
@@ -47,7 +51,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG, PREFIX_ITEM, PREFIX_FROM, PREFIX_TO,
-                        PREFIX_ROLE, PREFIX_DESCRIPTION, PREFIX_WEBSITE, PREFIX_LEVEL);
+                        PREFIX_ROLE, PREFIX_DESCRIPTION, PREFIX_WEBSITE, PREFIX_LEVEL, PREFIX_TITLE, PREFIX_PLACE,
+                        PREFIX_TIME);
 
         Index index;
 
@@ -139,6 +144,27 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
 
             return new EditSkillCommand(index, editSkillDescriptor);
+        case ItemUtil.NOTE_ALIAS:
+            EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptor();
+            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                editNoteDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            }
+            if (argMultimap.getValue(PREFIX_TITLE).isPresent()) {
+                editNoteDescriptor.setTitle(ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get()));
+            }
+            if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
+                editNoteDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get()));
+            }
+            if (argMultimap.getValue(PREFIX_PLACE).isPresent()) {
+                editNoteDescriptor.setPlace(ParserUtil.parsePlace(argMultimap.getValue(PREFIX_PLACE).get()));
+            }
+            if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+                editNoteDescriptor.setDescription(ParserUtil.parseDescription(
+                        argMultimap.getValue(PREFIX_DESCRIPTION).get()));
+            }
+
+            return new EditNoteCommand(index, editNoteDescriptor);
+
         default:
             // Should not have reached here
             // TODO: Use a better Exception here
