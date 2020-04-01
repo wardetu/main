@@ -76,11 +76,21 @@ public class GenerateResumeCommand extends Command {
         contentStream.newLineAtOffset(curX, curY);
     }
 
+    /**
+     * Moves cursor to the next line.
+     * @param contentStream {@code Content Stream} to write to file.
+     * @throws IOException
+     */
     public void nextLine(PDPageContentStream contentStream) throws IOException {
         contentStream.newLine();
         curY += spacing;
     }
 
+    /**
+     * Resets x alignment to left align.
+     * @param contentStream {@code Content Stream} to write to file.
+     * @throws IOException
+     */
     public void resetX(PDPageContentStream contentStream) throws IOException {
         float xOffSet = -curX + marginX;
         contentStream.newLineAtOffset(xOffSet, 0);
@@ -90,11 +100,14 @@ public class GenerateResumeCommand extends Command {
 
     /**
      * Changes the alignment of the text to centre align.
-     * @param content the text to be aligned
-     * @return x-coordinate offset to be set
+     * @param contentStream {@code Content Stream} to write to file.
+     * @param content content the text to be aligned
+     * @param font font of the content.
+     * @param size font size of the content.
      * @throws IOException
      */
-    public void centerAlign(PDPageContentStream contentStream, String content, PDFont font, int size) throws IOException {
+    public void centerAlign(PDPageContentStream contentStream, String content, PDFont font, int size)
+            throws IOException {
         float stringWidth = font.getStringWidth(content) * size / 1000f;
         float pageWidth = page.getWidth();
         float xOffSet = -curX + (pageWidth - stringWidth) / 2f;
@@ -105,7 +118,7 @@ public class GenerateResumeCommand extends Command {
 
     /**
      * Adds title headings to the output Resume file.
-     * @param contentStream `Content Stream` to write to file.
+     * @param contentStream {@code Content Stream} to write to file.
      * @param user user of the application.
      * @throws IOException
      */
@@ -132,6 +145,12 @@ public class GenerateResumeCommand extends Command {
         nextLine(contentStream);
     }
 
+    /**
+     * Adds educational details of the user to the output Resume file.
+     * @param contentStream {@code Content Stream} to write to file.
+     * @param user user of the application.
+     * @throws IOException
+     */
     public void addEducation(PDPageContentStream contentStream, Person user) throws IOException {
         String university = user.getUniversity();
         String from = user.getFrom().format();
@@ -151,7 +170,7 @@ public class GenerateResumeCommand extends Command {
 
     /**
      * Adds a new section to the output Resume file.
-     * @param contentStream `Content Stream` to write to file.
+     * @param contentStream {@code Content Stream} to write to file.
      * @param section name of the new section.
      * @throws IOException
      */
@@ -164,9 +183,9 @@ public class GenerateResumeCommand extends Command {
     }
 
     /**
-     * Adds a new `Internship` item to the output Resume file.
-     * @param contentStream `Content Stream` to write to file.
-     * @param internship `Internship` item to be added.
+     * Adds a new {@code Internship} item to the output Resume file.
+     * @param contentStream {@code Content Stream} to write to file.
+     * @param internship {@code Internship} item to be added.
      * @throws IOException
      */
     public void addInternship(PDPageContentStream contentStream, Internship internship) throws IOException {
@@ -182,9 +201,9 @@ public class GenerateResumeCommand extends Command {
     }
 
     /**
-     * Adds a new `Project` item to the output Resume file.
-     * @param contentStream `Content Stream` to write to file.
-     * @param project `Project` item to be added.
+     * Adds a new {@code Project} item to the output Resume file.
+     * @param contentStream {@code Content Stream} to write to file.
+     * @param project {@code Project} item to be added.
      * @throws IOException
      */
     public void addProject(PDPageContentStream contentStream, Project project) throws IOException {
@@ -199,9 +218,9 @@ public class GenerateResumeCommand extends Command {
     }
 
     /**
-     * Adds a new `Skill` item to the output Resume file.
-     * @param contentStream `Content Stream` to write to file.
-     * @param skill `Skill` item to be added.
+     * Adds a new {@code Skill} item to the output Resume file.
+     * @param contentStream {@code Content Stream} to write to file.
+     * @param skill {@code Skill} item to be added.
      * @throws IOException
      */
     public void addSkill(PDPageContentStream contentStream, Skill skill) throws IOException {
@@ -213,7 +232,7 @@ public class GenerateResumeCommand extends Command {
 
     /**
      * Adds title to a new item in the output Resume file
-     * @param contentStream `Content Stream` to write to file.
+     * @param contentStream {@code Content Stream} to write to file.
      * @param title title of the item to be added
      * @throws IOException
      */
@@ -226,7 +245,7 @@ public class GenerateResumeCommand extends Command {
 
     /**
      * Adds description to a new item in the output Resume file
-     * @param contentStream `Content Stream` to write to file.
+     * @param contentStream {@code Content Stream} to write to file.
      * @param description description of the item to be added
      * @throws IOException
      */
