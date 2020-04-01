@@ -130,7 +130,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteNoteEntry(NoteEntry noteEntry) {
-
+        versionedResumeBook.deleteNoteEntry(noteEntry);
     }
 
     @Override

@@ -451,14 +451,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Removes {@code key} from this {@code ResumeBook}.
      * {@code key} must exist in the resume book.
      */
-//    public void deleteNoteEntry(NoteEntry key) {
-////        int id = key.getId();
-////        entries.remove(key);
-////        for (Item item : resumes) {
-////            Resume resume = (Resume) item;
-////            resume.getNoteEntries().remove(id);
-////        }
-////    }
+    public void deleteNoteEntry(NoteEntry key) {
+        int id = key.getId();
+        entries.remove(key);
+    }
 
     @Override
     public NoteEntry getNoteEntry(Index index) {

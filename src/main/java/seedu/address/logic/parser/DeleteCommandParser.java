@@ -9,6 +9,7 @@ import seedu.address.logic.commands.delete.DeleteInternshipCommand;
 import seedu.address.logic.commands.delete.DeleteProjectCommand;
 import seedu.address.logic.commands.delete.DeleteResumeCommand;
 import seedu.address.logic.commands.delete.DeleteSkillCommand;
+import seedu.address.logic.commands.note.DeleteNoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.util.ItemUtil;
@@ -45,7 +46,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 return new DeleteProjectCommand(index);
             case ItemUtil.SKILL_ALIAS:
                 return new DeleteSkillCommand(index);
-
+            case ItemUtil.NOTE_ALIAS:
+                return new DeleteNoteCommand(index);
             default:
                 // Should not have reached here
                 // TODO: Use a better Exception here
