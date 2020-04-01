@@ -85,8 +85,6 @@ public interface Model {
 
     int getNoteEntrySize();
 
-//    void setNoteEntryToDisplay();
-
     //=========== Internships ================================================================================
 
     /**
@@ -344,4 +342,5 @@ public interface Model {
     boolean hasProjectId(int i);
     boolean hasSkillId(int i);
     boolean hasNoteEntryId(int i);
+
 }

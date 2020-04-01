@@ -50,33 +50,36 @@
                         <Insets bottom="5" left="10" right="10" top="5" />
                       </padding>
                      </StackPane>
-
-                     <SplitPane fx:id="userFeedback" dividerPositions="0.5" VBox.vgrow="ALWAYS">
-                       <items>
-                          <VBox fx:id="resultAndItem">
-                             <children>
-                             <StackPane fx:id="resultDisplayPlaceholder" maxHeight="150.0" minWidth="200.0" styleClass="pane-with-border">
-                               <padding>
+                        <VBox VBox.vgrow="ALWAYS">
+                           <children>
+                                 <SplitPane fx:id="userFeedback" dividerPositions="0.5" VBox.vgrow="ALWAYS">
+                             <items>
+                                <VBox fx:id="resultAndItem">
+                                   <children>
+                                   <StackPane fx:id="resultDisplayPlaceholder" maxHeight="150.0" minWidth="200.0" styleClass="pane-with-border">
+                                     <padding>
+                                        <Insets bottom="5" left="10" right="10" top="5" />
+                                     </padding>
+                                   </StackPane>
+                               <StackPane fx:id="itemDisplayPlaceholder" maxHeight="150.0" minWidth="200.0" styleClass="pane-with-border">
+                                <padding>
                                   <Insets bottom="5" left="10" right="10" top="5" />
-                               </padding>
-                             </StackPane>
-                         <StackPane fx:id="itemDisplayPlaceholder" maxHeight="150.0" minWidth="200.0" styleClass="pane-with-border">
-                          <padding>
-                            <Insets bottom="5" left="10" right="10" top="5" />
-                          </padding>
-                         </StackPane>
-                                    <StackPane styleClass="pane-with-border" />
-                             </children>
-                          </VBox>
-
-                      <VBox fx:id="personList" styleClass="pane-with-border">
-                        <padding>
-                          <Insets bottom="10" left="10" right="10" top="10" />
-                        </padding>
-                        <StackPane fx:id="personListPanelPlaceholder" minWidth="200" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
-                      </VBox>
-                       </items>
-                    </SplitPane>
+                                </padding>
+                               </StackPane>
+                                          <StackPane styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
+                                   </children>
+                                </VBox>
+      
+                                  <VBox fx:id="personList" styleClass="pane-with-border">
+                              <padding>
+                                <Insets bottom="10" left="10" right="10" top="10" />
+                              </padding>
+                              <StackPane fx:id="personListPanelPlaceholder" minWidth="200" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
+                            </VBox>
+                             </items>
+                          </SplitPane>
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                </children>

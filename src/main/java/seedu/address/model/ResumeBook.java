@@ -178,10 +178,9 @@ public class ResumeBook implements ReadOnlyResumeBook {
         this.resumes.setItems(resumes);
     }
 
-    public void setNoteEntries(UniqueItemList<NoteEntry> entries) {
+    private void setNoteEntries(UniqueItemList<NoteEntry> entries) {
         this.entries.setItems(entries);
     }
-
     /**
      * Resets the existing data of this {@code ResumeBook} with {@code newData}.
      */

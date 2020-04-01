@@ -30,7 +30,7 @@ public class ModelManager implements Model {
     private final VersionedResumeBook versionedResumeBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Item> filteredItems;
-    private final FilteredList<NoteEntry> filterdNoteEntries;
+    private final FilteredList<NoteEntry> filteredNoteEntries;
 
     /**
      * Initializes a ModelManager with the given resumeBook and userPrefs.
@@ -44,7 +44,7 @@ public class ModelManager implements Model {
         this.versionedResumeBook = new VersionedResumeBook(resumeBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredItems = new FilteredList<>(this.versionedResumeBook.getItemToDisplayList());
-        filterdNoteEntries = new FilteredList<>(this.versionedResumeBook.getNoteEntryToDisplayList());
+        filteredNoteEntries = new FilteredList<>(this.versionedResumeBook.getNoteEntryToDisplayList());
     }
 
     public ModelManager() {
@@ -119,7 +119,7 @@ public class ModelManager implements Model {
     @Override
     public void addNoteEntry(NoteEntry noteEntry) {
         versionedResumeBook.addNoteEntry(noteEntry);
-        updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        updateFilteredNoteEntryList(PREDICATE_SHOW_ALL_ENTRIES);
     }
 
     @Override
@@ -142,11 +142,6 @@ public class ModelManager implements Model {
     public int getNoteEntrySize() {
         return versionedResumeBook.getNoteEntrySize();
     }
-
-//    @Override
-//    public void setNoteEntryToDisplay() {
-//        versionedResumeBook.setNoteEntryToDisplay();
-//    }
 
     //=========== Internships ================================================================================
 
@@ -355,12 +350,12 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredNoteEntryList(Predicate<NoteEntry> predicate) {
         requireNonNull(predicate);
-        filterdNoteEntries.setPredicate(predicate);
+        filteredNoteEntries.setPredicate(predicate);
     }
 
     @Override
     public ObservableList<NoteEntry> getFilteredNoteEntryList() {
-        return filterdNoteEntries;
+        return filteredNoteEntries;
     }
 
     @Override
