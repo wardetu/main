@@ -40,20 +40,25 @@ public class GenerateResumeCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 [" + PREFIX_NAME + "MyResume";
     public static final String MESSAGE_GENERATE_SUCCESS = "Generated %s from %s";
 
+    private static PDPageContentStream contentStream;
     private static final Color MAIN_COLOR = new Color(0, 0, 0);
     private static final Color ACCENT_COLOR = new Color(153, 0, 51);
     private static final int BODY_SIZE = 11;
     private static final int HEADING_SIZE = 14;
+    private static final int TITLE_SIZE = 20;
     private static final PDFont FONT_BOLD = PDType1Font.HELVETICA_BOLD;
     private static final PDFont FONT_REGULAR = PDType1Font.HELVETICA;
     private static final int marginX = 64;
     private static final int marginY = 100;
-    private static final float spacing = 24;
+    private static final float spacing = 20;
     private static final PDRectangle page = PDRectangle.A4;
     private static final String rootPath = "export/";
 
     private static float curX = 0;
     private static float curY = 0;
+    private static Color curColor;
+    private static PDFont curFont;
+    private static int curSize;
 
     protected final Index targetIndex;
     protected String fileName;
@@ -68,7 +73,7 @@ public class GenerateResumeCommand extends Command {
         this.fileName = resumeName.toString();
     }
 
-    public void setUp(PDPageContentStream contentStream) throws IOException {
+    public void setUp() throws IOException {
         contentStream.setLeading(spacing);
         float pageHeight = page.getHeight();
         curY = pageHeight - marginY;
@@ -78,187 +83,217 @@ public class GenerateResumeCommand extends Command {
 
     /**
      * Moves cursor to the next line.
-     * @param contentStream {@code Content Stream} to write to file.
      * @throws IOException
      */
-    public void nextLine(PDPageContentStream contentStream) throws IOException {
+    public void nextLine() throws IOException {
         contentStream.newLine();
         curY += spacing;
     }
 
     /**
      * Resets x alignment to left align.
-     * @param contentStream {@code Content Stream} to write to file.
      * @throws IOException
      */
-    public void resetX(PDPageContentStream contentStream) throws IOException {
+    public void resetX() throws IOException {
         float xOffSet = -curX + marginX;
         contentStream.newLineAtOffset(xOffSet, 0);
         curX += xOffSet;
-        System.out.println("reset X to " + curX);
     }
 
     /**
      * Changes the alignment of the text to centre align.
-     * @param contentStream {@code Content Stream} to write to file.
      * @param content content the text to be aligned
-     * @param font font of the content.
-     * @param size font size of the content.
      * @throws IOException
      */
-    public void centerAlign(PDPageContentStream contentStream, String content, PDFont font, int size)
-            throws IOException {
-        float stringWidth = font.getStringWidth(content) * size / 1000f;
+    public void centerAlign(String content) throws IOException {
+        float stringWidth = curFont.getStringWidth(content) * curSize / 1000f;
         float pageWidth = page.getWidth();
         float xOffSet = -curX + (pageWidth - stringWidth) / 2f;
         contentStream.newLineAtOffset(xOffSet, 0);
         curX += xOffSet;
-        System.out.println("center align X to " + curX);
+    }
+
+    public void setColor(Color color) throws IOException {
+        contentStream.setNonStrokingColor(color);
+        curColor = color;
+    }
+
+    public void setFont(PDFont font, int size) throws IOException {
+        contentStream.setFont(font, size);
+        curFont = font;
+        curSize = size;
+    }
+
+    /**
+     * Formats and shows content that spans over multiple lines.
+     * @param content the content to be shown.
+     * @throws IOException
+     */
+    public void fitMultiLine(String content) throws IOException {
+        float limit = page.getWidth() - 2 * marginX;
+        String[] words = content.split(" ");
+        int i = 0;
+        boolean isFirstLine = true;
+        while (i < words.length) {
+            String line = "";
+            float width = 0;
+            while (i < words.length) {
+                String word = words[i];
+                float add = curFont.getStringWidth(word) * curSize / 1000f;
+                if (width + add > limit) {
+                    break;
+                }
+                width += add;
+                line += word + " ";
+                i++;
+            }
+            if (!isFirstLine) {
+                line = "  " + line;
+            }
+            contentStream.showText(line);
+            System.out.println(line);
+            System.out.println("width " + width + " fit in limit " + limit);
+            isFirstLine = false;
+            nextLine();
+        }
     }
 
     /**
      * Adds title headings to the output Resume file.
-     * @param contentStream {@code Content Stream} to write to file.
      * @param user user of the application.
      * @throws IOException
      */
-    public void addTitle(PDPageContentStream contentStream, Person user) throws IOException {
-        setUp(contentStream);
-
-        contentStream.setFont(FONT_BOLD, HEADING_SIZE);
-        contentStream.setNonStrokingColor(ACCENT_COLOR);
+    public void addTitle(Person user) throws IOException {
+        setUp();
+        setFont(FONT_BOLD, TITLE_SIZE);
+        setColor(ACCENT_COLOR);
         String name = user.getName().toString();
-        centerAlign(contentStream, name, FONT_BOLD, HEADING_SIZE);
+        centerAlign(name);
         contentStream.showText(name.toUpperCase());
-        resetX(contentStream);
-        nextLine(contentStream);
+        resetX();
+        nextLine();
 
-        contentStream.setFont(FONT_REGULAR, BODY_SIZE);
-        contentStream.setNonStrokingColor(MAIN_COLOR);
+        setFont(FONT_REGULAR, BODY_SIZE);
+        setColor(MAIN_COLOR);
         String phone = user.getPhone().toString();
         String email = user.getEmail().toString();
         String git = user.getGithub().toString();
         String contact = phone + "  |  " + email + "  |  " + git;
-        centerAlign(contentStream, contact, FONT_REGULAR, BODY_SIZE);
+        centerAlign(contact);
         contentStream.showText(contact);
-        resetX(contentStream);
-        nextLine(contentStream);
+        resetX();
+        nextLine();
+        nextLine();
     }
 
     /**
      * Adds educational details of the user to the output Resume file.
-     * @param contentStream {@code Content Stream} to write to file.
      * @param user user of the application.
      * @throws IOException
      */
-    public void addEducation(PDPageContentStream contentStream, Person user) throws IOException {
+    public void addEducation(Person user) throws IOException {
         String university = user.getUniversity();
         String from = user.getFrom().format();
         String to = user.getTo().format();
         String title = university + " | " + to + " - " + from;
-        addItemTitle(contentStream, title);
+        addItemTitle(title);
 
-        contentStream.setFont(FONT_REGULAR, BODY_SIZE);
-        contentStream.setNonStrokingColor(MAIN_COLOR);
+        setFont(FONT_REGULAR, BODY_SIZE);
+        setColor(MAIN_COLOR);
         String major = "- " + user.getMajor();
         contentStream.showText(major);
-        nextLine(contentStream);
+        nextLine();
         String cap = "- Cumulative Average Point: " + user.getCap();
         contentStream.showText(cap);
-        nextLine(contentStream);
+        nextLine();
+        nextLine();
     }
 
     /**
-     * Adds a new section to the output Resume file.
-     * @param contentStream {@code Content Stream} to write to file.
+     * Adds a new section title to the output Resume file.
      * @param section name of the new section.
      * @throws IOException
      */
-    public void addSection(PDPageContentStream contentStream, String section) throws IOException {
-        contentStream.setFont(FONT_BOLD, BODY_SIZE);
-        contentStream.setNonStrokingColor(ACCENT_COLOR);
-        nextLine(contentStream);
+    public void addSectionTitle(String section) throws IOException {
+        setFont(FONT_BOLD, HEADING_SIZE);
+        setColor(ACCENT_COLOR);
         contentStream.showText(section);
-        nextLine(contentStream);
+        nextLine();
     }
 
     /**
      * Adds a new {@code Internship} item to the output Resume file.
-     * @param contentStream {@code Content Stream} to write to file.
      * @param internship {@code Internship} item to be added.
      * @throws IOException
      */
-    public void addInternship(PDPageContentStream contentStream, Internship internship) throws IOException {
+    public void addInternship(Internship internship) throws IOException {
         String name = internship.getName().toString();
         String role = internship.getRole();
         String from = internship.getFrom().format();
         String to = internship.getTo().format();
         String title = name + " | " + role + " | " + from + " - " + to;
-        addItemTitle(contentStream, title);
+        addItemTitle(title);
 
         String description = internship.getDescription();
-        addDescription(contentStream, description);
+        addDescription(description);
     }
 
     /**
      * Adds a new {@code Project} item to the output Resume file.
-     * @param contentStream {@code Content Stream} to write to file.
      * @param project {@code Project} item to be added.
      * @throws IOException
      */
-    public void addProject(PDPageContentStream contentStream, Project project) throws IOException {
+    public void addProject(Project project) throws IOException {
         String name = project.getName().toString();
         String time = project.getTime().format();
         String website = project.getWebsite().toString();
         String title = name + " | " + time + " | " + website;
-        addItemTitle(contentStream, title);
+        addItemTitle(title);
 
         String description = project.getDescription();
-        addDescription(contentStream, description);
+        addDescription(description);
     }
 
     /**
      * Adds a new {@code Skill} item to the output Resume file.
-     * @param contentStream {@code Content Stream} to write to file.
      * @param skill {@code Skill} item to be added.
      * @throws IOException
      */
-    public void addSkill(PDPageContentStream contentStream, Skill skill) throws IOException {
+    public void addSkill(Skill skill) throws IOException {
         String name = skill.getName().toString();
         String level = skill.getLevel().toString();
         String description = name + " | " + level;
-        addDescription(contentStream, description);
+        addItemTitle(description);
     }
 
     /**
      * Adds title to a new item in the output Resume file
-     * @param contentStream {@code Content Stream} to write to file.
      * @param title title of the item to be added
      * @throws IOException
      */
-    public void addItemTitle(PDPageContentStream contentStream, String title) throws IOException {
-        contentStream.setNonStrokingColor(MAIN_COLOR);
+    public void addItemTitle(String title) throws IOException {
+        setColor(MAIN_COLOR);
         contentStream.setFont(FONT_BOLD, BODY_SIZE);
         contentStream.showText(title);
-        nextLine(contentStream);
+        nextLine();
     }
 
     /**
      * Adds description to a new item in the output Resume file
-     * @param contentStream {@code Content Stream} to write to file.
      * @param description description of the item to be added
      * @throws IOException
      */
-    public void addDescription(PDPageContentStream contentStream, String description) throws IOException {
-        contentStream.setNonStrokingColor(MAIN_COLOR);
-        contentStream.setFont(FONT_REGULAR, BODY_SIZE);
+    public void addDescription(String description) throws IOException {
+        setFont(FONT_REGULAR, BODY_SIZE);
 
         String[] content = description.split("\\.");
         for (String line: content) {
-            contentStream.showText("- " + line.trim() + ".");
-            nextLine(contentStream);
+            String point = "- " + line.trim() + ".";
+            fitMultiLine(point);
         }
+        nextLine();
     }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -289,27 +324,27 @@ public class GenerateResumeCommand extends Command {
         try {
             final PDDocument resume = new PDDocument();
             resume.addPage(singlePage);
-            final PDPageContentStream contentStream = new PDPageContentStream(resume, singlePage);
+            contentStream = new PDPageContentStream(resume, singlePage);
             contentStream.beginText();
-            addTitle(contentStream, user);
-            addSection(contentStream, "EDUCATION");
-            addEducation(contentStream, user);
-            addSection(contentStream, "INTERNSHIPS");
+            addTitle(user);
+            addSectionTitle("EDUCATION");
+            addEducation(user);
+            addSectionTitle("INTERNSHIPS");
             for (Integer id: internshipsToAdd) {
                 Internship toAdd = model.getInternshipById(id);
-                addInternship(contentStream, toAdd);
+                addInternship(toAdd);
             }
 
-            addSection(contentStream, "PROJECTS");
+            addSectionTitle("PROJECTS");
             for (Integer id: projectsToAdd) {
                 Project toAdd = model.getProjectById(id);
-                addProject(contentStream, toAdd);
+                addProject(toAdd);
             }
 
-            addSection(contentStream, "SKILLS");
+            addSectionTitle("SKILLS");
             for (Integer id: skillsToAdd) {
                 Skill toAdd = model.getSkillById(id);
-                addSkill(contentStream, toAdd);
+                addSkill(toAdd);
             }
             contentStream.endText();
             contentStream.close();
