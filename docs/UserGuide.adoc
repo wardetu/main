@@ -237,11 +237,15 @@ Examples:
 View the 2nd resume in the resume book.
 
 === Editing a resume: `redit`
-----
 Edits the resume to contain the items specified in the command. 
-----
-Format:
-`redit RESUME_INDEX TYPE/ [ITEM_INDEX...] [MORE_TYPE/ [ITEM_INDEX...]]`
+
+[NOTE]
+`redit` is a different command from `edit`. Please visit <<FAQ>> for more information.
+
+****
+Format: `redit RESUME_INDEX TYPE/ [ITEM_INDEX...] [MORE_TYPE/ [ITEM_INDEX...]]`
+****
+
 
 ****
 * Edits the resume with the specified `RESUME_INDEX`. 
