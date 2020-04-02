@@ -309,6 +309,10 @@ Content of other item types in the resume remain unchanged.
 
 Undoes the previous command and restores the state of the application to before that command is performed.
 
+****
+Format: undo
+****
+
 Commands that can be undone are: `add`, `delete`, `edit`, `redit`, and `me`.
 
 Successive undo commands will bring the application further back, until there is no more change to undo.
@@ -331,6 +335,10 @@ Successive undo commands will bring the application further back, until there is
 
 Reverts the most recent undone command and brings the application state to after the (re)execution
 of that command.
+
+****
+Format: redo
+****
 
 [NOTE]
 --
