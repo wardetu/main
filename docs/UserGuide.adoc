@@ -15,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-F10-1/main
 
-By: `Team F10-1`      Since: `Jan 2020`      Licence: `MIT`
+By: `CS2103T F10-1`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
@@ -47,14 +47,33 @@ and job application woes.
 |=======================================================================
 
 As you may have noticed from number 4, we are able to manage different resumes as well!
-(As if this is not the whole reason why we decided to build this app :))
+(As if this is not the whole reason why we decided to build this app in the firs place :D)
 Items from number 1 to 3 can be shared across different resumes.
 
 === Preview
 The following is the GUI for our application:
 // TODO: insert updated GUI
 
-Interested? Jump to the Section 3, `Quick Start` to get started. Enjoy!
+****
+The GUI includes:
+
+1. Command box: where you enter your commands.
+
+2. Result box: where the result of a command is shown. It can show a success message or a failure
+message if something wrong happens.
+
+3. View box: where the detailed information is shown if needed. For instance, if you are viewing an
+internship item, this box shows in full the item's name, timing, description, and other pieces of information.
+
+4. List box: where all items of a type are listed. Only a type is displayed at a time. You can change
+the view of this list. Also, when a command results in the change of one or more items of an item type,
+the list box will be set to displaying that type.
+
+5. User box: where you can view your information like name, email address, or phone number. If you make any update
+that change will be reflected.
+****
+
+Interested? Jump to <<Quick Start>> to get started. Enjoy!
 
 == About this guide
 Our aim when writing this document is to help you - a new user - get started with *ResuMe* as quickly as possible.
@@ -87,26 +106,6 @@ You will come across these little guys a lot in this document, so let's get to k
 |`index` | The position of the `item` in the currently displayed list
 |=======================================================================
 
-
-
-****
-The GUI includes:
-
-1. Command box: where you enter your commands.
-
-2. Result box: where the result of a command is shown. It can show a success message or a failure
-message if something wrong happens.
-
-3. View box: where the detailed information is shown if needed. For instance, if you are viewing an
-internship item, this box shows in full the item's name, timing, description, and other pieces of information.
-
-4. List box: where all items of a type are listed. Only a type is displayed at a time. You can change
-the view of this list. Also, when a command results in the change of one or more items of an item type,
-the list box will be set to displaying that type.
-
-5. User box: where you can view your information like name, email address, or phone number. If you make any update
-that change will be reflected.
-****
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
@@ -623,7 +622,5 @@ Lists of all commands which has format that *vary* depending on item type.
 |Project |`edit i/ proj [n/ PROJECT NAME] [t/ TIME] [w/ WEBSITE] [d/ DESCRIPTION] [#/ TAG]....`
 |Skill |`edit i/ ski [n/ SKILL NAME] [l/ LEVEL] [#/ TAG]....`
 |Resume |`edit i/ res [n/ NAME] [#/ TAG]...`
-
-
 
 |=======================================================================
