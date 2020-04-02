@@ -18,10 +18,11 @@ public class TypicalResumeBook {
             .withResume(TypicalResume.SE_RESUME)
             .build();
     public static final ResumeBook TYPICAL_WITHOUT_GOOGLE = new ResumeBookBuilder()
-            .withInternship(TypicalInternship.GOOGLE)
+            .withInternship(TypicalInternship.NINJA_VAN)
             .withPerson(TypicalPerson.ALICE)
             .withProject(TypicalProject.ORBITAL)
-            .withProject(TypicalProject.DUKE)
+            .withSkill(TypicalSkill.REACT)
+            .withResume(TypicalResume.ME_RESUME)
             .build();
 
 }
