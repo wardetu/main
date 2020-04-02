@@ -142,7 +142,7 @@ image::ListProject.png[width="790"]
 image::AddDukeProject.png[width="790"]
 
 
-=== Editing a person : `edit`
+=== Editing an item : `edit`
 
 Edits an existing item in the ResuMe application.
 
