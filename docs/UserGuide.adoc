@@ -304,6 +304,9 @@ Shows the text format of the resume with `RESUME_ID` 135.
 === Generating a resume: `rgen`
 Generates a .pdf file from an existing resume stored inside the application at the specified index.
 
+The exported `.pdf` file
+will be located in the same folder as the application `.jar` file.
+
 [NOTE]
 A valid `INDEX` is a positive integer that identifies an existing resume.
 
