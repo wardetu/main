@@ -371,11 +371,6 @@
     -fx-background-radius: 0;
 }
 
-#itemDisplay .content {
-    -fx-background-color: transparent, #5a6872, transparent, #5a6872;
-    -fx-background-radius: 0;
-}
-
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
@@ -393,16 +388,6 @@
 #resultDisplay .content {
     -fx-text-fill: white;
     -fx-background-color: #5a6872;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 5 5 5 5;
-    -fx-background-radius: 2;
-    -fx-font-size: 13pt;
-}
-
-#itemDisplay .content {
-    -fx-text-fill: white;
-    -fx-background-color: #5a6872;
-    -fx-padding: 1 3 1 3;
     -fx-border-radius: 5 5 5 5;
     -fx-background-radius: 2;
     -fx-font-size: 13pt;

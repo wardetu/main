@@ -40,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private PreviewWindow previewWindow;
     private UserOverallPane userOverallPane;
     private ItemDisplayList itemDisplayList;
+    private ObservableList<String> observableItemList;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -212,11 +213,11 @@ public class MainWindow extends UiPart<Stage> {
             userOverallPane.updateUserProfile(logic.getUser());
 
             if (commandResult.hasItemChanged()) {
-                ObservableList<String> list =
-                        FXCollections.observableArrayList(commandResult.getDataToUser().split("\n"));
-                itemDisplayList = new ItemDisplayList(list);
-                itemDisplayPlaceholder.getChildren().add(itemDisplayList.getRoot());
+                observableItemList = FXCollections.observableArrayList(commandResult.getDataToUser().split("\n"));
             }
+
+            itemDisplayList = new ItemDisplayList(observableItemList);
+            itemDisplayPlaceholder.getChildren().add(itemDisplayList.getRoot());
 
             if (commandResult.isShowPreview()) {
                 previewWindow.setPreviewText(commandResult.getDataToUser());

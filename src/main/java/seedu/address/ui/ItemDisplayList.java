@@ -18,12 +18,12 @@ public class ItemDisplayList extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ItemDisplayList.class);
 
     @FXML
-    private ListView<String> testList;
+    private ListView<String> itemDisplayList;
 
     public ItemDisplayList(ObservableList<String> itemList) {
         super(FXML);
-        testList.setItems(itemList);
-        testList.setCellFactory(lst ->
+        itemDisplayList.setItems(itemList);
+        itemDisplayList.setCellFactory(lst ->
             new ListCell<String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
