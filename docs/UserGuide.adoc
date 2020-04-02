@@ -18,13 +18,17 @@ By: `Team F10-1`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
-*ResuMe* is for those who *prefer to use a desktop app for managing
-resumes*. More importantly, *ResuMe* is *optimized for those who prefer
-to work with a Command Line Interface* (CLI) while still having the
-benefits of a Graphical User Interface (GUI). If you can type fast,
-*ResuMe* can get your resume management tasks done faster than
-traditional GUI apps. Interested? Jump to the Section 2, `Quick Start`
-to get started. Enjoy!
+Hello fellow University friends! Have you ever found writing resumes
+for job and internship applications a hassle? Have you ever dreamt about
+an app that can help you manage different resumes for different companies?
+Have you ever wished for more streamlined a *Command Line Interface*
+application that can match your efficiency and typing prowess?
+
+If this sounds like you, *ResuMe* is _the_ resume managing application for you!
+Made by University students for University students with _looovee_, this app
+understands your struggle and strives to cater to your specific resume needs
+and job application woes. Interested? Jump to the Section 2, `Quick Start` to
+get started. Enjoy!
 
 ResuMe allows management of different items and they must be one of the
 4 item types:
@@ -88,16 +92,23 @@ Lists out the function and usage of each command.
 Format: `help`
 
 === Listing all items : `list`
-----
+
 List items in the storage.
-----
-Format: `list i/ TYPE`
 
 ****
-* List items that have type matches the `TYPE` argument.
-* Listed items are in short form, only showing their name, `ID`, `tags` and a short summary.
-To view items in full details, use `view`.
+Format: `list i/ TYPE`
 ****
+
+[NOTE]
+Listed items are in short form, only showing their name, index, `tags` and a short summary.
+To view items in full details, use `view`.
+
+Examples:
+
+* `list i/ res`
+Lists all resume items.
+* `list i/ proj`
+Lists all project items.
 
 === Adding an item: `add`
 
@@ -291,15 +302,20 @@ to these states.
 ****
 
 === Previewing a resume: `rpreview`
-----
-Previews the resume in string format.
-----
-Format: `rpreview RESUME_ID`
+
+Previews a resume in text format in a different window.
+
+****
+Format: `rpreview INDEX`
+****
+
+[NOTE]
+`INDEX` is with respect to the index seen when `list i/res` is called.
 
 Examples:
 
-* `rpreview 135` +
-Shows the text format of the resume with `RESUME_ID` 135.
+* `rpreview 2` +
+Shows preview of the resume with at index 2.
 
 === Generating a resume: `rgen`
 Generates a .pdf file from an existing resume stored inside the application at the specified index.
@@ -330,6 +346,16 @@ image::ListResume.png[width="790"]
 +
 image::GenerateResume.png[width="790"]
 image::PdfFile.png[width="790"]
+
+=== Clearing all data: `clear`
+Clears all data from ResuMe.
+
+****
+Format: `clear`
+****
+
+[WARNING]
+This command cannot be undone. Please be careful when exercising this power.
 
 
 === Exiting the program : `exit`
