@@ -47,6 +47,24 @@ Items from number 1 to 3 can be shared across different resumes.
 
 The following is the GUI for our application:
 
+****
+The GUI includes:
+
+1. Command box: where you enter your commands.
+
+2. Result box: where the result of a command is shown. It can show a success message or a failure
+message if something wrong happens.
+
+3. View box: where the detailed information is shown if needed. For instance, if you are viewing an
+internship item, this box shows in full the item's name, timing, description, and other pieces of information.
+
+4. List box: where all items of a type are listed. Only a type is displayed at a time. You can change
+the view of this list. Also, when a command results in the change of one or more items of an item type,
+the list box will be set to displaying that type.
+
+5. User box: where you can view your information like name, email address, or phone number. If you make any update
+that change will be reflected.
+****
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
@@ -297,7 +315,7 @@ Successive undo commands will bring the application further back, until there is
 
 [NOTE]
 --
-* An undo is done for per command and not change.
+* An undo is done per command and not change.
 
 * Commands that make no change to the application state, like `list` or `view`, cannot be undone.
 
