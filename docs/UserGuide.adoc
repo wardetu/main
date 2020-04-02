@@ -3,13 +3,6 @@
 :toc:
 :toc-title:
 :toc-placement: preamble
-:icon: font
-
-++++
-<link rel="stylesheet"  href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css">
-++++
-
-:warning-caption:
 :sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
@@ -18,6 +11,7 @@
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
+:warning-caption: :warning:
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-F10-1/main
 
@@ -75,9 +69,9 @@ Most of us are visual learners, and we figured, what is a better way to present 
 [width="100%",cols="20%,80%",options="header",]
 |=======================================================================
 |Symbol / Format|Explanation
-|NOTE: | Important information to take note
-|TIP: | Tips
-|WARNING: | Warnings on potential misuse
+|:note-caption: | Important information to take note
+|:tip-caption: | Tips
+|:warning-caption: | Warnings on potential misuse
 |`consola font` | Keywords you could type in the command box and could be be executed by the application
 |=======================================================================
 
