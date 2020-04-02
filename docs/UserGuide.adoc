@@ -159,9 +159,9 @@ Edits an existing item in the ResuMe application.
 
 [NOTE]
 `edit` is a different command from `redit`. Please visit <<FAQ>> for more information.
-----
+****
 Format: `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...`
-----
+****
 
 
 [width="100%",cols="16%,84%",options="header",]
@@ -243,15 +243,29 @@ Deletes the 2nd resume in the resume book.
 
 === Viewing an item in details: `view`
 
-----
-Shows all items in an existing resume.
-----
+
+Shows the details of an item.
+
+****
 Format: `view INDEX i/ TYPE`
+****
 
-Examples:
+[TIP]
+The details of some item types like `proj` can only be viewed by using this command.
 
-* `view 2 i/ res` +
-View the 2nd resume in the resume book.
+*Example:* Try typing in the command box these two commands one by one!
+
+. `list i/ proj`
+. `view 1 i/ proj`
+
+*Outcome:*
+
+. All project items are listed in the list panel.
++
+image::ListProject2.png[width="790"]
+. Using the `view` command, we can view the details of the project such as its website ("abc.github.io") and its description ("For a little module named CS2103T").
++
+image::ViewDukeProject.png[width="790"]
 
 === Editing a resume: `redit`
 Edits the resume to contain the items specified in the command.
