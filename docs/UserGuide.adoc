@@ -412,7 +412,7 @@ Lists of all commands which has format that *do not vary* depending on item type
 | Clear | `clear`
 | Delete | `delete INDEX i/ TYPE`
 | Exit | `exit`
-| Edit Resume | `redit RESUME_INDEX TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]... [#/ TAG]...`
+| Edit Resume | `redit RESUME_INDEX TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]`
 | Find | `find KEYWORD [MORE_KEYWORDS]... i/ TYPE`
 | Generate Resume | `rgen RESUME_INDEX`
 | Help  | `help`
