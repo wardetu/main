@@ -21,11 +21,11 @@ By: `Team F10-1`      Since: `Jan 2020`      Licence: `MIT`
 Hello fellow University friends! Have you ever found writing resumes
 for job and internship applications a hassle? Have you ever dreamt about
 an app that can help you manage different resumes for different companies?
-Have you ever wished for more streamlined a *Command Line Interface*
+Have you ever wished for a more streamlined *Command Line Interface*
 application that can match your efficiency and typing prowess?
 
 If this sounds like you, *ResuMe* is _the_ resume managing application for you!
-Made by University students for University students with _looovee_, this app
+Made by University students for University students with _looovee_, this wonder
 understands your struggle and strives to cater to your specific resume needs
 and job application woes. Interested? Jump to the Section 2, `Quick Start` to
 get started. Enjoy!
@@ -79,7 +79,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/ TYPE n/ NAME`,
 `TYPE` and `NAME` are parameters which can be used as `add i/ proj n/ Orbital`.
 * Items in square brackets are optional e.g `n/ NAME [#/TAG]` can be used as `n/ Orbital #/ SE` or as `n/ Orbital`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[\#/ TAG]...`
+* Items with `…` after them can be used multiple times including zero times e.g. `[\#/ TAG]...`
 can be used as (i.e. 0 times), `#/ friend`, `\#/ friend`, `#/ family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/ NAME p/ PHONE`,
 `p/ PHONE_NUMBER n/ NAME` is also acceptable.
@@ -153,12 +153,15 @@ image::ListProject.png[width="790"]
 image::AddDukeProject.png[width="790"]
 
 
-=== Editing a person : `edit`
+=== Editing an item : `edit`
 
-----
 Edits an existing item in the ResuMe application.
+
+[NOTE]
+`edit` is a different command from `redit`. Please visit <<FAQ>> for more information.
 ----
 Format: `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...`
+----
 
 
 [width="100%",cols="16%,84%",options="header",]
@@ -173,18 +176,21 @@ Format: `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...`
 |Resume |`edit INDEX i/ res [n/ NAME] [#/ TAG]...`
 |=======================================================================
 
-****
-* Edits the item of type `TYPE` with the specified `ID`. The `ID` refers
-to the unique identification number given to the item when it was first
-added. The `ID` must be a *positive integer* that identifies an existing
-item.
-* At least *one* of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, existing tags of the person will be removed. i.e
-adding of tags is not cumulative.
-* You can remove *all* the person’s tags by typing `#/` without
-specifying any tags after it.
-****
+
+*Example:* Try typing in the command box these two commands one by one!
+
+. `list i/ res`
+. `edit 2 i/ res n/ Software Engineering Resume`
+
+*Outcome:*
+
+. All resume items are listed in the list panel.
++
+image::ListResume2.png[width="790"]
+. The Resume at index 2 has its name changed from "Resume 2" to "Software Engineering Resume".
++
+image::EditResumeExample.png[width="790"]
+
 Examples:
 
 * `edit 1 i/ res n/ Resume 1` +

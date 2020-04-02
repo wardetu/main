@@ -207,10 +207,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Item Display: " + commandResult.getDataToUser());
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isUpdateUser()) {
-                userOverallPane.updateUserProfile(logic.getUser());
-            }
+            userOverallPane.updateUserProfile(logic.getUser());
 
             if (commandResult.hasItemChanged()) {
                 itemDisplay.setDataFeedbackToUser(commandResult.getDataToUser());
