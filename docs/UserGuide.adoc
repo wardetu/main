@@ -11,6 +11,7 @@
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
+:warning-caption: :warning:
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-F10-1/main
 
@@ -27,29 +28,66 @@ application that can match your efficiency and typing prowess?
 If this sounds like you, *ResuMe* is _the_ resume managing application for you!
 Made by University students for University students with _looovee_, this wonder
 understands your struggle and strives to cater to your specific resume needs
-and job application woes. Interested? Jump to the Section 2, `Quick Start` to
-get started. Enjoy!
+and job application woes.
 
-ResuMe allows management of different items and they must be one of the
-4 item types:
+=== Overview
+*ResuMe* allows the management of four different item types:
 
 [source,sh]
 [cols="10%,10%,20%,60%",options="header",]
 |=======================================================================
-|No. |Alias |Item type |Attributes
-|1 |int |internship |id, name, position, from, to, description, tag
+|No. |Item type |Alias |Attributes
+|1 |internship |int |name, role, from, to, description, tag
 
-|2 |proj |project |id, name, from, to, description, tag
+|2 |project |proj |name, time, website, description, tag
 
-|3 |ski |skill |id, name, level, tag
+|3 |skill |ski |name, level, tag
 
-|4 |res |resume |id, name, description, tag
+|4 |resume |res |name, description, tag
 |=======================================================================
 
-As you may have noticed from number 4, we are able to manage different resumes as well.
+As you may have noticed from number 4, we are able to manage different resumes as well!
+(As if this is not the whole reason why we decided to build this app :))
 Items from number 1 to 3 can be shared across different resumes.
 
+=== Preview
 The following is the GUI for our application:
+UPDATE GUI
+
+Interested? Jump to the Section 3, `Quick Start` to get started. Enjoy!
+
+== About this guide
+Our aim when writing this document is to help you - a new user - get started with *ResuMe* as quickly as possible.
+The guide features all the available commands, their syntax, as well as specific examples for illustration.
+
+This section is, well... a guide on how to use this guide :) We will be explaining some of the symbols and formatting used, key terms,
+as well notes and tips for a better user experience.
+
+=== Symbols and Formatting
+Most of us are visual learners, and we figured, what is a better way to present information than using some shapes and colours?
+
+[width="100%",cols="20%,80%",options="header",]
+|=======================================================================
+|Symbol / Format|Explanation
+|NOTE: | Important information to take note
+|TIP: | Tips
+|WARNING: | Warnings on potential misuse
+|`consola font` | Keywords you could type in the command box and could be be executed by the application
+|=======================================================================
+
+=== Key terms
+You will come across these little guys a lot in this document, so let's get to know them first!
+[width="100%",cols="20%,80%",options="header",]
+|=======================================================================
+|Term |Explanation
+|`type` | Consisting of four different types: `internship`, `project`, `skill` or `resume`
+|`item` | An item stored in the application, which could be any one of the four types above
+|`command` | A line of text that you could type into the command box and execute
+|`parameter` | Specific information about an `item` supplied by you
+|`index` | The position of the `item` in the currently displayed list
+|=======================================================================
+
+
 
 ****
 The GUI includes:
@@ -104,10 +142,11 @@ can be used as (i.e. 0 times), `#/ friend`, `\#/ friend`, `#/ family` etc.
 ====
 
 === Viewing help : `help`
-----
+
 Lists out the function and usage of each command.
-----
+****
 Format: `help`
+****
 
 === Edit user profile: `me`
 
@@ -328,11 +367,11 @@ Examples:
 * `delete 2 i/ res` +
 Deletes the 2nd resume in the resume book.
 
-<Photo for good case>
+Photo for good case
 
-<Photo for failed case>
+Photo for failed case
 
-<Photo to show cascading>
+Photo to show cascading
 
 === Viewing an item in details: `view`
 
@@ -417,11 +456,11 @@ Successive undo commands will bring the application further back, until there is
 
 * You cannot undo if there is no previous state to return to.
 --
-<PHOTO OF SUCCESSIVE CASE>
+PHOTO OF SUCCESSIVE CASE
 
-<PHOTO OF NO UNDO AT THE BEGINNING>
+PHOTO OF NO UNDO AT THE BEGINNING
 
-<PHOTO OF FAILED UNDO>
+PHOTO OF FAILED UNDO
 
 === Redo a command: `redo`
 
@@ -440,7 +479,7 @@ Format: redo
 to these states.
 * You cannot redo if there is no forward state to go to.
 --
-<PHOTOS>
+PHOTOS
 
 === Previewing a resume: `rpreview`
 
@@ -460,6 +499,9 @@ Shows preview of the resume with at index 2.
 
 === Generating a resume: `rgen`
 Generates a .pdf file from an existing resume stored inside the application at the specified index.
+
+The exported `.pdf` file
+will be located in the same folder as the application `.jar` file.
 
 [NOTE]
 A valid `INDEX` is a positive integer that identifies an existing resume.
@@ -481,12 +523,12 @@ If no name is specified, the filename will be set, by default, to the name of th
 
 . The first command lists out all resumes. Assuming that you want to generate the first resume in the list.
 +
-image::ListResume.png[width="790"]
+image::ListResume.PNG[width="790"]
 
 . The second command generate a `My Resume.pdf` file from the specified resume. The screenshots of the generated file is as below:
 +
-image::GenerateResume.png[width="790"]
-image::PdfFile.png[width="790"]
+image::GenerateResume.PNG[width="790"]
+image::PdfFile.PNG[width="790"]
 
 === Clearing all data: `clear`
 Clears all data from ResuMe.
