@@ -18,17 +18,16 @@ import static seedu.address.logic.commands.CommandTestUtil.ITEM_TYPE_PROJECT;
 //import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 //import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 //import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_DESCRIPTION_ORBITAL;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_INTERNSHIP_DESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_GOOGLE;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_ORBITAL;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_ROLE_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TAG_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TAG_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TIME_ORBITAL;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TIME_FROM;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TIME_TO;
-import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_WEBSITE;
 //import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 //import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 //import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -38,6 +37,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_WEBSITE;
 //import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 //import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_NAME_ORBITAL;
 //import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_WEBSITE_ORBITAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JAVA;
 //import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME;
@@ -74,8 +74,9 @@ public class AddCommandParserTest {
         Project expectedProject = new ProjectBuilder(ORBITAL).withTags(VALID_TAG_JAVA).build();
 
         // Standard
-        assertParseSuccess(parser, ITEM_TYPE_PROJECT + PREFIXED_NAME_ORBITAL + PREFIXED_TIME + PREFIXED_WEBSITE
-                + PREFIXED_DESCRIPTION + PREFIXED_TAG_JAVA, new AddProjectCommand(expectedProject));
+        assertParseSuccess(parser, ITEM_TYPE_PROJECT + PREFIXED_NAME_ORBITAL + PREFIXED_TIME_ORBITAL
+                + PREFIXED_WEBSITE_ORBITAL + PREFIXED_DESCRIPTION_ORBITAL
+                + PREFIXED_TAG_JAVA, new AddProjectCommand(expectedProject));
     }
 
     @Test
