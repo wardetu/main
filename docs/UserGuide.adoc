@@ -159,9 +159,9 @@ Edits an existing item in the ResuMe application.
 
 [NOTE]
 `edit` is a different command from `redit`. Please visit <<FAQ>> for more information.
-----
+****
 Format: `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...`
-----
+****
 
 
 [width="100%",cols="16%,84%",options="header",]
@@ -251,7 +251,7 @@ Format: `view INDEX i/ TYPE`
 ****
 
 [TIP]
-The details of some item types like `proj` can only be viewed by using this command. 
+The details of some item types like `proj` can only be viewed by using this command.
 
 *Example:* Try typing in the command box these two commands one by one!
 
