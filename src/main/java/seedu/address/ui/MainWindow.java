@@ -208,7 +208,7 @@ public class MainWindow extends UiPart<Stage> {
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             userOverallPane.updateUserProfile(logic.getUser());
-            itemListPanel.changeStyle();
+            itemListPanel.changeStyle(commandResult.getDisplayType());
 
             if (commandResult.hasItemChanged()) {
                 itemDisplay.setDataFeedbackToUser(commandResult.getDataToUser());
