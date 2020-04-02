@@ -82,10 +82,11 @@ can be used as (i.e. 0 times), `#/ friend`, `\#/ friend`, `#/ family` etc.
 ====
 
 === Viewing help : `help`
-----
+
 Lists out the function and usage of each command.
-----
+****
 Format: `help`
+****
 
 === Listing all items : `list`
 ----
