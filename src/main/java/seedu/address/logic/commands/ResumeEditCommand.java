@@ -124,7 +124,7 @@ public class ResumeEditCommand extends Command {
             StringBuilder invalidIndices = new StringBuilder();
             boolean isInvalidIndexPresent = false;
             for (Integer i: unboxedIndices) {
-                if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
+                if (Index.fromOneBased(i).getZeroBased() >= model.getProjectSize()) {
                     isInvalidIndexPresent = true;
                     invalidIndices.append(i.toString()).append(" ");
                 }
@@ -142,7 +142,7 @@ public class ResumeEditCommand extends Command {
             StringBuilder invalidIndices = new StringBuilder();
             boolean isInvalidIndexPresent = false;
             for (Integer i: unboxedIndices) {
-                if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
+                if (Index.fromOneBased(i).getZeroBased() >= model.getSkillSize()) {
                     isInvalidIndexPresent = true;
                     invalidIndices.append(i.toString()).append(" ");
                 }
