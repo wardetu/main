@@ -51,6 +51,24 @@ Items from number 1 to 3 can be shared across different resumes.
 
 The following is the GUI for our application:
 
+****
+The GUI includes:
+
+1. Command box: where you enter your commands.
+
+2. Result box: where the result of a command is shown. It can show a success message or a failure
+message if something wrong happens.
+
+3. View box: where the detailed information is shown if needed. For instance, if you are viewing an
+internship item, this box shows in full the item's name, timing, description, and other pieces of information.
+
+4. List box: where all items of a type are listed. Only a type is displayed at a time. You can change
+the view of this list. Also, when a command results in the change of one or more items of an item type,
+the list box will be set to displaying that type.
+
+5. User box: where you can view your information like name, email address, or phone number. If you make any update
+that change will be reflected.
+****
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
@@ -164,7 +182,7 @@ Lists all project items.
 Adds an item to the ResuMe application.
 
 [NOTE]
-An item could be one of the four item types: `internship`, `project`, `skill` or even a `resume` itself.
+An item could be one of the four item types: `internship`, `project`, `skill` or even `resume` itself.
 
 ****
 Format: `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...`
@@ -207,9 +225,9 @@ Edits an existing item in the ResuMe application.
 
 [NOTE]
 `edit` is a different command from `redit`. Please visit <<FAQ>> for more information.
-----
+****
 Format: `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...`
-----
+****
 
 
 [width="100%",cols="16%,84%",options="header",]
@@ -283,36 +301,65 @@ The specific command syntax could be found in the table below:
 +
 image::find_command.png[width="790"]
 
-=== Deleting a person : `delete`
+=== Deleting an item : `delete`
 
-----
-Deletes an existing item in the ResuMe application
-----
+Deletes an item from the ResuMe application.
+
+****
 Format: `delete INDEX i/ TYPE`
+****
 
-****
-* Deletes the item of type `TYPE` with the specified `INDEX`. The `INDEX`
-refers to the index of the item in the respective item list. `INDEX` must be a valid index of the list.
-* Once the item with the specified `INDEX` is deleted,
-the list will automatically update to show the new indices of its items.
-****
+`INDEX` : the positional index of the item. Use `list TYPE` with the same item type to view this list.
+
+`TYPE`  : the item type.
+
+[NOTE]
+The `INDEX` argument comes before the `TYPE` argument.
+
+[TIP]
+Use `list` command to navigate to the correct list to ensure that 1) the item exists, and 2) you know the
+correct index for deletion. Or just fall back on `undo`.
+
+Deleting an item will set the list window to display items of its type.
+If the item is an internship, a project, or a skill, all resumes that contain it will also be updated to
+reflect the change.
 
 Examples:
 
 * `delete 2 i/ res` +
 Deletes the 2nd resume in the resume book.
 
+<Photo for good case>
+
+<Photo for failed case>
+
+<Photo to show cascading>
+
 === Viewing an item in details: `view`
 
-----
-Shows all items in an existing resume.
-----
+
+Shows the details of an item.
+
+****
 Format: `view INDEX i/ TYPE`
+****
 
-Examples:
+[TIP]
+The details of some item types like `proj` can only be viewed by using this command.
 
-* `view 2 i/ res` +
-View the 2nd resume in the resume book.
+*Example:* Try typing in the command box these two commands one by one!
+
+. `list i/ proj`
+. `view 1 i/ proj`
+
+*Outcome:*
+
+. All project items are listed in the list panel.
++
+image::ListProject2.png[width="790"]
+. Using the `view` command, we can view the details of the project such as its website ("abc.github.io") and its description ("For a little module named CS2103T").
++
+image::ViewDukeProject.png[width="790"]
 
 === Editing a resume: `redit`
 Edits the resume to contain the items specified in the command.
@@ -352,21 +399,49 @@ image::ReditWantSomeThings.png[][WantSomeThings,442,337]
 (To be implemented) Edits the resume specified at that index to contain all items of the specified tag.
 
 === Undo a command: `undo`
+
+Undoes the previous command and restores the state of the application to before that command is performed.
+
 ****
-* Undoes the previous command and restores the state of the application to before that command is performed.
-* Successive undo commands will bring the application state further back.
-* Do note that commands that make no change to the application state, like `list` or `view`, cannot be undone.
-* You cannot undo if there is no previous state to return to.
+Format: undo
 ****
 
+Commands that can be undone are: `add`, `delete`, `edit`, `redit`, and `me`.
+
+Successive undo commands will bring the application further back, until there is no more change to undo.
+
+[NOTE]
+--
+* An undo is done per command and not change.
+
+* Commands that make no change to the application state, like `list` or `view`, cannot be undone.
+
+* You cannot undo if there is no previous state to return to.
+--
+<PHOTO OF SUCCESSIVE CASE>
+
+<PHOTO OF NO UNDO AT THE BEGINNING>
+
+<PHOTO OF FAILED UNDO>
+
 === Redo a command: `redo`
+
+Reverts the most recent undone command and brings the application state to after the (re)execution
+of that command.
+
 ****
-* Redoes the immediately previous undone command and brings the application state to after the performing of that
-command.
-* If a new command is performed after `undo`, then all redo states will be deleted and you will not be able to go
+Format: redo
+****
+
+[NOTE]
+--
+* A redo is done per command and not change.
+
+* If a new `add`, `delete`, `edit`, `redit`, or `me` command is performed after an undo, then all redo states will be deleted and you will not be able to go
 to these states.
 * You cannot redo if there is no forward state to go to.
-****
+--
+<PHOTOS>
 
 === Previewing a resume: `rpreview`
 
@@ -461,34 +536,52 @@ ____
 
 == Command Summary
 
-* *Help* : `help`
+This is a summary of all commands for your convenience.
 
-* *Me* : `me dp/ FILEPATH n/ NAME [ATTRIBUTE/ VALUE]...` +
-e.g. `me dp//Users/nhamquochung/Desktop/test.png n/ My Name p/ 12345678 e/ test@gmail.com g/ mygithub u/ NUS m/ CS f/ 08-2018 t/ 05-2022 c/ 5.0`
+General commands::
+Lists of all commands which has format that *do not vary* depending on item type.
+[source,sh]
+[cols="20%,80%",options="header"]
+|=======================================================================
 
-* *List* : `list`
 
-* *Add* `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...` +
-e.g. `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
+| Command | Format
 
-* *Edit* : `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...` +
-e.g. `edit 2 i/ ski l/ ADVANCED #/`
+| Clear | `clear`
+| Delete | `delete INDEX i/ TYPE`
+| Exit | `exit`
+| Edit Resume | `redit RESUME_INDEX TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]`
+| Find | `find KEYWORD [MORE_KEYWORDS]... i/ TYPE`
+| Generate Resume | `rgen RESUME_INDEX`
+| Help  | `help`
+| List | `list i/ TYPE`
+| Me | `me dp/ FILEPATH n/ NAME [ATTRIBUTE/ VALUE]...`
+| Preview Resume | `rpreview RESUME_INDEX`
+| Redo | `redo`
+| Undo | `undo`
+| View | `view INDEX i/ TYPE`
 
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find Software`
+|=======================================================================
 
-* *Delete* : `delete INDEX i/ TYPE` +
-e.g. `delete 3 i/res`
+Item specific commands::
+Lists of all commands which has format that *vary* depending on item type.
 
-* *Edit Resume* : `redit RESUME_ID TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]... [#/ TAG]...`
-e.g. `redit 135 proj/ 9823 int/ 102 201` +
+[source,sh]
+[cols="5%,15%,80%",options="header"]
+|=======================================================================
 
-* *Undo* : `undo` +
+| Command | Type | Format
 
-* *Redo* : `redo` +
+.4+| Add |Internship | `add i/ int n/ COMPANY NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
+|Project |`add i/ proj n/ PROJECT NAME t/ TIME w/ WEBSITE d/ DESCRIPTION [#/ TAG]....`
+|Skill |`add i/ ski n/ SKILL NAME l/ LEVEL [#/ TAG]....`
+|Resume |`add i/ res n/ NAME [#/ TAG]...`
 
-* *Preview Resume* : `rpreview RESUME_ID` +
-e.g. `rpreview 234`
+.4+| Edit |Internship | `edit i/ int [n/ COMPANY NAME] [r/ ROLE] [f/ FROM] [t/ TO] [d/ DESCRIPTION] [#/ TAG]...`
+|Project |`edit i/ proj [n/ PROJECT NAME] [t/ TIME] [w/ WEBSITE] [d/ DESCRIPTION] [#/ TAG]....`
+|Skill |`edit i/ ski [n/ SKILL NAME] [l/ LEVEL] [#/ TAG]....`
+|Resume |`edit i/ res [n/ NAME] [#/ TAG]...`
 
-* *Generate Resume* : `rgen RESUME_ID` +
-e.g. `rgen 21`
+
+
+|=======================================================================
