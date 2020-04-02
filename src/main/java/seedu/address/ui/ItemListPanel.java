@@ -60,6 +60,10 @@ public class ItemListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Sets the UI according to the list shown.
+     * @param displayType String representation of type displayed.
+     */
     public void changeStyle(String displayType) {
         current.getStyleClass().remove("typeSelected");
         current.getStyleClass().add("typeNotSelected");
