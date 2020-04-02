@@ -94,10 +94,17 @@ List items in the storage.
 Format: `list i/ TYPE`
 
 ****
-* List items that have type matches the `TYPE` argument.
-* Listed items are in short form, only showing their name, `ID`, `tags` and a short summary.
+* List all items that have type matches the `TYPE` argument.
+* Listed items are in short form, only showing their name, index, `tags` and a short summary.
 To view items in full details, use `view`.
 ****
+
+Examples:
+
+* `list i/ res`
+Lists all resume items.
+* `list i/ proj`
+Lists all project items.
 
 === Adding an item: `add`
 ----
@@ -281,15 +288,17 @@ to these states.
 ****
 
 === Previewing a resume: `rpreview`
-----
-Previews the resume in string format.
-----
-Format: `rpreview RESUME_ID`
+
+Previews the resume in text format.
+
+****
+Format: `rpreview INDEX`
+****
 
 Examples:
 
-* `rpreview 135` +
-Shows the text format of the resume with `RESUME_ID` 135.
+* `rpreview 2` +
+Shows the text format of the resume with at index 2.
 
 === Generating a resume: rgen
 ----
