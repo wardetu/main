@@ -237,7 +237,7 @@ Examples:
 View the 2nd resume in the resume book.
 
 === Editing a resume: `redit`
-Edits the resume to contain the items specified in the command. 
+Edits the resume to contain the items specified in the command.
 
 [NOTE]
 `redit` is a different command from `edit`. Please visit <<FAQ>> for more information.
@@ -248,8 +248,8 @@ Format: `redit RESUME_INDEX TYPE/ [ITEM_INDEX...] [MORE_TYPE/ [ITEM_INDEX...]]`
 
 
 ****
-* Edits the resume with the specified `RESUME_INDEX`. 
-* The `INDEX` in the command is based on the position of the item when `list i/ ITEM` is called. 
+* Edits the resume with the specified `RESUME_INDEX`.
+* The `INDEX` in the command is based on the position of the item when `list i/ ITEM` is called.
 * `TYPE` can be any one of the following: `int`, `proj`, `skill`.
 * The `TYPE` to be inserted cannot be resume (`res`) and at least one
 `TYPE` must be provided.
@@ -273,13 +273,13 @@ This command modifies the resume at index 1. It changes the resume to contain no
 
 image::ReditRemoveEverything.png[][RemoveEverything,442,337]
 
-* `redit res/ 1 int/ 1 proj/ ski/ 2` + 
-This command modifies the resume at index 1. It changes the resume to contain internship item at index 1, no project items, and skill item at index 2. The following screenshot illustrates what can happen (take note that initially the resume may contain other set of items entirely): 
+* `redit res/ 1 int/ 1 proj/ ski/ 2` +
+This command modifies the resume at index 1. It changes the resume to contain internship item at index 1, no project items, and skill item at index 2. The following screenshot illustrates what can happen (take note that initially the resume may contain other set of items entirely):
 
 image::ReditWantSomeThings.png[][WantSomeThings,442,337]
 
 ===== Tag Pull
-(To be implemented) Edits the resume specified at that index to contain all items of the specified tag. 
+(To be implemented) Edits the resume specified at that index to contain all items of the specified tag.
 
 === Undo a command: `undo`
 ****
