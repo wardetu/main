@@ -371,12 +371,12 @@ If no name is specified, the filename will be set, by default, to the name of th
 
 . The first command lists out all resumes. Assuming that you want to generate the first resume in the list.
 +
-image::ListResume.png[width="790"]
+image::ListResume.PNG[width="790"]
 
 . The second command generate a `My Resume.pdf` file from the specified resume. The screenshots of the generated file is as below:
 +
-image::GenerateResume.png[width="790"]
-image::PdfFile.png[width="790"]
+image::GenerateResume.PNG[width="790"]
+image::PdfFile.PNG[width="790"]
 
 
 === Exiting the program : `exit`
