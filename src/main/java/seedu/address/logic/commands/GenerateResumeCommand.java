@@ -355,6 +355,6 @@ public class GenerateResumeCommand extends Command {
 
         return new CommandResult(resumeToGenerate.toString(),
                 String.format(MESSAGE_GENERATE_SUCCESS, fileName, resumeToGenerate.getName().toString()),
-                false, false, true, false, false);
+                false, true, false, false);
     }
 }
