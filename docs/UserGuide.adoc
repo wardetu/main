@@ -88,16 +88,16 @@ Lists out the function and usage of each command.
 Format: `help`
 
 === Listing all items : `list`
-----
+
 List items in the storage.
-----
-Format: `list i/ TYPE`
 
 ****
-* List all items that have type matches the `TYPE` argument.
-* Listed items are in short form, only showing their name, index, `tags` and a short summary.
-To view items in full details, use `view`.
+Format: `list i/ TYPE`
 ****
+
+[NOTE]
+Listed items are in short form, only showing their name, index, `tags` and a short summary.
+To view items in full details, use `view`.
 
 Examples:
 
@@ -298,16 +298,19 @@ to these states.
 
 === Previewing a resume: `rpreview`
 
-Previews the resume in text format.
+Previews a resume in text format in a different window.
 
 ****
 Format: `rpreview INDEX`
 ****
 
+[NOTE]
+`INDEX` is with respect to the index seen when `list i/res` is called.
+
 Examples:
 
 * `rpreview 2` +
-Shows the text format of the resume with at index 2.
+Shows preview of the resume with at index 2.
 
 === Generating a resume: `rgen`
 Generates a .pdf file from an existing resume stored inside the application at the specified index.
