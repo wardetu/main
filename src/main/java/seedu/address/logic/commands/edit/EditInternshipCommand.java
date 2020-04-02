@@ -25,16 +25,27 @@ import seedu.address.model.tag.Tag;
  * Edits an Internship Item in the address book.
  */
 public class EditInternshipCommand extends EditCommand {
+    private static final String FIELDS = COMMAND_WORD
+            + COMMAND_WORD + " "
+            + PREFIX_ITEM + "int "
+            + "[" + PREFIX_NAME + "COMPANY NAME] "
+            + "[" + PREFIX_ROLE + "ROLE] "
+            + "[" + PREFIX_FROM + "FROM] "
+            + "[" + PREFIX_TO + "TO] "
+            + "[" + PREFIX_DESCRIPTION + "DESC] "
+            + "[" + PREFIX_TAG + "TAG]....\n";
     private static final String EXAMPLE = "Example: "
             + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + " int "
             + PREFIX_NAME + " Shopee "
-            + PREFIX_DESCRIPTION + " I did some work "
             + PREFIX_FROM + " 05-2020 "
             + PREFIX_TO + " 08-2020 "
             + PREFIX_ROLE + " Backend Engineer"
+            + PREFIX_DESCRIPTION + " I did some work "
             + PREFIX_TAG + " backend ";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + EXAMPLE;
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n"
+            + FIELDS
+            + EXAMPLE;
     private static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
 
     private EditInternshipDescriptor editInternshipDescriptor;
