@@ -104,6 +104,13 @@ public class Verifier {
         }
     }
 
+    /**
+     * Check if a number is within accepted range.
+     * @param number
+     * @param min
+     * @param max
+     * @return
+     */
     public static boolean isWithinRange(double number, double min, double max) {
         return number >= min && number <= max;
     }

@@ -11,6 +11,7 @@
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
+:warning-caption: :warning:
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-F10-1/main
 
@@ -27,30 +28,85 @@ application that can match your efficiency and typing prowess?
 If this sounds like you, *ResuMe* is _the_ resume managing application for you!
 Made by University students for University students with _looovee_, this wonder
 understands your struggle and strives to cater to your specific resume needs
-and job application woes. Interested? Jump to the Section 2, `Quick Start` to
-get started. Enjoy!
+and job application woes.
 
-ResuMe allows management of different items and they must be one of the
-4 item types:
+=== Overview
+*ResuMe* allows the management of four different item types:
 
 [source,sh]
 [cols="10%,10%,20%,60%",options="header",]
 |=======================================================================
-|No. |Alias |Item type |Attributes
-|1 |int |internship |id, name, position, from, to, description, tag
+|No. |Item type |Alias |Attributes
+|1 |internship |int |name, role, from, to, description, tag
 
-|2 |proj |project |id, name, from, to, description, tag
+|2 |project |proj |name, time, website, description, tag
 
-|3 |ski |skill |id, name, level, tag
+|3 |skill |ski |name, level, tag
 
-|4 |res |resume |id, name, description, tag
+|4 |resume |res |name, description, tag
 |=======================================================================
 
-As you may have noticed from number 4, we are able to manage different resumes as well.
+As you may have noticed from number 4, we are able to manage different resumes as well!
+(As if this is not the whole reason why we decided to build this app :))
 Items from number 1 to 3 can be shared across different resumes.
 
+=== Preview
 The following is the GUI for our application:
+UPDATE GUI
 
+Interested? Jump to the Section 3, `Quick Start` to get started. Enjoy!
+
+== About this guide
+Our aim when writing this document is to help you - a new user - get started with *ResuMe* as quickly as possible.
+The guide features all the available commands, their syntax, as well as specific examples for illustration.
+
+This section is, well... a guide on how to use this guide :) We will be explaining some of the symbols and formatting used, key terms,
+as well notes and tips for a better user experience.
+
+=== Symbols and Formatting
+Most of us are visual learners, and we figured, what is a better way to present information than using some shapes and colours?
+
+[width="100%",cols="20%,80%",options="header",]
+|=======================================================================
+|Symbol / Format|Explanation
+|NOTE: | Important information to take note
+|TIP: | Tips
+|WARNING: | Warnings on potential misuse
+|`consola font` | Keywords you could type in the command box and could be be executed by the application
+|=======================================================================
+
+=== Key terms
+You will come across these little guys a lot in this document, so let's get to know them first!
+[width="100%",cols="20%,80%",options="header",]
+|=======================================================================
+|Term |Explanation
+|`type` | Consisting of four different types: `internship`, `project`, `skill` or `resume`
+|`item` | An item stored in the application, which could be any one of the four types above
+|`command` | A line of text that you could type into the command box and execute
+|`parameter` | Specific information about an `item` supplied by you
+|`index` | The position of the `item` in the currently displayed list
+|=======================================================================
+
+
+
+****
+The GUI includes:
+
+1. Command box: where you enter your commands.
+
+2. Result box: where the result of a command is shown. It can show a success message or a failure
+message if something wrong happens.
+
+3. View box: where the detailed information is shown if needed. For instance, if you are viewing an
+internship item, this box shows in full the item's name, timing, description, and other pieces of information.
+
+4. List box: where all items of a type are listed. Only a type is displayed at a time. You can change
+the view of this list. Also, when a command results in the change of one or more items of an item type,
+the list box will be set to displaying that type.
+
+5. User box: where you can view your information like name, email address, or phone number. If you make any update
+that change will be reflected.
+****
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
@@ -86,10 +142,60 @@ can be used as (i.e. 0 times), `#/ friend`, `\#/ friend`, `#/ family` etc.
 ====
 
 === Viewing help : `help`
-----
+
 Lists out the function and usage of each command.
-----
+****
 Format: `help`
+****
+
+=== Edit user profile: `me`
+
+Edits and updates user's display information.
+
+[NOTE]
+A user profile contains the following fields: `Display Picture`, `Name`, `Phone`, `Email`, `Github`, `University`, `Major`, `From`, `To`, `CAP`.
+
+****
+Format: `me dp/ FILEPATH n/ NAME p/ PHONE [ATTRIBUTE/ VALUE]...`
+****
+
+The specific command syntax could be found in the table below:
+
+[width="100%",cols="12%,88%",options="header",]
+|=======================================================================
+|Type |Format
+|Person | `me dp/ FILEPATH n/ NAME p/ PHONE e/ EMAIL g/ GITHUB u/ UNIVERSITY m/ MAJOR f/ FROM t/ TO c/ CAP`
+|=======================================================================
+
+*Example 1:* Try typing in the command box this command!
+
+. `me n/ My Name p/ 12345678 e/ test@gmail.com g/ mygithub u/ NUS m/ CS f/ 08-2018 t/ 05-2022 c/ 5.0`
+
+*Outcome:*
+
+. The user profile panel is updated accordingly as below.
++
+image::user_profile.png[width="790"]
+
+*Example 2:* Edit user profile image
+
+Follow the steps in one of these two links to copy a file path according to your respective Operating System.
+
+. Mac: https://osxdaily.com/2013/06/19/copy-file-folder-path-mac-os-x/
+
+. Windows: https://www.laptopmag.com/articles/show-full-folder-path-file-explorer
+
+Afterwards, try a command similar to the one below!
+
+. `me dp//Users/nhamquochung/Desktop/test.png`
+
+*Outcome:*
+
+. The user profile picture is updated accordingly as below.
++
+image::user_profile1.png[width="790"]
+
+
 
 === Listing all items : `list`
 
@@ -115,7 +221,7 @@ Lists all project items.
 Adds an item to the ResuMe application.
 
 [NOTE]
-An item could be one of the four item types: `internship`, `project`, `skill` or even a `resume` itself.
+An item could be one of the four item types: `internship`, `project`, `skill` or even `resume` itself.
 
 ****
 Format: `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...`
@@ -151,7 +257,6 @@ image::ListProject.png[width="790"]
 . A new project item named `Duke` with the specified fields is added. This item is automatically reflected in the list panel.
 +
 image::AddDukeProject.png[width="790"]
-
 
 === Editing an item : `edit`
 
@@ -198,48 +303,76 @@ Edits the name of the 1st resume to be `Resume 1`.
 * `edit 2 i/ ski l/ ADVANCED #/` +
 Edits the level of the 2nd skill to be `ADVANCED` and clears all existing tags.
 
-=== Locating persons by name: `find`
-----
+=== Finding items by name: `find`
+
 Finds items in the ResuMe application whose names contain the specified keyword(s).
-----
-Format: `find KEYWORD [MORE_KEYWORDS]`
+
+[NOTE]
+An item could be one of the four item types: `internship`, `project`, `skill` or even a `resume` itself.
 
 ****
-* At least one keyword must be provided.
-* The search is *case insensitive*. > e.g. orbital will match Orbital
-* The *order* of the keywords does *not* matter. > e.g. Orbital CP2106
-will match CP2106 Orbital
-* If the `TYPE` is not specified. The program will search across *_all_*
-items.
-* Only *_full_* words will be matched. > e.g. CP210 will not match
-CP2106*
+Format: `find KEYWORD [MORE_KEYWORDS]... i/ TYPE`
 ****
 
-Examples:
+The specific command syntax could be found in the table below:
 
-* `find Software` +
-Returns `software` and `Software`
-* `find Shopee Front-end` +
-Returns any items having names `Shopee` or `Front-end`
+[width="100%",cols="12%,88%",options="header",]
+|=======================================================================
+|Type |Format
+|Internship | `find KEYWORD [MORE_KEYWORDS]... i/ int`
 
-=== Deleting a person : `delete`
+|Project |`find KEYWORD [MORE_KEYWORDS]... i/ proj`
 
-----
-Deletes an existing item in the ResuMe application
-----
+|Skill |`find KEYWORD [MORE_KEYWORDS]... i/ ski`
+
+|Resume |`find KEYWORD [MORE_KEYWORDS]... i/res`
+|=======================================================================
+
+*Examples:* Try typing in the command box these two commands one by one!
+
+. `list i/ proj`
+. `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
+. `find Duke i/ proj`
+
+*Outcome*
+
+. Projects with matching name with keywords are listed in the list panel.
++
+image::find_command.png[width="790"]
+
+=== Deleting an item : `delete`
+
+Deletes an item from the ResuMe application.
+
+****
 Format: `delete INDEX i/ TYPE`
+****
 
-****
-* Deletes the item of type `TYPE` with the specified `INDEX`. The `INDEX`
-refers to the index of the item in the respective item list. `INDEX` must be a valid index of the list.
-* Once the item with the specified `INDEX` is deleted,
-the list will automatically update to show the new indices of its items.
-****
+`INDEX` : the positional index of the item. Use `list TYPE` with the same item type to view this list.
+
+`TYPE`  : the item type.
+
+[NOTE]
+The `INDEX` argument comes before the `TYPE` argument.
+
+[TIP]
+Use `list` command to navigate to the correct list to ensure that 1) the item exists, and 2) you know the
+correct index for deletion. Or just fall back on `undo`.
+
+Deleting an item will set the list window to display items of its type.
+If the item is an internship, a project, or a skill, all resumes that contain it will also be updated to
+reflect the change.
 
 Examples:
 
 * `delete 2 i/ res` +
 Deletes the 2nd resume in the resume book.
+
+Photo for good case
+
+Photo for failed case
+
+Photo to show cascading
 
 === Viewing an item in details: `view`
 
@@ -305,21 +438,49 @@ image::ReditWantSomeThings.png[][WantSomeThings,442,337]
 (To be implemented) Edits the resume specified at that index to contain all items of the specified tag.
 
 === Undo a command: `undo`
+
+Undoes the previous command and restores the state of the application to before that command is performed.
+
 ****
-* Undoes the previous command and restores the state of the application to before that command is performed.
-* Successive undo commands will bring the application state further back.
-* Do note that commands that make no change to the application state, like `list` or `view`, cannot be undone.
-* You cannot undo if there is no previous state to return to.
+Format: undo
 ****
 
+Commands that can be undone are: `add`, `delete`, `edit`, `redit`, and `me`.
+
+Successive undo commands will bring the application further back, until there is no more change to undo.
+
+[NOTE]
+--
+* An undo is done per command and not change.
+
+* Commands that make no change to the application state, like `list` or `view`, cannot be undone.
+
+* You cannot undo if there is no previous state to return to.
+--
+PHOTO OF SUCCESSIVE CASE
+
+PHOTO OF NO UNDO AT THE BEGINNING
+
+PHOTO OF FAILED UNDO
+
 === Redo a command: `redo`
+
+Reverts the most recent undone command and brings the application state to after the (re)execution
+of that command.
+
 ****
-* Redoes the immediately previous undone command and brings the application state to after the performing of that
-command.
-* If a new command is performed after `undo`, then all redo states will be deleted and you will not be able to go
+Format: redo
+****
+
+[NOTE]
+--
+* A redo is done per command and not change.
+
+* If a new `add`, `delete`, `edit`, `redit`, or `me` command is performed after an undo, then all redo states will be deleted and you will not be able to go
 to these states.
 * You cannot redo if there is no forward state to go to.
-****
+--
+PHOTOS
 
 === Previewing a resume: `rpreview`
 
@@ -339,6 +500,9 @@ Shows preview of the resume with at index 2.
 
 === Generating a resume: `rgen`
 Generates a .pdf file from an existing resume stored inside the application at the specified index.
+
+The exported `.pdf` file
+will be located in the same folder as the application `.jar` file.
 
 [NOTE]
 A valid `INDEX` is a positive integer that identifies an existing resume.
@@ -360,12 +524,12 @@ If no name is specified, the filename will be set, by default, to the name of th
 
 . The first command lists out all resumes. Assuming that you want to generate the first resume in the list.
 +
-image::ListResume.png[width="790"]
+image::ListResume.PNG[width="790"]
 
 . The second command generate a `My Resume.pdf` file from the specified resume. The screenshots of the generated file is as below:
 +
-image::GenerateResume.png[width="790"]
-image::PdfFile.png[width="790"]
+image::GenerateResume.PNG[width="790"]
+image::PdfFile.PNG[width="790"]
 
 === Clearing all data: `clear`
 Clears all data from ResuMe.
@@ -379,11 +543,12 @@ This command cannot be undone. Please be careful when exercising this power.
 
 
 === Exiting the program : `exit`
-----
-Exits the program.
-----
 
+Exits the program.
+
+****
 Format: `exit`
+****
 
 === Saving the data
 ResuMe data is saved in the hard disk automatically after any command
@@ -421,6 +586,7 @@ Lists of all commands which has format that *do not vary* depending on item type
 [cols="20%,80%",options="header"]
 |=======================================================================
 
+
 | Command | Format
 
 | Clear | `clear`
@@ -431,6 +597,7 @@ Lists of all commands which has format that *do not vary* depending on item type
 | Generate Resume | `rgen RESUME_INDEX`
 | Help  | `help`
 | List | `list i/ TYPE`
+| Me | `me dp/ FILEPATH n/ NAME [ATTRIBUTE/ VALUE]...`
 | Preview Resume | `rpreview RESUME_INDEX`
 | Redo | `redo`
 | Undo | `undo`
