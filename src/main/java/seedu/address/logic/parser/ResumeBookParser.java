@@ -106,5 +106,4 @@ public class ResumeBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

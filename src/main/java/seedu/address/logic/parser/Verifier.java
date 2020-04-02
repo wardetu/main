@@ -1,4 +1,6 @@
-package seedu.address.logic.parser.note;
+package seedu.address.logic.parser;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Validations for different input.
@@ -87,8 +89,15 @@ public class Verifier {
      * @param cap
      * @return
      */
-    public static boolean isValidCap(String cap) {
-        if (isNotEmpty(cap) && isWithinRange(Double.valueOf(cap), 0, 5)) {
+    public static boolean isValidCap(String cap) throws ParseException {
+        double userCap;
+        try {
+            userCap = Double.valueOf(cap);
+        } catch (NumberFormatException ex) {
+            throw new ParseException(CAP_MESSAGE_CONSTRAINTS);
+        }
+
+        if (isNotEmpty(cap) && isWithinRange(userCap, 0, 5)) {
             return true;
         } else {
             return false;
