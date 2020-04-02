@@ -56,9 +56,9 @@
                        <items>
                           <VBox fx:id="resultAndItem">
                              <children>
-                             <StackPane fx:id="resultDisplayPlaceholder" minWidth="300.0" styleClass="pane-with-border">
+                             <StackPane fx:id="resultDisplayPlaceholder" maxHeight="150.0" minWidth="200.0">
                                <padding>
-                                  <Insets bottom="5" left="10" right="10" top="5" />
+                                  <Insets bottom="0" left="0" right="0" top="0" />
                                </padding>
                                  <VBox.margin>
                                      <Insets top="5" />

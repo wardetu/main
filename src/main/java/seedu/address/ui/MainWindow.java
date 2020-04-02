@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -36,8 +38,9 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private PreviewWindow previewWindow;
-    private ItemDisplay itemDisplay;
     private UserOverallPane userOverallPane;
+    private ItemDisplayList itemDisplayList;
+    private ObservableList<String> observableItemList;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -59,6 +62,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane profilePlaceholder;
+
+    @FXML
+    private StackPane testPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -120,9 +126,6 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
-
-        itemDisplay = new ItemDisplay();
-        itemDisplayPlaceholder.getChildren().add(itemDisplay.getRoot());
 
         userOverallPane = new UserOverallPane(logic.getUser());
         profilePlaceholder.getChildren().add(userOverallPane.getRoot());
@@ -211,8 +214,11 @@ public class MainWindow extends UiPart<Stage> {
             itemListPanel.changeStyle(commandResult.getDisplayType());
 
             if (commandResult.hasItemChanged()) {
-                itemDisplay.setDataFeedbackToUser(commandResult.getDataToUser());
+                observableItemList = FXCollections.observableArrayList(commandResult.getDataToUser().split("\n"));
             }
+
+            itemDisplayList = new ItemDisplayList(observableItemList);
+            itemDisplayPlaceholder.getChildren().add(itemDisplayList.getRoot());
 
             if (commandResult.isShowPreview()) {
                 previewWindow.setPreviewText(commandResult.getDataToUser());
