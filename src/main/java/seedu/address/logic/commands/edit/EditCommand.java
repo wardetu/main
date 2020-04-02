@@ -23,7 +23,7 @@ public abstract class EditCommand extends Command {
             + "by the index number used in the displayed item list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX "
-            + "[" + PREFIX_ITEM + " TYPE] "
+            + PREFIX_ITEM + " TYPE "
             + "[ PREFIX/ OTHER PREFIX DATA]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + " int "
@@ -31,7 +31,7 @@ public abstract class EditCommand extends Command {
             + PREFIX_FROM + " 03-2019 "
             + PREFIX_TO + " 06-2019 "
             + PREFIX_ROLE + " Intern "
-            + PREFIX_DESCRIPTION + " Do things and get paid."
+            + PREFIX_DESCRIPTION + " Do things and get paid. "
             + PREFIX_TAG + " frontend ";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

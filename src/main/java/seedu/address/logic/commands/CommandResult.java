@@ -14,9 +14,6 @@ public class CommandResult {
     private final String feedbackToUser;
     private final String dataToUser;
 
-    /** Update user profile. */
-    private final boolean isUpdateUser;
-
     /** Preview information about a resume. */
     private final boolean isShowPreview;
 
@@ -35,24 +32,22 @@ public class CommandResult {
      */
     public CommandResult(String dataToUser, String feedbackToUser) {
         this(dataToUser, feedbackToUser,
-                false, false, false, false, false);
+                false, false, false, false);
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      * @param dataToUser data to show user.
      * @param feedbackToUser feedback to user.
-     * @param isUpdateUser boolean value of whether the CommandResult is the result of a {@code me} command.
      * @param isShowPreview boolean value of whether the CommandResult is the result of a {@code rpreview} command.
      * @param isGenerate boolean value of whether the CommandResult is the result of a {@code rgen} command.
      * @param isShowHelp boolean value of whether the CommandResult is the result of a {@code help} command.
      * @param isExit boolean value of whether the CommandResult is the result of an {@code exit} command.
      */
-    public CommandResult(String dataToUser, String feedbackToUser, boolean isUpdateUser, boolean isShowPreview,
+    public CommandResult(String dataToUser, String feedbackToUser, boolean isShowPreview,
                          boolean isGenerate, boolean isShowHelp, boolean isExit) {
         this.dataToUser = requireNonNull(dataToUser);
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.isUpdateUser = isUpdateUser;
         this.isShowPreview = isShowPreview;
         this.isGenerate = isGenerate;
         this.isShowHelp = isShowHelp;
@@ -67,16 +62,8 @@ public class CommandResult {
         return dataToUser;
     }
 
-    public boolean isUpdateUser() {
-        return isUpdateUser;
-    }
-
     public boolean isShowPreview() {
         return isShowPreview;
-    }
-
-    public boolean isGenerate() {
-        return isGenerate;
     }
 
     public boolean isShowHelp() {
@@ -105,13 +92,12 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && isShowHelp == otherCommandResult.isShowHelp
-                && isExit == otherCommandResult.isExit
-                && isUpdateUser == otherCommandResult.isUpdateUser;
+                && isExit == otherCommandResult.isExit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dataToUser, feedbackToUser, isUpdateUser, isShowHelp, isExit);
+        return Objects.hash(dataToUser, feedbackToUser, isShowHelp, isExit);
     }
 
 }
