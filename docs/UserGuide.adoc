@@ -21,11 +21,11 @@ By: `Team F10-1`      Since: `Jan 2020`      Licence: `MIT`
 Hello fellow University friends! Have you ever found writing resumes
 for job and internship applications a hassle? Have you ever dreamt about
 an app that can help you manage different resumes for different companies?
-Have you ever wished for more streamlined a *Command Line Interface*
+Have you ever wished for a more streamlined *Command Line Interface*
 application that can match your efficiency and typing prowess?
 
 If this sounds like you, *ResuMe* is _the_ resume managing application for you!
-Made by University students for University students with _looovee_, this app
+Made by University students for University students with _looovee_, this wonder
 understands your struggle and strives to cater to your specific resume needs
 and job application woes. Interested? Jump to the Section 2, `Quick Start` to
 get started. Enjoy!
@@ -79,7 +79,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/ TYPE n/ NAME`,
 `TYPE` and `NAME` are parameters which can be used as `add i/ proj n/ Orbital`.
 * Items in square brackets are optional e.g `n/ NAME [#/TAG]` can be used as `n/ Orbital #/ SE` or as `n/ Orbital`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[\#/ TAG]...`
+* Items with `…` after them can be used multiple times including zero times e.g. `[\#/ TAG]...`
 can be used as (i.e. 0 times), `#/ friend`, `\#/ friend`, `#/ family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/ NAME p/ PHONE`,
 `p/ PHONE_NUMBER n/ NAME` is also acceptable.
