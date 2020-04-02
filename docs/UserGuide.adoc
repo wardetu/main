@@ -248,40 +248,41 @@ Examples:
 View the 2nd resume in the resume book.
 
 === Editing a resume: `redit`
-----
-Edits an existing resume in the ResuMe application
-----
-Format:
-`redit RESUME_ID TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]... [#/ TAG]...`
+Edits the resume to contain the items specified in the command.
+
+[NOTE]
+`redit` is a different command from `edit`. Please visit <<FAQ>> for more information.
 
 ****
-* Edits the resume with the specified `RESUME_ID`. The `RESUME_ID`
-refers to the unique identification number given to the item when it was
-first added. The `ITEM_ID` and `RESUME_ID` must be a positive integer
-that identifies an existing item of that type.
-* The `TYPE` to be edited cannot be resume(`res`) and at least one
-`TYPE` must be provided.
-* For each `TYPE`, existing values will be updated to the input values.
-* You can add multiple items of a certain type to a resume by chaining
-`ITEM_ID` after `TYPE/` e.g. `proj/ 123 109`
-* You can remove all the resumes’ tags by typing `#/` without specifying
-any tags after it. Similarly, you can remove all items of type `TYPE` by
-typing `TYPE/` without specifying any `ITEM_ID` after it.
+Format: `redit RESUME_INDEX TYPE/ [ITEM_INDEX...] [MORE_TYPE/ [ITEM_INDEX...]]`
 ****
+
+* For each `TYPE`, existing items will be updated to the input items.
+* You can add multiple items of a certain type to a resume by chaining
+`ITEM_INDEX` after `TYPE/`  e.g. `proj/ 3 6`, will add item of indices 3 and 6.
+* You can remove all items of type `TYPE` by
+typing `TYPE/` without specifying any `ITEM_INDEX` after it.
 
 Examples:
 
-* `redit 135 proj/ 9823 int/ 102 201` +
-Edits the resume of
-`RESUME_ID` 135, overriding project content with project item of `ITEM_ID` 9823,
-internship content with internship items of `ITEM_ID` 102 and 201.
-Content of other item types in the resume remain unchanged.
+* `redit res/ 1 int/ 1 proj/ 1 ski/ 1 2` +
+This command modifies the resume at index 1. It changes the resume to contain the internship item at index 1, project item at index 1, and skill item at indices 1 and 2. The following screenshot illustrates what can happen:
 
-* `redit 148 int/ proj/ ski/` +
-Edits the resume of `RESUME_ID` 135,
-overriding internship content, project content and skill content with empty string.
-This effectively deletes all internship, project and skill items from the resume.
-Content of other item types in the resume remain unchanged.
+image::ReditAddIntoResume.png[][AddIntoResume,442,337]
+
+
+* `redit res/ 1 int/ proj/ ski/` +
+This command modifies the resume at index 1. It changes the resume to contain no internship, project, and skill items. The following screenshot illustrates what can happen:
+
+image::ReditRemoveEverything.png[][RemoveEverything,442,337]
+
+* `redit res/ 1 int/ 1 proj/ ski/ 2` +
+This command modifies the resume at index 1. It changes the resume to contain internship item at index 1, no project items, and skill item at index 2. The following screenshot illustrates what can happen (take note that initially the resume may contain other set of items entirely):
+
+image::ReditWantSomeThings.png[][WantSomeThings,442,337]
+
+===== Tag Pull
+(To be implemented) Edits the resume specified at that index to contain all items of the specified tag.
 
 === Undo a command: `undo`
 ****
