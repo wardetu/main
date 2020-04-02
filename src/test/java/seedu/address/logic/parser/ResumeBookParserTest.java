@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
 import java.util.Arrays;
 import java.util.List;
@@ -54,8 +54,8 @@ public class ResumeBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteResumeCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " i/ res");
-        assertEquals(new DeleteResumeCommand(INDEX_FIRST_PERSON), command);
+                DeleteResumeCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased() + " i/ res");
+        assertEquals(new DeleteResumeCommand(INDEX_FIRST_ITEM), command);
     }
 
     // TODO: Create DescriptorBuilders for testing puposes

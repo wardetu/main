@@ -59,6 +59,9 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyResumeBook getResumeBook();
 
+    /** Returns the stateless AddressBook */
+    ReadOnlyResumeBook getStatelessResumeBook();
+
     //=========== User ================================================================================
 
     /**

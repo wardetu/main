@@ -1,10 +1,17 @@
-= ResuMe
+[.text-center]
+== ResuMe
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.com/AY1920S2-CS2103T-F10-1/main[image:https://travis-ci.com/AY1920S2-CS2103T-F10-1/main.svg?branch=master[Build Status]]
 https://coveralls.io/github/AY1920S2-CS2103T-F10-1/main?branch=master[image:https://coveralls.io/repos/github/AY1920S2-CS2103T-F10-1/main/badge.svg?branch=master[Coverage Status]]
 
+[.text-left]
+=== What is ResuMe?
+*ResuMe* is a desktop application for you to manage all of your resumes from a centralised location.
+It is easy to build, customise and export different resume versions using only Command Line Interface. If you are a busy student
+in need of a clean and functional resume, whether for an internship or a job position, *ResuMe* can deliver that in no time!
 
+[.text-center]
 ifdef::env-github[]
 image::docs/images/Ui.png[width="600"]
 endif::[]
@@ -13,22 +20,16 @@ ifndef::env-github[]
 image::images/Ui.png[width="600"]
 endif::[]
 
-* This is a desktop Resume management application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* It is a Java sample application intended for students learning Software Engineering while using Java as the main programming language.
-* It is *written in OOP fashion*. It provides a *reasonably well-written* code example that is *significantly bigger* (around 6 KLoC)than what students usually write in beginner-level SE modules.
-
-== Site Map
+[.text-left]
+=== Site Map
 
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
 * <<AboutUs#, About Us>>
 * <<ContactUs#, Contact Us>>
 
-== Acknowledgements
-
-* Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
-_Marco Jakob_.
-* Libraries used: https://openjfx.io/[JavaFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/junit-team/junit5[JUnit5]
-* The starting point of this code is AddressBook-Level3 project created by https://se-education.org[SE-EDU initiative]
+[.text-left]
+=== Acknowledgements
+* This application was developed as a build-up from AddressBook-Level3 project created by https://se-education.org[SE-EDU initiative]
 
 == Licence : link:LICENSE[MIT]

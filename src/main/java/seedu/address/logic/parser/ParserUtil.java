@@ -16,7 +16,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.field.Address;
+import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
+import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
@@ -89,7 +91,6 @@ public class ParserUtil {
         }
         throw new ParseException("Level of proficiency can only be one of these three types: basic, intermediate, "
                 + "advanced.");
-
     }
 
     /**
@@ -211,5 +212,81 @@ public class ParserUtil {
 
             return Optional.of(mappedIndices);
         }
+    }
+
+    /**
+     * Parses a {@code String displayFilePath} into a {@code DisplayPicture}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static DisplayPicture parseDisplayPicture(String displayFilePath) throws ParseException {
+        requireNonNull(displayFilePath);
+        String trimmedDisplayFilePath = displayFilePath.trim();
+        if (DisplayPicture.isValidDisplayPicture(trimmedDisplayFilePath)) {
+            return new DisplayPicture(trimmedDisplayFilePath);
+        }
+        throw new ParseException(DisplayPicture.MESSAGE_CONSTRAINTS);
+    }
+
+    /**
+     * Parses a {@code String github} into a {@code Github}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code github} is invalid.
+     */
+    public static Github parseGithub(String github) throws ParseException {
+        requireNonNull(github);
+        String trimmedGithub = github.trim();
+        if (Github.isValidGithub(trimmedGithub)) {
+            return new Github(trimmedGithub);
+        }
+        throw new ParseException(Github.MESSAGE_CONSTRAINTS);
+    }
+
+    /**
+     * Parses a {@code String university} into a {@code String university}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code github} is invalid.
+     */
+    public static String parseUniversity(String university) throws ParseException {
+        requireNonNull(university);
+        String trimmedUniversity = university.trim();
+        if (Verifier.isValidUniversity(trimmedUniversity)) {
+            return trimmedUniversity;
+        }
+        throw new ParseException(Verifier.UNIVERSITY_MESSAGE_CONSTRAINTS);
+    }
+
+    /**
+     * Parses a {@code String major} into a {@code String major}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code major} is invalid.
+     */
+    public static String parseMajor(String major) throws ParseException {
+        requireNonNull(major);
+        String trimmedMajor = major.trim();
+        if (Verifier.isValidMajor(trimmedMajor)) {
+            return trimmedMajor;
+        }
+        throw new ParseException(Verifier.MAJOR_MESSAGE_CONSTRAINTS);
+    }
+
+    /**
+     * Parses a {@code String cap} into a {@code Double cap}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code cap} is invalid.
+     */
+    public static Double parseCap(String cap) throws ParseException {
+        requireNonNull(cap);
+        String trimmedCap = cap.trim();
+        if (Verifier.isValidCap(trimmedCap)) {
+            double userCap = Double.valueOf(trimmedCap);
+            return Math.round(userCap * 100.0) / 100.0;
+        }
+        throw new ParseException(Verifier.CAP_MESSAGE_CONSTRAINTS);
     }
 }

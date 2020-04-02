@@ -37,6 +37,16 @@ public class SkillBuilder {
         return this;
     }
 
+    /**
+     * Creates a SkillBuilder with a certain skill.
+     * @param level Level of skill
+     * @return SkillBuilder with new level
+     */
+    public SkillBuilder withLevel(Level level) {
+        this.level = level;
+        return this;
+    }
+
     public Skill build() {
         return new Skill(name, level, tags);
     }
