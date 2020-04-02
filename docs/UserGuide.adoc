@@ -393,31 +393,24 @@ ____
 
 == Command Summary
 
-* *Help* : `help`
+[source,sh]
+[cols="20%,80%",options="header"]
+|=======================================================================
 
-* *List* : `list`
+| Command | Format
+| Add | `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...`
+| Clear | `clear`
+| Delete | `delete INDEX i/ TYPE`
+| Edit | `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...`
+| Exit | `exit`
+| Edit Resume | `redit RESUME_INDEX TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]... [#/ TAG]...`
+| Find | `find KEYWORD [MORE_KEYWORDS]... i/ TYPE`
+| Generate Resume | `rgen RESUME_INDEX`
+| Help  | `help`
+| List | `list i/ TYPE`
+| Preview Resume | `rpreview RESUME_INDEX`
+| Redo | `redo`
+| Undo | `undo`
+| View | `view INDEX i/ TYPE`
 
-* *Add* `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...` +
-e.g. `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
-
-* *Edit* : `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...` +
-e.g. `edit 2 i/ ski l/ ADVANCED #/`
-
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find Software`
-
-* *Delete* : `delete INDEX i/ TYPE` +
-e.g. `delete 3 i/res`
-
-* *Edit Resume* : `redit RESUME_ID TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]... [#/ TAG]...`
-e.g. `redit 135 proj/ 9823 int/ 102 201` +
-
-* *Undo* : `undo` +
-
-* *Redo* : `redo` +
-
-* *Preview Resume* : `rpreview RESUME_ID` +
-e.g. `rpreview 234`
-
-* *Generate Resume* : `rgen RESUME_ID` +
-e.g. `rgen 21`
+|=======================================================================
