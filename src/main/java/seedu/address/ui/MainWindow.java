@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -36,8 +38,8 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private PreviewWindow previewWindow;
-    private ItemDisplay itemDisplay;
     private UserOverallPane userOverallPane;
+    private ItemDisplayList itemDisplayList;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -59,6 +61,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane profilePlaceholder;
+
+    @FXML
+    private StackPane testPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -120,9 +125,6 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
-
-        itemDisplay = new ItemDisplay();
-        itemDisplayPlaceholder.getChildren().add(itemDisplay.getRoot());
 
         userOverallPane = new UserOverallPane(logic.getUser());
         profilePlaceholder.getChildren().add(userOverallPane.getRoot());
@@ -207,13 +209,13 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Item Display: " + commandResult.getDataToUser());
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isUpdateUser()) {
-                userOverallPane.updateUserProfile(logic.getUser());
-            }
+            userOverallPane.updateUserProfile(logic.getUser());
 
             if (commandResult.hasItemChanged()) {
-                itemDisplay.setDataFeedbackToUser(commandResult.getDataToUser());
+                ObservableList<String> list =
+                        FXCollections.observableArrayList(commandResult.getDataToUser().split("\n"));
+                itemDisplayList = new ItemDisplayList(list);
+                itemDisplayPlaceholder.getChildren().add(itemDisplayList.getRoot());
             }
 
             if (commandResult.isShowPreview()) {
