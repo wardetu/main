@@ -25,12 +25,16 @@ By: `Team F10-1`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
-*ResuMe* is for those who *prefer to use a desktop app for managing
-resumes*. More importantly, *ResuMe* is *optimized for those who prefer
-to work with a Command Line Interface* (CLI) while still having the
-benefits of a Graphical User Interface (GUI). If you can type fast,
-*ResuMe* can get your resume management tasks done faster than
-traditional GUI apps.
+Hello fellow University friends! Have you ever found writing resumes
+for job and internship applications a hassle? Have you ever dreamt about
+an app that can help you manage different resumes for different companies?
+Have you ever wished for a more streamlined *Command Line Interface*
+application that can match your efficiency and typing prowess?
+
+If this sounds like you, *ResuMe* is _the_ resume managing application for you!
+Made by University students for University students with _looovee_, this wonder
+understands your struggle and strives to cater to your specific resume needs
+and job application woes.
 
 === Overview
 *ResuMe* allows the management of four different item types:
@@ -119,7 +123,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/ TYPE n/ NAME`,
 `TYPE` and `NAME` are parameters which can be used as `add i/ proj n/ Orbital`.
 * Items in square brackets are optional e.g `n/ NAME [#/TAG]` can be used as `n/ Orbital #/ SE` or as `n/ Orbital`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[\#/ TAG]...`
+* Items with `…` after them can be used multiple times including zero times e.g. `[\#/ TAG]...`
 can be used as (i.e. 0 times), `#/ friend`, `\#/ friend`, `#/ family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/ NAME p/ PHONE`,
 `p/ PHONE_NUMBER n/ NAME` is also acceptable.
@@ -133,16 +137,23 @@ Format: `help`
 ****
 
 === Listing all items : `list`
-----
+
 List items in the storage.
-----
-Format: `list i/ TYPE`
 
 ****
-* List items that have type matches the `TYPE` argument.
-* Listed items are in short form, only showing their name, `ID`, `tags` and a short summary.
-To view items in full details, use `view`.
+Format: `list i/ TYPE`
 ****
+
+[NOTE]
+Listed items are in short form, only showing their name, index, `tags` and a short summary.
+To view items in full details, use `view`.
+
+Examples:
+
+* `list i/ res`
+Lists all resume items.
+* `list i/ proj`
+Lists all project items.
 
 === Adding an item: `add`
 
@@ -187,12 +198,15 @@ image::ListProject.png[width="790"]
 image::AddDukeProject.png[width="790"]
 
 
-=== Editing a person : `edit`
+=== Editing an item : `edit`
 
-----
 Edits an existing item in the ResuMe application.
-----
+
+[NOTE]
+`edit` is a different command from `redit`. Please visit <<FAQ>> for more information.
+****
 Format: `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...`
+****
 
 
 [width="100%",cols="16%,84%",options="header",]
@@ -207,18 +221,21 @@ Format: `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...`
 |Resume |`edit INDEX i/ res [n/ NAME] [#/ TAG]...`
 |=======================================================================
 
-****
-* Edits the item of type `TYPE` with the specified `ID`. The `ID` refers
-to the unique identification number given to the item when it was first
-added. The `ID` must be a *positive integer* that identifies an existing
-item.
-* At least *one* of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, existing tags of the person will be removed. i.e
-adding of tags is not cumulative.
-* You can remove *all* the person’s tags by typing `#/` without
-specifying any tags after it.
-****
+
+*Example:* Try typing in the command box these two commands one by one!
+
+. `list i/ res`
+. `edit 2 i/ res n/ Software Engineering Resume`
+
+*Outcome:*
+
+. All resume items are listed in the list panel.
++
+image::ListResume2.png[width="790"]
+. The Resume at index 2 has its name changed from "Resume 2" to "Software Engineering Resume".
++
+image::EditResumeExample.png[width="790"]
+
 Examples:
 
 * `edit 1 i/ res n/ Resume 1` +
@@ -271,51 +288,66 @@ Deletes the 2nd resume in the resume book.
 
 === Viewing an item in details: `view`
 
-----
-Shows all items in an existing resume.
-----
+
+Shows the details of an item.
+
+****
 Format: `view INDEX i/ TYPE`
+****
 
-Examples:
+[TIP]
+The details of some item types like `proj` can only be viewed by using this command.
 
-* `view 2 i/ res` +
-View the 2nd resume in the resume book.
+*Example:* Try typing in the command box these two commands one by one!
+
+. `list i/ proj`
+. `view 1 i/ proj`
+
+*Outcome:*
+
+. All project items are listed in the list panel.
++
+image::ListProject2.png[width="790"]
+. Using the `view` command, we can view the details of the project such as its website ("abc.github.io") and its description ("For a little module named CS2103T").
++
+image::ViewDukeProject.png[width="790"]
 
 === Editing a resume: `redit`
-----
-Edits an existing resume in the ResuMe application
-----
-Format:
-`redit RESUME_ID TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]... [#/ TAG]...`
+Edits the resume to contain the items specified in the command.
+
+[NOTE]
+`redit` is a different command from `edit`. Please visit <<FAQ>> for more information.
 
 ****
-* Edits the resume with the specified `RESUME_ID`. The `RESUME_ID`
-refers to the unique identification number given to the item when it was
-first added. The `ITEM_ID` and `RESUME_ID` must be a positive integer
-that identifies an existing item of that type.
-* The `TYPE` to be edited cannot be resume(`res`) and at least one
-`TYPE` must be provided.
-* For each `TYPE`, existing values will be updated to the input values.
-* You can add multiple items of a certain type to a resume by chaining
-`ITEM_ID` after `TYPE/` e.g. `proj/ 123 109`
-* You can remove all the resumes’ tags by typing `#/` without specifying
-any tags after it. Similarly, you can remove all items of type `TYPE` by
-typing `TYPE/` without specifying any `ITEM_ID` after it.
+Format: `redit RESUME_INDEX TYPE/ [ITEM_INDEX...] [MORE_TYPE/ [ITEM_INDEX...]]`
 ****
+
+* For each `TYPE`, existing items will be updated to the input items.
+* You can add multiple items of a certain type to a resume by chaining
+`ITEM_INDEX` after `TYPE/`  e.g. `proj/ 3 6`, will add item of indices 3 and 6.
+* You can remove all items of type `TYPE` by
+typing `TYPE/` without specifying any `ITEM_INDEX` after it.
 
 Examples:
 
-* `redit 135 proj/ 9823 int/ 102 201` +
-Edits the resume of
-`RESUME_ID` 135, overriding project content with project item of `ITEM_ID` 9823,
-internship content with internship items of `ITEM_ID` 102 and 201.
-Content of other item types in the resume remain unchanged.
+* `redit res/ 1 int/ 1 proj/ 1 ski/ 1 2` +
+This command modifies the resume at index 1. It changes the resume to contain the internship item at index 1, project item at index 1, and skill item at indices 1 and 2. The following screenshot illustrates what can happen:
 
-* `redit 148 int/ proj/ ski/` +
-Edits the resume of `RESUME_ID` 135,
-overriding internship content, project content and skill content with empty string.
-This effectively deletes all internship, project and skill items from the resume.
-Content of other item types in the resume remain unchanged.
+image::ReditAddIntoResume.png[][AddIntoResume,442,337]
+
+
+* `redit res/ 1 int/ proj/ ski/` +
+This command modifies the resume at index 1. It changes the resume to contain no internship, project, and skill items. The following screenshot illustrates what can happen:
+
+image::ReditRemoveEverything.png[][RemoveEverything,442,337]
+
+* `redit res/ 1 int/ 1 proj/ ski/ 2` +
+This command modifies the resume at index 1. It changes the resume to contain internship item at index 1, no project items, and skill item at index 2. The following screenshot illustrates what can happen (take note that initially the resume may contain other set of items entirely):
+
+image::ReditWantSomeThings.png[][WantSomeThings,442,337]
+
+===== Tag Pull
+(To be implemented) Edits the resume specified at that index to contain all items of the specified tag.
 
 === Undo a command: `undo`
 ****
@@ -335,15 +367,20 @@ to these states.
 ****
 
 === Previewing a resume: `rpreview`
-----
-Previews the resume in string format.
-----
-Format: `rpreview RESUME_ID`
+
+Previews a resume in text format in a different window.
+
+****
+Format: `rpreview INDEX`
+****
+
+[NOTE]
+`INDEX` is with respect to the index seen when `list i/res` is called.
 
 Examples:
 
-* `rpreview 135` +
-Shows the text format of the resume with `RESUME_ID` 135.
+* `rpreview 2` +
+Shows preview of the resume with at index 2.
 
 === Generating a resume: `rgen`
 Generates a .pdf file from an existing resume stored inside the application at the specified index.
@@ -377,6 +414,16 @@ image::ListResume.PNG[width="790"]
 +
 image::GenerateResume.PNG[width="790"]
 image::PdfFile.PNG[width="790"]
+
+=== Clearing all data: `clear`
+Clears all data from ResuMe.
+
+****
+Format: `clear`
+****
+
+[WARNING]
+This command cannot be undone. Please be careful when exercising this power.
 
 
 === Exiting the program : `exit`
@@ -414,31 +461,50 @@ ____
 
 == Command Summary
 
-* *Help* : `help`
+This is a summary of all commands for your convenience.
 
-* *List* : `list`
+General commands::
+Lists of all commands which has format that *do not vary* depending on item type.
+[source,sh]
+[cols="20%,80%",options="header"]
+|=======================================================================
 
-* *Add* `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...` +
-e.g. `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
+| Command | Format
 
-* *Edit* : `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...` +
-e.g. `edit 2 i/ ski l/ ADVANCED #/`
+| Clear | `clear`
+| Delete | `delete INDEX i/ TYPE`
+| Exit | `exit`
+| Edit Resume | `redit RESUME_INDEX TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]`
+| Find | `find KEYWORD [MORE_KEYWORDS]... i/ TYPE`
+| Generate Resume | `rgen RESUME_INDEX`
+| Help  | `help`
+| List | `list i/ TYPE`
+| Preview Resume | `rpreview RESUME_INDEX`
+| Redo | `redo`
+| Undo | `undo`
+| View | `view INDEX i/ TYPE`
 
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find Software`
+|=======================================================================
 
-* *Delete* : `delete INDEX i/ TYPE` +
-e.g. `delete 3 i/res`
+Item specific commands::
+Lists of all commands which has format that *vary* depending on item type.
 
-* *Edit Resume* : `redit RESUME_ID TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]... [#/ TAG]...`
-e.g. `redit 135 proj/ 9823 int/ 102 201` +
+[source,sh]
+[cols="5%,15%,80%",options="header"]
+|=======================================================================
 
-* *Undo* : `undo` +
+| Command | Type | Format
 
-* *Redo* : `redo` +
+.4+| Add |Internship | `add i/ int n/ COMPANY NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
+|Project |`add i/ proj n/ PROJECT NAME t/ TIME w/ WEBSITE d/ DESCRIPTION [#/ TAG]....`
+|Skill |`add i/ ski n/ SKILL NAME l/ LEVEL [#/ TAG]....`
+|Resume |`add i/ res n/ NAME [#/ TAG]...`
 
-* *Preview Resume* : `rpreview RESUME_ID` +
-e.g. `rpreview 234`
+.4+| Edit |Internship | `edit i/ int [n/ COMPANY NAME] [r/ ROLE] [f/ FROM] [t/ TO] [d/ DESCRIPTION] [#/ TAG]...`
+|Project |`edit i/ proj [n/ PROJECT NAME] [t/ TIME] [w/ WEBSITE] [d/ DESCRIPTION] [#/ TAG]....`
+|Skill |`edit i/ ski [n/ SKILL NAME] [l/ LEVEL] [#/ TAG]....`
+|Resume |`edit i/ res [n/ NAME] [#/ TAG]...`
 
-* *Generate Resume* : `rgen RESUME_ID` +
-e.g. `rgen 21`
+
+
+|=======================================================================

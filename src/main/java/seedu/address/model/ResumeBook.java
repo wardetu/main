@@ -495,11 +495,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return other == this // short circuit if same object
                 || (other instanceof ResumeBook // instanceof handles nulls
                 && user.equals(((ResumeBook) other).user)
-                && itemsToDisplay.equals(((ResumeBook) other).itemsToDisplay))
+                && itemsToDisplay.equals(((ResumeBook) other).itemsToDisplay)
                 && internships.equals(((ResumeBook) other).internships)
                 && projects.equals(((ResumeBook) other).projects)
                 && skills.equals(((ResumeBook) other).skills)
-                && resumes.equals(((ResumeBook) other).resumes);
+                && resumes.equals(((ResumeBook) other).resumes));
     }
 
     @Override

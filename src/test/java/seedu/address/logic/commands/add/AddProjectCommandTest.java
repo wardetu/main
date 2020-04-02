@@ -15,9 +15,10 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 import seedu.address.model.item.Project;
+import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.ProjectBuilder;
 
-public class AddProjectCommandTest extends AddCommandTest {
+public class AddProjectCommandTest {
     @Test
     public void constructor_nullProject_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddProjectCommand(null));

@@ -95,6 +95,11 @@ public class ModelManager implements Model {
         return versionedResumeBook;
     }
 
+    @Override
+    public ReadOnlyResumeBook getStatelessResumeBook() {
+        return versionedResumeBook.getStatelessResumeBook();
+    }
+
     //=========== User ================================================================================
 
     @Override

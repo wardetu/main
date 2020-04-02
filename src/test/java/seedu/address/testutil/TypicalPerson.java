@@ -18,15 +18,19 @@ import java.util.List;
 import seedu.address.model.ResumeBook;
 import seedu.address.model.item.PersonalDetail;*/
 
+import seedu.address.model.item.Person;
+
 /**
  * A utility class containing a list of {@code PersonalDetail} objects to be used in tests.
  */
-public class TypicalPersonalDetails {
+public class TypicalPerson {
 
-    /*public static final PersonalDetail ALICE = new PersonalDetailBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
+            .withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends").build();
+            .build();
+
+    /*
     public static final PersonalDetail BENSON = new PersonalDetailBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")

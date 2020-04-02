@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.me;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CAP;
@@ -12,6 +12,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
 
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Person;
@@ -41,7 +43,7 @@ public class EditUserCommand extends Command {
             + PREFIX_FROM + "FROM "
             + PREFIX_TO + "TO "
             + PREFIX_CAP + "CAP\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: \n" + COMMAND_WORD + " "
             + PREFIX_DP + "/Users/nhamquochung/Desktop/test.png "
             + PREFIX_NAME + "HUNG "
             + PREFIX_PHONE + "91648888 "
@@ -53,8 +55,8 @@ public class EditUserCommand extends Command {
             + PREFIX_TO + "2022 "
             + PREFIX_CAP + "5.0 ";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited User Profile: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited User Profile: %1$s";
 
     private EditUserDescriptor editUserDescriptor;
 
@@ -69,22 +71,31 @@ public class EditUserCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person userToEdit = model.getUser();
-        DisplayPicture displayPicture = editUserDescriptor.getDisplayPicture().orElse(userToEdit.getDisplayPicture());
-        Name name = editUserDescriptor.getName().orElse(userToEdit.getName());
-        Phone phone = editUserDescriptor.getPhone().orElse(userToEdit.getPhone());
-        Email email = editUserDescriptor.getEmail().orElse(userToEdit.getEmail());
-        Github github = editUserDescriptor.getGithub().orElse(userToEdit.getGithub());
-        String university = editUserDescriptor.getUniversity().orElse(userToEdit.getUniversity());
-        String major = editUserDescriptor.getMajor().orElse(userToEdit.getMajor());
-        Time from = editUserDescriptor.getFrom().orElse(userToEdit.getFrom());
-        Time to = editUserDescriptor.getTo().orElse(userToEdit.getTo());
-        double cap = editUserDescriptor.getCap().orElse(userToEdit.getCap());
 
-        Person editedUser = new Person(displayPicture, name, phone, email, github, university, major, from, to, cap);
+        Person editedUser = createEditedUser(userToEdit, editUserDescriptor);
         model.setUser(editedUser);
         model.commitResumeBook();
 
-        return new CommandResult(editedUser.toString(), String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedUser),
-                true, false, false, false, false);
+        return new CommandResult(editedUser.toString(), String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedUser));
+    }
+
+    /**
+     * Create the user after edited.
+     * @param toEdit
+     * @param editUserDescriptor
+     * @return
+     */
+    private static Person createEditedUser(Person toEdit, EditUserDescriptor editUserDescriptor) {
+        DisplayPicture displayPicture = editUserDescriptor.getDisplayPicture().orElse(toEdit.getDisplayPicture());
+        Name name = editUserDescriptor.getName().orElse(toEdit.getName());
+        Phone phone = editUserDescriptor.getPhone().orElse(toEdit.getPhone());
+        Email email = editUserDescriptor.getEmail().orElse(toEdit.getEmail());
+        Github github = editUserDescriptor.getGithub().orElse(toEdit.getGithub());
+        String university = editUserDescriptor.getUniversity().orElse(toEdit.getUniversity());
+        String major = editUserDescriptor.getMajor().orElse(toEdit.getMajor());
+        Time from = editUserDescriptor.getFrom().orElse(toEdit.getFrom());
+        Time to = editUserDescriptor.getTo().orElse(toEdit.getTo());
+        double cap = editUserDescriptor.getCap().orElse(toEdit.getCap());
+        return new Person(displayPicture, name, phone, email, github, university, major, from, to, cap);
     }
 }
