@@ -17,37 +17,37 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.item.Internship;
-import seedu.address.testutil.InternshipBuilder;
+import seedu.address.model.item.Resume;
 import seedu.address.testutil.ModelStub;
+import seedu.address.testutil.ResumeBuilder;
 
-public class DeleteInternshipCommandTest {
+public class DeleteResumeCommandTest {
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteInternshipCommand(null));
+        assertThrows(NullPointerException.class, () -> new DeleteResumeCommand(null));
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Internship validItem = new InternshipBuilder().build();
-        ModelStub modelStub = new ModelStubWithInternship(validItem);
+        Resume validItem = new ResumeBuilder().build();
+        ModelStub modelStub = new ModelStubWithResume(validItem);
         Index invalidIndex = INDEX_THIRD_ITEM;
-        DeleteInternshipCommand deleteInternshipCommand = new DeleteInternshipCommand(invalidIndex);
+        DeleteResumeCommand deleteResumeCommand = new DeleteResumeCommand(invalidIndex);
         assertThrows(CommandException.class,
-                Messages.MESSAGE_INVALID_INDEX, () -> deleteInternshipCommand.execute(modelStub));
+                Messages.MESSAGE_INVALID_INDEX, () -> deleteResumeCommand.execute(modelStub));
     }
 
     @Test
     public void execute_validIndex_deleteSuccessful() throws CommandException {
-        ModelStubContainingInternshipDeleted modelStub = new ModelStubContainingInternshipDeleted();
+        ModelStubContainingResumeDeleted modelStub = new ModelStubContainingResumeDeleted();
         Index validIndex = INDEX_FIRST_ITEM;
-        Internship toDelete = modelStub.getInternshipByIndex(validIndex);
-        DeleteInternshipCommand deleteInternshipCommand = new DeleteInternshipCommand(validIndex);
-        assertEquals(Arrays.asList(toDelete), modelStub.internships);
+        Resume toDelete = modelStub.getResumeByIndex(validIndex);
+        DeleteResumeCommand deleteResumeCommand = new DeleteResumeCommand(validIndex);
+        assertEquals(Arrays.asList(toDelete), modelStub.resumes);
 
-        CommandResult commandResult = deleteInternshipCommand.execute(modelStub);
-        assertEquals(String.format(DeleteInternshipCommand.MESSAGE_DELETE_ITEM_SUCCESS,
+        CommandResult commandResult = deleteResumeCommand.execute(modelStub);
+        assertEquals(String.format(DeleteResumeCommand.MESSAGE_DELETE_ITEM_SUCCESS,
                 toDelete.getType().getFullType()),
                 commandResult.getFeedbackToUser());
     }
@@ -56,14 +56,14 @@ public class DeleteInternshipCommandTest {
     public void equals() {
         Index indexA = Index.fromZeroBased(5);
         Index indexB = Index.fromOneBased(19);
-        DeleteInternshipCommand deleteACommand = new DeleteInternshipCommand(indexA);
-        DeleteInternshipCommand deleteBCommand = new DeleteInternshipCommand(indexB);
+        DeleteResumeCommand deleteACommand = new DeleteResumeCommand(indexA);
+        DeleteResumeCommand deleteBCommand = new DeleteResumeCommand(indexB);
 
         // same object -> returns true
         assertTrue(deleteACommand.equals(deleteACommand));
 
         // same value -> returns true
-        DeleteInternshipCommand deleteACommandCopy = new DeleteInternshipCommand(indexA);
+        DeleteResumeCommand deleteACommandCopy = new DeleteResumeCommand(indexA);
         assertTrue(deleteACommand.equals(deleteACommandCopy));
 
         // different types -> returns false
@@ -77,45 +77,45 @@ public class DeleteInternshipCommandTest {
     }
 
     /**
-     * A Model stub that contains a single Internship.
+     * A Model stub that contains a single Resume.
      */
-    private class ModelStubWithInternship extends ModelStub {
-        private final Internship item;
+    private class ModelStubWithResume extends ModelStub {
+        private final Resume item;
 
-        ModelStubWithInternship(Internship item) {
+        ModelStubWithResume(Resume item) {
             requireNonNull(item);
             this.item = item;
         }
 
         @Override
-        public boolean hasInternship(Internship item) {
+        public boolean hasResume(Resume item) {
             requireNonNull(item);
             return this.item.isSame(item);
         }
     }
 
     /**
-     * A Model stub that always contain the Internship being deleted.
+     * A Model stub that always contain the Resume being deleted.
      */
-    private class ModelStubContainingInternshipDeleted extends ModelStub {
-        final ArrayList<Internship> internships = new ArrayList<>();
-        ModelStubContainingInternshipDeleted() {
-            internships.add(new InternshipBuilder().withName("Stub internship").build());
+    private class ModelStubContainingResumeDeleted extends ModelStub {
+        final ArrayList<Resume> resumes = new ArrayList<>();
+        ModelStubContainingResumeDeleted() {
+            resumes.add(new ResumeBuilder().withName("Stub resume").build());
         }
 
         @Override
-        public Internship getInternshipByIndex(Index index) {
-            return internships.get(index.getZeroBased());
+        public Resume getResumeByIndex(Index index) {
+            return resumes.get(index.getZeroBased());
         }
 
         @Override
-        public int getInternshipSize() {
-            return internships.size();
+        public int getResumeSize() {
+            return resumes.size();
         }
 
         @Override
-        public void deleteInternship(Internship internship) {
-            internships.remove(internship);
+        public void deleteResume(Resume resume) {
+            resumes.remove(resume);
         }
     }
 }
