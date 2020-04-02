@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -24,7 +25,7 @@ public class ItemDisplayList extends UiPart<Region> {
         super(FXML);
         itemDisplayList.setItems(itemList);
         itemDisplayList.setCellFactory(lst ->
-            new ListCell<String>() {
+            new ListCell<>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
@@ -37,6 +38,10 @@ public class ItemDisplayList extends UiPart<Region> {
                     }
                 }
         });
+    }
+
+    public void updateDisplayItem(String[] strings) {
+        itemDisplayList.setItems(FXCollections.observableArrayList(strings));
     }
 
     /**

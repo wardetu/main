@@ -133,6 +133,9 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        itemDisplayList = new ItemDisplayList(FXCollections.observableArrayList(new String[0]));
+        itemDisplayPlaceholder.getChildren().add(itemDisplayList.getRoot());
+
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
@@ -214,11 +217,8 @@ public class MainWindow extends UiPart<Stage> {
             itemListPanel.changeStyle(commandResult.getDisplayType());
 
             if (commandResult.hasItemChanged()) {
-                observableItemList = FXCollections.observableArrayList(commandResult.getDataToUser().split("\n"));
+                itemDisplayList.updateDisplayItem(commandResult.getDataToUser().split("\n"));
             }
-
-            itemDisplayList = new ItemDisplayList(observableItemList);
-            itemDisplayPlaceholder.getChildren().add(itemDisplayList.getRoot());
 
             if (commandResult.isShowPreview()) {
                 previewWindow.setPreviewText(commandResult.getDataToUser());
