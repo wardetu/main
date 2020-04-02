@@ -246,19 +246,11 @@ Edits the resume to contain the items specified in the command.
 Format: `redit RESUME_INDEX TYPE/ [ITEM_INDEX...] [MORE_TYPE/ [ITEM_INDEX...]]`
 ****
 
-
-****
-* Edits the resume with the specified `RESUME_INDEX`.
-* The `INDEX` in the command is based on the position of the item when `list i/ ITEM` is called.
-* `TYPE` can be any one of the following: `int`, `proj`, `skill`.
-* The `TYPE` to be inserted cannot be resume (`res`) and at least one
-`TYPE` must be provided.
-* For each `TYPE`, existing values will be updated to the input values.
+* For each `TYPE`, existing items will be updated to the input items.
 * You can add multiple items of a certain type to a resume by chaining
 `ITEM_INDEX` after `TYPE/`  e.g. `proj/ 3 6`, will add item of indices 3 and 6.
 * You can remove all items of type `TYPE` by
 typing `TYPE/` without specifying any `ITEM_INDEX` after it.
-****
 
 Examples:
 
