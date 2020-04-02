@@ -240,27 +240,49 @@ View the 2nd resume in the resume book.
 
 === Editing a resume: `redit`
 ----
-Edits an existing resume in the ResuMe application
+Edits the resume to contain the items specified in the command. 
 ----
 Format:
-`redit RESUME_ID TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]... [#/ TAG]...`
+`redit RESUME_INDEX TYPE/ [ITEM_INDEX...] [MORE_TYPE/ [ITEM_INDEX...]]... [#/ TAG]...`
 
 ****
-* Edits the resume with the specified `RESUME_ID`. The `RESUME_ID`
-refers to the unique identification number given to the item when it was
-first added. The `ITEM_ID` and `RESUME_ID` must be a positive integer
-that identifies an existing item of that type.
-* The `TYPE` to be edited cannot be resume(`res`) and at least one
+* Edits the resume with the specified `RESUME_INDEX`. 
+* The `INDEX` in the command is based on the position of the item when `list i/ ITEM` is called. 
+* `TYPE` can be any one of the following: `int`, `proj`, `skill`.
+* The `TYPE` to be inserted cannot be resume (`res`) and at least one
 `TYPE` must be provided.
 * For each `TYPE`, existing values will be updated to the input values.
 * You can add multiple items of a certain type to a resume by chaining
-`ITEM_ID` after `TYPE/` e.g. `proj/ 123 109`
+`ITEM_INDEX` after `TYPE/`  e.g. `proj/ 3 6`, will add item of indices 3 and 6.
 * You can remove all the resumes’ tags by typing `#/` without specifying
 any tags after it. Similarly, you can remove all items of type `TYPE` by
-typing `TYPE/` without specifying any `ITEM_ID` after it.
+typing `TYPE/` without specifying any `ITEM_INDEX` after it.
 ****
 
-Examples:
+===== Adding into the resume
+The following screenshot illustrates what happens when we use `redit` to add item into the resume. The numbers in the command represent the index of the item in the list. After the end of the command, the number of item in the resume would have increased.
+
+image::ReditAddIntoResume.png[][AddIntoResume,442,337]
+
+For modifications and removal of item from the resume, all we have to do is to run the same command again, specifying which item we want to *retain* in the resume.
+
+===== Removing all from the resume
+The following sreenshot illustrates what happens if you want to remove all the items in the resume, starting from a an already-filled resume:
+
+image::ReditRemoveEverything.png[][RemoveEverything,442,337]
+
+===== Removing some from the resume
+And the following screenshot illustrates what happens if you want to remove some items:
+
+image::ReditWantSomeThings.png[][WantSomeThings,442,337]
+
+===== Changing content using tags
+On top of these methods to change the content of the resume, `redit` can also make changes to the resume by making use of tags.
+Regardless of what the original content is, after running the command, the resume will then only have items with the desired tags.
+
+An example is shown in the following screenshot:
+
+image::ReditTags.png[][ReditWithTags,442,337]
 
 * `redit 135 proj/ 9823 int/ 102 201` +
 Edits the resume of
