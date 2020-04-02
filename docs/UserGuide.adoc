@@ -3,13 +3,6 @@
 :toc:
 :toc-title:
 :toc-placement: preamble
-:icon: font
-
-++++
-<link rel="stylesheet"  href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css">
-++++
-
-:warning-caption:
 :sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
