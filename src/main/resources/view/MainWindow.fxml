@@ -33,7 +33,7 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
-            <HBox fx:id="mainContainer" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" minWidth="500">
+            <HBox fx:id="mainContainer" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" minWidth="570">
                <children>
                   <VBox fx:id="userExperiencePlaceholder" minWidth="360.0" styleClass="pane-with-border">
                      <padding>
@@ -70,7 +70,7 @@
                              </children>
                           </VBox>
 
-                      <VBox fx:id="personList" minWidth="200.0" styleClass="pane-with-border">
+                      <VBox fx:id="personList" minWidth="270.0" styleClass="pane-with-border">
                         <padding>
                           <Insets bottom="10" left="10" right="10" top="10" />
                         </padding>

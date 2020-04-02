@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -19,6 +20,18 @@ public class ItemListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Item> itemListView;
+
+    @FXML
+    private Label internshipLabel;
+
+    @FXML
+    private Label resumeLabel;
+
+    @FXML
+    private Label skillLabel;
+
+    @FXML
+    private Label projectLabel;
 
     public ItemListPanel(ObservableList<Item> itemList) {
         super(FXML);
@@ -41,5 +54,10 @@ public class ItemListPanel extends UiPart<Region> {
                 setGraphic(new ItemCard(item, item.getIndex() + 1).getRoot());
             }
         }
+    }
+
+    public void changeStyle() {
+        internshipLabel.getStyleClass().remove("typeNotSelected");
+        internshipLabel.getStyleClass().add("typeSelected");
     }
 }
