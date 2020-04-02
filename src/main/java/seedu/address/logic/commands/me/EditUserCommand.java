@@ -80,6 +80,12 @@ public class EditUserCommand extends Command {
                 true, false, false, false, false);
     }
 
+    /**
+     * Create the user after edited.
+     * @param toEdit
+     * @param editUserDescriptor
+     * @return
+     */
     private static Person createEditedUser(Person toEdit, EditUserDescriptor editUserDescriptor) {
         DisplayPicture displayPicture = editUserDescriptor.getDisplayPicture().orElse(toEdit.getDisplayPicture());
         Name name = editUserDescriptor.getName().orElse(toEdit.getName());

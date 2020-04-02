@@ -285,8 +285,8 @@ public class ParserUtil {
         requireNonNull(cap);
         String trimmedCap = cap.trim();
         if (Verifier.isValidCap(trimmedCap)) {
-            double CAP = Double.valueOf(trimmedCap);
-            return Math.round(CAP * 100.0) / 100.0;
+            double userCap = Double.valueOf(trimmedCap);
+            return Math.round(userCap * 100.0) / 100.0;
         }
         throw new ParseException(Verifier.CAP_MESSAGE_CONSTRAINTS);
     }
