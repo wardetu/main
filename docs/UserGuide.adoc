@@ -342,6 +342,16 @@ image::ListResume.png[width="790"]
 image::GenerateResume.png[width="790"]
 image::PdfFile.png[width="790"]
 
+=== Clearing all data: `clear`
+Clears all data from ResuMe.
+
+****
+Format: `clear`
+****
+
+[WARNING]
+This command cannot be undone. Please be careful when exercising this power.
+
 
 === Exiting the program : `exit`
 ----
