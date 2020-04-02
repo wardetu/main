@@ -14,15 +14,15 @@ import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
 public class EditInternshipDescriptorTest {
+    public static final String[] DEFAULT_TAGS = {"java", "backend"};
+
     private Name name = new Name("name");
     private String role = "role";
     private Time from = new Time("10-2020");
     private Time to = new Time("12-2020");
     private String description = "description";
-    public static final String[] DEFAULT_TAGS = {"java", "backend"};
     private Set<Tag> tags = new HashSet<>();
-
-    EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
+    private EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
 
     @Test
     public void equals() {
@@ -34,7 +34,8 @@ public class EditInternshipDescriptorTest {
         editInternshipDescriptor.setTags(tags);
         tags.addAll(Arrays.stream(DEFAULT_TAGS).map(Tag::new).collect(Collectors.toList()));
 
-        EditInternshipDescriptor editInternshipDescriptorToTest = new EditInternshipDescriptor(editInternshipDescriptor);
+        EditInternshipDescriptor editInternshipDescriptorToTest =
+                new EditInternshipDescriptor(editInternshipDescriptor);
 
         // same name -> returns true
         assertEquals(editInternshipDescriptorToTest.getName().get(), name);
