@@ -413,31 +413,50 @@ ____
 
 == Command Summary
 
-* *Help* : `help`
+This is a summary of all commands for your convenience.
 
-* *List* : `list`
+General commands::
+Lists of all commands which has format that *do not vary* depending on item type.
+[source,sh]
+[cols="20%,80%",options="header"]
+|=======================================================================
 
-* *Add* `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...` +
-e.g. `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
+| Command | Format
 
-* *Edit* : `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...` +
-e.g. `edit 2 i/ ski l/ ADVANCED #/`
+| Clear | `clear`
+| Delete | `delete INDEX i/ TYPE`
+| Exit | `exit`
+| Edit Resume | `redit RESUME_INDEX TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]`
+| Find | `find KEYWORD [MORE_KEYWORDS]... i/ TYPE`
+| Generate Resume | `rgen RESUME_INDEX`
+| Help  | `help`
+| List | `list i/ TYPE`
+| Preview Resume | `rpreview RESUME_INDEX`
+| Redo | `redo`
+| Undo | `undo`
+| View | `view INDEX i/ TYPE`
 
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find Software`
+|=======================================================================
 
-* *Delete* : `delete INDEX i/ TYPE` +
-e.g. `delete 3 i/res`
+Item specific commands::
+Lists of all commands which has format that *vary* depending on item type.
 
-* *Edit Resume* : `redit RESUME_ID TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]... [#/ TAG]...`
-e.g. `redit 135 proj/ 9823 int/ 102 201` +
+[source,sh]
+[cols="5%,15%,80%",options="header"]
+|=======================================================================
 
-* *Undo* : `undo` +
+| Command | Type | Format
 
-* *Redo* : `redo` +
+.4+| Add |Internship | `add i/ int n/ COMPANY NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
+|Project |`add i/ proj n/ PROJECT NAME t/ TIME w/ WEBSITE d/ DESCRIPTION [#/ TAG]....`
+|Skill |`add i/ ski n/ SKILL NAME l/ LEVEL [#/ TAG]....`
+|Resume |`add i/ res n/ NAME [#/ TAG]...`
 
-* *Preview Resume* : `rpreview RESUME_ID` +
-e.g. `rpreview 234`
+.4+| Edit |Internship | `edit i/ int [n/ COMPANY NAME] [r/ ROLE] [f/ FROM] [t/ TO] [d/ DESCRIPTION] [#/ TAG]...`
+|Project |`edit i/ proj [n/ PROJECT NAME] [t/ TIME] [w/ WEBSITE] [d/ DESCRIPTION] [#/ TAG]....`
+|Skill |`edit i/ ski [n/ SKILL NAME] [l/ LEVEL] [#/ TAG]....`
+|Resume |`edit i/ res [n/ NAME] [#/ TAG]...`
 
-* *Generate Resume* : `rgen RESUME_ID` +
-e.g. `rgen 21`
+
+
+|=======================================================================
