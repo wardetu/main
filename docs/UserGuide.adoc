@@ -153,12 +153,15 @@ image::ListProject.png[width="790"]
 image::AddDukeProject.png[width="790"]
 
 
-=== Editing a person : `edit`
+=== Editing an item : `edit`
 
-----
 Edits an existing item in the ResuMe application.
+
+[NOTE]
+`edit` is a different command from `redit`. Please visit <<FAQ>> for more information.
 ----
 Format: `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...`
+----
 
 
 [width="100%",cols="16%,84%",options="header",]
@@ -173,18 +176,21 @@ Format: `edit INDEX i/ TYPE [ATTRIBUTE/ VALUE]... [#/ TAG]...`
 |Resume |`edit INDEX i/ res [n/ NAME] [#/ TAG]...`
 |=======================================================================
 
-****
-* Edits the item of type `TYPE` with the specified `ID`. The `ID` refers
-to the unique identification number given to the item when it was first
-added. The `ID` must be a *positive integer* that identifies an existing
-item.
-* At least *one* of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, existing tags of the person will be removed. i.e
-adding of tags is not cumulative.
-* You can remove *all* the person’s tags by typing `#/` without
-specifying any tags after it.
-****
+
+*Example:* Try typing in the command box these two commands one by one!
+
+. `list i/ res`
+. `edit 2 i/ res n/ Software Engineering Resume`
+
+*Outcome:*
+
+. All resume items are listed in the list panel.
++
+image::ListResume2.png[width="790"]
+. The Resume at index 2 has its name changed from "Resume 2" to "Software Engineering Resume".
++
+image::EditResumeExample.png[width="790"]
+
 Examples:
 
 * `edit 1 i/ res n/ Resume 1` +
