@@ -62,7 +62,8 @@ public class EditSkillCommand extends EditCommand {
         model.setSkillToDisplay();
         model.commitResumeBook();
 
-        return new CommandResult(editedSkill.toString(), String.format(MESSAGE_EDIT_SKILL_SUCCESS, editedSkill));
+        return new CommandResult(editedSkill.toString(), String.format(MESSAGE_EDIT_SKILL_SUCCESS, editedSkill),
+                model.getDisplayType());
     }
 
     /**
