@@ -52,7 +52,7 @@ Items from number 1 to 3 can be shared across different resumes.
 
 === Preview
 The following is the GUI for our application:
-// TODO: insert updated GUI
+UPDATE GUI
 
 ****
 The GUI includes:
@@ -372,11 +372,11 @@ Examples:
 * `delete 2 i/ res` +
 Deletes the 2nd resume in the resume book.
 
-<Photo for good case>
+Photo for good case
 
-<Photo for failed case>
+Photo for failed case
 
-<Photo to show cascading>
+Photo to show cascading
 
 === Viewing an item in details: `view`
 
@@ -461,11 +461,11 @@ Successive undo commands will bring the application further back, until there is
 
 * You cannot undo if there is no previous state to return to.
 --
-<PHOTO OF SUCCESSIVE CASE>
+PHOTO OF SUCCESSIVE CASE
 
-<PHOTO OF NO UNDO AT THE BEGINNING>
+PHOTO OF NO UNDO AT THE BEGINNING
 
-<PHOTO OF FAILED UNDO>
+PHOTO OF FAILED UNDO
 
 === Redo a command: `redo`
 
@@ -484,7 +484,7 @@ Format: redo
 to these states.
 * You cannot redo if there is no forward state to go to.
 --
-<PHOTOS>
+PHOTOS
 
 === Previewing a resume: `rpreview`
 
