@@ -15,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-F10-1/main
 
-By: `Team F10-1`      Since: `Jan 2020`      Licence: `MIT`
+By: `CS2103T F10-1`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
@@ -47,47 +47,12 @@ and job application woes.
 |=======================================================================
 
 As you may have noticed from number 4, we are able to manage different resumes as well!
-(As if this is not the whole reason why we decided to build this app :))
+(As if this is not the whole reason why we decided to build this app in the firs place :D)
 Items from number 1 to 3 can be shared across different resumes.
 
 === Preview
 The following is the GUI for our application:
 UPDATE GUI
-
-Interested? Jump to the Section 3, `Quick Start` to get started. Enjoy!
-
-== About this guide
-Our aim when writing this document is to help you - a new user - get started with *ResuMe* as quickly as possible.
-The guide features all the available commands, their syntax, as well as specific examples for illustration.
-
-This section is, well... a guide on how to use this guide :) We will be explaining some of the symbols and formatting used, key terms,
-as well notes and tips for a better user experience.
-
-=== Symbols and Formatting
-Most of us are visual learners, and we figured, what is a better way to present information than using some shapes and colours?
-
-[width="100%",cols="20%,80%",options="header",]
-|=======================================================================
-|Symbol / Format|Explanation
-|NOTE: | Important information to take note
-|TIP: | Tips
-|WARNING: | Warnings on potential misuse
-|`consola font` | Keywords you could type in the command box and could be be executed by the application
-|=======================================================================
-
-=== Key terms
-You will come across these little guys a lot in this document, so let's get to know them first!
-[width="100%",cols="20%,80%",options="header",]
-|=======================================================================
-|Term |Explanation
-|`type` | Consisting of four different types: `internship`, `project`, `skill` or `resume`
-|`item` | An item stored in the application, which could be any one of the four types above
-|`command` | A line of text that you could type into the command box and execute
-|`parameter` | Specific information about an `item` supplied by you
-|`index` | The position of the `item` in the currently displayed list
-|=======================================================================
-
-
 
 ****
 The GUI includes:
@@ -107,6 +72,40 @@ the list box will be set to displaying that type.
 5. User box: where you can view your information like name, email address, or phone number. If you make any update
 that change will be reflected.
 ****
+
+Interested? Jump to <<Quick Start>> to get started. Enjoy!
+
+== About this guide
+Our aim when writing this document is to help you - a new user - get started with *ResuMe* as quickly as possible.
+The guide features all the available commands, their syntax, as well as specific examples for illustration.
+
+This section is, well... a guide on how to use this guide :) We will be explaining some of the symbols and formatting used, key terms,
+as well notes and tips for a better user experience.
+
+=== Symbols and Formatting
+Most of us are visual learners, and we figured, what is a better way to present information than using some shapes and colours?
+
+[width="100%",cols="20%,80%",options="header",]
+|=======================================================================
+|Symbol / Format|Explanation
+|:note-caption: | Important information to take note
+|:tip-caption: | Tips
+|:warning-caption: | Warnings on potential misuse
+|`consola font` | Keywords you could type in the command box and could be be executed by the application
+|=======================================================================
+
+=== Key terms
+You will come across these little guys a lot in this document, so let's get to know them first!
+[width="100%",cols="20%,80%",options="header",]
+|=======================================================================
+|Term |Explanation
+|`type` | Consisting of four different types: `internship`, `project`, `skill` or `resume`
+|`item` | An item stored in the application, which could be any one of the four types above
+|`command` | A line of text that you could type into the command box and execute
+|`parameter` | Specific information about an `item` supplied by you
+|`index` | The position of the `item` in the currently displayed list
+|=======================================================================
+
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
@@ -241,6 +240,11 @@ The specific command syntax could be found in the table below:
 
 |Resume |`add i/ res n/ NAME [#/ TAG]...`
 |=======================================================================
+
+[TIP]
+The description of a `Resume` could be written one paragraph (with *full stop* and a *space* after each sentence).
+These sentences, when exported to .pdf format, will be automatically shown as individual bullet points! +
+_(refer to <<Generating a resume: `rgen`>> for more details)_
 
 *Example:* Try typing in the command box these two commands one by one!
 
@@ -622,7 +626,5 @@ Lists of all commands which has format that *vary* depending on item type.
 |Project |`edit i/ proj [n/ PROJECT NAME] [t/ TIME] [w/ WEBSITE] [d/ DESCRIPTION] [#/ TAG]....`
 |Skill |`edit i/ ski [n/ SKILL NAME] [l/ LEVEL] [#/ TAG]....`
 |Resume |`edit i/ res [n/ NAME] [#/ TAG]...`
-
-
 
 |=======================================================================

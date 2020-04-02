@@ -211,6 +211,7 @@ public class MainWindow extends UiPart<Stage> {
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             userOverallPane.updateUserProfile(logic.getUser());
+            itemListPanel.changeStyle(commandResult.getDisplayType());
 
             if (commandResult.hasItemChanged()) {
                 observableItemList = FXCollections.observableArrayList(commandResult.getDataToUser().split("\n"));
