@@ -100,15 +100,25 @@ To view items in full details, use `view`.
 ****
 
 === Adding an item: `add`
-----
-Adds an item to the ResuMe application.
-----
-Format: `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...`
 
-[width="100%",cols="16%,84%",options="header",]
+Adds an item to the ResuMe application.
+
+[NOTE]
+An item could be one of the four item types: `internship`, `project`, `skill` or even a `resume` itself.
+
+****
+Format: `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...`
+****
+
+[TIP]
+An item could have any number of tags _(including 0)_.
+
+The specific command syntax could be found in the table below:
+
+[width="100%",cols="12%,88%",options="header",]
 |=======================================================================
 |Type |Format
-|Internship |`add i/ int n/ COMPANY NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
+|Internship | `add i/ int n/ COMPANY NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
 
 |Project |`add i/ proj n/ PROJECT NAME t/ TIME w/ WEBSITE d/ DESCRIPTION [#/ TAG]....`
 
@@ -117,21 +127,20 @@ Format: `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...`
 |Resume |`add i/ res n/ NAME [#/ TAG]...`
 |=======================================================================
 
-****
-* Name is a *compulsory* field of add command, while other attributes
-are _optional_.
-* Other optional attributes depend on the type of the item. Eg. project
-items will have `FROM, TO, DESCRIPTION`.
-* Any item, excluding tags, could have any number of tags _(including
-0)_.
-* A unique `ID` is generated, and will be used to uniquely identify the
-item in the later commands.
-****
+*Example:* Try typing in the command box these two commands one by one!
 
-Examples:
+. `list i/ proj`
+. `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
 
-* `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
-* `add i/ ski n/ Git and Github l/ INTERMEDIATE #/ VCS #/ tech`
+*Outcome:*
+
+. All project items are listed in the list panel.
++
+image::ListProject.png[width="790"]
+. A new project item named `Duke` with the specified fields is added. This item is automatically reflected in the list panel.
++
+image::AddDukeProject.png[width="790"]
+
 
 === Editing a person : `edit`
 
@@ -291,21 +300,36 @@ Examples:
 * `rpreview 135` +
 Shows the text format of the resume with `RESUME_ID` 135.
 
-=== Generating a resume: rgen
-----
-Generates a .pdf file from an existing resume object.
-----
-Format: `rgen RESUME_ID`
+=== Generating a resume: `rgen`
+Generates a .pdf file from an existing resume stored inside the application at the specified index.
+
+[NOTE]
+A valid `INDEX` is a positive integer that identifies an existing resume.
 
 ****
-* Generates a `.pdf` file from resume object with id `RESUME_ID`.
-* The `RESUME_ID` must be a positive integer that identifies an existing item.
+Format: `rgen INDEX [n/ FILENAME]`
 ****
 
-Examples:
+[TIP]
+It is optional to specify a `FILENAME` for the .pdf file.
+If no name is specified, the filename will be set, by default, to the name of the generated `Resume`.
 
-* `rgen 1234` +
-Generates a `.pdf` file from resume object with `RESUME_ID` 1234.
+*Example:* Let's try out the following commands!
+
+. `list i/ res`
+. `rgen 2 n/ My Resume`
+
+*Outcome:*
+
+. The first command lists out all resumes. Assuming that you want to generate the first resume in the list.
++
+image::ListResume.png[width="790"]
+
+. The second command generate a `My Resume.pdf` file from the specified resume. The screenshots of the generated file is as below:
++
+image::GenerateResume.png[width="790"]
+image::PdfFile.png[width="790"]
+
 
 === Exiting the program : `exit`
 ----
