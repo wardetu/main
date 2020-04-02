@@ -36,6 +36,8 @@ public class CommandTestUtil {
 
     public static final String VALID_RESUME_NAME_SE = "Software Engineering Intern Resume";
     public static final String VALID_RESUME_NAME_ME = "Mechanical Engineering Intern Resume";
+
+    // SKILL
     public static final String VALID_SKILL_NAME_GIT = "Git and Github";
     public static final String VALID_SKILL_NAME_REACT = "React";
 

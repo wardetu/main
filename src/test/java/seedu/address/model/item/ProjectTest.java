@@ -14,7 +14,6 @@ import static seedu.address.testutil.TypicalProject.ORBITAL;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.InternshipBuilder;
 import seedu.address.testutil.ProjectBuilder;
 
 public class ProjectTest {
@@ -58,7 +57,7 @@ public class ProjectTest {
         // different type -> returns false
         assertFalse(ORBITAL.equals(5));
 
-        // different internship -> returns false
+        // different project -> returns false
         assertFalse(ORBITAL.equals(DUKE));
 
         // different name -> returns false
