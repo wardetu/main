@@ -109,6 +109,55 @@ Lists out the function and usage of each command.
 ----
 Format: `help`
 
+=== Edit user profile: `me`
+
+Edits and updates user's display information.
+
+[NOTE]
+A user profile contains the following fields: `Display Picture`, `Name`, `Phone`, `Email`, `Github`, `University`, `Major`, `From`, `To`, `CAP`.
+
+****
+Format: `me dp/ FILEPATH n/ NAME p/ PHONE [ATTRIBUTE/ VALUE]...`
+****
+
+The specific command syntax could be found in the table below:
+
+[width="100%",cols="12%,88%",options="header",]
+|=======================================================================
+|Type |Format
+|Person | `me dp/ FILEPATH n/ NAME p/ PHONE e/ EMAIL g/ GITHUB u/ UNIVERSITY m/ MAJOR f/ FROM t/ TO c/ CAP`
+|=======================================================================
+
+*Example 1:* Try typing in the command box this command!
+
+. `me n/ My Name p/ 12345678 e/ test@gmail.com g/ mygithub u/ NUS m/ CS f/ 08-2018 t/ 05-2022 c/ 5.0`
+
+*Outcome:*
+
+. The user profile panel is updated accordingly as below.
++
+image::user_profile.png[width="790"]
+
+*Example 2:* Edit user profile image
+
+Follow the steps in one of these two links to copy a file path according to your respective Operating System.
+
+. Mac: https://osxdaily.com/2013/06/19/copy-file-folder-path-mac-os-x/
+
+. Windows: https://www.laptopmag.com/articles/show-full-folder-path-file-explorer
+
+Afterwards, try a command similar to the one below!
+
+. `me dp//Users/nhamquochung/Desktop/test.png`
+
+*Outcome:*
+
+. The user profile picture is updated accordingly as below.
++
+image::user_profile1.png[width="790"]
+
+
+
 === Listing all items : `list`
 
 List items in the storage.
@@ -170,7 +219,6 @@ image::ListProject.png[width="790"]
 +
 image::AddDukeProject.png[width="790"]
 
-
 === Editing an item : `edit`
 
 Edits an existing item in the ResuMe application.
@@ -216,29 +264,42 @@ Edits the name of the 1st resume to be `Resume 1`.
 * `edit 2 i/ ski l/ ADVANCED #/` +
 Edits the level of the 2nd skill to be `ADVANCED` and clears all existing tags.
 
-=== Locating persons by name: `find`
-----
+=== Finding items by name: `find`
+
 Finds items in the ResuMe application whose names contain the specified keyword(s).
-----
-Format: `find KEYWORD [MORE_KEYWORDS]`
+
+[NOTE]
+An item could be one of the four item types: `internship`, `project`, `skill` or even a `resume` itself.
 
 ****
-* At least one keyword must be provided.
-* The search is *case insensitive*. > e.g. orbital will match Orbital
-* The *order* of the keywords does *not* matter. > e.g. Orbital CP2106
-will match CP2106 Orbital
-* If the `TYPE` is not specified. The program will search across *_all_*
-items.
-* Only *_full_* words will be matched. > e.g. CP210 will not match
-CP2106*
+Format: `find KEYWORD [MORE_KEYWORDS]... i/ TYPE`
 ****
 
-Examples:
+The specific command syntax could be found in the table below:
 
-* `find Software` +
-Returns `software` and `Software`
-* `find Shopee Front-end` +
-Returns any items having names `Shopee` or `Front-end`
+[width="100%",cols="12%,88%",options="header",]
+|=======================================================================
+|Type |Format
+|Internship | `find KEYWORD [MORE_KEYWORDS]... i/ int`
+
+|Project |`find KEYWORD [MORE_KEYWORDS]... i/ proj`
+
+|Skill |`find KEYWORD [MORE_KEYWORDS]... i/ ski`
+
+|Resume |`find KEYWORD [MORE_KEYWORDS]... i/res`
+|=======================================================================
+
+*Examples:* Try typing in the command box these two commands one by one!
+
+. `list i/ proj`
+. `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
+. `find Duke i/ proj`
+
+*Outcome*
+
+. Projects with matching name with keywords are listed in the list panel.
++
+image::find_command.png[width="790"]
 
 === Deleting an item : `delete`
 
@@ -440,11 +501,12 @@ This command cannot be undone. Please be careful when exercising this power.
 
 
 === Exiting the program : `exit`
-----
-Exits the program.
-----
 
+Exits the program.
+
+****
 Format: `exit`
+****
 
 === Saving the data
 ResuMe data is saved in the hard disk automatically after any command
@@ -482,6 +544,7 @@ Lists of all commands which has format that *do not vary* depending on item type
 [cols="20%,80%",options="header"]
 |=======================================================================
 
+
 | Command | Format
 
 | Clear | `clear`
@@ -492,6 +555,7 @@ Lists of all commands which has format that *do not vary* depending on item type
 | Generate Resume | `rgen RESUME_INDEX`
 | Help  | `help`
 | List | `list i/ TYPE`
+| Me | `me dp/ FILEPATH n/ NAME [ATTRIBUTE/ VALUE]...`
 | Preview Resume | `rpreview RESUME_INDEX`
 | Redo | `redo`
 | Undo | `undo`
