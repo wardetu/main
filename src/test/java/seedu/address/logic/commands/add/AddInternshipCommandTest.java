@@ -16,8 +16,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 
 import seedu.address.model.item.Internship;
 import seedu.address.testutil.InternshipBuilder;
+import seedu.address.testutil.ModelStub;
 
-public class AddInternshipCommandTest extends AddCommandTest {
+public class AddInternshipCommandTest {
     @Test
     public void constructor_nullInternship_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddInternshipCommand(null));
