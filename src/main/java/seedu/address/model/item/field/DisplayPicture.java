@@ -8,9 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class DisplayPicture {
     public static final String MESSAGE_CONSTRAINTS = "Profile Display path has to be a valid path of the image you "
-            + "want to display as your profile picture. Example format: /images/Duke.png\nUpon first start-up, a "
-            + "default DP will be displayed which you can then update it. From then, if you key in an invalid path, "
-            + "the image won't be updated.";
+            + "want to display as your profile picture. Example format: /Users/nhamquochung/Desktop/test.png";
 
     /**
      * Check for a valid file path
@@ -33,7 +31,7 @@ public class DisplayPicture {
     /**
      * Return true is the dpPath is a valid file path.
      */
-    public boolean isValidDisplayPicture(String dpPath) {
+    public static boolean isValidDisplayPicture(String dpPath) {
         return dpPath.matches(VALIDATION_REGEX);
     }
 

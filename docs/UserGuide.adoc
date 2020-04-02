@@ -100,15 +100,25 @@ To view items in full details, use `view`.
 ****
 
 === Adding an item: `add`
-----
+
 Adds an item to the ResuMe application.
+
 ----
 Format: `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...`
+----
 
-[width="100%",cols="16%,84%",options="header",]
+[TIP]
+An item could be one of the four item types: `internship`, `project`, `skill` or even a `resume` itself.
+[TIP]
+Any item could have any number of tags _(including
+0)_.
+
+The specific command syntax could be found in the table below:
+
+[width="100%",cols="12%,88%",options="header",]
 |=======================================================================
 |Type |Format
-|Internship |`add i/ int n/ COMPANY NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
+|Internship | `add i/ int n/ COMPANY NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
 
 |Project |`add i/ proj n/ PROJECT NAME t/ TIME w/ WEBSITE d/ DESCRIPTION [#/ TAG]....`
 
@@ -117,21 +127,22 @@ Format: `add i/ TYPE n/ NAME [ATTRIBUTE/ VALUE]... [#/ TAG]...`
 |Resume |`add i/ res n/ NAME [#/ TAG]...`
 |=======================================================================
 
-****
-* Name is a *compulsory* field of add command, while other attributes
-are _optional_.
-* Other optional attributes depend on the type of the item. Eg. project
-items will have `FROM, TO, DESCRIPTION`.
-* Any item, excluding tags, could have any number of tags _(including
-0)_.
-* A unique `ID` is generated, and will be used to uniquely identify the
-item in the later commands.
-****
 
-Examples:
 
-* `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
-* `add i/ ski n/ Git and Github l/ INTERMEDIATE #/ VCS #/ tech`
+*Example:* Try typing in the command box these two commands one by one!
+
+. `list i/ proj`
+. `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
+
+*Outcomes:*
+
+. All project items are listed in the list panel.
++
+image::ListProject.png[width="790"]
+. A new project item named `Duke` with the specified fields is added. This item is automatically reflected in the list panel.
++
+image::AddDukeProject.png[width="790"]
+
 
 === Editing a person : `edit`
 
@@ -291,7 +302,7 @@ Examples:
 * `rpreview 135` +
 Shows the text format of the resume with `RESUME_ID` 135.
 
-=== Generating a resume: rgen
+=== Generating a resume: `rgen`
 ----
 Generates a .pdf file from an existing resume object.
 ----
