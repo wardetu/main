@@ -243,6 +243,11 @@ The specific command syntax could be found in the table below:
 |Resume |`add i/ res n/ NAME [#/ TAG]...`
 |=======================================================================
 
+[TIP]
+The description of a `Resume` could be written one paragraph (with *full stop* and a *space* after each sentence).
+These sentences, when exported to .pdf format, will be automatically shown as individual bullet points! +
+_(refer to <<Generating a resume: `rgen`>> for more details)_
+
 *Example:* Try typing in the command box these two commands one by one!
 
 . `list i/ proj`
