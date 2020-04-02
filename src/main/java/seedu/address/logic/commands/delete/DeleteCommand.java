@@ -1,5 +1,6 @@
 package seedu.address.logic.commands.delete;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 
 import seedu.address.commons.core.index.Index;
@@ -23,6 +24,7 @@ public abstract class DeleteCommand extends Command {
     protected final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
