@@ -25,7 +25,7 @@ import seedu.address.model.tag.Tag;
  * Edits an Internship Item in the address book.
  */
 public class EditInternshipCommand extends EditCommand {
-    private static final String FIELDS = "Exampled: "
+    private static final String FIELDS = "Examples: "
             + COMMAND_WORD + " "
             + PREFIX_ITEM + "int "
             + "[" + PREFIX_NAME + "COMPANY NAME] "
