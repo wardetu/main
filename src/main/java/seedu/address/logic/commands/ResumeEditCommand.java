@@ -19,7 +19,8 @@ import seedu.address.model.item.Resume;
 /**
  * Edits the content of a Resume.
  */
-public class ResumeEditCommand extends Command {
+public class
+ResumeEditCommand extends Command {
     public static final String COMMAND_WORD = "redit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits what an existing resume contains in the ResuMe "
@@ -92,7 +93,9 @@ public class ResumeEditCommand extends Command {
                     .collect(Collectors.toList());
         }
 
-        model.editResume(toEdit, internshipsId, projectsId, skillsId);
+        Resume editedResume = new Resume(toEdit.getName(), toEdit.getId(), toEdit.getTags());
+        model.editResume(editedResume, internshipsId, projectsId, skillsId);
+        model.setResume(toEdit, editedResume);
         model.setResumeToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
