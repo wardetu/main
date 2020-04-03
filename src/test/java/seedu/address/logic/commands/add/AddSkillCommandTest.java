@@ -15,9 +15,10 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 import seedu.address.model.item.Skill;
+import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.SkillBuilder;
 
-public class AddSkillCommandTest extends AddCommandTest {
+public class AddSkillCommandTest {
     @Test
     public void constructor_nullSkill_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddSkillCommand(null));

@@ -20,6 +20,7 @@ public interface ReadOnlyResumeBook {
 
     /**
      * Returns the user of the resume book.
+     *
      * @return {@code Person} item representing the user.
      */
     Person getUser();
@@ -62,15 +63,19 @@ public interface ReadOnlyResumeBook {
 
     /**
      * Return an Internship item at the specified index from the internship list.
+     *
      * @param index index of internship
      * @return Internship item at {@code index}
      */
-    Internship getInternship(Index index);
+    Internship getInternshipByIndex(Index index);
+
+    boolean hasInternshipId(int id);
 
     /**
      * Return a Internship item with the specified ID from the internship list.
+     *
      * @param id
-     * @return Internship item with {@code index}
+     * @return Internship item with {@code id}
      */
     Internship getInternshipById(int id);
 
@@ -81,15 +86,19 @@ public interface ReadOnlyResumeBook {
 
     /**
      * Return a Project item at the specified index from the project list.
+     *
      * @param index index of project
      * @return Project item at {@code index}
      */
-    Project getProject(Index index);
+    Project getProjectByIndex(Index index);
+
+    boolean hasProjectId(int id);
 
     /**
      * Return a Project item with the specified ID from the project list.
+     *
      * @param id
-     * @return Project item with {@code index}
+     * @return Project item with {@code id}
      */
     Project getProjectById(int id);
 
@@ -100,15 +109,19 @@ public interface ReadOnlyResumeBook {
 
     /**
      * Return a Skill item at the specified index from the skill list.
+     *
      * @param index index of skill
      * @return Skill item at {@code index}
      */
-    Skill getSkill(Index index);
+    Skill getSkillByIndex(Index index);
+
+    boolean hasSkillId(int id);
 
     /**
      * Return a Skill item with the specified ID from the skill list.
+     *
      * @param id
-     * @return Skill item with {@code index}
+     * @return Skill item with {@code id}
      */
     Skill getSkillById(int id);
 
@@ -119,39 +132,34 @@ public interface ReadOnlyResumeBook {
 
     /**
      * Return a Resume item at the specified index from the resume list.
+     *
      * @param index index of resume
      * @return Resume item at {@code index}
      */
-    Resume getResume(Index index);
+    Resume getResumeByIndex(Index index);
+
+    boolean hasResumeId(int id);
 
     /**
      * Return the size of the resume list.
      */
     int getResumeSize();
 
-    /**
-     * Return a Skill item at the specified index from the skill list.
-     * @param index index of skill
-     * @return Skill item at {@code index}
-     */
+    NoteEntry getNoteEntryByIndex(int id);
+
+
     NoteEntry getNoteEntry(Index index);
 
-    /**
-     * Return the size of the skill list.
-     */
-    int getNoteEntrySize();
+    public int getNoteEntrySize();
 
+    public UniqueItemList<Item> getPersonalDetailList();
 
-    ///STUB
-    UniqueItemList<Item> getPersonalDetailList();
+    public void setNoteEntry(NoteEntry target, NoteEntry editedNoteEntry);
 
-    boolean hasResumeId(int resumeIndex);
+    public void addNoteEntry(NoteEntry noteEntry);
 
-    boolean hasInternshipId(int i);
+    public boolean hasNoteEntry(NoteEntry noteEntry);
 
-    boolean hasProjectId(int i);
+    public boolean hasNoteEntryId(int i);
 
-    boolean hasSkillId(int i);
-
-    boolean hasNoteEntryId(int i);
 }

@@ -31,7 +31,7 @@ public class ViewNoteCommand extends ViewCommand {
         model.updateFilteredNoteEntryList(Model.PREDICATE_SHOW_ALL_ENTRIES);
 
         return new CommandResult(toView.toString(),
-                String.format(MESSAGE_VIEW_SUCCESS, toView), true);
+                String.format(MESSAGE_VIEW_SUCCESS, toView), model.getDisplayType());
     }
 
     @Override

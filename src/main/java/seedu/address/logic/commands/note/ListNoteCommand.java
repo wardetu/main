@@ -16,6 +16,6 @@ public class ListNoteCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredNoteEntryList(PREDICATE_SHOW_ALL_ENTRIES);
-        return new CommandResult("", String.format(MESSAGE_SUCCESS, "NoteEntry"), true);
+        return new CommandResult("", String.format(MESSAGE_SUCCESS, "NoteEntry"), model.getDisplayType());
     }
 }

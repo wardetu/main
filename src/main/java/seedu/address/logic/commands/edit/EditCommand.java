@@ -19,11 +19,14 @@ public abstract class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
+    // TODO: Refactor this into a nice message centre
+    public static final String MESSAGE_DUPLICATE_ITEM = "Item with the same name already exists in the resume book.";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the item identified "
             + "by the index number used in the displayed item list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX "
-            + "[" + PREFIX_ITEM + " TYPE] "
+            + PREFIX_ITEM + " TYPE "
             + "[ PREFIX/ OTHER PREFIX DATA]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + " int "
@@ -31,7 +34,7 @@ public abstract class EditCommand extends Command {
             + PREFIX_FROM + " 03-2019 "
             + PREFIX_TO + " 06-2019 "
             + PREFIX_ROLE + " Intern "
-            + PREFIX_DESCRIPTION + " Do things and get paid."
+            + PREFIX_DESCRIPTION + " Do things and get paid. "
             + PREFIX_TAG + " frontend ";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

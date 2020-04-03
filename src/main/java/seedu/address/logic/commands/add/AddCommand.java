@@ -13,8 +13,8 @@ public abstract class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an Item to the address book. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an Item to the address book.\n"
+            + COMMAND_WORD + " "
             + PREFIX_ITEM + "TYPE "
             + PREFIX_NAME + "NAME "
             + "[" + PREFIX_TAG + "TAG]....\n"
@@ -25,5 +25,5 @@ public abstract class AddCommand extends Command {
             + PREFIX_TAG + "tech";
 
     public static final String MESSAGE_SUCCESS = "New %1$s added";
-    public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the resume book";
 }

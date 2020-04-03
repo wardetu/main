@@ -2,7 +2,9 @@ package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
@@ -21,11 +23,17 @@ import seedu.address.model.tag.Tag;
  * TODO: CONNECT LEVEL TO SKILL
  */
 public class EditSkillCommand extends EditCommand {
+    private static final String FIELDS = COMMAND_WORD
+            + " INDEX "
+            + PREFIX_ITEM + "res "
+            + "[" + PREFIX_NAME + "SKILL NAME] "
+            + "[" + PREFIX_LEVEL + "LEVEL] "
+            + "[" + PREFIX_TAG + "TAG]....\n";
     private static final String EXAMPLE = "Example: "
             + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + " ski "
             + PREFIX_NAME + " Software Engineering";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + EXAMPLE;
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + FIELDS + EXAMPLE;
     private static final String MESSAGE_EDIT_SKILL_SUCCESS = "Edited Skill: %1$s";
 
     private EditSkillDescriptor editSkillDescriptor;
@@ -46,15 +54,20 @@ public class EditSkillCommand extends EditCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Skill toEdit = model.getSkill(index);
+        Skill toEdit = model.getSkillByIndex(index);
 
         Skill editedSkill = createEditedSkill(toEdit, editSkillDescriptor);
+
+        if (model.hasSkill(editedSkill)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ITEM);
+        }
 
         model.setSkill(toEdit, editedSkill);
         model.setSkillToDisplay();
         model.commitResumeBook();
 
-        return new CommandResult(editedSkill.toString(), String.format(MESSAGE_EDIT_SKILL_SUCCESS, editedSkill));
+        return new CommandResult(editedSkill.toString(), String.format(MESSAGE_EDIT_SKILL_SUCCESS, editedSkill),
+                model.getDisplayType());
     }
 
     /**

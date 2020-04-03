@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.EditUserCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.GenerateResumeCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ResumeEditCommand;
@@ -20,6 +20,7 @@ import seedu.address.logic.commands.delete.DeleteCommand;
 import seedu.address.logic.commands.edit.EditCommand;
 import seedu.address.logic.commands.find.FindCommand;
 import seedu.address.logic.commands.list.ListCommand;
+import seedu.address.logic.commands.me.EditUserCommand;
 import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -69,6 +70,10 @@ public class ResumeBookParser {
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
 
+        case GenerateResumeCommand.COMMAND_WORD:
+            return new GenerateResumeParser().parse(arguments);
+
+
         //-----------------Undo/Redo----------------------------
 
         case UndoCommand.COMMAND_WORD:
@@ -102,19 +107,6 @@ public class ResumeBookParser {
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-        }
-    }
-
-    /**
-     * Ensures commands not meant to have trailing arguments do not have any. Trailing spaces following commands are
-     * fine and would have been trimmed off automatically by the program.
-     *
-     * @param arguments Argument inputs keyed in by the user following the command.
-     * @throws ParseException If there are additional arguments after the command.
-     */
-    private void requireEmptyArguments(String arguments) throws ParseException {
-        if (!arguments.isEmpty()) {
-            throw new ParseException("MESSAGE_ARGUMENTS_MUST_BE_EMPTY");
         }
     }
 }

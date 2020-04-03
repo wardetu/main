@@ -41,7 +41,7 @@ public class AddNoteCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_ERROR);
         }
         model.addNoteEntry(toAdd);
-        return new CommandResult(toAdd.toString(), MESSAGE_SUCCESS, true);
+        return new CommandResult(toAdd.toString(), MESSAGE_SUCCESS, model.getDisplayType());
     }
 
     @Override

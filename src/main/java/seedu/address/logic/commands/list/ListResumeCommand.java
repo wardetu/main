@@ -16,6 +16,6 @@ public class ListResumeCommand extends ListCommand {
         requireNonNull(model);
         model.setResumeToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        return new CommandResult("", String.format(MESSAGE_SUCCESS, "Resume"));
+        return new CommandResult("", String.format(MESSAGE_SUCCESS, "Resume"), model.getDisplayType());
     }
 }

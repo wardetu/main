@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -37,8 +39,9 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private PreviewWindow previewWindow;
-    private ItemDisplay itemDisplay;
     private UserOverallPane userOverallPane;
+    private ItemDisplayList itemDisplayList;
+    private ObservableList<String> observableItemList;
     private NoteListPanel noteListPanel;
 
     @FXML
@@ -61,6 +64,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane profilePlaceholder;
+
+    @FXML
+    private StackPane testPanelPlaceholder;
+
+    @FXML
+    private StackPane notePlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -123,16 +132,17 @@ public class MainWindow extends UiPart<Stage> {
         itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
 
-        itemDisplay = new ItemDisplay();
-        itemDisplayPlaceholder.getChildren().add(itemDisplay.getRoot());
-
-        noteListPanel = new NoteListPanel(logic.getFilteredNoteEntryList());
-
         userOverallPane = new UserOverallPane(logic.getUser());
         profilePlaceholder.getChildren().add(userOverallPane.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        noteListPanel = new NoteListPanel(logic.getFilteredNoteEntryList());
+        notePlaceholder.getChildren().add(noteListPanel.getRoot());
+
+        itemDisplayList = new ItemDisplayList(FXCollections.observableArrayList(new String[0]));
+        itemDisplayPlaceholder.getChildren().add(itemDisplayList.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -212,13 +222,12 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Item Display: " + commandResult.getDataToUser());
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            userOverallPane.updateUserProfile(logic.getUser());
+            itemListPanel.changeStyle(commandResult.getDisplayType());
 
-            if (commandResult.isUserUpdated()) {
-                userOverallPane.updateUserProfile(logic.getUser());
-            }
 
             if (commandResult.hasItemChanged()) {
-                itemDisplay.setDataFeedbackToUser(commandResult.getDataToUser());
+                itemDisplayList.updateDisplayItem(commandResult.getDataToUser().split("\n"));
             }
 
             if (commandResult.isShowPreview()) {
@@ -231,31 +240,11 @@ public class MainWindow extends UiPart<Stage> {
             } else if (commandResult.isExit()) {
                 handleExit();
             }
-
-            if (commandResult.isTakeNote()) {
-                switchToTakeNoteView();
-            } else {
-                switchToListView();
-            }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
-    }
-
-    /**
-     * Switch main display pane to the specified UI part
-     */
-    private void switchToTakeNoteView() {
-        personListPanelPlaceholder.getChildren().clear();
-        personListPanelPlaceholder.getChildren().add(noteListPanel.getRoot());
-    }
-
-    private void switchToListView() {
-        personListPanelPlaceholder.getChildren().clear();
-        personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
     }
 }

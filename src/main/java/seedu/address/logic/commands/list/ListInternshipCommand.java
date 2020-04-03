@@ -16,6 +16,6 @@ public class ListInternshipCommand extends ListCommand {
         requireNonNull(model);
         model.setInternshipToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        return new CommandResult("", String.format(MESSAGE_SUCCESS, "Internship"));
+        return new CommandResult("", String.format(MESSAGE_SUCCESS, "Internship"), model.getDisplayType());
     }
 }

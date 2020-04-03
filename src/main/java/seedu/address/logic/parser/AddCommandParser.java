@@ -132,7 +132,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
             Time noteTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
             Place place = ParserUtil.parsePlace(argMultimap.getValue(PREFIX_PLACE).get());
-            Description noteDescription = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+            Description noteDescription = new Description(argMultimap.getValue(PREFIX_DESCRIPTION).get());
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
             NoteEntry noteEntry = new NoteEntry(name, title, noteTime, place, noteDescription, tagList);
@@ -144,6 +144,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException("The item type is not detected! Something is wrong");
         }
     }
+
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.

@@ -22,6 +22,7 @@ public class FindInternshipCommand extends FindCommand {
         model.setInternshipToDisplay();
         model.updateFilteredItemList(predicate);
         return new CommandResult("",
-                String.format(Messages.MESSAGE_ITEMS_LISTED, model.getFilteredItemList().size(), "Internships"));
+                String.format(Messages.MESSAGE_ITEMS_LISTED, model.getFilteredItemList().size(), "Internships"),
+                model.getDisplayType());
     }
 }

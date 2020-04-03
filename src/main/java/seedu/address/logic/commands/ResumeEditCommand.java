@@ -55,7 +55,8 @@ public class ResumeEditCommand extends Command {
         }
 
         checkIndicesValidity(model);
-        Resume toEdit = model.getResume(index);
+
+        Resume toEdit = model.getResumeByIndex(index);
 
         List<Integer> internshipsId = toEdit.getInternshipIds();
         List<Integer> projectsId = toEdit.getProjectIds();
@@ -63,11 +64,13 @@ public class ResumeEditCommand extends Command {
 
         // If any of the indices are present (user keys in the prefix), then use what the user uses
         // Else, use the one currently being used by the resume
+
         if (internshipIndices.isPresent()) {
             internshipsId = internshipIndices
                     .get()
                     .stream()
-                    .map(x -> model.getInternship(Index.fromOneBased(x)).getId())
+                    .distinct()
+                    .map(x -> model.getInternshipByIndex(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
         }
 
@@ -75,7 +78,8 @@ public class ResumeEditCommand extends Command {
             projectsId = projectIndices
                     .get()
                     .stream()
-                    .map(x -> model.getProject(Index.fromOneBased(x)).getId())
+                    .distinct()
+                    .map(x -> model.getProjectByIndex(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
         }
 
@@ -83,7 +87,8 @@ public class ResumeEditCommand extends Command {
             skillsId = skillIndices
                     .get()
                     .stream()
-                    .map(x -> model.getSkill(Index.fromOneBased(x)).getId())
+                    .distinct()
+                    .map(x -> model.getSkillByIndex(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
         }
 
@@ -91,7 +96,7 @@ public class ResumeEditCommand extends Command {
         model.setResumeToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
-        return new CommandResult(toEdit.toString(), "Resume is updated");
+        return new CommandResult(toEdit.toString(), "Resume is updated", model.getDisplayType());
     }
 
     /**
@@ -122,7 +127,7 @@ public class ResumeEditCommand extends Command {
             StringBuilder invalidIndices = new StringBuilder();
             boolean isInvalidIndexPresent = false;
             for (Integer i: unboxedIndices) {
-                if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
+                if (Index.fromOneBased(i).getZeroBased() >= model.getProjectSize()) {
                     isInvalidIndexPresent = true;
                     invalidIndices.append(i.toString()).append(" ");
                 }
@@ -140,7 +145,7 @@ public class ResumeEditCommand extends Command {
             StringBuilder invalidIndices = new StringBuilder();
             boolean isInvalidIndexPresent = false;
             for (Integer i: unboxedIndices) {
-                if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
+                if (Index.fromOneBased(i).getZeroBased() >= model.getSkillSize()) {
                     isInvalidIndexPresent = true;
                     invalidIndices.append(i.toString()).append(" ");
                 }

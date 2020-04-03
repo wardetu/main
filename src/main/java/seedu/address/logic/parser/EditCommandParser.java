@@ -34,6 +34,7 @@ import seedu.address.logic.commands.note.EditNoteCommand;
 import seedu.address.logic.commands.note.EditNoteDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
+import seedu.address.model.note.field.Description;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 
@@ -90,7 +91,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editInternshipDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
             }
             if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-                editInternshipDescriptor.setRole(argMultimap.getValue(PREFIX_ROLE).get().trim());
+                editInternshipDescriptor.setRole(ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get().trim()));
             }
             if (argMultimap.getValue(PREFIX_FROM).isPresent()) {
                 editInternshipDescriptor.setFrom(ParserUtil.parseTime(argMultimap.getValue(PREFIX_FROM).get().trim()));
@@ -99,7 +100,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editInternshipDescriptor.setTo(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TO).get().trim()));
             }
             if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-                editInternshipDescriptor.setDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get().trim());
+                editInternshipDescriptor.setDescription(ParserUtil.parseDescription(
+                        argMultimap.getValue(PREFIX_DESCRIPTION).get().trim()));
             }
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editInternshipDescriptor::setTags);
 
@@ -114,13 +116,15 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editProjectDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
             }
             if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-                editProjectDescriptor.setDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get().trim());
+                editProjectDescriptor.setDescription(
+                        ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get().trim()));
             }
             if (argMultimap.getValue(PREFIX_WEBSITE).isPresent()) {
-                editProjectDescriptor.setDescription(argMultimap.getValue(PREFIX_WEBSITE).get().trim());
+                editProjectDescriptor.setWebsite(ParserUtil
+                        .parseWebsite(argMultimap.getValue(PREFIX_WEBSITE).get().trim()));
             }
             if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
-                editProjectDescriptor.setDescription(argMultimap.getValue(PREFIX_TIME).get().trim());
+                editProjectDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get().trim()));
             }
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editProjectDescriptor::setTags);
 
@@ -159,7 +163,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editNoteDescriptor.setPlace(ParserUtil.parsePlace(argMultimap.getValue(PREFIX_PLACE).get()));
             }
             if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-                editNoteDescriptor.setDescription(ParserUtil.parseDescription(
+                editNoteDescriptor.setDescription(new Description(
                         argMultimap.getValue(PREFIX_DESCRIPTION).get()));
             }
 

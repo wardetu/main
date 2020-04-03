@@ -65,7 +65,7 @@ public class EditNoteCommand extends EditCommand {
         model.updateFilteredNoteEntryList(Model.PREDICATE_SHOW_ALL_ENTRIES);
         model.commitResumeBook();
         return new CommandResult(editedNoteEntry.toString(),
-                String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedNoteEntry), true);
+                String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedNoteEntry), model.getDisplayType());
     }
 
     /**

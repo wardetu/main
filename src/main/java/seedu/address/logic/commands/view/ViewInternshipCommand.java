@@ -26,11 +26,11 @@ public class ViewInternshipCommand extends ViewCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Internship toView = model.getInternship(targetIndex);
+        Internship toView = model.getInternshipByIndex(targetIndex);
         model.setInternshipToDisplay();
 
         return new CommandResult(toView.toString(),
-                String.format(MESSAGE_VIEW_SUCCESS, toView));
+                String.format(MESSAGE_VIEW_SUCCESS, toView), model.getDisplayType());
     }
 
     @Override

@@ -15,8 +15,8 @@ import seedu.address.model.item.Resume;
  */
 public class AddResumeCommand extends AddCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a resume to the address book. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a resume to the address book.\n"
+            + COMMAND_WORD + " "
             + PREFIX_ITEM + "TYPE "
             + PREFIX_NAME + "NAME "
             + "[" + PREFIX_TAG + "TAG]....\n"
@@ -49,7 +49,8 @@ public class AddResumeCommand extends AddCommand {
         model.commitResumeBook();
 
         return new CommandResult(toAdd.toString(),
-                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()));
+                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()),
+                model.getDisplayType());
     }
 
     @Override

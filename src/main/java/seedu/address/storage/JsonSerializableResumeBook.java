@@ -104,7 +104,7 @@ class JsonSerializableResumeBook {
         int maxIdValue = -1;
         for (JsonAdaptedResume jsonAdaptedResume : resumes) {
             Resume resume = jsonAdaptedResume.toModelType();
-            if (resumeBook.hasItem(resume)) {
+            if (resumeBook.hasResume(resume)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             resumeBook.addResume(resume);
@@ -115,7 +115,7 @@ class JsonSerializableResumeBook {
         maxIdValue = -1;
         for (JsonAdaptedInternship jsonAdaptedInternship : internships) {
             Internship internship = jsonAdaptedInternship.toModelType();
-            if (resumeBook.hasItem(internship)) {
+            if (resumeBook.hasInternship(internship)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             resumeBook.addInternship(internship);
@@ -126,7 +126,7 @@ class JsonSerializableResumeBook {
         maxIdValue = -1;
         for (JsonAdaptedProject jsonAdaptedProject : projects) {
             Project project = jsonAdaptedProject.toModelType();
-            if (resumeBook.hasItem(project)) {
+            if (resumeBook.hasProject(project)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             resumeBook.addProject(project);
@@ -137,7 +137,7 @@ class JsonSerializableResumeBook {
         maxIdValue = -1;
         for (JsonAdaptedSkill jsonAdaptedSkill : skills) {
             Skill skill = jsonAdaptedSkill.toModelType();
-            if (resumeBook.hasItem(skill)) {
+            if (resumeBook.hasSkill(skill)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             resumeBook.addSkill(skill);
@@ -148,7 +148,7 @@ class JsonSerializableResumeBook {
         maxIdValue = -1;
         for (JsonAdaptedNoteEntry jsonAdaptedNoteEntry : entries) {
             NoteEntry noteEntry = jsonAdaptedNoteEntry.toModelType();
-            if (resumeBook.hasItem(noteEntry)) {
+            if (resumeBook.hasNoteEntry(noteEntry)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             resumeBook.addNoteEntry(noteEntry);

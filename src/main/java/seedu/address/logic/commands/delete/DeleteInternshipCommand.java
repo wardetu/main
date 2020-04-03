@@ -26,14 +26,15 @@ public class DeleteInternshipCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Internship toDelete = model.getInternship(targetIndex);
+        Internship toDelete = model.getInternshipByIndex(targetIndex);
 
         model.deleteInternship(toDelete);
         model.setInternshipToDisplay();
         model.commitResumeBook();
 
         return new CommandResult(toDelete.toString(),
-                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()));
+                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()),
+                model.getDisplayType());
     }
 
     @Override

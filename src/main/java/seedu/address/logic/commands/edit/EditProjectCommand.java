@@ -1,9 +1,12 @@
 package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEBSITE;
 
 import java.util.Set;
 
@@ -22,12 +25,23 @@ import seedu.address.model.tag.Tag;
  * Edits a Project Item in the address book.
  */
 public class EditProjectCommand extends EditCommand {
+    private static final String FIELDS = COMMAND_WORD
+            + " INDEX "
+            + PREFIX_ITEM + "proj "
+            + "[" + PREFIX_NAME + "PROJECT NAME] "
+            + "[" + PREFIX_WEBSITE + "WEBSITE] "
+            + "[" + PREFIX_TIME + "TIME] "
+            + "[" + PREFIX_DESCRIPTION + "DESC] "
+            + "[" + PREFIX_TAG + "TAG]....\n";
     private static final String EXAMPLE = "Example: "
             + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + " proj "
             + PREFIX_NAME + " LaundryBot "
-            + PREFIX_TIME + " 02-2022";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + EXAMPLE;
+            + PREFIX_WEBSITE + " laundryboo.io "
+            + PREFIX_TIME + " 02-2022 "
+            + PREFIX_DESCRIPTION + " It washes things. "
+            + PREFIX_TAG + "clean\n";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + FIELDS + EXAMPLE;
     private static final String MESSAGE_EDIT_PROJECT_SUCCESS = "Edited Project: %1$s";
 
     private EditProjectDescriptor editProjectDescriptor;
@@ -49,14 +63,19 @@ public class EditProjectCommand extends EditCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Project toEdit = model.getProject(index);
+        Project toEdit = model.getProjectByIndex(index);
 
-        Project editProject = createEditedProject(toEdit, editProjectDescriptor);
+        Project editedProject = createEditedProject(toEdit, editProjectDescriptor);
 
-        model.setProject(toEdit, editProject);
+        if (model.hasProject(editedProject)) {
+            throw new CommandException("A project with the same name and time already exists.");
+        }
+
+        model.setProject(toEdit, editedProject);
         model.setProjectToDisplay();
         model.commitResumeBook();
-        return new CommandResult(editProject.toString(), String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editProject));
+        return new CommandResult(editedProject.toString(), String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editedProject),
+                model.getDisplayType());
     }
 
     /**

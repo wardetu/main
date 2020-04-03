@@ -42,12 +42,12 @@ public class ResumePreviewCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Resume toPreview = model.getResume(index);
+        Resume toPreview = model.getResumeByIndex(index);
 
         String data = getDataFromResume(toPreview, model);
 
         String feedback = "Previewing resume at index " + index.getOneBased();
-        return new CommandResult(data, feedback, false, true, false, false, false);
+        return new CommandResult(data, feedback, model.getDisplayType(), true, false, false, false);
     }
 
     private String getDataFromResume(Resume resume, Model model) {

@@ -22,7 +22,8 @@ public class FindProjectCommand extends FindCommand {
         model.setProjectToDisplay();
         model.updateFilteredItemList(predicate);
         return new CommandResult("",
-                String.format(Messages.MESSAGE_ITEMS_LISTED, model.getFilteredItemList().size(), "Projects"));
+                String.format(Messages.MESSAGE_ITEMS_LISTED, model.getFilteredItemList().size(), "Projects"),
+                model.getDisplayType());
     }
 
 }

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -9,25 +8,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-//import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEBSITE;
-//import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.Assert.assertThrows;
 
-//import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.List;
-
-//import seedu.address.commons.core.index.Index;
-//import seedu.address.logic.commands.exceptions.CommandException;
-//import seedu.address.model.Model;
-//import seedu.address.model.ResumeBook;
-//import seedu.address.model.item.Item;
-//import seedu.address.model.item.field.NameContainsKeywordsPredicate;
-// import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 
 /**
  * Contains helper methods for testing commands.
@@ -48,10 +37,12 @@ public class CommandTestUtil {
     public static final String VALID_RESUME_NAME_SE = "Software Engineering Intern Resume";
     public static final String VALID_RESUME_NAME_ME = "Mechanical Engineering Intern Resume";
     public static final String VALID_SKILL_NAME_GIT = "Git and Github";
+    public static final String VALID_SKILL_NAME_REACT = "React";
 
     // PROJECT
     public static final String ITEM_TYPE_PROJECT = " " + PREFIX_ITEM + " proj";
     public static final String VALID_PROJECT_NAME_ORBITAL = "Orbital";
+    public static final String VALID_PROJECT_NAME_DUKE = "Duke";
     public static final String PREFIXED_NAME_ORBITAL = " " + PREFIX_NAME + " " + VALID_PROJECT_NAME_ORBITAL;
     public static final String VALID_TIME = "06-2020";
     public static final String PREFIXED_TIME = " " + PREFIX_TIME + " " + VALID_TIME;
@@ -118,30 +109,31 @@ public class CommandTestUtil {
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
-    /*
+
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
-            assertEquals(expectedCommandResult, result);
-            assertEquals(expectedModel, actualModel);
+
+            assertEquals(expectedCommandResult.getFeedbackToUser(), result.getFeedbackToUser());
+            assertEquals(expectedModel.getStatelessResumeBook(), actualModel.getStatelessResumeBook());
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }
-     */
+
 
     /**
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
-    /*
-    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+
+    public static void assertCommandSuccess(Command command, Model actualModel, String expectedData,
+                                            String expectedFeedback, Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedData, expectedFeedback, "");
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
-     */
+
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -149,18 +141,13 @@ public class CommandTestUtil {
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
      */
-    /*
-    public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
+
+    public static void assertCommandFailure(Command command, Model actualModel, CommandException exception) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        ResumeBook expectedAddressBook = new ResumeBook(actualModel.getResumeBook());
-        List<Item> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonalDetailList());
-
-        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getResumeBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonalDetailList());
+        assertThrows(CommandException.class, exception.getMessage(), () -> command.execute(actualModel));
     }
-    */
+
 
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
