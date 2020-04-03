@@ -158,12 +158,6 @@ public class ResumeBookTest {
             return resumes;
         }
 
-        // STUB
-        @Override
-        public UniqueItemList<Item> getPersonalDetailList() {
-            return null;
-        }
-
         @Override
         public boolean hasResumeId(int resumeIndex) {
             return false;
@@ -180,24 +174,41 @@ public class ResumeBookTest {
         }
 
         @Override
-        public Internship getInternship(Index index) {
+        public Internship getInternshipByIndex(Index index) {
             return new Internship(new Name("Company 1"), "Software Engineer", new Time("02-2019"),
                     new Time("05-2020"), "I did nothing", new HashSet<>());
         }
 
         @Override
-        public Project getProject(Index index) {
+        public Internship getInternshipById(int id) {
+            return new Internship(new Name("Company 1"), "Software Engineer", new Time("02-2019"),
+                    new Time("05-2020"), "I did nothing", new HashSet<>());
+        }
+
+        @Override
+        public Project getProjectByIndex(Index index) {
             return new Project(new Name("Project 1"), new Time("01-2020"), new Website("www.website.com"),
                     "I did nothing", new HashSet<>());
         }
 
         @Override
-        public Skill getSkill(Index index) {
+        public Project getProjectById(int id) {
+            return new Project(new Name("Project 1"), new Time("01-2020"), new Website("www.website.com"),
+                    "I did nothing", new HashSet<>());
+        }
+
+        @Override
+        public Skill getSkillByIndex(Index index) {
             return new Skill(new Name("Useless skill 1"), Level.ADVANCED, new HashSet<>(), -1);
         }
 
         @Override
-        public Resume getResume(Index index) {
+        public Skill getSkillById(int id) {
+            return new Skill(new Name("Useless skill 1"), Level.ADVANCED, new HashSet<>(), -1);
+        }
+
+        @Override
+        public Resume getResumeByIndex(Index index) {
             return new Resume(new Name("Resume 1"), new HashSet<>());
         }
 

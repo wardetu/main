@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -35,8 +37,10 @@ public class MainWindow extends UiPart<Stage> {
     private ItemListPanel itemListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private ItemDisplay itemDisplay;
+    private PreviewWindow previewWindow;
     private UserOverallPane userOverallPane;
+    private ItemDisplayList itemDisplayList;
+    private ObservableList<String> observableItemList;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -59,6 +63,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane profilePlaceholder;
 
+    @FXML
+    private StackPane testPanelPlaceholder;
+
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
@@ -72,6 +79,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        previewWindow = new PreviewWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -119,14 +127,14 @@ public class MainWindow extends UiPart<Stage> {
         itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
 
-        itemDisplay = new ItemDisplay();
-        itemDisplayPlaceholder.getChildren().add(itemDisplay.getRoot());
-
         userOverallPane = new UserOverallPane(logic.getUser());
         profilePlaceholder.getChildren().add(userOverallPane.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        itemDisplayList = new ItemDisplayList(FXCollections.observableArrayList(new String[0]));
+        itemDisplayPlaceholder.getChildren().add(itemDisplayList.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -160,6 +168,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handlePreview() {
+        if (!previewWindow.isShowing()) {
+            previewWindow.show();
+        } else {
+            previewWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -173,6 +193,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        previewWindow.hide();
         primaryStage.hide();
     }
 
@@ -192,13 +213,16 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Item Display: " + commandResult.getDataToUser());
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isUserUpdated()) {
-                userOverallPane.updateUserProfile(logic.getUser());
-            }
+            userOverallPane.updateUserProfile(logic.getUser());
+            itemListPanel.changeStyle(commandResult.getDisplayType());
 
             if (commandResult.hasItemChanged()) {
-                itemDisplay.setDataFeedbackToUser(commandResult.getDataToUser());
+                itemDisplayList.updateDisplayItem(commandResult.getDataToUser().split("\n"));
+            }
+
+            if (commandResult.isShowPreview()) {
+                previewWindow.setPreviewText(commandResult.getDataToUser());
+                handlePreview();
             }
 
             if (commandResult.isShowHelp()) {

@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.Set;
 
@@ -26,16 +25,27 @@ import seedu.address.model.tag.Tag;
  * Edits an Internship Item in the address book.
  */
 public class EditInternshipCommand extends EditCommand {
+    private static final String FIELDS = "Examples: "
+            + COMMAND_WORD + " "
+            + PREFIX_ITEM + "int "
+            + "[" + PREFIX_NAME + "COMPANY NAME] "
+            + "[" + PREFIX_ROLE + "ROLE] "
+            + "[" + PREFIX_FROM + "FROM] "
+            + "[" + PREFIX_TO + "TO] "
+            + "[" + PREFIX_DESCRIPTION + "DESC] "
+            + "[" + PREFIX_TAG + "TAG]....\n";
     private static final String EXAMPLE = "Example: "
             + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + " int "
             + PREFIX_NAME + " Shopee "
-            + PREFIX_DESCRIPTION + " I did some work "
             + PREFIX_FROM + " 05-2020 "
             + PREFIX_TO + " 08-2020 "
             + PREFIX_ROLE + " Backend Engineer"
+            + PREFIX_DESCRIPTION + " I did some work "
             + PREFIX_TAG + " backend ";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + EXAMPLE;
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n"
+            + FIELDS
+            + EXAMPLE;
     private static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
 
     private EditInternshipDescriptor editInternshipDescriptor;
@@ -57,16 +67,20 @@ public class EditInternshipCommand extends EditCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Internship toEdit = model.getInternship(index);
+        Internship toEdit = model.getInternshipByIndex(index);
 
         Internship editedInternship = createEditedInternship(toEdit, editInternshipDescriptor);
 
+        if (model.hasInternship(editedInternship)) {
+            throw new CommandException("An internship with the same name, role, and time already exists.");
+        }
+
         model.setInternship(toEdit, editedInternship);
         model.setInternshipToDisplay();
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
         return new CommandResult(editedInternship.toString(),
-                String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship));
+                String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship),
+                model.getDisplayType());
     }
 
     /**

@@ -60,7 +60,16 @@ public interface ReadOnlyResumeBook {
      * @param index index of internship
      * @return Internship item at {@code index}
      */
-    Internship getInternship(Index index);
+    Internship getInternshipByIndex(Index index);
+
+    boolean hasInternshipId(int id);
+
+    /**
+     * Return a Internship item with the specified ID from the internship list.
+     * @param id
+     * @return Internship item with {@code id}
+     */
+    Internship getInternshipById(int id);
 
     /**
      * Return the size of the internship list.
@@ -72,7 +81,16 @@ public interface ReadOnlyResumeBook {
      * @param index index of project
      * @return Project item at {@code index}
      */
-    Project getProject(Index index);
+    Project getProjectByIndex(Index index);
+
+    boolean hasProjectId(int id);
+
+    /**
+     * Return a Project item with the specified ID from the project list.
+     * @param id
+     * @return Project item with {@code id}
+     */
+    Project getProjectById(int id);
 
     /**
      * Return the size of the project list.
@@ -84,7 +102,16 @@ public interface ReadOnlyResumeBook {
      * @param index index of skill
      * @return Skill item at {@code index}
      */
-    Skill getSkill(Index index);
+    Skill getSkillByIndex(Index index);
+
+    boolean hasSkillId(int id);
+
+    /**
+     * Return a Skill item with the specified ID from the skill list.
+     * @param id
+     * @return Skill item with {@code id}
+     */
+    Skill getSkillById(int id);
 
     /**
      * Return the size of the skill list.
@@ -96,21 +123,12 @@ public interface ReadOnlyResumeBook {
      * @param index index of resume
      * @return Resume item at {@code index}
      */
-    Resume getResume(Index index);
+    Resume getResumeByIndex(Index index);
+
+    boolean hasResumeId(int id);
 
     /**
      * Return the size of the resume list.
      */
     int getResumeSize();
-
-    ///STUB
-    UniqueItemList<Item> getPersonalDetailList();
-
-    boolean hasResumeId(int resumeIndex);
-
-    boolean hasInternshipId(int i);
-
-    boolean hasProjectId(int i);
-
-    boolean hasSkillId(int i);
 }

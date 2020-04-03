@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.Set;
 
@@ -21,12 +20,17 @@ import seedu.address.model.tag.Tag;
  * Edits a Resume Item in the address book.
  */
 public class EditResumeCommand extends EditCommand {
+    private static final String FIELDS = COMMAND_WORD
+            + " INDEX "
+            + PREFIX_ITEM + "res "
+            + "[" + PREFIX_NAME + "RESUME NAME] "
+            + "[" + PREFIX_TAG + "TAG]....\n";
     private static final String EXAMPLE = "Example: "
             + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + " res "
             + PREFIX_NAME + " Resume 1 "
             + PREFIX_TAG + " frontend ";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + EXAMPLE;
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + FIELDS + EXAMPLE;
     private static final String MESSAGE_EDIT_RESUME_SUCCESS = "Edited Resume: %1$s";
     private EditResumeDescriptor editResumeDescriptor;
     /**
@@ -46,15 +50,19 @@ public class EditResumeCommand extends EditCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Resume toEdit = model.getResume(index);
+        Resume toEdit = model.getResumeByIndex(index);
 
         Resume editedResume = createEditedResume(toEdit, editResumeDescriptor);
 
+        if (model.hasResume(editedResume)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ITEM);
+        }
+
         model.setResume(toEdit, editedResume);
         model.setResumeToDisplay();
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
-        return new CommandResult(editedResume.toString(), String.format(MESSAGE_EDIT_RESUME_SUCCESS, editedResume));
+        return new CommandResult(editedResume.toString(), String.format(MESSAGE_EDIT_RESUME_SUCCESS, editedResume),
+                model.getDisplayType());
     }
 
     /**
@@ -67,7 +75,11 @@ public class EditResumeCommand extends EditCommand {
         Name updatedName = editResumeDescriptor.getName().orElse(toEdit.getName());
         Set<Tag> updatedTags = editResumeDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
-        return new Resume(updatedName, id, updatedTags);
+        Resume editedResume = new Resume(updatedName, id, updatedTags);
+        editedResume.setInternshipIds(toEdit.getInternshipIds());
+        editedResume.setProjectIds(toEdit.getProjectIds());
+        editedResume.setSkillIds(toEdit.getSkillIds());
+        return editedResume;
     }
 
 }

@@ -26,11 +26,11 @@ public class ViewResumeCommand extends ViewCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Resume toView = model.getResume(targetIndex);
+        Resume toView = model.getResumeByIndex(targetIndex);
         model.setResumeToDisplay();
 
         return new CommandResult(toView.toString(),
-                String.format(MESSAGE_VIEW_SUCCESS, toView));
+                String.format(MESSAGE_VIEW_SUCCESS, toView), model.getDisplayType());
     }
 
     @Override

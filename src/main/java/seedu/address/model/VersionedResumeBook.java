@@ -98,6 +98,12 @@ public class VersionedResumeBook extends ResumeBook {
                 && currentStatePointer == otherVersionedResumeBook.currentStatePointer;
     }
 
+    public ReadOnlyResumeBook getStatelessResumeBook() {
+        this.currentStatePointer = 0;
+        this.resumeBookStateList.clear();
+        return this;
+    }
+
     /**
      * Thrown when trying to {@code undo()} but can't.
      */

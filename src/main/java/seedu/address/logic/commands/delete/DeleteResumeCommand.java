@@ -26,14 +26,15 @@ public class DeleteResumeCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Resume toDelete = model.getResume(targetIndex);
+        Resume toDelete = model.getResumeByIndex(targetIndex);
 
         model.deleteResume(toDelete);
         model.setResumeToDisplay();
         model.commitResumeBook();
 
         return new CommandResult(toDelete.toString(),
-                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()));
+                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()),
+                model.getDisplayType());
     }
 
     @Override

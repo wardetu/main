@@ -2,16 +2,24 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.field.Address;
+import seedu.address.model.item.field.Description;
+import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
+import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
@@ -69,6 +77,7 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
+    // TODO: BEAUTIFY THE EXCEPTION MESSAGE
     /**
      * Parses a {@code String level} into a {@code Level}.
      * Leading and trailing whitespaces will be trimmed.
@@ -84,7 +93,6 @@ public class ParserUtil {
         }
         throw new ParseException("Level of proficiency can only be one of these three types: basic, intermediate, "
                 + "advanced.");
-
     }
 
     /**
@@ -156,6 +164,9 @@ public class ParserUtil {
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
+        if (tagSet.isEmpty()) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
         return tagSet;
     }
 
@@ -187,5 +198,130 @@ public class ParserUtil {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
         return new Time(trimmedTime);
+    }
+
+    /**
+     * Parses the Item Indices to give the required optional
+     */
+    public static Optional<List<Integer>> parseReditItemIndices(String indices) throws ParseException {
+        if (indices == null) {
+            return Optional.empty();
+        } else if (indices.equals("")) {
+            // Empty string will return an InvokationTargetException in the streams
+            // TODO: Investigate how this can be combined with the else block
+            return Optional.of(new ArrayList<>());
+        } else {
+            List<Integer> mappedIndices = Arrays.stream(indices.split("\\s+"))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+
+            return Optional.of(mappedIndices);
+        }
+    }
+
+    /**
+     * Parses a {@code String displayFilePath} into a {@code DisplayPicture}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static DisplayPicture parseDisplayPicture(String displayFilePath) throws ParseException {
+        requireNonNull(displayFilePath);
+        String trimmedDisplayFilePath = displayFilePath.trim();
+        if (DisplayPicture.isValidDisplayPicture(trimmedDisplayFilePath)) {
+            return new DisplayPicture(trimmedDisplayFilePath);
+        }
+        throw new ParseException(DisplayPicture.MESSAGE_CONSTRAINTS);
+    }
+
+    /**
+     * Parses a {@code String github} into a {@code Github}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code github} is invalid.
+     */
+    public static Github parseGithub(String github) throws ParseException {
+        requireNonNull(github);
+        String trimmedGithub = github.trim();
+        if (Github.isValidGithub(trimmedGithub)) {
+            return new Github(trimmedGithub);
+        }
+        throw new ParseException(Github.MESSAGE_CONSTRAINTS);
+    }
+
+    /**
+     * Parses a {@code String university} into a {@code String university}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code github} is invalid.
+     */
+    public static String parseUniversity(String university) throws ParseException {
+        requireNonNull(university);
+        String trimmedUniversity = university.trim();
+        if (Verifier.isValidUniversity(trimmedUniversity)) {
+            return trimmedUniversity;
+        }
+        throw new ParseException(Verifier.UNIVERSITY_MESSAGE_CONSTRAINTS);
+    }
+
+    /**
+     * Parses a {@code String major} into a {@code String major}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code major} is invalid.
+     */
+    public static String parseMajor(String major) throws ParseException {
+        requireNonNull(major);
+        String trimmedMajor = major.trim();
+        if (Verifier.isValidMajor(trimmedMajor)) {
+            return trimmedMajor;
+        }
+        throw new ParseException(Verifier.MAJOR_MESSAGE_CONSTRAINTS);
+    }
+
+    /**
+     * Parses a {@code String cap} into a {@code Double cap}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code cap} is invalid.
+     */
+    public static Double parseCap(String cap) throws ParseException {
+        requireNonNull(cap);
+        String trimmedCap = cap.trim();
+        if (Verifier.isValidCap(trimmedCap)) {
+            double userCap = Double.valueOf(trimmedCap);
+            return Math.round(userCap * 100.0) / 100.0;
+        }
+        throw new ParseException(Verifier.CAP_MESSAGE_CONSTRAINTS);
+    }
+
+    /**
+     * Parses a {@code String description} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static String parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedDescription;
+    }
+
+    /**
+     * Parses a {@code String role} into a {@code String role}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code role} is invalid.
+     */
+    public static String parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        if (Verifier.isValidRole(trimmedRole)) {
+            return trimmedRole;
+        }
+        throw new ParseException(Verifier.ROLE_MESSAGE_CONSTRAINTS);
     }
 }

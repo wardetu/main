@@ -26,14 +26,15 @@ public class DeleteProjectCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Project toDelete = model.getProject(targetIndex);
+        Project toDelete = model.getProjectByIndex(targetIndex);
 
         model.deleteProject(toDelete);
         model.setProjectToDisplay();
         model.commitResumeBook();
 
         return new CommandResult(toDelete.toString(),
-                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()));
+                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()),
+                model.getDisplayType());
     }
 
     @Override

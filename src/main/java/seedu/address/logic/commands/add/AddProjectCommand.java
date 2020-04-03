@@ -2,7 +2,6 @@ package seedu.address.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -19,12 +18,12 @@ import seedu.address.model.item.Project;
  */
 public class AddProjectCommand extends AddCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an project to the address book. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an project to the address book.\n"
+            + COMMAND_WORD + " "
             + PREFIX_ITEM + "TYPE "
             + PREFIX_NAME + "PROJECT NAME "
             + PREFIX_TIME + "TIME "
-            + PREFIX_FROM + "FROM "
+            + PREFIX_WEBSITE + "WEBSITE "
             + PREFIX_DESCRIPTION + "DESC "
             + "[" + PREFIX_TAG + "TAG]....\n"
             + "Example: " + COMMAND_WORD + " "
@@ -59,7 +58,8 @@ public class AddProjectCommand extends AddCommand {
         model.commitResumeBook();
 
         return new CommandResult(toAdd.toString(),
-                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()));
+                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()),
+                model.getDisplayType());
     }
 
     @Override

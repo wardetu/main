@@ -1,7 +1,8 @@
 package seedu.address.model.item;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Type;
@@ -17,9 +18,9 @@ public class Resume extends Item {
     // Item-level fields
 
     // Data fields
-    private final TreeSet<Integer> internships = new TreeSet<>();
-    private final TreeSet<Integer> projects = new TreeSet<>();
-    private final TreeSet<Integer> skills = new TreeSet<>();
+    private List<Integer> internshipIds = new ArrayList<>();
+    private List<Integer> projectIds = new ArrayList<>();
+    private List<Integer> skillIds = new ArrayList<>();
 
     public Resume(Name name, Set<Tag> tags) {
         this(name, ItemUtil.yieldId(ItemUtil.RESUME_ALIAS), tags);
@@ -31,59 +32,50 @@ public class Resume extends Item {
         // TODO: change Resume constructor to take in existing lists of internships, projects or skills
     }
 
-    public void addInternship(int value) {
-        internships.add(value);
+    public void addInternshipId(int value) {
+        internshipIds.add(value);
     }
 
-    public void setInternships(int... values) {
-        internships.clear();
-        for (int i : values) {
-            internships.add(i);
-        }
+    public void setInternshipIds(List<Integer> internshipIds) {
+        this.internshipIds = internshipIds;
     }
 
-    public TreeSet<Integer> getInternships() {
-        return this.internships;
+    public List<Integer> getInternshipIds() {
+        return this.internshipIds;
     }
 
-    public void addProject(int value) {
-        projects.add(value);
+    public void addProjectId(int value) {
+        projectIds.add(value);
     }
 
-    public TreeSet<Integer> getProjects() {
-        return this.projects;
+    public List<Integer> getProjectIds() {
+        return this.projectIds;
     }
 
-    public void setProjects(int... values) {
-        projects.clear();
-        for (int i : values) {
-            projects.add(i);
-        }
+    public void setProjectIds(List<Integer> projectIds) {
+        this.projectIds = projectIds;
     }
 
-    public void addSkill(int value) {
-        skills.add(value);
+    public void addSkillId(int value) {
+        skillIds.add(value);
     }
 
-    public TreeSet<Integer> getSkills() {
-        return this.skills;
+    public List<Integer> getSkillIds() {
+        return this.skillIds;
     }
 
-    public void setSkills(int... values) {
-        skills.clear();
-        for (int i : values) {
-            skills.add(i);
-        }
+    public void setSkillIds(List<Integer> skillIds) {
+        this.skillIds = skillIds;
     }
 
     @Override
     public String getSummary() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getInternships().size())
+        builder.append(getInternshipIds().size())
                 .append(" internship(s), ")
-                .append(getProjects().size())
+                .append(getProjectIds().size())
                 .append(" project(s), ")
-                .append(getSkills().size())
+                .append(getSkillIds().size())
                 .append(" skill(s).");
         return builder.toString();
     }

@@ -26,14 +26,15 @@ public class DeleteSkillCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Skill toDelete = model.getSkill(targetIndex);
+        Skill toDelete = model.getSkillByIndex(targetIndex);
 
         model.deleteSkill(toDelete);
         model.setSkillToDisplay();
         model.commitResumeBook();
 
         return new CommandResult(toDelete.toString(),
-                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()));
+                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()),
+                model.getDisplayType());
     }
 
     @Override

@@ -16,8 +16,8 @@ import seedu.address.model.item.Skill;
  */
 public class AddSkillCommand extends AddCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a skill to the address book. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a skill to the address book.\n"
+            + COMMAND_WORD + " "
             + PREFIX_ITEM + "TYPE "
             + PREFIX_NAME + "SKILL NAME "
             + PREFIX_LEVEL + "LEVEL "
@@ -52,7 +52,8 @@ public class AddSkillCommand extends AddCommand {
         model.commitResumeBook();
 
         return new CommandResult(toAdd.toString(),
-                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()));
+                String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()),
+                model.getDisplayType());
     }
 
     @Override
