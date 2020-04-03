@@ -20,6 +20,7 @@ import seedu.address.model.item.Internship;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.util.ItemUtil;
 import seedu.address.testutil.TypicalInternship;
 import seedu.address.testutil.TypicalProject;
 import seedu.address.testutil.TypicalResume;
@@ -50,7 +51,7 @@ public class AddCommandIntegrationTest {
                 model,
                 new CommandResult(validInternship.toString(),
                         String.format(AddInternshipCommand.MESSAGE_SUCCESS,
-                                validInternship.getType().getFullType())),
+                                validInternship.getType().getFullType()), ItemUtil.INTERNSHIP_ALIAS),
                 expectedModel);
     }
 
@@ -75,7 +76,8 @@ public class AddCommandIntegrationTest {
                 model,
                 new CommandResult(validResume.toString(),
                         String.format(AddResumeCommand.MESSAGE_SUCCESS,
-                                validResume.getType().getFullType())),
+                                validResume.getType().getFullType()),
+                        ItemUtil.RESUME_ALIAS),
                 expectedModel);
     }
 
@@ -100,7 +102,8 @@ public class AddCommandIntegrationTest {
                 model,
                 new CommandResult(validSkill.toString(),
                         String.format(AddSkillCommand.MESSAGE_SUCCESS,
-                                validSkill.getType().getFullType())),
+                                validSkill.getType().getFullType()),
+                        ItemUtil.SKILL_ALIAS),
                 expectedModel);
     }
 
@@ -125,7 +128,8 @@ public class AddCommandIntegrationTest {
                 model,
                 new CommandResult(validProject.toString(),
                         String.format(AddProjectCommand.MESSAGE_SUCCESS,
-                                validProject.getType().getFullType())),
+                                validProject.getType().getFullType()),
+                        ItemUtil.PROJECT_ALIAS),
                 expectedModel);
     }
 
