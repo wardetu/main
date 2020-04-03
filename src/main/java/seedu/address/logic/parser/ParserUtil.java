@@ -76,6 +76,7 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
+    // TODO: BEAUTIFY THE EXCEPTION MESSAGE
     /**
      * Parses a {@code String level} into a {@code Level}.
      * Leading and trailing whitespaces will be trimmed.
