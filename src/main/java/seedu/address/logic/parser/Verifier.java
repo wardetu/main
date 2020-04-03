@@ -6,12 +6,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Validations for different input.
  */
 public class Verifier {
-    public static final int UNIVERSITY_MAX_LENGTH = 30;
+    public static final int UNIVERSITY_MAX_LENGTH = 50;
     public static final String UNIVERSITY_MESSAGE_CONSTRAINTS =
             "University should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String UNIVERSITY_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public static final int MAJOR_MAX_LENGTH = 30;
+    public static final int MAJOR_MAX_LENGTH = 50;
     public static final String MAJOR_MESSAGE_CONSTRAINTS =
             "Major should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String MAJOR_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
@@ -19,6 +19,12 @@ public class Verifier {
     public static final String CAP_MESSAGE_CONSTRAINTS =
             "CAP should only contain numeric characters and must match actual range from 0.0 to 5.0 and it "
                     + "should not be blank";
+
+    public static final int ROLE_MAX_LENGTH = 50;
+    public static final String ROLE_MESSAGE_CONSTRAINTS =
+            "Major should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String ROLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
 
     /**
      * Check if a field is within length limit.
@@ -113,5 +119,19 @@ public class Verifier {
      */
     public static boolean isWithinRange(double number, double min, double max) {
         return number >= min && number <= max;
+    }
+
+    /**
+     * Check if the Role field is valid.
+     * @param role
+     * @return
+     */
+    public static boolean isValidRole(String role) {
+        if (isNotEmpty(role) && isCorrectLength(role, ROLE_MAX_LENGTH)
+                && role.matches(ROLE_VALIDATION_REGEX)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
