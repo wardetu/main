@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -225,7 +226,14 @@ public class ResumeBook implements ReadOnlyResumeBook {
         internships.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getInternshipIds().remove(Integer.valueOf(id));
+            Resume newresume = new Resume(resume.getName(), resume.getId(), resume.getTags());
+            List<Integer> newInternshipList = new ArrayList<>();
+            newInternshipList.addAll(resume.getInternshipIds());
+            newresume.setInternshipIds(newInternshipList);
+            newresume.setProjectIds(resume.getProjectIds());
+            newresume.setSkillIds(resume.getSkillIds());
+            newresume.getInternshipIds().remove(Integer.valueOf(id));
+            setResume(resume, newresume);
         }
     }
 
@@ -291,7 +299,14 @@ public class ResumeBook implements ReadOnlyResumeBook {
         projects.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getProjectIds().remove(Integer.valueOf(id));
+            Resume newresume = new Resume(resume.getName(), resume.getId(), resume.getTags());
+            newresume.setInternshipIds(resume.getInternshipIds());
+            List<Integer> newProjectList = new ArrayList<>();
+            newProjectList.addAll(resume.getProjectIds());
+            newresume.setProjectIds(newProjectList);
+            newresume.setSkillIds(resume.getSkillIds());
+            newresume.getProjectIds().remove(Integer.valueOf(id));
+            setResume(resume, newresume);
         }
     }
 
@@ -357,7 +372,14 @@ public class ResumeBook implements ReadOnlyResumeBook {
         skills.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getSkillIds().remove(Integer.valueOf(id));
+            Resume newresume = new Resume(resume.getName(), resume.getId(), resume.getTags());
+            newresume.setInternshipIds(resume.getInternshipIds());
+            newresume.setProjectIds(resume.getProjectIds());
+            List<Integer> newSkillList = new ArrayList<>();
+            newSkillList.addAll(resume.getSkillIds());
+            newresume.setSkillIds(newSkillList);
+            newresume.getSkillIds().remove(Integer.valueOf(id));
+            setResume(resume, newresume);
         }
     }
 

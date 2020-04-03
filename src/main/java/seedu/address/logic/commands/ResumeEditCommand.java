@@ -19,8 +19,7 @@ import seedu.address.model.item.Resume;
 /**
  * Edits the content of a Resume.
  */
-public class
-ResumeEditCommand extends Command {
+public class ResumeEditCommand extends Command {
     public static final String COMMAND_WORD = "redit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits what an existing resume contains in the ResuMe "
