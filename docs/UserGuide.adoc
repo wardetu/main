@@ -52,7 +52,8 @@ Items from number 1 to 3 can be shared across different resumes.
 
 === Preview
 The following is the GUI for our application:
-UPDATE GUI
+
+image::GUI.png[width="790"]
 
 ****
 The GUI includes:
@@ -174,7 +175,7 @@ The specific command syntax could be found in the table below:
 
 . The user profile panel is updated accordingly as below.
 +
-image::user_profile.png[width="790"]
+image::user_profile.png[width="400"]
 
 *Example 2:* Edit user profile image
 
@@ -192,7 +193,7 @@ Afterwards, try a command similar to the one below!
 
 . The user profile picture is updated accordingly as below.
 +
-image::user_profile1.png[width="790"]
+image::user_profile1.png[width="400"]
 
 === Listing all items : `list`
 

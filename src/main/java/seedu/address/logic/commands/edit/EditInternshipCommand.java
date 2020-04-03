@@ -71,6 +71,10 @@ public class EditInternshipCommand extends EditCommand {
 
         Internship editedInternship = createEditedInternship(toEdit, editInternshipDescriptor);
 
+        if (model.hasInternship(editedInternship)) {
+            throw new CommandException("An internship with the same name, role, and time already exists.");
+        }
+
         model.setInternship(toEdit, editedInternship);
         model.setInternshipToDisplay();
         model.commitResumeBook();

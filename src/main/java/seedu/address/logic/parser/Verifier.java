@@ -6,12 +6,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Validations for different input.
  */
 public class Verifier {
-    public static final int UNIVERSITY_MAX_LENGTH = 50;
+
+    public static final int UNIVERSITY_MAX_LENGTH = 100;
     public static final String UNIVERSITY_MESSAGE_CONSTRAINTS =
             "University should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String UNIVERSITY_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public static final int MAJOR_MAX_LENGTH = 50;
+
+    public static final int MAJOR_MAX_LENGTH = 100;
     public static final String MAJOR_MESSAGE_CONSTRAINTS =
             "Major should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String MAJOR_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
