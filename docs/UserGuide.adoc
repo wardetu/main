@@ -52,7 +52,8 @@ Items from number 1 to 3 can be shared across different resumes.
 
 === Preview
 The following is the GUI for our application:
-UPDATE GUI
+
+image::GUI.png[width="790"]
 
 ****
 The GUI includes:
