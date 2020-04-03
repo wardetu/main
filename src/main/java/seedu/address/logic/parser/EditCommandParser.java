@@ -112,10 +112,11 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editProjectDescriptor.setDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get().trim());
             }
             if (argMultimap.getValue(PREFIX_WEBSITE).isPresent()) {
-                editProjectDescriptor.setDescription(argMultimap.getValue(PREFIX_WEBSITE).get().trim());
+                editProjectDescriptor.setWebsite(ParserUtil
+                        .parseWebsite(argMultimap.getValue(PREFIX_WEBSITE).get().trim()));
             }
             if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
-                editProjectDescriptor.setDescription(argMultimap.getValue(PREFIX_TIME).get().trim());
+                editProjectDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get().trim()));
             }
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editProjectDescriptor::setTags);
 

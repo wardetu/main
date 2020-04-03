@@ -52,7 +52,7 @@ public class GenerateResumeCommand extends Command {
     private static final int marginY = 100;
     private static final float spacing = 20;
     private static final PDRectangle page = PDRectangle.A4;
-    private static final String rootPath = "export/";
+    private static final String rootPath = "";
 
     private static float curX = 0;
     private static float curY = 0;
