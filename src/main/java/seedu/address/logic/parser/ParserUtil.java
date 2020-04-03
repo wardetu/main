@@ -163,6 +163,9 @@ public class ParserUtil {
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
+        if (tagSet.isEmpty()) {
+            throw new ParseException("Tag.MESSAGE_CONSTRAINTS");
+        }
         return tagSet;
     }
 
