@@ -54,6 +54,10 @@ public class EditResumeCommand extends EditCommand {
 
         Resume editedResume = createEditedResume(toEdit, editResumeDescriptor);
 
+        if (model.hasResume(editedResume)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ITEM);
+        }
+
         model.setResume(toEdit, editedResume);
         model.setResumeToDisplay();
         model.commitResumeBook();
