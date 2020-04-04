@@ -5,6 +5,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.RedoCommandResult;
 import seedu.address.model.Model;
 
 /**
@@ -26,7 +27,7 @@ public class RedoCommand extends Command {
 
         model.redoResumeBook();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        return new CommandResult("", MESSAGE_SUCCESS, model.getDisplayType());
+        return new RedoCommandResult("", MESSAGE_SUCCESS, model.getDisplayType());
     }
 
 }
