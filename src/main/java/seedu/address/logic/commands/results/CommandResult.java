@@ -8,10 +8,6 @@ import java.util.Objects;
  * Represents the result of a command execution.
  */
 public class CommandResult {
-    private final String feedbackToUser;
-    private final String dataToUser;
-    private final String displayType;
-
     /** Preview information about a resume. */
     protected boolean isShowPreview;
 
@@ -23,6 +19,10 @@ public class CommandResult {
 
     /** The application should exit. */
     protected boolean isExit;
+
+    private final String feedbackToUser;
+    private final String dataToUser;
+    private final String displayType;
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code dataToUser} and {@code feedbackToUser},

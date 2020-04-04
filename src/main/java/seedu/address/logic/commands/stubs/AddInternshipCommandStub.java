@@ -1,8 +1,8 @@
 package seedu.address.logic.commands.stubs;
 
-import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
 

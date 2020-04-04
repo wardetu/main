@@ -13,8 +13,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
 
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.results.EditUserCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Person;
