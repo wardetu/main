@@ -14,7 +14,6 @@ import seedu.address.logic.commands.add.AddResumeCommand;
 import seedu.address.logic.commands.add.AddSkillCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.AddCommandResult;
-import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
