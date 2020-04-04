@@ -16,6 +16,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEBSITE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
 
 /**
@@ -36,6 +37,8 @@ public class CommandTestUtil {
 
     public static final String VALID_RESUME_NAME_SE = "Software Engineering Intern Resume";
     public static final String VALID_RESUME_NAME_ME = "Mechanical Engineering Intern Resume";
+
+    // SKILL
     public static final String VALID_SKILL_NAME_GIT = "Git and Github";
     public static final String VALID_SKILL_NAME_REACT = "React";
 
@@ -44,12 +47,20 @@ public class CommandTestUtil {
     public static final String VALID_PROJECT_NAME_ORBITAL = "Orbital";
     public static final String VALID_PROJECT_NAME_DUKE = "Duke";
     public static final String PREFIXED_NAME_ORBITAL = " " + PREFIX_NAME + " " + VALID_PROJECT_NAME_ORBITAL;
-    public static final String VALID_TIME = "06-2020";
-    public static final String PREFIXED_TIME = " " + PREFIX_TIME + " " + VALID_TIME;
-    public static final String VALID_WEBSITE = "abc.github.io";
-    public static final String PREFIXED_WEBSITE = " " + PREFIX_WEBSITE + " " + VALID_WEBSITE;
-    public static final String VALID_DESCRIPTION = "For a little mod named CS2103T";
-    public static final String PREFIXED_DESCRIPTION = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION;
+    public static final String PREFIXED_NAME_DUKE = " " + PREFIX_NAME + " " + VALID_PROJECT_NAME_DUKE;
+    public static final String VALID_TIME_1 = "06-2020";
+    public static final String VALID_TIME_2 = "08-2018";
+    public static final String PREFIXED_TIME_ORBITAL = " " + PREFIX_TIME + " " + VALID_TIME_1;
+    public static final String PREFIXED_TIME_2 = " " + PREFIX_TIME + " " + VALID_TIME_2;
+    public static final String VALID_WEBSITE_ORBITAL = "myorbital.github.io";
+    public static final String VALID_WEBSITE_DUKE = "www.duke.org";
+    public static final String PREFIXED_WEBSITE_ORBITAL = " " + PREFIX_WEBSITE + " " + VALID_WEBSITE_ORBITAL;
+    public static final String PREFIXED_WEBSITE_DUKE = " " + PREFIX_WEBSITE + " " + VALID_WEBSITE_DUKE;
+    public static final String VALID_DESCRIPTION_ORBITAL = "My first summer project!";
+    public static final String VALID_DESCRIPTION_DUKE = "For a little mod named CS2103T";
+    public static final String PREFIXED_DESCRIPTION_ORBITAL = " " + PREFIX_DESCRIPTION
+            + " " + VALID_DESCRIPTION_ORBITAL;
+    public static final String PREFIXED_DESCRIPTION_DUKE = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_DUKE;
     public static final String VALID_TAG_JAVA = "Java";
     public static final String PREFIXED_TAG_JAVA = " " + PREFIX_TAG + " " + VALID_TAG_JAVA;
 

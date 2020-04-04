@@ -27,6 +27,12 @@ public class SkillBuilder {
         tags.addAll(Arrays.stream(DEFAULT_TAGS).map(Tag::new).collect(Collectors.toList()));
     }
 
+    public SkillBuilder(Skill skill) {
+        name = skill.getName();
+        level = skill.getLevel();
+        tags.addAll(skill.getTags());
+    }
+
     /**
      * Creates a SkillBuilder with a certain name.
      * @param name String name
