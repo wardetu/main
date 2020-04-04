@@ -1,18 +1,18 @@
 package seedu.address.logic.commands.results;
 
 /**
- * Represents the result of the Add command execution.
+ * Represents the result of the Delete command execution.
  */
-public class AddCommandResult extends CommandResult {
+public class DeleteCommandResult extends CommandResult {
 
     /**
-     * Constructs an {@code AddCommandResult} with the specified {@code dataToUser} and {@code feedbackToUser},
+     * Constructs a {@code DeleteCommandResult} with the specified {@code dataToUser} and {@code feedbackToUser},
      * {@code displayType}.
      * @param dataToUser data to show user.
      * @param feedbackToUser feedback to user.
      * @param displayType the alias of the item type.
      */
-    public AddCommandResult(String dataToUser, String feedbackToUser, String displayType) {
+    public DeleteCommandResult(String dataToUser, String feedbackToUser, String displayType) {
         super(dataToUser, feedbackToUser, displayType);
         super.isShowPreview = false;
         super.isGenerate = false;

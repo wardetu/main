@@ -6,6 +6,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.DeleteCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Skill;
 
@@ -32,7 +33,7 @@ public class DeleteSkillCommand extends DeleteCommand {
         model.setSkillToDisplay();
         model.commitResumeBook();
 
-        return new CommandResult(toDelete.toString(),
+        return new DeleteCommandResult(toDelete.toString(),
                 String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()),
                 model.getDisplayType());
     }
