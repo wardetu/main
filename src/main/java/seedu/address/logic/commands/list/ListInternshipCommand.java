@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.ListCommandResult;
 import seedu.address.model.Model;
 
 /**
@@ -16,7 +17,9 @@ public class ListInternshipCommand extends ListCommand {
         requireNonNull(model);
         model.setInternshipToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        return new CommandResult("", String.format(MESSAGE_SUCCESS, "Internship"), model.getDisplayType());
+        return new ListCommandResult("",
+                String.format(MESSAGE_SUCCESS, "Internship"),
+                model.getDisplayType());
     }
 
 }
