@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalSkill.REACT;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.item.field.Level;
-import seedu.address.testutil.ProjectBuilder;
 import seedu.address.testutil.SkillBuilder;
 
 public class SkillTest {
