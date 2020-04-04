@@ -16,11 +16,6 @@ public abstract class ViewCommand extends Command {
 
     protected final Index targetIndex;
 
-    // This default constructor is needed for the stub
-    public ViewCommand() {
-        this.targetIndex = null;
-    }
-
     public ViewCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
