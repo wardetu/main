@@ -92,7 +92,6 @@ public class VersionedResumeBook extends ResumeBook {
 
         VersionedResumeBook otherVersionedResumeBook = (VersionedResumeBook) other;
 
-
         // state check
         return super.equals(otherVersionedResumeBook)
                 && resumeBookStateList.equals(otherVersionedResumeBook.resumeBookStateList)

@@ -9,6 +9,7 @@ public class TypicalResumeBook {
     public static final ResumeBook TYPICAL = new ResumeBookBuilder()
             .withInternship(TypicalInternship.GOOGLE)
             .withInternship(TypicalInternship.NINJA_VAN)
+            .withInternship(TypicalInternship.PAYPAL)
             .withPerson(TypicalPerson.ALICE)
             .withProject(TypicalProject.ORBITAL)
             .withProject(TypicalProject.DUKE)
@@ -19,6 +20,7 @@ public class TypicalResumeBook {
             .build();
     public static final ResumeBook TYPICAL_WITHOUT_GOOGLE = new ResumeBookBuilder()
             .withInternship(TypicalInternship.NINJA_VAN)
+            .withInternship(TypicalInternship.PAYPAL)
             .withPerson(TypicalPerson.ALICE)
             .withProject(TypicalProject.ORBITAL)
             .withSkill(TypicalSkill.REACT)

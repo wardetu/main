@@ -15,12 +15,6 @@ import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
-import seedu.address.model.item.field.DisplayPicture;
-import seedu.address.model.item.field.Email;
-import seedu.address.model.item.field.Github;
-import seedu.address.model.item.field.Name;
-import seedu.address.model.item.field.Phone;
-import seedu.address.model.item.field.Time;
 import seedu.address.model.util.ItemUtil;
 
 /**
