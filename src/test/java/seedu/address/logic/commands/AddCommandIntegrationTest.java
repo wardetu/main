@@ -144,15 +144,16 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void equals() {
-        Internship validInternship = TypicalInternship.GOOGLE;
-        Project validProject = TypicalProject.ORBITAL;
-        Resume validResume = TypicalResume.ME_RESUME;
-        Skill validSkill = TypicalSkill.REACT;
-        assertNotEquals(new AddInternshipCommand(validInternship), new AddProjectCommand(validProject));
-        assertNotEquals(new AddInternshipCommand(validInternship), new AddResumeCommand(validResume));
-        assertNotEquals(new AddInternshipCommand(validInternship), new AddSkillCommand(validSkill));
-        assertNotEquals(new AddProjectCommand(validProject), new AddResumeCommand(validResume));
-        assertNotEquals(new AddProjectCommand(validProject), new AddSkillCommand(validSkill));
-        assertNotEquals(new AddResumeCommand(validResume), new AddSkillCommand(validSkill));
+        AddCommand validInternship = new AddInternshipCommand(TypicalInternship.GOOGLE);
+        AddCommand validProject = new AddProjectCommand(TypicalProject.ORBITAL);
+        AddCommand validResume = new AddResumeCommand(TypicalResume.ME_RESUME);
+        AddCommand validSkill = new AddSkillCommand(TypicalSkill.REACT);
+
+        assertNotEquals(validInternship, validProject);
+        assertNotEquals(validInternship, validResume);
+        assertNotEquals(validInternship, validSkill);
+        assertNotEquals(validProject, validResume);
+        assertNotEquals(validProject, validSkill);
+        assertNotEquals(validResume, validSkill);
     }
 }
