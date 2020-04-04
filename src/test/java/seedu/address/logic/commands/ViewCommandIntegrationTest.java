@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.commands.view.ViewInternshipCommand;
 import seedu.address.logic.commands.view.ViewProjectCommand;
