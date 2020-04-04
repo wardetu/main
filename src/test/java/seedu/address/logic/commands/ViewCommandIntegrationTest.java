@@ -62,84 +62,86 @@ public class ViewCommandIntegrationTest {
                 model,
                 new CommandException(Messages.MESSAGE_INVALID_INDEX));
     }
-//
-//    @Test
-//    public void execute_newResume_success() {
-//        Resume validResume = TypicalResume.SE_RESUME;
-//
-//        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
-//        expectedModel.addResume(validResume);
-//        expectedModel.setResumeToDisplay();
-//
-//        assertCommandSuccess(new ViewResumeCommand(validResume),
-//                model,
-//                new CommandResult(validResume.toString(),
-//                        String.format(ViewResumeCommand.MESSAGE_SUCCESS,
-//                                validResume.getType().getFullType()),
-//                        ItemUtil.RESUME_ALIAS),
-//                expectedModel);
-//    }
-//
-//    @Test
-//    public void execute_duplicateResume_throwsCommandException() {
-//        Resume validResume = TypicalResume.ME_RESUME;
-//
-//        assertCommandFailure(new ViewResumeCommand(validResume),
-//                model,
-//                new CommandException(ViewCommand.MESSAGE_DUPLICATE_ITEM));
-//    }
-//
-//    @Test
-//    public void execute_newSkill_success() {
-//        Skill validSkill = TypicalSkill.GIT;
-//
-//        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
-//        expectedModel.addSkill(validSkill);
-//        expectedModel.setSkillToDisplay();
-//
-//        assertCommandSuccess(new ViewSkillCommand(validSkill),
-//                model,
-//                new CommandResult(validSkill.toString(),
-//                        String.format(ViewSkillCommand.MESSAGE_SUCCESS,
-//                                validSkill.getType().getFullType()),
-//                        ItemUtil.SKILL_ALIAS),
-//                expectedModel);
-//    }
-//
-//    @Test
-//    public void execute_duplicateSkill_throwsCommandException() {
-//        Skill validSkill = TypicalSkill.REACT;
-//
-//        assertCommandFailure(new ViewSkillCommand(validSkill),
-//                model,
-//                new CommandException(ViewCommand.MESSAGE_DUPLICATE_ITEM));
-//    }
-//
-//    @Test
-//    public void execute_newProject_success() {
-//        Project validProject = TypicalProject.DUKE;
-//
-//        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
-//        expectedModel.addProject(validProject);
-//        expectedModel.setProjectToDisplay();
-//
-//        assertCommandSuccess(new ViewProjectCommand(validProject),
-//                model,
-//                new CommandResult(validProject.toString(),
-//                        String.format(ViewProjectCommand.MESSAGE_SUCCESS,
-//                                validProject.getType().getFullType()),
-//                        ItemUtil.PROJECT_ALIAS),
-//                expectedModel);
-//    }
-//
-//    @Test
-//    public void execute_duplicateProject_throwsCommandException() {
-//        Project validProject = TypicalProject.ORBITAL;
-//
-//        assertCommandFailure(new ViewProjectCommand(validProject),
-//                model,
-//                new CommandException(ViewCommand.MESSAGE_DUPLICATE_ITEM));
-//    }
 
-//    @Test
+    @Test
+    public void execute_viewProject_success() {
+        Project validProject = TypicalProject.DUKE;
+
+        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        expectedModel.setProjectToDisplay();
+
+        assertCommandSuccess(new ViewProjectCommand(Index.fromOneBased(1)),
+                model,
+                new CommandResult(validProject.toString(),
+                        ViewProjectCommand.MESSAGE_VIEW_SUCCESS,
+                        ItemUtil.INTERNSHIP_ALIAS),
+                expectedModel);
+    }
+
+    @Test
+    public void execute_outOfBoundsProject_throwsCommandException() {
+        assertCommandFailure(new ViewProjectCommand(Index.fromOneBased(2)),
+                model,
+                new CommandException(Messages.MESSAGE_INVALID_INDEX));
+    }
+
+    @Test
+    public void execute_viewResume_success() {
+        Resume validResume = TypicalResume.SE_RESUME;
+
+        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        expectedModel.setResumeToDisplay();
+
+        assertCommandSuccess(new ViewResumeCommand(Index.fromOneBased(1)),
+                model,
+                new CommandResult(validResume.toString(),
+                        ViewResumeCommand.MESSAGE_VIEW_SUCCESS,
+                        ItemUtil.INTERNSHIP_ALIAS),
+                expectedModel);
+    }
+
+    @Test
+    public void execute_outOfBoundsResume_throwsCommandException() {
+        assertCommandFailure(new ViewResumeCommand(Index.fromOneBased(2)),
+                model,
+                new CommandException(Messages.MESSAGE_INVALID_INDEX));
+    }
+
+    @Test
+    public void execute_viewSkill_success() {
+        Skill validSkill = TypicalSkill.REACT;
+
+        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        expectedModel.setSkillToDisplay();
+
+        assertCommandSuccess(new ViewSkillCommand(Index.fromOneBased(1)),
+                model,
+                new CommandResult(validSkill.toString(),
+                        ViewSkillCommand.MESSAGE_VIEW_SUCCESS,
+                        ItemUtil.INTERNSHIP_ALIAS),
+                expectedModel);
+    }
+
+    @Test
+    public void execute_outOfBoundsSkill_throwsCommandException() {
+        assertCommandFailure(new ViewSkillCommand(Index.fromOneBased(2)),
+                model,
+                new CommandException(Messages.MESSAGE_INVALID_INDEX));
+    }
+
+    @Test
+    public void equals() {
+        ViewCommand viewInternship = new ViewInternshipCommand(Index.fromOneBased(1));
+        ViewCommand viewProject = new ViewProjectCommand(Index.fromOneBased(1));
+        ViewCommand viewResume = new ViewResumeCommand(Index.fromOneBased(1));
+        ViewCommand viewSkill = new ViewSkillCommand(Index.fromOneBased(1));
+
+        assertNotEquals(viewInternship, viewProject);
+        assertNotEquals(viewInternship, viewResume);
+        assertNotEquals(viewInternship, viewSkill);
+        assertNotEquals(viewProject, viewResume);
+        assertNotEquals(viewProject, viewSkill);
+        assertNotEquals(viewResume, viewSkill);
+
+    }
 }
