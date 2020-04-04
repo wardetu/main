@@ -18,7 +18,7 @@ package seedu.address.logic;
 //import org.junit.jupiter.api.io.TempDir;
 //
 //import seedu.address.logic.commands.add.AddCommand;
-//import seedu.address.logic.commands.CommandResult;
+//import seedu.address.logic.commands.results.CommandResult;
 //import seedu.address.logic.commands.list.ListCommand;
 //import seedu.address.logic.commands.exceptions.CommandException;
 //import seedu.address.logic.parser.exceptions.ParseException;

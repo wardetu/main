@@ -9,10 +9,12 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.EditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Resume;
+import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
 
@@ -54,14 +56,16 @@ public class EditResumeCommand extends EditCommand {
 
         Resume editedResume = createEditedResume(toEdit, editResumeDescriptor);
 
-        if (model.hasResume(editedResume)) {
+        try {
+            model.setResume(toEdit, editedResume);
+            model.setResumeToDisplay();
+            model.commitResumeBook();
+        } catch (DuplicateItemException e) {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
-        model.setResume(toEdit, editedResume);
-        model.setResumeToDisplay();
-        model.commitResumeBook();
-        return new CommandResult(editedResume.toString(), String.format(MESSAGE_EDIT_RESUME_SUCCESS, editedResume),
+        return new EditCommandResult(editedResume.toString(),
+                String.format(MESSAGE_EDIT_RESUME_SUCCESS, editedResume),
                 model.getDisplayType());
     }
 
