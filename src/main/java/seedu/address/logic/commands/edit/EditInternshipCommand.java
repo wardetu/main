@@ -15,6 +15,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.EditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.field.Name;
@@ -78,7 +79,7 @@ public class EditInternshipCommand extends EditCommand {
         model.setInternship(toEdit, editedInternship);
         model.setInternshipToDisplay();
         model.commitResumeBook();
-        return new CommandResult(editedInternship.toString(),
+        return new EditCommandResult(editedInternship.toString(),
                 String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship),
                 model.getDisplayType());
     }

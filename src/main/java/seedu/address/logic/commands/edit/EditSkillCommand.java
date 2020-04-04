@@ -12,6 +12,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.EditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.field.Level;
@@ -66,7 +67,8 @@ public class EditSkillCommand extends EditCommand {
         model.setSkillToDisplay();
         model.commitResumeBook();
 
-        return new CommandResult(editedSkill.toString(), String.format(MESSAGE_EDIT_SKILL_SUCCESS, editedSkill),
+        return new EditCommandResult(editedSkill.toString(),
+                String.format(MESSAGE_EDIT_SKILL_SUCCESS, editedSkill),
                 model.getDisplayType());
     }
 
