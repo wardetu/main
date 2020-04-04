@@ -230,14 +230,16 @@ public class ResumeBook implements ReadOnlyResumeBook {
         internships.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            Resume newresume = new Resume(resume.getName(), resume.getId(), resume.getTags());
+            Resume newResume = new Resume(resume.getName(), resume.getId(), resume.getTags());
             List<Integer> newInternshipList = new ArrayList<>();
             newInternshipList.addAll(resume.getInternshipIds());
-            newresume.setInternshipIds(newInternshipList);
-            newresume.setProjectIds(resume.getProjectIds());
-            newresume.setSkillIds(resume.getSkillIds());
-            newresume.getInternshipIds().remove(Integer.valueOf(id));
-            setResume(resume, newresume);
+
+            newResume.setInternshipIds(newInternshipList);
+            newResume.setProjectIds(resume.getProjectIds());
+            newResume.setSkillIds(resume.getSkillIds());
+            newResume.getInternshipIds().remove(Integer.valueOf(id));
+
+            setResume(resume, newResume);
         }
     }
 
@@ -303,14 +305,16 @@ public class ResumeBook implements ReadOnlyResumeBook {
         projects.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            Resume newresume = new Resume(resume.getName(), resume.getId(), resume.getTags());
-            newresume.setInternshipIds(resume.getInternshipIds());
+            Resume newResume = new Resume(resume.getName(), resume.getId(), resume.getTags());
             List<Integer> newProjectList = new ArrayList<>();
             newProjectList.addAll(resume.getProjectIds());
-            newresume.setProjectIds(newProjectList);
-            newresume.setSkillIds(resume.getSkillIds());
-            newresume.getProjectIds().remove(Integer.valueOf(id));
-            setResume(resume, newresume);
+
+            newResume.setInternshipIds(resume.getInternshipIds());
+            newResume.setProjectIds(newProjectList);
+            newResume.setSkillIds(resume.getSkillIds());
+            newResume.getProjectIds().remove(Integer.valueOf(id));
+
+            setResume(resume, newResume);
         }
     }
 
@@ -376,14 +380,16 @@ public class ResumeBook implements ReadOnlyResumeBook {
         skills.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            Resume newresume = new Resume(resume.getName(), resume.getId(), resume.getTags());
-            newresume.setInternshipIds(resume.getInternshipIds());
-            newresume.setProjectIds(resume.getProjectIds());
+            Resume newResume = new Resume(resume.getName(), resume.getId(), resume.getTags());
             List<Integer> newSkillList = new ArrayList<>();
             newSkillList.addAll(resume.getSkillIds());
-            newresume.setSkillIds(newSkillList);
-            newresume.getSkillIds().remove(Integer.valueOf(id));
-            setResume(resume, newresume);
+
+            newResume.setInternshipIds(resume.getInternshipIds());
+            newResume.setProjectIds(resume.getProjectIds());
+            newResume.setSkillIds(newSkillList);
+            newResume.getSkillIds().remove(Integer.valueOf(id));
+
+            setResume(resume, newResume);
         }
     }
 
