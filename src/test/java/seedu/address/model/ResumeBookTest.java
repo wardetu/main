@@ -30,6 +30,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -230,6 +231,11 @@ public class ResumeBookTest {
         @Override
         public int getResumeSize() {
             return 1;
+        }
+
+        @Override
+        public ObservablePerson getObservablePerson() {
+            return null;
         }
 
     }
