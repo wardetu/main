@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -379,6 +380,11 @@ public class ModelManager implements Model {
     @Override
     public void commitResumeBook() {
         versionedResumeBook.commit();
+    }
+
+    @Override
+    public ObservablePerson getObservablePerson() {
+        return versionedResumeBook.getObservablePerson();
     }
 
 }

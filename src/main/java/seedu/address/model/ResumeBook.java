@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -36,6 +37,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     private final UniqueItemList<Skill> skills;
     private final UniqueItemList<Resume> resumes;
     private String displayType = "";
+    private ObservablePerson observablePerson;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -48,6 +50,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
         user = new Person(new DisplayPicture("/images/Duke.png"), new Name("Default name"), new Phone("000"),
                 new Email("000@gmail.com"), new Github("000"), "Default university", "Default major",
                 new Time("12-9999"), new Time("12-9999"), 0.0);
+        observablePerson = new ObservablePerson(user);
         itemsToDisplay = new UniqueItemList<>();
         internships = new UniqueItemList<>();
         projects = new UniqueItemList<>();
@@ -142,6 +145,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     public void setUser(Person user) {
         this.user = user;
+        this.observablePerson.setInternalPerson(user);
     }
 
     /**
@@ -472,6 +476,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
     @Override
     public int getResumeSize() {
         return resumes.getSize();
+    }
+
+    @Override
+    public ObservablePerson getObservablePerson() {
+        return this.observablePerson;
     }
 
     //=========== Util methods ================================================================================

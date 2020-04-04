@@ -127,7 +127,8 @@ public class MainWindow extends UiPart<Stage> {
         itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
 
-        userOverallPane = new UserOverallPane(logic.getUser());
+        userOverallPane = new UserOverallPane(logic.getObservablePerson());
+
         profilePlaceholder.getChildren().add(userOverallPane.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -213,7 +214,6 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Item Display: " + commandResult.getDataToUser());
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            userOverallPane.updateUserProfile(logic.getUser());
             itemListPanel.changeStyle(commandResult.getDisplayType());
 
             if (commandResult.hasItemChanged()) {

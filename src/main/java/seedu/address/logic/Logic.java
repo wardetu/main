@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 
 /**
@@ -50,4 +51,6 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     Person getUser();
+
+    ObservablePerson getObservablePerson();
 }

@@ -12,7 +12,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.item.Item;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of items.
  */
 public class ItemDisplayList extends UiPart<Region> {
     private static final String FXML = "ItemDisplayList.fxml";
