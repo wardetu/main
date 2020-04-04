@@ -15,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.EditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Skill;
+import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
@@ -39,7 +40,7 @@ public class EditSkillCommand extends EditCommand {
 
     private EditSkillDescriptor editSkillDescriptor;
     /**
-     * @param index                of the skill in the filtered skill list to edit
+     * @param index index of the skill in the filtered skill list to edit
      * @param editSkillDescriptor details to edit the skill with
      */
     public EditSkillCommand(Index index, EditSkillDescriptor editSkillDescriptor) {
@@ -59,7 +60,11 @@ public class EditSkillCommand extends EditCommand {
 
         Skill editedSkill = createEditedSkill(toEdit, editSkillDescriptor);
 
-        if (model.hasSkill(editedSkill)) {
+        try {
+            model.setSkill(toEdit, editedSkill);
+            model.setSkillToDisplay();
+            model.commitResumeBook();
+        } catch (DuplicateItemException e) {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 

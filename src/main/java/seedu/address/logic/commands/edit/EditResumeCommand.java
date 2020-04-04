@@ -14,6 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.EditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Resume;
+import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
 
@@ -55,7 +56,11 @@ public class EditResumeCommand extends EditCommand {
 
         Resume editedResume = createEditedResume(toEdit, editResumeDescriptor);
 
-        if (model.hasResume(editedResume)) {
+        try {
+            model.setResume(toEdit, editedResume);
+            model.setResumeToDisplay();
+            model.commitResumeBook();
+        } catch (DuplicateItemException e) {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 

@@ -17,6 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.EditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Project;
+import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
@@ -68,8 +69,12 @@ public class EditProjectCommand extends EditCommand {
 
         Project editedProject = createEditedProject(toEdit, editProjectDescriptor);
 
-        if (model.hasProject(editedProject)) {
-            throw new CommandException("A project with the same name and time already exists.");
+        try {
+            model.setProject(toEdit, editedProject);
+            model.setProjectToDisplay();
+            model.commitResumeBook();
+        } catch (DuplicateItemException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
         model.setProject(toEdit, editedProject);
