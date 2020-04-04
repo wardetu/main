@@ -12,8 +12,9 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.EditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.exceptions.DuplicateItemException;
@@ -75,7 +76,9 @@ public class EditProjectCommand extends EditCommand {
         } catch (DuplicateItemException e) {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
-        return new CommandResult(editedProject.toString(), String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editedProject),
+
+        return new EditCommandResult(editedProject.toString(),
+                String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editedProject),
                 model.getDisplayType());
     }
 

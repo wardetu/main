@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.ResumeEditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Resume;
 
@@ -98,7 +100,7 @@ public class ResumeEditCommand extends Command {
         model.setResumeToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
-        return new CommandResult(toEdit.toString(), "Resume is updated", model.getDisplayType());
+        return new ResumeEditCommandResult(toEdit.toString(), "Resume is updated", model.getDisplayType());
     }
 
     /**

@@ -14,8 +14,9 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.GenerateResumeCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Person;
@@ -115,8 +116,8 @@ public class GenerateResumeCommand extends Command {
             err.println("Exception while trying to create simple document - " + e);
         }
 
-        return new CommandResult(resumeToGenerate.toString(),
+        return new GenerateResumeCommandResult(resumeToGenerate.toString(),
                 String.format(MESSAGE_GENERATE_SUCCESS, fileName, resumeToGenerate.getName().toString()),
-                model.getDisplayType(), false, true, false, false);
+                model.getDisplayType());
     }
 }
