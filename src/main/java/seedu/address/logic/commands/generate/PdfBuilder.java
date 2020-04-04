@@ -152,7 +152,7 @@ public class PdfBuilder {
             float width = 0;
             while (i < words.length) {
                 String word = words[i];
-                float add = curFont.getStringWidth(word) * curSize / 1000f;
+                float add = curFont.getStringWidth(word + " ") * curSize / 1000f;
                 if (width + add > limit) {
                     break;
                 }
