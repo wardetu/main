@@ -6,7 +6,7 @@ package seedu.address.logic.commands.results;
 public class ListCommandResult extends CommandResult {
 
     /**
-     * Constructs an {@code ListCommandResult} with the specified {@code dataToUser} and {@code feedbackToUser},
+     * Constructs a {@code ListCommandResult} with the specified {@code dataToUser}, {@code feedbackToUser}, and
      * {@code displayType}.
      * @param dataToUser data to show user.
      * @param feedbackToUser feedback to user.

@@ -6,7 +6,7 @@ package seedu.address.logic.commands.results;
 public class ResumeEditCommandResult extends CommandResult {
 
     /**
-     * Constructs an {@code ResumeEditCommandResult} with the specified {@code dataToUser} and {@code feedbackToUser},
+     * Constructs a {@code ResumeEditCommandResult} with the specified {@code dataToUser}, {@code feedbackToUser}, and
      * {@code displayType}.
      * @param dataToUser data to show user.
      * @param feedbackToUser feedback to user.

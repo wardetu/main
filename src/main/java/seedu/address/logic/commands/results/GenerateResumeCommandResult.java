@@ -6,7 +6,7 @@ package seedu.address.logic.commands.results;
 public class GenerateResumeCommandResult extends CommandResult {
 
     /**
-     * Constructs an {@code GenerateResumeCommandResult} with the specified {@code dataToUser}, {@code feedbackToUser},
+     * Constructs a {@code GenerateResumeCommandResult} with the specified {@code dataToUser}, {@code feedbackToUser},
      * and {@code displayType}.
      * @param dataToUser data to show user.
      * @param feedbackToUser feedback to user.

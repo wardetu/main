@@ -6,8 +6,8 @@ package seedu.address.logic.commands.results;
 public class ResumePreviewCommandResult extends CommandResult {
 
     /**
-     * Constructs an {@code ResumePreviewCommandResult} with the specified {@code dataToUser} and {@code feedbackToUser},
-     * {@code displayType}.
+     * Constructs a {@code ResumePreviewCommandResult} with the specified {@code dataToUser}, {@code feedbackToUser},
+     * and {@code displayType}.
      * @param dataToUser data to show user.
      * @param feedbackToUser feedback to user.
      * @param displayType the alias of the item type.

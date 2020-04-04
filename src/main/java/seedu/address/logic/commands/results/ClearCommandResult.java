@@ -6,7 +6,7 @@ package seedu.address.logic.commands.results;
 public class ClearCommandResult extends CommandResult {
 
     /**
-     * Constructs an {@code ClearCommandResult} with the specified {@code dataToUser} and {@code feedbackToUser},
+     * Constructs a {@code ClearCommandResult} with the specified {@code dataToUser}, {@code feedbackToUser}, and
      * {@code displayType}.
      * @param dataToUser data to show user.
      * @param feedbackToUser feedback to user.
