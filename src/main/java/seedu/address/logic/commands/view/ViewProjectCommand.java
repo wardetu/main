@@ -4,8 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.ViewCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Project;
 
@@ -29,8 +30,9 @@ public class ViewProjectCommand extends ViewCommand {
         Project toView = model.getProjectByIndex(targetIndex);
         model.setProjectToDisplay();
 
-        return new CommandResult(toView.toString(),
-                String.format(MESSAGE_VIEW_SUCCESS, toView), model.getDisplayType());
+        return new ViewCommandResult(toView.toString(),
+                String.format(MESSAGE_VIEW_SUCCESS, toView),
+                model.getDisplayType());
     }
 
     @Override
