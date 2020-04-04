@@ -13,6 +13,8 @@ import seedu.address.logic.commands.add.AddProjectCommand;
 import seedu.address.logic.commands.add.AddResumeCommand;
 import seedu.address.logic.commands.add.AddSkillCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.AddCommandResult;
+import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -49,7 +51,7 @@ public class AddCommandIntegrationTest {
 
         assertCommandSuccess(new AddInternshipCommand(validInternship),
                 model,
-                new CommandResult(validInternship.toString(),
+                new AddCommandResult(validInternship.toString(),
                         String.format(AddInternshipCommand.MESSAGE_SUCCESS,
                                 validInternship.getType().getFullType()), ItemUtil.INTERNSHIP_ALIAS),
                 expectedModel);
@@ -74,7 +76,7 @@ public class AddCommandIntegrationTest {
 
         assertCommandSuccess(new AddResumeCommand(validResume),
                 model,
-                new CommandResult(validResume.toString(),
+                new AddCommandResult(validResume.toString(),
                         String.format(AddResumeCommand.MESSAGE_SUCCESS,
                                 validResume.getType().getFullType()),
                         ItemUtil.RESUME_ALIAS),
@@ -100,7 +102,7 @@ public class AddCommandIntegrationTest {
 
         assertCommandSuccess(new AddSkillCommand(validSkill),
                 model,
-                new CommandResult(validSkill.toString(),
+                new AddCommandResult(validSkill.toString(),
                         String.format(AddSkillCommand.MESSAGE_SUCCESS,
                                 validSkill.getType().getFullType()),
                         ItemUtil.SKILL_ALIAS),
@@ -126,7 +128,7 @@ public class AddCommandIntegrationTest {
 
         assertCommandSuccess(new AddProjectCommand(validProject),
                 model,
-                new CommandResult(validProject.toString(),
+                new AddCommandResult(validProject.toString(),
                         String.format(AddProjectCommand.MESSAGE_SUCCESS,
                                 validProject.getType().getFullType()),
                         ItemUtil.PROJECT_ALIAS),
