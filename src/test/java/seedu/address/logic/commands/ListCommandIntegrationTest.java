@@ -1,0 +1,96 @@
+package seedu.address.logic.commands;
+
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.list.ListCommand;
+import seedu.address.logic.commands.list.ListInternshipCommand;
+import seedu.address.logic.commands.list.ListProjectCommand;
+import seedu.address.logic.commands.list.ListResumeCommand;
+import seedu.address.logic.commands.list.ListSkillCommand;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.util.ItemUtil;
+import seedu.address.testutil.TypicalResumeBook;
+
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+
+public class ListCommandIntegrationTest {
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE, new UserPrefs());
+    }
+
+    @Test
+    public void execute_listInternship_success() {
+        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        expectedModel.setInternshipToDisplay();
+
+        assertCommandSuccess(new ListInternshipCommand(),
+                model,
+                new CommandResult("",
+                        String.format(ListCommand.MESSAGE_SUCCESS, "Internship"),
+                        ItemUtil.INTERNSHIP_ALIAS),
+                expectedModel);
+    }
+
+    @Test
+    public void execute_listProject_success() {
+        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        expectedModel.setProjectToDisplay();
+
+        assertCommandSuccess(new ListProjectCommand(),
+                model,
+                new CommandResult("",
+                        String.format(ListCommand.MESSAGE_SUCCESS, "Project"),
+                        ItemUtil.INTERNSHIP_ALIAS),
+                expectedModel);
+    }
+
+    @Test
+    public void execute_listResume_success() {
+        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        expectedModel.setResumeToDisplay();
+
+        assertCommandSuccess(new ListResumeCommand(),
+                model,
+                new CommandResult("",
+                        String.format(ListCommand.MESSAGE_SUCCESS, "Resume"),
+                        ItemUtil.INTERNSHIP_ALIAS),
+                expectedModel);
+    }
+
+    @Test
+    public void execute_listSkill_success() {
+        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        expectedModel.setSkillToDisplay();
+
+        assertCommandSuccess(new ListSkillCommand(),
+                model,
+                new CommandResult("",
+                        String.format(ListCommand.MESSAGE_SUCCESS, "Skill"),
+                        ItemUtil.INTERNSHIP_ALIAS),
+                expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        ListCommand listInternships = new ListInternshipCommand();
+        ListCommand listProjects = new ListProjectCommand();
+        ListCommand listResumes = new ListResumeCommand();
+        ListCommand listSkills = new ListSkillCommand();
+
+        assertNotEquals(listInternships, listProjects);
+        assertNotEquals(listInternships, listResumes);
+        assertNotEquals(listInternships, listSkills);
+        assertNotEquals(listProjects, listResumes);
+        assertNotEquals(listProjects, listSkills);
+        assertNotEquals(listResumes, listSkills);
+    }
+
+}
