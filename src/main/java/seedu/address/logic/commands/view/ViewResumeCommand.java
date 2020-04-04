@@ -29,8 +29,7 @@ public class ViewResumeCommand extends ViewCommand {
         Resume toView = model.getResumeByIndex(targetIndex);
         model.setResumeToDisplay();
 
-        return new CommandResult(toView.toString(),
-                String.format(MESSAGE_VIEW_SUCCESS, toView), model.getDisplayType());
+        return new CommandResult(toView.toString(), MESSAGE_VIEW_SUCCESS, model.getDisplayType());
     }
 
     @Override

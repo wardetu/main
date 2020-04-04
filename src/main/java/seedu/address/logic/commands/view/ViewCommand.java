@@ -1,5 +1,7 @@
 package seedu.address.logic.commands.view;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 
@@ -22,6 +24,7 @@ public abstract class ViewCommand extends Command {
     }
 
     public ViewCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
