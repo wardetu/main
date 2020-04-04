@@ -81,9 +81,6 @@ public class EditInternshipCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
-        model.setInternship(toEdit, editedInternship);
-        model.setInternshipToDisplay();
-        model.commitResumeBook();
         return new EditCommandResult(editedInternship.toString(),
                 String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship),
                 model.getDisplayType());

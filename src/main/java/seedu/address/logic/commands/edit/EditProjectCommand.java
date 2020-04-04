@@ -77,9 +77,6 @@ public class EditProjectCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
-        model.setProject(toEdit, editedProject);
-        model.setProjectToDisplay();
-        model.commitResumeBook();
         return new EditCommandResult(editedProject.toString(),
                 String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editedProject),
                 model.getDisplayType());

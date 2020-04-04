@@ -64,9 +64,6 @@ public class EditResumeCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
-        model.setResume(toEdit, editedResume);
-        model.setResumeToDisplay();
-        model.commitResumeBook();
         return new EditCommandResult(editedResume.toString(),
                 String.format(MESSAGE_EDIT_RESUME_SUCCESS, editedResume),
                 model.getDisplayType());

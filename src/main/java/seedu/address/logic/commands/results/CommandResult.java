@@ -9,16 +9,16 @@ import java.util.Objects;
  */
 public class CommandResult {
     /** Preview information about a resume. */
-    protected boolean isShowPreview;
+    protected boolean isShowPreview = false;
 
     /** Generate .pdf file from a resume. */
-    protected boolean isGenerate;
+    protected boolean isGenerate = false;
 
     /** Help information should be shown to the user. */
-    protected boolean isShowHelp;
+    protected boolean isShowHelp = false;
 
     /** The application should exit. */
-    protected boolean isExit;
+    protected boolean isExit = false;
 
     private final String feedbackToUser;
     private final String dataToUser;
