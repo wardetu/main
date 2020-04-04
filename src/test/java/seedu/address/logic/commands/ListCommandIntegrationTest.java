@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,13 +11,12 @@ import seedu.address.logic.commands.list.ListInternshipCommand;
 import seedu.address.logic.commands.list.ListProjectCommand;
 import seedu.address.logic.commands.list.ListResumeCommand;
 import seedu.address.logic.commands.list.ListSkillCommand;
+import seedu.address.logic.commands.results.ListCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.ItemUtil;
 import seedu.address.testutil.TypicalResumeBook;
-
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 public class ListCommandIntegrationTest {
     private Model model;
@@ -33,7 +33,7 @@ public class ListCommandIntegrationTest {
 
         assertCommandSuccess(new ListInternshipCommand(),
                 model,
-                new CommandResult("",
+                new ListCommandResult("",
                         String.format(ListCommand.MESSAGE_SUCCESS, "Internship"),
                         ItemUtil.INTERNSHIP_ALIAS),
                 expectedModel);
@@ -46,7 +46,7 @@ public class ListCommandIntegrationTest {
 
         assertCommandSuccess(new ListProjectCommand(),
                 model,
-                new CommandResult("",
+                new ListCommandResult("",
                         String.format(ListCommand.MESSAGE_SUCCESS, "Project"),
                         ItemUtil.INTERNSHIP_ALIAS),
                 expectedModel);
@@ -59,7 +59,7 @@ public class ListCommandIntegrationTest {
 
         assertCommandSuccess(new ListResumeCommand(),
                 model,
-                new CommandResult("",
+                new ListCommandResult("",
                         String.format(ListCommand.MESSAGE_SUCCESS, "Resume"),
                         ItemUtil.INTERNSHIP_ALIAS),
                 expectedModel);
@@ -72,7 +72,7 @@ public class ListCommandIntegrationTest {
 
         assertCommandSuccess(new ListSkillCommand(),
                 model,
-                new CommandResult("",
+                new ListCommandResult("",
                         String.format(ListCommand.MESSAGE_SUCCESS, "Skill"),
                         ItemUtil.INTERNSHIP_ALIAS),
                 expectedModel);
