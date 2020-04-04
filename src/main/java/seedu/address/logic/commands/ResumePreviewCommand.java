@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.ResumePreviewCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Project;
@@ -47,7 +49,7 @@ public class ResumePreviewCommand extends Command {
         String data = getDataFromResume(toPreview, model);
 
         String feedback = "Previewing resume at index " + index.getOneBased();
-        return new CommandResult(data, feedback, model.getDisplayType(), true, false, false, false);
+        return new ResumePreviewCommandResult(data, feedback, model.getDisplayType());
     }
 
     private String getDataFromResume(Resume resume, Model model) {

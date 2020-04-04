@@ -9,8 +9,9 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.EditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.exceptions.DuplicateItemException;
@@ -62,7 +63,9 @@ public class EditResumeCommand extends EditCommand {
         } catch (DuplicateItemException e) {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
-        return new CommandResult(editedResume.toString(), String.format(MESSAGE_EDIT_RESUME_SUCCESS, editedResume),
+
+        return new EditCommandResult(editedResume.toString(),
+                String.format(MESSAGE_EDIT_RESUME_SUCCESS, editedResume),
                 model.getDisplayType());
     }
 

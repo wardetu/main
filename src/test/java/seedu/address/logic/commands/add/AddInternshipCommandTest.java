@@ -11,8 +11,8 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
 
 import seedu.address.model.item.Internship;
 import seedu.address.testutil.InternshipBuilder;
