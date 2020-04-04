@@ -16,24 +16,28 @@ public class CommandResult {
     private final String displayType;
 
     /** Preview information about a resume. */
-    private final boolean isShowPreview;
+    protected boolean isShowPreview;
 
     /** Generate .pdf file from a resume. */
-    private final boolean isGenerate;
+    protected boolean isGenerate;
 
     /** Help information should be shown to the user. */
-    private final boolean isShowHelp;
+    protected boolean isShowHelp;
 
     /** The application should exit. */
-    private final boolean isExit;
+    protected boolean isExit;
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code dataToUser} and {@code feedbackToUser},
-     * and other fields set to their default value.
+     * {@code displayType}.
+     * @param dataToUser data to show user.
+     * @param feedbackToUser feedback to user.
+     * @param displayType the alias of the item type.
      */
     public CommandResult(String dataToUser, String feedbackToUser, String displayType) {
-        this(dataToUser, feedbackToUser, displayType,
-                false, false, false, false);
+        this.dataToUser = requireNonNull(dataToUser);
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.displayType = requireNonNull(displayType);
     }
 
     /**

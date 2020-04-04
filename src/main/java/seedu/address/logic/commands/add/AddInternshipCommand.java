@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
+import seedu.address.logic.commands.results.AddCommandResult;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -60,7 +61,7 @@ public class AddInternshipCommand extends AddCommand {
         model.setInternshipToDisplay();
         model.commitResumeBook();
 
-        return new CommandResult(toAdd.toString(),
+        return new AddCommandResult(toAdd.toString(),
                 String.format(MESSAGE_SUCCESS, toAdd.getType().getFullType()),
                 model.getDisplayType());
     }
