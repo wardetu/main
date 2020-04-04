@@ -309,7 +309,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
             newResume.setProjectIds(newProjectList);
             newResume.setSkillIds(resume.getSkillIds());
             newResume.getProjectIds().remove(Integer.valueOf(id));
-          
+
             setResume(resume, newResume);
         }
     }
