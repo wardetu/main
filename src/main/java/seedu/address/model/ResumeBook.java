@@ -304,12 +304,12 @@ public class ResumeBook implements ReadOnlyResumeBook {
             Resume newResume = new Resume(resume.getName(), resume.getId(), resume.getTags());
             List<Integer> newProjectList = new ArrayList<>();
             newProjectList.addAll(resume.getProjectIds());
- 
+
             newResume.setInternshipIds(resume.getInternshipIds());
             newResume.setProjectIds(newProjectList);
             newResume.setSkillIds(resume.getSkillIds());
             newResume.getProjectIds().remove(Integer.valueOf(id));
-           
+          
             setResume(resume, newResume);
         }
     }
