@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -44,7 +43,7 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Internship");
         String expectedData = internshipToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.deleteInternship(internshipToDelete);
         expectedModel.setInternshipToDisplay();
 
@@ -59,7 +58,7 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Internship");
         String expectedData = internshipToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.deleteInternship(internshipToDelete);
         expectedModel.setInternshipToDisplay();
 
@@ -82,7 +81,7 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Project");
         String expectedData = projectToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.deleteProject(projectToDelete);
         expectedModel.setProjectToDisplay();
 
@@ -97,7 +96,7 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Project");
         String expectedData = projectToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.deleteProject(projectToDelete);
         expectedModel.setProjectToDisplay();
 
@@ -120,7 +119,7 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Skill");
         String expectedData = skillToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.deleteSkill(skillToDelete);
         expectedModel.setSkillToDisplay();
 
@@ -135,7 +134,7 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Skill");
         String expectedData = skillToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.deleteSkill(skillToDelete);
         expectedModel.setSkillToDisplay();
 
@@ -158,7 +157,7 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Resume");
         String expectedData = resumeToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.deleteResume(resumeToDelete);
         expectedModel.setResumeToDisplay();
 
@@ -173,7 +172,7 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Resume");
         String expectedData = resumeToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.deleteResume(resumeToDelete);
         expectedModel.setResumeToDisplay();
 
@@ -188,128 +187,17 @@ public class DeleteCommandIntegrationTest {
         assertCommandFailure(deleteCommand, model, new CommandException(Messages.MESSAGE_INVALID_INDEX));
     }
 
-    /*@Test
-    public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        PersonalDetail personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
-
-        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
-        expectedModel.deleteItem(personToDelete);
-        showNoPerson(expectedModel);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }*/
-
-    /*
-    @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getResumeBook().getItemToDisplayList().size());
-
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-    */
-
     @Test
     public void equals() {
         DeleteCommand deleteFirstInternshipCommand = new DeleteInternshipCommand(INDEX_FIRST_ITEM);
-        DeleteCommand deleteSecondInternshipCommand = new DeleteInternshipCommand(INDEX_SECOND_ITEM);
-
-        // same object -> returns true
-        assertEquals(deleteFirstInternshipCommand, deleteFirstInternshipCommand);
-
-        // same values -> returns true
-        DeleteCommand deleteFirstInternshipCommandCopy = new DeleteInternshipCommand(INDEX_FIRST_ITEM);
-        assertEquals(deleteFirstInternshipCommand, deleteFirstInternshipCommandCopy);
-
-        // different types -> returns false
-        assertNotEquals(1, deleteFirstInternshipCommand);
-
-        // null -> returns false
-        assertNotEquals(null, deleteFirstInternshipCommand);
-
-        // different internship -> returns false
-        assertNotEquals(deleteFirstInternshipCommand, deleteSecondInternshipCommand);
-
         DeleteCommand deleteFirstProjectCommand = new DeleteProjectCommand(INDEX_FIRST_ITEM);
-        DeleteCommand deleteSecondProjectCommand = new DeleteProjectCommand(INDEX_SECOND_ITEM);
-
-        // same object -> returns true
-        assertEquals(deleteFirstProjectCommand, deleteFirstProjectCommand);
-
-        // same values -> returns true
-        DeleteCommand deleteFirstProjectCommandCopy = new DeleteProjectCommand(INDEX_FIRST_ITEM);
-        assertEquals(deleteFirstProjectCommand, deleteFirstProjectCommandCopy);
-
-        // different types -> returns false
-        assertNotEquals(1, deleteFirstProjectCommand);
-
-        // null -> returns false
-        assertNotEquals(null, deleteFirstProjectCommand);
-
-        // different project -> returns false
-        assertNotEquals(deleteFirstProjectCommand, deleteSecondProjectCommand);
-
-        DeleteCommand deleteFirstSkillCommand = new DeleteSkillCommand(INDEX_FIRST_ITEM);
-        DeleteCommand deleteSecondSkillCommand = new DeleteSkillCommand(INDEX_SECOND_ITEM);
-
-        // same object -> returns true
-        assertEquals(deleteFirstSkillCommand, deleteFirstSkillCommand);
-
-        // same values -> returns true
-        DeleteSkillCommand deleteFirstSkillCommandCopy = new DeleteSkillCommand(INDEX_FIRST_ITEM);
-        assertEquals(deleteFirstSkillCommand, deleteFirstSkillCommandCopy);
-
-        // different types -> returns false
-        assertNotEquals(1, deleteFirstSkillCommand);
-
-        // null -> returns false
-        assertNotEquals(null, deleteFirstSkillCommand);
-
-        // different skill -> returns false
-        assertNotEquals(deleteFirstSkillCommand, deleteSecondSkillCommand);
-
         DeleteCommand deleteFirstResumeCommand = new DeleteResumeCommand(INDEX_FIRST_ITEM);
-        DeleteCommand deleteSecondResumeCommand = new DeleteResumeCommand(INDEX_SECOND_ITEM);
-
-        // same object -> returns true
-        assertEquals(deleteFirstResumeCommand, deleteFirstResumeCommand);
-
-        // same values -> returns true
-        DeleteCommand deleteFirstResumeCommandCopy = new DeleteResumeCommand(INDEX_FIRST_ITEM);
-        assertEquals(deleteFirstResumeCommand, deleteFirstResumeCommandCopy);
-
-        // different types -> returns false
-        assertNotEquals(1, deleteFirstResumeCommand);
-
-        // null -> returns false
-        assertNotEquals(null, deleteFirstResumeCommand);
-
-        // different resume -> returns false
-        assertNotEquals(deleteFirstResumeCommand, deleteSecondResumeCommand);
-
-        // different type -> returns false
+        DeleteCommand deleteFirstSkillCommand = new DeleteSkillCommand(INDEX_FIRST_ITEM);
         assertNotEquals(deleteFirstInternshipCommand, deleteFirstProjectCommand);
+        assertNotEquals(deleteFirstInternshipCommand, deleteFirstResumeCommand);
+        assertNotEquals(deleteFirstInternshipCommand, deleteFirstSkillCommand);
+        assertNotEquals(deleteFirstProjectCommand, deleteFirstResumeCommand);
+        assertNotEquals(deleteFirstProjectCommand, deleteFirstSkillCommand);
+        assertNotEquals(deleteFirstResumeCommand, deleteFirstSkillCommand);
     }
-
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    /*
-    private void showNoPerson(Model model) {
-        model.updateFilteredItemList(p -> false);
-
-        assertTrue(model.getFilteredItemList().isEmpty());
-    }
-    */
 }
