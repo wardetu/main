@@ -445,3 +445,24 @@
 #item-list-view {
     -fx-background-radius: 10 10 10 10;
 }
+
+#previewBox {
+    -fx-background-color: linear-gradient(to bottom right, #212c34, #434e56);
+}
+
+#previewHeader {
+     -fx-text-fill: white;
+     -fx-font-size: 22pt;
+     -fx-font-family: "Segoe UI Semibold";
+}
+
+#previewText {
+    -fx-control-inner-background: #434e56;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 14pt;
+    -fx-text-fill: white;
+    -fx-focus-color: -fx-control-inner-background ;
+    -fx-faint-focus-color: -fx-control-inner-background ;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
