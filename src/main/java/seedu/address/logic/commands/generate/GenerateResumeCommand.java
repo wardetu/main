@@ -65,7 +65,7 @@ public class GenerateResumeCommand extends Command {
         if (targetIndex.getZeroBased() >= model.getResumeSize()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
-        Person user = model.getUser();
+        Person user = model.getUser().getInternalPerson();
         Resume resumeToGenerate = model.getResumeByIndex(targetIndex);
 
         // Set file name

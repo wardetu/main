@@ -15,11 +15,11 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.item.wrapper.ObservablePerson;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -103,17 +103,19 @@ public class ModelManager implements Model {
 
     //=========== User ================================================================================
 
+
     @Override
     public void setUser(Person person) {
-        versionedResumeBook.setUser(person);
+        // Wrap the Person object so it is consistent with the setUser method in ResumeBook
+        versionedResumeBook.setUser(new ObservablePerson(person));
     }
 
     @Override
-    public Person getUser() {
+    public ObservablePerson getUser() {
         return versionedResumeBook.getUser();
     }
 
-    //=========== Internships ================================================================================
+    //======================================= Internships ==================================================
 
     @Override
     public boolean hasInternship(Internship internship) {
@@ -163,7 +165,7 @@ public class ModelManager implements Model {
         versionedResumeBook.setInternshipToDisplay();
     }
 
-    //=========== Projects ================================================================================
+    //======================================= Projects ==========================================
 
     @Override
     public boolean hasProject(Project project) {
@@ -213,7 +215,7 @@ public class ModelManager implements Model {
         versionedResumeBook.setProjectToDisplay();
     }
 
-    //=========== Skill ================================================================================
+    //======================================= Skill ===================================================
 
     @Override
     public boolean hasSkill(Skill skill) {
@@ -263,7 +265,7 @@ public class ModelManager implements Model {
         versionedResumeBook.setSkillToDisplay();
     }
 
-    //=========== Resume ================================================================================
+    //========================================== Resume =======================================================
 
     @Override
     public boolean hasResume(Resume resume) {
@@ -336,25 +338,6 @@ public class ModelManager implements Model {
         return versionedResumeBook.getDisplayType();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        // short circuit if same object
-        if (obj == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(obj instanceof ModelManager)) {
-            return false;
-        }
-
-        // state check
-        ModelManager other = (ModelManager) obj;
-        return versionedResumeBook.equals(other.versionedResumeBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredItems.equals(other.filteredItems);
-    }
-
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -382,9 +365,26 @@ public class ModelManager implements Model {
         versionedResumeBook.commit();
     }
 
+    //========================================================================================================
+
     @Override
-    public ObservablePerson getObservablePerson() {
-        return versionedResumeBook.getObservablePerson();
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof ModelManager)) {
+            return false;
+        }
+
+        // state check
+        ModelManager other = (ModelManager) obj;
+        return versionedResumeBook.equals(other.versionedResumeBook)
+                && userPrefs.equals(other.userPrefs)
+                && filteredItems.equals(other.filteredItems);
     }
+
 
 }

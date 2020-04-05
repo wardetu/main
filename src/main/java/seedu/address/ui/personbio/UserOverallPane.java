@@ -10,8 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.MainApp;
-import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
+import seedu.address.model.item.wrapper.ObservablePerson;
 import seedu.address.ui.UiPart;
 
 /**
@@ -38,6 +38,10 @@ public class UserOverallPane extends UiPart<Region> implements Observer {
      */
     public UserOverallPane(ObservablePerson person) {
         super(FXML);
+        /*
+        Hooks the Pane to the ObservablePerson object so that all changes to the person will trigger an update
+        by this object via the update method.
+        */
         person.addObserver(this);
         this.user = person.getInternalPerson();
 

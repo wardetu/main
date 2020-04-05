@@ -4,12 +4,11 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.ObservablePerson;
-import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
-import seedu.address.model.item.UniqueItemList;
+import seedu.address.model.item.wrapper.ObservablePerson;
+import seedu.address.model.item.wrapper.UniqueItemList;
 
 /**
  * Unmodifiable view of a resume book
@@ -17,12 +16,6 @@ import seedu.address.model.item.UniqueItemList;
 public interface ReadOnlyResumeBook {
 
     //=========== Get Detail Operations ======================================================================
-
-    /**
-     * Returns the user of the resume book.
-     * @return {@code Person} item representing the user.
-     */
-    Person getUser();
 
     /**
      * Returns an unmodifiable view of the current items list as an {@code ObservableList}
@@ -53,6 +46,12 @@ public interface ReadOnlyResumeBook {
      * This list will not contain any duplicate resume.
      */
     UniqueItemList<Resume> getResumeList();
+
+    /**
+     * Returns an
+     */
+    ObservablePerson getUser();
+
 
     //=========== Query List Operations ================================================================================
 
@@ -133,5 +132,4 @@ public interface ReadOnlyResumeBook {
      */
     int getResumeSize();
 
-    ObservablePerson getObservablePerson();
 }

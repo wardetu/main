@@ -9,18 +9,18 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
-import seedu.address.model.item.UniqueItemList;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.wrapper.ObservablePerson;
+import seedu.address.model.item.wrapper.UniqueItemList;
 import seedu.address.model.util.ItemUtil;
 
 /**
@@ -30,14 +30,13 @@ import seedu.address.model.util.ItemUtil;
 public class ResumeBook implements ReadOnlyResumeBook {
 
     // Should be all caps but check style complain
-    private Person user;
     private final UniqueItemList<Item> itemsToDisplay;
     private final UniqueItemList<Internship> internships;
     private final UniqueItemList<Project> projects;
     private final UniqueItemList<Skill> skills;
     private final UniqueItemList<Resume> resumes;
     private String displayType = "";
-    private ObservablePerson observablePerson;
+    private ObservablePerson user;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -47,10 +46,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
      *   among constructors.
      */
     {
-        user = new Person(new DisplayPicture("/images/Duke.png"), new Name("Default name"), new Phone("000"),
-                new Email("000@gmail.com"), new Github("000"), "Default university", "Default major",
-                new Time("12-9999"), new Time("12-9999"), 0.0);
-        observablePerson = new ObservablePerson(user);
+        Person defaultUser = new Person(new DisplayPicture("/images/Duke.png"), new Name("Default name"),
+                new Phone("000"), new Email("000@gmail.com"), new Github("000"), "Default university",
+                "Default major", new Time("12-9999"), new Time("12-9999"), 0.0);
+        user = new ObservablePerson(defaultUser);
         itemsToDisplay = new UniqueItemList<>();
         internships = new UniqueItemList<>();
         projects = new UniqueItemList<>();
@@ -143,9 +142,9 @@ public class ResumeBook implements ReadOnlyResumeBook {
     /**
      * Replaces the user profile detail with that of {@code person}.
      */
-    public void setUser(Person user) {
-        this.user = user;
-        this.observablePerson.setInternalPerson(user);
+    public void setUser(ObservablePerson user) {
+        // Method's name is setPerson so it is consistent with the Observable class name.
+        this.user.setPerson(user);
     }
 
     /**
@@ -485,8 +484,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public ObservablePerson getObservablePerson() {
-        return this.observablePerson;
+    public ObservablePerson getUser() {
+        return this.user;
     }
 
     //=========== Util methods ================================================================================
@@ -495,11 +494,6 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public String toString() {
         return itemsToDisplay.asUnmodifiableObservableList().size() + " items";
         // TODO: refine later
-    }
-
-    @Override
-    public Person getUser() {
-        return this.user;
     }
 
     @Override

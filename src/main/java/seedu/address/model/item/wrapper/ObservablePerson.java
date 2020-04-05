@@ -1,6 +1,9 @@
-package seedu.address.model.item;
+package seedu.address.model.item.wrapper;
 
 import java.util.Observable;
+
+import seedu.address.model.item.Person;
+
 
 /**
  * A wrapper class for the person contained in the resume book.
@@ -13,9 +16,10 @@ public class ObservablePerson extends Observable {
         this.internalPerson = person;
     }
 
-    public void setInternalPerson (Person person) {
-        this.internalPerson = person;
+    public void setPerson(ObservablePerson person) {
+        this.internalPerson = person.getInternalPerson();
         this.setChanged();
+        // Triggers all the observers
         this.notifyObservers();
     }
 
