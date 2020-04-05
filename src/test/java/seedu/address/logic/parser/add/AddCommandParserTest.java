@@ -239,7 +239,7 @@ public class AddCommandParserTest {
 
         Project expectedProject = new ProjectBuilder(ORBITAL).withTags().build();
 
-        // Standard
+        // 0 tags
         assertParseSuccess(parser, ITEM_TYPE_PROJECT + PREFIXED_NAME_ORBITAL + PREFIXED_TIME_ORBITAL
                 + PREFIXED_WEBSITE_ORBITAL + PREFIXED_DESCRIPTION_ORBITAL,
                 new AddProjectCommand(expectedProject));
@@ -267,7 +267,7 @@ public class AddCommandParserTest {
                         + PREFIXED_TIME_TO + PREFIXED_INTERNSHIP_DESCRIPTION + PREFIXED_TAG_FRONTEND,
                 Item.MESSAGE_CONSTRAINTS);
 
-        // missing item prefix
+        // invalid item prefix
         assertParseFailure(parser,
                 INVALID_TYPE_DESC + PREFIXED_NAME_GOOGLE + PREFIXED_ROLE_FRONTEND + PREFIXED_TIME_FROM
                         + PREFIXED_TIME_TO + PREFIXED_INTERNSHIP_DESCRIPTION + PREFIXED_TAG_FRONTEND,
