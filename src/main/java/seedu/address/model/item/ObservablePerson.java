@@ -25,4 +25,10 @@ public class ObservablePerson extends Observable {
         return internalPerson;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+            || (other instanceof ObservablePerson
+            && ((ObservablePerson) other).getInternalPerson().equals(this.internalPerson));
+    }
 }
