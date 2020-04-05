@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.ResumeBook;
 import seedu.address.model.item.Internship;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -28,7 +29,7 @@ public class ResumeBookBuilder {
      * Sets a new {@code Person} to the {@code ResumeBook} that we are building.
      */
     public ResumeBookBuilder withPerson(Person person) {
-        resumeBook.setUser(person);
+        resumeBook.setUser(new ObservablePerson(person));
         return this;
     }
 
