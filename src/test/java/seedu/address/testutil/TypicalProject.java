@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_DUK
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_ORBITAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_NAME_DUKE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_NAME_ORBITAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_2;
@@ -22,5 +23,5 @@ public class TypicalProject {
             .withDescription(VALID_DESCRIPTION_ORBITAL).withTags(VALID_TAG_TECH).build();
     public static final Project DUKE = new ProjectBuilder().withName(VALID_PROJECT_NAME_DUKE)
             .withTime(VALID_TIME_2).withWebsite(VALID_WEBSITE_DUKE).withDescription(VALID_DESCRIPTION_DUKE)
-            .withTags(VALID_TAG_TECH).build();
+            .withTags(VALID_TAG_TECH, VALID_TAG_JAVA).build();
 }

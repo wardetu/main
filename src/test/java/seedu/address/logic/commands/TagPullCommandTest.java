@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRONTEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NONE_USAGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECH;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -99,7 +102,142 @@ public class TagPullCommandTest {
         assertEquals(thirdIndexResume, expectedThirdResume);
     }
 
+    @Test
+    public void execute_validTag_successAndOnlyOneCountIncreases() throws CommandException {
+        Index index = INDEX_THIRD_ITEM;
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag(VALID_TAG_FRONTEND));
 
+        Resume expectedResume = new ResumeBuilder(TypicalResume.FILLED_RESUME)
+                .withInternship(TypicalInternship.GOOGLE)
+                .withProject(TypicalProject.ORBITAL)
+                .withSkill(TypicalSkill.GIT) // Order matters here
+                .withSkill(TypicalSkill.REACT)
+                .build();
+
+        CommandResult commandResult = new TagPullCommand(index, tags).execute(model);
+        assertEquals(String.format(feedbackToUser, 0, 0, 1), commandResult.getFeedbackToUser());
+
+        Resume resume = model.getResumeByIndex(index);
+        assertEquals(resume, expectedResume);
+    }
+
+    @Test
+    public void execute_validTag_successAndTwoCountsIncreases() throws CommandException {
+        Index index = INDEX_FIRST_ITEM;
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag(VALID_TAG_FRONTEND));
+
+        Resume expectedResume = new ResumeBuilder(TypicalResume.ME_RESUME)
+                .withInternship(TypicalInternship.GOOGLE)
+                .withSkill(TypicalSkill.REACT)
+                .build();
+
+        CommandResult commandResult = new TagPullCommand(index, tags).execute(model);
+        assertEquals(String.format(feedbackToUser, 1, 0, 1), commandResult.getFeedbackToUser());
+
+        Resume resume = model.getResumeByIndex(index);
+        assertEquals(resume, expectedResume);
+    }
+
+    @Test
+    public void execute_validTag_successNoCountsIncreases() throws CommandException {
+        Index firstIndex = INDEX_FIRST_ITEM;
+        Index thirdIndex = INDEX_THIRD_ITEM;
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag(VALID_TAG_NONE_USAGE));
+
+        Resume expectedFirstResume = new ResumeBuilder(TypicalResume.ME_RESUME)
+                .build();
+
+        Resume expectedThirdResume = new ResumeBuilder(TypicalResume.FILLED_RESUME)
+                .withInternship(TypicalInternship.GOOGLE)
+                .withProject(TypicalProject.ORBITAL)
+                .withSkill(TypicalSkill.GIT) // Order matters here
+                .build();
+
+        // Resume at first index
+        CommandResult commandResultFirstIndex = new TagPullCommand(firstIndex, tags).execute(model);
+        assertEquals(String.format(feedbackToUser, 0, 0, 0), commandResultFirstIndex.getFeedbackToUser());
+
+        Resume firstIndexResume = model.getResumeByIndex(firstIndex);
+        assertEquals(firstIndexResume, expectedFirstResume);
+
+        // Resume at third index
+        CommandResult commandResultThirdIndex = new TagPullCommand(thirdIndex, tags).execute(model);
+        assertEquals(String.format(feedbackToUser, 0, 0, 0), commandResultThirdIndex.getFeedbackToUser());
+
+        Resume thirdIndexResume = model.getResumeByIndex(thirdIndex);
+        assertEquals(thirdIndexResume, expectedThirdResume);
+    }
+
+    // Not sure why this isn't working
+    /*
+    @Test
+    public void execute_validTagCalledTwice_success() throws CommandException {
+        Index index = INDEX_FIRST_ITEM;
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag(VALID_TAG_TECH));
+
+        Resume expectedResume = new ResumeBuilder(TypicalResume.ME_RESUME)
+                .withInternship(TypicalInternship.GOOGLE)
+                .withInternship(TypicalInternship.NINJA_VAN)
+                .withProject(TypicalProject.ORBITAL)
+                .withProject(TypicalProject.DUKE)
+                .withSkill(TypicalSkill.REACT)
+                .withSkill(TypicalSkill.GIT)
+                .build();
+
+        CommandResult commandResult = new TagPullCommand(index, tags).execute(model);
+        assertEquals(String.format(feedbackToUser, 2, 2, 2), commandResult.getFeedbackToUser());
+
+        Resume resume = model.getResumeByIndex(index);
+        assertEquals(resume, expectedResume);
+
+        CommandResult commandResultAgain = new TagPullCommand(index, tags).execute(model);
+        assertEquals(String.format(feedbackToUser, 0, 0, 0), commandResult.getFeedbackToUser());
+
+        Resume resumeAgain = model.getResumeByIndex(index);
+        assertEquals(resumeAgain, expectedResume);
+    }
+    */
+
+    @Test
+    public void execute_multipleTags_success() throws CommandException {
+        Index firstIndex = INDEX_FIRST_ITEM;
+        Index thirdIndex = INDEX_THIRD_ITEM;
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag(VALID_TAG_JAVA));
+        tags.add(new Tag(VALID_TAG_FRONTEND));
+
+        Resume expectedFirstResume = new ResumeBuilder(TypicalResume.ME_RESUME)
+                .withInternship(TypicalInternship.GOOGLE)
+                .withProject(TypicalProject.DUKE)
+                .withSkill(TypicalSkill.REACT)
+                .build();
+
+        Resume expectedThirdResume = new ResumeBuilder(TypicalResume.FILLED_RESUME)
+                .withInternship(TypicalInternship.GOOGLE)
+                .withProject(TypicalProject.ORBITAL)
+                .withProject(TypicalProject.DUKE)
+                .withSkill(TypicalSkill.GIT) // Order matters here
+                .withSkill(TypicalSkill.REACT)
+                .build();
+
+        // Resume at first index
+        CommandResult commandResultFirstIndex = new TagPullCommand(firstIndex, tags).execute(model);
+        assertEquals(String.format(feedbackToUser, 1, 1, 1), commandResultFirstIndex.getFeedbackToUser());
+
+        Resume firstIndexResume = model.getResumeByIndex(firstIndex);
+        assertEquals(firstIndexResume, expectedFirstResume);
+
+        // Resume at third index
+        CommandResult commandResultThirdIndex = new TagPullCommand(thirdIndex, tags).execute(model);
+        assertEquals(String.format(feedbackToUser, 0, 1, 1), commandResultThirdIndex.getFeedbackToUser());
+
+        Resume thirdIndexResume = model.getResumeByIndex(thirdIndex);
+        assertEquals(thirdIndexResume, expectedThirdResume);
+    }
 
     /*
      * 1. Tagpull a tag that increases all 3 counts
