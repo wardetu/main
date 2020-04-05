@@ -19,7 +19,10 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        String type = model.getDisplayType();
         model.setResumeBook(new ResumeBook());
-        return new ClearCommandResult("", MESSAGE_SUCCESS, model.getDisplayType());
+        model.setItemsToDisplay(type);
+        model.commitResumeBook();
+        return new ClearCommandResult(" ", MESSAGE_SUCCESS, model.getDisplayType());
     }
 }
