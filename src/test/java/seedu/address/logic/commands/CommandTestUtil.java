@@ -108,11 +108,12 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_FROM_DESC = " " + PREFIX_FROM + "123-1998"; // '&' not allowed in names
-    public static final String INVALID_TO_DESC = " " + PREFIX_TIME + "123-1998"; // '&' not allowed in names
-    public static final String INVALID_WEBSITE_DESC = " " + PREFIX_WEBSITE + "dfadsf"; // '&' not allowed in names
-    public static final String INVALID_LEVEL_DESC = " " + PREFIX_LEVEL + "basii"; // '&' not allowed in names
-    public static final String INVALID_TYPE_DESC = " " + PREFIX_ITEM + "skil"; // '&' not allowed in names
+    public static final String INVALID_FROM_DESC = " " + PREFIX_FROM + "123-1998"; // Time must be of format MM-YYYY
+    public static final String INVALID_TO_DESC = " " + PREFIX_TIME + "123-1998"; // Time must be of format MM-YYYY
+    public static final String INVALID_WEBSITE_DESC = " " + PREFIX_WEBSITE + "dfadsf"; // Must match regex of websit
+    public static final String INVALID_LEVEL_DESC =
+            " " + PREFIX_LEVEL + "basii"; // basic / intermediate / advanced only
+    public static final String INVALID_TYPE_DESC = " " + PREFIX_ITEM + "skil"; // ski / int / res / proj only
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + " 911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + " bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
