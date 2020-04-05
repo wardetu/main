@@ -180,4 +180,15 @@ public class ResumeEditCommand extends Command {
             }
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ResumeEditCommand // instanceof handles nulls
+                && index.equals(((ResumeEditCommand) other).index)
+                && internshipIndices.equals(((ResumeEditCommand) other).internshipIndices)
+                && projectIndices.equals(((ResumeEditCommand) other).projectIndices)
+                && skillIndices.equals(((ResumeEditCommand) other).skillIndices));
+    }
+
 }

@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_ITEM;
@@ -341,5 +343,40 @@ public class ResumeEditCommandTest {
                 .build();
 
         assertEquals(changedResume, expectedResume);
+    }
+
+    @Test
+    public void equals() {
+        Optional<List<Integer>> internshipIndicesA = new ItemIndicesBuilder().add(1).build();
+        Optional<List<Integer>> projectIndicesA = new ItemIndicesBuilder().add(1).build();
+        Optional<List<Integer>> skillIndicesA = new ItemIndicesBuilder().add(1).build();
+
+        Optional<List<Integer>> internshipIndicesB = new ItemIndicesBuilder().add(2).build();
+        Optional<List<Integer>> projectIndicesB = new ItemIndicesBuilder().add(1).build();
+        Optional<List<Integer>> skillIndicesB = new ItemIndicesBuilder().add(1).build();
+
+        Index index = INDEX_FIRST_ITEM;
+
+        ResumeEditCommand reditACommand = new ResumeEditCommand(index, internshipIndicesA, projectIndicesA,
+                skillIndicesA);
+        ResumeEditCommand reditBCommand = new ResumeEditCommand(index, internshipIndicesB, projectIndicesB,
+                skillIndicesB);
+
+        // same object -> returns true
+        assertTrue(reditACommand.equals(reditACommand));
+
+        // same values -> returns true
+        ResumeEditCommand reditACommandCopy = new ResumeEditCommand(index, internshipIndicesA, projectIndicesA,
+                skillIndicesA);
+        assertTrue(reditACommand.equals(reditACommandCopy));
+
+        // different types -> returns false
+        assertFalse(reditACommand.equals(1));
+
+        // null -> returns false
+        assertFalse(reditACommand.equals(null));
+
+        // different indices -> returns false
+        assertFalse(reditACommand.equals(reditBCommand));
     }
 }
