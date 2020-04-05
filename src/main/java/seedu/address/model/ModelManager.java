@@ -210,7 +210,7 @@ public class ModelManager implements Model {
 
     @Override
     public List<Project> getProjectsByTag(Tag tag) {
-        return versionedResumeBook.getProjectsbyTag(tag);
+        return versionedResumeBook.getProjectsByTag(tag);
     }
 
     @Override
