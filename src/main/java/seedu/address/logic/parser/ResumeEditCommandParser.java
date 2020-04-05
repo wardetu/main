@@ -9,10 +9,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ResumeEditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new {@code ResumeEditCommand} object
@@ -30,6 +32,7 @@ public class ResumeEditCommandParser implements Parser<ResumeEditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_INTERNSHIP, PREFIX_SKILL, PREFIX_PROJECT, PREFIX_TAG);
         Index index;
+        Set<Tag> tagList;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -37,6 +40,7 @@ public class ResumeEditCommandParser implements Parser<ResumeEditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ResumeEditCommand.MESSAGE_USAGE),
                     pe);
         }
+        tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         // Optional.empty() denotes non-existence, "" denotes that no argument specified, else some arguments specified
         Optional<List<Integer>> internshipIndices = ParserUtil.parseReditItemIndices(
@@ -46,7 +50,6 @@ public class ResumeEditCommandParser implements Parser<ResumeEditCommand> {
         Optional<List<Integer>> skillsIndices = ParserUtil.parseReditItemIndices(
                 argMultimap.getValue(PREFIX_SKILL).orElse(null));
 
-        // Will assume correct input for now
-        return new ResumeEditCommand(index, internshipIndices, projectsIndices, skillsIndices);
+        return new ResumeEditCommand(index, internshipIndices, projectsIndices, skillsIndices, tagList);
     }
 }

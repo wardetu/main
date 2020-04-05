@@ -8,6 +8,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
@@ -17,6 +18,7 @@ import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.results.ResumeEditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Resume;
+import seedu.address.model.tag.Tag;
 
 /**
  * Edits the content of a Resume.
@@ -36,16 +38,19 @@ public class ResumeEditCommand extends Command {
             + PREFIX_PROJECT + " 1 ";
 
     protected final Index index;
+    protected final Set<Tag> tagList;
     protected final Optional<List<Integer>> internshipIndices;
     protected final Optional<List<Integer>> projectIndices;
     protected final Optional<List<Integer>> skillIndices;
 
     public ResumeEditCommand(Index index, Optional<List<Integer>> internshipIndices,
-                             Optional<List<Integer>> projectIndices, Optional<List<Integer>> skillIndices) {
+                             Optional<List<Integer>> projectIndices, Optional<List<Integer>> skillIndices,
+                             Set<Tag> tagList) {
         this.index = index;
         this.internshipIndices = internshipIndices;
         this.projectIndices = projectIndices;
         this.skillIndices = skillIndices;
+        this.tagList = tagList;
     }
 
     @Override
