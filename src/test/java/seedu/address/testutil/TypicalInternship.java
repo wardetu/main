@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_ROLE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TO;
 
 import java.util.ArrayList;
@@ -22,16 +23,17 @@ import seedu.address.model.item.Internship;
 public class TypicalInternship {
     public static final Internship PAYPAL = new InternshipBuilder().withName("PayPal")
             .withRole("Backend Software Intern").withFrom("05-2020").withTo("07-2020")
-            .withDescription("I am learning new things").withTags(VALID_TAG_BACKEND, "SE").build();
+            .withDescription("I am learning new things").withTags(VALID_TAG_BACKEND, "SE", VALID_TAG_TECH).build();
 
     public static final Internship NINJA_VAN = new InternshipBuilder().withName("Ninja Van")
             .withRole("Ninja Intern").withFrom("05-2020").withTo("07-2020")
-            .withDescription("My journey to become a better ninja").withTags("UX").build();
+            .withDescription("My journey to become a better ninja").withTags("UX", VALID_TAG_TECH).build();
 
     // Manually added - internship's details found in {@code CommandTestUtil}
     public static final Internship GOOGLE = new InternshipBuilder().withName(VALID_INTERNSHIP_NAME_GOOGLE)
             .withRole(VALID_INTERNSHIP_ROLE_FRONTEND).withFrom(VALID_FROM).withTo(VALID_TO)
-            .withDescription(VALID_INTERNSHIP_DESCRIPTION).withTags(VALID_TAG_FRONTEND, VALID_TAG_JAVA).build();
+            .withDescription(VALID_INTERNSHIP_DESCRIPTION)
+            .withTags(VALID_TAG_FRONTEND, VALID_TAG_JAVA, VALID_TAG_TECH).build();
 
     public static final String KEYWORD_MATCHING_SOFTWARE = "software"; // A keyword that matches SOFTWARE
 
