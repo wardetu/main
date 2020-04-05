@@ -286,6 +286,8 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered item list */
     ObservableList<Item> getFilteredItemList();
 
+    void setItemsToDisplay(String typeString);
+
     /**
      * Updates the filter of the filtered item list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
