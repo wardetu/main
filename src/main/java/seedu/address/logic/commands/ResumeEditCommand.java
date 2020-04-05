@@ -60,15 +60,14 @@ public class ResumeEditCommand extends Command {
 
         Resume toEdit = model.getResumeByIndex(index);
 
-        List<Integer> internshipsId = toEdit.getInternshipIds();
-        List<Integer> projectsId = toEdit.getProjectIds();
-        List<Integer> skillsId = toEdit.getSkillIds();
+        List<Integer> internshipIds = toEdit.getInternshipIds();
+        List<Integer> projectIds = toEdit.getProjectIds();
+        List<Integer> skillIds = toEdit.getSkillIds();
 
         // If any of the indices are present (user keys in the prefix), then use what the user uses
         // Else, use the one currently being used by the resume
-
         if (internshipIndices.isPresent()) {
-            internshipsId = internshipIndices
+            internshipIds = internshipIndices
                     .get()
                     .stream()
                     .distinct()
@@ -77,7 +76,7 @@ public class ResumeEditCommand extends Command {
         }
 
         if (projectIndices.isPresent()) {
-            projectsId = projectIndices
+            projectIds = projectIndices
                     .get()
                     .stream()
                     .distinct()
@@ -86,7 +85,7 @@ public class ResumeEditCommand extends Command {
         }
 
         if (skillIndices.isPresent()) {
-            skillsId = skillIndices
+            skillIds = skillIndices
                     .get()
                     .stream()
                     .distinct()
@@ -95,12 +94,13 @@ public class ResumeEditCommand extends Command {
         }
 
         Resume editedResume = new Resume(toEdit.getName(), toEdit.getId(), toEdit.getTags());
-        model.editResume(editedResume, internshipsId, projectsId, skillsId);
+        model.editResume(editedResume, internshipIds, projectIds, skillIds);
         model.setResume(toEdit, editedResume);
         model.setResumeToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
-        return new ResumeEditCommandResult(toEdit.toString(), "Resume is updated", model.getDisplayType());
+        return new ResumeEditCommandResult(editedResume.toString(), "Resume is updated",
+                model.getDisplayType());
     }
 
     /**

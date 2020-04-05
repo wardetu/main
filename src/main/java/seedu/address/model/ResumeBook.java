@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
@@ -20,6 +21,7 @@ import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 
 /**
@@ -245,6 +247,19 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
+    public List<Internship> getInternshipsByTag(Tag tag) {
+        return internships
+            .getItemList()
+            .stream()
+            .distinct()
+            .filter(x -> x.hasTag(tag))
+            .map(x -> (Internship) x)
+            .collect(Collectors.toList());
+    }
+
+
+
+    @Override
     public boolean hasInternshipId(int id) {
         for (Internship item : internships) {
             if (item.getId() == id) {
@@ -320,6 +335,17 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
+    public List<Project> getProjectsByTag(Tag tag) {
+        return projects
+            .getItemList()
+            .stream()
+            .distinct()
+            .filter(x -> x.hasTag(tag))
+            .map(x -> (Project) x)
+            .collect(Collectors.toList());
+    }
+
+    @Override
     public boolean hasProjectId(int id) {
         for (Project item : projects) {
             if (item.getId() == id) {
@@ -392,6 +418,17 @@ public class ResumeBook implements ReadOnlyResumeBook {
     @Override
     public Skill getSkillByIndex(Index index) {
         return skills.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public List<Skill> getSkillsByTag(Tag tag) {
+        return skills
+            .getItemList()
+            .stream()
+            .distinct()
+            .filter(x -> x.hasTag(tag))
+            .map(x -> (Skill) x)
+            .collect(Collectors.toList());
     }
 
     @Override
