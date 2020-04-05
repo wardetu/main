@@ -59,6 +59,10 @@ public class TagPullCommand extends Command {
         List<Integer> currProjectIds = toEdit.getProjectIds();
         List<Integer> currSkillIds = toEdit.getSkillIds();
 
+        int internshipCountBefore = currInternshipIds.size();
+        int projectCountBefore = currProjectIds.size();
+        int skillCountBefore = currSkillIds.size();
+
         // The item IDs with the desired tags
         List<Integer> pulledInternshipIds = tagList
                 .stream()
@@ -82,28 +86,40 @@ public class TagPullCommand extends Command {
                 .collect(Collectors.toList());
 
         // Concatenate both sets of items as we are adding on top
-        List<Integer> internshipIds = Stream
+        List<Integer> newInternshipIds = Stream
                 .concat(currInternshipIds.stream(), pulledInternshipIds.stream())
                 .distinct()
                 .collect(Collectors.toList());
 
-        List<Integer> projectIds = Stream
+        List<Integer> newProjectIds = Stream
                 .concat(currProjectIds.stream(), pulledProjectIds.stream())
                 .distinct()
                 .collect(Collectors.toList());
 
-        List<Integer> skillIds = Stream
+        List<Integer> newSkillIds = Stream
                 .concat(currSkillIds.stream(), pulledSkillIds.stream())
                 .distinct()
                 .collect(Collectors.toList());
 
+        int internshipCountAfter = newInternshipIds.size();
+        int projectCountAfter = newProjectIds.size();
+        int skillCountAfter = newSkillIds.size();
+
         Resume editedResume = new Resume(toEdit.getName(), toEdit.getId(), toEdit.getTags());
-        model.editResume(editedResume, internshipIds, projectIds, skillIds);
+        model.editResume(editedResume, newInternshipIds, newProjectIds, newSkillIds);
         model.setResume(toEdit, editedResume);
         model.setResumeToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
-        return new TagPullCommandResult(editedResume.toString(), "Tag Pull is successful!",
+
+        String feedbackToUser = new StringBuilder()
+                .append("Items pulled:\n")
+                .append(internshipCountAfter - internshipCountBefore).append(" internship(s), ")
+                .append(projectCountAfter - projectCountBefore).append(" project(s), ")
+                .append(skillCountAfter - skillCountBefore).append(" skill(s).")
+                .toString();
+
+        return new TagPullCommandResult(editedResume.toString(), feedbackToUser,
                 model.getDisplayType());
     }
 }
