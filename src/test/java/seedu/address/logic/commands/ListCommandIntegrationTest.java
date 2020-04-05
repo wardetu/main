@@ -23,12 +23,12 @@ public class ListCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE, new UserPrefs());
+        model = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
     }
 
     @Test
     public void execute_listInternship_success() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setInternshipToDisplay();
 
         assertCommandSuccess(new ListInternshipCommand(),
@@ -41,7 +41,7 @@ public class ListCommandIntegrationTest {
 
     @Test
     public void execute_listProject_success() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setProjectToDisplay();
 
         assertCommandSuccess(new ListProjectCommand(),
@@ -54,7 +54,7 @@ public class ListCommandIntegrationTest {
 
     @Test
     public void execute_listResume_success() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setResumeToDisplay();
 
         assertCommandSuccess(new ListResumeCommand(),
@@ -67,7 +67,7 @@ public class ListCommandIntegrationTest {
 
     @Test
     public void execute_listSkill_success() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setSkillToDisplay();
 
         assertCommandSuccess(new ListSkillCommand(),
