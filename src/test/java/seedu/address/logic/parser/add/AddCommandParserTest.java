@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEVEL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TO_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TYPE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_WEBSITE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.ITEM_TYPE_INTERNSHIP;
 import static seedu.address.logic.commands.CommandTestUtil.ITEM_TYPE_PROJECT;
@@ -261,12 +262,16 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryItemTypeMissing_failure() {
-        String typeMissingMessage = Item.MESSAGE_CONSTRAINTS;
-
         // missing item prefix
         assertParseFailure(parser, PREFIXED_NAME_GOOGLE + PREFIXED_ROLE_FRONTEND + PREFIXED_TIME_FROM
                         + PREFIXED_TIME_TO + PREFIXED_INTERNSHIP_DESCRIPTION + PREFIXED_TAG_FRONTEND,
-                typeMissingMessage);
+                Item.MESSAGE_CONSTRAINTS);
+
+        // missing item prefix
+        assertParseFailure(parser,
+                INVALID_TYPE_DESC + PREFIXED_NAME_GOOGLE + PREFIXED_ROLE_FRONTEND + PREFIXED_TIME_FROM
+                        + PREFIXED_TIME_TO + PREFIXED_INTERNSHIP_DESCRIPTION + PREFIXED_TAG_FRONTEND,
+                "Not a valid item type!");
     }
 
 

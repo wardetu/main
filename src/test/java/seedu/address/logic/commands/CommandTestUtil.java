@@ -112,6 +112,7 @@ public class CommandTestUtil {
     public static final String INVALID_TO_DESC = " " + PREFIX_TIME + "123-1998"; // '&' not allowed in names
     public static final String INVALID_WEBSITE_DESC = " " + PREFIX_WEBSITE + "dfadsf"; // '&' not allowed in names
     public static final String INVALID_LEVEL_DESC = " " + PREFIX_LEVEL + "basii"; // '&' not allowed in names
+    public static final String INVALID_TYPE_DESC = " " + PREFIX_ITEM + "skil"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + " 911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + " bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
