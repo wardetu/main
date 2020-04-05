@@ -1,13 +1,13 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalInternship.NINJA_VAN;
 import static seedu.address.testutil.TypicalInternship.PAYPAL;
 import static seedu.address.testutil.TypicalProject.ORBITAL;
+import static seedu.address.testutil.TypicalResume.ME_RESUME;
+import static seedu.address.testutil.TypicalResume.SE_RESUME;
 import static seedu.address.testutil.TypicalSkill.REACT;
 
 import java.util.Arrays;
@@ -141,6 +141,35 @@ public class FindCommandIntegrationTest {
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(REACT), model.getFilteredItemList());
     }
+
+    @Test
+    public void execute_zeroKeywords_noResumeFound() {
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        expectedModel.setResumeToDisplay();
+        CommandResult expectedCommandResult = new CommandResult("",
+                String.format(Messages.MESSAGE_ITEMS_LISTED, 0, "Resumes"),
+                expectedModel.getDisplayType());
+        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FindResumeCommand command = new FindResumeCommand(predicate);
+        model.updateFilteredItemList(predicate);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredItemList());
+    }
+
+    @Test
+    public void execute_singleKeyword_multipleResumesFound() {
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        expectedModel.setResumeToDisplay();
+        CommandResult expectedCommandResult = new CommandResult("",
+                String.format(Messages.MESSAGE_ITEMS_LISTED, 2, "Resumes"),
+                expectedModel.getDisplayType());
+        NameContainsKeywordsPredicate predicate = preparePredicate("Engineering");
+        FindResumeCommand command = new FindResumeCommand(predicate);
+        model.updateFilteredItemList(predicate);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+        assertEquals(Arrays.asList(ME_RESUME, SE_RESUME), model.getFilteredItemList());
+    }
+
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.

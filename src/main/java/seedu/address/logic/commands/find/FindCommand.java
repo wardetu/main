@@ -1,5 +1,6 @@
 package seedu.address.logic.commands.find;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 
 import seedu.address.logic.commands.Command;
@@ -23,6 +24,7 @@ public abstract class FindCommand extends Command {
     protected final NameContainsKeywordsPredicate predicate;
 
     public FindCommand(NameContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 

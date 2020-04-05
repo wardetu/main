@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalInternship.NINJA_VAN;
-import static seedu.address.testutil.TypicalInternship.PAYPAL;
+import static seedu.address.testutil.TypicalProject.DUKE;
+import static seedu.address.testutil.TypicalProject.ORBITAL;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,53 +19,53 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.results.CommandResult;
-import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Project;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 import seedu.address.testutil.ModelStub;
 
-public class FindInternshipCommandTest {
+public class FindProjectCommandTest {
 
     @Test
     public void constructor_nullPredicate_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new FindInternshipCommand(null));
+        assertThrows(NullPointerException.class, () -> new FindProjectCommand(null));
     }
 
     @Test
-    public void execute_emptyPredicate_noInternshipFound() {
-        FindInternshipCommandTest.ModelStubAcceptingInternshipAdded modelStub =
-                new FindInternshipCommandTest.ModelStubAcceptingInternshipAdded();
-        modelStub.addInternship(NINJA_VAN);
+    public void execute_emptyPredicate_noProjectFound() {
+        FindProjectCommandTest.ModelStubAcceptingProjectAdded modelStub =
+                new FindProjectCommandTest.ModelStubAcceptingProjectAdded();
+        modelStub.addProject(ORBITAL);
         NameContainsKeywordsPredicate emptyPredicate = preparePredicate(" ");
         modelStub.updateFilteredItemList(emptyPredicate);
-        CommandResult commandResult = new FindInternshipCommand(emptyPredicate).execute(modelStub);
-        assertEquals(String.format(Messages.MESSAGE_ITEMS_LISTED, 0, "Internships"), commandResult.getFeedbackToUser());
+        CommandResult commandResult = new FindProjectCommand(emptyPredicate).execute(modelStub);
+        assertEquals(String.format(Messages.MESSAGE_ITEMS_LISTED, 0, "Projects"), commandResult.getFeedbackToUser());
         assertEquals(Collections.emptyList(), modelStub.getFilteredItemList());
     }
 
     @Test
-    public void execute_oneKeyword_oneInternshipFound() {
-        FindInternshipCommandTest.ModelStubAcceptingInternshipAdded modelStub =
-                new FindInternshipCommandTest.ModelStubAcceptingInternshipAdded();
-        modelStub.addInternship(NINJA_VAN);
-        NameContainsKeywordsPredicate onePredicate = preparePredicate("Ninja");
+    public void execute_oneKeyword_oneProjectFound() {
+        FindProjectCommandTest.ModelStubAcceptingProjectAdded modelStub =
+                new FindProjectCommandTest.ModelStubAcceptingProjectAdded();
+        modelStub.addProject(DUKE);
+        NameContainsKeywordsPredicate onePredicate = preparePredicate("Duke");
         modelStub.updateFilteredItemList(onePredicate);
-        CommandResult commandResult = new FindInternshipCommand(onePredicate).execute(modelStub);
-        assertEquals(String.format(Messages.MESSAGE_ITEMS_LISTED, 1, "Internships"), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(NINJA_VAN), modelStub.getFilteredItemList());
+        CommandResult commandResult = new FindProjectCommand(onePredicate).execute(modelStub);
+        assertEquals(String.format(Messages.MESSAGE_ITEMS_LISTED, 1, "Projects"), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(DUKE), modelStub.getFilteredItemList());
     }
 
     @Test
-    public void execute_multipleKeywords_multipleInternshipsFound() {
-        FindInternshipCommandTest.ModelStubAcceptingInternshipAdded modelStub =
-                new FindInternshipCommandTest.ModelStubAcceptingInternshipAdded();
-        modelStub.addInternship(NINJA_VAN);
-        modelStub.addInternship(PAYPAL);
-        NameContainsKeywordsPredicate twoPredicate = preparePredicate("Van PayPal");
+    public void execute_multipleKeywords_oneProjectFound() {
+        FindProjectCommandTest.ModelStubAcceptingProjectAdded modelStub =
+                new FindProjectCommandTest.ModelStubAcceptingProjectAdded();
+        modelStub.addProject(ORBITAL);
+        modelStub.addProject(DUKE);
+        NameContainsKeywordsPredicate twoPredicate = preparePredicate("Orbital Resume");
         modelStub.updateFilteredItemList(twoPredicate);
-        CommandResult commandResult = new FindInternshipCommand(twoPredicate).execute(modelStub);
-        assertEquals(String.format(Messages.MESSAGE_ITEMS_LISTED, 2, "Internships"), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(NINJA_VAN, PAYPAL), modelStub.getFilteredItemList());
+        CommandResult commandResult = new FindProjectCommand(twoPredicate).execute(modelStub);
+        assertEquals(String.format(Messages.MESSAGE_ITEMS_LISTED, 1, "Projects"), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(ORBITAL), modelStub.getFilteredItemList());
     }
 
     @Test
@@ -75,14 +75,14 @@ public class FindInternshipCommandTest {
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindInternshipCommand findFirstCommand = new FindInternshipCommand(firstPredicate);
-        FindInternshipCommand findSecondCommand = new FindInternshipCommand(secondPredicate);
+        FindProjectCommand findFirstCommand = new FindProjectCommand(firstPredicate);
+        FindProjectCommand findSecondCommand = new FindProjectCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindInternshipCommand(firstPredicate);
+        FindCommand findFirstCommandCopy = new FindProjectCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -96,15 +96,15 @@ public class FindInternshipCommandTest {
     }
 
     /**
-     * A Model stub that always accept the Internship being added.
+     * A Model stub that always accept the Project being added.
      */
-    private class ModelStubAcceptingInternshipAdded extends ModelStub {
-        final ObservableList<Item> internships = FXCollections.observableArrayList();
-        final FilteredList<Item> filteredList = new FilteredList<>(internships);
+    private class ModelStubAcceptingProjectAdded extends ModelStub {
+        final ObservableList<Item> projects = FXCollections.observableArrayList();
+        final FilteredList<Item> filteredList = new FilteredList<>(projects);
 
         @Override
-        public void addInternship(Internship internship) {
-            internships.add(internship);
+        public void addProject(Project project) {
+            projects.add(project);
             updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         }
 
