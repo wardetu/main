@@ -32,16 +32,6 @@ import seedu.address.testutil.TypicalResume;
 import seedu.address.testutil.TypicalResumeBook;
 import seedu.address.testutil.TypicalSkill;
 
-// Test Suite: To Remove after testing:
-/*
- * 1. Tagpull a tag that increases all 3 counts
- * 2. Tagpull a tag that increases 1 of the counts
- * 3. Tagpull that has no effect
- * 4. Tagpull invalid index
- * 5. Tagpull twice the same thing
- * 6. Tagpull pulls something that already exists - check for distinct
- * 7. Tagpull multiple tags
- */
 public class TagPullCommandTest {
     private Model model;
     private String feedbackToUser = "Items pulled:\n%1$d internship(s), %2$d project(s), %3$d skill(s).";
@@ -236,15 +226,4 @@ public class TagPullCommandTest {
         Resume thirdIndexResume = model.getResumeByIndex(thirdIndex);
         assertEquals(thirdIndexResume, expectedThirdResume);
     }
-
-    /*
-     * 1. Tagpull a tag that increases all 3 counts
-     * 2. Tagpull a tag that increases 1 of the counts
-     * 3. Tagpull that has no effect
-     * 4. Tagpull invalid index
-     * 5. Tagpull twice the same thing
-     * 6. Tagpull pulls something that already exists - check for distinct
-     * 7. Tagpull multiple tags
-     */
-
 }
