@@ -4,11 +4,11 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
-import seedu.address.model.item.wrapper.ObservablePerson;
-import seedu.address.model.item.wrapper.UniqueItemList;
+import seedu.address.model.item.UniqueItemList;
 
 /**
  * Unmodifiable view of a resume book

@@ -9,7 +9,7 @@ import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.wrapper.ObservablePerson;
+import seedu.address.model.item.ObservablePerson;
 
 /**
  * API of the Logic component

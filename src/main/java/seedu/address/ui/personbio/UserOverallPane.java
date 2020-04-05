@@ -10,8 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.MainApp;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
-import seedu.address.model.item.wrapper.ObservablePerson;
 import seedu.address.ui.UiPart;
 
 /**

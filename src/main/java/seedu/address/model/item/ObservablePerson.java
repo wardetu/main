@@ -1,8 +1,6 @@
-package seedu.address.model.item.wrapper;
+package seedu.address.model.item;
 
 import java.util.Observable;
-
-import seedu.address.model.item.Person;
 
 
 /**
