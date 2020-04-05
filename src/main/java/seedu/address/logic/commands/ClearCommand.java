@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.core.Version;
 import seedu.address.logic.commands.results.ClearCommandResult;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
