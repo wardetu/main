@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -14,13 +13,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new {@code ResumeEditCommand} object
+ * Parses input arguments and creates a new {@code TagPullCommand} object
  */
 public class TagPullCommandParser implements Parser<TagPullCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the ResumeEditCommand
-     * and returns an ResumeEditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the TagPullCommand
+     * and returns an TagPullCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
