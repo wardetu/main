@@ -6,11 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
@@ -19,11 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.results.ResumeEditCommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.item.Internship;
-import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
-import seedu.address.model.item.Skill;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the content of a Resume.
@@ -43,21 +36,16 @@ public class ResumeEditCommand extends Command {
             + PREFIX_PROJECT + " 1 ";
 
     protected final Index index;
-    protected final Set<Tag> tagList;
-    protected final boolean isTagPull;
     protected final Optional<List<Integer>> internshipIndices;
     protected final Optional<List<Integer>> projectIndices;
     protected final Optional<List<Integer>> skillIndices;
 
     public ResumeEditCommand(Index index, Optional<List<Integer>> internshipIndices,
-                             Optional<List<Integer>> projectIndices, Optional<List<Integer>> skillIndices,
-                             Set<Tag> tagList, boolean isTagPull) {
+                             Optional<List<Integer>> projectIndices, Optional<List<Integer>> skillIndices) {
         this.index = index;
         this.internshipIndices = internshipIndices;
         this.projectIndices = projectIndices;
         this.skillIndices = skillIndices;
-        this.tagList = tagList;
-        this.isTagPull = isTagPull;
     }
 
     @Override
@@ -76,35 +64,8 @@ public class ResumeEditCommand extends Command {
         List<Integer> projectIds = toEdit.getProjectIds();
         List<Integer> skillIds = toEdit.getSkillIds();
 
-        // Temporary implementation: Either you do a tag pull, or you do normally:
-        if (isTagPull) {
-            List<List<Integer>> listOfLists = tagPull(internshipIds, projectIds, skillIds, model);
-            internshipIds = listOfLists.get(0);
-            projectIds = listOfLists.get(1);
-            skillIds = listOfLists.get(2);
-        } else {
-            List<List<Integer>> listOfLists = normalImplementation(internshipIds, projectIds, skillIds, model);
-            internshipIds = listOfLists.get(0);
-            projectIds = listOfLists.get(1);
-            skillIds = listOfLists.get(2);
-        }
-
-
-
-        Resume editedResume = new Resume(toEdit.getName(), toEdit.getId(), toEdit.getTags());
-        model.editResume(editedResume, internshipIds, projectIds, skillIds);
-        model.setResume(toEdit, editedResume);
-        model.setResumeToDisplay();
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        model.commitResumeBook();
-        return new ResumeEditCommandResult(editedResume.toString(), "Resume is updated", model.getDisplayType());
-    }
-
-    private List<List<Integer>> normalImplementation(List<Integer> internshipIds, List<Integer> projectIds,
-                                                    List<Integer> skillIds, Model model) {
         // If any of the indices are present (user keys in the prefix), then use what the user uses
         // Else, use the one currently being used by the resume
-
         if (internshipIndices.isPresent()) {
             internshipIds = internshipIndices
                     .get()
@@ -131,41 +92,15 @@ public class ResumeEditCommand extends Command {
                     .map(x -> model.getSkillByIndex(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
         }
-        List<List<Integer>> newList = new ArrayList<>();
-        newList.add(internshipIds);
-        newList.add(projectIds);
-        newList.add(skillIds);
-        return newList;
-    }
 
-    private List<List<Integer>> tagPull(List<Integer> internshipIds, List<Integer> projectIds, List<Integer> skillIds,
-                                      Model model) {
-        List<List<Integer>> newList = new ArrayList<>();
-        internshipIds = tagList
-                .stream()
-                .map(model::getInternshipsByTag)
-                .flatMap(Collection::stream)
-                .map(Internship::getId)
-                .collect(Collectors.toList());
-
-        projectIds = tagList
-                .stream()
-                .map(model::getProjectsByTag)
-                .flatMap(Collection::stream)
-                .map(Project::getId)
-                .collect(Collectors.toList());
-
-        skillIds = tagList
-                .stream()
-                .map(model::getSkillsByTag)
-                .flatMap(Collection::stream)
-                .map(Skill::getId)
-                .collect(Collectors.toList());
-
-        newList.add(internshipIds);
-        newList.add(projectIds);
-        newList.add(skillIds);
-        return newList;
+        Resume editedResume = new Resume(toEdit.getName(), toEdit.getId(), toEdit.getTags());
+        model.editResume(editedResume, internshipIds, projectIds, skillIds);
+        model.setResume(toEdit, editedResume);
+        model.setResumeToDisplay();
+        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        model.commitResumeBook();
+        return new ResumeEditCommandResult(editedResume.toString(), "Resume is updated",
+                model.getDisplayType());
     }
 
     /**
