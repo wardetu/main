@@ -30,9 +30,9 @@ public class TagPullCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Pulls all the items with the desired tag into the "
             + "resume in the application with the specified index.\n"
-            + "Existing values will be added on top the new items to be added"
+            + "Existing values will be added on top the new items to be added.\n"
             + "Parameters: INDEX "
-            + "[#/ TAG}\n"
+            + "[#/ TAG]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + " tech";
 
