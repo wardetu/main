@@ -246,7 +246,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return internships.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
-    // TODO: Override?
+    @Override
     public List<Internship> getInternshipsByTag(Tag tag) {
         return internships
             .getItemList()
@@ -334,8 +334,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return projects.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
-    // TODO: Override?
-    public List<Project> getProjectsbyTag(Tag tag) {
+    @Override
+    public List<Project> getProjectsByTag(Tag tag) {
         return projects
             .getItemList()
             .stream()
@@ -420,7 +420,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return skills.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
-    // TODO: Override?
+    @Override
     public List<Skill> getSkillsByTag(Tag tag) {
         return skills
             .getItemList()
