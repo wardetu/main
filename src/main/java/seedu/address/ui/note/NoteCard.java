@@ -22,17 +22,11 @@ public class NoteCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label name;
-    @FXML
     private Label tag;
     @FXML
     private Label title;
     @FXML
     private Label time;
-    @FXML
-    private Label place;
-    @FXML
-    private Label description;
     @FXML
     private ImageView checkBox;
 
@@ -41,10 +35,7 @@ public class NoteCard extends UiPart<Region> {
         this.noteEntry = noteEntry;
         id.setText(displayIndex + ". ");
         title.setText(noteEntry.getTitle().toString());
-        name.setText(noteEntry.getName().toString());
         time.setText(noteEntry.getTime().toString());
-        place.setText(noteEntry.getPlace().toString());
-        description.setText(noteEntry.getDescription().toString());
         tag.setText("Priority: HIGH");
     }
 

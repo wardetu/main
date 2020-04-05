@@ -15,7 +15,7 @@
 .list-cell {
     -fx-background-color: blue;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
+    -fx-font-size: 10pt;
     -fx-text-fill: white;
 }
 
@@ -45,3 +45,36 @@
     -fx-background-color: #163950;
 }
 
+.scroll-pane {
+    -fx-background: transparent !important;
+    -fx-background-color: transparent !important;
+    -fx-border-color: rgb(255, 255, 255) !important;
+    -fx-border-width: 0 0 0.5 0 !important;
+    -fx-border-radius: 1 !important;
+}
+
+.scroll-bar {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-insets: 1;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 1 4 1 4;
+}
+
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 4 1 4 1;
+}

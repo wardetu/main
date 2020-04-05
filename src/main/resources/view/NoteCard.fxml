@@ -7,65 +7,48 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <HBox id="noteCardPane" stylesheets="@NoteCard.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox id="indexBox">
          <children>
-            <Label id="index" fx:id="id" prefHeight="44.0" prefWidth="64.0" text="Label" />
+            <Label id="index" fx:id="id" prefHeight="43.0" prefWidth="30.0" text="1">
+               <font>
+                  <Font size="9.0" />
+               </font></Label>
          </children>
       </VBox>
       <VBox prefWidth="1.0" />
-      <BorderPane prefHeight="100.0">
+      <BorderPane>
          <top>
             <HBox BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="checkBox" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="checkBox" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../docs/images/check-mark.png" />
-                     </image></ImageView>
-                  <Label id="tag" fx:id="tag" text="\\\$tag">
+                     </image>
                      <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../docs/images/label.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Label>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin></ImageView>
                   <Label fx:id="title" text="\\\$title" underline="true">
                      <HBox.margin>
-                        <Insets left="5.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin></Label>
                </children>
                <BorderPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets left="5.0" />
                </BorderPane.margin>
             </HBox>
          </top>
          <center>
             <HBox BorderPane.alignment="CENTER">
                <children>
-                  <VBox id="box1" prefHeight="200.0">
+                  <VBox id="box1">
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox>
                            <children>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../docs/images/name.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="5.0" right="5.0" />
-                                 </HBox.margin></ImageView>
-                              <Label id="header" text="Name: " />
-                              <Label id="details" fx:id="name" text="\\\$name" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -75,42 +58,40 @@
                               <Label id="header" text="Time: " />
                               <Label id="details" fx:id="time" text="\\\$time" />
                            </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox id="box2" prefHeight="200.0">
+                  <VBox>
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox>
                            <children>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../docs/images/label.png" />
+                                 </image>
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
-                                 <image>
-                                    <Image url="@../../../../docs/images/place.png" />
-                                 </image></ImageView>
-                              <Label id="header" text="Place: " />
-                              <Label id="details" fx:id="place" text="\\\$place" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                              </ImageView>
+                              <Label id="tag" text="Tag: " />
+                              <Label id="tag" fx:id="tag" text="\\\$tag">
                                  <HBox.margin>
-                                    <Insets left="5.0" right="5.0" />
+                                    <Insets />
                                  </HBox.margin>
-                                 <image>
-                                    <Image url="@../../../../docs/images/description.png" />
-                                 </image></ImageView>
-                              <Label id="header" text="Description: " />
-                              <Label id="details" fx:id="description" text="\\\$description" />
+                              </Label>
                            </children>
+                           <VBox.margin>
+                              <Insets left="5.0" />
+                           </VBox.margin>
                         </HBox>
                      </children>
                   </VBox>
                </children>
                <BorderPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </BorderPane.margin>
             </HBox>
          </center>
