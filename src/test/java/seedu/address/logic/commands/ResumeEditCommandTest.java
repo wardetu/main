@@ -81,6 +81,18 @@ public class ResumeEditCommandTest {
     }
 
     @Test
+    public void execute_invalidInternshipIndexWithDuplicates_throwsCommandException() {
+        Index validIndex = INDEX_FIRST_ITEM;
+        Optional<List<Integer>> internshipIndices = new ItemIndicesBuilder().add(3).add(3).add(3).build();
+        Optional<List<Integer>> projectIndices = Optional.empty();
+        Optional<List<Integer>> skillIndices = Optional.empty();
+        ResumeEditCommand resumeEditCommand = new ResumeEditCommand(validIndex, internshipIndices, projectIndices,
+                skillIndices);
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_REDIT_ITEM_INDEX, "internship", "3");
+        assertThrows(CommandException.class, expectedMessage, () -> resumeEditCommand.execute(model));
+    }
+
+    @Test
     public void execute_invalidInternshipIndexMixedWithValid_throwsCommandException() {
         Index validIndex = INDEX_FIRST_ITEM;
         Optional<List<Integer>> internshipIndices = new ItemIndicesBuilder().add(4).add(1).add(3).build();
