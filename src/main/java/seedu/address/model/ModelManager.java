@@ -20,6 +20,7 @@ import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.note.NoteEntry;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -189,6 +190,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public List<Internship> getInternshipsByTag(Tag tag) {
+        return versionedResumeBook.getInternshipsByTag(tag);
+    }
+
+    @Override
     public int getInternshipSize() {
         return versionedResumeBook.getInternshipSize();
     }
@@ -239,6 +245,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public List<Project> getProjectsByTag(Tag tag) {
+        return versionedResumeBook.getProjectsByTag(tag);
+    }
+
+    @Override
     public int getProjectSize() {
         return versionedResumeBook.getProjectSize();
     }
@@ -286,6 +297,11 @@ public class ModelManager implements Model {
     @Override
     public Skill getSkillById(int id) {
         return versionedResumeBook.getSkillById(id);
+    }
+
+    @Override
+    public List<Skill> getSkillsByTag(Tag tag) {
+        return versionedResumeBook.getSkillsByTag(tag);
     }
 
     @Override
@@ -358,6 +374,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Item> getFilteredItemList() {
         return filteredItems;
+    }
+
+    @Override
+    public void setItemsToDisplay(String typeString) {
+        versionedResumeBook.setItemsToDisplay(typeString);
     }
 
     @Override

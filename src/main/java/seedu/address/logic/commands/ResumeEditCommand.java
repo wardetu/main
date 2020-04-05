@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -13,6 +14,8 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.ResumeEditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Resume;
 
@@ -58,15 +61,14 @@ public class ResumeEditCommand extends Command {
 
         Resume toEdit = model.getResumeByIndex(index);
 
-        List<Integer> internshipsId = toEdit.getInternshipIds();
-        List<Integer> projectsId = toEdit.getProjectIds();
-        List<Integer> skillsId = toEdit.getSkillIds();
+        List<Integer> internshipIds = toEdit.getInternshipIds();
+        List<Integer> projectIds = toEdit.getProjectIds();
+        List<Integer> skillIds = toEdit.getSkillIds();
 
         // If any of the indices are present (user keys in the prefix), then use what the user uses
         // Else, use the one currently being used by the resume
-
         if (internshipIndices.isPresent()) {
-            internshipsId = internshipIndices
+            internshipIds = internshipIndices
                     .get()
                     .stream()
                     .distinct()
@@ -75,7 +77,7 @@ public class ResumeEditCommand extends Command {
         }
 
         if (projectIndices.isPresent()) {
-            projectsId = projectIndices
+            projectIds = projectIndices
                     .get()
                     .stream()
                     .distinct()
@@ -84,7 +86,7 @@ public class ResumeEditCommand extends Command {
         }
 
         if (skillIndices.isPresent()) {
-            skillsId = skillIndices
+            skillIds = skillIndices
                     .get()
                     .stream()
                     .distinct()
@@ -92,11 +94,14 @@ public class ResumeEditCommand extends Command {
                     .collect(Collectors.toList());
         }
 
-        model.editResume(toEdit, internshipsId, projectsId, skillsId);
+        Resume editedResume = new Resume(toEdit.getName(), toEdit.getId(), toEdit.getTags());
+        model.editResume(editedResume, internshipIds, projectIds, skillIds);
+        model.setResume(toEdit, editedResume);
         model.setResumeToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
-        return new CommandResult(toEdit.toString(), "Resume is updated", model.getDisplayType());
+        return new ResumeEditCommandResult(editedResume.toString(), "Resume is updated",
+                model.getDisplayType());
     }
 
     /**
@@ -106,55 +111,84 @@ public class ResumeEditCommand extends Command {
         // Internships
         if (internshipIndices.isPresent()) {
             List<Integer> unboxedIndices = internshipIndices.get();
-            StringBuilder invalidIndices = new StringBuilder();
+            List<Integer> invalidIndices = new ArrayList<>();
             boolean isInvalidIndexPresent = false;
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
                     isInvalidIndexPresent = true;
-                    invalidIndices.append(i.toString()).append(" ");
+                    invalidIndices.add(i);
                 }
             }
 
+            String invalidIndicesString = invalidIndices
+                    .stream()
+                    .distinct()
+                    .map(Object::toString)
+                    .collect(Collectors.joining(" "));
+
             if (isInvalidIndexPresent) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_REDIT_ITEM_INDEX, "internship",
-                        invalidIndices.toString().trim()));
+                        invalidIndicesString.trim()));
             }
         }
 
         // Projects
         if (projectIndices.isPresent()) {
             List<Integer> unboxedIndices = projectIndices.get();
-            StringBuilder invalidIndices = new StringBuilder();
+            List<Integer> invalidIndices = new ArrayList<>();
             boolean isInvalidIndexPresent = false;
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getProjectSize()) {
                     isInvalidIndexPresent = true;
-                    invalidIndices.append(i.toString()).append(" ");
+                    invalidIndices.add(i);
                 }
             }
 
+            String invalidIndicesString = invalidIndices
+                    .stream()
+                    .distinct()
+                    .map(Object::toString)
+                    .collect(Collectors.joining(" "));
+
             if (isInvalidIndexPresent) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_REDIT_ITEM_INDEX, "project",
-                        invalidIndices.toString().trim()));
+                        invalidIndicesString.trim()));
             }
         }
 
         // Skills
         if (skillIndices.isPresent()) {
             List<Integer> unboxedIndices = skillIndices.get();
-            StringBuilder invalidIndices = new StringBuilder();
+            List<Integer> invalidIndices = new ArrayList<>();
             boolean isInvalidIndexPresent = false;
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getSkillSize()) {
                     isInvalidIndexPresent = true;
-                    invalidIndices.append(i.toString()).append(" ");
+                    invalidIndices.add(i);
                 }
             }
 
+            String invalidIndicesString = invalidIndices
+                    .stream()
+                    .distinct()
+                    .map(Object::toString)
+                    .collect(Collectors.joining(" "));
+
             if (isInvalidIndexPresent) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_REDIT_ITEM_INDEX, "skill",
-                        invalidIndices.toString().trim()));
+                        invalidIndicesString.trim()));
             }
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ResumeEditCommand // instanceof handles nulls
+                && index.equals(((ResumeEditCommand) other).index)
+                && internshipIndices.equals(((ResumeEditCommand) other).internshipIndices)
+                && projectIndices.equals(((ResumeEditCommand) other).projectIndices)
+                && skillIndices.equals(((ResumeEditCommand) other).skillIndices));
+    }
+
 }

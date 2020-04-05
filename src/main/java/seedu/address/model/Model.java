@@ -14,6 +14,7 @@ import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.note.NoteEntry;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -130,6 +131,8 @@ public interface Model {
      */
     Internship getInternshipById(int id);
 
+    List<Internship> getInternshipsByTag(Tag tag);
+
     /**
      * Return the size of the internship list.
      */
@@ -182,6 +185,8 @@ public interface Model {
      */
     Project getProjectById(int id);
 
+    List<Project> getProjectsByTag(Tag tag);
+
     /**
      * Return the size of the project list.
      */
@@ -233,6 +238,8 @@ public interface Model {
      * @return Skill item with {@code id}
      */
     Skill getSkillById(int id);
+
+    List<Skill> getSkillsByTag(Tag tag);
 
     /**
      * Return the size of the skill list.
@@ -298,6 +305,8 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered item list */
     ObservableList<Item> getFilteredItemList();
+
+    void setItemsToDisplay(String typeString);
 
     /**
      * Updates the filter of the filtered item list to filter by the given {@code predicate}.

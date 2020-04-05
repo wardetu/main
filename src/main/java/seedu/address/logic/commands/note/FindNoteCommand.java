@@ -3,8 +3,8 @@ package seedu.address.logic.commands.note;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.find.FindCommand;
+import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.note.field.EntryTitleContainsKeywordsPredicate;
 

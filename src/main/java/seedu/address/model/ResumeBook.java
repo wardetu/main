@@ -2,7 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
@@ -20,6 +22,7 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.note.NoteEntry;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 
 /**
@@ -232,7 +235,16 @@ public class ResumeBook implements ReadOnlyResumeBook {
         internships.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getInternshipIds().remove(Integer.valueOf(id));
+            Resume newResume = new Resume(resume.getName(), resume.getId(), resume.getTags());
+            List<Integer> newInternshipList = new ArrayList<>();
+            newInternshipList.addAll(resume.getInternshipIds());
+
+            newResume.setInternshipIds(newInternshipList);
+            newResume.setProjectIds(resume.getProjectIds());
+            newResume.setSkillIds(resume.getSkillIds());
+            newResume.getInternshipIds().remove(Integer.valueOf(id));
+
+            setResume(resume, newResume);
         }
     }
 
@@ -240,6 +252,19 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public Internship getInternshipByIndex(Index index) {
         return internships.asUnmodifiableObservableList().get(index.getZeroBased());
     }
+
+    @Override
+    public List<Internship> getInternshipsByTag(Tag tag) {
+        return internships
+            .getItemList()
+            .stream()
+            .distinct()
+            .filter(x -> x.hasTag(tag))
+            .map(x -> (Internship) x)
+            .collect(Collectors.toList());
+    }
+
+
 
     @Override
     public boolean hasInternshipId(int id) {
@@ -298,13 +323,33 @@ public class ResumeBook implements ReadOnlyResumeBook {
         projects.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getProjectIds().remove(Integer.valueOf(id));
+            Resume newResume = new Resume(resume.getName(), resume.getId(), resume.getTags());
+            List<Integer> newProjectList = new ArrayList<>();
+            newProjectList.addAll(resume.getProjectIds());
+
+            newResume.setInternshipIds(resume.getInternshipIds());
+            newResume.setProjectIds(newProjectList);
+            newResume.setSkillIds(resume.getSkillIds());
+            newResume.getProjectIds().remove(Integer.valueOf(id));
+
+            setResume(resume, newResume);
         }
     }
 
     @Override
     public Project getProjectByIndex(Index index) {
         return projects.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public List<Project> getProjectsByTag(Tag tag) {
+        return projects
+            .getItemList()
+            .stream()
+            .distinct()
+            .filter(x -> x.hasTag(tag))
+            .map(x -> (Project) x)
+            .collect(Collectors.toList());
     }
 
     @Override
@@ -364,13 +409,33 @@ public class ResumeBook implements ReadOnlyResumeBook {
         skills.remove(key);
         for (Item item : resumes) {
             Resume resume = (Resume) item;
-            resume.getSkillIds().remove(Integer.valueOf(id));
+            Resume newResume = new Resume(resume.getName(), resume.getId(), resume.getTags());
+            List<Integer> newSkillList = new ArrayList<>();
+            newSkillList.addAll(resume.getSkillIds());
+
+            newResume.setInternshipIds(resume.getInternshipIds());
+            newResume.setProjectIds(resume.getProjectIds());
+            newResume.setSkillIds(newSkillList);
+            newResume.getSkillIds().remove(Integer.valueOf(id));
+
+            setResume(resume, newResume);
         }
     }
 
     @Override
     public Skill getSkillByIndex(Index index) {
         return skills.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public List<Skill> getSkillsByTag(Tag tag) {
+        return skills
+            .getItemList()
+            .stream()
+            .distinct()
+            .filter(x -> x.hasTag(tag))
+            .map(x -> (Skill) x)
+            .collect(Collectors.toList());
     }
 
     @Override

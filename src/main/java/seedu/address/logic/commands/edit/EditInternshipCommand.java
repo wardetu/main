@@ -13,10 +13,12 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.EditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
+import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
@@ -71,14 +73,15 @@ public class EditInternshipCommand extends EditCommand {
 
         Internship editedInternship = createEditedInternship(toEdit, editInternshipDescriptor);
 
-        if (model.hasInternship(editedInternship)) {
-            throw new CommandException("An internship with the same name, role, and time already exists.");
+        try {
+            model.setInternship(toEdit, editedInternship);
+            model.setInternshipToDisplay();
+            model.commitResumeBook();
+        } catch (DuplicateItemException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
-        model.setInternship(toEdit, editedInternship);
-        model.setInternshipToDisplay();
-        model.commitResumeBook();
-        return new CommandResult(editedInternship.toString(),
+        return new EditCommandResult(editedInternship.toString(),
                 String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship),
                 model.getDisplayType());
     }

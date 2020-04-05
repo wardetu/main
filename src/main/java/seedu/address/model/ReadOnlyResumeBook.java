@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
@@ -10,6 +12,7 @@ import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
 import seedu.address.model.note.NoteEntry;
+import seedu.address.model.tag.Tag;
 
 /**
  * Unmodifiable view of a resume book
@@ -69,6 +72,13 @@ public interface ReadOnlyResumeBook {
      */
     Internship getInternshipByIndex(Index index);
 
+    /**
+     * Returns a list of Internship which is tagged with {@code tag}.
+     * @param tag the {@code tag} which is expected in the Internship item.
+     * @return List of Internship tagged with {@code tag}.
+     */
+    List<Internship> getInternshipsByTag(Tag tag);
+
     boolean hasInternshipId(int id);
 
     /**
@@ -92,6 +102,13 @@ public interface ReadOnlyResumeBook {
      */
     Project getProjectByIndex(Index index);
 
+    /**
+     * Returns a list of Project which is tagged with {@code tag}.
+     * @param tag the {@code tag} which is expected in the Project item.
+     * @return List of Project tagged with {@code tag}.
+     */
+    List<Project> getProjectsByTag(Tag tag);
+
     boolean hasProjectId(int id);
 
     /**
@@ -114,6 +131,13 @@ public interface ReadOnlyResumeBook {
      * @return Skill item at {@code index}
      */
     Skill getSkillByIndex(Index index);
+
+    /**
+     * Returns a list of Skill which is tagged with {@code tag}.
+     * @param tag the {@code tag} which is expected in the Skill item.
+     * @return List of Skill tagged with {@code tag}.
+     */
+    List<Skill> getSkillsByTag(Tag tag);
 
     boolean hasSkillId(int id);
 

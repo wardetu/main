@@ -77,6 +77,10 @@ public abstract class Item {
         return Collections.unmodifiableSet(tags);
     }
 
+    public boolean hasTag(Tag tag) {
+        return tags.contains(tag);
+    }
+
     /**
      * Returns true if both items have the same name and are of the same type.
      * This defines a weaker notion of equality between two items.

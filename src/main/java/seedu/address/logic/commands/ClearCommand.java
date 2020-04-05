@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.results.ClearCommandResult;
+import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ResumeBook;
 
@@ -17,7 +19,10 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        String type = model.getDisplayType();
         model.setResumeBook(new ResumeBook());
-        return new CommandResult("", MESSAGE_SUCCESS, model.getDisplayType());
+        model.setItemsToDisplay(type);
+        model.commitResumeBook();
+        return new ClearCommandResult(" ", MESSAGE_SUCCESS, model.getDisplayType());
     }
 }

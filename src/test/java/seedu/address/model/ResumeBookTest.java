@@ -24,6 +24,7 @@ package seedu.address.model;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,7 +44,11 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
+<<<<<<< HEAD
 import seedu.address.model.note.NoteEntry;
+=======
+import seedu.address.model.tag.Tag;
+>>>>>>> b27a99a8cac7862ede90840fe445b907740dfaca
 
 public class ResumeBookTest {
     /*
@@ -205,6 +210,11 @@ public class ResumeBookTest {
         }
 
         @Override
+        public List<Internship> getInternshipsByTag(Tag tag) {
+            return null;
+        }
+
+        @Override
         public Internship getInternshipById(int id) {
             return new Internship(new Name("Company 1"), "Software Engineer", new Time("02-2019"),
                     new Time("05-2020"), "I did nothing", new HashSet<>());
@@ -217,6 +227,11 @@ public class ResumeBookTest {
         }
 
         @Override
+        public List<Project> getProjectsByTag(Tag tag) {
+            return null;
+        }
+
+        @Override
         public Project getProjectById(int id) {
             return new Project(new Name("Project 1"), new Time("01-2020"), new Website("www.website.com"),
                     "I did nothing", new HashSet<>());
@@ -225,6 +240,11 @@ public class ResumeBookTest {
         @Override
         public Skill getSkillByIndex(Index index) {
             return new Skill(new Name("Useless skill 1"), Level.ADVANCED, new HashSet<>(), -1);
+        }
+
+        @Override
+        public List<Skill> getSkillsByTag(Tag tag) {
+            return null;
         }
 
         @Override

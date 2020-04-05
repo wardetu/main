@@ -2,9 +2,9 @@ package seedu.address.logic.commands.note;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.note.NoteEntry;
 
