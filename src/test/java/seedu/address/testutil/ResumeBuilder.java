@@ -25,9 +25,9 @@ public class ResumeBuilder {
     private Set<Tag> tags = new HashSet<>();
 
     // The actual Resume uses ids, but during building I will use the objects and map it to its ids
-    List<Internship> internships = new ArrayList<>();
-    List<Project> projects = new ArrayList<>();
-    List<Skill> skills = new ArrayList<>();
+    private List<Internship> internships = new ArrayList<>();
+    private List<Project> projects = new ArrayList<>();
+    private List<Skill> skills = new ArrayList<>();
 
     public ResumeBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -79,6 +79,10 @@ public class ResumeBuilder {
         return this;
     }
 
+    /**
+     * Builds the Resume based on data that has been added to the ResumeBuilder.
+     * @return the Resume that has been built.
+     */
     public Resume build() {
         Resume resume = new Resume(name, tags);
         List<Integer> internshipIds = internships

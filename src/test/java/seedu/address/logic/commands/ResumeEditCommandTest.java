@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
@@ -29,20 +29,6 @@ import seedu.address.testutil.TypicalResume;
 import seedu.address.testutil.TypicalResumeBook;
 import seedu.address.testutil.TypicalSkill;
 
-// Test Suite (to remove after writing for all):
-
-/*
- * 1. Invalid Index
- * 2. Invalid Internship Index
- * 3. Invalid Skill Index
- * 4. Invalid Project Index
- * 5. Test all I, S, P, valid
- * 6. Test all pairs (IS, SP, IP) valid
- * 7. Test all solo valid
- * 8. Test removal
- * 9. Test nothing supplied nothing changes
- * 10. duplicates
- */
 public class ResumeEditCommandTest {
     private Model model;
 

@@ -8,7 +8,7 @@ import java.util.Optional;
  * A builder class to support testing of ResumeEditCommand and TagPullCommand.
  */
 public class ItemIndicesBuilder {
-    List<Integer> itemIndices;
+    private List<Integer> itemIndices;
 
     public ItemIndicesBuilder() {
         itemIndices = new ArrayList<>();
