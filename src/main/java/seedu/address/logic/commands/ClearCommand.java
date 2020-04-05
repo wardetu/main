@@ -22,6 +22,7 @@ public class ClearCommand extends Command {
         String type = model.getDisplayType();
         model.setResumeBook(new ResumeBook());
         model.setItemsToDisplay(type);
-        return new ClearCommandResult("", MESSAGE_SUCCESS, model.getDisplayType());
+        model.commitResumeBook();
+        return new ClearCommandResult(" ", MESSAGE_SUCCESS, model.getDisplayType());
     }
 }
