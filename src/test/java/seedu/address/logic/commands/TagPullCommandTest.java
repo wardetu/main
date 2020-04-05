@@ -172,7 +172,6 @@ public class TagPullCommandTest {
     }
 
     // Not sure why this isn't working
-    /*
     @Test
     public void execute_validTagCalledTwice_success() throws CommandException {
         Index index = INDEX_FIRST_ITEM;
@@ -195,12 +194,11 @@ public class TagPullCommandTest {
         assertEquals(resume, expectedResume);
 
         CommandResult commandResultAgain = new TagPullCommand(index, tags).execute(model);
-        assertEquals(String.format(feedbackToUser, 0, 0, 0), commandResult.getFeedbackToUser());
+        assertEquals(String.format(feedbackToUser, 0, 0, 0), commandResultAgain.getFeedbackToUser());
 
         Resume resumeAgain = model.getResumeByIndex(index);
         assertEquals(resumeAgain, expectedResume);
     }
-    */
 
     @Test
     public void execute_multipleTags_success() throws CommandException {
