@@ -94,6 +94,9 @@ public class Resume extends Item {
         return other == this // short circuit if same object
                 || (other instanceof Resume // instanceof handles nulls
                 && getName().equals(((Resume) other).getName())
-                && getTags().equals(((Resume) other).getTags()));
+                && getTags().equals(((Resume) other).getTags()))
+                && this.internshipIds.equals(((Resume) other).internshipIds)
+                && this.projectIds.equals(((Resume) other).projectIds)
+                && this.skillIds.equals(((Resume) other).skillIds);
     }
 }

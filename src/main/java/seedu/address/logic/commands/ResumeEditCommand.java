@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -110,55 +111,84 @@ public class ResumeEditCommand extends Command {
         // Internships
         if (internshipIndices.isPresent()) {
             List<Integer> unboxedIndices = internshipIndices.get();
-            StringBuilder invalidIndices = new StringBuilder();
+            List<Integer> invalidIndices = new ArrayList<>();
             boolean isInvalidIndexPresent = false;
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getInternshipSize()) {
                     isInvalidIndexPresent = true;
-                    invalidIndices.append(i.toString()).append(" ");
+                    invalidIndices.add(i);
                 }
             }
 
+            String invalidIndicesString = invalidIndices
+                    .stream()
+                    .distinct()
+                    .map(Object::toString)
+                    .collect(Collectors.joining(" "));
+
             if (isInvalidIndexPresent) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_REDIT_ITEM_INDEX, "internship",
-                        invalidIndices.toString().trim()));
+                        invalidIndicesString.trim()));
             }
         }
 
         // Projects
         if (projectIndices.isPresent()) {
             List<Integer> unboxedIndices = projectIndices.get();
-            StringBuilder invalidIndices = new StringBuilder();
+            List<Integer> invalidIndices = new ArrayList<>();
             boolean isInvalidIndexPresent = false;
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getProjectSize()) {
                     isInvalidIndexPresent = true;
-                    invalidIndices.append(i.toString()).append(" ");
+                    invalidIndices.add(i);
                 }
             }
 
+            String invalidIndicesString = invalidIndices
+                    .stream()
+                    .distinct()
+                    .map(Object::toString)
+                    .collect(Collectors.joining(" "));
+
             if (isInvalidIndexPresent) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_REDIT_ITEM_INDEX, "project",
-                        invalidIndices.toString().trim()));
+                        invalidIndicesString.trim()));
             }
         }
 
         // Skills
         if (skillIndices.isPresent()) {
             List<Integer> unboxedIndices = skillIndices.get();
-            StringBuilder invalidIndices = new StringBuilder();
+            List<Integer> invalidIndices = new ArrayList<>();
             boolean isInvalidIndexPresent = false;
             for (Integer i: unboxedIndices) {
                 if (Index.fromOneBased(i).getZeroBased() >= model.getSkillSize()) {
                     isInvalidIndexPresent = true;
-                    invalidIndices.append(i.toString()).append(" ");
+                    invalidIndices.add(i);
                 }
             }
 
+            String invalidIndicesString = invalidIndices
+                    .stream()
+                    .distinct()
+                    .map(Object::toString)
+                    .collect(Collectors.joining(" "));
+
             if (isInvalidIndexPresent) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_REDIT_ITEM_INDEX, "skill",
-                        invalidIndices.toString().trim()));
+                        invalidIndicesString.trim()));
             }
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ResumeEditCommand // instanceof handles nulls
+                && index.equals(((ResumeEditCommand) other).index)
+                && internshipIndices.equals(((ResumeEditCommand) other).internshipIndices)
+                && projectIndices.equals(((ResumeEditCommand) other).projectIndices)
+                && skillIndices.equals(((ResumeEditCommand) other).skillIndices));
+    }
+
 }
