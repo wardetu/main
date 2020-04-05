@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NONE_USAGE;
@@ -225,5 +227,34 @@ public class TagPullCommandTest {
 
         Resume thirdIndexResume = model.getResumeByIndex(thirdIndex);
         assertEquals(thirdIndexResume, expectedThirdResume);
+    }
+    @Test
+    public void equals() {
+        Index index = INDEX_FIRST_ITEM;
+        Set<Tag> tagsA = new HashSet<>();
+        tagsA.add(new Tag(VALID_TAG_JAVA));
+        tagsA.add(new Tag(VALID_TAG_FRONTEND));
+
+        Set<Tag> tagsB = new HashSet<>();
+        tagsA.add(new Tag(VALID_TAG_TECH));
+
+        TagPullCommand tagPullACommand = new TagPullCommand(index, tagsA);
+        TagPullCommand tagPullBCommand = new TagPullCommand(index, tagsB);
+
+        // same object -> returns true
+        assertTrue(tagPullACommand.equals(tagPullACommand));
+
+        // same values -> returns true
+        TagPullCommand tagPullACommandCopy = new TagPullCommand(index, tagsA);
+        assertTrue(tagPullACommand.equals(tagPullACommandCopy));
+
+        // different types -> returns false
+        assertFalse(tagPullACommand.equals(1));
+
+        // null -> returns false
+        assertFalse(tagPullACommand.equals(null));
+
+        // different tags -> returns false
+        assertFalse(tagPullACommand.equals(tagPullBCommand));
     }
 }
