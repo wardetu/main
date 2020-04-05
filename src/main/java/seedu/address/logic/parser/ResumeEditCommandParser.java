@@ -33,6 +33,7 @@ public class ResumeEditCommandParser implements Parser<ResumeEditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_INTERNSHIP, PREFIX_SKILL, PREFIX_PROJECT, PREFIX_TAG);
         Index index;
         Set<Tag> tagList;
+        boolean isTagPull;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -42,6 +43,13 @@ public class ResumeEditCommandParser implements Parser<ResumeEditCommand> {
         }
         tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
+        if (tagList.isEmpty()) {
+            // Use the internship indices thingy
+            isTagPull = false;
+        } else {
+            isTagPull = true;
+        }
+
         // Optional.empty() denotes non-existence, "" denotes that no argument specified, else some arguments specified
         Optional<List<Integer>> internshipIndices = ParserUtil.parseReditItemIndices(
                 argMultimap.getValue(PREFIX_INTERNSHIP).orElse(null));
@@ -50,6 +58,6 @@ public class ResumeEditCommandParser implements Parser<ResumeEditCommand> {
         Optional<List<Integer>> skillsIndices = ParserUtil.parseReditItemIndices(
                 argMultimap.getValue(PREFIX_SKILL).orElse(null));
 
-        return new ResumeEditCommand(index, internshipIndices, projectsIndices, skillsIndices, tagList);
+        return new ResumeEditCommand(index, internshipIndices, projectsIndices, skillsIndices, tagList, isTagPull);
     }
 }

@@ -39,18 +39,20 @@ public class ResumeEditCommand extends Command {
 
     protected final Index index;
     protected final Set<Tag> tagList;
+    protected final boolean isTagPull;
     protected final Optional<List<Integer>> internshipIndices;
     protected final Optional<List<Integer>> projectIndices;
     protected final Optional<List<Integer>> skillIndices;
 
     public ResumeEditCommand(Index index, Optional<List<Integer>> internshipIndices,
                              Optional<List<Integer>> projectIndices, Optional<List<Integer>> skillIndices,
-                             Set<Tag> tagList) {
+                             Set<Tag> tagList, boolean isTagPull) {
         this.index = index;
         this.internshipIndices = internshipIndices;
         this.projectIndices = projectIndices;
         this.skillIndices = skillIndices;
         this.tagList = tagList;
+        this.isTagPull = isTagPull;
     }
 
     @Override
@@ -65,15 +67,35 @@ public class ResumeEditCommand extends Command {
 
         Resume toEdit = model.getResumeByIndex(index);
 
-        List<Integer> internshipsId = toEdit.getInternshipIds();
-        List<Integer> projectsId = toEdit.getProjectIds();
-        List<Integer> skillsId = toEdit.getSkillIds();
+        List<Integer> internshipIds = toEdit.getInternshipIds();
+        List<Integer> projectIds = toEdit.getProjectIds();
+        List<Integer> skillIds = toEdit.getSkillIds();
 
+        // Temporary implementation: Either you do a tag pull, or you do normally:
+        if (isTagPull) {
+            normalImplementation(internshipIds, projectIds, skillIds, model);
+        } else {
+            tagPull(internshipIds, projectIds, skillIds, model);
+        }
+
+
+
+        Resume editedResume = new Resume(toEdit.getName(), toEdit.getId(), toEdit.getTags());
+        model.editResume(editedResume, internshipIds, projectIds, skillIds);
+        model.setResume(toEdit, editedResume);
+        model.setResumeToDisplay();
+        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        model.commitResumeBook();
+        return new ResumeEditCommandResult(toEdit.toString(), "Resume is updated", model.getDisplayType());
+    }
+
+    private void normalImplementation(List<Integer> internshipIds, List<Integer> projectIds, List<Integer> skillIds,
+                                      Model model) {
         // If any of the indices are present (user keys in the prefix), then use what the user uses
         // Else, use the one currently being used by the resume
 
         if (internshipIndices.isPresent()) {
-            internshipsId = internshipIndices
+            internshipIds = internshipIndices
                     .get()
                     .stream()
                     .distinct()
@@ -82,7 +104,7 @@ public class ResumeEditCommand extends Command {
         }
 
         if (projectIndices.isPresent()) {
-            projectsId = projectIndices
+            projectIds = projectIndices
                     .get()
                     .stream()
                     .distinct()
@@ -91,21 +113,18 @@ public class ResumeEditCommand extends Command {
         }
 
         if (skillIndices.isPresent()) {
-            skillsId = skillIndices
+            skillIds = skillIndices
                     .get()
                     .stream()
                     .distinct()
                     .map(x -> model.getSkillByIndex(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
         }
+    }
 
-        Resume editedResume = new Resume(toEdit.getName(), toEdit.getId(), toEdit.getTags());
-        model.editResume(editedResume, internshipsId, projectsId, skillsId);
-        model.setResume(toEdit, editedResume);
-        model.setResumeToDisplay();
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        model.commitResumeBook();
-        return new ResumeEditCommandResult(toEdit.toString(), "Resume is updated", model.getDisplayType());
+    private void tagPull(List<Integer> internshipIds, List<Integer> projectIds, List<Integer> skillIds,
+                                      Model model) {
+
     }
 
     /**
