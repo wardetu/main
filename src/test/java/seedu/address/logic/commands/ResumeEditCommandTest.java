@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class ResumeEditCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+        model = new ModelManager(TypicalResumeBook.TYPICAL_WITH_FILLED_RESUME, new UserPrefs());
     }
 
     @Test
@@ -57,7 +58,7 @@ public class ResumeEditCommandTest {
 
     @Test
     public void execute_invalidResumeIndex_throwsCommandException() {
-        Index invalidIndex = INDEX_THIRD_ITEM;
+        Index invalidIndex = INDEX_FOURTH_ITEM;
         Optional<List<Integer>> internshipIndices = ItemIndicesBuilder.empty();
         Optional<List<Integer>> projectIndices = ItemIndicesBuilder.empty();
         Optional<List<Integer>> skillIndices = ItemIndicesBuilder.empty();
@@ -228,6 +229,108 @@ public class ResumeEditCommandTest {
         Optional<List<Integer>> internshipIndices = ItemIndicesBuilder.empty();
         Optional<List<Integer>> projectIndices = ItemIndicesBuilder.empty();
         Optional<List<Integer>> skillIndices = new ItemIndicesBuilder().add(1).build();
+        ResumeEditCommand resumeEditCommand = new ResumeEditCommand(validIndex, internshipIndices, projectIndices,
+                skillIndices);
+
+        CommandResult commandResult = resumeEditCommand.execute(model);
+        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+
+        Resume changedResume = model.getResumeByIndex(validIndex);
+        Resume expectedResume = new ResumeBuilder(TypicalResume.ME_RESUME)
+                .withSkill(TypicalSkill.REACT)
+                .build();
+
+        assertEquals(changedResume, expectedResume);
+    }
+
+    @Test
+    public void execute_removeAll_success() throws CommandException {
+        Index validIndex = INDEX_THIRD_ITEM;
+        Optional<List<Integer>> internshipIndices = new ItemIndicesBuilder().build();
+        Optional<List<Integer>> projectIndices = new ItemIndicesBuilder().build();
+        Optional<List<Integer>> skillIndices = new ItemIndicesBuilder().build();
+        ResumeEditCommand resumeEditCommand = new ResumeEditCommand(validIndex, internshipIndices, projectIndices,
+                skillIndices);
+
+        CommandResult commandResult = resumeEditCommand.execute(model);
+        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+
+        Resume changedResume = model.getResumeByIndex(validIndex);
+        Resume expectedResume = new ResumeBuilder(TypicalResume.FILLED_RESUME)
+                .build();
+
+        assertEquals(changedResume, expectedResume);
+    }
+
+    @Test
+    public void execute_removeSome_success() throws CommandException {
+        Index validIndex = INDEX_THIRD_ITEM;
+        Optional<List<Integer>> internshipIndices = new ItemIndicesBuilder().build();
+        Optional<List<Integer>> projectIndices = ItemIndicesBuilder.empty();
+        Optional<List<Integer>> skillIndices = new ItemIndicesBuilder().build();
+        ResumeEditCommand resumeEditCommand = new ResumeEditCommand(validIndex, internshipIndices, projectIndices,
+                skillIndices);
+
+        CommandResult commandResult = resumeEditCommand.execute(model);
+        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+
+        Resume changedResume = model.getResumeByIndex(validIndex);
+        Resume expectedResume = new ResumeBuilder(TypicalResume.FILLED_RESUME)
+                .withProject(TypicalProject.ORBITAL)
+                .build();
+
+        assertEquals(changedResume, expectedResume);
+    }
+
+    @Test
+    public void execute_removeSomeWhileAdding_success() throws CommandException {
+        Index validIndex = INDEX_THIRD_ITEM;
+        Optional<List<Integer>> internshipIndices = new ItemIndicesBuilder().build();
+        Optional<List<Integer>> projectIndices = new ItemIndicesBuilder().add(1).add(2).build();
+        Optional<List<Integer>> skillIndices = new ItemIndicesBuilder().build();
+        ResumeEditCommand resumeEditCommand = new ResumeEditCommand(validIndex, internshipIndices, projectIndices,
+                skillIndices);
+
+        CommandResult commandResult = resumeEditCommand.execute(model);
+        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+
+        Resume changedResume = model.getResumeByIndex(validIndex);
+        Resume expectedResume = new ResumeBuilder(TypicalResume.FILLED_RESUME)
+                .withProject(TypicalProject.ORBITAL)
+                .withProject(TypicalProject.DUKE)
+                .build();
+
+        assertEquals(changedResume, expectedResume);
+    }
+
+    @Test
+    public void execute_nothingSupplied_success() throws CommandException {
+        Index validIndex = INDEX_THIRD_ITEM;
+        Optional<List<Integer>> internshipIndices = ItemIndicesBuilder.empty();
+        Optional<List<Integer>> projectIndices = ItemIndicesBuilder.empty();
+        Optional<List<Integer>> skillIndices = ItemIndicesBuilder.empty();
+        ResumeEditCommand resumeEditCommand = new ResumeEditCommand(validIndex, internshipIndices, projectIndices,
+                skillIndices);
+
+        CommandResult commandResult = resumeEditCommand.execute(model);
+        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+
+        Resume changedResume = model.getResumeByIndex(validIndex);
+        Resume expectedResume = new ResumeBuilder(TypicalResume.FILLED_RESUME)
+                .withInternship(TypicalInternship.GOOGLE)
+                .withProject(TypicalProject.ORBITAL)
+                .withSkill(TypicalSkill.GIT)
+                .build();
+
+        assertEquals(changedResume, expectedResume);
+    }
+
+    @Test
+    public void execute_duplicateIndices_success() throws CommandException {
+        Index validIndex = INDEX_FIRST_ITEM;
+        Optional<List<Integer>> internshipIndices = ItemIndicesBuilder.empty();
+        Optional<List<Integer>> projectIndices = ItemIndicesBuilder.empty();
+        Optional<List<Integer>> skillIndices = new ItemIndicesBuilder().add(1).add(1).add(1).build();
         ResumeEditCommand resumeEditCommand = new ResumeEditCommand(validIndex, internshipIndices, projectIndices,
                 skillIndices);
 
