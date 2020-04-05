@@ -58,7 +58,7 @@ public class ResumeBuilder {
         return this;
     }
 
-    /*
+    /**
      * Creates a ResumeBuilder with a newly added Internship.
      * @param internship the Internship to be added.
      * @return ResumeBuilder with a newly added Internship.
