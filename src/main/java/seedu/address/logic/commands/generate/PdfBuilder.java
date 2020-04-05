@@ -152,7 +152,7 @@ public class PdfBuilder {
             float width = 0;
             while (i < words.length) {
                 String word = words[i];
-                float add = curFont.getStringWidth(word) * curSize / 1000f;
+                float add = curFont.getStringWidth(word + " ") * curSize / 1000f;
                 if (width + add > limit) {
                     break;
                 }
@@ -263,7 +263,7 @@ public class PdfBuilder {
         String university = user.getUniversity();
         String from = user.getFrom().format();
         String to = user.getTo().format();
-        String title = university + " | " + to + " - " + from;
+        String title = university + " | " + from + " - " + to;
         addItemTitle(title);
 
         setFont(FONT_REGULAR, BODY_SIZE);

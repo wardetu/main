@@ -4,6 +4,8 @@ import static java.lang.System.err;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -90,28 +92,38 @@ public class GenerateResumeCommand extends Command {
             builder.addSectionTitle("EDUCATION");
             builder.addEducation(user);
 
-            builder.addSectionTitle("INTERNSHIPS");
-            for (Integer id: internshipsToAdd) {
-                Internship toAdd = model.getInternshipById(id);
-                builder.addInternship(toAdd);
+            if (!internshipsToAdd.isEmpty()) {
+                builder.addSectionTitle("INTERNSHIPS");
+                for (Integer id: internshipsToAdd) {
+                    Internship toAdd = model.getInternshipById(id);
+                    builder.addInternship(toAdd);
+                }
             }
 
-            builder.addSectionTitle("PROJECTS");
-            for (Integer id: projectsToAdd) {
-                Project toAdd = model.getProjectById(id);
-                builder.addProject(toAdd);
+            if (!projectsToAdd.isEmpty()) {
+                builder.addSectionTitle("PROJECTS");
+                for (Integer id: projectsToAdd) {
+                    Project toAdd = model.getProjectById(id);
+                    builder.addProject(toAdd);
+                }
             }
 
-            builder.addSectionTitle("SKILLS");
-            List<Skill> skills = resumeToGenerate.getSkillIds().stream()
-                    .map(x -> model.hasSkillId(x) ? model.getSkillById(x) : null)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList());
-            builder.addSkills(skills);
+            if (!skillsToAdd.isEmpty()) {
+                builder.addSectionTitle("SKILLS");
+                List<Skill> skills = resumeToGenerate.getSkillIds().stream()
+                        .map(x -> model.hasSkillId(x) ? model.getSkillById(x) : null)
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList());
+                builder.addSkills(skills);
+            }
 
             PDDocument resume = builder.build();
             resume.save(rootPath + fileName + ".pdf");
 
+            if (Desktop.isDesktopSupported()) {
+                File file = new File(rootPath + fileName + ".pdf");
+                Desktop.getDesktop().open(file);
+            }
         } catch (IOException e) {
             err.println("Exception while trying to create simple document - " + e);
         }

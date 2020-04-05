@@ -249,6 +249,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void setItemsToDisplay(String typeString) {
+
+    }
+
+    @Override
     public void updateFilteredItemList(Predicate<Item> predicate) {
 
     }

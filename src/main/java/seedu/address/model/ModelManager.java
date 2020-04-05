@@ -328,6 +328,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setItemsToDisplay(String typeString) {
+        versionedResumeBook.setItemsToDisplay(typeString);
+    }
+
+    @Override
     public void updateFilteredItemList(Predicate<Item> predicate) {
         requireNonNull(predicate);
         filteredItems.setPredicate(predicate);
