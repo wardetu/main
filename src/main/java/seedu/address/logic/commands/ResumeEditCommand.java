@@ -97,7 +97,7 @@ public class ResumeEditCommand extends Command {
         model.setResumeToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
-        return new ResumeEditCommandResult(toEdit.toString(), "Resume is updated", model.getDisplayType());
+        return new ResumeEditCommandResult(editedResume.toString(), "Resume is updated", model.getDisplayType());
     }
 
     private List<List<Integer>> normalImplementation(List<Integer> internshipIds, List<Integer> projectIds,
