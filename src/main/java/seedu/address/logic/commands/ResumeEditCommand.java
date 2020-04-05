@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -73,9 +74,15 @@ public class ResumeEditCommand extends Command {
 
         // Temporary implementation: Either you do a tag pull, or you do normally:
         if (isTagPull) {
-            normalImplementation(internshipIds, projectIds, skillIds, model);
+            List<List<Integer>> listOfLists = tagPull(internshipIds, projectIds, skillIds, model);
+            internshipIds = listOfLists.get(0);
+            projectIds = listOfLists.get(1);
+            skillIds = listOfLists.get(2);
         } else {
-            tagPull(internshipIds, projectIds, skillIds, model);
+            List<List<Integer>> listOfLists = normalImplementation(internshipIds, projectIds, skillIds, model);
+            internshipIds = listOfLists.get(0);
+            projectIds = listOfLists.get(1);
+            skillIds = listOfLists.get(2);
         }
 
 
@@ -89,8 +96,8 @@ public class ResumeEditCommand extends Command {
         return new ResumeEditCommandResult(toEdit.toString(), "Resume is updated", model.getDisplayType());
     }
 
-    private void normalImplementation(List<Integer> internshipIds, List<Integer> projectIds, List<Integer> skillIds,
-                                      Model model) {
+    private List<List<Integer>> normalImplementation(List<Integer> internshipIds, List<Integer> projectIds,
+                                                    List<Integer> skillIds, Model model) {
         // If any of the indices are present (user keys in the prefix), then use what the user uses
         // Else, use the one currently being used by the resume
 
@@ -120,11 +127,17 @@ public class ResumeEditCommand extends Command {
                     .map(x -> model.getSkillByIndex(Index.fromOneBased(x)).getId())
                     .collect(Collectors.toList());
         }
+        List<List<Integer>> newList = new ArrayList<>();
+        newList.add(internshipIds);
+        newList.add(projectIds);
+        newList.add(skillIds);
+        return newList;
     }
 
-    private void tagPull(List<Integer> internshipIds, List<Integer> projectIds, List<Integer> skillIds,
+    private List<List<Integer>> tagPull(List<Integer> internshipIds, List<Integer> projectIds, List<Integer> skillIds,
                                       Model model) {
-
+        List<List<Integer>> newList = new ArrayList<>();
+        return newList;
     }
 
     /**
