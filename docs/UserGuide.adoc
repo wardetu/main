@@ -469,7 +469,7 @@ Pull the internship, project and skill items with the specified tag(s) into a re
 `tagpull INDEX [#/ TAG]`
 ****
 
-This command does not remove items from the resume and will add items on top of existing items. 
+This command does not remove items from the resume and will add items on top of existing items.
 
 Examples:
 
