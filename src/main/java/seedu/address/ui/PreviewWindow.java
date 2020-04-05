@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +17,9 @@ public class PreviewWindow extends UiPart<Stage> {
     private static final String FXML = "PreviewWindow.fxml";
 
     @FXML
+    private Label previewHeader;
+
+    @FXML
     private TextArea previewText;
 
     /**
@@ -25,7 +29,6 @@ public class PreviewWindow extends UiPart<Stage> {
      */
     public PreviewWindow(Stage root) {
         super(FXML, root);
-        previewText.setText("PREVIEW_MESSAGE");
     }
 
     /**
@@ -36,7 +39,9 @@ public class PreviewWindow extends UiPart<Stage> {
     }
 
     public void setPreviewText(String text) {
-        previewText.setText(text);
+        String[] headerAndText = text.split("\n", 2);
+        previewHeader.setText(headerAndText[0]);
+        previewText.setText(headerAndText[1]);
     }
 
     /**

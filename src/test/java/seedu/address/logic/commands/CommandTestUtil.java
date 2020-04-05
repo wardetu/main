@@ -41,6 +41,7 @@ public class CommandTestUtil {
     public static final String VALID_RESUME_NAME_ME = "Mechanical Engineering Intern Resume";
     public static final String PREFIXED_NAME_ME = " " + PREFIX_NAME + " " + VALID_RESUME_NAME_ME;
     public static final String ITEM_TYPE_RESUME = " " + PREFIX_ITEM + " res";
+    public static final String VALID_RESUME_NAME_FILLED = "An already filled Resume";
 
     // SKILL
     public static final String VALID_SKILL_NAME_GIT = "Git and Github";
