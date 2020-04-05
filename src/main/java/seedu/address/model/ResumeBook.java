@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
@@ -20,6 +21,7 @@ import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 
 /**
@@ -243,6 +245,19 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public Internship getInternshipByIndex(Index index) {
         return internships.asUnmodifiableObservableList().get(index.getZeroBased());
     }
+
+    // TODO: Override?
+    public List<Internship> getInternshipsByTag(Tag tag) {
+        List<Internship> filteredListByTag = internships
+                .getItemList()
+                .stream()
+                .distinct()
+                .filter(x -> x.hasTag(tag))
+                .map(x -> (Internship) x)
+                .collect(Collectors.toList());
+        return filteredListByTag;
+    }
+
 
     @Override
     public boolean hasInternshipId(int id) {

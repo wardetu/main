@@ -13,6 +13,7 @@ import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -116,6 +117,8 @@ public interface Model {
      * @return Internship item with {@code id}
      */
     Internship getInternshipById(int id);
+
+    List<Internship> getInternshipsByTag(Tag tag);
 
     /**
      * Return the size of the internship list.

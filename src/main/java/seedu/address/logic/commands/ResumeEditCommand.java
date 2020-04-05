@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.results.ResumeEditCommandResult;
 import seedu.address.model.Model;
+import seedu.address.model.item.Internship;
 import seedu.address.model.item.Resume;
 import seedu.address.model.tag.Tag;
 
@@ -137,6 +139,15 @@ public class ResumeEditCommand extends Command {
     private List<List<Integer>> tagPull(List<Integer> internshipIds, List<Integer> projectIds, List<Integer> skillIds,
                                       Model model) {
         List<List<Integer>> newList = new ArrayList<>();
+        internshipIds = tagList
+                .stream()
+                .map(model::getInternshipsByTag)
+                .flatMap(Collection::stream)
+                .map(Internship::getId)
+                .collect(Collectors.toList());
+        newList.add(internshipIds);
+        newList.add(projectIds);
+        newList.add(skillIds);
         return newList;
     }
 

@@ -19,6 +19,7 @@ import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -140,6 +141,11 @@ public class ModelManager implements Model {
     @Override
     public Internship getInternshipByIndex(Index index) {
         return versionedResumeBook.getInternshipByIndex(index);
+    }
+
+    @Override
+    public List<Internship> getInternshipsByTag(Tag tag) {
+        return versionedResumeBook.getInternshipsByTag(tag);
     }
 
     @Override
