@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalInternship.NINJA_VAN;
@@ -19,6 +20,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.find.FindCommand;
 import seedu.address.logic.commands.find.FindInternshipCommand;
 import seedu.address.logic.commands.find.FindProjectCommand;
+import seedu.address.logic.commands.find.FindResumeCommand;
 import seedu.address.logic.commands.find.FindSkillCommand;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
@@ -41,34 +43,24 @@ public class FindCommandIntegrationTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
+        NameContainsKeywordsPredicate predicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        FindCommand findInternship = new FindInternshipCommand(predicate);
+        FindCommand findProject = new FindProjectCommand(predicate);
+        FindCommand findSkill = new FindSkillCommand(predicate);
+        FindCommand findResume = new FindResumeCommand(predicate);
 
-        FindInternshipCommand findFirstCommand = new FindInternshipCommand(firstPredicate);
-        FindInternshipCommand findSecondCommand = new FindInternshipCommand(secondPredicate);
-
-        // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
-
-        // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindInternshipCommand(firstPredicate);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertNotEquals(findInternship, findProject);
+        assertNotEquals(findInternship, findResume);
+        assertNotEquals(findInternship, findSkill);
+        assertNotEquals(findProject, findResume);
+        assertNotEquals(findProject, findSkill);
+        assertNotEquals(findResume, findSkill);
     }
 
     @Test
     public void execute_zeroKeywords_noInternshipFound() {
-        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setInternshipToDisplay();
         CommandResult expectedCommandResult = new CommandResult("",
                 String.format(Messages.MESSAGE_ITEMS_LISTED, 0, "Internships"),
@@ -82,7 +74,7 @@ public class FindCommandIntegrationTest {
 
     @Test
     public void execute_multipleKeywords_multipleInternshipsFound() {
-        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setInternshipToDisplay();
         CommandResult expectedCommandResult = new CommandResult("",
                 String.format(Messages.MESSAGE_ITEMS_LISTED, 2, "Internships"),
@@ -96,7 +88,7 @@ public class FindCommandIntegrationTest {
 
     @Test
     public void execute_zeroKeywords_noProjectFound() {
-        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setProjectToDisplay();
         CommandResult expectedCommandResult = new CommandResult("",
                 String.format(Messages.MESSAGE_ITEMS_LISTED, 0, "Projects"),
@@ -110,7 +102,7 @@ public class FindCommandIntegrationTest {
 
     @Test
     public void execute_singleKeyword_singleProjectFound() {
-        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setProjectToDisplay();
         CommandResult expectedCommandResult = new CommandResult("",
                 String.format(Messages.MESSAGE_ITEMS_LISTED, 1, "Projects"),
@@ -124,7 +116,7 @@ public class FindCommandIntegrationTest {
 
     @Test
     public void execute_zeroKeywords_noSkillFound() {
-        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setSkillToDisplay();
         CommandResult expectedCommandResult = new CommandResult("",
                 String.format(Messages.MESSAGE_ITEMS_LISTED, 0, "Skills"),
@@ -138,7 +130,7 @@ public class FindCommandIntegrationTest {
 
     @Test
     public void execute_singleKeyword_singleSkillFound() {
-        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setSkillToDisplay();
         CommandResult expectedCommandResult = new CommandResult("",
                 String.format(Messages.MESSAGE_ITEMS_LISTED, 1, "Skills"),
