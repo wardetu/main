@@ -35,5 +35,12 @@ public class TypicalResumeBook {
             .withSkill(TypicalSkill.REACT)
             .withResume(TypicalResume.ME_RESUME)
             .build();
+    public static final ResumeBook TYPICAL_WITHOUT_GOOGLE_COPY = new ResumeBookBuilder()
+            .withInternship(TypicalInternship.NINJA_VAN)
+            .withPerson(TypicalPerson.ALICE)
+            .withProject(TypicalProject.ORBITAL)
+            .withSkill(TypicalSkill.REACT)
+            .withResume(TypicalResume.ME_RESUME)
+            .build();
 
 }
