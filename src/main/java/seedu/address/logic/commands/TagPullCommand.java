@@ -1,16 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,7 +14,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
-import seedu.address.logic.commands.results.ResumeEditCommandResult;
 import seedu.address.logic.commands.results.TagPullCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
@@ -90,14 +84,17 @@ public class TagPullCommand extends Command {
         // Concatenate both sets of items as we are adding on top
         List<Integer> internshipIds = Stream
                 .concat(currInternshipIds.stream(), pulledInternshipIds.stream())
+                .distinct()
                 .collect(Collectors.toList());
 
         List<Integer> projectIds = Stream
                 .concat(currProjectIds.stream(), pulledProjectIds.stream())
+                .distinct()
                 .collect(Collectors.toList());
 
         List<Integer> skillIds = Stream
                 .concat(currSkillIds.stream(), pulledSkillIds.stream())
+                .distinct()
                 .collect(Collectors.toList());
 
         Resume editedResume = new Resume(toEdit.getName(), toEdit.getId(), toEdit.getTags());
