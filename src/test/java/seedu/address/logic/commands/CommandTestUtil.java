@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -35,12 +36,21 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    // RESUME
     public static final String VALID_RESUME_NAME_SE = "Software Engineering Intern Resume";
     public static final String VALID_RESUME_NAME_ME = "Mechanical Engineering Intern Resume";
+    public static final String PREFIXED_NAME_ME = " " + PREFIX_NAME + " " + VALID_RESUME_NAME_ME;
+    public static final String ITEM_TYPE_RESUME = " " + PREFIX_ITEM + " res";
 
     // SKILL
     public static final String VALID_SKILL_NAME_GIT = "Git and Github";
     public static final String VALID_SKILL_NAME_REACT = "React";
+    public static final String PREFIXED_NAME_REACT = " " + PREFIX_NAME + " " + VALID_SKILL_NAME_REACT;
+    public static final String LEVEL_BASIC = "BASIC";
+    public static final String LEVEL_INTERMEDIATE = "INTERMEDIATE";
+    public static final String PREFIXED_BASIC = " " + PREFIX_LEVEL + " " + LEVEL_BASIC;
+    public static final String PREFIXED_INTERMEDIATE = " " + PREFIX_LEVEL + " " + LEVEL_INTERMEDIATE;
+    public static final String ITEM_TYPE_SKILL = " " + PREFIX_ITEM + " ski";
 
     // PROJECT
     public static final String ITEM_TYPE_PROJECT = " " + PREFIX_ITEM + " proj";
@@ -69,11 +79,17 @@ public class CommandTestUtil {
     public static final String VALID_INTERNSHIP_NAME_GOOGLE = "Google";
     public static final String PREFIXED_NAME_GOOGLE = " " + PREFIX_NAME + " " + VALID_INTERNSHIP_NAME_GOOGLE;
     public static final String VALID_INTERNSHIP_ROLE_FRONTEND = "Frontend Web Engineer";
+    public static final String VALID_INTERNSHIP_ROLE_BACKEND = "Backend Web Engineer";
     public static final String PREFIXED_ROLE_FRONTEND = " " + PREFIX_ROLE + " " + VALID_INTERNSHIP_ROLE_FRONTEND;
+    public static final String PREFIXED_ROLE_BACKEND = " " + PREFIX_ROLE + " " + VALID_INTERNSHIP_ROLE_BACKEND;
     public static final String VALID_FROM = "06-2020";
+    public static final String VALID_FROM_2 = "07-2020";
     public static final String VALID_TO = "12-2020";
+    public static final String VALID_TO_2 = "11-2020";
     public static final String PREFIXED_TIME_FROM = " " + PREFIX_FROM + " " + VALID_FROM;
+    public static final String PREFIXED_TIME_FROM_2 = " " + PREFIX_FROM + " " + VALID_FROM_2;
     public static final String PREFIXED_TIME_TO = " " + PREFIX_TO + " " + VALID_TO;
+    public static final String PREFIXED_TIME_TO_2 = " " + PREFIX_TO + " " + VALID_TO_2;
     public static final String VALID_INTERNSHIP_DESCRIPTION = "I did work, I made money";
     public static final String PREFIXED_INTERNSHIP_DESCRIPTION = " " + PREFIX_DESCRIPTION + " "
             + VALID_INTERNSHIP_DESCRIPTION;
@@ -92,8 +108,12 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_FROM_DESC = " " + PREFIX_FROM + "123-1998"; // '&' not allowed in names
+    public static final String INVALID_TO_DESC = " " + PREFIX_TIME + "123-1998"; // '&' not allowed in names
+    public static final String INVALID_WEBSITE_DESC = " " + PREFIX_WEBSITE + "dfadsf"; // '&' not allowed in names
+    public static final String INVALID_LEVEL_DESC = " " + PREFIX_LEVEL + "basii"; // '&' not allowed in names
+    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + " 911a"; // 'a' not allowed in phones
+    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + " bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 

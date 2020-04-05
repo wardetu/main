@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Resume objects.
@@ -24,6 +25,11 @@ public class ResumeBuilder {
         tags.addAll(Arrays.stream(DEFAULT_TAGS).map(Tag::new).collect(Collectors.toList()));
     }
 
+    public ResumeBuilder(Resume resumeToCopy) {
+        name = resumeToCopy.getName();
+        tags = new HashSet<>(resumeToCopy.getTags());
+    }
+
     /**
      * Creates a ResumeBuilder with a certain name.
      * @param name String name
@@ -33,6 +39,15 @@ public class ResumeBuilder {
         this.name = new Name(name);
         return this;
     }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Resume} that we are building.
+     */
+    public ResumeBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
 
     public Resume build() {
         return new Resume(name, tags);
