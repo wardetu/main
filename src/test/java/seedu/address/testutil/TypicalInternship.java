@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_DESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NAME_GOOGLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_ROLE_FRONTEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TO;
@@ -21,7 +22,7 @@ import seedu.address.model.item.Internship;
 public class TypicalInternship {
     public static final Internship PAYPAL = new InternshipBuilder().withName("PayPal")
             .withRole("Backend Software Intern").withFrom("05-2020").withTo("07-2020")
-            .withDescription("I am learning new things").withTags("Backend", "SE").build();
+            .withDescription("I am learning new things").withTags(VALID_TAG_BACKEND, "SE").build();
 
     public static final Internship NINJA_VAN = new InternshipBuilder().withName("Ninja Van")
             .withRole("Ninja Intern").withFrom("05-2020").withTo("07-2020")
