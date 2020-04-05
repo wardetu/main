@@ -144,11 +144,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Internship> getInternshipsByTag(Tag tag) {
-        return versionedResumeBook.getInternshipsByTag(tag);
-    }
-
-    @Override
     public boolean hasInternshipId(int id) {
         return versionedResumeBook.hasInternshipId(id);
     }
@@ -156,6 +151,11 @@ public class ModelManager implements Model {
     @Override
     public Internship getInternshipById(int id) {
         return versionedResumeBook.getInternshipById(id);
+    }
+
+    @Override
+    public List<Internship> getInternshipsByTag(Tag tag) {
+        return versionedResumeBook.getInternshipsByTag(tag);
     }
 
     @Override
@@ -209,6 +209,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public List<Project> getProjectsByTag(Tag tag) {
+        return versionedResumeBook.getProjectsbyTag(tag);
+    }
+
+    @Override
     public int getProjectSize() {
         return versionedResumeBook.getProjectSize();
     }
@@ -256,6 +261,11 @@ public class ModelManager implements Model {
     @Override
     public Skill getSkillById(int id) {
         return versionedResumeBook.getSkillById(id);
+    }
+
+    @Override
+    public List<Skill> getSkillsByTag(Tag tag) {
+        return versionedResumeBook.getSkillsByTag(tag);
     }
 
     @Override

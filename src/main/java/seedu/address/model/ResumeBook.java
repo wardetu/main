@@ -248,15 +248,15 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     // TODO: Override?
     public List<Internship> getInternshipsByTag(Tag tag) {
-        List<Internship> filteredListByTag = internships
-                .getItemList()
-                .stream()
-                .distinct()
-                .filter(x -> x.hasTag(tag))
-                .map(x -> (Internship) x)
-                .collect(Collectors.toList());
-        return filteredListByTag;
+        return internships
+            .getItemList()
+            .stream()
+            .distinct()
+            .filter(x -> x.hasTag(tag))
+            .map(x -> (Internship) x)
+            .collect(Collectors.toList());
     }
+
 
 
     @Override
@@ -334,6 +334,17 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return projects.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
+    // TODO: Override?
+    public List<Project> getProjectsbyTag(Tag tag) {
+        return projects
+            .getItemList()
+            .stream()
+            .distinct()
+            .filter(x -> x.hasTag(tag))
+            .map(x -> (Project) x)
+            .collect(Collectors.toList());
+    }
+
     @Override
     public boolean hasProjectId(int id) {
         for (Project item : projects) {
@@ -407,6 +418,17 @@ public class ResumeBook implements ReadOnlyResumeBook {
     @Override
     public Skill getSkillByIndex(Index index) {
         return skills.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    // TODO: Override?
+    public List<Skill> getSkillsByTag(Tag tag) {
+        return skills
+            .getItemList()
+            .stream()
+            .distinct()
+            .filter(x -> x.hasTag(tag))
+            .map(x -> (Skill) x)
+            .collect(Collectors.toList());
     }
 
     @Override

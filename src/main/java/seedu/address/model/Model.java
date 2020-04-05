@@ -172,6 +172,8 @@ public interface Model {
      */
     Project getProjectById(int id);
 
+    List<Project> getProjectsByTag(Tag tag);
+
     /**
      * Return the size of the project list.
      */
@@ -223,6 +225,8 @@ public interface Model {
      * @return Skill item with {@code id}
      */
     Skill getSkillById(int id);
+
+    List<Skill> getSkillsByTag(Tag tag);
 
     /**
      * Return the size of the skill list.

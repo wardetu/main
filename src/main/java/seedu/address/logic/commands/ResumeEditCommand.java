@@ -20,7 +20,9 @@ import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.results.ResumeEditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
+import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
+import seedu.address.model.item.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -145,6 +147,21 @@ public class ResumeEditCommand extends Command {
                 .flatMap(Collection::stream)
                 .map(Internship::getId)
                 .collect(Collectors.toList());
+
+        projectIds = tagList
+                .stream()
+                .map(model::getProjectsByTag)
+                .flatMap(Collection::stream)
+                .map(Project::getId)
+                .collect(Collectors.toList());
+
+        skillIds = tagList
+                .stream()
+                .map(model::getSkillsByTag)
+                .flatMap(Collection::stream)
+                .map(Skill::getId)
+                .collect(Collectors.toList());
+
         newList.add(internshipIds);
         newList.add(projectIds);
         newList.add(skillIds);
