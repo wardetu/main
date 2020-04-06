@@ -163,7 +163,6 @@ public class TagPullCommandTest {
         assertEquals(thirdIndexResume, expectedThirdResume);
     }
 
-    // Not sure why this isn't working
     @Test
     public void execute_validTagCalledTwice_success() throws CommandException {
         Index index = INDEX_FIRST_ITEM;
