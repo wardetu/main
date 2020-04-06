@@ -9,6 +9,7 @@ import seedu.address.model.item.Skill;
 import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Skill objects.
@@ -50,6 +51,14 @@ public class SkillBuilder {
      */
     public SkillBuilder withLevel(Level level) {
         this.level = level;
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Skill} that we are building.
+     */
+    public SkillBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 

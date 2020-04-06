@@ -46,7 +46,7 @@ public class ViewCommandIntegrationTest {
     public void execute_viewInternship_success() {
         Internship validInternship = TypicalInternship.NINJA_VAN;
 
-        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
         expectedModel.setInternshipToDisplay();
 
         assertCommandSuccess(new ViewInternshipCommand(Index.fromOneBased(1)),
@@ -68,7 +68,7 @@ public class ViewCommandIntegrationTest {
     public void execute_viewProject_success() {
         Project validProject = TypicalProject.DUKE;
 
-        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
         expectedModel.setProjectToDisplay();
 
         assertCommandSuccess(new ViewProjectCommand(Index.fromOneBased(1)),
@@ -90,7 +90,7 @@ public class ViewCommandIntegrationTest {
     public void execute_viewResume_success() {
         Resume validResume = TypicalResume.SE_RESUME;
 
-        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
         expectedModel.setResumeToDisplay();
 
         assertCommandSuccess(new ViewResumeCommand(Index.fromOneBased(1)),
@@ -112,7 +112,7 @@ public class ViewCommandIntegrationTest {
     public void execute_viewSkill_success() {
         Skill validSkill = TypicalSkill.REACT;
 
-        Model expectedModel = new ModelManager(model.getResumeBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
         expectedModel.setSkillToDisplay();
 
         assertCommandSuccess(new ViewSkillCommand(Index.fromOneBased(1)),
