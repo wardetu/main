@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -30,6 +31,7 @@ public class ModelManager implements Model {
     private final VersionedResumeBook versionedResumeBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Item> filteredItems;
+    private final FilteredList<Note> filteredNotes;
 
     /**
      * Initializes a ModelManager with the given resumeBook and userPrefs.
@@ -43,6 +45,7 @@ public class ModelManager implements Model {
         this.versionedResumeBook = new VersionedResumeBook(resumeBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredItems = new FilteredList<>(this.versionedResumeBook.getItemToDisplayList());
+        filteredNotes = new FilteredList<>(this.versionedResumeBook.getNoteToDisplayList());
     }
 
     public ModelManager() {
@@ -111,6 +114,39 @@ public class ModelManager implements Model {
     @Override
     public Person getUser() {
         return versionedResumeBook.getUser();
+    }
+
+    @Override
+    public boolean hasNote(Note note) {
+        requireNonNull(note);
+        return versionedResumeBook.hasNote(note);
+    }
+
+    @Override
+    public void addNote(Note note) {
+        versionedResumeBook.addNote(note);
+        updateFilteredNoteList(PREDICATE_SHOW_ALL_ITEMS);
+    }
+
+    @Override
+    public void setNote(Note target, Note editedNote) {
+        requireAllNonNull(target, editedNote);
+        versionedResumeBook.setNote(target, editedNote);
+    }
+
+    @Override
+    public void deleteNote(Note note) {
+        versionedResumeBook.deleteNote(note);
+    }
+
+    @Override
+    public Note getNote(Index index) {
+        return versionedResumeBook.getNoteByIndex(index);
+    }
+
+    @Override
+    public int getNoteListSize() {
+        return versionedResumeBook.getNoteListSize();
     }
 
     //=========== Internships ================================================================================
@@ -352,6 +388,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredNoteList(Predicate<Item> predicate) {
+        requireNonNull(predicate);
+        filteredNotes.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Note> getFilteredNoteList() {
+        return filteredNotes;
+    }
+
+
     public String getDisplayType() {
         return versionedResumeBook.getDisplayType();
     }
@@ -401,5 +448,4 @@ public class ModelManager implements Model {
     public void commitResumeBook() {
         versionedResumeBook.commit();
     }
-
 }

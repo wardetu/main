@@ -24,7 +24,7 @@ import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits an Internship Item in the address book.
+ * Edits an Internship Item in the resume book.
  */
 public class EditInternshipCommand extends EditCommand {
     private static final String FIELDS = "Examples: "

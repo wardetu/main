@@ -46,4 +46,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_UNIVERSITY = new Prefix("u/");
     public static final Prefix PREFIX_MAJOR = new Prefix("m/");
     public static final Prefix PREFIX_CAP = new Prefix("c/");
+
+    /* Note */
+    public static final Prefix PREFIX_DONE = new Prefix("d/");
 }

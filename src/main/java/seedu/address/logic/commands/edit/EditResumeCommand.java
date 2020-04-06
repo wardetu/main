@@ -19,7 +19,7 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits a Resume Item in the address book.
+ * Edits a Resume Item in the resume book.
  */
 public class EditResumeCommand extends EditCommand {
     private static final String FIELDS = COMMAND_WORD

@@ -31,6 +31,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -141,6 +142,11 @@ public class ResumeBookTest {
         }
 
         @Override
+        public ObservableList<Note> getNoteToDisplayList() {
+            return null;
+        }
+
+        @Override
         public UniqueItemList<Internship> getInternshipList() {
             return internships;
         }
@@ -158,6 +164,23 @@ public class ResumeBookTest {
         @Override
         public UniqueItemList<Resume> getResumeList() {
             return resumes;
+        }
+
+        @Override
+        public UniqueItemList<Note> getNoteList() {
+            return null;
+        }
+
+        public void setNote(Note target, Note editedNote) {
+
+        }
+
+        public void addNote(Note note) {
+
+        }
+
+        public boolean hasNote(Note note) {
+            return false;
         }
 
         @Override
@@ -247,6 +270,16 @@ public class ResumeBookTest {
         @Override
         public int getResumeSize() {
             return 1;
+        }
+
+        @Override
+        public Note getNoteByIndex(Index index) {
+            return null;
+        }
+
+        @Override
+        public int getNoteListSize() {
+            return 0;
         }
 
     }

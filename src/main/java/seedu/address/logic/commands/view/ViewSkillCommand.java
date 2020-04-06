@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Skill;
 
 /**
- * The command for viewing the details of a Skill item.
+ * Views the details of a Skill item.
  */
 public class ViewSkillCommand extends ViewCommand {
 

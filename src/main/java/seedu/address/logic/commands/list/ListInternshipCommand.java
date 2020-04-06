@@ -21,5 +21,4 @@ public class ListInternshipCommand extends ListCommand {
                 String.format(MESSAGE_SUCCESS, "Internship"),
                 model.getDisplayType());
     }
-
 }
