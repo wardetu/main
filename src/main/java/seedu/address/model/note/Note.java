@@ -69,7 +69,7 @@ public class Note extends Item {
     }
 
     public void markAsDone() {
-        isDone = false;
+        isDone = true;
     }
 
     /**
