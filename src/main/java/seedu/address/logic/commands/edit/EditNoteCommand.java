@@ -1,28 +1,20 @@
-package seedu.address.logic.commands.note;
+package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.edit.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
-import seedu.address.model.note.NoteEntry;
-import seedu.address.model.note.field.Description;
-import seedu.address.model.note.field.Place;
-import seedu.address.model.note.field.Title;
+import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,14 +25,11 @@ public class EditNoteCommand extends EditCommand {
     private static final String EXAMPLE = "Example: "
             + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + " note "
-            + PREFIX_NAME + " Reminder "
-            + PREFIX_TITLE + " Finish up Resume 3 "
-            + PREFIX_TIME + " 04-2020 "
-            + PREFIX_PLACE + " Home "
-            + PREFIX_DESCRIPTION + " Add new internships and skills  "
-            + PREFIX_TAG + " Shopee ";
+            + PREFIX_NAME + " Reminder to finish up Resume 3 "
+            + PREFIX_TIME + " 04-2020 ";
+
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + EXAMPLE;
-    private static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
+    private static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited This Note!";
 
     private EditNoteDescriptor editNoteDescriptor;
 
@@ -53,19 +42,19 @@ public class EditNoteCommand extends EditCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (index.getZeroBased() >= model.getNoteEntrySize()) {
+        if (index.getZeroBased() >= model.getNoteListSize()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        NoteEntry toEdit = model.getNoteEntry(index);
+        Note toEdit = model.getNote(index);
 
-        NoteEntry editedNoteEntry = createEditedNoteEntry(toEdit, editNoteDescriptor);
+        Note editedNote = createEditedNoteEntry(toEdit, editNoteDescriptor);
 
-        model.setNoteEntry(toEdit, editedNoteEntry);
-        model.updateFilteredNoteEntryList(Model.PREDICATE_SHOW_ALL_ENTRIES);
+        model.setNote(toEdit, editedNote);
+        model.updateFilteredNoteList(Model.PREDICATE_SHOW_ALL_ENTRIES);
         model.commitResumeBook();
-        return new CommandResult(editedNoteEntry.toString(),
-                String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedNoteEntry), model.getDisplayType());
+        return new CommandResult(editedNote.toString(),
+                String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedNote), model.getDisplayType());
     }
 
     /**
@@ -74,14 +63,12 @@ public class EditNoteCommand extends EditCommand {
      * @param editNoteDescriptor
      * @return
      */
-    public NoteEntry createEditedNoteEntry(NoteEntry toEdit, EditNoteDescriptor editNoteDescriptor) {
-        Name updatedName = editNoteDescriptor.getName().orElse(toEdit.getName());
-        Title updateTitle = editNoteDescriptor.getTitle().orElse(toEdit.getTitle());
+    public Note createEditedNoteEntry(Note toEdit, EditNoteDescriptor editNoteDescriptor) {
+        Name updateName = editNoteDescriptor.getName().orElse(toEdit.getName());
         Time updateTime = editNoteDescriptor.getTime().orElse(toEdit.getTime());
-        Place updatedPlace = editNoteDescriptor.getPlace().orElse(toEdit.getPlace());
-        Description updatedDescription = editNoteDescriptor.getDescription().orElse(toEdit.getDescription());
-        Set<Tag> updatedTags = editNoteDescriptor.getTags().orElse(toEdit.getTags());
+        boolean updateDone = editNoteDescriptor.getDone().orElse(toEdit.isDone());
+        Set<Tag> updateTags = editNoteDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
-        return new NoteEntry(updatedName, updateTitle, updateTime, updatedPlace, updatedDescription, updatedTags, id);
+        return new Note(updateName, updateTime, updateDone, updateTags, id);
     }
 }

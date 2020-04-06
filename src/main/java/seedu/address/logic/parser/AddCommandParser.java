@@ -6,11 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEBSITE;
 
@@ -19,10 +17,10 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.add.AddInternshipCommand;
+import seedu.address.logic.commands.add.AddNoteCommand;
 import seedu.address.logic.commands.add.AddProjectCommand;
 import seedu.address.logic.commands.add.AddResumeCommand;
 import seedu.address.logic.commands.add.AddSkillCommand;
-import seedu.address.logic.commands.note.AddNoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
@@ -33,10 +31,7 @@ import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
-import seedu.address.model.note.NoteEntry;
-import seedu.address.model.note.field.Description;
-import seedu.address.model.note.field.Place;
-import seedu.address.model.note.field.Title;
+import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 
@@ -53,8 +48,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG, PREFIX_ITEM, PREFIX_FROM, PREFIX_TO,
-                        PREFIX_ROLE, PREFIX_DESCRIPTION, PREFIX_WEBSITE, PREFIX_LEVEL, PREFIX_TITLE,
-                        PREFIX_PLACE, PREFIX_TIME);
+                        PREFIX_ROLE, PREFIX_DESCRIPTION, PREFIX_WEBSITE, PREFIX_LEVEL);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ITEM) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(Item.MESSAGE_CONSTRAINTS);
@@ -124,19 +118,22 @@ public class AddCommandParser implements Parser<AddCommand> {
             return new AddSkillCommand(skill);
 
         case(ItemUtil.NOTE_ALIAS):
-            if (!arePrefixesPresent(argMultimap, PREFIX_TITLE, PREFIX_TIME) || !argMultimap.getPreamble().isEmpty()) {
+            if (!argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddSkillCommand.MESSAGE_USAGE));
+                        AddNoteCommand.MESSAGE_USAGE));
             }
+
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TIME)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddNoteCommand.MESSAGE_CONSTRAINTS));
+            }
+
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
             Time noteTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
-            Place place = ParserUtil.parsePlace(argMultimap.getValue(PREFIX_PLACE).get());
-            Description noteDescription = new Description(argMultimap.getValue(PREFIX_DESCRIPTION).get());
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            NoteEntry noteEntry = new NoteEntry(name, title, noteTime, place, noteDescription, tagList);
-            return new AddNoteCommand(noteEntry);
+            Note note = new Note(name, noteTime, false, tagList);
+            return new AddNoteCommand(note);
 
         default:
             // Should not have reached here

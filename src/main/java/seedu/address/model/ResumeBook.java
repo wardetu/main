@@ -21,7 +21,7 @@ import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
-import seedu.address.model.note.NoteEntry;
+import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 
@@ -38,7 +38,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     private final UniqueItemList<Project> projects;
     private final UniqueItemList<Skill> skills;
     private final UniqueItemList<Resume> resumes;
-    private final UniqueItemList<NoteEntry> entries;
+    private final UniqueItemList<Note> notes;
     private String displayType = "";
 
     /*
@@ -57,7 +57,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
         projects = new UniqueItemList<>();
         skills = new UniqueItemList<>();
         resumes = new UniqueItemList<>();
-        entries = new UniqueItemList<>();
+        notes = new UniqueItemList<>();
     }
 
     public ResumeBook() {}
@@ -181,8 +181,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
         this.resumes.setItems(resumes);
     }
 
-    private void setNoteEntries(UniqueItemList<NoteEntry> entries) {
-        this.entries.setItems(entries);
+    private void setNotes(UniqueItemList<Note> notes) {
+        this.notes.setItems(notes);
     }
     /**
      * Resets the existing data of this {@code ResumeBook} with {@code newData}.
@@ -194,7 +194,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
         setProjects(newData.getProjectList());
         setSkills(newData.getSkillList());
         setResumes(newData.getResumeList());
-        setNoteEntries(newData.getNoteEntryList());
+        setNotes(newData.getNoteList());
         setItemsToDisplay(((ResumeBook) newData).getDisplayType());
     }
 
@@ -449,7 +449,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public boolean hasNoteEntryId(int i) {
+    public boolean hasNoteId(int i) {
         return false;
     }
 
@@ -535,18 +535,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
     /**
      * Returns true if a skill with the same identity as {@code skill} exists in the resume book.
      */
-    public boolean hasNoteEntry(NoteEntry noteEntry) {
-        requireNonNull(noteEntry);
-        return entries.contains(noteEntry);
+    public boolean hasNote(Note note) {
+        requireNonNull(note);
+        return notes.contains(note);
     }
 
     /**
      * Adds a skill to the resume book.
      * The skill must not already exist in the resume book.
      */
-    public void addNoteEntry(NoteEntry noteEntry) {
-        requireNonNull(noteEntry);
-        entries.add(noteEntry);
+    public void addNote(Note note) {
+        requireNonNull(note);
+        notes.add(note);
     }
 
     /**
@@ -554,27 +554,27 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * {@code target} must exist in the resume book.
      * The identity of {@code editedSkill} must not be the same as another existing skill in the resume book.
      */
-    public void setNoteEntry(NoteEntry target, NoteEntry editedNoteEntry) {
-        entries.setItem(target, editedNoteEntry);
+    public void setNote(Note target, Note editedNote) {
+        notes.setItem(target, editedNote);
     }
 
     /**
      * Removes {@code key} from this {@code ResumeBook}.
      * {@code key} must exist in the resume book.
      */
-    public void deleteNoteEntry(NoteEntry key) {
+    public void deleteNote(Note key) {
         int id = key.getId();
-        entries.remove(key);
+        notes.remove(key);
     }
 
     @Override
-    public NoteEntry getNoteEntry(Index index) {
-        return entries.asUnmodifiableObservableList().get(index.getZeroBased());
+    public Note getNote(Index index) {
+        return notes.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
     @Override
-    public int getNoteEntrySize() {
-        return entries.getSize();
+    public int getNoteListSize() {
+        return notes.getSize();
     }
 
     @Override
@@ -583,7 +583,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public NoteEntry getNoteEntryByIndex(int id) {
+    public Note getNoteByIndex(int id) {
         return null;
     }
 
@@ -606,8 +606,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public ObservableList<NoteEntry> getNoteEntryToDisplayList() {
-        return entries.asUnmodifiableObservableList();
+    public ObservableList<Note> getNoteToDisplayList() {
+        return notes.asUnmodifiableObservableList();
     }
 
     @Override
@@ -631,8 +631,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public UniqueItemList<NoteEntry> getNoteEntryList() {
-        return entries;
+    public UniqueItemList<Note> getNoteList() {
+        return notes;
     }
 
     @Override
@@ -645,7 +645,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
                 && projects.equals(((ResumeBook) other).projects)
                 && skills.equals(((ResumeBook) other).skills)
                 && resumes.equals(((ResumeBook) other).resumes)
-                && entries.equals(((ResumeBook) other).entries));
+                && notes.equals(((ResumeBook) other).notes));
     }
 
     @Override

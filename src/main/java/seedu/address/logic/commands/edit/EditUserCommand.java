@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.me;
+package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CAP;

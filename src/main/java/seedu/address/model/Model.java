@@ -13,7 +13,7 @@ import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
-import seedu.address.model.note.NoteEntry;
+import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,7 +22,7 @@ import seedu.address.model.tag.Tag;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
-    Predicate<NoteEntry> PREDICATE_SHOW_ALL_ENTRIES = unused -> true;
+    Predicate<Note> PREDICATE_SHOW_ALL_ENTRIES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -77,17 +77,17 @@ public interface Model {
      */
     Person getUser();
 
-    boolean hasNoteEntry(NoteEntry noteEntry);
+    boolean hasNote(Note note);
 
-    void addNoteEntry(NoteEntry noteEntry);
+    void addNote(Note note);
 
-    void setNoteEntry(NoteEntry target, NoteEntry editedNoteEntry);
+    void setNote(Note target, Note editedNote);
 
-    void deleteNoteEntry(NoteEntry noteEntry);
+    void deleteNote(Note note);
 
-    NoteEntry getNoteEntry(Index index);
+    Note getNote(Index index);
 
-    int getNoteEntrySize();
+    int getNoteListSize();
 
     //=========== Internships ================================================================================
 
@@ -314,9 +314,9 @@ public interface Model {
      */
     void updateFilteredItemList(Predicate<Item> predicate);
 
-    ObservableList<NoteEntry> getFilteredNoteEntryList();
+    ObservableList<Note> getFilteredNoteList();
 
-    public void updateFilteredNoteEntryList(Predicate<NoteEntry> predicate);
+    public void updateFilteredNoteList(Predicate<Note> predicate);
 
     String getDisplayType();
 

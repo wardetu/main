@@ -45,7 +45,7 @@ import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
 <<<<<<< HEAD
-import seedu.address.model.note.NoteEntry;
+import seedu.address.model.note.Note;
 =======
 import seedu.address.model.tag.Tag;
 >>>>>>> b27a99a8cac7862ede90840fe445b907740dfaca
@@ -135,7 +135,7 @@ public class ResumeBookTest {
         }
 
         @Override
-        public boolean hasNoteEntryId(int i) {
+        public boolean hasNoteId(int i) {
             return false;
         }
 
@@ -150,7 +150,7 @@ public class ResumeBookTest {
         }
 
         @Override
-        public ObservableList<NoteEntry> getNoteEntryToDisplayList() {
+        public ObservableList<Note> getNoteToDisplayList() {
             return null;
         }
 
@@ -176,7 +176,7 @@ public class ResumeBookTest {
 
 <<<<<<< HEAD
         @Override
-        public UniqueItemList<NoteEntry> getNoteEntryList() {
+        public UniqueItemList<Note> getNoteList() {
             return null;
         }
 
@@ -278,12 +278,12 @@ public class ResumeBookTest {
         }
 
         @Override
-        public NoteEntry getNoteEntry(Index index) {
+        public Note getNote(Index index) {
             return null;
         }
 
         @Override
-        public int getNoteEntrySize() {
+        public int getNoteListSize() {
             return 0;
         }
 

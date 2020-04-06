@@ -21,7 +21,7 @@ import seedu.address.logic.commands.edit.EditCommand;
 import seedu.address.logic.commands.find.FindCommand;
 import seedu.address.logic.commands.generate.GenerateResumeCommand;
 import seedu.address.logic.commands.list.ListCommand;
-import seedu.address.logic.commands.me.EditUserCommand;
+import seedu.address.logic.commands.edit.EditUserCommand;
 import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 

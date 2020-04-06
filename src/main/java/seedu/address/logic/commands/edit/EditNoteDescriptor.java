@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.note;
+package seedu.address.logic.commands.edit;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -6,11 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.commands.edit.EditItemDescriptor;
 import seedu.address.model.item.field.Time;
-import seedu.address.model.note.field.Description;
-import seedu.address.model.note.field.Place;
-import seedu.address.model.note.field.Title;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,10 +14,8 @@ import seedu.address.model.tag.Tag;
  * corresponding field value of the note.
  */
 public class EditNoteDescriptor extends EditItemDescriptor {
-    private Title title;
     private Time time;
-    private Place place;
-    private Description description;
+    private boolean isDone;
     private Set<Tag> tags;
 
     public EditNoteDescriptor() {}
@@ -32,19 +26,9 @@ public class EditNoteDescriptor extends EditItemDescriptor {
      */
     public EditNoteDescriptor(EditNoteDescriptor toCopy) {
         setName(toCopy.name);
-        setTitle(toCopy.title);
         setTime(toCopy.time);
-        setPlace(toCopy.place);
-        setDescription(toCopy.description);
+        setDone(toCopy.isDone);
         setTags(toCopy.tags);
-    }
-
-    public void setTitle(Title title) {
-        this.title = title;
-    }
-
-    public Optional<Title> getTitle() {
-        return Optional.ofNullable(title);
     }
 
     public void setTime(Time time) {
@@ -55,20 +39,12 @@ public class EditNoteDescriptor extends EditItemDescriptor {
         return Optional.ofNullable(time);
     }
 
-    public void setPlace(Place place) {
-        this.place = place;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
-    public Optional<Place> getPlace() {
-        return Optional.ofNullable(place);
-    }
-
-    public void setDescription(Description description) {
-        this.description = description;
-    }
-
-    public Optional<Description> getDescription() {
-        return Optional.ofNullable(description);
+    public Optional<Boolean> getDone() {
+        return Optional.ofNullable(isDone);
     }
 
     /**
@@ -93,7 +69,7 @@ public class EditNoteDescriptor extends EditItemDescriptor {
      */
     @Override
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(name, title, time, place, description);
+        return CollectionUtil.isAnyNonNull(name, time, isDone);
     }
 
     @Override
@@ -112,10 +88,8 @@ public class EditNoteDescriptor extends EditItemDescriptor {
         EditNoteDescriptor e = (EditNoteDescriptor) other;
 
         return getName().equals(e.getName())
-                && getTitle().equals(e.getTitle())
                 && getTime().equals(e.getTime())
-                && getPlace().equals(e.getPlace())
-                && getDescription().equals(e.getDescription())
+                && getDone().equals(e.getDone())
                 && getTags().equals(e.getTags());
     }
 }

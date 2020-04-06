@@ -11,7 +11,7 @@ import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
-import seedu.address.model.note.NoteEntry;
+import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,7 +34,7 @@ public interface ReadOnlyResumeBook {
      */
     ObservableList<Item> getItemToDisplayList();
 
-    public ObservableList<NoteEntry> getNoteEntryToDisplayList();
+    public ObservableList<Note> getNoteToDisplayList();
 
     /**
      * Returns an unmodifiable view of the current internship list.
@@ -60,7 +60,7 @@ public interface ReadOnlyResumeBook {
      */
     UniqueItemList<Resume> getResumeList();
 
-    UniqueItemList<NoteEntry> getNoteEntryList();
+    UniqueItemList<Note> getNoteList();
 
     //=========== Query List Operations ================================================================================
 
@@ -169,21 +169,21 @@ public interface ReadOnlyResumeBook {
      */
     int getResumeSize();
 
-    NoteEntry getNoteEntryByIndex(int id);
+    Note getNoteByIndex(int id);
 
 
-    NoteEntry getNoteEntry(Index index);
+    Note getNote(Index index);
 
-    public int getNoteEntrySize();
+    public int getNoteListSize();
 
     public UniqueItemList<Item> getPersonalDetailList();
 
-    public void setNoteEntry(NoteEntry target, NoteEntry editedNoteEntry);
+    public void setNote(Note target, Note editedNote);
 
-    public void addNoteEntry(NoteEntry noteEntry);
+    public void addNote(Note note);
 
-    public boolean hasNoteEntry(NoteEntry noteEntry);
+    public boolean hasNote(Note note);
 
-    public boolean hasNoteEntryId(int i);
+    public boolean hasNoteId(int i);
 
 }

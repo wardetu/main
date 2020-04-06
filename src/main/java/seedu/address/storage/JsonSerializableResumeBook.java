@@ -16,7 +16,7 @@ import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
-import seedu.address.model.note.NoteEntry;
+import seedu.address.model.note.Note;
 import seedu.address.model.util.ItemUtil;
 
 /**
@@ -32,7 +32,7 @@ class JsonSerializableResumeBook {
     private final List<JsonAdaptedInternship> internships = new ArrayList<>();
     private final List<JsonAdaptedSkill> skills = new ArrayList<>();
     private final List<JsonAdaptedProject> projects = new ArrayList<>();
-    private final List<JsonAdaptedNoteEntry> entries = new ArrayList<>();
+    private final List<JsonAdaptedNote> entries = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableResumeBook} with the given persons.
@@ -43,7 +43,7 @@ class JsonSerializableResumeBook {
                                       @JsonProperty("internships") List<JsonAdaptedInternship> internships,
                                       @JsonProperty("skills") List<JsonAdaptedSkill> skills,
                                       @JsonProperty("projects") List<JsonAdaptedProject> projects,
-                                      @JsonProperty("entries") List<JsonAdaptedNoteEntry> entries) {
+                                      @JsonProperty("entries") List<JsonAdaptedNote> entries) {
         this.user = user;
         this.resumes.addAll(resumes);
         this.internships.addAll(internships);
@@ -84,10 +84,10 @@ class JsonSerializableResumeBook {
                 .map(JsonAdaptedProject::new)
                 .collect(Collectors.toList()));
         entries.addAll(source
-               .getNoteEntryList()
+               .getNoteList()
                 .asUnmodifiableObservableList()
                 .stream()
-                .map(JsonAdaptedNoteEntry::new)
+                .map(JsonAdaptedNote::new)
                 .collect(Collectors.toList()));
     }
 
@@ -146,13 +146,13 @@ class JsonSerializableResumeBook {
         ItemUtil.setBaseIdOfItemType("ski", maxIdValue + 1);
 
         maxIdValue = -1;
-        for (JsonAdaptedNoteEntry jsonAdaptedNoteEntry : entries) {
-            NoteEntry noteEntry = jsonAdaptedNoteEntry.toModelType();
-            if (resumeBook.hasNoteEntry(noteEntry)) {
+        for (JsonAdaptedNote jsonAdaptedNote : entries) {
+            Note note = jsonAdaptedNote.toModelType();
+            if (resumeBook.hasNote(note)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            resumeBook.addNoteEntry(noteEntry);
-            maxIdValue = Math.max(maxIdValue, noteEntry.getId());
+            resumeBook.addNote(note);
+            maxIdValue = Math.max(maxIdValue, note.getId());
         }
         ItemUtil.setBaseIdOfItemType("note", maxIdValue + 1);
 

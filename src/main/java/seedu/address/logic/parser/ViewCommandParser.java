@@ -4,7 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.note.ViewNoteCommand;
+import seedu.address.logic.commands.view.ViewNoteCommand;
 import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.commands.view.ViewInternshipCommand;
 import seedu.address.logic.commands.view.ViewProjectCommand;
