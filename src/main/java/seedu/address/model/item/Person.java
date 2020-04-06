@@ -103,12 +103,6 @@ public class Person {
     }
 
     @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(displayPicture, name, phone, email, github, university, major, from, to, cap);
-    }
-
-    @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDisplayPicture()).append("\n")
