@@ -40,7 +40,7 @@ public class NoteListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new NoteCard(note, getIndex() + 1).getRoot());
+                setGraphic(new NoteCard(note, note.getIndex() + 1).getRoot());
             }
         }
     }

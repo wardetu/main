@@ -44,11 +44,8 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
-<<<<<<< HEAD
 import seedu.address.model.note.Note;
-=======
 import seedu.address.model.tag.Tag;
->>>>>>> b27a99a8cac7862ede90840fe445b907740dfaca
 
 public class ResumeBookTest {
     /*
@@ -174,7 +171,6 @@ public class ResumeBookTest {
             return resumes;
         }
 
-<<<<<<< HEAD
         @Override
         public UniqueItemList<Note> getNoteList() {
             return null;
@@ -186,8 +182,21 @@ public class ResumeBookTest {
             return null;
         }
 
-=======
->>>>>>> a80fd903f466967476dc8f399401614360ad2e09
+        @Override
+        public void setNote(Note target, Note editedNote) {
+
+        }
+
+        @Override
+        public void addNote(Note note) {
+
+        }
+
+        @Override
+        public boolean hasNote(Note note) {
+            return false;
+        }
+
         @Override
         public boolean hasResumeId(int resumeIndex) {
             return false;
@@ -275,6 +284,11 @@ public class ResumeBookTest {
         @Override
         public int getResumeSize() {
             return 1;
+        }
+
+        @Override
+        public Note getNoteByIndex(int id) {
+            return null;
         }
 
         @Override

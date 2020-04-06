@@ -22,7 +22,7 @@ import seedu.address.model.tag.Tag;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
-    Predicate<Note> PREDICATE_SHOW_ALL_ENTRIES = unused -> true;
+    Predicate<Note> PREDICATE_SHOW_ALL_NOTES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

@@ -22,6 +22,6 @@ public class FindNoteCommand extends FindCommand {
         model.updateFilteredNoteList(notePredicate);
         return new CommandResult("",
                 String.format(Messages.MESSAGE_ITEMS_LISTED,
-                        model.getFilteredNoteList().size(), "Note Entries"), model.getDisplayType());
+                        model.getFilteredNoteList().size(), "Notes"), model.getDisplayType());
     }
 }

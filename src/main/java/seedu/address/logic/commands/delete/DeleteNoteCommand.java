@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.delete;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ENTRIES;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_NOTES;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -30,11 +30,11 @@ public class DeleteNoteCommand extends DeleteCommand {
         Note toDelete = model.getNote(targetIndex);
 
         model.deleteNote(toDelete);
-        model.updateFilteredNoteList(PREDICATE_SHOW_ALL_ENTRIES);
+        model.updateFilteredNoteList(PREDICATE_SHOW_ALL_NOTES);
         model.commitResumeBook();
 
         return new CommandResult(toDelete.toString(),
-                String.format(MESSAGE_DELETE_ITEM_SUCCESS, toDelete.getType().getFullType()), model.getDisplayType());
+                String.format(MESSAGE_DELETE_ITEM_SUCCESS, "Note"), model.getDisplayType());
     }
 
     @Override

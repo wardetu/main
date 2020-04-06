@@ -125,7 +125,7 @@ public class ModelManager implements Model {
     @Override
     public void addNote(Note note) {
         versionedResumeBook.addNote(note);
-        updateFilteredNoteList(PREDICATE_SHOW_ALL_ENTRIES);
+        updateFilteredNoteList(PREDICATE_SHOW_ALL_NOTES);
     }
 
     @Override

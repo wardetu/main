@@ -52,14 +52,12 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG, PREFIX_ITEM, PREFIX_FROM, PREFIX_TO,
                         PREFIX_ROLE, PREFIX_DESCRIPTION, PREFIX_WEBSITE, PREFIX_LEVEL);
 
-        Index index;
-
-        // TODO: Better error handling
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        if (argMultimap.getPreamble().isEmpty() && !argMultimap.getValue(PREFIX_ITEM).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_USAGE));
         }
+
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
         if (!argMultimap.getValue(PREFIX_ITEM).isPresent()) {
             throw new ParseException(Item.MESSAGE_CONSTRAINTS);
@@ -147,15 +145,26 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditSkillCommand(index, editSkillDescriptor);
         case ItemUtil.NOTE_ALIAS:
             EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptor();
+            boolean isAnyFieldEdited = false;
+
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                isAnyFieldEdited = true;
                 editNoteDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
             }
             if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
+                isAnyFieldEdited = true;
                 editNoteDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get()));
             }
             if (argMultimap.getValue(PREFIX_DONE).isPresent()) {
+                isAnyFieldEdited = true;
+                editNoteDescriptor.setDoneUpdated();
                 editNoteDescriptor.setDone(ParserUtil.parseDone(argMultimap.getValue(PREFIX_DONE).get()));
             }
+
+            if (!isAnyFieldEdited) {
+                throw new ParseException(EditNoteCommand.MESSAGE_NOT_EDITED);
+            }
+
             return new EditNoteCommand(index, editNoteDescriptor);
 
         default:

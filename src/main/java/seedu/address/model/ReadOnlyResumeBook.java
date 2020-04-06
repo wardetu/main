@@ -185,5 +185,5 @@ public interface ReadOnlyResumeBook {
     public boolean hasNote(Note note);
 
     public boolean hasNoteId(int i);
-
 }
+

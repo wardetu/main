@@ -16,6 +16,7 @@ import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -75,6 +76,36 @@ public class ModelStub implements Model {
     @Override
     public Person getUser() {
         return null;
+    }
+
+    @Override
+    public boolean hasNote(Note note) {
+        return false;
+    }
+
+    @Override
+    public void addNote(Note note) {
+
+    }
+
+    @Override
+    public void setNote(Note target, Note editedNote) {
+
+    }
+
+    @Override
+    public void deleteNote(Note note) {
+
+    }
+
+    @Override
+    public Note getNote(Index index) {
+        return null;
+    }
+
+    @Override
+    public int getNoteListSize() {
+        return 0;
     }
 
     @Override
@@ -270,6 +301,16 @@ public class ModelStub implements Model {
 
     @Override
     public void updateFilteredItemList(Predicate<Item> predicate) {
+
+    }
+
+    @Override
+    public ObservableList<Note> getFilteredNoteList() {
+        return null;
+    }
+
+    @Override
+    public void updateFilteredNoteList(Predicate<Note> predicate) {
 
     }
 

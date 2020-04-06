@@ -17,6 +17,7 @@ public class EditNoteDescriptor extends EditItemDescriptor {
     private Time time;
     private boolean isDone;
     private Set<Tag> tags;
+    private boolean isDoneUpdated = false;
 
     public EditNoteDescriptor() {}
 
@@ -70,6 +71,14 @@ public class EditNoteDescriptor extends EditItemDescriptor {
     @Override
     public boolean isAnyFieldEdited() {
         return CollectionUtil.isAnyNonNull(name, time, isDone);
+    }
+
+    public boolean isDoneUpdated() {
+        return isDoneUpdated;
+    }
+
+    public void setDoneUpdated() {
+        isDoneUpdated = true;
     }
 
     @Override

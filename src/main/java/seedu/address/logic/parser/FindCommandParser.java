@@ -7,10 +7,10 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.find.FindCommand;
 import seedu.address.logic.commands.find.FindInternshipCommand;
+import seedu.address.logic.commands.find.FindNoteCommand;
 import seedu.address.logic.commands.find.FindProjectCommand;
 import seedu.address.logic.commands.find.FindResumeCommand;
 import seedu.address.logic.commands.find.FindSkillCommand;
-import seedu.address.logic.commands.find.FindNoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
@@ -30,8 +30,9 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM);
 
-        if (!argMultimap.getValue(PREFIX_ITEM).isPresent()) {
-            throw new ParseException(Item.MESSAGE_CONSTRAINTS);
+        if (argMultimap.getPreamble().isEmpty() && !argMultimap.getValue(PREFIX_ITEM).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_USAGE));
         }
 
         String trimmedPreamble = argMultimap.getPreamble().trim();
@@ -40,9 +41,13 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
+        if (!argMultimap.getValue(PREFIX_ITEM).isPresent()) {
+            throw new ParseException(Item.MESSAGE_CONSTRAINTS);
+        }
+
         String[] nameKeywords = trimmedPreamble.split("\\s+");
 
-        String[] noteTitleKeywords = trimmedPreamble.split("\\s+");
+        String[] noteNameKeywords = trimmedPreamble.split("\\s+");
 
         String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
@@ -56,7 +61,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         case ItemUtil.SKILL_ALIAS:
             return new FindSkillCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         case ItemUtil.NOTE_ALIAS:
-            return new FindNoteCommand(new NoteNameContainsKeywordsPredicate(Arrays.asList(noteTitleKeywords)));
+            return new FindNoteCommand(new NoteNameContainsKeywordsPredicate(Arrays.asList(noteNameKeywords)));
         default:
             // Should not have reached here
             // TODO: Use a better Exception here

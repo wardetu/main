@@ -25,37 +25,36 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        try {
-            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM);
 
-            if (!argMultimap.getValue(PREFIX_ITEM).isPresent()) {
-                throw new ParseException(Item.MESSAGE_CONSTRAINTS);
-            }
+        if (argMultimap.getPreamble().isEmpty() && !argMultimap.getValue(PREFIX_ITEM).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteCommand.MESSAGE_USAGE));
+        }
 
-            String preamble = argMultimap.getPreamble();
-            Index index = ParserUtil.parseIndex(preamble);
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
-            String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
+        if (!argMultimap.getValue(PREFIX_ITEM).isPresent()) {
+            throw new ParseException(Item.MESSAGE_CONSTRAINTS);
+        }
 
-            switch (itemType) {
-            case ItemUtil.RESUME_ALIAS:
-                return new DeleteResumeCommand(index);
-            case ItemUtil.INTERNSHIP_ALIAS:
-                return new DeleteInternshipCommand(index);
-            case ItemUtil.PROJECT_ALIAS:
-                return new DeleteProjectCommand(index);
-            case ItemUtil.SKILL_ALIAS:
-                return new DeleteSkillCommand(index);
-            case ItemUtil.NOTE_ALIAS:
-                return new DeleteNoteCommand(index);
-            default:
-                // Should not have reached here
-                // TODO: Use a better Exception here
-                throw new ParseException("The item type is not detected! Something is wrong");
-            }
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+        String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
+
+        switch (itemType) {
+        case ItemUtil.RESUME_ALIAS:
+            return new DeleteResumeCommand(index);
+        case ItemUtil.INTERNSHIP_ALIAS:
+            return new DeleteInternshipCommand(index);
+        case ItemUtil.PROJECT_ALIAS:
+            return new DeleteProjectCommand(index);
+        case ItemUtil.SKILL_ALIAS:
+            return new DeleteSkillCommand(index);
+        case ItemUtil.NOTE_ALIAS:
+            return new DeleteNoteCommand(index);
+        default:
+            // Should not have reached here
+            // TODO: Use a better Exception here
+            throw new ParseException("The item type is not detected! Something is wrong");
         }
     }
 

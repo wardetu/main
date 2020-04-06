@@ -11,9 +11,9 @@
 
 <HBox id="noteCardPane" stylesheets="@NoteCard.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox id="indexBox">
+      <VBox id="indexBox" prefHeight="40.0" prefWidth="40.0">
          <children>
-            <Label id="index" fx:id="id" prefHeight="43.0" prefWidth="30.0" text="\\\$index">
+            <Label id="index" fx:id="id" alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="40.0" text="\\\$index" textAlignment="CENTER">
                <font>
                   <Font size="9.0" />
                </font></Label>
@@ -50,7 +50,7 @@
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
                                  <image>
-                                    <Image url="@../../../../docs/images/summer.png" />
+                                    <Image url="@../images/summer.png" />
                                  </image></ImageView>
                               <Label id="header" text="Time: " />
                               <Label id="details" fx:id="time" text="\\\$time" />

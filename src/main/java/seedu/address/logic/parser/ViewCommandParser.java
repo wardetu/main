@@ -4,9 +4,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.view.ViewNoteCommand;
 import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.commands.view.ViewInternshipCommand;
+import seedu.address.logic.commands.view.ViewNoteCommand;
 import seedu.address.logic.commands.view.ViewProjectCommand;
 import seedu.address.logic.commands.view.ViewResumeCommand;
 import seedu.address.logic.commands.view.ViewSkillCommand;
@@ -25,37 +25,36 @@ public class ViewCommandParser {
      */
     public ViewCommand parse(String args) throws ParseException {
         // The code is actually identical to DeleteCommand
-        try {
-            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM);
 
-            if (!argMultimap.getValue(PREFIX_ITEM).isPresent()) {
-                throw new ParseException(Item.MESSAGE_CONSTRAINTS);
-            }
+        if (argMultimap.getPreamble().isEmpty() && !argMultimap.getValue(PREFIX_ITEM).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ViewCommand.MESSAGE_USAGE));
+        }
 
-            String preamble = argMultimap.getPreamble();
-            Index index = ParserUtil.parseIndex(preamble);
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
-            String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
+        if (!argMultimap.getValue(PREFIX_ITEM).isPresent()) {
+            throw new ParseException(Item.MESSAGE_CONSTRAINTS);
+        }
 
-            switch(itemType) {
-            case ItemUtil.RESUME_ALIAS:
-                return new ViewResumeCommand(index);
-            case ItemUtil.INTERNSHIP_ALIAS:
-                return new ViewInternshipCommand(index);
-            case ItemUtil.PROJECT_ALIAS:
-                return new ViewProjectCommand(index);
-            case ItemUtil.SKILL_ALIAS:
-                return new ViewSkillCommand(index);
-            case ItemUtil.NOTE_ALIAS:
-                return new ViewNoteCommand(index);
-            default:
-                // Should not have reached here
-                // TODO: Use a better Exception here
-                throw new ParseException("The item type is not detected! Something is wrong");
-            }
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), pe);
+        String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
+
+        switch(itemType) {
+        case ItemUtil.RESUME_ALIAS:
+            return new ViewResumeCommand(index);
+        case ItemUtil.INTERNSHIP_ALIAS:
+            return new ViewInternshipCommand(index);
+        case ItemUtil.PROJECT_ALIAS:
+            return new ViewProjectCommand(index);
+        case ItemUtil.SKILL_ALIAS:
+            return new ViewSkillCommand(index);
+        case ItemUtil.NOTE_ALIAS:
+            return new ViewNoteCommand(index);
+        default:
+            // Should not have reached here
+            // TODO: Use a better Exception here
+            throw new ParseException("The item type is not detected! Something is wrong");
         }
     }
 }

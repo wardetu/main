@@ -125,7 +125,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TIME)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddNoteCommand.MESSAGE_CONSTRAINTS));
+                        AddNoteCommand.MESSAGE_USAGE));
             }
 
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());

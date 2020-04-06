@@ -27,7 +27,7 @@ public class ViewNoteCommand extends ViewCommand {
         }
 
         Note toView = model.getNote(targetIndex);
-        model.updateFilteredNoteList(Model.PREDICATE_SHOW_ALL_ENTRIES);
+        model.updateFilteredNoteList(Model.PREDICATE_SHOW_ALL_NOTES);
 
         return new CommandResult(toView.toString(),
                 String.format(MESSAGE_VIEW_SUCCESS, toView), model.getDisplayType());
