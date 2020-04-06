@@ -6,12 +6,12 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
-import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,7 +34,11 @@ public interface ReadOnlyResumeBook {
      */
     ObservableList<Item> getItemToDisplayList();
 
-    public ObservableList<Note> getNoteToDisplayList();
+    /**
+     * Returns an unmodifiable view of the current notes list as an {@code ObservableList}
+     * This list will not contain any duplicate items.
+     */
+    ObservableList<Note> getNoteToDisplayList();
 
     /**
      * Returns an unmodifiable view of the current internship list.
@@ -60,6 +64,10 @@ public interface ReadOnlyResumeBook {
      */
     UniqueItemList<Resume> getResumeList();
 
+    /**
+     * Returns an unmodifiable view of the current note list.
+     * This list will not contain any duplicate resume.
+     */
     UniqueItemList<Note> getNoteList();
 
     //=========== Query List Operations ================================================================================
@@ -169,21 +177,17 @@ public interface ReadOnlyResumeBook {
      */
     int getResumeSize();
 
-    Note getNoteByIndex(int id);
+    /**
+     * Return a Note item at the specified index from the note list.
+     *
+     * @param index index of skill
+     * @return Skill item at {@code index}
+     */
+    Note getNoteByIndex(Index index);
 
-
-    Note getNote(Index index);
-
+    /**
+     * Return the size of the note list.
+     */
     public int getNoteListSize();
-
-    public UniqueItemList<Item> getPersonalDetailList();
-
-    public void setNote(Note target, Note editedNote);
-
-    public void addNote(Note note);
-
-    public boolean hasNote(Note note);
-
-    public boolean hasNoteId(int i);
 }
 

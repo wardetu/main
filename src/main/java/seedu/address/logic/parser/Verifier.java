@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Validations for different input.
+ * Validations for different inputs without a separate class.
  */
 public class Verifier {
 
@@ -29,11 +29,6 @@ public class Verifier {
             "Major should only contain alphanumeric characters and spaces, with max length of 50 characters"
                     + " and it should not be blank";
     public static final String ROLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
-    public static final String IS_DONE_VALIDATION_REGEX = "[yYnN]";
-    public static final String IS_DONE_MESSAGE_CONSTRAINTS =
-            "The field d/ should only take in a single non case-sensitive character of either 'y'/'n' or "
-                    + "'Y'/'N'. Please help us input whether we want to mark this note as Done or Not Done!";
 
     /**
      * Check if a field is within length limit.
@@ -138,20 +133,6 @@ public class Verifier {
     public static boolean isValidRole(String role) {
         if (isNotEmpty(role) && isCorrectLength(role, ROLE_MAX_LENGTH)
                 && role.matches(ROLE_VALIDATION_REGEX)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Check if the isDone field is valid.
-     * @param isDone is a String.
-     * @return true or false.
-     */
-    public static boolean isValidDone(String isDone) {
-        if (isNotEmpty(isDone) && isDone.length() == 1
-            && isDone.matches(IS_DONE_VALIDATION_REGEX)) {
             return true;
         } else {
             return false;

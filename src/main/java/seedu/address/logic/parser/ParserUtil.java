@@ -213,21 +213,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code boolean isDone} in MM-YYYY format into a {@code boolean}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code email} is invalid.
-     */
-    public static boolean parseDone(String isDone) throws ParseException {
-        requireNonNull(isDone);
-        String trimmedIsDone = isDone.trim();
-        if (!Verifier.isValidDone(trimmedIsDone)) {
-            throw new ParseException(Verifier.IS_DONE_MESSAGE_CONSTRAINTS);
-        }
-        return trimmedIsDone.toLowerCase().equals("y") ? true : false;
-    }
-
-    /**
      * Parses the Item Indices to give the required optional
      */
     public static Optional<List<Integer>> parseReditItemIndices(String indices) throws ParseException {

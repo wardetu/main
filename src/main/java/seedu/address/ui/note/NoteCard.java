@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.note.Note;
+import seedu.address.model.item.Note;
 import seedu.address.ui.UiPart;
 
 /**

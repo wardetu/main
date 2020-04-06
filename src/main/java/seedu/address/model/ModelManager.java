@@ -15,11 +15,11 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
-import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -125,7 +125,7 @@ public class ModelManager implements Model {
     @Override
     public void addNote(Note note) {
         versionedResumeBook.addNote(note);
-        updateFilteredNoteList(PREDICATE_SHOW_ALL_NOTES);
+        updateFilteredNoteList(PREDICATE_SHOW_ALL_ITEMS);
     }
 
     @Override
@@ -141,7 +141,7 @@ public class ModelManager implements Model {
 
     @Override
     public Note getNote(Index index) {
-        return versionedResumeBook.getNote(index);
+        return versionedResumeBook.getNoteByIndex(index);
     }
 
     @Override
@@ -388,7 +388,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredNoteList(Predicate<Note> predicate) {
+    public void updateFilteredNoteList(Predicate<Item> predicate) {
         requireNonNull(predicate);
         filteredNotes.setPredicate(predicate);
     }

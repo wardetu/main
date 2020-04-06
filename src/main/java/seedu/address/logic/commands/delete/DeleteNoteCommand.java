@@ -1,14 +1,14 @@
 package seedu.address.logic.commands.delete;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_NOTES;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.note.Note;
+import seedu.address.model.item.Note;
 
 /**
  * Deletes a NoteEntry item.
@@ -30,7 +30,7 @@ public class DeleteNoteCommand extends DeleteCommand {
         Note toDelete = model.getNote(targetIndex);
 
         model.deleteNote(toDelete);
-        model.updateFilteredNoteList(PREDICATE_SHOW_ALL_NOTES);
+        model.updateFilteredNoteList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
 
         return new CommandResult(toDelete.toString(),

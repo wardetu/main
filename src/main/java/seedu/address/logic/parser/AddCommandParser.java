@@ -24,6 +24,7 @@ import seedu.address.logic.commands.add.AddSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
@@ -31,7 +32,6 @@ import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
-import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 
@@ -132,7 +132,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Time noteTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            Note note = new Note(name, noteTime, false, tagList);
+            Note note = new Note(name, noteTime, tagList);
             return new AddNoteCommand(note);
 
         default:

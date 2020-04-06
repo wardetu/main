@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -21,7 +22,6 @@ import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
-import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 
@@ -181,6 +181,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
         this.resumes.setItems(resumes);
     }
 
+    /**
+     * Replaces the contents of the note list with {@code notes}.
+     * {@code notes} must not contain duplicate items.
+     */
     private void setNotes(UniqueItemList<Note> notes) {
         this.notes.setItems(notes);
     }
@@ -449,11 +453,6 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public boolean hasNoteId(int i) {
-        return false;
-    }
-
-    @Override
     public Skill getSkillById(int id) {
         return skills.getById(id);
     }
@@ -559,32 +558,21 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     /**
-     * Removes {@code key} from this {@code ResumeBook}.
-     * {@code key} must exist in the resume book.
+     * Removes {@code key} from this {@code notes}.
+     * {@code key} must exist in the note list.
      */
     public void deleteNote(Note key) {
-        int id = key.getId();
         notes.remove(key);
     }
 
     @Override
-    public Note getNote(Index index) {
+    public Note getNoteByIndex(Index index) {
         return notes.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
     @Override
     public int getNoteListSize() {
         return notes.getSize();
-    }
-
-    @Override
-    public UniqueItemList<Item> getPersonalDetailList() {
-        return null;
-    }
-
-    @Override
-    public Note getNoteByIndex(int id) {
-        return null;
     }
 
     //=========== Util methods ================================================================================

@@ -4,7 +4,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
-import seedu.address.model.note.field.NoteNameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all items in the storage whose name contains any of the argument keywords and whose type matches the
@@ -23,16 +22,8 @@ public abstract class FindCommand extends Command {
 
     protected final NameContainsKeywordsPredicate predicate;
 
-    protected final NoteNameContainsKeywordsPredicate notePredicate;
-
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
-        this.notePredicate = null;
-    }
-
-    public FindCommand(NoteNameContainsKeywordsPredicate notePredicate) {
-        this.notePredicate = notePredicate;
-        this.predicate = null;
     }
 
     @Override

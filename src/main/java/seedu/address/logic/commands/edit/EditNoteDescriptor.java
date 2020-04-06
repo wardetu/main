@@ -15,7 +15,6 @@ import seedu.address.model.tag.Tag;
  */
 public class EditNoteDescriptor extends EditItemDescriptor {
     private Time time;
-    private boolean isDone;
     private Set<Tag> tags;
     private boolean isDoneUpdated = false;
 
@@ -28,7 +27,6 @@ public class EditNoteDescriptor extends EditItemDescriptor {
     public EditNoteDescriptor(EditNoteDescriptor toCopy) {
         setName(toCopy.name);
         setTime(toCopy.time);
-        setDone(toCopy.isDone);
         setTags(toCopy.tags);
     }
 
@@ -38,14 +36,6 @@ public class EditNoteDescriptor extends EditItemDescriptor {
 
     public Optional<Time> getTime() {
         return Optional.ofNullable(time);
-    }
-
-    public void setDone(boolean isDone) {
-        this.isDone = isDone;
-    }
-
-    public Optional<Boolean> getDone() {
-        return Optional.ofNullable(isDone);
     }
 
     /**
@@ -70,15 +60,7 @@ public class EditNoteDescriptor extends EditItemDescriptor {
      */
     @Override
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(name, time, isDone);
-    }
-
-    public boolean isDoneUpdated() {
-        return isDoneUpdated;
-    }
-
-    public void setDoneUpdated() {
-        isDoneUpdated = true;
+        return CollectionUtil.isAnyNonNull(name, time);
     }
 
     @Override
@@ -98,7 +80,6 @@ public class EditNoteDescriptor extends EditItemDescriptor {
 
         return getName().equals(e.getName())
                 && getTime().equals(e.getTime())
-                && getDone().equals(e.getDone())
                 && getTags().equals(e.getTags());
     }
 }

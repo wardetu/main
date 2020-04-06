@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.note.Note;
+import seedu.address.model.item.Note;
 
 /**
  * Add a NoteEntry into Note list.

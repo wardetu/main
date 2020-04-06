@@ -12,11 +12,11 @@ import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
-import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -310,9 +310,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void updateFilteredNoteList(Predicate<Note> predicate) {
-
-    }
+    public void updateFilteredNoteList(Predicate<Item> predicate) {}
 
     @Override
     public String getDisplayType() {

@@ -7,7 +7,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.note.Note;
+import seedu.address.model.item.Note;
 
 /**
  * View a specified note.
@@ -27,7 +27,6 @@ public class ViewNoteCommand extends ViewCommand {
         }
 
         Note toView = model.getNote(targetIndex);
-        model.updateFilteredNoteList(Model.PREDICATE_SHOW_ALL_NOTES);
 
         return new CommandResult(toView.toString(),
                 String.format(MESSAGE_VIEW_SUCCESS, toView), model.getDisplayType());

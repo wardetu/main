@@ -1,11 +1,10 @@
-package seedu.address.model.note;
+package seedu.address.model.item;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.item.Item;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Type;
@@ -19,20 +18,19 @@ public class Note extends Item {
     private Time time;
     private boolean isDone;
 
-    public Note(Name name, Time time, boolean isDone, Set<Tag> tags) {
-        this(name, time, isDone, tags, ItemUtil.yieldId(ItemUtil.NOTE_ALIAS));
+    public Note(Name name, Time time, Set<Tag> tags) {
+        this(name, time, false, tags, ItemUtil.yieldId(ItemUtil.NOTE_ALIAS));
     }
 
     /**
-     * Constructor for NoteEntry.
+     * Constructor for Note.
      * @param name
      * @param time
      * @param isDone
      * @param tags
      * @param id
      */
-    public Note(Name name, Time time, boolean isDone,
-                Set<Tag> tags, int id) {
+    public Note(Name name, Time time, boolean isDone, Set<Tag> tags, int id) {
         super(name, id, tags);
         requireAllNonNull(time);
         this.type = Type.generate(ItemUtil.NOTE_ALIAS);

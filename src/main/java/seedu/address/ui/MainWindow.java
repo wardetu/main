@@ -236,9 +236,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
-            } else if (commandResult.isExit()) {
+            }
+
+            if (commandResult.isExit()) {
                 handleExit();
             }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
