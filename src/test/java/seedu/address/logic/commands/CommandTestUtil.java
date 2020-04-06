@@ -97,6 +97,12 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRONTEND = "Frontend";
     public static final String PREFIXED_TAG_FRONTEND = " " + PREFIX_TAG + " " + VALID_TAG_FRONTEND;
 
+    // TAGS
+    public static final String VALID_TAG_TECH = "tech";
+    public static final String VALID_TAG_BACKEND = "backend";
+    public static final String VALID_TAG_NONE_USAGE = "noOneUseThis";
+
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;

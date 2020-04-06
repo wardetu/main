@@ -122,4 +122,12 @@ public class TagPullCommand extends Command {
         return new TagPullCommandResult(editedResume.toString(), feedbackToUser,
                 model.getDisplayType());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TagPullCommand // instanceof handles nulls
+                && index.equals(((TagPullCommand) other).index)
+                && tagList.equals(((TagPullCommand) other).tagList));
+    }
 }
