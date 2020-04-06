@@ -99,12 +99,12 @@ public class FindResumeCommandTest {
      * A Model stub that always accept the Resume being added.
      */
     private class ModelStubAcceptingResumeAdded extends ModelStub {
-        final ObservableList<Item> Resumes = FXCollections.observableArrayList();
-        final FilteredList<Item> filteredList = new FilteredList<>(Resumes);
+        final ObservableList<Item> resumes = FXCollections.observableArrayList();
+        final FilteredList<Item> filteredList = new FilteredList<>(resumes);
 
         @Override
-        public void addResume(Resume Resume) {
-            Resumes.add(Resume);
+        public void addResume(Resume resume) {
+            resumes.add(resume);
             updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         }
 

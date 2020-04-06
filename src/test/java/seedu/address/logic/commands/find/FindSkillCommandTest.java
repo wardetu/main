@@ -99,12 +99,12 @@ public class FindSkillCommandTest {
      * A Model stub that always accept the Skill being added.
      */
     private class ModelStubAcceptingSkillAdded extends ModelStub {
-        final ObservableList<Item> Skills = FXCollections.observableArrayList();
-        final FilteredList<Item> filteredList = new FilteredList<>(Skills);
+        final ObservableList<Item> skills = FXCollections.observableArrayList();
+        final FilteredList<Item> filteredList = new FilteredList<>(skills);
 
         @Override
-        public void addSkill(Skill Skill) {
-            Skills.add(Skill);
+        public void addSkill(Skill skill) {
+            skills.add(skill);
             updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         }
 
