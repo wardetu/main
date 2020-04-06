@@ -6,8 +6,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.item.field.Phone;
-
 public class PhoneTest {
     @Test
     public void constructor_null_throwsNullPointerException() {

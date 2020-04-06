@@ -1,21 +1,17 @@
 package seedu.address.model.item.field;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.TypicalResume;
-
 public class TypeTest {
-    Type resume = Type.generate("res");
-    Type skill = Type.generate("ski");
-    Type internship = Type.generate("int");
-    Type project = Type.generate("proj");
-    Type invalid = Type.generate("hello");
+    private Type resume = Type.generate("res");
+    private Type skill = Type.generate("ski");
+    private Type internship = Type.generate("int");
+    private Type project = Type.generate("proj");
+    private Type invalid = Type.generate("hello");
 
     @Test
     public void generate_null_throwsNullPointerException() {

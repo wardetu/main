@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 import seedu.address.testutil.InternshipBuilder;
 import seedu.address.testutil.ProjectBuilder;
 import seedu.address.testutil.ResumeBuilder;

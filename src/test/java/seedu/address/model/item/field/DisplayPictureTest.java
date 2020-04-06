@@ -7,8 +7,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class DisplayPictureTest {
-    DisplayPicture pic1 = new DisplayPicture("/Users/nhamquochung/Desktop/test.png");
-    DisplayPicture pic2 = new DisplayPicture("/images/duke.png");
+    private DisplayPicture pic1 = new DisplayPicture("/Users/nhamquochung/Desktop/test.png");
+    private DisplayPicture pic2 = new DisplayPicture("/images/duke.png");
+
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DisplayPicture(null));

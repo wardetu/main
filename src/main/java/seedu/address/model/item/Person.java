@@ -1,7 +1,5 @@
 package seedu.address.model.item;
 
-import java.util.Objects;
-
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
@@ -101,6 +99,7 @@ public class Person {
                 .append("CAP: ").append(getCap());
         return builder.toString();
     }
+
 
     @Override
     public String toString() {

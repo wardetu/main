@@ -26,7 +26,7 @@ public class TimeTest {
 
         // blank time
         assertFalse(Time.isValidTime("")); // empty string
-        assertFalse(Time.isValidTime(" "));  // spaces only
+        assertFalse(Time.isValidTime(" ")); // spaces only
 
         // invalid pattern
         assertFalse(Time.isValidTime("09-01-1998")); // extra date
