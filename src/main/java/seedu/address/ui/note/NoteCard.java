@@ -2,10 +2,11 @@ package seedu.address.ui.note;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.note.NoteEntry;
+import seedu.address.model.note.Note;
 import seedu.address.ui.UiPart;
 
 /**
@@ -15,7 +16,7 @@ public class NoteCard extends UiPart<Region> {
 
     private static final String FXML = "NoteCard.fxml";
 
-    private final NoteEntry noteEntry;
+    private final Note note;
 
     @FXML
     private HBox noteCardPane;
@@ -28,14 +29,24 @@ public class NoteCard extends UiPart<Region> {
     @FXML
     private Label time;
     @FXML
-    private ImageView checkBox;
+    private ImageView tickBox;
 
-    public NoteCard(NoteEntry noteEntry, int displayIndex) {
+    public NoteCard(Note note, int displayIndex) {
         super(FXML);
-        this.noteEntry = noteEntry;
+        this.note = note;
         id.setText(displayIndex + ". ");
-        title.setText(noteEntry.getTitle().toString());
-        time.setText(noteEntry.getTime().toString());
+        title.setText(note.getName().toString());
+        time.setText(note.getTime().toString());
+
+        Image image;
+
+        if (note.isDone()) {
+            image = new Image("/images/check-mark.png");
+        } else {
+            image = new Image("/images/remove.png");
+        }
+
+        tickBox.setImage(image);
     }
 
     @Override
@@ -53,6 +64,6 @@ public class NoteCard extends UiPart<Region> {
         // state check
         NoteCard card = (NoteCard) other;
         return id.getText().equals(card.id.getText())
-                && noteEntry.equals(card.noteEntry);
+                && note.equals(card.note);
     }
 }

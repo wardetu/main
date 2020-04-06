@@ -16,6 +16,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.field.Address;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
@@ -24,9 +25,6 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
-import seedu.address.model.note.field.Description;
-import seedu.address.model.note.field.Place;
-import seedu.address.model.note.field.Title;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -143,6 +141,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String description} into an {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static String parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedDescription;
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -200,48 +213,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String title} into a {@code Title}.
+     * Parses a {@code boolean isDone} in MM-YYYY format into a {@code boolean}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code title} is invalid.
+     * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Title parseTitle(String title) throws ParseException {
-        requireNonNull(title);
-        String trimmedTitle = title.trim();
-        if (Verifier.isValidTitle(trimmedTitle)) {
-            return new Title(trimmedTitle);
+    public static boolean parseDone(String isDone) throws ParseException {
+        requireNonNull(isDone);
+        String trimmedIsDone = isDone.trim();
+        if (!Verifier.isValidDone(trimmedIsDone)) {
+            throw new ParseException(Verifier.IS_DONE_MESSAGE_CONSTRAINTS);
         }
-        throw new ParseException(Title.MESSAGE_CONSTRAINTS);
-    }
-
-    /**
-     * Parses a {@code String place} into a {@code Place}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code place} is invalid.
-     */
-    public static Place parsePlace(String place) throws ParseException {
-        requireNonNull(place);
-        String trimmedPlace = place.trim();
-        if (Verifier.isValidPlace(trimmedPlace)) {
-            return new Place(trimmedPlace);
-        }
-        throw new ParseException(Place.MESSAGE_CONSTRAINTS);
-    }
-
-    /**
-     * Parses a {@code String description} into a {@code String description}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code description} is invalid.
-     */
-    public static String parseDescription(String description) throws ParseException {
-        requireNonNull(description);
-        String trimmedDescription = description.trim();
-        if (Verifier.isValidDescription(trimmedDescription)) {
-            return trimmedDescription;
-        }
-        throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        return trimmedIsDone.toLowerCase().equals("y") ? true : false;
     }
 
     /**

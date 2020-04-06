@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.note.NoteEntry;
+import seedu.address.model.note.Note;
 import seedu.address.ui.UiPart;
 
 /**
@@ -20,27 +20,27 @@ public class NoteListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(NoteListPanel.class);
 
     @FXML
-    private ListView<NoteEntry> noteListView;
+    private ListView<Note> noteListView;
 
-    public NoteListPanel(ObservableList<NoteEntry> noteEntries) {
+    public NoteListPanel(ObservableList<Note> notes) {
         super(FXML);
-        noteListView.setItems(noteEntries);
+        noteListView.setItems(notes);
         noteListView.setCellFactory(listView -> new NoteListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code NoteEntry} using a {@code NoteCard}.
      */
-    class NoteListViewCell extends ListCell<NoteEntry> {
+    class NoteListViewCell extends ListCell<Note> {
         @Override
-        protected void updateItem(NoteEntry entry, boolean empty) {
-            super.updateItem(entry, empty);
+        protected void updateItem(Note note, boolean empty) {
+            super.updateItem(note, empty);
 
-            if (empty || entry == null) {
+            if (empty || note == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new NoteCard(entry, getIndex() + 1).getRoot());
+                setGraphic(new NoteCard(note, getIndex() + 1).getRoot());
             }
         }
     }

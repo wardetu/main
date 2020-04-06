@@ -3,15 +3,14 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEBSITE;
 
@@ -24,17 +23,16 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.edit.EditCommand;
 import seedu.address.logic.commands.edit.EditInternshipCommand;
 import seedu.address.logic.commands.edit.EditInternshipDescriptor;
+import seedu.address.logic.commands.edit.EditNoteCommand;
+import seedu.address.logic.commands.edit.EditNoteDescriptor;
 import seedu.address.logic.commands.edit.EditProjectCommand;
 import seedu.address.logic.commands.edit.EditProjectDescriptor;
 import seedu.address.logic.commands.edit.EditResumeCommand;
 import seedu.address.logic.commands.edit.EditResumeDescriptor;
 import seedu.address.logic.commands.edit.EditSkillCommand;
 import seedu.address.logic.commands.edit.EditSkillDescriptor;
-import seedu.address.logic.commands.note.EditNoteCommand;
-import seedu.address.logic.commands.note.EditNoteDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
-import seedu.address.model.note.field.Description;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 
@@ -52,8 +50,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG, PREFIX_ITEM, PREFIX_FROM, PREFIX_TO,
-                        PREFIX_ROLE, PREFIX_DESCRIPTION, PREFIX_WEBSITE, PREFIX_LEVEL, PREFIX_TITLE, PREFIX_PLACE,
-                        PREFIX_TIME);
+                        PREFIX_ROLE, PREFIX_DESCRIPTION, PREFIX_WEBSITE, PREFIX_LEVEL);
 
         Index index;
 
@@ -153,20 +150,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editNoteDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
             }
-            if (argMultimap.getValue(PREFIX_TITLE).isPresent()) {
-                editNoteDescriptor.setTitle(ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get()));
-            }
             if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
                 editNoteDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get()));
             }
-            if (argMultimap.getValue(PREFIX_PLACE).isPresent()) {
-                editNoteDescriptor.setPlace(ParserUtil.parsePlace(argMultimap.getValue(PREFIX_PLACE).get()));
+            if (argMultimap.getValue(PREFIX_DONE).isPresent()) {
+                editNoteDescriptor.setDone(ParserUtil.parseDone(argMultimap.getValue(PREFIX_DONE).get()));
             }
-            if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-                editNoteDescriptor.setDescription(new Description(
-                        argMultimap.getValue(PREFIX_DESCRIPTION).get()));
-            }
-
             return new EditNoteCommand(index, editNoteDescriptor);
 
         default:

@@ -24,10 +24,7 @@
          <top>
             <HBox BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="checkBox" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../docs/images/remove.png" />
-                     </image>
+                  <ImageView fx:id="tickBox" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin></ImageView>
@@ -55,7 +52,7 @@
                                  <image>
                                     <Image url="@../../../../docs/images/summer.png" />
                                  </image></ImageView>
-                              <Label id="header" text="Date: " />
+                              <Label id="header" text="Time: " />
                               <Label id="details" fx:id="time" text="\\\$time" />
                            </children>
                            <VBox.margin>
