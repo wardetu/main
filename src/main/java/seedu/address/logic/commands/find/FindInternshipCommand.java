@@ -27,4 +27,10 @@ public class FindInternshipCommand extends FindCommand {
                 model.getDisplayType());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindInternshipCommand // instanceof handles nulls
+                && predicate.equals(((FindInternshipCommand) other).predicate)); // state check
+    }
 }
