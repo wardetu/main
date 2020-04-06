@@ -16,6 +16,7 @@ import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.tag.Tag;
 
 /**
  * A default model stub that have all of the methods failing.
@@ -107,6 +108,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public List<Internship> getInternshipsByTag(Tag tag) {
+        return null;
+    }
+
+    @Override
     public int getInternshipSize() {
         return 0;
     }
@@ -147,6 +153,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public List<Project> getProjectsByTag(Tag tag) {
+        return null;
+    }
+
+    @Override
     public int getProjectSize() {
         return 0;
     }
@@ -183,6 +194,11 @@ public class ModelStub implements Model {
 
     @Override
     public Skill getSkillById(int id) {
+        return null;
+    }
+
+    @Override
+    public List<Skill> getSkillsByTag(Tag tag) {
         return null;
     }
 

@@ -5,7 +5,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +27,7 @@ public class ResumeEditCommandParser implements Parser<ResumeEditCommand> {
     public ResumeEditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_INTERNSHIP, PREFIX_SKILL, PREFIX_PROJECT, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_INTERNSHIP, PREFIX_SKILL, PREFIX_PROJECT);
         Index index;
 
         try {
@@ -46,7 +45,6 @@ public class ResumeEditCommandParser implements Parser<ResumeEditCommand> {
         Optional<List<Integer>> skillsIndices = ParserUtil.parseReditItemIndices(
                 argMultimap.getValue(PREFIX_SKILL).orElse(null));
 
-        // Will assume correct input for now
         return new ResumeEditCommand(index, internshipIndices, projectsIndices, skillsIndices);
     }
 }
