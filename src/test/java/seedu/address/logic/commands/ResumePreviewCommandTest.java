@@ -50,7 +50,7 @@ public class ResumePreviewCommandTest {
         Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITH_FILLED_RESUME, new UserPrefs());
         Index validIndex = INDEX_FIRST_ITEM;
         ResumePreviewCommand resumePreviewCommand = new ResumePreviewCommand(validIndex);
-        String data = createData(model.getUser(), model.getResumeByIndex(Index.fromOneBased(1)), new ArrayList<>(),
+        String data = createData(model.getUser(), model.getResumeByIndex(INDEX_FIRST_ITEM), new ArrayList<>(),
                 new ArrayList<>(), new ArrayList<>());
         assertCommandSuccess(resumePreviewCommand,
                 model,
@@ -70,7 +70,7 @@ public class ResumePreviewCommandTest {
         projects.add(TypicalProject.ORBITAL);
         ArrayList<Skill> skills = new ArrayList<>();
         skills.add(TypicalSkill.GIT);
-        String data = createData(model.getUser(), model.getResumeByIndex(Index.fromOneBased(3)), internships,
+        String data = createData(model.getUser(), model.getResumeByIndex(INDEX_THIRD_ITEM), internships,
                 projects, skills);
         assertCommandSuccess(resumePreviewCommand,
                 model,
