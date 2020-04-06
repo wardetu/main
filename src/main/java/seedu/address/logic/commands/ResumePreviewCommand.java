@@ -23,7 +23,7 @@ import seedu.address.model.item.Skill;
 public class ResumePreviewCommand extends Command {
 
     public static final String COMMAND_WORD = "rpreview";
-    public static final String MESSAGE_SUCCESS = "Previewing successfully!";
+    public static final String MESSAGE_SUCCESS = "Previewing resume at index %1$s successfully!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Previews the details of the resume identified "
             + "by the index number used in the displayed resume list. "
             + "Parameters: INDEX "
@@ -47,8 +47,8 @@ public class ResumePreviewCommand extends Command {
 
         String data = getDataFromResume(toPreview, model);
 
-        String feedback = "Previewing resume at index " + index.getOneBased();
-        return new ResumePreviewCommandResult(data, feedback, model.getDisplayType());
+        return new ResumePreviewCommandResult(data,
+                String.format(MESSAGE_SUCCESS, index.getOneBased()), model.getDisplayType());
     }
 
     private String getDataFromResume(Resume resume, Model model) {
@@ -75,7 +75,7 @@ public class ResumePreviewCommand extends Command {
 
         StringBuilder data = new StringBuilder(resume.getName() + "\n");
 
-        data.append("\n=========================\n")
+        data.append("=========================\n")
                 .append("PERSONAL DETAILS\n")
                 .append("=========================\n\n")
                 .append(model.getUser().toPreview())
