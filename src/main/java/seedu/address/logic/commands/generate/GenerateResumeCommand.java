@@ -50,11 +50,13 @@ public class GenerateResumeCommand extends Command {
 
 
     public GenerateResumeCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
         fileName = null;
     }
 
     public GenerateResumeCommand(Index targetIndex, Name resumeName) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
         this.fileName = resumeName.toString();
     }
@@ -131,5 +133,12 @@ public class GenerateResumeCommand extends Command {
         return new GenerateResumeCommandResult(resumeToGenerate.toString(),
                 String.format(MESSAGE_GENERATE_SUCCESS, fileName, resumeToGenerate.getName().toString()),
                 model.getDisplayType());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof GenerateResumeCommand // instanceof handles nulls
+                && targetIndex.equals(((GenerateResumeCommand) other).targetIndex));
     }
 }
