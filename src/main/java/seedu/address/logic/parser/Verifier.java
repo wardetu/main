@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Validations for different input.
+ * Validations for different inputs without a separate class.
  */
 public class Verifier {
 
@@ -29,7 +29,6 @@ public class Verifier {
             "Major should only contain alphanumeric characters and spaces, with max length of 50 characters"
                     + " and it should not be blank";
     public static final String ROLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
 
     /**
      * Check if a field is within length limit.

@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -32,6 +33,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     private final UniqueItemList<Project> projects;
     private final UniqueItemList<Skill> skills;
     private final UniqueItemList<Resume> resumes;
+    private final UniqueItemList<Note> notes;
     private String displayType = "";
 
     /*
@@ -48,6 +50,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
         projects = new UniqueItemList<>();
         skills = new UniqueItemList<>();
         resumes = new UniqueItemList<>();
+        notes = new UniqueItemList<>();
     }
 
     public ResumeBook() {}
@@ -172,6 +175,13 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     /**
+     * Replaces the contents of the note list with {@code notes}.
+     * {@code notes} must not contain duplicate items.
+     */
+    private void setNotes(UniqueItemList<Note> notes) {
+        this.notes.setItems(notes);
+    }
+    /**
      * Resets the existing data of this {@code ResumeBook} with {@code newData}.
      */
     public void resetData(ReadOnlyResumeBook newData) {
@@ -181,6 +191,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
         setProjects(newData.getProjectList());
         setSkills(newData.getSkillList());
         setResumes(newData.getResumeList());
+        setNotes(newData.getNoteList());
         setItemsToDisplay(((ResumeBook) newData).getDisplayType());
     }
 
@@ -510,6 +521,53 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return resumes.getSize();
     }
 
+
+    //=========== Notes ================================================================================
+
+    /**
+     * Returns true if a skill with the same identity as {@code skill} exists in the resume book.
+     */
+    public boolean hasNote(Note note) {
+        requireNonNull(note);
+        return notes.contains(note);
+    }
+
+    /**
+     * Adds a skill to the resume book.
+     * The skill must not already exist in the resume book.
+     */
+    public void addNote(Note note) {
+        requireNonNull(note);
+        notes.add(note);
+    }
+
+    /**
+     * Replaces the given skill {@code target} in the list with {@code editedSkill}.
+     * {@code target} must exist in the resume book.
+     * The identity of {@code editedSkill} must not be the same as another existing skill in the resume book.
+     */
+    public void setNote(Note target, Note editedNote) {
+        notes.setItem(target, editedNote);
+    }
+
+    /**
+     * Removes {@code key} from this {@code notes}.
+     * {@code key} must exist in the note list.
+     */
+    public void deleteNote(Note key) {
+        notes.remove(key);
+    }
+
+    @Override
+    public Note getNoteByIndex(Index index) {
+        return notes.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public int getNoteListSize() {
+        return notes.getSize();
+    }
+
     //=========== Util methods ================================================================================
 
     @Override
@@ -526,6 +584,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
     @Override
     public ObservableList<Item> getItemToDisplayList() {
         return itemsToDisplay.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Note> getNoteToDisplayList() {
+        return notes.asUnmodifiableObservableList();
     }
 
     @Override
@@ -549,6 +612,11 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
+    public UniqueItemList<Note> getNoteList() {
+        return notes;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ResumeBook // instanceof handles nulls
@@ -557,7 +625,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
                 && internships.equals(((ResumeBook) other).internships)
                 && projects.equals(((ResumeBook) other).projects)
                 && skills.equals(((ResumeBook) other).skills)
-                && resumes.equals(((ResumeBook) other).resumes));
+                && resumes.equals(((ResumeBook) other).resumes)
+                && notes.equals(((ResumeBook) other).notes));
     }
 
     @Override

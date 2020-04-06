@@ -141,6 +141,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String description} into an {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static String parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedDescription;
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -204,7 +219,7 @@ public class ParserUtil {
         if (indices == null) {
             return Optional.empty();
         } else if (indices.equals("")) {
-            // Empty string will return an InvokationTargetException in the streams
+            // Empty string will return an InvocationTargetException in the streams
             // TODO: Investigate how this can be combined with the else block
             return Optional.of(new ArrayList<>());
         } else {
@@ -290,21 +305,6 @@ public class ParserUtil {
             return Math.round(userCap * 100.0) / 100.0;
         }
         throw new ParseException(Verifier.CAP_MESSAGE_CONSTRAINTS);
-    }
-
-    /**
-     * Parses a {@code String description} into a {@code Description}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code description} is invalid.
-     */
-    public static String parseDescription(String description) throws ParseException {
-        requireNonNull(description);
-        String trimmedDescription = description.trim();
-        if (!Description.isValidDescription(trimmedDescription)) {
-            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
-        }
-        return trimmedDescription;
     }
 
     /**
