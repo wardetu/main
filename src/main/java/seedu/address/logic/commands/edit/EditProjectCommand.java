@@ -24,7 +24,7 @@ import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits a Project Item in the address book.
+ * Edits a Project Item in the resume book.
  */
 public class EditProjectCommand extends EditCommand {
     private static final String FIELDS = COMMAND_WORD

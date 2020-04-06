@@ -17,8 +17,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
 import java.io.File;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.me.EditUserCommand;
-import seedu.address.logic.commands.me.EditUserDescriptor;
+import seedu.address.logic.commands.edit.EditUserCommand;
+import seedu.address.logic.commands.edit.EditUserDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.field.DisplayPicture;
 

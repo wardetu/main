@@ -38,6 +38,7 @@ public class DeleteResumeCommand extends DeleteCommand {
                 model.getDisplayType());
     }
 
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

@@ -6,6 +6,7 @@ import seedu.address.logic.commands.results.ClearCommandResult;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ResumeBook;
+import seedu.address.model.VersionedResumeBook;
 
 /**
  * Clears the address book.
@@ -20,7 +21,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         String type = model.getDisplayType();
-        model.setResumeBook(new ResumeBook());
+        model.setResumeBook(new VersionedResumeBook(new ResumeBook()));
         model.setItemsToDisplay(type);
         model.commitResumeBook();
         return new ClearCommandResult(" ", MESSAGE_SUCCESS, model.getDisplayType());

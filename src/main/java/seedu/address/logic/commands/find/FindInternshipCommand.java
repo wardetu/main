@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 
 /**
- * Finds {@code Internship} items in the address book whose name contains the keyword.
+ * Finds {@code Internship} items in the resume book whose name contains the keyword.
  * Keyword matching is case-insensitive.
  */
 public class FindInternshipCommand extends FindCommand {
@@ -27,4 +27,10 @@ public class FindInternshipCommand extends FindCommand {
                 model.getDisplayType());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindInternshipCommand // instanceof handles nulls
+                && predicate.equals(((FindInternshipCommand) other).predicate)); // state check
+    }
 }

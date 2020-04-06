@@ -21,5 +21,4 @@ public class ListResumeCommand extends ListCommand {
                 String.format(MESSAGE_SUCCESS, "Resume"),
                 model.getDisplayType());
     }
-
 }

@@ -10,10 +10,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ObservablePerson;
+import seedu.address.model.item.Note;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -21,6 +23,7 @@ import seedu.address.model.item.Skill;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
+    Predicate<Note> PREDICATE_SHOW_ALL_NOTES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -75,6 +78,17 @@ public interface Model {
      */
     ObservablePerson getUser();
 
+    boolean hasNote(Note note);
+
+    void addNote(Note note);
+
+    void setNote(Note target, Note editedNote);
+
+    void deleteNote(Note note);
+
+    Note getNote(Index index);
+
+    int getNoteListSize();
 
     //=========== Internships ================================================================================
 
@@ -117,6 +131,8 @@ public interface Model {
      * @return Internship item with {@code id}
      */
     Internship getInternshipById(int id);
+
+    List<Internship> getInternshipsByTag(Tag tag);
 
     /**
      * Return the size of the internship list.
@@ -170,6 +186,8 @@ public interface Model {
      */
     Project getProjectById(int id);
 
+    List<Project> getProjectsByTag(Tag tag);
+
     /**
      * Return the size of the project list.
      */
@@ -221,6 +239,8 @@ public interface Model {
      * @return Skill item with {@code id}
      */
     Skill getSkillById(int id);
+
+    List<Skill> getSkillsByTag(Tag tag);
 
     /**
      * Return the size of the skill list.
@@ -295,9 +315,14 @@ public interface Model {
      */
     void updateFilteredItemList(Predicate<Item> predicate);
 
+    ObservableList<Note> getFilteredNoteList();
+
+    public void updateFilteredNoteList(Predicate<Item> predicate);
+
     String getDisplayType();
 
     //================================ Undo/Redo =============================================================
+
     /**
      * Returns true if the model has previous resume book states to restore.
      */

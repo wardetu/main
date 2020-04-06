@@ -17,5 +17,4 @@ public class ExitCommand extends Command {
     public CommandResult execute(Model model) {
         return new ExitCommandResult("Exiting", MESSAGE_EXIT_ACKNOWLEDGEMENT, model.getDisplayType());
     }
-
 }

@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.me;
+package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CAP;
@@ -26,7 +26,7 @@ import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 
 /**
- * This command edits the user profile information.
+ * Edits user profile information.
  */
 public class EditUserCommand extends Command {
 
