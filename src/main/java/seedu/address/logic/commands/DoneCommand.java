@@ -6,6 +6,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.DoneCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Note;
 
@@ -39,7 +40,7 @@ public class DoneCommand extends Command {
         model.setNote(toDone, toDone);
         model.commitResumeBook();
 
-        return new CommandResult(toDone.toString(), MESSAGE_DONE_SUCCESS, "");
+        return new DoneCommandResult(toDone.toString(), MESSAGE_DONE_SUCCESS, "");
     }
 
     @Override

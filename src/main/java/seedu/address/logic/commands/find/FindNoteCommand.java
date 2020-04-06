@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.FindCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 
@@ -20,7 +21,7 @@ public class FindNoteCommand extends FindCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredNoteList(predicate);
-        return new CommandResult("",
+        return new FindCommandResult("",
                 String.format(Messages.MESSAGE_ITEMS_LISTED,
                         model.getFilteredNoteList().size(), "Notes"), model.getDisplayType());
     }

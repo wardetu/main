@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.AddCommandResult;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Note;
@@ -56,7 +57,7 @@ public class AddNoteCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_ERROR);
         }
         model.addNote(toAdd);
-        return new CommandResult(toAdd.toString(), MESSAGE_SUCCESS, model.getDisplayType());
+        return new AddCommandResult(toAdd.toString(), MESSAGE_SUCCESS, model.getDisplayType());
     }
 
     @Override

@@ -12,6 +12,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.EditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Note;
 import seedu.address.model.item.exceptions.DuplicateItemException;
@@ -67,7 +68,7 @@ public class EditNoteCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
-        return new CommandResult(editedNote.toString(),
+        return new EditCommandResult(editedNote.toString(),
                 String.format(MESSAGE_EDIT_NOTE_SUCCESS, editedNote), model.getDisplayType());
     }
 

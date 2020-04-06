@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.ListCommandResult;
 import seedu.address.model.Model;
 
 /**
@@ -15,6 +16,6 @@ public class ListNoteCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredNoteList(PREDICATE_SHOW_ALL_ITEMS);
-        return new CommandResult("", String.format(MESSAGE_SUCCESS, "Note"), model.getDisplayType());
+        return new ListCommandResult("", String.format(MESSAGE_SUCCESS, "Note"), model.getDisplayType());
     }
 }

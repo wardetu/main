@@ -6,11 +6,12 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.ViewCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Note;
 
 /**
- * View the details of a specific note.
+ * Views the details of a specific note.
  */
 public class ViewNoteCommand extends ViewCommand {
 
@@ -28,7 +29,7 @@ public class ViewNoteCommand extends ViewCommand {
 
         Note toView = model.getNote(targetIndex);
 
-        return new CommandResult(toView.toString(),
+        return new ViewCommandResult(toView.toString(),
                 String.format(MESSAGE_VIEW_SUCCESS, toView), model.getDisplayType());
     }
 
