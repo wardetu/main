@@ -27,4 +27,10 @@ public class FindProjectCommand extends FindCommand {
                 model.getDisplayType());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindProjectCommand // instanceof handles nulls
+                && predicate.equals(((FindProjectCommand) other).predicate)); // state check
+    }
 }
