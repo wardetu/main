@@ -24,7 +24,7 @@ public class ItemCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Item person;
+    public final Item item;
 
     @FXML
     private HBox itemPane;
@@ -37,14 +37,14 @@ public class ItemCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public ItemCard(Item person, int displayedIndex) {
+    public ItemCard(Item item, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.item = item;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        summary.setText(person.getSummary());
+        name.setText(item.getName().fullName);
+        summary.setText(item.getSummary());
 
-        person.getTags().stream()
+        item.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
@@ -64,6 +64,6 @@ public class ItemCard extends UiPart<Region> {
         // state check
         ItemCard card = (ItemCard) other;
         return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+                && item.equals(card.item);
     }
 }

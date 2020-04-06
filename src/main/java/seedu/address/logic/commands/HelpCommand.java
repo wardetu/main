@@ -5,7 +5,7 @@ import seedu.address.logic.commands.results.HelpCommandResult;
 import seedu.address.model.Model;
 
 /**
- * Format full help instructions for every command for display.
+ * Formats full help instructions for every command for display.
  */
 public class HelpCommand extends Command {
 

@@ -29,5 +29,4 @@ public class RedoCommand extends Command {
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         return new RedoCommandResult("", MESSAGE_SUCCESS, model.getDisplayType());
     }
-
 }

@@ -102,7 +102,7 @@ public abstract class Item {
      * @return true if the itemType matches any of the known item types.
      */
     public static boolean isValidItemType(String itemType) {
-        String[] correctFormats = new String[] {"int", "proj", "ski", "res"};
+        String[] correctFormats = new String[] {"int", "proj", "ski", "res", "note"};
         for (String correctFormat: correctFormats) {
             if (itemType.equals(correctFormat)) {
                 return true;

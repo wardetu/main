@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
@@ -18,12 +17,14 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.add.AddInternshipCommand;
+import seedu.address.logic.commands.add.AddNoteCommand;
 import seedu.address.logic.commands.add.AddProjectCommand;
 import seedu.address.logic.commands.add.AddResumeCommand;
 import seedu.address.logic.commands.add.AddSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
@@ -116,6 +117,23 @@ public class AddCommandParser implements Parser<AddCommand> {
             Skill skill = new Skill(name, level, tagList);
             return new AddSkillCommand(skill);
 
+        case(ItemUtil.NOTE_ALIAS):
+            if (!argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddNoteCommand.MESSAGE_USAGE));
+            }
+
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TIME)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddNoteCommand.MESSAGE_USAGE));
+            }
+
+            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            Time noteTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
+            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+            Note note = new Note(name, noteTime, tagList);
+            return new AddNoteCommand(note);
 
         default:
             // Should not have reached here

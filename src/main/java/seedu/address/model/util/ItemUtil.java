@@ -19,12 +19,12 @@ public class ItemUtil {
     public static final String PROJECT_ALIAS = "proj";
     public static final String RESUME_ALIAS = "res";
     public static final String SKILL_ALIAS = "ski";
+    public static final String NOTE_ALIAS = "note";
 
     public static final Person DEFAULT_USER = new Person(new DisplayPicture("/images/Duke.png"),
             new Name("Your Name"), new Phone("000"), new Email("youremail@gmail.com"), new Github("yourgithub"),
             "Your University", "Your Major",
             new Time("12-9999"), new Time("12-9999"), 0.0);
-
 
     private static TreeMap<String, Integer> idGenerator = new TreeMap<>();
 
