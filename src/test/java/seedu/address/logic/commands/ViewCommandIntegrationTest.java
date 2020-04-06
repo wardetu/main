@@ -59,7 +59,7 @@ public class ViewCommandIntegrationTest {
 
     @Test
     public void execute_outOfBoundsInternship_throwsCommandException() {
-        assertCommandFailure(new ViewInternshipCommand(Index.fromOneBased(2)),
+        assertCommandFailure(new ViewInternshipCommand(Index.fromOneBased(3)),
                 model,
                 new CommandException(Messages.MESSAGE_INVALID_INDEX));
     }
