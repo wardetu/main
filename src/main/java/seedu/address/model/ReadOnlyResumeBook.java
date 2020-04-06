@@ -6,8 +6,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Note;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -23,7 +23,7 @@ public interface ReadOnlyResumeBook {
     //=========== Get Detail Operations ======================================================================
 
     /**
-     * Returns the user of the resume book.
+     * Returns the user of the resume book as a Person object.
      *
      * @return {@code Person} item representing the user.
      */
@@ -72,10 +72,9 @@ public interface ReadOnlyResumeBook {
     UniqueItemList<Note> getNoteList();
 
     /**
-     * Returns an
+     * Returns the user in the Resume Book as an ObservablePerson object.
      */
-    ObservablePerson getUser();
-
+    ObservablePerson getObservableUser();
 
     //=========== Query List Operations ================================================================================
 

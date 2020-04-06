@@ -14,8 +14,8 @@ public class ObservablePerson extends Observable {
         this.internalPerson = person;
     }
 
-    public void setPerson(ObservablePerson person) {
-        this.internalPerson = person.getInternalPerson();
+    public void setPerson(Person person) {
+        this.internalPerson = person;
         this.setChanged();
         // Triggers all the observers
         this.notifyObservers();

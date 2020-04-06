@@ -78,7 +78,7 @@ public class ResumePreviewCommand extends Command {
         data.append("=========================\n")
                 .append("PERSONAL DETAILS\n")
                 .append("=========================\n\n")
-                .append(model.getUser().getInternalPerson().toPreview())
+                .append(model.getUser().toPreview())
                 .append("\n\n");
 
         data.append("=========================\n")

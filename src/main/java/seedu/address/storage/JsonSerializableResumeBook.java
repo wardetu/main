@@ -12,7 +12,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.ResumeBook;
 import seedu.address.model.item.Internship;
-import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Note;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
@@ -59,7 +58,7 @@ class JsonSerializableResumeBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableResumeBook}.
      */
     public JsonSerializableResumeBook(ReadOnlyResumeBook source) {
-        user = new JsonAdaptedPerson(source.getUser().getInternalPerson());
+        user = new JsonAdaptedPerson(source.getUser());
         resumes.addAll(source
                 .getResumeList()
                 .asUnmodifiableObservableList()
@@ -100,7 +99,7 @@ class JsonSerializableResumeBook {
     public ResumeBook toModelType() throws IllegalValueException {
         ResumeBook resumeBook = new ResumeBook();
         Person person = user.toModelType();
-        resumeBook.setUser(new ObservablePerson(person));
+        resumeBook.setUser(person);
 
         int maxIdValue = -1;
         for (JsonAdaptedResume jsonAdaptedResume : resumes) {

@@ -9,8 +9,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Note;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -74,9 +74,14 @@ public interface Model {
     void setUser(Person person);
 
     /**
-     * @return ObservablePerson in the model.
+     * @return the user in the model as a Person object.
      */
-    ObservablePerson getUser();
+    Person getUser();
+
+    /**
+     * @return the user in the model as an ObservablePerson object.
+     */
+    ObservablePerson getObservableUser();
 
     boolean hasNote(Note note);
 
@@ -347,4 +352,5 @@ public interface Model {
      * Saves the current resume book state for undo/redo.
      */
     void commitResumeBook();
+
 }

@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.util.ItemUtil.DEFAULT_USER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +10,19 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Note;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
+import seedu.address.model.item.field.DisplayPicture;
+import seedu.address.model.item.field.Email;
+import seedu.address.model.item.field.Github;
+import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 
@@ -35,7 +40,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     private final UniqueItemList<Resume> resumes;
     private final UniqueItemList<Note> notes;
     private String displayType = "";
-    private ObservablePerson user;
+    private ObservablePerson observableUser;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -45,11 +50,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
      *   among constructors.
      */
     {
-        user = DEFAULT_USER;
         Person defaultUser = new Person(new DisplayPicture("/images/Duke.png"), new Name("Default name"),
                 new Phone("000"), new Email("000@gmail.com"), new Github("000"), "Default university",
                 "Default major", new Time("12-9999"), new Time("12-9999"), 0.0);
-        user = new ObservablePerson(defaultUser);
+        observableUser = new ObservablePerson(defaultUser);
         itemsToDisplay = new UniqueItemList<>();
         internships = new UniqueItemList<>();
         projects = new UniqueItemList<>();
@@ -143,9 +147,9 @@ public class ResumeBook implements ReadOnlyResumeBook {
     /**
      * Replaces the user profile detail with that of {@code person}.
      */
-    public void setUser(ObservablePerson user) {
+    public void setUser(Person user) {
         // Method's name is setPerson so it is consistent with the Observable class name.
-        this.user.setPerson(user);
+        this.observableUser.setPerson(user);
     }
 
     /**
@@ -575,8 +579,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
-    public ObservablePerson getUser() {
-        return this.user;
+    public Person getUser() {
+        return this.observableUser.getInternalPerson();
     }
 
     //=========== Util methods ================================================================================
@@ -623,10 +627,15 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
+    public ObservablePerson getObservableUser() {
+        return observableUser;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ResumeBook // instanceof handles nulls
-                && user.equals(((ResumeBook) other).user)
+                && observableUser.equals(((ResumeBook) other).observableUser)
                 && itemsToDisplay.equals(((ResumeBook) other).itemsToDisplay)
                 && internships.equals(((ResumeBook) other).internships)
                 && projects.equals(((ResumeBook) other).projects)

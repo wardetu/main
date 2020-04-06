@@ -9,8 +9,8 @@ import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Note;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 
 /**
@@ -53,5 +53,7 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    ObservablePerson getUser();
+    ObservablePerson getObservableUser();
+
+    Person getUser();
 }

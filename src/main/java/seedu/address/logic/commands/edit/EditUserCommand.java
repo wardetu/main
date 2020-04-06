@@ -71,7 +71,7 @@ public class EditUserCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person userToEdit = model.getUser().getInternalPerson();
+        Person userToEdit = model.getUser();
 
         Person editedUser = createEditedUser(userToEdit, editUserDescriptor);
         model.setUser(editedUser);

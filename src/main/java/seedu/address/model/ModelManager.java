@@ -15,8 +15,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Note;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -111,12 +111,17 @@ public class ModelManager implements Model {
     @Override
     public void setUser(Person person) {
         // Wrap the Person object so it is consistent with the setUser method in ResumeBook
-        versionedResumeBook.setUser(new ObservablePerson(person));
+        versionedResumeBook.setUser(person);
     }
 
     @Override
-    public ObservablePerson getUser() {
+    public Person getUser() {
         return versionedResumeBook.getUser();
+    }
+
+    @Override
+    public ObservablePerson getObservableUser() {
+        return versionedResumeBook.getObservableUser();
     }
 
     //======================================= Internships ==================================================
