@@ -13,6 +13,7 @@ import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Resume objects.
@@ -34,9 +35,9 @@ public class ResumeBuilder {
         tags.addAll(Arrays.stream(DEFAULT_TAGS).map(Tag::new).collect(Collectors.toList()));
     }
 
-    public ResumeBuilder(Resume resume) {
-        name = resume.getName();
-        tags = resume.getTags();
+    public ResumeBuilder(Resume resumeToCopy) {
+        name = resumeToCopy.getName();
+        tags = new HashSet<>(resumeToCopy.getTags());
     }
 
     /**
@@ -46,6 +47,14 @@ public class ResumeBuilder {
      */
     public ResumeBuilder withName(String name) {
         this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Resume} that we are building.
+     */
+    public ResumeBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
