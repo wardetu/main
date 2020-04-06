@@ -63,9 +63,4 @@ public class Time {
                 && value.equals(((Time) other).value)); // state check
     }
 
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-
 }
