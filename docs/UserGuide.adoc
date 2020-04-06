@@ -432,6 +432,8 @@ Edits the resume to contain the items specified in the command.
 ****
 `redit RESUME_INDEX TYPE/ [ITEM_INDEX...] [MORE_TYPE/ [ITEM_INDEX...]]`
 ****
+[TIP]
+If you find it a hassle to manually enter items into the resume, you can consider using <<Pulling tagged items into the resume: `tagpull`, tagpull>>!
 
 * For each `TYPE`, existing items will be updated to the input items.
 * You can add multiple items of a certain type to a resume by chaining
@@ -457,8 +459,25 @@ This command modifies the resume at index 1. It changes the resume to contain in
 
 image::ReditWantSomeThings.png[][WantSomeThings,442,337]
 
-===== Tag Pull
-(To be implemented) Edits the resume specified at that index to contain all items of the specified tag.
+=== Pulling tagged items into the resume: `tagpull`
+
+Pull the internship, project and skill items with the specified tag(s) into a resume.
+
+**Format:**
+
+****
+`tagpull INDEX [#/ TAG]`
+****
+
+This command does not remove items from the resume and will add items on top of existing items.
+
+Examples:
+
+* `tagpull 1 #/ tech` +
+This command modifies the resume at index 1. It will find all the internship, project, and skill items with the tag `tech` and adds it into the resume.
+
+* `tagpull 2 #/ tech frontend` +
+This command modifies the resume at index 2. It will find all the internship, project, and skill items which has either the tag `tech` or `frontend` and adds it into the resume.
 
 === Undo a command: `undo`
 

@@ -43,4 +43,18 @@ public class TypicalResumeBook {
             .withResume(TypicalResume.ME_RESUME)
             .build();
 
+    // This TypicalResumeBook is used mainly for the ResumeEdit and TagPull Command tests
+    // It will be best not to add more things, nor add Tags to the Items that are added
+    public static final ResumeBook TYPICAL_WITH_FILLED_RESUME = new ResumeBookBuilder()
+            .withInternship(TypicalInternship.GOOGLE)
+            .withInternship(TypicalInternship.NINJA_VAN)
+            .withPerson(TypicalPerson.ALICE)
+            .withProject(TypicalProject.ORBITAL)
+            .withProject(TypicalProject.DUKE)
+            .withSkill(TypicalSkill.REACT)
+            .withSkill(TypicalSkill.GIT)
+            .withResume(TypicalResume.ME_RESUME)
+            .withResume(TypicalResume.SE_RESUME)
+            .withResume(TypicalResume.FILLED_RESUME)
+            .build();
 }

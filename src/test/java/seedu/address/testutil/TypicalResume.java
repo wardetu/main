@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RESUME_NAME_FILLED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RESUME_NAME_ME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RESUME_NAME_SE;
 
@@ -11,4 +12,10 @@ import seedu.address.model.item.Resume;
 public class TypicalResume {
     public static final Resume SE_RESUME = new ResumeBuilder().withName(VALID_RESUME_NAME_SE).build();
     public static final Resume ME_RESUME = new ResumeBuilder().withName(VALID_RESUME_NAME_ME).build();
+    public static final Resume FILLED_RESUME = new ResumeBuilder()
+            .withName(VALID_RESUME_NAME_FILLED)
+            .withInternship(TypicalInternship.GOOGLE)
+            .withProject(TypicalProject.ORBITAL)
+            .withSkill(TypicalSkill.GIT)
+            .build();
 }
