@@ -567,6 +567,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     /**
      * Resets the list of notes in UI to be consistent with the list kept in model {@code notes}.
+     * This must be called after any changes made to notes!
      */
     private void setNotesToDisplay() {
         this.notesToDisplay.setItems(notes.getItemList().stream().map(x -> (Note) x).collect(Collectors.toList()));
