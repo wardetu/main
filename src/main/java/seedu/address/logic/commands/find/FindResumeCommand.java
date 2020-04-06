@@ -26,4 +26,11 @@ public class FindResumeCommand extends FindCommand {
                 String.format(Messages.MESSAGE_ITEMS_LISTED, model.getFilteredItemList().size(), "Resumes"),
                 model.getDisplayType());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindResumeCommand // instanceof handles nulls
+                && predicate.equals(((FindResumeCommand) other).predicate)); // state check
+    }
 }

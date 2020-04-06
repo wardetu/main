@@ -2,6 +2,14 @@ package seedu.address.model.util;
 
 import java.util.TreeMap;
 
+import seedu.address.model.item.Person;
+import seedu.address.model.item.field.DisplayPicture;
+import seedu.address.model.item.field.Email;
+import seedu.address.model.item.field.Github;
+import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Time;
+
 /**
  * Containing utility methods for Item and its subclasses
  */
@@ -12,6 +20,11 @@ public class ItemUtil {
     public static final String RESUME_ALIAS = "res";
     public static final String SKILL_ALIAS = "ski";
     public static final String NOTE_ALIAS = "note";
+
+    public static final Person DEFAULT_USER = new Person(new DisplayPicture("/images/Duke.png"),
+            new Name("Your Name"), new Phone("000"), new Email("youremail@gmail.com"), new Github("yourgithub"),
+            "Your University", "Your Major",
+            new Time("12-9999"), new Time("12-9999"), 0.0);
 
     private static TreeMap<String, Integer> idGenerator = new TreeMap<>();
 

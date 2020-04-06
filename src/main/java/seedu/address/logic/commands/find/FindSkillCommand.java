@@ -26,4 +26,11 @@ public class FindSkillCommand extends FindCommand {
                 String.format(Messages.MESSAGE_ITEMS_LISTED, model.getFilteredItemList().size(), "Skills"),
                 model.getDisplayType());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindSkillCommand // instanceof handles nulls
+                && predicate.equals(((FindSkillCommand) other).predicate)); // state check
+    }
 }
