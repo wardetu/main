@@ -102,4 +102,11 @@ public class ResumePreviewCommand extends Command {
 
         return data.toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ResumePreviewCommand // instanceof handles nulls
+                && index.equals(((ResumePreviewCommand) other).index));
+    }
 }
