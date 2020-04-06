@@ -51,7 +51,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Set the content of the {@code TextArea} to {@code text}.
+     * Sets the content of the {@code TextArea} to {@code text}.
      * @param text the content to be set.
      */
     public void setText(String text) {
