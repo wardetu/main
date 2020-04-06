@@ -19,8 +19,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.results.CommandResult;
-import seedu.address.model.item.Resume;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Resume;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 import seedu.address.testutil.ModelStub;
 
