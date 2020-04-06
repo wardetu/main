@@ -33,6 +33,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     private final UniqueItemList<Project> projects;
     private final UniqueItemList<Skill> skills;
     private final UniqueItemList<Resume> resumes;
+    private final UniqueItemList<Note> notesToDisplay;
     private final UniqueItemList<Note> notes;
     private String displayType = "";
 
@@ -50,6 +51,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
         projects = new UniqueItemList<>();
         skills = new UniqueItemList<>();
         resumes = new UniqueItemList<>();
+        notesToDisplay = new UniqueItemList<>();
         notes = new UniqueItemList<>();
     }
 
@@ -180,7 +182,9 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     private void setNotes(UniqueItemList<Note> notes) {
         this.notes.setItems(notes);
+        setNotesToDisplay();
     }
+
     /**
      * Resets the existing data of this {@code ResumeBook} with {@code newData}.
      */
@@ -539,6 +543,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public void addNote(Note note) {
         requireNonNull(note);
         notes.add(note);
+        setNotesToDisplay();
     }
 
     /**
@@ -548,6 +553,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     public void setNote(Note target, Note editedNote) {
         notes.setItem(target, editedNote);
+        setNotesToDisplay();
     }
 
     /**
@@ -556,6 +562,14 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     public void deleteNote(Note key) {
         notes.remove(key);
+        setNotesToDisplay();
+    }
+
+    /**
+     * Resets the list of notes in UI to be consistent with the list kept in model {@code notes}.
+     */
+    private void setNotesToDisplay() {
+        this.notesToDisplay.setItems(notes.getItemList().stream().map(x -> (Note) x).collect(Collectors.toList()));
     }
 
     @Override
@@ -588,7 +602,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     @Override
     public ObservableList<Note> getNoteToDisplayList() {
-        return notes.asUnmodifiableObservableList();
+        return notesToDisplay.asUnmodifiableObservableList();
     }
 
     @Override

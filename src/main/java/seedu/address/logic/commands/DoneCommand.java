@@ -35,12 +35,13 @@ public class DoneCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Note toDone = model.getNote(targetIndex);
-        toDone.markAsDone();
-        model.setNote(toDone, toDone);
+        Note toSetDone = model.getNote(targetIndex);
+        Note done = toSetDone.toCopy();
+        done.markAsDone();
+        model.setNote(toSetDone, done);
         model.commitResumeBook();
 
-        return new DoneCommandResult(toDone.toString(), MESSAGE_DONE_SUCCESS, "");
+        return new DoneCommandResult(done.toString(), MESSAGE_DONE_SUCCESS, model.getDisplayType());
     }
 
     @Override
