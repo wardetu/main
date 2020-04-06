@@ -42,4 +42,23 @@ public class GithubTest {
         assertTrue(Github.isValidGithub("nhamhung"));
     }
 
+    @Test
+    public void isEqual() {
+        Github git1 = new Github("duongphammmm");
+        Github git2 = new Github("helloImHai");
+
+        // different type
+        assertFalse(git1.equals(null));
+        assertFalse(git1.equals(5));
+
+        // same Github
+        assertTrue(git1.equals(git1));
+
+        // same value
+        assertTrue(git1.equals(new Github("duongphammmm")));
+
+        // different value
+        assertFalse(git1.equals(git2));
+    }
+
 }
