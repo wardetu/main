@@ -36,7 +36,6 @@ public class NoteCard extends UiPart<Region> {
         id.setText(displayIndex + ". ");
         title.setText(noteEntry.getTitle().toString());
         time.setText(noteEntry.getTime().toString());
-        tag.setText("Priority: HIGH");
     }
 
     @Override

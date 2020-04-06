@@ -13,7 +13,7 @@
    <children>
       <VBox id="indexBox">
          <children>
-            <Label id="index" fx:id="id" prefHeight="43.0" prefWidth="30.0" text="1">
+            <Label id="index" fx:id="id" prefHeight="43.0" prefWidth="30.0" text="\\\$index">
                <font>
                   <Font size="9.0" />
                </font></Label>
@@ -26,7 +26,7 @@
                <children>
                   <ImageView fx:id="checkBox" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../docs/images/check-mark.png" />
+                        <Image url="@../../../../docs/images/remove.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -53,38 +53,13 @@
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
                                  <image>
-                                    <Image url="@../../../../docs/images/clock.png" />
+                                    <Image url="@../../../../docs/images/summer.png" />
                                  </image></ImageView>
-                              <Label id="header" text="Time: " />
+                              <Label id="header" text="Date: " />
                               <Label id="details" fx:id="time" text="\\\$time" />
                            </children>
                            <VBox.margin>
                               <Insets />
-                           </VBox.margin>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <VBox>
-                     <children>
-                        <HBox>
-                           <children>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../docs/images/label.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="5.0" right="5.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label id="tag" text="Tag: " />
-                              <Label id="tag" fx:id="tag" text="\\\$tag">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets left="5.0" />
                            </VBox.margin>
                         </HBox>
                      </children>
