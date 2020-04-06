@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Note;
 
 /**
- * Deletes a NoteEntry item.
+ * Deletes a Note from the note list.
  */
 public class DeleteNoteCommand extends DeleteCommand {
 

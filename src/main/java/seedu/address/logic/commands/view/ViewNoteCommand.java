@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Note;
 
 /**
- * View a specified note.
+ * View the details of a specific note.
  */
 public class ViewNoteCommand extends ViewCommand {
 

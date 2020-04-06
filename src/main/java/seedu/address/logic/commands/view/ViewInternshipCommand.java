@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
 
 /**
- * The command for viewing the details of an Internship item.
+ * Views the details of an Internship item.
  */
 public class ViewInternshipCommand extends ViewCommand {
 

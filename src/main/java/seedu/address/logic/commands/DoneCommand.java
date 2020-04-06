@@ -10,12 +10,12 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Note;
 
 /**
- * This command allows user to mark a note as done.
+ * Marks a note as done.
  */
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
 
-    public static final String MESSAGE_DONE_SUCCESS = "Mark this note as done!";
+    public static final String MESSAGE_DONE_SUCCESS = "Marked this note as done!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " INDEX \n"
             + "Example: done 1 ";
 

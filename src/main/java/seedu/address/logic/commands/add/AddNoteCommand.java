@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Note;
 
 /**
- * Add a NoteEntry into Note list.
+ * Adds a Note into the note list.
  */
 public class AddNoteCommand extends AddCommand {
 
@@ -36,7 +36,7 @@ public class AddNoteCommand extends AddCommand {
 
     /**
      * Constructor.
-     * @param note is a NoteEntry.
+     * @param note is a Note.
      */
     public AddNoteCommand(Note note) {
         requireNonNull(note);
@@ -44,7 +44,7 @@ public class AddNoteCommand extends AddCommand {
     }
 
     /**
-     * Add NoteEntry to the list.
+     * Add a Note to the list.
      * @param model {@code Model} which the command should operate on.
      * @return Command Result.
      * @throws CommandException

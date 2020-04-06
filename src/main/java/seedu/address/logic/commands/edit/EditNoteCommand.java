@@ -20,7 +20,7 @@ import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edit a specified NoteEntry.
+ * Edits a specified Note.
  */
 public class EditNoteCommand extends EditCommand {
 

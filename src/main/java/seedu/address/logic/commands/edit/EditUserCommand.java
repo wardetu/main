@@ -26,7 +26,7 @@ import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
 
 /**
- * This command edits the user profile information.
+ * Edits user profile information.
  */
 public class EditUserCommand extends Command {
 
