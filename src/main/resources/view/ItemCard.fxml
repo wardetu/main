@@ -2,8 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -34,25 +32,11 @@
             <VBox.margin>
                <Insets left="22.0" top="5.0" />
             </VBox.margin>
-            <children>
-               <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/label.png" />
-                  </image>
-               </ImageView>
-            </children>
       </FlowPane>
       <Label fx:id="summary" styleClass="cell_medium_label" text="\$summary" wrapText="true">
             <VBox.margin>
                <Insets left="22.0" top="5.0" />
             </VBox.margin>
-            <graphic>
-               <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/notes.png" />
-                  </image>
-               </ImageView>
-            </graphic>
       </Label>
     </VBox>
       <rowConstraints>
