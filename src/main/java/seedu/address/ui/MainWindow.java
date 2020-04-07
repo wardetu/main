@@ -17,6 +17,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.HelpCommandResult;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.ui.note.NoteListPanel;
 import seedu.address.ui.personbio.UserOverallPane;
@@ -235,6 +236,8 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowHelp()) {
+                HelpCommandResult helpCommandResult = (HelpCommandResult) commandResult;
+                helpWindow.setText(helpCommandResult.getPopUpContent());
                 handleHelp();
             }
 
