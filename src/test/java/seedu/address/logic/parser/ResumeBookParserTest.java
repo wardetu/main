@@ -77,11 +77,11 @@ public class ResumeBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findInternship() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" "))
-                        + " i/res");
+        FindCommand command = (FindCommand) parser.parseCommand
+                (FindInternshipCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")) + " i/int");
         assertEquals(new FindInternshipCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 

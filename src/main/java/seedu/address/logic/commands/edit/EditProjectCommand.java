@@ -12,17 +12,19 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.EditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Project;
+import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits a Project Item in the address book.
+ * Edits a Project Item in the resume book.
  */
 public class EditProjectCommand extends EditCommand {
     private static final String FIELDS = COMMAND_WORD
@@ -67,14 +69,16 @@ public class EditProjectCommand extends EditCommand {
 
         Project editedProject = createEditedProject(toEdit, editProjectDescriptor);
 
-        if (model.hasProject(editedProject)) {
-            throw new CommandException("A project with the same name and time already exists.");
+        try {
+            model.setProject(toEdit, editedProject);
+            model.setProjectToDisplay();
+            model.commitResumeBook();
+        } catch (DuplicateItemException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
-        model.setProject(toEdit, editedProject);
-        model.setProjectToDisplay();
-        model.commitResumeBook();
-        return new CommandResult(editedProject.toString(), String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editedProject),
+        return new EditCommandResult(editedProject.toString(),
+                String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editedProject),
                 model.getDisplayType());
     }
 

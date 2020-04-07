@@ -123,4 +123,20 @@ public class Person {
                 .append("CAP: ").append(getCap());
         return builder.toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Person // instanceof handles nulls
+                && name.equals(((Person) other).name)
+                && phone.equals(((Person) other).phone)
+                && email.equals(((Person) other).email)
+                && github.equals(((Person) other).github)
+                && university.equals(((Person) other).university)
+                && from.equals(((Person) other).from)
+                && to.equals(((Person) other).to)
+                && major.equals(((Person) other).major)
+                && displayPicture.equals(((Person) other).displayPicture)
+                && cap == ((Person) other).cap);
+    }
 }

@@ -78,10 +78,15 @@ public class Project extends Item {
         return builder.toString();
     }
 
+    /**
+     * Returns true if both projects have the same name, time and website.
+     * This defines a weaker notion of equality between two items.
+     */
     @Override
     public boolean isSame(Item otherProject) {
         return super.isSame(otherProject)
-                && ((Project) otherProject).getTime().equals(getTime());
+                && ((Project) otherProject).getTime().equals(getTime())
+                && ((Project) otherProject).getWebsite().equals(getWebsite());
     }
 
 

@@ -77,6 +77,10 @@ public abstract class Item {
         return Collections.unmodifiableSet(tags);
     }
 
+    public boolean hasTag(Tag tag) {
+        return tags.contains(tag);
+    }
+
     /**
      * Returns true if both items have the same name and are of the same type.
      * This defines a weaker notion of equality between two items.
@@ -98,7 +102,7 @@ public abstract class Item {
      * @return true if the itemType matches any of the known item types.
      */
     public static boolean isValidItemType(String itemType) {
-        String[] correctFormats = new String[] {"int", "proj", "ski", "res"};
+        String[] correctFormats = new String[] {"int", "proj", "ski", "res", "note"};
         for (String correctFormat: correctFormats) {
             if (itemType.equals(correctFormat)) {
                 return true;

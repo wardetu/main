@@ -4,12 +4,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.commands.list.ListInternshipCommand;
+import seedu.address.logic.commands.list.ListNoteCommand;
 import seedu.address.logic.commands.list.ListProjectCommand;
 import seedu.address.logic.commands.list.ListResumeCommand;
 import seedu.address.logic.commands.list.ListSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.util.ItemUtil;
+
 
 /**
  * Parses input arguments and creates a new ListCommand object
@@ -40,6 +42,8 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListProjectCommand();
         case ItemUtil.SKILL_ALIAS:
             return new ListSkillCommand();
+        case ItemUtil.NOTE_ALIAS:
+            return new ListNoteCommand();
         default:
             // Should not have reached here
             // TODO: Use a better Exception here

@@ -4,13 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.ViewCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Resume;
 
 /**
- * The command for viewing the details of a Resume item.
+ * Views the details of a Resume item.
  */
 public class ViewResumeCommand extends ViewCommand {
 
@@ -29,8 +30,9 @@ public class ViewResumeCommand extends ViewCommand {
         Resume toView = model.getResumeByIndex(targetIndex);
         model.setResumeToDisplay();
 
-        return new CommandResult(toView.toString(),
-                String.format(MESSAGE_VIEW_SUCCESS, toView), model.getDisplayType());
+        return new ViewCommandResult(toView.toString(),
+                String.format(MESSAGE_VIEW_SUCCESS, toView),
+                model.getDisplayType());
     }
 
     @Override

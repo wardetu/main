@@ -12,10 +12,12 @@ import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.tag.Tag;
 
 /**
  * A default model stub that have all of the methods failing.
@@ -77,6 +79,36 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasNote(Note note) {
+        return false;
+    }
+
+    @Override
+    public void addNote(Note note) {
+
+    }
+
+    @Override
+    public void setNote(Note target, Note editedNote) {
+
+    }
+
+    @Override
+    public void deleteNote(Note note) {
+
+    }
+
+    @Override
+    public Note getNote(Index index) {
+        return null;
+    }
+
+    @Override
+    public int getNoteListSize() {
+        return 0;
+    }
+
+    @Override
     public boolean hasInternship(Internship internship) {
         return false;
     }
@@ -103,6 +135,11 @@ public class ModelStub implements Model {
 
     @Override
     public Internship getInternshipById(int id) {
+        return null;
+    }
+
+    @Override
+    public List<Internship> getInternshipsByTag(Tag tag) {
         return null;
     }
 
@@ -147,6 +184,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public List<Project> getProjectsByTag(Tag tag) {
+        return null;
+    }
+
+    @Override
     public int getProjectSize() {
         return 0;
     }
@@ -183,6 +225,11 @@ public class ModelStub implements Model {
 
     @Override
     public Skill getSkillById(int id) {
+        return null;
+    }
+
+    @Override
+    public List<Skill> getSkillsByTag(Tag tag) {
         return null;
     }
 
@@ -248,9 +295,22 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void setItemsToDisplay(String typeString) {
+
+    }
+
+    @Override
     public void updateFilteredItemList(Predicate<Item> predicate) {
 
     }
+
+    @Override
+    public ObservableList<Note> getFilteredNoteList() {
+        return null;
+    }
+
+    @Override
+    public void updateFilteredNoteList(Predicate<Item> predicate) {}
 
     @Override
     public String getDisplayType() {
