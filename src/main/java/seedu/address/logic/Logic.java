@@ -10,6 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Note;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 
 /**
@@ -51,6 +52,8 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    ObservablePerson getObservableUser();
 
     Person getUser();
 }

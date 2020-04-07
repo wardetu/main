@@ -14,6 +14,8 @@ import seedu.address.model.Model;
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
+    // This is to trigger a view box refresh
+    public static final String DEFAULT_DATA_TO_USER = " ";
     public static final String MESSAGE_SUCCESS = "Undo successfully!";
     public static final String MESSAGE_FAILURE = "Cannot undo any more.";
 
@@ -27,6 +29,6 @@ public class UndoCommand extends Command {
 
         model.undoResumeBook();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        return new UndoCommandResult("", MESSAGE_SUCCESS, model.getDisplayType());
+        return new UndoCommandResult(DEFAULT_DATA_TO_USER, MESSAGE_SUCCESS, model.getDisplayType());
     }
 }

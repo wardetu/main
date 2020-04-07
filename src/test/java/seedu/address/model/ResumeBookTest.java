@@ -1,26 +1,4 @@
 package seedu.address.model;
-//
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertFalse;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-//import static seedu.address.testutil.Assert.assertThrows;
-//import static seedu.address.testutil.TypicalPersonalDetails.ALICE;
-//import static seedu.address.testutil.TypicalPersonalDetails.getTypicalAddressBook;
-//
-//import java.util.Arrays;
-//import java.util.Collection;
-//import java.util.Collections;
-//import java.util.List;
-//
-//import org.junit.jupiter.api.Test;
-//
-//import javafx.collections.FXCollections;
-//import javafx.collections.ObservableList;
-//import seedu.address.model.item.Item;
-//import seedu.address.model.item.exceptions.DuplicateItemException;
-//import seedu.address.testutil.PersonalDetailBuilder;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -32,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Note;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -112,15 +91,17 @@ public class ResumeBookTest {
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class ResumeBookStub implements ReadOnlyResumeBook {
-        private Person user = new Person(new DisplayPicture("/images/Duke.png"), new Name("Default name"),
+        private Person person = new Person(new DisplayPicture("/images/Duke.png"), new Name("Default name"),
                 new Phone("000"), new Email("000@gmail.com"),
                 new Github("000"), "Default university", "Default major",
                 new Time("12-9999"), new Time("12-9999"), 5.0);
+        private ObservablePerson observableUser = new ObservablePerson(person);
         private final ObservableList<Item> itemsToDisplay = FXCollections.observableArrayList();
         private final UniqueItemList<Internship> internships = new UniqueItemList<>();
         private final UniqueItemList<Project> projects = new UniqueItemList<>();
         private final UniqueItemList<Skill> skills = new UniqueItemList<>();
         private final UniqueItemList<Resume> resumes = new UniqueItemList<>();
+        private final UniqueItemList<Note> notes = new UniqueItemList<>();
 
         ResumeBookStub(Collection<Item> itemsToDisplay) {
             this.itemsToDisplay.setAll(itemsToDisplay);
@@ -133,7 +114,7 @@ public class ResumeBookTest {
 
         @Override
         public Person getUser() {
-            return user;
+            return observableUser.getInternalPerson();
         }
 
         @Override
@@ -168,6 +149,11 @@ public class ResumeBookTest {
 
         @Override
         public UniqueItemList<Note> getNoteList() {
+            return notes;
+        }
+
+        @Override
+        public ObservablePerson getObservableUser() {
             return null;
         }
 

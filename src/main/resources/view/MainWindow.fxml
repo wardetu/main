@@ -40,10 +40,10 @@
                      </padding>
                      <children>
                         <StackPane fx:id="profilePlaceholder" styleClass="pane-with-border" />
-                        <StackPane fx:id="notePlaceholder" styleClass="pane-with-border" />
+                        <StackPane fx:id="notePlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
-                  <VBox fx:id="mainAppPlaceholder" minWidth="600.0">
+                  <VBox fx:id="mainAppPlaceholder" minWidth="600.0" HBox.hgrow="ALWAYS">
                      <children>
                      <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
                       <padding>
@@ -54,17 +54,11 @@
                        <items>
                           <VBox fx:id="resultAndItem">
                              <children>
-                             <StackPane fx:id="resultDisplayPlaceholder" maxHeight="150.0" minWidth="200.0">
-                               <padding>
-                                  <Insets bottom="0" left="0" right="0" top="0" />
-                               </padding>
-                                 <VBox.margin>
-                                     <Insets top="5" />
-                                 </VBox.margin>
+                             <StackPane fx:id="resultDisplayPlaceholder" maxHeight="200.0" minWidth="200.0">
                              </StackPane>
                              <StackPane fx:id="itemDisplayPlaceholder" minWidth="300.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                               <padding>
-                                <Insets bottom="5" left="10" right="10" top="5" />
+                                <Insets bottom="5" left="5" right="10" top="5" />
                               </padding>
                                  <VBox.margin>
                                      <Insets bottom="5" top="5" />
@@ -74,7 +68,7 @@
                              </children>
                           </VBox>
 
-                      <VBox fx:id="personList" minWidth="320.0" styleClass="pane-with-border">
+                      <VBox fx:id="personList" minWidth="320.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                         <padding>
                           <Insets bottom="10" left="10" right="10" top="10" />
                         </padding>

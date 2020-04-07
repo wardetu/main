@@ -68,15 +68,14 @@ public class EditNoteCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
-        return new EditCommandResult(editedNote.toString(),
-                String.format(MESSAGE_EDIT_NOTE_SUCCESS, editedNote), model.getDisplayType());
+        return new EditCommandResult(editedNote.toString(), MESSAGE_EDIT_NOTE_SUCCESS, model.getDisplayType());
     }
 
     /**
      * Create a new Note after it has been edited.
-     * @param toEdit
-     * @param editNoteDescriptor
-     * @return
+     * @param toEdit the note that will be edited.
+     * @param editNoteDescriptor describes how the note will be edited.
+     * @return the edited note
      */
     public Note createEditedNoteEntry(Note toEdit, EditNoteDescriptor editNoteDescriptor) {
         Name updatedName = editNoteDescriptor.getName().orElse(toEdit.getName());

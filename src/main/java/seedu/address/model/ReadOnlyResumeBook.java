@@ -7,6 +7,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Note;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -22,7 +23,7 @@ public interface ReadOnlyResumeBook {
     //=========== Get Detail Operations ======================================================================
 
     /**
-     * Returns the user of the resume book.
+     * Returns the user of the resume book as a Person object.
      *
      * @return {@code Person} item representing the user.
      */
@@ -69,6 +70,11 @@ public interface ReadOnlyResumeBook {
      * This list will not contain any duplicate resume.
      */
     UniqueItemList<Note> getNoteList();
+
+    /**
+     * Returns the user in the Resume Book as an ObservablePerson object.
+     */
+    ObservablePerson getObservableUser();
 
     //=========== Query List Operations ================================================================================
 
@@ -189,5 +195,5 @@ public interface ReadOnlyResumeBook {
      * Return the size of the note list.
      */
     public int getNoteListSize();
-}
 
+}
