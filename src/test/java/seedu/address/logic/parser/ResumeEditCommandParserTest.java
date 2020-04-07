@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.model.util.ItemUtil.PROJECT_ALIAS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_ITEM;
 
@@ -213,5 +214,19 @@ public class ResumeEditCommandParserTest {
         // all invalid
         assertParseFailure(parser, "2 int/ -1 proj/ a", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
         assertParseFailure(parser, "3 int/ -1 proj/ a ski/ 0", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+    }
+
+    @Test
+    public void parseVariousTypo_throwsParseException() {
+        // Forgot to specify index and go to item prefixes directly -- Parser expects an index
+        assertParseFailure(parser, PREFIX_INTERNSHIP + "1 2", ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // Space between slash and prefix, right after index -- Parser thinks that the mistyped prefix is part of index
+        assertParseFailure(parser, "1 " + PROJECT_ALIAS + " /", ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // Space between slash and prefix, right after a correct prefix -- Parser thinks it's part of the indices of
+        // the correctly-written prefix
+        assertParseFailure(parser, "1 " + PREFIX_INTERNSHIP + " 1 2 " + PROJECT_ALIAS + " / 2 3",
+                ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
     }
 }
