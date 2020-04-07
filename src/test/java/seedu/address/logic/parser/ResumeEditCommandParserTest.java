@@ -20,46 +20,49 @@ public class ResumeEditCommandParserTest {
     @Test
     public void parse_allItemsSpecified_success() {
         ItemIndicesBuilder internshipIndicesBuilder = new ItemIndicesBuilder().add(1).add(3).add(4);
-        ItemIndicesBuilder skillIndicesBuilder =  new ItemIndicesBuilder().add(1);
+        ItemIndicesBuilder skillIndicesBuilder = new ItemIndicesBuilder().add(1);
         ItemIndicesBuilder projectIndicesBuilder = new ItemIndicesBuilder().add(1).add(2);
 
         // Standard
         assertParseSuccess(parser,
-                "1 " + PREFIX_INTERNSHIP + " " + internshipIndicesBuilder.toString() + " " + PREFIX_SKILL +
-                        " " + skillIndicesBuilder.toString() + " " + PREFIX_PROJECT + " " +
-                        projectIndicesBuilder.toString(),
+                "1 " + PREFIX_INTERNSHIP + " " + internshipIndicesBuilder.toString() + " " + PREFIX_SKILL
+                        + " " + skillIndicesBuilder.toString() + " " + PREFIX_PROJECT + " "
+                        + projectIndicesBuilder.toString(),
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), projectIndicesBuilder.build(),
                         skillIndicesBuilder.build()));
 
         // Shuffle the order of prefixes
         assertParseSuccess(parser,
-                "1 " + PREFIX_PROJECT + " " + projectIndicesBuilder.toString() + " " + PREFIX_INTERNSHIP +
-                        " " + internshipIndicesBuilder.toString() + " " + PREFIX_SKILL + " " +
-                        skillIndicesBuilder.toString(),
+                "1 " + PREFIX_PROJECT + " " + projectIndicesBuilder.toString() + " " + PREFIX_INTERNSHIP
+                        + " " + internshipIndicesBuilder.toString() + " " + PREFIX_SKILL + " "
+                        + skillIndicesBuilder.toString(),
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), projectIndicesBuilder.build(),
                         skillIndicesBuilder.build()));
 
         // multiple project prefixes -- only last one accepted
         assertParseSuccess(parser,
-                "1 " + PREFIX_PROJECT + " 100 200 " + PREFIX_INTERNSHIP + " " +
-                        internshipIndicesBuilder.toString() + " " + PREFIX_SKILL + " " +
-                        skillIndicesBuilder.toString() + " " + PREFIX_PROJECT + " " + projectIndicesBuilder.toString(),
+                "1 " + PREFIX_PROJECT + " 100 200 " + PREFIX_INTERNSHIP + " "
+                        + internshipIndicesBuilder.toString() + " " + PREFIX_SKILL + " "
+                        + skillIndicesBuilder.toString() + " " + PREFIX_PROJECT + " "
+                        + projectIndicesBuilder.toString(),
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), projectIndicesBuilder.build(),
                         skillIndicesBuilder.build()));
 
         // multiple internship prefixes -- only last one accepted
         assertParseSuccess(parser,
-                "1 " + PREFIX_INTERNSHIP + " 100 200 " + PREFIX_INTERNSHIP + " " +
-                        internshipIndicesBuilder.toString() + " " + PREFIX_SKILL + " " +
-                        skillIndicesBuilder.toString() + " " + PREFIX_PROJECT + " " + projectIndicesBuilder.toString(),
+                "1 " + PREFIX_INTERNSHIP + " 100 200 " + PREFIX_INTERNSHIP + " "
+                        + internshipIndicesBuilder.toString() + " " + PREFIX_SKILL + " "
+                        + skillIndicesBuilder.toString() + " " + PREFIX_PROJECT + " "
+                        + projectIndicesBuilder.toString(),
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), projectIndicesBuilder.build(),
                         skillIndicesBuilder.build()));
 
         // multiple skill prefixes -- only last one accepted
         assertParseSuccess(parser,
-                "1 " + PREFIX_SKILL + " 100 200 " + PREFIX_INTERNSHIP + " " +
-                        internshipIndicesBuilder.toString() + " " + PREFIX_SKILL + " " +
-                        skillIndicesBuilder.toString() + " " + PREFIX_PROJECT + " " + projectIndicesBuilder.toString(),
+                "1 " + PREFIX_SKILL + " 100 200 " + PREFIX_INTERNSHIP + " "
+                        + internshipIndicesBuilder.toString() + " " + PREFIX_SKILL + " "
+                        + skillIndicesBuilder.toString() + " " + PREFIX_PROJECT + " "
+                        + projectIndicesBuilder.toString(),
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), projectIndicesBuilder.build(),
                         skillIndicesBuilder.build()));
     }
@@ -71,31 +74,31 @@ public class ResumeEditCommandParserTest {
 
         // Standard
         assertParseSuccess(parser,
-                "1 " + PREFIX_INTERNSHIP + " " + internshipIndicesBuilder.toString() + " " +
-                        PREFIX_PROJECT + " " + projectIndicesBuilder.toString(),
+                "1 " + PREFIX_INTERNSHIP + " " + internshipIndicesBuilder.toString() + " "
+                        + PREFIX_PROJECT + " " + projectIndicesBuilder.toString(),
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), projectIndicesBuilder.build(),
                         ItemIndicesBuilder.empty()));
 
         // Shuffle the order of prefixes
         assertParseSuccess(parser,
-                "1 " + PREFIX_PROJECT + " " + projectIndicesBuilder.toString() + " " + PREFIX_INTERNSHIP +
-                        " " + internshipIndicesBuilder.toString(),
+                "1 " + PREFIX_PROJECT + " " + projectIndicesBuilder.toString() + " " + PREFIX_INTERNSHIP
+                        + " " + internshipIndicesBuilder.toString(),
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), projectIndicesBuilder.build(),
                         ItemIndicesBuilder.empty()));
 
         // multiple internship prefixes -- only last one accepted
         assertParseSuccess(parser,
-                "1 " + PREFIX_INTERNSHIP + " 100 200 " + PREFIX_INTERNSHIP + " " +
-                        internshipIndicesBuilder.toString() + " " + PREFIX_PROJECT + " " +
-                        projectIndicesBuilder.toString(),
+                "1 " + PREFIX_INTERNSHIP + " 100 200 " + PREFIX_INTERNSHIP + " "
+                        + internshipIndicesBuilder.toString() + " " + PREFIX_PROJECT + " "
+                        + projectIndicesBuilder.toString(),
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), projectIndicesBuilder.build(),
                         ItemIndicesBuilder.empty()));
 
         // multiple project prefixes -- only last one accepted
         assertParseSuccess(parser,
-                "1 " + PREFIX_PROJECT + " 100 200 " + PREFIX_INTERNSHIP + " " +
-                        internshipIndicesBuilder.toString() + " " + PREFIX_PROJECT + " " +
-                        projectIndicesBuilder.toString(),
+                "1 " + PREFIX_PROJECT + " 100 200 " + PREFIX_INTERNSHIP + " "
+                        + internshipIndicesBuilder.toString() + " " + PREFIX_PROJECT + " "
+                        + projectIndicesBuilder.toString(),
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), projectIndicesBuilder.build(),
                         ItemIndicesBuilder.empty()));
     }
@@ -107,31 +110,31 @@ public class ResumeEditCommandParserTest {
 
         // Standard
         assertParseSuccess(parser,
-                "1 " + PREFIX_INTERNSHIP + " " + internshipIndicesBuilder.toString() + " " +
-                        PREFIX_SKILL + " " + skillIndicesBuilder.toString(),
+                "1 " + PREFIX_INTERNSHIP + " " + internshipIndicesBuilder.toString() + " "
+                        + PREFIX_SKILL + " " + skillIndicesBuilder.toString(),
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), ItemIndicesBuilder.empty(),
                         skillIndicesBuilder.build()));
 
         // Shuffle the order of prefixes
         assertParseSuccess(parser,
-                "1 " + PREFIX_SKILL + " " + skillIndicesBuilder.toString() + " " + PREFIX_INTERNSHIP +
-                        " " + internshipIndicesBuilder.toString(),
+                "1 " + PREFIX_SKILL + " " + skillIndicesBuilder.toString() + " " + PREFIX_INTERNSHIP
+                        + " " + internshipIndicesBuilder.toString(),
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), ItemIndicesBuilder.empty(),
                         skillIndicesBuilder.build()));
 
         // multiple internship prefixes -- only last one accepted
         assertParseSuccess(parser,
-                "1 " + PREFIX_INTERNSHIP + " 100 200 " + PREFIX_INTERNSHIP + " " +
-                        internshipIndicesBuilder.toString() + " " + PREFIX_SKILL + " " +
-                        skillIndicesBuilder.toString(),
+                "1 " + PREFIX_INTERNSHIP + " 100 200 " + PREFIX_INTERNSHIP + " "
+                        + internshipIndicesBuilder.toString() + " " + PREFIX_SKILL + " "
+                        + skillIndicesBuilder.toString(),
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), ItemIndicesBuilder.empty(),
                         skillIndicesBuilder.build()));
 
         // multiple skill prefixes -- only last one accepted
         assertParseSuccess(parser,
-                "1 " + PREFIX_SKILL + " 100 200 " + PREFIX_INTERNSHIP + " " +
-                        internshipIndicesBuilder.toString() + " " + PREFIX_SKILL + " " +
-                        skillIndicesBuilder.toString(),
+                "1 " + PREFIX_SKILL + " 100 200 " + PREFIX_INTERNSHIP + " "
+                        + internshipIndicesBuilder.toString() + " " + PREFIX_SKILL + " "
+                        + skillIndicesBuilder.toString(),
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), ItemIndicesBuilder.empty(),
                         skillIndicesBuilder.build()));
     }
@@ -143,7 +146,7 @@ public class ResumeEditCommandParserTest {
         // Standard
         assertParseSuccess(parser,
                 "1 " + PREFIX_PROJECT + " " + projectIndicesBuilder.toString(),
-                new ResumeEditCommand(INDEX_FIRST_ITEM, ItemIndicesBuilder.empty() ,projectIndicesBuilder.build(),
+                new ResumeEditCommand(INDEX_FIRST_ITEM, ItemIndicesBuilder.empty(), projectIndicesBuilder.build(),
                         ItemIndicesBuilder.empty()));
 
         // multiple project prefixes -- only last one accepted
@@ -190,8 +193,8 @@ public class ResumeEditCommandParserTest {
         assertParseFailure(parser, "-1", ParserUtil.MESSAGE_INVALID_INDEX);
 
         // with some item prefixes
-        assertParseFailure(parser, "a " + PREFIX_INTERNSHIP + " 1 2 3 " + PREFIX_PROJECT + " 3 2 1 " +
-                        PREFIX_SKILL + " 2 1", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "a " + PREFIX_INTERNSHIP + " 1 2 3 " + PREFIX_PROJECT + " 3 2 1 "
+                        + PREFIX_SKILL + " 2 1", ParserUtil.MESSAGE_INVALID_INDEX);
         assertParseFailure(parser, "-1 " + PREFIX_PROJECT + " 4 1 2", ParserUtil.MESSAGE_INVALID_INDEX);
         assertParseFailure(parser, "1 1 " + PREFIX_PROJECT + " 4 1 2", ParserUtil.MESSAGE_INVALID_INDEX);
     }
@@ -223,8 +226,8 @@ public class ResumeEditCommandParserTest {
         // all invalid
         assertParseFailure(parser, "2 " + PREFIX_INTERNSHIP + " -1 " + PREFIX_PROJECT + " a",
                 ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
-        assertParseFailure(parser, "3 " + PREFIX_INTERNSHIP + " -1 " + PREFIX_PROJECT + " a " +
-                PREFIX_SKILL + " 0",
+        assertParseFailure(parser, "3 " + PREFIX_INTERNSHIP + " -1 " + PREFIX_PROJECT + " a "
+                + PREFIX_SKILL + " 0",
                 ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
     }
 
