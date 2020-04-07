@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_ITEM;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ResumeEditCommand;
-import seedu.address.model.item.Item;
 import seedu.address.testutil.ItemIndicesBuilder;
 
 public class ResumeEditCommandParserTest {
@@ -191,29 +190,42 @@ public class ResumeEditCommandParserTest {
         assertParseFailure(parser, "-1", ParserUtil.MESSAGE_INVALID_INDEX);
 
         // with some item prefixes
-        assertParseFailure(parser, "a int/ 1 2 3 proj/ 3 2 1 ski/ 2 1", ParserUtil.MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, "-1 proj/ 4 1 2", ParserUtil.MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, "1 1 proj/ 4 1 2", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "a " + PREFIX_INTERNSHIP + " 1 2 3 " + PREFIX_PROJECT + " 3 2 1 " +
+                        PREFIX_SKILL + " 2 1", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "-1 " + PREFIX_PROJECT + " 4 1 2", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "1 1 " + PREFIX_PROJECT + " 4 1 2", ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
     @Test
     public void parse_invalidReditItemIndices_throwsParseException() {
         // standard
-        assertParseFailure(parser, "1 int/ a", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
-        assertParseFailure(parser, "1 int/ -1", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
-        assertParseFailure(parser, "2 proj/ a", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
-        assertParseFailure(parser, "2 proj/ -1", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
-        assertParseFailure(parser, "3 ski/ 0", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
-        assertParseFailure(parser, "3 ski/ 100@", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "1 " + PREFIX_INTERNSHIP + " a",
+                ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "1 " + PREFIX_INTERNSHIP + " -1",
+                ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "2 " + PREFIX_PROJECT + " a",
+                ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "2 " + PREFIX_PROJECT + " -1",
+                ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "3 " + PREFIX_SKILL + " 0",
+                ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "3 " + PREFIX_SKILL + " 100@",
+                ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
 
         // mix valid and invalid
-        assertParseFailure(parser, "2 proj/ -1 ski/ 1 2 3", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
-        assertParseFailure(parser, "2 int/ 3 1 2 ski/ @", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
-        assertParseFailure(parser, "2 int/ 3 2 proj/ a", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "2 " + PREFIX_PROJECT + " -1 " + PREFIX_SKILL + " 1 2 3",
+                ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "2 " + PREFIX_INTERNSHIP + " 3 1 2 " + PREFIX_SKILL + " @",
+                ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "2 " + PREFIX_INTERNSHIP + " 3 2 " + PREFIX_PROJECT + " a",
+                ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
 
         // all invalid
-        assertParseFailure(parser, "2 int/ -1 proj/ a", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
-        assertParseFailure(parser, "3 int/ -1 proj/ a ski/ 0", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "2 " + PREFIX_INTERNSHIP + " -1 " + PREFIX_PROJECT + " a",
+                ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "3 " + PREFIX_INTERNSHIP + " -1 " + PREFIX_PROJECT + " a " +
+                PREFIX_SKILL + " 0",
+                ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
     }
 
     @Test
