@@ -8,8 +8,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.generate.GenerateResumeCommand;
-import seedu.address.logic.parser.GenerateResumeCommandParser;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.item.field.Name;
 
 public class GenerateResumeCommandParserTest {
