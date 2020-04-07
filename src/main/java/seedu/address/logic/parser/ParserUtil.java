@@ -33,6 +33,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_REDIT_ITEM_INDEX = "Index provided for one of the items is not" +
+            " a non-zero unsigned integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -223,10 +225,17 @@ public class ParserUtil {
             // TODO: Investigate how this can be combined with the else block
             return Optional.of(new ArrayList<>());
         } else {
-            List<Integer> mappedIndices = Arrays.stream(indices.split("\\s+"))
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
+            boolean isValidIndices = Arrays
+                    .stream(indices.split("\\s+"))
+                    .allMatch(StringUtil::isNonZeroUnsignedInteger);
 
+            if (!isValidIndices) {
+                throw new ParseException(MESSAGE_INVALID_REDIT_ITEM_INDEX);
+            }
+
+            List<Integer> mappedIndices = Arrays.stream(indices.split("\\s+"))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList());
             return Optional.of(mappedIndices);
         }
     }

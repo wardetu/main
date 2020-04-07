@@ -184,7 +184,7 @@ public class ResumeEditCommandParserTest {
     }
 
     @Test
-    public void parse_invalidIndex_throwsParseException() {
+    public void parse_invalidResumeIndex_throwsParseException() {
         // standard
         assertParseFailure(parser, "a", ParserUtil.MESSAGE_INVALID_INDEX);
         assertParseFailure(parser, "-1", ParserUtil.MESSAGE_INVALID_INDEX);
@@ -193,5 +193,25 @@ public class ResumeEditCommandParserTest {
         assertParseFailure(parser, "a int/ 1 2 3 proj/ 3 2 1 ski/ 2 1", ParserUtil.MESSAGE_INVALID_INDEX);
         assertParseFailure(parser, "-1 proj/ 4 1 2", ParserUtil.MESSAGE_INVALID_INDEX);
         assertParseFailure(parser, "1 1 proj/ 4 1 2", ParserUtil.MESSAGE_INVALID_INDEX);
+    }
+
+    @Test
+    public void parse_invalidReditItemIndices_throwsParseException() {
+        // standard
+        assertParseFailure(parser, "1 int/ a", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "1 int/ -1", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "2 proj/ a", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "2 proj/ -1", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "3 ski/ 0", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "3 ski/ 100@", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+
+        // mix valid and invalid
+        assertParseFailure(parser, "2 proj/ -1 ski/ 1 2 3", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "2 int/ 3 1 2 ski/ @", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "2 int/ 3 2 proj/ a", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+
+        // all invalid
+        assertParseFailure(parser, "2 int/ -1 proj/ a", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
+        assertParseFailure(parser, "3 int/ -1 proj/ a ski/ 0", ParserUtil.MESSAGE_INVALID_REDIT_ITEM_INDEX);
     }
 }
