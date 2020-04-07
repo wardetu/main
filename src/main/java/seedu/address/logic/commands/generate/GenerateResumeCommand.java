@@ -38,7 +38,7 @@ public class GenerateResumeCommand extends Command {
             + "If no name is provided for the output .pdf file, default name is the same as resume name.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME]\n"
-            + "Example: " + COMMAND_WORD + " 1 [" + PREFIX_NAME + "MyResume";
+            + "Example: " + COMMAND_WORD + " 1 [" + PREFIX_NAME + "MyResume]";
     public static final String MESSAGE_GENERATE_SUCCESS = "Generated %s from %s";
     private static final String rootPath = "";
 
