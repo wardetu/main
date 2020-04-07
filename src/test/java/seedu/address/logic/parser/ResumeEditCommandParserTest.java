@@ -20,8 +20,8 @@ public class ResumeEditCommandParserTest {
     @Test
     public void parse_allItemsSpecified_success() {
         ItemIndicesBuilder internshipIndicesBuilder = new ItemIndicesBuilder().add(1).add(3).add(4);
-        ItemIndicesBuilder skillIndicesBuilder = new ItemIndicesBuilder().add(1);
         ItemIndicesBuilder projectIndicesBuilder = new ItemIndicesBuilder().add(1).add(2);
+        ItemIndicesBuilder skillIndicesBuilder = new ItemIndicesBuilder().add(1);
 
         // Standard
         assertParseSuccess(parser,
@@ -187,6 +187,61 @@ public class ResumeEditCommandParserTest {
     }
 
     @Test
+    public void parse_itemsSpecifiedButNoIndex_success() {
+        ItemIndicesBuilder internshipIndicesBuilder = new ItemIndicesBuilder();
+        ItemIndicesBuilder projectIndicesBuilder = new ItemIndicesBuilder();
+        ItemIndicesBuilder skillIndicesBuilder = new ItemIndicesBuilder();
+
+        // clear all
+        assertParseSuccess(parser,
+                "1 " + PREFIX_INTERNSHIP + " " + PREFIX_PROJECT + " " + PREFIX_SKILL,
+                new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), projectIndicesBuilder.build(),
+                        skillIndicesBuilder.build()));
+
+        // clear only two
+        assertParseSuccess(parser,
+                "1 " + PREFIX_INTERNSHIP + " " + PREFIX_SKILL,
+                new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), ItemIndicesBuilder.empty(),
+                        skillIndicesBuilder.build()));
+
+        assertParseSuccess(parser,
+                "1 " + PREFIX_PROJECT + " " + PREFIX_SKILL,
+                new ResumeEditCommand(INDEX_FIRST_ITEM, ItemIndicesBuilder.empty(), projectIndicesBuilder.build(),
+                        skillIndicesBuilder.build()));
+
+        // clear only one
+        assertParseSuccess(parser,
+                "1 " + PREFIX_INTERNSHIP,
+                new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), ItemIndicesBuilder.empty(),
+                        ItemIndicesBuilder.empty()));
+
+        assertParseSuccess(parser,
+                "1 " + PREFIX_PROJECT,
+                new ResumeEditCommand(INDEX_FIRST_ITEM, ItemIndicesBuilder.empty(), projectIndicesBuilder.build(),
+                        ItemIndicesBuilder.empty()));
+    }
+
+    @Test
+    public void parse_mixAndMatchItemSpecifiedButNoIndex_success() {
+        ItemIndicesBuilder internshipIndicesBuilder = new ItemIndicesBuilder().add(1).add(4).add(3);
+        ItemIndicesBuilder projectIndicesBuilder = new ItemIndicesBuilder().add(2).add(4).add(1);
+        ItemIndicesBuilder skillIndicesBuilder = new ItemIndicesBuilder();
+
+        // fill up the internship and project, but empty the skill
+        assertParseSuccess(parser,
+                "1 " + PREFIX_INTERNSHIP + " " + internshipIndicesBuilder.toString() + " "
+                        + PREFIX_PROJECT + " " + projectIndicesBuilder.toString() + " " + PREFIX_SKILL,
+                new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), projectIndicesBuilder.build(),
+                        skillIndicesBuilder.build()));
+
+        // fill up the internship, but empty the skill
+        assertParseSuccess(parser,
+                "1 " + PREFIX_INTERNSHIP + " " + internshipIndicesBuilder.toString() + " " + PREFIX_SKILL,
+                new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), ItemIndicesBuilder.empty(),
+                        skillIndicesBuilder.build()));
+    }
+
+    @Test
     public void parse_invalidResumeIndex_throwsParseException() {
         // standard
         assertParseFailure(parser, "a", ParserUtil.MESSAGE_INVALID_INDEX);
@@ -232,7 +287,7 @@ public class ResumeEditCommandParserTest {
     }
 
     @Test
-    public void parseVariousTypo_throwsParseException() {
+    public void parse_variousTypo_throwsParseException() {
         // Forgot to specify index and go to item prefixes directly -- Parser expects an index
         assertParseFailure(parser, PREFIX_INTERNSHIP + "1 2", ParserUtil.MESSAGE_INVALID_INDEX);
 
