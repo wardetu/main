@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_ITEM;
 
 import org.junit.jupiter.api.Test;
 
@@ -126,13 +127,60 @@ public class ResumeEditCommandParserTest {
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), ItemIndicesBuilder.empty(),
                         skillIndicesBuilder.build()));
 
-        // multiple project prefixes -- only last one accepted
+        // multiple skill prefixes -- only last one accepted
         assertParseSuccess(parser,
                 "1 " + PREFIX_SKILL + " 100 200 " + PREFIX_INTERNSHIP + " " +
                         internshipIndicesBuilder.toString() + " " + PREFIX_SKILL + " " +
                         skillIndicesBuilder.toString(),
                 new ResumeEditCommand(INDEX_FIRST_ITEM, internshipIndicesBuilder.build(), ItemIndicesBuilder.empty(),
                         skillIndicesBuilder.build()));
+    }
+
+    @Test
+    public void parse_onlyProjSpecified_success() {
+        ItemIndicesBuilder projectIndicesBuilder = new ItemIndicesBuilder().add(1).add(2);
+
+        // Standard
+        assertParseSuccess(parser,
+                "1 " + PREFIX_PROJECT + " " + projectIndicesBuilder.toString(),
+                new ResumeEditCommand(INDEX_FIRST_ITEM, ItemIndicesBuilder.empty() ,projectIndicesBuilder.build(),
+                        ItemIndicesBuilder.empty()));
+
+        // multiple project prefixes -- only last one accepted
+        assertParseSuccess(parser,
+                "1 " + PREFIX_PROJECT + " 100 200 " + PREFIX_PROJECT + " " + projectIndicesBuilder.toString(),
+                new ResumeEditCommand(INDEX_FIRST_ITEM, ItemIndicesBuilder.empty(), projectIndicesBuilder.build(),
+                        ItemIndicesBuilder.empty()));
+    }
+
+    @Test
+    public void parse_onlySkiSpecified_success() {
+        ItemIndicesBuilder skillIndicesBuilder = new ItemIndicesBuilder().add(1).add(2);
+
+        // Standard
+        assertParseSuccess(parser,
+                "1 " + PREFIX_SKILL + " " + skillIndicesBuilder.toString(),
+                new ResumeEditCommand(INDEX_FIRST_ITEM, ItemIndicesBuilder.empty(), ItemIndicesBuilder.empty(),
+                        skillIndicesBuilder.build()));
+
+        // multiple skill prefixes -- only last one accepted
+        assertParseSuccess(parser,
+                "1 " + PREFIX_SKILL + " 100 200 " + PREFIX_SKILL + " " + skillIndicesBuilder.toString(),
+                new ResumeEditCommand(INDEX_FIRST_ITEM, ItemIndicesBuilder.empty(), ItemIndicesBuilder.empty(),
+                        skillIndicesBuilder.build()));
+    }
+
+    @Test
+    public void parse_nothingSpecified_success() {
+        assertParseSuccess(parser,
+                "1",
+                new ResumeEditCommand(INDEX_FIRST_ITEM, ItemIndicesBuilder.empty(), ItemIndicesBuilder.empty(),
+                        ItemIndicesBuilder.empty()));
+
+        assertParseSuccess(parser,
+                "4",
+                new ResumeEditCommand(INDEX_FOURTH_ITEM, ItemIndicesBuilder.empty(), ItemIndicesBuilder.empty(),
+                        ItemIndicesBuilder.empty()));
     }
 
     @Test
