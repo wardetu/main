@@ -16,6 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Note;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -106,8 +107,10 @@ public class ModelManager implements Model {
 
     //=========== User ================================================================================
 
+
     @Override
     public void setUser(Person person) {
+        // Wrap the Person object so it is consistent with the setUser method in ResumeBook
         versionedResumeBook.setUser(person);
     }
 
@@ -116,6 +119,12 @@ public class ModelManager implements Model {
         return versionedResumeBook.getUser();
     }
 
+    @Override
+    public ObservablePerson getObservableUser() {
+        return versionedResumeBook.getObservableUser();
+    }
+
+    //======================================= Internships ==================================================
     @Override
     public boolean hasNote(Note note) {
         requireNonNull(note);
@@ -204,7 +213,7 @@ public class ModelManager implements Model {
         versionedResumeBook.setInternshipToDisplay();
     }
 
-    //=========== Projects ================================================================================
+    //======================================= Projects ==========================================
 
     @Override
     public boolean hasProject(Project project) {
@@ -259,7 +268,7 @@ public class ModelManager implements Model {
         versionedResumeBook.setProjectToDisplay();
     }
 
-    //=========== Skill ================================================================================
+    //======================================= Skill ===================================================
 
     @Override
     public boolean hasSkill(Skill skill) {
@@ -314,7 +323,7 @@ public class ModelManager implements Model {
         versionedResumeBook.setSkillToDisplay();
     }
 
-    //=========== Resume ================================================================================
+    //========================================== Resume =======================================================
 
     @Override
     public boolean hasResume(Resume resume) {
@@ -403,25 +412,6 @@ public class ModelManager implements Model {
         return versionedResumeBook.getDisplayType();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        // short circuit if same object
-        if (obj == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(obj instanceof ModelManager)) {
-            return false;
-        }
-
-        // state check
-        ModelManager other = (ModelManager) obj;
-        return versionedResumeBook.equals(other.versionedResumeBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredItems.equals(other.filteredItems);
-    }
-
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -448,4 +438,27 @@ public class ModelManager implements Model {
     public void commitResumeBook() {
         versionedResumeBook.commit();
     }
+
+    //========================================================================================================
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof ModelManager)) {
+            return false;
+        }
+
+        // state check
+        ModelManager other = (ModelManager) obj;
+        return versionedResumeBook.equals(other.versionedResumeBook)
+                && userPrefs.equals(other.userPrefs)
+                && filteredItems.equals(other.filteredItems);
+    }
+
+
 }

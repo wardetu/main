@@ -8,21 +8,22 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_ITEM;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.ResumePreviewCommand;
+import seedu.address.logic.commands.DoneCommand;
 
-public class ResumePreviewParserTest {
-    private ResumePreviewCommandParser parser = new ResumePreviewCommandParser();
+public class DoneCommandParserTest {
+
+    private DoneCommandParser parser = new DoneCommandParser();
 
     @Test
-    public void parse_validIndex_returnsResumePreviewCommand() {
-        assertParseSuccess(parser, "1", new ResumePreviewCommand(INDEX_FIRST_ITEM));
-        assertParseSuccess(parser, "4", new ResumePreviewCommand(INDEX_FOURTH_ITEM));
+    public void parse_validIndex_returnsDoneCommand() {
+        assertParseSuccess(parser, "1", new DoneCommand(INDEX_FIRST_ITEM));
+        assertParseSuccess(parser, "4", new DoneCommand(INDEX_FOURTH_ITEM));
     }
 
     @Test
     public void parse_noIndex_throwsParseException() {
         assertParseFailure(parser, "",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ResumePreviewCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -30,5 +31,4 @@ public class ResumePreviewParserTest {
         assertParseFailure(parser, "a", ParserUtil.MESSAGE_INVALID_INDEX);
         assertParseFailure(parser, "-1", ParserUtil.MESSAGE_INVALID_INDEX);
     }
-
 }
