@@ -99,6 +99,7 @@ public class CommandTestUtil {
 
     // NOTES
     public static final String ITEM_TYPE_NOTE = " " + PREFIX_ITEM + " note";
+    public static final String PREFIXED_NAME_NOTE = " " + PREFIX_NAME + " Finish CS2103";
 
     // INVALID ITEM
     public static final String ITEM_TYPE_INVALID = " " + PREFIX_ITEM + " notee";
