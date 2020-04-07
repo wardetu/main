@@ -111,6 +111,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void sortNotes(Comparator<Note> sortComparator) {
+
+    }
+
+    @Override
     public int getNoteListSize() {
         return 0;
     }

@@ -1,15 +1,18 @@
 package seedu.address.logic.commands.sort;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
+
+import java.util.Comparator;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.results.SortCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Note;
 
-import java.util.Comparator;
-
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
-
+/**
+ * Sorts Note items in the resume book.
+ */
 public class SortNotesCommand extends SortCommand {
 
     private final Comparator<Note> sortComparator;
