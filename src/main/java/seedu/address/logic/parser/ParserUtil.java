@@ -314,4 +314,19 @@ public class ParserUtil {
         }
         throw new ParseException(Verifier.ROLE_MESSAGE_CONSTRAINTS);
     }
+
+    /**
+     * Parses a {@code String reverse} choice into a boolean option.
+     * A default value of false is returned if null is provided.
+     */
+    public static boolean parseReverse(String reverse) throws ParseException {
+        if (reverse == null || reverse.equalsIgnoreCase("false")) {
+            return false;
+        } else if (reverse.equalsIgnoreCase("true")) {
+            return true;
+        } else {
+            throw new ParseException("Reverse choice can only be true of false.");
+        }
+
+    }
 }

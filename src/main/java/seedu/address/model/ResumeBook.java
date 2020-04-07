@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -275,7 +276,9 @@ public class ResumeBook implements ReadOnlyResumeBook {
             .collect(Collectors.toList());
     }
 
-
+    public void sortInternships(Comparator<Internship> sortComparator) {
+        internships.sort(sortComparator);
+    }
 
     @Override
     public boolean hasInternshipId(int id) {
@@ -361,6 +364,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
             .filter(x -> x.hasTag(tag))
             .map(x -> (Project) x)
             .collect(Collectors.toList());
+    }
+
+    public void sortProjects(Comparator<Project> sortComparator) {
+        projects.sort(sortComparator);
     }
 
     @Override
@@ -449,6 +456,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
             .collect(Collectors.toList());
     }
 
+    public void sortSkills(Comparator<Skill> sortComparator) {
+        skills.sort(sortComparator);
+    }
+
     @Override
     public boolean hasSkillId(int id) {
         for (Skill item : skills) {
@@ -518,6 +529,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
     @Override
     public Resume getResumeByIndex(Index index) {
         return resumes.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    public void sortResumes(Comparator<Resume> sortComparator) {
+        resumes.sort(sortComparator);
     }
 
     @Override
@@ -593,6 +608,12 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return notes.getSize();
     }
 
+
+    public void sortNotes(Comparator<Note> sortComparator) {
+        notes.sort(sortComparator);
+    }
+
+
     @Override
     public Person getUser() {
         return this.observableUser.getInternalPerson();
@@ -663,4 +684,5 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public int hashCode() {
         return itemsToDisplay.hashCode();
     }
+
 }
