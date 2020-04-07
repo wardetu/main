@@ -73,7 +73,7 @@ public class ResumeBookParser {
             return new ViewCommandParser().parse(arguments);
 
         case GenerateResumeCommand.COMMAND_WORD:
-            return new GenerateResumeParser().parse(arguments);
+            return new GenerateResumeCommandParser().parse(arguments);
 
 
         //-----------------Undo/Redo----------------------------
