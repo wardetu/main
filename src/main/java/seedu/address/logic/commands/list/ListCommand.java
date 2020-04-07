@@ -13,7 +13,7 @@ public abstract class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all %1$s items";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an Item to the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all items of specified type in the resume book.\n"
             + COMMAND_WORD + " "
             + PREFIX_ITEM + "TYPE "
             + "Example: " + COMMAND_WORD + " "
