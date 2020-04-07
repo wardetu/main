@@ -1,7 +1,5 @@
 package seedu.address.model.item;
 
-import java.util.Objects;
-
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
@@ -102,11 +100,6 @@ public class Person {
         return builder.toString();
     }
 
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(displayPicture, name, phone, email, github, university, major, from, to, cap);
-    }
 
     @Override
     public String toString() {
