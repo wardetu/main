@@ -27,6 +27,7 @@ import seedu.address.model.tag.Tag;
  * Edits an Internship Item in the resume book.
  */
 public class EditInternshipCommand extends EditCommand {
+    public static final String MESSAGE_FROM_TO_MISORDER = "\"from\" field cannot be after \"to\" field. ";
     private static final String FIELDS = "Examples: "
             + COMMAND_WORD + " "
             + PREFIX_ITEM + "int "
@@ -49,7 +50,6 @@ public class EditInternshipCommand extends EditCommand {
             + FIELDS
             + EXAMPLE;
     private static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
-    public static final String MESSAGE_FROM_TO_MISORDER = "\"from\" field cannot be after \"to\" field. ";
 
     private EditInternshipDescriptor editInternshipDescriptor;
 
