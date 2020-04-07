@@ -8,10 +8,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.sort.SortCommand;
-import seedu.address.logic.commands.sort.SortInternshipCommand;
-import seedu.address.logic.commands.sort.SortProjectCommand;
-import seedu.address.logic.commands.sort.SortResumeCommand;
-import seedu.address.logic.commands.sort.SortSkillCommand;
+import seedu.address.logic.commands.sort.SortInternshipsCommand;
+import seedu.address.logic.commands.sort.SortNotesCommand;
+import seedu.address.logic.commands.sort.SortProjectsCommand;
+import seedu.address.logic.commands.sort.SortResumesCommand;
+import seedu.address.logic.commands.sort.SortSkillsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.util.ItemUtil;
@@ -50,29 +51,38 @@ public class SortCommandParser implements Parser<SortCommand> {
             if (!sortOrder.equalsIgnoreCase("name")) {
                 throw new ParseException(SortCommand.MESSAGE_INAPPLICABLE_SORT);
             } else {
-                return new SortResumeCommand(sortOrder, reverse);
+                return new SortResumesCommand(sortOrder, reverse);
             }
 
         case ItemUtil.INTERNSHIP_ALIAS:
             if (sortOrder.equalsIgnoreCase("level")) {
                 throw new ParseException(SortCommand.MESSAGE_INAPPLICABLE_SORT);
             } else {
-                return new SortInternshipCommand(sortOrder, reverse);
+                return new SortInternshipsCommand(sortOrder, reverse);
             }
 
         case ItemUtil.PROJECT_ALIAS:
             if (sortOrder.equalsIgnoreCase("level")) {
                 throw new ParseException(SortCommand.MESSAGE_INAPPLICABLE_SORT);
             } else {
-                return new SortProjectCommand(sortOrder, reverse);
+                return new SortProjectsCommand(sortOrder, reverse);
             }
 
         case ItemUtil.SKILL_ALIAS:
             if (sortOrder.equalsIgnoreCase("time")) {
                 throw new ParseException(SortCommand.MESSAGE_INAPPLICABLE_SORT);
             } else {
-                return new SortSkillCommand(sortOrder, reverse);
+                return new SortSkillsCommand(sortOrder, reverse);
             }
+
+        case ItemUtil.NOTE_ALIAS:
+            if (sortOrder.equalsIgnoreCase("level")) {
+                throw new ParseException(SortCommand.MESSAGE_INAPPLICABLE_SORT);
+            } else {
+                return new SortNotesCommand(sortOrder, reverse);
+            }
+
+
         default:
             // TODO: Use a better Exception here
             throw new ParseException("The item type is not detected! Something is wrong");

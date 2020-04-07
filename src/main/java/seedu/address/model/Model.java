@@ -94,6 +94,12 @@ public interface Model {
 
     Note getNote(Index index);
 
+    /**
+     * Sorts all Note items in the resume book using the supplied Comparator.
+     * @param sortComparator a Comparator that compares two Note items.
+     */
+    void sortNotes(Comparator<Note> sortComparator);
+
     int getNoteListSize();
 
     //=========== Internships ================================================================================

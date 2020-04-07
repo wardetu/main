@@ -11,20 +11,17 @@ import seedu.address.model.item.Internship;
 /**
  * Sort Internship items in the resume book.
  */
-public class SortInternshipCommand extends SortCommand {
+public class SortInternshipsCommand extends SortCommand {
 
     // TODO: more defensive
     private final Comparator<Internship> sortComparator;
 
-    public SortInternshipCommand(String sortOrder, boolean reverse) {
-        Comparator<Internship> baseComparator = new Comparator<Internship>() {
-            @Override
-            public int compare(Internship int1, Internship int2) {
-                if (sortOrder.equalsIgnoreCase("name")) {
-                    return int1.getName().compareTo(int2.getName());
-                } else {
-                    return int1.getFrom().compareTo(int2.getFrom());
-                }
+    public SortInternshipsCommand(String sortOrder, boolean reverse) {
+        Comparator<Internship> baseComparator = (int1, int2) -> {
+            if (sortOrder.equalsIgnoreCase("name")) {
+                return int1.getName().compareTo(int2.getName());
+            } else {
+                return int1.getFrom().compareTo(int2.getFrom());
             }
         };
         sortComparator = reverse ? baseComparator.reversed() : baseComparator;

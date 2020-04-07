@@ -11,18 +11,15 @@ import seedu.address.model.item.Skill;
 /**
  * Sorts Skill items in the resume book.
  */
-public class SortSkillCommand extends SortCommand {
+public class SortSkillsCommand extends SortCommand {
     private final Comparator<Skill> sortComparator;
 
-    public SortSkillCommand(String sortOrder, boolean reverse) {
-        Comparator<Skill> baseComparator = new Comparator<Skill>() {
-            @Override
-            public int compare(Skill ski1, Skill ski2) {
-                if (sortOrder.equals("name")) {
-                    return ski1.getName().compareTo(ski2.getName());
-                } else {
-                    return ski1.getLevel().compareTo(ski2.getLevel());
-                }
+    public SortSkillsCommand(String sortOrder, boolean reverse) {
+        Comparator<Skill> baseComparator = (ski1, ski2) -> {
+            if (sortOrder.equals("name")) {
+                return ski1.getName().compareTo(ski2.getName());
+            } else {
+                return ski1.getLevel().compareTo(ski2.getLevel());
             }
         };
         sortComparator = reverse ? baseComparator.reversed() : baseComparator;

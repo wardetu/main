@@ -11,18 +11,15 @@ import seedu.address.model.item.Project;
 /**
  * Sorts Project items in the resume book.
  */
-public class SortProjectCommand extends SortCommand {
+public class SortProjectsCommand extends SortCommand {
     private final Comparator<Project> sortComparator;
 
-    public SortProjectCommand(String sortOrder, boolean reverse) {
-        Comparator<Project> baseComparator = new Comparator<Project>() {
-            @Override
-            public int compare(Project proj1, Project proj2) {
-                if (sortOrder.equalsIgnoreCase("name")) {
-                    return proj1.getName().compareTo(proj2.getName());
-                } else {
-                    return proj1.getTime().compareTo(proj2.getTime());
-                }
+    public SortProjectsCommand(String sortOrder, boolean reverse) {
+        Comparator<Project> baseComparator = (proj1, proj2) -> {
+            if (sortOrder.equalsIgnoreCase("name")) {
+                return proj1.getName().compareTo(proj2.getName());
+            } else {
+                return proj1.getTime().compareTo(proj2.getTime());
             }
         };
         sortComparator = reverse ? baseComparator.reversed() : baseComparator;

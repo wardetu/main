@@ -155,6 +155,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortNotes(Comparator<Note> sortComparator) {
+        versionedResumeBook.sortNotes(sortComparator);
+    }
+
+    @Override
     public int getNoteListSize() {
         return versionedResumeBook.getNoteListSize();
     }

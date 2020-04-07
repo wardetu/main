@@ -11,15 +11,10 @@ import seedu.address.model.item.Resume;
 /**
  * Sorts Resume items in the resume book.
  */
-public class SortResumeCommand extends SortCommand {
+public class SortResumesCommand extends SortCommand {
     private final Comparator<Resume> sortComparator;
-    public SortResumeCommand(String sortOrder, boolean reverse) {
-        Comparator<Resume> baseComparator = new Comparator<Resume>() {
-            @Override
-            public int compare(Resume res1, Resume res2) {
-                return res1.getName().compareTo(res2.getName());
-            }
-        };
+    public SortResumesCommand(String sortOrder, boolean reverse) {
+        Comparator<Resume> baseComparator = (res1, res2) -> res1.getName().compareTo(res2.getName());
         sortComparator = reverse ? baseComparator.reversed() : baseComparator;
     }
 

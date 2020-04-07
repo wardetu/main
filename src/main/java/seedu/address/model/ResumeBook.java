@@ -593,6 +593,12 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return notes.getSize();
     }
 
+
+    public void sortNotes(Comparator<Note> sortComparator) {
+        notes.sort(sortComparator);
+    }
+
+
     @Override
     public Person getUser() {
         return this.observableUser.getInternalPerson();
