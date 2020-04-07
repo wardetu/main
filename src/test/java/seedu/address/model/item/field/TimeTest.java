@@ -20,10 +20,12 @@ public class TimeTest {
     }
 
     @Test
-    public void isValidTime() {
-        // null time
+    public void isValidTime_nullInput_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> Time.isValidTime(null));
+    }
 
+    @Test
+    public void isValidTime() {
         // blank time
         assertFalse(Time.isValidTime("")); // empty string
         assertFalse(Time.isValidTime(" ")); // spaces only

@@ -19,10 +19,12 @@ public class GithubTest {
     }
 
     @Test
-    public void isValidGithub() {
-        // null github
+    public void isValidGithub_nullInput_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> Github.isValidGithub(null));
+    }
 
+    @Test
+    public void isValidGithub() {
         // blank github
         assertFalse(Github.isValidGithub("")); // empty string
         assertFalse(Github.isValidGithub(" ")); // spaces only
