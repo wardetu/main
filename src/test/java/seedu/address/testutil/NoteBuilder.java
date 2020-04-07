@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import seedu.address.model.item.Note;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
-import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -76,6 +75,10 @@ public class NoteBuilder {
         return this;
     }
 
+    /**
+     * Returns a note.
+     * @return note as as specified by descriptions of NoteBuilder.
+     */
     public Note build() {
         Note note = new Note(name, time, tags);
         if (done) {

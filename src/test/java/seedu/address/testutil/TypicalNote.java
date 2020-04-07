@@ -2,6 +2,9 @@ package seedu.address.testutil;
 
 import seedu.address.model.item.Note;
 
+/**
+ * A utility class containing a list of {@code Note} objects to be used in tests.
+ */
 public class TypicalNote {
     public static final Note NOTE_DONE = new NoteBuilder()
             .withName("Finish Homework")

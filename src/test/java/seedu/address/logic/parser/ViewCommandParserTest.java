@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.commands.view.ViewInternshipCommand;
 import seedu.address.logic.commands.view.ViewNoteCommand;
@@ -77,9 +78,4 @@ public class ViewCommandParserTest {
         assertParseFailure(parser, "3 " + ITEM_TYPE_INVALID,
                 "Not a valid item type!");
     }
-//
-//    @Test
-//    public void parser_invalidType_failure() {
-//        assertParseFailure(parser, ITEM_TYPE_INVALID, "Not a valid item type!");
-//    }
 }

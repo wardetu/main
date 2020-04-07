@@ -37,11 +37,9 @@ import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_WEBSITE_DUKE
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_WEBSITE_ORBITAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECH;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalInternship.GOOGLE;
-import static seedu.address.testutil.TypicalNote.NOTE_DONE;
 import static seedu.address.testutil.TypicalNote.NOTE_NOT_DONE;
 import static seedu.address.testutil.TypicalProject.ORBITAL;
 import static seedu.address.testutil.TypicalResume.ME_RESUME;
@@ -155,7 +153,7 @@ public class AddCommandParserTest {
 
         // multiple item time - last time accepted
         assertParseSuccess(parser,
-                ITEM_TYPE_NOTE + PREFIXED_NAME_NOTE + " t/ 12-2021" +PREFIXED_TIME_TO + PREFIXED_TAG_JAVA,
+                ITEM_TYPE_NOTE + PREFIXED_NAME_NOTE + " t/ 12-2021" + PREFIXED_TIME_TO + PREFIXED_TAG_JAVA,
                 new AddNoteCommand(expectedNote));
 
         // multiple item tags - all tags accepted

@@ -1,8 +1,8 @@
 package seedu.address.logic.commands.list;
 
-import seedu.address.logic.commands.Command;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
+
+import seedu.address.logic.commands.Command;
 
 /**
  * Lists all items in the address book to the user.

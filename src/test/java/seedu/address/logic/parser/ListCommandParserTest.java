@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.commands.list.ListInternshipCommand;
 import seedu.address.logic.commands.list.ListNoteCommand;
@@ -20,7 +21,6 @@ import seedu.address.logic.commands.list.ListSkillCommand;
 
 public class ListCommandParserTest {
     private ListCommandParser parser = new ListCommandParser();
-    
     @Test
     public void parse_listAllInternships_success() {
         assertParseSuccess(parser, ITEM_TYPE_INTERNSHIP, new ListInternshipCommand());
