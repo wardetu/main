@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.core.index.Index;
@@ -20,7 +21,8 @@ public class GenerateResumeCommandParser implements Parser<GenerateResumeCommand
     public GenerateResumeCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
         if (argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(GenerateResumeCommand.MESSAGE_USAGE);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    GenerateResumeCommand.MESSAGE_USAGE));
         }
         String preamble = argMultimap.getPreamble();
         Index index = ParserUtil.parseIndex(preamble);
