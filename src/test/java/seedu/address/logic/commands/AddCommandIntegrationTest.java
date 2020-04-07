@@ -72,7 +72,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newNote_success() {
-        Note validNote = TypicalNote.NOTE_NOT_DONE;
+        Note validNote = TypicalNote.NOTE_DONE;
 
         Model expectedModel = new ModelManager(TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
         expectedModel.addNote(validNote);
@@ -80,15 +80,13 @@ public class AddCommandIntegrationTest {
         assertCommandSuccess(new AddNoteCommand(validNote),
                 model,
                 new AddCommandResult(validNote.toString(),
-                        String.format(AddNoteCommand.MESSAGE_SUCCESS,
-                                validNote.getType().getFullType()), ItemUtil.INTERNSHIP_ALIAS),
+                        AddNoteCommand.MESSAGE_SUCCESS, ItemUtil.INTERNSHIP_ALIAS),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicateNote_throwsCommandException() {
         Note validNote = TypicalNote.NOTE_NOT_DONE;
-        model.addNote((new NoteBuilder(validNote)).build());
 
         assertCommandFailure(new AddNoteCommand(validNote),
                 model,
