@@ -4,6 +4,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ResumePreviewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 /**
  * Parses input arguments and creates a new ResumePreviewCommand object
  */
@@ -14,7 +16,7 @@ public class ResumePreviewCommandParser implements Parser<ResumePreviewCommand> 
                 ArgumentTokenizer.tokenize(userInput);
 
         if (argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(ResumePreviewCommand.MESSAGE_USAGE);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ResumePreviewCommand.MESSAGE_USAGE));
         }
 
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
