@@ -49,6 +49,7 @@ public class EditInternshipCommand extends EditCommand {
             + FIELDS
             + EXAMPLE;
     private static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
+    public static final String MESSAGE_FROM_TO_MISORDER = "\"from\" field cannot be after \"to\" field. ";
 
     private EditInternshipDescriptor editInternshipDescriptor;
 
@@ -72,6 +73,10 @@ public class EditInternshipCommand extends EditCommand {
         Internship toEdit = model.getInternshipByIndex(index);
 
         Internship editedInternship = createEditedInternship(toEdit, editInternshipDescriptor);
+
+        if (editedInternship.getFrom().compareTo(editedInternship.getTo()) > 0) {
+            throw new CommandException(MESSAGE_FROM_TO_MISORDER);
+        }
 
         try {
             model.setInternship(toEdit, editedInternship);
