@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.results;
 
 /**
- * Represents the result of the Redo command execution.
+ * Represents the result of a Redo command execution.
  */
 public class RedoCommandResult extends CommandResult {
 

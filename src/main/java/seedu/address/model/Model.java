@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -122,7 +123,7 @@ public interface Model {
     void deleteInternship(Internship internship);
 
     /**
-     * Return an Internship item at the specified index from the internship list.
+     * Returns an Internship item at the specified index from the internship list.
      * @param index
      * @return Internship item at {@code index}
      */
@@ -131,13 +132,19 @@ public interface Model {
     boolean hasInternshipId(int id);
 
     /**
-     * Return a Internship item with the specified ID from the internship list.
+     * Returns a Internship item with the specified ID from the internship list.
      * @param id
      * @return Internship item with {@code id}
      */
     Internship getInternshipById(int id);
 
     List<Internship> getInternshipsByTag(Tag tag);
+
+    /**
+     * Sorts all Internship items in the resume book using the supplied Comparator.
+     * @param sortComparator a Comparator that compares two Internship items.
+     */
+    void sortInternships(Comparator<Internship> sortComparator);
 
     /**
      * Return the size of the internship list.
@@ -194,6 +201,12 @@ public interface Model {
     List<Project> getProjectsByTag(Tag tag);
 
     /**
+     * Sorts all Project items in the resume book using the supplied Comparator.
+     * @param sortComparator a Comparator that compares two Project items.
+     */
+    void sortProjects(Comparator<Project> sortComparator);
+
+    /**
      * Return the size of the project list.
      */
     int getProjectSize();
@@ -248,6 +261,12 @@ public interface Model {
     List<Skill> getSkillsByTag(Tag tag);
 
     /**
+     * Sorts all Skill items in the resume book using the supplied Comparator.
+     * @param sortComparator a Comparator that compares two Skill items.
+     */
+    void sortSkills(Comparator<Skill> sortComparator);
+
+    /**
      * Return the size of the skill list.
      */
     int getSkillSize();
@@ -294,6 +313,12 @@ public interface Model {
      * @return Resume item at {@code index}
      */
     Resume getResumeByIndex(Index index);
+
+    /**
+     * Sorts all Resume items in the resume book using the supplied Comparator.
+     * @param sortComparator a Comparator that compares two Resume items.
+     */
+    void sortResumes(Comparator<Resume> sortComparator);
 
     boolean hasResumeId(int id);
 

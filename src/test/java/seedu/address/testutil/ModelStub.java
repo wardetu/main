@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -150,6 +151,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void sortInternships(Comparator<Internship> sortComparator) {
+
+    }
+
+    @Override
     public int getInternshipSize() {
         return 0;
     }
@@ -192,6 +198,11 @@ public class ModelStub implements Model {
     @Override
     public List<Project> getProjectsByTag(Tag tag) {
         return null;
+    }
+
+    @Override
+    public void sortProjects(Comparator<Project> sortComparator) {
+
     }
 
     @Override
@@ -240,6 +251,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void sortSkills(Comparator<Skill> sortComparator) {
+
+    }
+
+    @Override
     public int getSkillSize() {
         return 0;
     }
@@ -283,6 +299,11 @@ public class ModelStub implements Model {
     @Override
     public Resume getResumeByIndex(Index index) {
         return null;
+    }
+
+    @Override
+    public void sortResumes(Comparator<Resume> sortComparator) {
+
     }
 
     @Override

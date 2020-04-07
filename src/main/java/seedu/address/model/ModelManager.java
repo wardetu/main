@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -204,6 +205,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortInternships(Comparator<Internship> sortComparator) {
+        versionedResumeBook.sortInternships(sortComparator);
+    }
+
+    @Override
     public int getInternshipSize() {
         return versionedResumeBook.getInternshipSize();
     }
@@ -256,6 +262,11 @@ public class ModelManager implements Model {
     @Override
     public List<Project> getProjectsByTag(Tag tag) {
         return versionedResumeBook.getProjectsByTag(tag);
+    }
+
+    @Override
+    public void sortProjects(Comparator<Project> sortComparator) {
+        versionedResumeBook.sortProjects(sortComparator);
     }
 
     @Override
@@ -314,6 +325,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortSkills(Comparator<Skill> sortComparator) {
+        versionedResumeBook.sortSkills(sortComparator);
+    }
+
+    @Override
     public int getSkillSize() {
         return versionedResumeBook.getSkillSize();
     }
@@ -357,6 +373,11 @@ public class ModelManager implements Model {
     @Override
     public Resume getResumeByIndex(Index index) {
         return versionedResumeBook.getResumeByIndex(index);
+    }
+
+    @Override
+    public void sortResumes(Comparator<Resume> sortComparator) {
+        versionedResumeBook.sortResumes(sortComparator);
     }
 
     @Override

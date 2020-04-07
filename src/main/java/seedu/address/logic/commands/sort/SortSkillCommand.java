@@ -1,4 +1,39 @@
 package seedu.address.logic.commands.sort;
 
-public class SortSkillCommand {
+import java.util.Comparator;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.SortCommandResult;
+import seedu.address.model.Model;
+import seedu.address.model.item.Skill;
+
+/**
+ * Sorts Skill items in the resume book.
+ */
+public class SortSkillCommand extends SortCommand {
+    private final Comparator<Skill> sortComparator;
+
+    public SortSkillCommand(String sortOrder, boolean reverse) {
+        Comparator<Skill> baseComparator = new Comparator<Skill>() {
+            @Override
+            public int compare(Skill ski1, Skill ski2) {
+                if (sortOrder.equals("name")) {
+                    return ski1.getName().compareTo(ski2.getName());
+                } else {
+                    return ski1.getLevel().compareTo(ski2.getLevel());
+                }
+            }
+        };
+        sortComparator = reverse ? baseComparator.reversed() : baseComparator;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        model.sortSkills(sortComparator);
+        model.setSkillToDisplay();
+        model.commitResumeBook();
+
+        return new SortCommandResult(String.format(MESSAGE_SUCCESS, "Internship"), model.getDisplayType());
+    }
 }
