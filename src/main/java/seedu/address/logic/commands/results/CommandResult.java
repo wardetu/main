@@ -78,6 +78,8 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                && dataToUser.equals(otherCommandResult.dataToUser)
+                && displayType.equals(otherCommandResult.displayType)
                 && isShowPreview == otherCommandResult.isShowPreview
                 && isGenerate == otherCommandResult.isGenerate
                 && isShowHelp == otherCommandResult.isShowHelp

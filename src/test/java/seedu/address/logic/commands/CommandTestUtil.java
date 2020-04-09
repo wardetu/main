@@ -154,8 +154,8 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
-
-            assertEquals(expectedCommandResult.getFeedbackToUser(), result.getFeedbackToUser());
+            System.out.println(expectedCommandResult.getDisplayType().equals(result.getDisplayType()));
+            assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel.getStatelessResumeBook(), actualModel.getStatelessResumeBook());
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
