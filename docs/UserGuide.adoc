@@ -361,6 +361,8 @@ The specific command syntax could be found in the table below:
 +
 image::find_command.png[width="790"]
 
+// tag::delete[]
+
 === Deleting an item : `delete`
 
 Deletes an item from the ResuMe application.
@@ -403,6 +405,8 @@ deletion to proceed.
 +
 
 image::DeleteSkill3.png[width="790"]
+
+// end::delete[]
 
 // tag::view[]
 === Viewing an item in details: `view`
@@ -497,6 +501,8 @@ This command modifies the resume at index 2. It will find all the internship, pr
 
 // end::tagpull[]
 
+// tag::undo[]
+
 === Undo a command: `undo`
 
 Undoes the previous command and restores the state of the application to before that command is performed.
@@ -537,6 +543,10 @@ Voila, Java is back, and our list box now displays skills.
 
 image::postUndo_JavaIsBack.png[width="790"]
 
+// end::undo[]
+
+// tag::redo[]
+
 === Redo a command: `redo`
 
 Reverts the most recent undone command and brings the application state to after the (re)execution
@@ -565,6 +575,8 @@ once again removed from our life.
 +
 
 image::redo_success.png[width="790"]
+
+// end::redo[]
 
 === Previewing a resume: `rpreview`
 
