@@ -10,7 +10,6 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ResumeEditCommand;
 import seedu.address.logic.commands.ResumePreviewCommand;
@@ -22,6 +21,7 @@ import seedu.address.logic.commands.edit.EditCommand;
 import seedu.address.logic.commands.edit.EditUserCommand;
 import seedu.address.logic.commands.find.FindCommand;
 import seedu.address.logic.commands.generate.GenerateResumeCommand;
+import seedu.address.logic.commands.help.HelpCommand;
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -73,7 +73,7 @@ public class ResumeBookParser {
             return new ViewCommandParser().parse(arguments);
 
         case GenerateResumeCommand.COMMAND_WORD:
-            return new GenerateResumeParser().parse(arguments);
+            return new GenerateResumeCommandParser().parse(arguments);
 
 
         //-----------------Undo/Redo----------------------------
@@ -110,7 +110,7 @@ public class ResumeBookParser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommandParser().parse(arguments.trim());
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
