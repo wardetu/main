@@ -105,7 +105,7 @@ public abstract class Item {
      */
     public static boolean isValidItemType(String itemType) {
         String[] correctFormats = new String[] {ItemUtil.INTERNSHIP_ALIAS, ItemUtil.PROJECT_ALIAS, ItemUtil.SKILL_ALIAS,
-                ItemUtil.RESUME_ALIAS, ItemUtil.NOTE_ALIAS};
+            ItemUtil.RESUME_ALIAS, ItemUtil.NOTE_ALIAS};
         for (String correctFormat: correctFormats) {
             if (itemType.equals(correctFormat)) {
                 return true;
