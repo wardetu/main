@@ -146,7 +146,7 @@ public class MainWindow extends UiPart<Stage> {
         itemDisplayList = new ItemDisplayList(FXCollections.observableArrayList(new String[0]));
         itemDisplayPlaceholder.getChildren().add(itemDisplayList.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getResumeBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
