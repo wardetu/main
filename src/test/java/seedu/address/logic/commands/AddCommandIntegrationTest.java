@@ -81,7 +81,7 @@ public class AddCommandIntegrationTest {
         assertCommandSuccess(new AddNoteCommand(validNote),
                 model,
                 new AddCommandResult(validNote.toString(),
-                        AddNoteCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType()),
+                        AddNoteCommand.MESSAGE_SUCCESS, ItemUtil.INTERNSHIP_ALIAS),
                 expectedModel);
     }
 
