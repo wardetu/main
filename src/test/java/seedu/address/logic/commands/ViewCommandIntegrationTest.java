@@ -69,7 +69,7 @@ public class ViewCommandIntegrationTest {
 
     @Test
     public void execute_viewNote_success() {
-        Note validNote = TypicalNote.NOTE_NOT_DONE;
+        Note validNote = TypicalNote.FINISH_CS_2103;
 
         Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
 
@@ -92,7 +92,7 @@ public class ViewCommandIntegrationTest {
 
     @Test
     public void execute_viewProject_success() {
-        Project validProject = TypicalProject.DUKE;
+        Project validProject = TypicalProject.ORBITAL;
 
         Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
         expectedModel.setProjectToDisplay();
@@ -114,7 +114,7 @@ public class ViewCommandIntegrationTest {
 
     @Test
     public void execute_viewResume_success() {
-        Resume validResume = TypicalResume.SE_RESUME;
+        Resume validResume = TypicalResume.ME_RESUME;
 
         Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
         expectedModel.setResumeToDisplay();

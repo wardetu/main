@@ -22,7 +22,6 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         case "start":
             return new HelpStartCommand();
         default:
-            System.out.println(args);
             throw new ParseException(HelpCommand.MESSAGE_INVALID_OPTION);
         }
     }

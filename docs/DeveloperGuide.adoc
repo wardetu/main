@@ -123,6 +123,7 @@ image::DeleteSequenceDiagram.png[]
 
 NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+// tag::model[]
 [[Design-Model]]
 === Model component
 
@@ -143,6 +144,8 @@ The `Model`,
 As a more OOP model, we can store a `Tag` list in `Resume Book`, which `Item` can reference. This would allow `Resume Book` to only require one `Tag` object per unique `Tag`, instead of each `Item` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:BetterModelClassDiagram.png[]
+
+// end::model[]
 
 [[Design-Storage]]
 === Storage component
@@ -351,13 +354,13 @@ with the app.
 ==== Change Background and Font Color
 This allows the user to change the background and font color using rgb or hex color codes.
 
-// tag::export[]
-=== [Proposed] Export Resume feature
+//tag::export[]
+=== Export Resume feature
 The Export Resume feature supports two main actions: previewing the content of a `Resume` item, and
 then exporting it as a .pdf file.
 
 ==== rpreview: preview a `Resume`
-===== Proposed Implementation
+===== Implementation
 `rpreview` is supported by the new `Command`, `ResumePreviewCommand` and the additional method `Resume#getPreview()`
 which return the content of the `Resume` in textual format.
 
@@ -397,7 +400,7 @@ to call `rpreview` after each edit, reducing the number of switches between view
 ****
 
 ==== rgen: generate a .pdf file from a `Resume`
-===== Proposed Implementation
+===== Implementation
 This feature utilises the external *iText* library. When using `rgen`, the user could specify the desired name of
 the generated file, which will be saved in the root directory of the project.
 
@@ -449,7 +452,7 @@ of reading its content twice (once during `rpreview` and once during `rgen`) is 
 will further allows the application to have more control when formatting the output file, and leaving room for potential
 extended features (e.g. allow user to choose from a variety of pre-defined resume templates).
 ****
-// end::export[]
+end::export[]
 
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
