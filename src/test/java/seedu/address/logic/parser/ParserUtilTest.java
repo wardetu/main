@@ -22,6 +22,7 @@ import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
+import seedu.address.testutil.ItemIndicesBuilder;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -269,6 +270,33 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseReditItemIndices_null_returnOptionalEmpty() throws Exception {
+        assertEquals(ItemIndicesBuilder.empty(), ParserUtil.parseReditItemIndices(null));
+    }
+
+    @Test
+    public void parseReditItemIndices_emptyString_returnOptionalOfEmptyArray() throws Exception {
+        assertEquals(new ItemIndicesBuilder().build(), ParserUtil.parseReditItemIndices(""));
+    }
+
+    @Test
+    public void parseReditItemIndices_invalidIndices_returnOptionalOfIndices() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseReditItemIndices("2 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseReditItemIndices("a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseReditItemIndices("0"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseReditItemIndices("-1"));
+    }
+
+    @Test
+    public void parseReditItemIndices_validIndicesWithoutWhitespace_returnOptionalOfIndices() throws Exception {
+        ItemIndicesBuilder expectedIndices1 = new ItemIndicesBuilder().add(2).add(1).add(3).add(5);
+        assertEquals(expectedIndices1.build(), ParserUtil.parseReditItemIndices("2 1 3 5"));
+
+        ItemIndicesBuilder expectedIndices2 = new ItemIndicesBuilder().add(2);
+        assertEquals(expectedIndices2.build(), ParserUtil.parseReditItemIndices("2"));
     }
 
     @Test
