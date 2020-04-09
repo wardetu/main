@@ -23,10 +23,13 @@ import seedu.address.logic.commands.find.FindProjectCommand;
 import seedu.address.logic.commands.find.FindResumeCommand;
 import seedu.address.logic.commands.find.FindSkillCommand;
 import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.FindCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.item.Item;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
+import seedu.address.model.util.ItemUtil;
 import seedu.address.testutil.TypicalResumeBook;
 
 /**
@@ -62,13 +65,12 @@ public class FindCommandIntegrationTest {
     public void execute_zeroKeywords_noInternshipFound() {
         Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setInternshipToDisplay();
-        CommandResult expectedCommandResult = new CommandResult("",
-                String.format(Messages.MESSAGE_ITEMS_LISTED, 0, "Internships"),
-                expectedModel.getDisplayType());
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindInternshipCommand command = new FindInternshipCommand(predicate);
         model.updateFilteredItemList(predicate);
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+
+        assertCommandSuccess(new FindInternshipCommand(predicate), model,
+                new FindCommandResult("", String.format(Messages.MESSAGE_ITEMS_LISTED, 0, "Internships"),
+                ItemUtil.INTERNSHIP_ALIAS), expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredItemList());
     }
 
@@ -76,13 +78,13 @@ public class FindCommandIntegrationTest {
     public void execute_multipleKeywords_multipleInternshipsFound() {
         Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setInternshipToDisplay();
-        CommandResult expectedCommandResult = new CommandResult("",
-                String.format(Messages.MESSAGE_ITEMS_LISTED, 2, "Internships"),
-                expectedModel.getDisplayType());
         NameContainsKeywordsPredicate predicate = preparePredicate("Van PayPal");
-        FindInternshipCommand command = new FindInternshipCommand(predicate);
         model.updateFilteredItemList(predicate);
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+
+        assertCommandSuccess(new FindInternshipCommand(predicate), model,
+                new FindCommandResult("",
+                        String.format(Messages.MESSAGE_ITEMS_LISTED, 2, "Internships"),
+                        ItemUtil.INTERNSHIP_ALIAS), expectedModel);
         assertEquals(Arrays.asList(NINJA_VAN, PAYPAL), model.getFilteredItemList());
     }
 
@@ -90,13 +92,12 @@ public class FindCommandIntegrationTest {
     public void execute_zeroKeywords_noProjectFound() {
         Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setProjectToDisplay();
-        CommandResult expectedCommandResult = new CommandResult("",
-                String.format(Messages.MESSAGE_ITEMS_LISTED, 0, "Projects"),
-                expectedModel.getDisplayType());
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindProjectCommand command = new FindProjectCommand(predicate);
         model.updateFilteredItemList(predicate);
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+
+        assertCommandSuccess(new FindProjectCommand(predicate), model,
+                new FindCommandResult("", String.format(Messages.MESSAGE_ITEMS_LISTED, 0, "Projects"),
+                        ItemUtil.PROJECT_ALIAS), expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredItemList());
     }
 
@@ -104,13 +105,13 @@ public class FindCommandIntegrationTest {
     public void execute_singleKeyword_singleProjectFound() {
         Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setProjectToDisplay();
-        CommandResult expectedCommandResult = new CommandResult("",
-                String.format(Messages.MESSAGE_ITEMS_LISTED, 1, "Projects"),
-                expectedModel.getDisplayType());
         NameContainsKeywordsPredicate predicate = preparePredicate("Orbital");
-        FindProjectCommand command = new FindProjectCommand(predicate);
         model.updateFilteredItemList(predicate);
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+
+        assertCommandSuccess(new FindProjectCommand(predicate), model,
+                new FindCommandResult("",
+                        String.format(Messages.MESSAGE_ITEMS_LISTED, 1, "Projects"),
+                        ItemUtil.PROJECT_ALIAS), expectedModel);
         assertEquals(Arrays.asList(ORBITAL), model.getFilteredItemList());
     }
 
@@ -118,13 +119,12 @@ public class FindCommandIntegrationTest {
     public void execute_zeroKeywords_noSkillFound() {
         Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setSkillToDisplay();
-        CommandResult expectedCommandResult = new CommandResult("",
-                String.format(Messages.MESSAGE_ITEMS_LISTED, 0, "Skills"),
-                expectedModel.getDisplayType());
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindSkillCommand command = new FindSkillCommand(predicate);
         model.updateFilteredItemList(predicate);
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+
+        assertCommandSuccess(new FindSkillCommand(predicate), model,
+                new FindCommandResult("", String.format(Messages.MESSAGE_ITEMS_LISTED, 0, "Skills"),
+                        ItemUtil.SKILL_ALIAS), expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredItemList());
     }
 
@@ -132,13 +132,12 @@ public class FindCommandIntegrationTest {
     public void execute_singleKeyword_singleSkillFound() {
         Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setSkillToDisplay();
-        CommandResult expectedCommandResult = new CommandResult("",
-                String.format(Messages.MESSAGE_ITEMS_LISTED, 1, "Skills"),
-                expectedModel.getDisplayType());
         NameContainsKeywordsPredicate predicate = preparePredicate("React");
-        FindSkillCommand command = new FindSkillCommand(predicate);
         model.updateFilteredItemList(predicate);
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+
+        assertCommandSuccess(new FindSkillCommand(predicate), model,
+                new FindCommandResult("", String.format(Messages.MESSAGE_ITEMS_LISTED, 1, "Skills"),
+                        ItemUtil.SKILL_ALIAS), expectedModel);
         assertEquals(Arrays.asList(REACT), model.getFilteredItemList());
     }
 
@@ -146,13 +145,12 @@ public class FindCommandIntegrationTest {
     public void execute_zeroKeywords_noResumeFound() {
         Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setResumeToDisplay();
-        CommandResult expectedCommandResult = new CommandResult("",
-                String.format(Messages.MESSAGE_ITEMS_LISTED, 0, "Resumes"),
-                expectedModel.getDisplayType());
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindResumeCommand command = new FindResumeCommand(predicate);
         model.updateFilteredItemList(predicate);
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+
+        assertCommandSuccess(new FindResumeCommand(predicate), model,
+                new FindCommandResult("", String.format(Messages.MESSAGE_ITEMS_LISTED, 0, "Resumes"),
+                        ItemUtil.RESUME_ALIAS), expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredItemList());
     }
 
@@ -160,13 +158,12 @@ public class FindCommandIntegrationTest {
     public void execute_singleKeyword_multipleResumesFound() {
         Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         expectedModel.setResumeToDisplay();
-        CommandResult expectedCommandResult = new CommandResult("",
-                String.format(Messages.MESSAGE_ITEMS_LISTED, 2, "Resumes"),
-                expectedModel.getDisplayType());
         NameContainsKeywordsPredicate predicate = preparePredicate("Engineering");
-        FindResumeCommand command = new FindResumeCommand(predicate);
         model.updateFilteredItemList(predicate);
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+
+        assertCommandSuccess(new FindResumeCommand(predicate), model,
+                new CommandResult("", String.format(Messages.MESSAGE_ITEMS_LISTED, 2, "Resumes"),
+                        ItemUtil.RESUME_ALIAS), expectedModel);
         assertEquals(Arrays.asList(ME_RESUME, SE_RESUME), model.getFilteredItemList());
     }
 
