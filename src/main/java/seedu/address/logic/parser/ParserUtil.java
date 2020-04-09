@@ -318,9 +318,10 @@ public class ParserUtil {
      * A default value of false is returned if null is provided.
      */
     public static boolean parseReverse(String reverse) throws ParseException {
-        if (reverse == null || reverse.equalsIgnoreCase("false")) {
+        // trimming is not done before null check to avoid NullPointerException
+        if (reverse == null || reverse.trim().equalsIgnoreCase("false")) {
             return false;
-        } else if (reverse.equalsIgnoreCase("true")) {
+        } else if (reverse.trim().equalsIgnoreCase("true")) {
             return true;
         } else {
             throw new ParseException("Reverse choice can only be true of false.");

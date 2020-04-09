@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -408,6 +409,34 @@ public class ParserUtilTest {
     public void parseRole_validValueWithWhitespace_returnsTrimmedRole() throws Exception {
         String roleWithWhitespace = WHITESPACE + VALID_ROLE + WHITESPACE;
         assertEquals(VALID_ROLE, ParserUtil.parseRole(roleWithWhitespace));
+    }
+
+    @Test
+    public void parseReverse_null_returnsFalse() throws Exception {
+        assertFalse(ParserUtil.parseReverse(null));
+    }
+
+    @Test
+    public void parseReverse_false_returnsFalse() throws Exception {
+        assertFalse(ParserUtil.parseReverse("false"));
+        assertFalse(ParserUtil.parseReverse("fAlSe"));
+        assertFalse(ParserUtil.parseReverse(WHITESPACE + "false" + WHITESPACE));
+        assertFalse(ParserUtil.parseReverse(WHITESPACE + "fAlSe" + WHITESPACE));
+    }
+
+    @Test
+    public void parseReverse_true_returnsTrue() throws Exception {
+        assertTrue(ParserUtil.parseReverse("true"));
+        assertTrue(ParserUtil.parseReverse("tRuE"));
+        assertTrue(ParserUtil.parseReverse(WHITESPACE + "true" + WHITESPACE));
+        assertTrue(ParserUtil.parseReverse(WHITESPACE + "tRuE" + WHITESPACE));
+    }
+
+    @Test
+    public void parseReverse_invalidValue_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseReverse("t"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseReverse("f"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseReverse("a dlksj"));
     }
 
     @Test
