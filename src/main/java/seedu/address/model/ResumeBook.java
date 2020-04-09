@@ -607,6 +607,9 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     //=========== Util methods ================================================================================
 
+    /**
+    * Returns the String form the item list currently on display.
+    */
     @Override
     public String toString() {
         return itemsToDisplay.asUnmodifiableObservableList().size() + " items";
