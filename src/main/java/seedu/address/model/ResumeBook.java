@@ -613,6 +613,9 @@ public class ResumeBook implements ReadOnlyResumeBook {
         // TODO: refine later
     }
 
+    /**
+    * Returns the current list of items for display as an {@code ObservableList<Item>}
+    */
     @Override
     public ObservableList<Item> getItemToDisplayList() {
         return itemsToDisplay.asUnmodifiableObservableList();
