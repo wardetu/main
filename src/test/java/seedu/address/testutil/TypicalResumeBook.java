@@ -6,6 +6,7 @@ import seedu.address.model.ResumeBook;
  * A utility class containing a list of {@code ResumeBook} objects to be used in tests.
  */
 public class TypicalResumeBook {
+
     public static ResumeBook typical = buildTypical();
     public static ResumeBook typicalCopy = buildTypical();
     public static ResumeBook typicalWithoutGoogle = buildTypicalWithoutGoogle();
