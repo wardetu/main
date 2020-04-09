@@ -40,7 +40,7 @@ public class TagPullCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalResumeBook.TYPICAL_WITH_FILLED_RESUME, new UserPrefs());
+        model = new ModelManager(TypicalResumeBook.typicalWithFilledResume, new UserPrefs());
     }
 
 

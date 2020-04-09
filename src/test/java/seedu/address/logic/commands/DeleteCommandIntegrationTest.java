@@ -6,6 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -16,6 +18,7 @@ import seedu.address.logic.commands.delete.DeleteProjectCommand;
 import seedu.address.logic.commands.delete.DeleteResumeCommand;
 import seedu.address.logic.commands.delete.DeleteSkillCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.DeleteCommandResult;
 import seedu.address.model.Model;
 
 import seedu.address.model.ModelManager;
@@ -24,6 +27,7 @@ import seedu.address.model.item.Internship;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.util.ItemUtil;
 import seedu.address.testutil.TypicalResumeBook;
 
 /**
@@ -32,8 +36,17 @@ import seedu.address.testutil.TypicalResumeBook;
  * TODO: TEST UNDO AND REDO TOO!
  */
 public class DeleteCommandIntegrationTest {
+    private Model model;
 
-    private Model model = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+    @BeforeAll
+    public static void reset() {
+        TypicalResumeBook.reset();
+    }
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(TypicalResumeBook.typical, new UserPrefs());
+    }
 
     @Test
     public void execute_deleteFirstInternship_success() {
@@ -43,11 +56,12 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Internship");
         String expectedData = internshipToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteInternship(internshipToDelete);
         expectedModel.setInternshipToDisplay();
 
-        assertCommandSuccess(deleteCommand, model, expectedData, expectedFeedback, expectedModel);
+        assertCommandSuccess(deleteCommand, model, new DeleteCommandResult(expectedData, expectedFeedback,
+                ItemUtil.INTERNSHIP_ALIAS), expectedModel);
     }
 
     @Test
@@ -58,11 +72,12 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Internship");
         String expectedData = internshipToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteInternship(internshipToDelete);
         expectedModel.setInternshipToDisplay();
 
-        assertCommandSuccess(deleteCommand, model, expectedData, expectedFeedback, expectedModel);
+        assertCommandSuccess(deleteCommand, model, new DeleteCommandResult(expectedData, expectedFeedback,
+                ItemUtil.INTERNSHIP_ALIAS), expectedModel);
     }
 
     @Test
@@ -81,11 +96,12 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Project");
         String expectedData = projectToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteProject(projectToDelete);
         expectedModel.setProjectToDisplay();
 
-        assertCommandSuccess(deleteCommand, model, expectedData, expectedFeedback, expectedModel);
+        assertCommandSuccess(deleteCommand, model, new DeleteCommandResult(expectedData, expectedFeedback,
+                ItemUtil.PROJECT_ALIAS), expectedModel);
     }
 
     @Test
@@ -96,11 +112,12 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Project");
         String expectedData = projectToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteProject(projectToDelete);
         expectedModel.setProjectToDisplay();
 
-        assertCommandSuccess(deleteCommand, model, expectedData, expectedFeedback, expectedModel);
+        assertCommandSuccess(deleteCommand, model, new DeleteCommandResult(expectedData, expectedFeedback,
+                ItemUtil.PROJECT_ALIAS), expectedModel);
     }
 
     @Test
@@ -119,11 +136,12 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Skill");
         String expectedData = skillToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteSkill(skillToDelete);
         expectedModel.setSkillToDisplay();
 
-        assertCommandSuccess(deleteCommand, model, expectedData, expectedFeedback, expectedModel);
+        assertCommandSuccess(deleteCommand, model, new DeleteCommandResult(expectedData, expectedFeedback,
+                ItemUtil.SKILL_ALIAS), expectedModel);
     }
 
     @Test
@@ -134,11 +152,12 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Skill");
         String expectedData = skillToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteSkill(skillToDelete);
         expectedModel.setSkillToDisplay();
 
-        assertCommandSuccess(deleteCommand, model, expectedData, expectedFeedback, expectedModel);
+        assertCommandSuccess(deleteCommand, model, new DeleteCommandResult(expectedData, expectedFeedback,
+                ItemUtil.SKILL_ALIAS), expectedModel);
     }
 
     @Test
@@ -157,11 +176,12 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Resume");
         String expectedData = resumeToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteResume(resumeToDelete);
         expectedModel.setResumeToDisplay();
 
-        assertCommandSuccess(deleteCommand, model, expectedData, expectedFeedback, expectedModel);
+        assertCommandSuccess(deleteCommand, model, new DeleteCommandResult(expectedData, expectedFeedback,
+                ItemUtil.RESUME_ALIAS), expectedModel);
     }
 
     @Test
@@ -172,11 +192,12 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Resume");
         String expectedData = resumeToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteResume(resumeToDelete);
         expectedModel.setResumeToDisplay();
 
-        assertCommandSuccess(deleteCommand, model, expectedData, expectedFeedback, expectedModel);
+        assertCommandSuccess(deleteCommand, model, new DeleteCommandResult(expectedData, expectedFeedback,
+                ItemUtil.RESUME_ALIAS), expectedModel);
     }
 
     @Test

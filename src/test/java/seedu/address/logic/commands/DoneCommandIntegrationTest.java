@@ -7,6 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_ITEM;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,14 +24,19 @@ import seedu.address.testutil.TypicalResumeBook;
 public class DoneCommandIntegrationTest {
     private Model model;
 
+    @BeforeAll
+    public static void reset() {
+        TypicalResumeBook.reset();
+    }
+
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+        model = new ModelManager(TypicalResumeBook.typical, new UserPrefs());
     }
 
     @Test
     public void execute_setNoteToDone_success() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         Index validIndex = INDEX_FIRST_ITEM;
         Note doneItem = expectedModel.getNote(validIndex);
         doneItem.markAsDone();

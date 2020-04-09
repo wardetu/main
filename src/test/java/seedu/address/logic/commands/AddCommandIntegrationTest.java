@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY;
+import static seedu.address.testutil.TypicalResumeBook.typicalWithoutGoogleCopy;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,14 +41,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE, new UserPrefs());
+        model = new ModelManager(TypicalResumeBook.typicalWithoutGoogle, new UserPrefs());
     }
 
     @Test
     public void execute_newInternship_success() {
         Internship validInternship = TypicalInternship.GOOGLE;
 
-        Model expectedModel = new ModelManager(TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(typicalWithoutGoogleCopy, new UserPrefs());
         expectedModel.addInternship(validInternship);
         expectedModel.setInternshipToDisplay();
 
@@ -73,7 +73,7 @@ public class AddCommandIntegrationTest {
     public void execute_newNote_success() {
         Note validNote = TypicalNote.FINISH_HOMEWORK;
 
-        Model expectedModel = new ModelManager(TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(typicalWithoutGoogleCopy, new UserPrefs());
         expectedModel.addNote(validNote);
 
         assertCommandSuccess(new AddNoteCommand(validNote),
@@ -96,7 +96,7 @@ public class AddCommandIntegrationTest {
     public void execute_newResume_success() {
         Resume validResume = TypicalResume.SE_RESUME;
 
-        Model expectedModel = new ModelManager(TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(typicalWithoutGoogleCopy, new UserPrefs());
         expectedModel.addResume(validResume);
         expectedModel.setResumeToDisplay();
 
@@ -122,7 +122,7 @@ public class AddCommandIntegrationTest {
     public void execute_newSkill_success() {
         Skill validSkill = TypicalSkill.GIT;
 
-        Model expectedModel = new ModelManager(TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(typicalWithoutGoogleCopy, new UserPrefs());
         expectedModel.addSkill(validSkill);
         expectedModel.setSkillToDisplay();
 
@@ -148,7 +148,7 @@ public class AddCommandIntegrationTest {
     public void execute_newProject_success() {
         Project validProject = TypicalProject.DUKE;
 
-        Model expectedModel = new ModelManager(TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(typicalWithoutGoogleCopy, new UserPrefs());
         expectedModel.addProject(validProject);
         expectedModel.setProjectToDisplay();
 

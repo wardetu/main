@@ -27,7 +27,7 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE, new UserPrefs());
+        Model model = new ModelManager(TypicalResumeBook.typicalWithoutGoogle, new UserPrefs());
         Model expectedModel = new ModelManager(new ResumeBook(), new UserPrefs());
         assertCommandSuccess(new ClearCommand(),
                 model,

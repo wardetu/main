@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,14 +23,19 @@ import seedu.address.testutil.TypicalResumeBook;
 public class ListCommandIntegrationTest {
     private Model model;
 
+    @BeforeAll
+    public static void reset() {
+        TypicalResumeBook.reset();
+    }
+
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+        model = new ModelManager(TypicalResumeBook.typical, new UserPrefs());
     }
 
     @Test
     public void execute_listInternship_success() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.setInternshipToDisplay();
 
         assertCommandSuccess(new ListInternshipCommand(),
@@ -42,7 +48,7 @@ public class ListCommandIntegrationTest {
 
     @Test
     public void execute_listNote_success() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
 
         assertCommandSuccess(new ListNoteCommand(),
                 model,
@@ -54,7 +60,7 @@ public class ListCommandIntegrationTest {
 
     @Test
     public void execute_listProject_success() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.setProjectToDisplay();
 
         assertCommandSuccess(new ListProjectCommand(),
@@ -67,7 +73,7 @@ public class ListCommandIntegrationTest {
 
     @Test
     public void execute_listResume_success() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.setResumeToDisplay();
 
         assertCommandSuccess(new ListResumeCommand(),
@@ -80,7 +86,7 @@ public class ListCommandIntegrationTest {
 
     @Test
     public void execute_listSkill_success() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.setSkillToDisplay();
 
         assertCommandSuccess(new ListSkillCommand(),

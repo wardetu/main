@@ -42,14 +42,14 @@ public class ViewCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE, new UserPrefs());
+        model = new ModelManager(TypicalResumeBook.typicalWithoutGoogle, new UserPrefs());
     }
 
     @Test
     public void execute_viewInternship_success() {
         Internship validInternship = TypicalInternship.NINJA_VAN;
 
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.typicalWithoutGoogleCopy, new UserPrefs());
         expectedModel.setInternshipToDisplay();
 
         assertCommandSuccess(new ViewInternshipCommand(Index.fromOneBased(1)),
@@ -71,7 +71,7 @@ public class ViewCommandIntegrationTest {
     public void execute_viewNote_success() {
         Note validNote = TypicalNote.FINISH_CS_2103;
 
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.typicalWithoutGoogleCopy, new UserPrefs());
 
         assertCommandSuccess(new ViewNoteCommand(Index.fromOneBased(1)),
                 model,
@@ -94,7 +94,7 @@ public class ViewCommandIntegrationTest {
     public void execute_viewProject_success() {
         Project validProject = TypicalProject.ORBITAL;
 
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.typicalWithoutGoogleCopy, new UserPrefs());
         expectedModel.setProjectToDisplay();
 
         assertCommandSuccess(new ViewProjectCommand(Index.fromOneBased(1)),
@@ -116,7 +116,7 @@ public class ViewCommandIntegrationTest {
     public void execute_viewResume_success() {
         Resume validResume = TypicalResume.ME_RESUME;
 
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.typicalWithoutGoogleCopy, new UserPrefs());
         expectedModel.setResumeToDisplay();
 
         assertCommandSuccess(new ViewResumeCommand(Index.fromOneBased(1)),
@@ -138,7 +138,7 @@ public class ViewCommandIntegrationTest {
     public void execute_viewSkill_success() {
         Skill validSkill = TypicalSkill.REACT;
 
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.typicalWithoutGoogleCopy, new UserPrefs());
         expectedModel.setSkillToDisplay();
 
         assertCommandSuccess(new ViewSkillCommand(Index.fromOneBased(1)),
