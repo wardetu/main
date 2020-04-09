@@ -108,7 +108,8 @@ public class EditUserCommand extends Command {
         String major = editUserDescriptor.getMajor().orElse(toEdit.getMajor());
         Time from = editUserDescriptor.getFrom().orElse(toEdit.getFrom());
         Time to = editUserDescriptor.getTo().orElse(toEdit.getTo());
-        double cap = editUserDescriptor.getCap().orElse(toEdit.getCap());
+        Double cap = editUserDescriptor.getCap() > -1 ? editUserDescriptor.getCap() : toEdit.getCap();
+
         return new Person(displayPicture, name, description, phone, email, github, university, major, from, to, cap);
     }
 }

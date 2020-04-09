@@ -24,7 +24,12 @@ public class EditUserDescriptor {
     private String major;
     private Time from;
     private Time to;
-    private double cap;
+
+    /*
+        A workaround since the default value for double is 0. The original implementation tried to wrap the value
+        in an Optional<Double> which caused the CAP field to be set to 0 everytime an edit is made to user profile.
+     */
+    private double cap = -1;
 
     public EditUserDescriptor() {}
 
@@ -130,8 +135,8 @@ public class EditUserDescriptor {
         this.cap = cap;
     }
 
-    public Optional<Double> getCap() {
-        return Optional.ofNullable(cap);
+    public Double getCap() {
+        return cap;
     }
 
     /**

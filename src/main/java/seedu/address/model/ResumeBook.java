@@ -609,7 +609,6 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return notes.getSize();
     }
 
-
     /**
      * Sorts the list of notes in the resume book using the provided {@code sortComparator}.
      */
@@ -617,7 +616,6 @@ public class ResumeBook implements ReadOnlyResumeBook {
         notes.sort(sortComparator);
         setNotesToDisplay();
     }
-
 
     @Override
     public Person getUser() {
