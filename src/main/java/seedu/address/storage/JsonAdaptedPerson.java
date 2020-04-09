@@ -81,7 +81,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     DisplayPicture.class.getSimpleName()));
         }
-        if(!DisplayPicture.isValidDisplayPicture(dp)) {
+        if (!DisplayPicture.isValidDisplayPicture(dp)) {
             throw new IllegalValueException(DisplayPicture.MESSAGE_CONSTRAINTS);
         }
         final DisplayPicture modelDisplayPicture = new DisplayPicture(dp);
@@ -154,7 +154,7 @@ class JsonAdaptedPerson {
         } catch (NumberFormatException e) {
             throw new IllegalValueException("The cap field must be a numeric value");
         }
-        if (modelCap > 5 || modelCap <0) {
+        if (modelCap > 5 || modelCap < 0) {
             throw new IllegalValueException("The cap value must be between 0.0 and 5.0 inclusive.");
         }
 

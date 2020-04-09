@@ -105,7 +105,7 @@ public class JsonAdaptedInternship {
         final Time modelTo = new Time(to);
 
         if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,"description"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
         }
 
         final int modelId;
