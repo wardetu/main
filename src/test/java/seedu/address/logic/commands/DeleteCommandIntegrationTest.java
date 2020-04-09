@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -32,8 +33,12 @@ import seedu.address.testutil.TypicalResumeBook;
  * TODO: TEST UNDO AND REDO TOO!
  */
 public class DeleteCommandIntegrationTest {
+    private Model model;
 
-    private Model model = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+    }
 
     @Test
     public void execute_deleteFirstInternship_success() {

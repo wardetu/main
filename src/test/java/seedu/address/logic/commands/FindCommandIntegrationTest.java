@@ -27,7 +27,6 @@ import seedu.address.logic.commands.results.FindCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.item.Item;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 import seedu.address.model.util.ItemUtil;
 import seedu.address.testutil.TypicalResumeBook;
