@@ -78,7 +78,6 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
-    // TODO: BEAUTIFY THE EXCEPTION MESSAGE
     /**
      * Parses a {@code String level} into a {@code Level}.
      * Leading and trailing whitespaces will be trimmed.
@@ -92,8 +91,7 @@ public class ParserUtil {
                 return value;
             }
         }
-        throw new ParseException("Level of proficiency can only be one of these three types: basic, intermediate, "
-                + "advanced.");
+        throw new ParseException(Level.MESSAGE_CONSTRAINTS);
     }
 
     /**

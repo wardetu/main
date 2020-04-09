@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.field.Email;
+import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.tag.Tag;
@@ -77,6 +78,39 @@ public class ParserUtilTest {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+    }
+
+    @Test
+    public void parseLevel_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+    }
+
+    @Test
+    public void parseLevel_invalidValue_throwsNullPointerException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLevel(VALID_NAME));
+        assertThrows(ParseException.class, () -> ParserUtil.parseLevel(INVALID_NAME));
+        assertThrows(ParseException.class, () -> ParserUtil.parseLevel("b asic"));
+    }
+
+    @Test
+    public void parseLevel_validValue_returnsLevel() throws Exception {
+        assertEquals(Level.BASIC, ParserUtil.parseLevel("basic"));
+        assertEquals(Level.INTERMEDIATE, ParserUtil.parseLevel("intermediate"));
+        assertEquals(Level.ADVANCED, ParserUtil.parseLevel("advanced"));
+    }
+
+    @Test
+    public void parseLevel_validValueWithWhitespace_returnsLevel() throws Exception {
+        assertEquals(Level.BASIC, ParserUtil.parseLevel(WHITESPACE + "basic" + WHITESPACE));
+        assertEquals(Level.INTERMEDIATE, ParserUtil.parseLevel(WHITESPACE + "intermediate" + WHITESPACE));
+        assertEquals(Level.ADVANCED, ParserUtil.parseLevel(WHITESPACE + "advanced" + WHITESPACE));
+    }
+
+    @Test
+    public void parseLevel_validValueWithCases_returnsLevel() throws Exception {
+        assertEquals(Level.BASIC, ParserUtil.parseLevel("bAsIc"));
+        assertEquals(Level.INTERMEDIATE, ParserUtil.parseLevel("Intermediate"));
+        assertEquals(Level.ADVANCED, ParserUtil.parseLevel("adVanCeD"));
     }
 
     @Test
