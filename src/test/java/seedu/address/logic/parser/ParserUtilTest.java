@@ -18,6 +18,7 @@ import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
@@ -29,6 +30,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_WEBSITE = "john.a";
+    private static final String INVALID_TIME = "13-2019";
 
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -40,6 +42,8 @@ public class ParserUtilTest {
     private static final String VALID_WEBSITE_1 = "www.github.com/asd";
     private static final String VALID_WEBSITE_2 = "https://www.facebook.com";
     private static final String VALID_DESCRIPTION = "This is a description of the item.";
+    private static final String VALID_TIME_1 = "06-2020";
+    private static final String VALID_TIME_2 = "08-2018";
 
 
     private static final String WHITESPACE = " \t\r\n";
@@ -174,6 +178,7 @@ public class ParserUtilTest {
     @Test
     public void parseItemType_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseItemType(INVALID_PHONE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseItemType("some bad item type"));
     }
 
     @Test
@@ -188,6 +193,36 @@ public class ParserUtilTest {
     public void parseItemType_validValueWithWhitespace_returnsTrimmedItemType() throws Exception {
         assertEquals(ItemUtil.RESUME_ALIAS, ParserUtil.parseItemType(WHITESPACE + ItemUtil.RESUME_ALIAS + WHITESPACE));
         assertEquals(ItemUtil.NOTE_ALIAS, ParserUtil.parseItemType(WHITESPACE + ItemUtil.NOTE_ALIAS + WHITESPACE));
+    }
+
+    @Test
+    public void parseTime_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTime((String) null));
+    }
+
+    @Test
+    public void parseTime_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTime(INVALID_TIME));
+    }
+
+    @Test
+    public void parseTime_validValueWithoutWhitespace_returnsTime() throws Exception {
+        Time expectedTime1 = new Time(VALID_TIME_1);
+        Time expectedTime2 = new Time(VALID_TIME_2);
+
+        assertEquals(expectedTime1, ParserUtil.parseTime(VALID_TIME_1));
+        assertEquals(expectedTime2, ParserUtil.parseTime(VALID_TIME_2));
+    }
+
+    @Test
+    public void parseTime_validValueWithWhitespace_returnsTrimmedTime() throws Exception {
+        String websiteWithWhitespace1 = WHITESPACE + VALID_TIME_1 + WHITESPACE;
+        String websiteWithWhitespace2 = WHITESPACE + VALID_TIME_2 + WHITESPACE;
+        Time expectedTime1 = new Time(VALID_TIME_1);
+        Time expectedTime2 = new Time(VALID_TIME_2);
+
+        assertEquals(expectedTime1, ParserUtil.parseTime(websiteWithWhitespace1));
+        assertEquals(expectedTime2, ParserUtil.parseTime(websiteWithWhitespace2));
     }
 
     @Test
