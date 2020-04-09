@@ -33,6 +33,7 @@ public class DoneCommandIntegrationTest {
         Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         Index validIndex = INDEX_FIRST_ITEM;
         Note doneItem = expectedModel.getNote(validIndex);
+        doneItem.markAsDone();
         DoneCommand doneCommand = new DoneCommand(validIndex);
         assertCommandSuccess(doneCommand,
                 model,
@@ -42,11 +43,20 @@ public class DoneCommandIntegrationTest {
     }
 
     @Test
-    public void execute_invalidResumeIndex_throwsCommandException() {
+    public void execute_invalidNoteIndex_throwsCommandException() {
         Index invalidIndex = INDEX_FOURTH_ITEM;
         DoneCommand doneCommand = new DoneCommand(invalidIndex);
         assertThrows(CommandException.class,
                 Messages.MESSAGE_INVALID_INDEX, () -> doneCommand.execute(model));
+    }
+
+    @Test
+    public void execute_setNoteAsDoneTwice_throwsCommandException() throws CommandException {
+        Index validIndex = INDEX_FIRST_ITEM;
+        DoneCommand doneCommand = new DoneCommand(validIndex);
+        doneCommand.execute(model);
+        assertThrows(CommandException.class,
+                DoneCommand.MESSAGE_DONE_FAILURE, () -> doneCommand.execute(model));
     }
 
     @Test

@@ -161,7 +161,7 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
-
+            assertEquals(expectedCommandResult.getDataToUser(), result.getDataToUser());
             assertEquals(expectedCommandResult.getFeedbackToUser(), result.getFeedbackToUser());
             assertEquals(expectedModel.getStatelessResumeBook(), actualModel.getStatelessResumeBook());
         } catch (CommandException ce) {

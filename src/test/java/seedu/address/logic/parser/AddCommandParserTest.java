@@ -318,6 +318,12 @@ public class AddCommandParserTest {
                 "Not a valid item type!");
     }
 
+    @Test
+    public void parseInternship_fromLaterThanTo_failure() {
+        assertParseFailure(parser, ITEM_TYPE_INTERNSHIP + PREFIXED_NAME_GOOGLE + PREFIXED_ROLE_FRONTEND
+                        + " f/02-2022 " + PREFIXED_TIME_TO + PREFIXED_INTERNSHIP_DESCRIPTION + PREFIXED_TAG_FRONTEND,
+                AddInternshipCommand.MESSAGE_FROM_TO_MISORDER);
+    }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
