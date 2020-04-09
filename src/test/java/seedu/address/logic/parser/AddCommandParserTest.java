@@ -40,7 +40,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JAVA;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalInternship.GOOGLE;
-import static seedu.address.testutil.TypicalNote.NOTE_NOT_DONE;
+import static seedu.address.testutil.TypicalNote.FINISH_CS_2103;
 import static seedu.address.testutil.TypicalProject.ORBITAL;
 import static seedu.address.testutil.TypicalResume.ME_RESUME;
 import static seedu.address.testutil.TypicalSkill.REACT;
@@ -134,7 +134,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allAddNoteFieldsPresent_success() {
-        Note expectedNote = new NoteBuilder(NOTE_NOT_DONE).withTags(VALID_TAG_JAVA).build();
+        Note expectedNote = new NoteBuilder(FINISH_CS_2103).withTags(VALID_TAG_JAVA).build();
         // Standard
         assertParseSuccess(parser,
                 ITEM_TYPE_NOTE + PREFIXED_NAME_NOTE + PREFIXED_TIME_TO + PREFIXED_TAG_JAVA,
@@ -157,7 +157,7 @@ public class AddCommandParserTest {
                 new AddNoteCommand(expectedNote));
 
         // multiple item tags - all tags accepted
-        expectedNote = new NoteBuilder(NOTE_NOT_DONE).withTags(VALID_TAG_JAVA, VALID_TAG_FRONTEND).build();
+        expectedNote = new NoteBuilder(FINISH_CS_2103).withTags(VALID_TAG_JAVA, VALID_TAG_FRONTEND).build();
         assertParseSuccess(parser,
                 ITEM_TYPE_NOTE + PREFIXED_NAME_NOTE + PREFIXED_TIME_TO + PREFIXED_TAG_JAVA + PREFIXED_TAG_FRONTEND,
                 new AddNoteCommand(expectedNote));
@@ -273,7 +273,7 @@ public class AddCommandParserTest {
                         + PREFIXED_TIME_TO + PREFIXED_INTERNSHIP_DESCRIPTION,
                 new AddInternshipCommand(expectedInternship));
 
-        Note expectedNote = new NoteBuilder(NOTE_NOT_DONE).withTags().build();
+        Note expectedNote = new NoteBuilder(FINISH_CS_2103).withTags().build();
 
         // 0 tags
         assertParseSuccess(parser,
@@ -318,6 +318,12 @@ public class AddCommandParserTest {
                 "Not a valid item type!");
     }
 
+    @Test
+    public void parseInternship_fromLaterThanTo_failure() {
+        assertParseFailure(parser, ITEM_TYPE_INTERNSHIP + PREFIXED_NAME_GOOGLE + PREFIXED_ROLE_FRONTEND
+                        + " f/02-2022 " + PREFIXED_TIME_TO + PREFIXED_INTERNSHIP_DESCRIPTION + PREFIXED_TAG_FRONTEND,
+                AddInternshipCommand.MESSAGE_FROM_TO_MISORDER);
+    }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {

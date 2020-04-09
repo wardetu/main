@@ -16,6 +16,7 @@ import seedu.address.model.item.field.Time;
 public class EditUserDescriptor {
     private DisplayPicture displayPicture;
     private Name name;
+    private String description;
     private Phone phone;
     private Email email;
     private Github github;
@@ -39,6 +40,7 @@ public class EditUserDescriptor {
     public EditUserDescriptor(EditUserDescriptor toCopy) {
         setDisplayPicture(toCopy.displayPicture);
         setName(toCopy.name);
+        setDescription(toCopy.description);
         setPhone(toCopy.phone);
         setEmail(toCopy.email);
         setGithub(toCopy.github);
@@ -63,6 +65,14 @@ public class EditUserDescriptor {
 
     public Optional<Name> getName() {
         return Optional.ofNullable(name);
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Optional<String> getDescription() {
+        return Optional.ofNullable(description);
     }
 
     public void setPhone(Phone phone) {
@@ -133,7 +143,7 @@ public class EditUserDescriptor {
      * Returns true if at least one field is edited.
      */
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(displayPicture, name, phone, email, github, university,
+        return CollectionUtil.isAnyNonNull(displayPicture, name, description, phone, email, github, university,
                 major, from, to, cap);
     }
 
@@ -154,6 +164,7 @@ public class EditUserDescriptor {
 
         return getDisplayPicture().equals(e.getDisplayPicture())
                 && getName().equals(e.getName())
+                && getDescription().equals(e.getDescription())
                 && getPhone().equals(e.getPhone())
                 && getEmail().equals(e.getEmail())
                 && getGithub().equals(e.getGithub())

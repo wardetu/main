@@ -25,7 +25,6 @@ import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.util.ItemUtil;
-import seedu.address.testutil.NoteBuilder;
 import seedu.address.testutil.TypicalInternship;
 import seedu.address.testutil.TypicalNote;
 import seedu.address.testutil.TypicalProject;
@@ -72,7 +71,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newNote_success() {
-        Note validNote = TypicalNote.NOTE_NOT_DONE;
+        Note validNote = TypicalNote.FINISH_HOMEWORK;
 
         Model expectedModel = new ModelManager(TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
         expectedModel.addNote(validNote);
@@ -80,15 +79,13 @@ public class AddCommandIntegrationTest {
         assertCommandSuccess(new AddNoteCommand(validNote),
                 model,
                 new AddCommandResult(validNote.toString(),
-                        String.format(AddNoteCommand.MESSAGE_SUCCESS,
-                                validNote.getType().getFullType()), ItemUtil.INTERNSHIP_ALIAS),
+                        AddNoteCommand.MESSAGE_SUCCESS, ItemUtil.INTERNSHIP_ALIAS),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicateNote_throwsCommandException() {
-        Note validNote = TypicalNote.NOTE_NOT_DONE;
-        model.addNote((new NoteBuilder(validNote)).build());
+        Note validNote = TypicalNote.FINISH_CS_2103;
 
         assertCommandFailure(new AddNoteCommand(validNote),
                 model,
@@ -179,7 +176,7 @@ public class AddCommandIntegrationTest {
         AddCommand validProject = new AddProjectCommand(TypicalProject.ORBITAL);
         AddCommand validResume = new AddResumeCommand(TypicalResume.ME_RESUME);
         AddCommand validSkill = new AddSkillCommand(TypicalSkill.REACT);
-        AddCommand validNote = new AddNoteCommand(TypicalNote.NOTE_NOT_DONE);
+        AddCommand validNote = new AddNoteCommand(TypicalNote.FINISH_CS_2103);
 
         assertNotEquals(validInternship, validNote);
         assertNotEquals(validInternship, validProject);
