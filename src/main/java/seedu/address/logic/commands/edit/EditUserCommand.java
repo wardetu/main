@@ -33,6 +33,8 @@ public class EditUserCommand extends Command {
 
     public static final String COMMAND_WORD = "me";
 
+    public static final String MESSAGE_FROM_TO_MISORDER = "\'from\' cannot be later than \'to\' field. ";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the user profile in our resuMeme. "
             + "Parameters: "
             + PREFIX_DP + "DISPLAY PICTURE "
@@ -76,6 +78,11 @@ public class EditUserCommand extends Command {
         Person userToEdit = model.getUser();
 
         Person editedUser = createEditedUser(userToEdit, editUserDescriptor);
+
+        if (editedUser.getFrom().compareTo(editedUser.getTo()) > 0) {
+            throw new CommandException(MESSAGE_FROM_TO_MISORDER);
+        }
+
         model.setUser(editedUser);
         model.commitResumeBook();
 
@@ -89,7 +96,7 @@ public class EditUserCommand extends Command {
      * @param editUserDescriptor
      * @return
      */
-    private static Person createEditedUser(Person toEdit, EditUserDescriptor editUserDescriptor) {
+    private static Person createEditedUser(Person toEdit, EditUserDescriptor editUserDescriptor) throws CommandException {
         DisplayPicture displayPicture = editUserDescriptor.getDisplayPicture().orElse(toEdit.getDisplayPicture());
         Name name = editUserDescriptor.getName().orElse(toEdit.getName());
         String description = editUserDescriptor.getDescription().orElse(toEdit.getDescription());

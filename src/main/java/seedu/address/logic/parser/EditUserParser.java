@@ -21,7 +21,6 @@ import seedu.address.logic.commands.edit.EditUserCommand;
 import seedu.address.logic.commands.edit.EditUserDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.field.DisplayPicture;
-import seedu.address.model.item.field.Time;
 
 /**
  * Parser for EditUserCommand.
@@ -92,9 +91,6 @@ public class EditUserParser implements Parser<EditUserCommand> {
         }
         if (argMultimap.getValue(PREFIX_CAP).isPresent()) {
             editUserDescriptor.setCap(ParserUtil.parseCap(argMultimap.getValue(PREFIX_CAP).get()));
-        }
-        if (editUserDescriptor.getFrom().get().compareTo(editUserDescriptor.getTo().get()) > 0) {
-            throw new ParseException(Time.MESSAGE_FROM_TO_MISORDER);
         }
         return new EditUserCommand(editUserDescriptor);
     }
