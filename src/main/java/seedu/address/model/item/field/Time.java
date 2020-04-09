@@ -15,7 +15,6 @@ public class Time implements Comparable<Time> {
 
     public static final String MESSAGE_CONSTRAINTS = "Time should be in the format MM-yyyy";
     public static final String VALIDATION_REGEX = "^(1[0-2]|0[1-9])-[0-9]{4}$";
-    public static final String MESSAGE_FROM_TO_MISORDER = "\"from\" field cannot be after \"to\" field. ";
     public final String value;
 
     /**

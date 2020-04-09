@@ -84,10 +84,11 @@ public class EditUserCommand extends Command {
         }
 
         model.setUser(editedUser);
+
         model.commitResumeBook();
 
         return new EditUserCommandResult(editedUser.toString(),
-                MESSAGE_EDIT_PERSON_SUCCESS, "");
+                MESSAGE_EDIT_PERSON_SUCCESS, model.getDisplayType());
     }
 
     /**
