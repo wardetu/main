@@ -1,7 +1,5 @@
 package seedu.address.model.item;
 
-import java.util.Objects;
-
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;

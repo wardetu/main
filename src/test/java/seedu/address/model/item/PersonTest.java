@@ -16,13 +16,14 @@ import seedu.address.model.item.field.Time;
 public class PersonTest {
     private Person defaultUser = DEFAULT_USER;
     private Person user1 = new Person(new DisplayPicture("/images/Duke.png"),
-            new Name("Your Name"), new Phone("000"), new Email("youremail@gmail.com"), new Github("yourgithub"),
+            new Name("Your Name"), "Your Description", new Phone("000"), new Email("youremail@gmail.com"),
+            new Github("yourgithub"),
             "Your University", "Your Major",
             new Time("12-9999"), new Time("12-9999"), 0.0);
     private Person user2 = new Person(new DisplayPicture("/images/Duke.png"),
-            new Name("My Name"), new Phone("000"), new Email("myemail@gmail.com"), new Github("mygithub"),
-            "My University", "My Major",
-            new Time("12-9999"), new Time("12-9999"), 0.0);
+            new Name("My Name"), "My Description", new Phone("000"), new Email("myemail@gmail.com"),
+            new Github("mygithub"), "My University", "My Major", new Time("12-9999"),
+            new Time("12-9999"), 0.0);
 
     @Test
     public void testToString() {
