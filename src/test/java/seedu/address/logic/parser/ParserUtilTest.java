@@ -20,6 +20,7 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.ItemUtil;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -163,6 +164,30 @@ public class ParserUtilTest {
     public void parseDescription_validValueWithWhitespace_returnsTrimmedDescription() throws Exception {
         String descriptionWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
         assertEquals(VALID_DESCRIPTION, ParserUtil.parseDescription(descriptionWithWhitespace));
+    }
+
+    @Test
+    public void parseItemType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseItemType((String) null));
+    }
+
+    @Test
+    public void parseItemType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseItemType(INVALID_PHONE));
+    }
+
+    @Test
+    public void parseItemType_validValueWithoutWhitespace_returnsItemType() throws Exception {
+        ParserUtil.parseItemType(ItemUtil.INTERNSHIP_ALIAS);
+        assertEquals(ItemUtil.INTERNSHIP_ALIAS, ParserUtil.parseItemType(ItemUtil.INTERNSHIP_ALIAS));
+        assertEquals(ItemUtil.SKILL_ALIAS, ParserUtil.parseItemType(ItemUtil.SKILL_ALIAS));
+        assertEquals(ItemUtil.PROJECT_ALIAS, ParserUtil.parseItemType(ItemUtil.PROJECT_ALIAS));
+    }
+
+    @Test
+    public void parseItemType_validValueWithWhitespace_returnsTrimmedItemType() throws Exception {
+        assertEquals(ItemUtil.RESUME_ALIAS, ParserUtil.parseItemType(WHITESPACE + ItemUtil.RESUME_ALIAS + WHITESPACE));
+        assertEquals(ItemUtil.NOTE_ALIAS, ParserUtil.parseItemType(WHITESPACE + ItemUtil.NOTE_ALIAS + WHITESPACE));
     }
 
     @Test

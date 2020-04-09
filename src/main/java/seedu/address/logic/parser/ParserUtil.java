@@ -176,7 +176,7 @@ public class ParserUtil {
         requireNonNull(itemType);
         String trimmedItemType = itemType.trim();
         if (!Item.isValidItemType(trimmedItemType)) {
-            throw new ParseException("Not a valid item type!");
+            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
         }
         return trimmedItemType;
     }
