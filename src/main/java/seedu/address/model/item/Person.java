@@ -118,15 +118,15 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getDisplayPicture()).append("\n")
-                .append(getName()).append("\n")
-                .append(getDescription()).append("\n")
-                .append(getPhone()).append(" | ")
-                .append(getEmail()).append(" | ")
-                .append(getGithub()).append("\n")
-                .append(getUniversity()).append(" | ")
-                .append(getFrom()).append(" - ")
-                .append(getTo()).append("\n")
+        builder.append("DP: " + getDisplayPicture()).append("\n")
+                .append("Name: " + getName()).append("\n")
+                .append("Description: " + getDescription()).append("\n")
+                .append("Phone: " + getPhone()).append(" | ")
+                .append("Email: " + getEmail()).append(" | ")
+                .append("GitHub: " + getGithub()).append("\n")
+                .append("University: " + getUniversity()).append(" | ")
+                .append("From: " + getFrom()).append(" - ")
+                .append("To: " + getTo()).append("\n")
                 .append("Major: ").append(getMajor()).append(" | ")
                 .append("CAP: ").append(getCap());
         return builder.toString();
