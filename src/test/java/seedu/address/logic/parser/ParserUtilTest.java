@@ -38,6 +38,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_WEBSITE_1 = "www.github.com/asd";
     private static final String VALID_WEBSITE_2 = "https://www.facebook.com";
+    private static final String VALID_DESCRIPTION = "This is a description of the item.";
 
 
     private static final String WHITESPACE = " \t\r\n";
@@ -146,6 +147,22 @@ public class ParserUtilTest {
 
         assertEquals(expectedWebsite1, ParserUtil.parseWebsite(websiteWithWhitespace1));
         assertEquals(expectedWebsite2, ParserUtil.parseWebsite(websiteWithWhitespace2));
+    }
+
+    @Test
+    public void parseDescription_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription((String) null));
+    }
+
+    @Test
+    public void parseDescription_validValueWithoutWhitespace_returnsDescription() throws Exception {
+        assertEquals(VALID_DESCRIPTION, ParserUtil.parseDescription(VALID_DESCRIPTION));
+    }
+
+    @Test
+    public void parseDescription_validValueWithWhitespace_returnsTrimmedDescription() throws Exception {
+        String descriptionWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
+        assertEquals(VALID_DESCRIPTION, ParserUtil.parseDescription(descriptionWithWhitespace));
     }
 
     @Test
