@@ -14,7 +14,7 @@ public class Verifier {
     public static final String UNIVERSITY_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
 
-    public static final int MAJOR_MAX_LENGTH = 100;
+    public static final int MAJOR_MAX_LENGTH = 50;
     public static final String MAJOR_MESSAGE_CONSTRAINTS =
             "Major should only contain alphanumeric characters and spaces, with max length of 50 characters"
                     + " and it should not be blank";

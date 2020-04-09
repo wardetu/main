@@ -38,6 +38,7 @@ public class ParserUtilTest {
     private static final String INVALID_GITHUB_1 = "-starthyphen";
     private static final String INVALID_GITHUB_2 = "double--hyphen";
     private static final String INVALID_UNIVERSITY = "here is a very long university name that should exceed 50 chars";
+    private static final String INVALID_MAJOR = "computer@science";
 
 
 
@@ -55,6 +56,7 @@ public class ParserUtilTest {
     private static final String VALID_FILE_PATH = "/Users/Pictures/someone.png";
     private static final String VALID_GITHUB = "validgithub";
     private static final String VALID_UNIVERSITY = "National University of Singapore";
+    private static final String VALID_MAJOR = "computer science";
 
 
     private static final String WHITESPACE = " \t\r\n";
@@ -309,9 +311,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseGithub_validValueWithWhitespace_returnsTrimmedGithub() throws Exception {
-        String phoneWithWhitespace = WHITESPACE + VALID_GITHUB + WHITESPACE;
+        String githubWithWhitespace = WHITESPACE + VALID_GITHUB + WHITESPACE;
         Github expectedGithub = new Github(VALID_GITHUB);
-        assertEquals(expectedGithub, ParserUtil.parseGithub(phoneWithWhitespace));
+        assertEquals(expectedGithub, ParserUtil.parseGithub(githubWithWhitespace));
     }
 
     @Test
@@ -333,6 +335,27 @@ public class ParserUtilTest {
     public void parseUniversity_validValueWithWhitespace_returnsTrimmedUniversity() throws Exception {
         String universityWithWhitespace = WHITESPACE + VALID_UNIVERSITY + WHITESPACE;
         assertEquals(VALID_UNIVERSITY, ParserUtil.parseUniversity(universityWithWhitespace));
+    }
+
+    @Test
+    public void parseMajor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMajor((String) null));
+    }
+
+    @Test
+    public void parseMajor_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMajor(INVALID_MAJOR));
+    }
+
+    @Test
+    public void parseMajor_validValueWithoutWhitespace_returnsMajor() throws Exception {
+        assertEquals(VALID_MAJOR, ParserUtil.parseMajor(VALID_MAJOR));
+    }
+
+    @Test
+    public void parseMajor_validValueWithWhitespace_returnsTrimmedMajor() throws Exception {
+        String universityWithWhitespace = WHITESPACE + VALID_MAJOR + WHITESPACE;
+        assertEquals(VALID_MAJOR, ParserUtil.parseMajor(universityWithWhitespace));
     }
 
     @Test
