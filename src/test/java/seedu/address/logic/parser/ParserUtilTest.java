@@ -14,6 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
@@ -32,6 +33,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_WEBSITE = "john.a";
     private static final String INVALID_TIME = "13-2019";
+    private static final String INVALID_FILE_PATH = "";
 
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -45,6 +47,7 @@ public class ParserUtilTest {
     private static final String VALID_DESCRIPTION = "This is a description of the item.";
     private static final String VALID_TIME_1 = "06-2020";
     private static final String VALID_TIME_2 = "08-2018";
+    private static final String VALID_FILE_PATH = "/Users/Pictures/someone.png";
 
 
     private static final String WHITESPACE = " \t\r\n";
@@ -227,6 +230,60 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseReditItemIndices_null_returnOptionalEmpty() throws Exception {
+        assertEquals(ItemIndicesBuilder.empty(), ParserUtil.parseReditItemIndices(null));
+    }
+
+    @Test
+    public void parseReditItemIndices_emptyString_returnOptionalOfEmptyArray() throws Exception {
+        assertEquals(new ItemIndicesBuilder().build(), ParserUtil.parseReditItemIndices(""));
+    }
+
+    @Test
+    public void parseReditItemIndices_invalidIndices_returnOptionalOfIndices() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseReditItemIndices("2 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseReditItemIndices("a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseReditItemIndices("0"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseReditItemIndices("-1"));
+    }
+
+    @Test
+    public void parseReditItemIndices_validIndicesWithoutWhitespace_returnOptionalOfIndices() throws Exception {
+        ItemIndicesBuilder expectedIndices1 = new ItemIndicesBuilder().add(2).add(1).add(3).add(5);
+        assertEquals(expectedIndices1.build(), ParserUtil.parseReditItemIndices("2 1 3 5"));
+
+        ItemIndicesBuilder expectedIndices2 = new ItemIndicesBuilder().add(2);
+        assertEquals(expectedIndices2.build(), ParserUtil.parseReditItemIndices("2"));
+    }
+
+
+    @Test
+    public void parseDisplayPicture_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDisplayPicture((String) null));
+    }
+
+    // TODO: I don't know an invalid file path. Can someone help?
+    /*
+    @Test
+    public void parseDisplayPicture_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDisplayPicture(INVALID_FILE_PATH));
+    }
+     */
+
+    @Test
+    public void parseDisplayPicture_validValueWithoutWhitespace_returnsDisplayPicture() throws Exception {
+        DisplayPicture expectedDisplayPicture = new DisplayPicture(VALID_FILE_PATH);
+        assertEquals(expectedDisplayPicture, ParserUtil.parseDisplayPicture(VALID_FILE_PATH));
+    }
+
+    @Test
+    public void parseDisplayPicture_validValueWithWhitespace_returnsTrimmedDisplayPicture() throws Exception {
+        String emailWithWhitespace = WHITESPACE + VALID_FILE_PATH + WHITESPACE;
+        DisplayPicture expectedDisplayPicture = new DisplayPicture(VALID_FILE_PATH);
+        assertEquals(expectedDisplayPicture, ParserUtil.parseDisplayPicture(emailWithWhitespace));
+    }
+
+    @Test
     public void parsePhone_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
     }
@@ -270,33 +327,6 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
-    }
-
-    @Test
-    public void parseReditItemIndices_null_returnOptionalEmpty() throws Exception {
-        assertEquals(ItemIndicesBuilder.empty(), ParserUtil.parseReditItemIndices(null));
-    }
-
-    @Test
-    public void parseReditItemIndices_emptyString_returnOptionalOfEmptyArray() throws Exception {
-        assertEquals(new ItemIndicesBuilder().build(), ParserUtil.parseReditItemIndices(""));
-    }
-
-    @Test
-    public void parseReditItemIndices_invalidIndices_returnOptionalOfIndices() throws Exception {
-        assertThrows(ParseException.class, () -> ParserUtil.parseReditItemIndices("2 a"));
-        assertThrows(ParseException.class, () -> ParserUtil.parseReditItemIndices("a"));
-        assertThrows(ParseException.class, () -> ParserUtil.parseReditItemIndices("0"));
-        assertThrows(ParseException.class, () -> ParserUtil.parseReditItemIndices("-1"));
-    }
-
-    @Test
-    public void parseReditItemIndices_validIndicesWithoutWhitespace_returnOptionalOfIndices() throws Exception {
-        ItemIndicesBuilder expectedIndices1 = new ItemIndicesBuilder().add(2).add(1).add(3).add(5);
-        assertEquals(expectedIndices1.build(), ParserUtil.parseReditItemIndices("2 1 3 5"));
-
-        ItemIndicesBuilder expectedIndices2 = new ItemIndicesBuilder().add(2);
-        assertEquals(expectedIndices2.build(), ParserUtil.parseReditItemIndices("2"));
     }
 
     @Test
