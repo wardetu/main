@@ -52,7 +52,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     {
         Person defaultUser = new Person(new DisplayPicture("/images/Duke.png"), new Name("Default name"),
-                new Phone("000"), new Email("000@gmail.com"), new Github("000"), "Default university",
+                "Default description", new Phone("000"), new Email("000@gmail.com"), new Github("000"), "Default university",
                 "Default major", new Time("12-9999"), new Time("12-9999"), 0.0);
         observableUser = new ObservablePerson(defaultUser);
         itemsToDisplay = new UniqueItemList<>();

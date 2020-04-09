@@ -9,21 +9,21 @@
 
 <HBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="profilePicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-      <ScrollPane fitToWidth="true" styleClass="scroll-pane" HBox.hgrow="ALWAYS">
+      <ImageView fx:id="profilePicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
+      <ScrollPane fitToHeight="true" fitToWidth="true" HBox.hgrow="ALWAYS">
          <content>
-            <VBox maxHeight="Infinity">
+            <VBox maxHeight="1.7976931348623157E308">
                <children>
-                  <Label fx:id="name" styleClass="name" lineSpacing="5.0" maxHeight="Infinity" text="Label" wrapText="true">
+                  <Label fx:id="name" lineSpacing="5.0" maxHeight="Infinity" styleClass="name" text="Label" textAlignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                      </Label>
-                  <Label fx:id="description" styleClass="description" lineSpacing="5.0" maxHeight="Infinity"
-                         text="Label" wrapText="true">
+                  <Label fx:id="description" lineSpacing="5.0" maxHeight="Infinity" styleClass="description" text="Label" textAlignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </VBox.margin></Label>
+                     </VBox.margin>
+                  </Label>
                </children>
             </VBox>
          </content>

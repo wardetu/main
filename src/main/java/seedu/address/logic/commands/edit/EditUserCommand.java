@@ -2,6 +2,7 @@ package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CAP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
@@ -34,8 +35,9 @@ public class EditUserCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the user profile in our resuMeme. "
             + "Parameters: "
-            + PREFIX_DP + "DISPLAY PROFILE "
+            + PREFIX_DP + "DISPLAY PICTURE "
             + PREFIX_NAME + "NAME "
+            + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_GITHUB + "GITHUB "
@@ -47,17 +49,17 @@ public class EditUserCommand extends Command {
             + "Example: \n" + COMMAND_WORD + " "
             + PREFIX_DP + "/Users/nhamquochung/Desktop/test.png "
             + PREFIX_NAME + "HUNG "
+            + PREFIX_DESCRIPTION + "Technology enthusiast. "
             + PREFIX_PHONE + "91648888 "
             + PREFIX_EMAIL + "nhamhung.gttn@gmail.com "
             + PREFIX_GITHUB + "nhamhung "
-            + PREFIX_UNIVERSITY + "NUS "
-            + PREFIX_MAJOR + "CS "
+            + PREFIX_UNIVERSITY + "National University of Singapore "
+            + PREFIX_MAJOR + "Computer Science "
             + PREFIX_FROM + "2018 "
             + PREFIX_TO + "2022 "
             + PREFIX_CAP + "5.0 ";
 
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited User Profile: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited User Profile!";
 
     private EditUserDescriptor editUserDescriptor;
 
@@ -78,12 +80,11 @@ public class EditUserCommand extends Command {
         model.commitResumeBook();
 
         return new EditUserCommandResult(editedUser.toString(),
-                String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedUser),
-                model.getDisplayType());
+                MESSAGE_EDIT_PERSON_SUCCESS, "");
     }
 
     /**
-     * Create the user after edited.
+     * Creates the user after edited.
      * @param toEdit
      * @param editUserDescriptor
      * @return
@@ -91,6 +92,7 @@ public class EditUserCommand extends Command {
     private static Person createEditedUser(Person toEdit, EditUserDescriptor editUserDescriptor) {
         DisplayPicture displayPicture = editUserDescriptor.getDisplayPicture().orElse(toEdit.getDisplayPicture());
         Name name = editUserDescriptor.getName().orElse(toEdit.getName());
+        String description = editUserDescriptor.getDescription().orElse(toEdit.getDescription());
         Phone phone = editUserDescriptor.getPhone().orElse(toEdit.getPhone());
         Email email = editUserDescriptor.getEmail().orElse(toEdit.getEmail());
         Github github = editUserDescriptor.getGithub().orElse(toEdit.getGithub());
@@ -99,6 +101,6 @@ public class EditUserCommand extends Command {
         Time from = editUserDescriptor.getFrom().orElse(toEdit.getFrom());
         Time to = editUserDescriptor.getTo().orElse(toEdit.getTo());
         double cap = editUserDescriptor.getCap().orElse(toEdit.getCap());
-        return new Person(displayPicture, name, phone, email, github, university, major, from, to, cap);
+        return new Person(displayPicture, name, description, phone, email, github, university, major, from, to, cap);
     }
 }
