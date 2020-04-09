@@ -404,6 +404,7 @@ deletion to proceed.
 
 image::DeleteSkill3.png[width="790"]
 
+// tag::view[]
 === Viewing an item in details: `view`
 
 Shows the details of an item.
@@ -430,6 +431,9 @@ image::ListProject2.png[width="790"]
 +
 image::ViewDukeProject.png[width="790"]
 
+// end::view[]
+
+// tag::redit[]
 === Editing a resume: `redit`
 Edits the resume to contain the items specified in the command.
 
@@ -468,6 +472,9 @@ This command modifies the resume at index 1. It changes the resume to contain in
 
 image::ReditWantSomeThings.png[][WantSomeThings,442,337]
 
+// end::redit[]
+
+// tag::tagpull[]
 === Pulling tagged items into the resume: `tagpull`
 
 Pull the internship, project and skill items with the specified tag(s) into a resume.
@@ -487,6 +494,8 @@ This command modifies the resume at index 1. It will find all the internship, pr
 
 * `tagpull 2 #/ tech frontend` +
 This command modifies the resume at index 2. It will find all the internship, project, and skill items which has either the tag `tech` or `frontend` and adds it into the resume.
+
+// end::tagpull[]
 
 === Undo a command: `undo`
 
