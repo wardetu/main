@@ -25,7 +25,6 @@ import seedu.address.model.item.Note;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
-import seedu.address.model.util.ItemUtil;
 import seedu.address.testutil.TypicalInternship;
 import seedu.address.testutil.TypicalNote;
 import seedu.address.testutil.TypicalProject;
