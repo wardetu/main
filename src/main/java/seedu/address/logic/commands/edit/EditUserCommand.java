@@ -96,7 +96,7 @@ public class EditUserCommand extends Command {
      * @param editUserDescriptor
      * @return
      */
-    private static Person createEditedUser(Person toEdit, EditUserDescriptor editUserDescriptor) throws CommandException {
+    private static Person createEditedUser(Person toEdit, EditUserDescriptor editUserDescriptor) {
         DisplayPicture displayPicture = editUserDescriptor.getDisplayPicture().orElse(toEdit.getDisplayPicture());
         Name name = editUserDescriptor.getName().orElse(toEdit.getName());
         String description = editUserDescriptor.getDescription().orElse(toEdit.getDescription());
