@@ -596,7 +596,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
 
     public void sortNotes(Comparator<Note> sortComparator) {
         notes.sort(sortComparator);
-        setNoteToDisplay();
+        setNotesToDisplay();
     }
 
 
