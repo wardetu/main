@@ -41,7 +41,7 @@ public class ParserUtilTest {
     private static final String INVALID_MAJOR = "computer@science";
     private static final String INVALID_CAP_1 = "6.1";
     private static final String INVALID_CAP_2 = "@@";
-
+    private static final String INVALID_ROLE = "ComputerScientist@BestPlace";
 
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -61,6 +61,7 @@ public class ParserUtilTest {
     private static final String VALID_MAJOR = "computer science";
     private static final String VALID_CAP_1 = "4.5";
     private static final String VALID_CAP_2 = "4.5394";
+    private static final String VALID_ROLE = "Frontend Engineer";
 
 
     private static final String WHITESPACE = " \t\r\n";
@@ -386,6 +387,27 @@ public class ParserUtilTest {
 
         String capWithWhitespace2 = WHITESPACE + VALID_CAP_2 + WHITESPACE;
         assertEquals(4.54, ParserUtil.parseCap(capWithWhitespace2));
+    }
+
+    @Test
+    public void parseRole_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRole((String) null));
+    }
+
+    @Test
+    public void parseRole_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_ROLE));
+    }
+
+    @Test
+    public void parseRole_validValueWithoutWhitespace_returnsRole() throws Exception {
+        assertEquals(VALID_ROLE, ParserUtil.parseRole(VALID_ROLE));
+    }
+
+    @Test
+    public void parseRole_validValueWithWhitespace_returnsTrimmedRole() throws Exception {
+        String roleWithWhitespace = WHITESPACE + VALID_ROLE + WHITESPACE;
+        assertEquals(VALID_ROLE, ParserUtil.parseRole(roleWithWhitespace));
     }
 
     @Test
