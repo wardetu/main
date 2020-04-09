@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
+import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
@@ -34,6 +35,9 @@ public class ParserUtilTest {
     private static final String INVALID_WEBSITE = "john.a";
     private static final String INVALID_TIME = "13-2019";
     private static final String INVALID_FILE_PATH = "";
+    private static final String INVALID_GITHUB_1 = "-starthyphen";
+    private static final String INVALID_GITHUB_2 = "double--hyphen";
+
 
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -48,6 +52,7 @@ public class ParserUtilTest {
     private static final String VALID_TIME_1 = "06-2020";
     private static final String VALID_TIME_2 = "08-2018";
     private static final String VALID_FILE_PATH = "/Users/Pictures/someone.png";
+    private static final String VALID_GITHUB = "validgithub";
 
 
     private static final String WHITESPACE = " \t\r\n";
@@ -281,6 +286,30 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_FILE_PATH + WHITESPACE;
         DisplayPicture expectedDisplayPicture = new DisplayPicture(VALID_FILE_PATH);
         assertEquals(expectedDisplayPicture, ParserUtil.parseDisplayPicture(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseGithub_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGithub((String) null));
+    }
+
+    @Test
+    public void parseGithub_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGithub(INVALID_GITHUB_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseGithub(INVALID_GITHUB_2));
+    }
+
+    @Test
+    public void parseGithub_validValueWithoutWhitespace_returnsGithub() throws Exception {
+        Github expectedGithub = new Github(VALID_GITHUB);
+        assertEquals(expectedGithub, ParserUtil.parseGithub(VALID_GITHUB));
+    }
+
+    @Test
+    public void parseGithub_validValueWithWhitespace_returnsTrimmedGithub() throws Exception {
+        String phoneWithWhitespace = WHITESPACE + VALID_GITHUB + WHITESPACE;
+        Github expectedGithub = new Github(VALID_GITHUB);
+        assertEquals(expectedGithub, ParserUtil.parseGithub(phoneWithWhitespace));
     }
 
     @Test
