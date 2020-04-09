@@ -71,7 +71,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newNote_success() {
-        Note validNote = TypicalNote.NOTE_DONE;
+        Note validNote = TypicalNote.FINISH_HOMEWORK;
 
         Model expectedModel = new ModelManager(TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
         expectedModel.addNote(validNote);
@@ -85,7 +85,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateNote_throwsCommandException() {
-        Note validNote = TypicalNote.NOTE_NOT_DONE;
+        Note validNote = TypicalNote.FINISH_CS_2103;
 
         assertCommandFailure(new AddNoteCommand(validNote),
                 model,
@@ -176,7 +176,7 @@ public class AddCommandIntegrationTest {
         AddCommand validProject = new AddProjectCommand(TypicalProject.ORBITAL);
         AddCommand validResume = new AddResumeCommand(TypicalResume.ME_RESUME);
         AddCommand validSkill = new AddSkillCommand(TypicalSkill.REACT);
-        AddCommand validNote = new AddNoteCommand(TypicalNote.NOTE_NOT_DONE);
+        AddCommand validNote = new AddNoteCommand(TypicalNote.FINISH_CS_2103);
 
         assertNotEquals(validInternship, validNote);
         assertNotEquals(validInternship, validProject);
