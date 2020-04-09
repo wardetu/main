@@ -10,6 +10,8 @@ public enum Level {
 
     private final int levelCode;
 
+    public static String MESSAGE_CONSTRAINTS = "A skill level can only be basic, intermediate, or advanced.";
+
     Level(int levelCode) {
         this.levelCode = levelCode;
     }

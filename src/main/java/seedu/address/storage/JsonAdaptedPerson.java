@@ -3,7 +3,9 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.item.Person;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
@@ -28,7 +30,7 @@ class JsonAdaptedPerson {
     private final String major;
     private final String from;
     private final String to;
-    private final double cap;
+    private final String cap;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given details.
@@ -50,7 +52,7 @@ class JsonAdaptedPerson {
         this.major = major;
         this.from = from;
         this.to = to;
-        this.cap = Double.valueOf(cap);
+        this.cap = cap;
     }
 
     /**
@@ -67,14 +69,96 @@ class JsonAdaptedPerson {
         major = source.getMajor();
         from = source.getFrom().toString();
         to = source.getTo().toString();
-        cap = source.getCap();
+        cap = String.valueOf(source.getCap());
     }
 
+    // TODO: CHECK FOR UNIVERSITY AND DESCRIPTION
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      */
-    public Person toModelType() {
-        return new Person(new DisplayPicture(dp), new Name(name), description, new Phone(phone), new Email(email),
-                new Github(github), university, major, new Time(from), new Time(to), cap);
+    public Person toModelType() throws IllegalValueException {
+        if (dp == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DisplayPicture.class.getSimpleName()));
+        }
+        if(!DisplayPicture.isValidDisplayPicture(dp)) {
+            throw new IllegalValueException(DisplayPicture.MESSAGE_CONSTRAINTS);
+        }
+        final DisplayPicture modelDisplayPicture = new DisplayPicture(dp);
+
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Name modelName = new Name(name);
+
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
+        }
+        if (!Description.isValidDescription(description)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
+        }
+        final Description modelDescription = new Description(description);
+
+        if (phone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Phone.class.getSimpleName()));
+        }
+        if (!Phone.isValidPhone(phone)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        final Phone modelPhone = new Phone(phone);
+
+        if (email == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Email.class.getSimpleName()));
+        }
+        if (!Email.isValidEmail(email)) {
+            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        }
+        final Email modelEmail = new Email(email);
+
+        if (github == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Github.class.getSimpleName()));
+        }
+        if (!Github.isValidGithub(github)) {
+            throw new IllegalValueException(Github.MESSAGE_CONSTRAINTS);
+        }
+        final Github modelGithub = new Github(github);
+
+        if (from == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Time.class.getSimpleName()));
+        }
+        if (!Time.isValidTime(from)) {
+            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
+        }
+        final Time modelFrom = new Time(from);
+
+        if (to == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Time.class.getSimpleName()));
+        }
+        if (!Time.isValidTime(to)) {
+            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
+        }
+        final Time modelTo = new Time(to);
+
+        final double modelCap;
+        try {
+            modelCap = Double.parseDouble(cap);
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException("The cap field must be a numeric value");
+        }
+        if (modelCap > 5 || modelCap <0) {
+            throw new IllegalValueException("The cap value must be between 0.0 and 5.0 inclusive.");
+        }
+
+        return new Person(modelDisplayPicture, modelName, description, modelPhone, modelEmail,
+                modelGithub, university, major, modelFrom, modelTo, modelCap);
     }
 }
