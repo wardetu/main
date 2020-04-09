@@ -69,7 +69,7 @@ public class ViewCommandIntegrationTest {
 
     @Test
     public void execute_viewNote_success() {
-        Note validNote = TypicalNote.NOTE_NOT_DONE;
+        Note validNote = TypicalNote.FINISH_CS_2103;
 
         Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
 
