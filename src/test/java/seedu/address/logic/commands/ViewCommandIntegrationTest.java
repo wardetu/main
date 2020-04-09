@@ -25,7 +25,6 @@ import seedu.address.model.item.Note;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
-import seedu.address.model.util.ItemUtil;
 import seedu.address.testutil.TypicalInternship;
 import seedu.address.testutil.TypicalNote;
 import seedu.address.testutil.TypicalProject;
@@ -56,7 +55,7 @@ public class ViewCommandIntegrationTest {
                 model,
                 new CommandResult(validInternship.toString(),
                         ViewInternshipCommand.MESSAGE_VIEW_SUCCESS,
-                        ItemUtil.INTERNSHIP_ALIAS),
+                        expectedModel.getDisplayType()),
                 expectedModel);
     }
 
@@ -77,7 +76,7 @@ public class ViewCommandIntegrationTest {
                 model,
                 new CommandResult(validNote.toString(),
                         ViewNoteCommand.MESSAGE_VIEW_SUCCESS,
-                        ItemUtil.INTERNSHIP_ALIAS),
+                        expectedModel.getDisplayType()),
                 expectedModel);
     }
 
@@ -101,7 +100,7 @@ public class ViewCommandIntegrationTest {
                 model,
                 new CommandResult(validProject.toString(),
                         ViewProjectCommand.MESSAGE_VIEW_SUCCESS,
-                        ItemUtil.INTERNSHIP_ALIAS),
+                        expectedModel.getDisplayType()),
                 expectedModel);
     }
 
@@ -123,7 +122,7 @@ public class ViewCommandIntegrationTest {
                 model,
                 new CommandResult(validResume.toString(),
                         ViewResumeCommand.MESSAGE_VIEW_SUCCESS,
-                        ItemUtil.INTERNSHIP_ALIAS),
+                        expectedModel.getDisplayType()),
                 expectedModel);
     }
 
@@ -145,7 +144,7 @@ public class ViewCommandIntegrationTest {
                 model,
                 new CommandResult(validSkill.toString(),
                         ViewSkillCommand.MESSAGE_VIEW_SUCCESS,
-                        ItemUtil.INTERNSHIP_ALIAS),
+                        expectedModel.getDisplayType()),
                 expectedModel);
     }
 
