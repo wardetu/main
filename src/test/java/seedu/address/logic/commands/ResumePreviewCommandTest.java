@@ -34,7 +34,7 @@ public class ResumePreviewCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalResumeBook.typicalWithFilledResume, new UserPrefs());
+        model = new ModelManager(TypicalResumeBook.TYPICAL_WITH_FILLED_RESUME, new UserPrefs());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ResumePreviewCommandTest {
 
     @Test
     public void execute_emptyResume_success() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.typicalWithFilledResume, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITH_FILLED_RESUME, new UserPrefs());
         Index validIndex = INDEX_FIRST_ITEM;
         ResumePreviewCommand resumePreviewCommand = new ResumePreviewCommand(validIndex);
         String data = createData(model.getUser(), model.getResumeByIndex(INDEX_FIRST_ITEM), new ArrayList<>(),
@@ -61,7 +61,7 @@ public class ResumePreviewCommandTest {
 
     @Test
     public void execute_filledResume_success() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.typicalWithFilledResume, new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITH_FILLED_RESUME, new UserPrefs());
         Index validIndex = INDEX_THIRD_ITEM;
         ResumePreviewCommand resumePreviewCommand = new ResumePreviewCommand(validIndex);
         ArrayList<Internship> internships = new ArrayList<>();
