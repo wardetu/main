@@ -100,6 +100,7 @@ The `UI` component,
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 * Responds to events raised by various commands and the UI can be updated accordingly.
 
+// tag::logic[]
 [[Design-Logic]]
 === Logic component
 
@@ -122,6 +123,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 image::DeleteSequenceDiagram.png[]
 
 NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+// end::logic[]
 
 // tag::model[]
 [[Design-Model]]
@@ -169,7 +171,8 @@ Classes used by multiple components are in the `seedu.resumebook.commons` packag
 
 This section describes some noteworthy details on how certain features are implemented.
 
-=== [Proposed] Resume Edit feature
+// tag::redit[]
+=== Resume Edit feature
 ==== Proposed Implementation
 The Resume Edit feature or `redit` allows users to edit which `Item` belongs to the `Resume` (for example, adding a `Skill` item or removing an `Internship` item).
 It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`.
@@ -257,7 +260,7 @@ our many command classes would only have a single reason to change. Moreover, ou
 reduces double work as `Parser` will not have to parse `Type` in the user input to create the `ABCCommand`, then only to
 be switch-cased again in `ABCCommand`.
 ****
-
+// end::redit[]
 === Me Feature
 This feature allows a user to make changes and updates his/her user profile which is reflected by the user profile panel.
 At the same time, it also allows user to personalise his/her experience using the app with certain sub-features. They are
