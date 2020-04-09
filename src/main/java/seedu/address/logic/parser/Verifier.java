@@ -7,7 +7,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class Verifier {
 
-    public static final int UNIVERSITY_MAX_LENGTH = 100;
+    public static final int UNIVERSITY_MAX_LENGTH = 50;
     public static final String UNIVERSITY_MESSAGE_CONSTRAINTS =
             "University should only contain alphanumeric characters and spaces, with max length of 50 characters"
                     + " and it should not be blank";

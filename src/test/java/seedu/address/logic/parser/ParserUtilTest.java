@@ -37,6 +37,7 @@ public class ParserUtilTest {
     private static final String INVALID_FILE_PATH = "";
     private static final String INVALID_GITHUB_1 = "-starthyphen";
     private static final String INVALID_GITHUB_2 = "double--hyphen";
+    private static final String INVALID_UNIVERSITY = "here is a very long university name that should exceed 50 chars";
 
 
 
@@ -53,6 +54,7 @@ public class ParserUtilTest {
     private static final String VALID_TIME_2 = "08-2018";
     private static final String VALID_FILE_PATH = "/Users/Pictures/someone.png";
     private static final String VALID_GITHUB = "validgithub";
+    private static final String VALID_UNIVERSITY = "National University of Singapore";
 
 
     private static final String WHITESPACE = " \t\r\n";
@@ -310,6 +312,27 @@ public class ParserUtilTest {
         String phoneWithWhitespace = WHITESPACE + VALID_GITHUB + WHITESPACE;
         Github expectedGithub = new Github(VALID_GITHUB);
         assertEquals(expectedGithub, ParserUtil.parseGithub(phoneWithWhitespace));
+    }
+
+    @Test
+    public void parseUniversity_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseUniversity((String) null));
+    }
+
+    @Test
+    public void parseUniversity_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseUniversity(INVALID_UNIVERSITY));
+    }
+
+    @Test
+    public void parseUniversity_validValueWithoutWhitespace_returnsUniversity() throws Exception {
+        assertEquals(VALID_UNIVERSITY, ParserUtil.parseUniversity(VALID_UNIVERSITY));
+    }
+
+    @Test
+    public void parseUniversity_validValueWithWhitespace_returnsTrimmedUniversity() throws Exception {
+        String universityWithWhitespace = WHITESPACE + VALID_UNIVERSITY + WHITESPACE;
+        assertEquals(VALID_UNIVERSITY, ParserUtil.parseUniversity(universityWithWhitespace));
     }
 
     @Test
