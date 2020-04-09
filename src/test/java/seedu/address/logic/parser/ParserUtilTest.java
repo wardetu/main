@@ -18,6 +18,7 @@ import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,6 +27,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_WEBSITE = "john.a";
 
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -34,6 +36,9 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_WEBSITE_1 = "www.github.com/asd";
+    private static final String VALID_WEBSITE_2 = "https://www.facebook.com";
+
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -82,7 +87,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseLevel_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLevel((String) null));
     }
 
     @Test
@@ -93,7 +98,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseLevel_validValue_returnsLevel() throws Exception {
+    public void parseLevel_validValueWithoutWhitespace_returnsLevel() throws Exception {
         assertEquals(Level.BASIC, ParserUtil.parseLevel("basic"));
         assertEquals(Level.INTERMEDIATE, ParserUtil.parseLevel("intermediate"));
         assertEquals(Level.ADVANCED, ParserUtil.parseLevel("advanced"));
@@ -111,6 +116,36 @@ public class ParserUtilTest {
         assertEquals(Level.BASIC, ParserUtil.parseLevel("bAsIc"));
         assertEquals(Level.INTERMEDIATE, ParserUtil.parseLevel("Intermediate"));
         assertEquals(Level.ADVANCED, ParserUtil.parseLevel("adVanCeD"));
+    }
+
+    @Test
+    public void parseWebsite_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseWebsite((String) null));
+    }
+
+    @Test
+    public void parseWebsite_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseWebsite(INVALID_WEBSITE));
+    }
+
+    @Test
+    public void parseWebsite_validValueWithoutWhitespace_returnsWebsite() throws Exception {
+        Website expectedWebsite1 = new Website(VALID_WEBSITE_1);
+        Website expectedWebsite2 = new Website(VALID_WEBSITE_2);
+
+        assertEquals(expectedWebsite1, ParserUtil.parseWebsite(VALID_WEBSITE_1));
+        assertEquals(expectedWebsite2, ParserUtil.parseWebsite(VALID_WEBSITE_2));
+    }
+
+    @Test
+    public void parseWebsite_validValueWithWhitespace_returnsTrimmedWebsite() throws Exception {
+        String websiteWithWhitespace1 = WHITESPACE + VALID_WEBSITE_1 + WHITESPACE;
+        String websiteWithWhitespace2 = WHITESPACE + VALID_WEBSITE_2 + WHITESPACE;
+        Website expectedWebsite1 = new Website(VALID_WEBSITE_1);
+        Website expectedWebsite2 = new Website(VALID_WEBSITE_2);
+
+        assertEquals(expectedWebsite1, ParserUtil.parseWebsite(websiteWithWhitespace1));
+        assertEquals(expectedWebsite2, ParserUtil.parseWebsite(websiteWithWhitespace2));
     }
 
     @Test
