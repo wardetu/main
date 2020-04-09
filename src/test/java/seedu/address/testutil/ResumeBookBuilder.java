@@ -22,7 +22,23 @@ public class ResumeBookBuilder {
     }
 
     public ResumeBookBuilder(ResumeBook resumeBook) {
-        this.resumeBook = resumeBook;
+        this.resumeBook = new ResumeBook();
+        this.resumeBook.setUser(new PersonBuilder(resumeBook.getUser()).build());
+        resumeBook.getInternshipList().getItemList().stream()
+                .map(x -> new InternshipBuilder((Internship) x).build())
+                .forEach(x -> this.resumeBook.addInternship(x));
+        resumeBook.getSkillList().getItemList().stream()
+                .map(x -> new SkillBuilder((Skill) x).build())
+                .forEach(x -> this.resumeBook.addSkill(x));
+        resumeBook.getProjectList().getItemList().stream()
+                .map(x -> new ProjectBuilder((Project) x).build())
+                .forEach(x -> this.resumeBook.addProject(x));
+        resumeBook.getResumeList().getItemList().stream()
+                .map(x -> new ResumeBuilder((Resume) x).build())
+                .forEach(x -> this.resumeBook.addResume(x));
+        resumeBook.getNoteList().getItemList().stream()
+                .map(x -> new NoteBuilder((Note) x).build())
+                .forEach(x -> this.resumeBook.addNote(x));
     }
 
     /**

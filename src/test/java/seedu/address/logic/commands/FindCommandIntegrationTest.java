@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalSkill.REACT;
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,9 +26,11 @@ import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.results.FindCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ResumeBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 import seedu.address.model.util.ItemUtil;
+import seedu.address.testutil.ResumeBookBuilder;
 import seedu.address.testutil.TypicalResumeBook;
 
 /**
@@ -38,15 +39,14 @@ import seedu.address.testutil.TypicalResumeBook;
 public class FindCommandIntegrationTest {
 
     private Model model;
-
-    @BeforeAll
-    public static void reset() {
-        TypicalResumeBook.reset();
-    }
+    private Model expectedModel;
+    private ResumeBook resumeBook = new ResumeBookBuilder(TypicalResumeBook.TYPICAL).build();
+    private ResumeBook resumeBookCopy = new ResumeBookBuilder(TypicalResumeBook.TYPICAL).build();
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalResumeBook.typical, new UserPrefs());
+        model = new ModelManager(resumeBook, new UserPrefs());
+        expectedModel = new ModelManager(resumeBookCopy, new UserPrefs());
     }
 
     @Test
@@ -68,7 +68,6 @@ public class FindCommandIntegrationTest {
 
     @Test
     public void execute_zeroKeywords_noInternshipFound() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.setInternshipToDisplay();
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         model.updateFilteredItemList(predicate);
@@ -81,7 +80,6 @@ public class FindCommandIntegrationTest {
 
     @Test
     public void execute_multipleKeywords_multipleInternshipsFound() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.setInternshipToDisplay();
         NameContainsKeywordsPredicate predicate = preparePredicate("Van PayPal");
         model.updateFilteredItemList(predicate);
@@ -95,7 +93,6 @@ public class FindCommandIntegrationTest {
 
     @Test
     public void execute_zeroKeywords_noProjectFound() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.setProjectToDisplay();
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         model.updateFilteredItemList(predicate);
@@ -108,7 +105,6 @@ public class FindCommandIntegrationTest {
 
     @Test
     public void execute_singleKeyword_singleProjectFound() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.setProjectToDisplay();
         NameContainsKeywordsPredicate predicate = preparePredicate("Orbital");
         model.updateFilteredItemList(predicate);
@@ -122,7 +118,6 @@ public class FindCommandIntegrationTest {
 
     @Test
     public void execute_zeroKeywords_noSkillFound() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.setSkillToDisplay();
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         model.updateFilteredItemList(predicate);
@@ -135,7 +130,6 @@ public class FindCommandIntegrationTest {
 
     @Test
     public void execute_singleKeyword_singleSkillFound() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.setSkillToDisplay();
         NameContainsKeywordsPredicate predicate = preparePredicate("React");
         model.updateFilteredItemList(predicate);
@@ -148,7 +142,6 @@ public class FindCommandIntegrationTest {
 
     @Test
     public void execute_zeroKeywords_noResumeFound() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.setResumeToDisplay();
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         model.updateFilteredItemList(predicate);
@@ -161,7 +154,6 @@ public class FindCommandIntegrationTest {
 
     @Test
     public void execute_singleKeyword_multipleResumesFound() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.setResumeToDisplay();
         NameContainsKeywordsPredicate predicate = preparePredicate("Engineering");
         model.updateFilteredItemList(predicate);

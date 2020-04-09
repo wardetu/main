@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,12 +21,14 @@ import seedu.address.logic.commands.results.DeleteCommandResult;
 import seedu.address.model.Model;
 
 import seedu.address.model.ModelManager;
+import seedu.address.model.ResumeBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.util.ItemUtil;
+import seedu.address.testutil.ResumeBookBuilder;
 import seedu.address.testutil.TypicalResumeBook;
 
 /**
@@ -37,15 +38,14 @@ import seedu.address.testutil.TypicalResumeBook;
  */
 public class DeleteCommandIntegrationTest {
     private Model model;
-
-    @BeforeAll
-    public static void reset() {
-        TypicalResumeBook.reset();
-    }
+    private Model expectedModel;
+    private ResumeBook resumeBook = new ResumeBookBuilder(TypicalResumeBook.TYPICAL).build();
+    private ResumeBook resumeBookCopy = new ResumeBookBuilder(TypicalResumeBook.TYPICAL).build();
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalResumeBook.typical, new UserPrefs());
+        model = new ModelManager(resumeBook, new UserPrefs());
+        expectedModel = new ModelManager(resumeBookCopy, new UserPrefs());
     }
 
     @Test
@@ -56,7 +56,6 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Internship");
         String expectedData = internshipToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteInternship(internshipToDelete);
         expectedModel.setInternshipToDisplay();
 
@@ -72,7 +71,6 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Internship");
         String expectedData = internshipToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteInternship(internshipToDelete);
         expectedModel.setInternshipToDisplay();
 
@@ -96,7 +94,6 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Project");
         String expectedData = projectToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteProject(projectToDelete);
         expectedModel.setProjectToDisplay();
 
@@ -112,7 +109,6 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Project");
         String expectedData = projectToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteProject(projectToDelete);
         expectedModel.setProjectToDisplay();
 
@@ -136,7 +132,6 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Skill");
         String expectedData = skillToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteSkill(skillToDelete);
         expectedModel.setSkillToDisplay();
 
@@ -152,7 +147,6 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Skill");
         String expectedData = skillToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteSkill(skillToDelete);
         expectedModel.setSkillToDisplay();
 
@@ -176,7 +170,6 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Resume");
         String expectedData = resumeToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteResume(resumeToDelete);
         expectedModel.setResumeToDisplay();
 
@@ -192,7 +185,6 @@ public class DeleteCommandIntegrationTest {
         String expectedFeedback = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, "Resume");
         String expectedData = resumeToDelete.toString();
 
-        ModelManager expectedModel = new ModelManager(TypicalResumeBook.typicalCopy, new UserPrefs());
         expectedModel.deleteResume(resumeToDelete);
         expectedModel.setResumeToDisplay();
 
