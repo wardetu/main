@@ -1,9 +1,6 @@
 package seedu.address.testutil;
 
 import seedu.address.model.ResumeBook;
-import seedu.address.model.item.Internship;
-import seedu.address.model.item.Project;
-import seedu.address.model.item.Skill;
 
 /**
  * A utility class containing a list of {@code ResumeBook} objects to be used in tests.
