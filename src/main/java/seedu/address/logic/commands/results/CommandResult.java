@@ -88,7 +88,8 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(dataToUser, feedbackToUser, isShowHelp, isExit);
+        return Objects.hash(dataToUser, feedbackToUser, dataToUser,
+                displayType, isShowPreview, isGenerate, isShowHelp, isExit);
     }
 
 }
