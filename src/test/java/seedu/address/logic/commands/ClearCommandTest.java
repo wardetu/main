@@ -9,6 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ResumeBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.ResumeBookBuilder;
 import seedu.address.testutil.TypicalResumeBook;
 
 public class ClearCommandTest {
@@ -27,7 +28,8 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(TypicalResumeBook.typicalWithoutGoogle, new UserPrefs());
+        Model model = new ModelManager(new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build(),
+                new UserPrefs());
         Model expectedModel = new ModelManager(new ResumeBook(), new UserPrefs());
         assertCommandSuccess(new ClearCommand(),
                 model,
