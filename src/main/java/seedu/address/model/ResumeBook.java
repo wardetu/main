@@ -594,6 +594,9 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
 
+    /**
+     * Sorts the list of notes in the resume book using the provided {@code sortComparator}.
+     */
     public void sortNotes(Comparator<Note> sortComparator) {
         notes.sort(sortComparator);
         setNotesToDisplay();
@@ -608,8 +611,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
     //=========== Util methods ================================================================================
 
     /**
-    * Returns the String form the item list currently on display.
-    */
+     * Returns the String form the item list currently on display.
+     */
     @Override
     public String toString() {
         return itemsToDisplay.asUnmodifiableObservableList().size() + " items";
@@ -617,8 +620,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     /**
-    * Returns the current list of items for display as an {@code ObservableList<Item>}
-    */
+     * Returns the current list of items for display as an {@code ObservableList<Item>}
+     */
     @Override
     public ObservableList<Item> getItemToDisplayList() {
         return itemsToDisplay.asUnmodifiableObservableList();
