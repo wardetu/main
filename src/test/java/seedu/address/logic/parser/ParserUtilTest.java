@@ -39,6 +39,8 @@ public class ParserUtilTest {
     private static final String INVALID_GITHUB_2 = "double--hyphen";
     private static final String INVALID_UNIVERSITY = "here is a very long university name that should exceed 50 chars";
     private static final String INVALID_MAJOR = "computer@science";
+    private static final String INVALID_CAP_1 = "6.1";
+    private static final String INVALID_CAP_2 = "@@";
 
 
 
@@ -57,6 +59,8 @@ public class ParserUtilTest {
     private static final String VALID_GITHUB = "validgithub";
     private static final String VALID_UNIVERSITY = "National University of Singapore";
     private static final String VALID_MAJOR = "computer science";
+    private static final String VALID_CAP_1 = "4.5";
+    private static final String VALID_CAP_2 = "4.5394";
 
 
     private static final String WHITESPACE = " \t\r\n";
@@ -354,8 +358,34 @@ public class ParserUtilTest {
 
     @Test
     public void parseMajor_validValueWithWhitespace_returnsTrimmedMajor() throws Exception {
-        String universityWithWhitespace = WHITESPACE + VALID_MAJOR + WHITESPACE;
-        assertEquals(VALID_MAJOR, ParserUtil.parseMajor(universityWithWhitespace));
+        String majorWithWhitespace = WHITESPACE + VALID_MAJOR + WHITESPACE;
+        assertEquals(VALID_MAJOR, ParserUtil.parseMajor(majorWithWhitespace));
+    }
+
+    @Test
+    public void parseCap_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCap((String) null));
+    }
+
+    @Test
+    public void parseCap_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCap(INVALID_CAP_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseCap(INVALID_CAP_2));
+    }
+
+    @Test
+    public void parseCap_validValueWithoutWhitespace_returnsCap() throws Exception {
+        assertEquals(4.5 , ParserUtil.parseCap(VALID_CAP_1));
+        assertEquals(4.54 , ParserUtil.parseCap(VALID_CAP_2));
+    }
+
+    @Test
+    public void parseCap_validValueWithWhitespace_returnsTrimmedCap() throws Exception {
+        String capWithWhitespace1 = WHITESPACE + VALID_CAP_1 + WHITESPACE;
+        assertEquals(4.5, ParserUtil.parseCap(capWithWhitespace1));
+
+        String capWithWhitespace2 = WHITESPACE + VALID_CAP_2 + WHITESPACE;
+        assertEquals(4.54, ParserUtil.parseCap(capWithWhitespace2));
     }
 
     @Test
