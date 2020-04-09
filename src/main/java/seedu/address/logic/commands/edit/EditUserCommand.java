@@ -32,7 +32,7 @@ public class EditUserCommand extends Command {
 
     public static final String COMMAND_WORD = "me";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the user profile in our resuMeme. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the user profile. "
             + "Parameters: "
             + PREFIX_DP + "DISPLAY PROFILE "
             + PREFIX_NAME + "NAME "
@@ -98,7 +98,8 @@ public class EditUserCommand extends Command {
         String major = editUserDescriptor.getMajor().orElse(toEdit.getMajor());
         Time from = editUserDescriptor.getFrom().orElse(toEdit.getFrom());
         Time to = editUserDescriptor.getTo().orElse(toEdit.getTo());
-        double cap = editUserDescriptor.getCap().orElse(toEdit.getCap());
+        double cap = editUserDescriptor.getCap() > -1 ? editUserDescriptor.getCap() : toEdit.getCap();
+
         return new Person(displayPicture, name, phone, email, github, university, major, from, to, cap);
     }
 }
