@@ -21,7 +21,7 @@ ResuMe is a desktop application for you to manage all of your resumes from a cen
 
 * *Major enhancement*: added *the ability to modify items in the resume*
 ** What it does: allows the user to selectively modify items in a specified resume.
-** Justification: This is a key feature in the application because a user would need to select existing items in the resume to be included before generating them. 
+** Justification: This is a key feature in the application because a user would need to select existing items in the resume to be included before generating them.
 ** Highlights: This enhancement is particularly tricky to implement due to the various possibilities of input that a user can give. Careful parsing of the input is required before the command is processed.
 
 * *Major enhancement*: added *the ability to add items in the resume based on tags*
@@ -33,8 +33,8 @@ ResuMe is a desktop application for you to manage all of your resumes from a cen
 === Contributions to team-based tasks:
 
 ==== Morphed CommandResult in overall architecture
-* What it means: `CommandResult` has been separated to many different subclasses which correspond to the different `Command`. 
-* Justification: Several `CommandResult` require a special boolean value to indicate that it is the result of a certain `Command`. With only one class, the constructor would have to take in many booleans in the constructor and this gets very messy. 
+* What it means: `CommandResult` has been separated to many different subclasses which correspond to the different `Command`.
+* Justification: Several `CommandResult` require a special boolean value to indicate that it is the result of a certain `Command`. With only one class, the constructor would have to take in many booleans in the constructor and this gets very messy.
 
 ==== Project management
 Managed releases `v1.2` - `v1.4` (3 releases) on GitHub
