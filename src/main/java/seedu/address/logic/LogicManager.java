@@ -89,9 +89,4 @@ public class LogicManager implements Logic {
     public ObservablePerson getObservableUser() {
         return model.getObservableUser();
     }
-
-    @Override
-    public Person getUser() {
-        return model.getUser();
-    }
 }
