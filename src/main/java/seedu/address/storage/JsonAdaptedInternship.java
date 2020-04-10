@@ -19,8 +19,10 @@ import seedu.address.model.tag.Tag;
  */
 public class JsonAdaptedInternship {
 
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Internship's %s field is missing!";
+
     private final String name;
-    private final int id;
+    private final String id;
     private final String from;
     private final String to;
     private final String role;
@@ -32,7 +34,7 @@ public class JsonAdaptedInternship {
      * Constructs a {@code JsonAdaptedInternship} with the given details.
      */
     @JsonCreator
-    public JsonAdaptedInternship(@JsonProperty("name") String name, @JsonProperty("id") int id,
+    public JsonAdaptedInternship(@JsonProperty("name") String name, @JsonProperty("id") String id,
                              @JsonProperty("from") String from, @JsonProperty("to") String to,
                              @JsonProperty("role") String role, @JsonProperty("description") String description,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
@@ -53,7 +55,7 @@ public class JsonAdaptedInternship {
      */
     public JsonAdaptedInternship(Internship internship) {
         this.name = internship.getName().fullName;
-        this.id = internship.getId();
+        this.id = String.valueOf(internship.getId());
         this.from = internship.getFrom().toString();
         this.to = internship.getTo().toString();
         this.role = internship.getRole();
@@ -72,7 +74,55 @@ public class JsonAdaptedInternship {
             tags.add(tag.toModelType());
         }
 
-        return new Internship(new Name(name), role, new Time(from), new Time(to), description, Set.copyOf(tags), id);
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Name modelName = new Name(name);
 
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "role"));
+        }
+
+        if (from == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Time.class.getSimpleName()));
+        }
+        if (!Time.isValidTime(from)) {
+            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
+        }
+        final Time modelFrom = new Time(from);
+
+        if (to == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Time.class.getSimpleName()));
+        }
+        if (!Time.isValidTime(to)) {
+            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
+        }
+        final Time modelTo = new Time(to);
+
+        // Enforces that to does not precede from
+        if (modelTo.compareTo(modelFrom) < 0) {
+            throw new IllegalValueException("The \"to\" field must not precede the \"from\" field.");
+        }
+
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
+        }
+
+        final int modelId;
+        try {
+            modelId = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException("The id field can only be an integer.");
+        }
+        if (modelId < 0) {
+            throw new IllegalValueException("The id field must not be negative.");
+        }
+
+        return new Internship(modelName, role, modelFrom, modelTo, description, Set.copyOf(tags), modelId);
     }
 }

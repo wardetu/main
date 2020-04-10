@@ -21,8 +21,10 @@ import seedu.address.model.tag.Tag;
  */
 public class JsonAdaptedProject {
 
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Project's %s field is missing!";
+
     private final String name;
-    private final int id;
+    private final String id;
     private final String website;
     private final String time;
     private final String description;
@@ -34,7 +36,7 @@ public class JsonAdaptedProject {
      * Constructs a {@code JsonAdaptedProject} with the given details.
      */
     @JsonCreator
-    public JsonAdaptedProject(@JsonProperty("name") String name, @JsonProperty("id") int id,
+    public JsonAdaptedProject(@JsonProperty("name") String name, @JsonProperty("id") String id,
                               @JsonProperty("time") String time, @JsonProperty("website") String website,
                               @JsonProperty("description") String description,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags) {
@@ -53,14 +55,13 @@ public class JsonAdaptedProject {
      */
     public JsonAdaptedProject(Project project) {
         this.name = project.getName().fullName;
-        this.id = project.getId();
+        this.id = String.valueOf(project.getId());
         this.time = project.getTime().toString();
         this.website = project.getWebsite().toString();
         this.description = project.getDescription();
         tagged.addAll(project.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
 
     }
-
 
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Project} object.
@@ -71,7 +72,45 @@ public class JsonAdaptedProject {
             tags.add(tag.toModelType());
         }
 
-        return new Project(new Name(name), new Time(time), new Website(website), description, Set.copyOf(tags), id);
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Name modelName = new Name(name);
+
+        if (time == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
+        }
+        if (!Time.isValidTime(time)) {
+            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
+        }
+        final Time modelTime = new Time(time);
+
+        if (website == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Website.class.getSimpleName()));
+        }
+        if (!Website.isValidWebsite(website)) {
+            throw new IllegalValueException(Website.MESSAGE_CONSTRAINTS);
+        }
+        final Website modelWebsite = new Website(website);
+
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
+        }
+
+        final int modelId;
+        try {
+            modelId = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException("The id field can only be an integer.");
+        }
+        if (modelId < 0) {
+            throw new IllegalValueException("The id field must not be negative.");
+        }
+
+        return new Project(modelName, modelTime, modelWebsite, description, Set.copyOf(tags), modelId);
 
     }
 }
