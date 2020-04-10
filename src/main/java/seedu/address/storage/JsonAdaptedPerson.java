@@ -219,6 +219,6 @@ class JsonAdaptedPerson {
                 && from.equals(((JsonAdaptedPerson) other).from)
                 && to.equals(((JsonAdaptedPerson) other).to)         
                 && currentCap.equals(((JsonAdaptedPerson) other).currentCap)
-                && maxCap.equals(((JsonAdaptedPerson) other).maxCap);
+                && maxCap.equals(((JsonAdaptedPerson) other).maxCap));
     }
 }
