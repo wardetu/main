@@ -36,14 +36,15 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddCommand object.
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -61,7 +62,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         String description;
 
         switch (itemType) {
-        case (ItemUtil.RESUME_ALIAS):
+        case ItemUtil.RESUME_ALIAS:
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddResumeCommand.MESSAGE_USAGE));
@@ -73,7 +74,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Resume resume = new Resume(name, tagList);
             return new AddResumeCommand(resume);
 
-        case (ItemUtil.INTERNSHIP_ALIAS):
+        case ItemUtil.INTERNSHIP_ALIAS:
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FROM, PREFIX_TO, PREFIX_ROLE, PREFIX_DESCRIPTION)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -91,11 +92,10 @@ public class AddCommandParser implements Parser<AddCommand> {
             description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            // TODO: handle this toString() thingy better
             Internship internship = new Internship(name, role, from, to, description, tagList);
             return new AddInternshipCommand(internship);
 
-        case (ItemUtil.PROJECT_ALIAS):
+        case ItemUtil.PROJECT_ALIAS:
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TIME, PREFIX_WEBSITE, PREFIX_DESCRIPTION)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -110,7 +110,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Project project = new Project(name, time, website, description, tagList);
             return new AddProjectCommand(project);
 
-        case(ItemUtil.SKILL_ALIAS):
+        case ItemUtil.SKILL_ALIAS:
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LEVEL) || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddSkillCommand.MESSAGE_USAGE));
@@ -122,7 +122,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Skill skill = new Skill(name, level, tagList);
             return new AddSkillCommand(skill);
 
-        case(ItemUtil.NOTE_ALIAS):
+        case ItemUtil.NOTE_ALIAS:
             if (!argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddNoteCommand.MESSAGE_USAGE));
@@ -141,9 +141,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             return new AddNoteCommand(note);
 
         default:
-            // Should not have reached here
-            // TODO: Use a better Exception here
-            throw new ParseException("The item type is not detected! Something is wrong");
+            // Should not have reached here at all
+            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
         }
     }
 

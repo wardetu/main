@@ -17,14 +17,15 @@ import seedu.address.model.item.field.NameContainsKeywordsPredicate;
 import seedu.address.model.util.ItemUtil;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindCommand object.
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM);
@@ -60,9 +61,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         case ItemUtil.NOTE_ALIAS:
             return new FindNoteCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         default:
-            // Should not have reached here
-            // TODO: Use a better Exception here
-            throw new ParseException("The item type is not detected! Something is wrong");
+            // Should not have reached here at all
+            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
         }
     }
 
