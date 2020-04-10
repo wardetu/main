@@ -91,7 +91,7 @@ public class FindResumeCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different values -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 

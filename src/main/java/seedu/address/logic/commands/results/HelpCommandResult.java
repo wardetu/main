@@ -19,7 +19,6 @@ public class HelpCommandResult extends CommandResult {
     public HelpCommandResult(String dataToUser, String feedbackToUser, String displayType, String popUpContent) {
         super(dataToUser, feedbackToUser, displayType);
         super.isShowPreview = false;
-        super.isGenerate = false;
         super.isShowHelp = true;
         super.isExit = false;
         this.popUpContent = requireNonNull(popUpContent);

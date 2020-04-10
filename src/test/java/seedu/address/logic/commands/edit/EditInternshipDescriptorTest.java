@@ -9,7 +9,9 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
@@ -17,10 +19,10 @@ public class EditInternshipDescriptorTest {
     public static final String[] DEFAULT_TAGS = {"java", "backend"};
 
     private Name name = new Name("name");
-    private String role = "role";
+    private Role role = new Role("role");
     private Time from = new Time("10-2020");
     private Time to = new Time("12-2020");
-    private String description = "description";
+    private Description description = new Description("description");
     private Set<Tag> tags = new HashSet<>();
     private EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
 

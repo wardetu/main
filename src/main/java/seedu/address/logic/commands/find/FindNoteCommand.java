@@ -25,4 +25,11 @@ public class FindNoteCommand extends FindCommand {
                 String.format(Messages.MESSAGE_ITEMS_LISTED,
                         model.getFilteredNoteList().size(), "Notes"), model.getDisplayType());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindNoteCommand // instanceof handles nulls
+                && predicate.equals(((FindNoteCommand) other).predicate)); // state check
+    }
 }

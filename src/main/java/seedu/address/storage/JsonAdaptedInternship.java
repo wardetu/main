@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.item.Internship;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
@@ -58,8 +60,8 @@ public class JsonAdaptedInternship {
         this.id = String.valueOf(internship.getId());
         this.from = internship.getFrom().toString();
         this.to = internship.getTo().toString();
-        this.role = internship.getRole();
-        this.description = internship.getDescription();
+        this.role = internship.getRole().toString();
+        this.description = internship.getDescription().toString();
         tagged.addAll(internship.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
 
     }
@@ -83,8 +85,21 @@ public class JsonAdaptedInternship {
         final Name modelName = new Name(name);
 
         if (role == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "role"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
         }
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Role modelRole = new Role(role);
+
+        if (description == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+        }
+        if (!Description.isValidDescription(description)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
+        }
+        final Description modelDescription = new Description(description);
 
         if (from == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -109,10 +124,6 @@ public class JsonAdaptedInternship {
             throw new IllegalValueException("The \"to\" field must not precede the \"from\" field.");
         }
 
-        if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
-        }
-
         final int modelId;
         try {
             modelId = Integer.parseInt(id);
@@ -123,7 +134,7 @@ public class JsonAdaptedInternship {
             throw new IllegalValueException("The id field must not be negative.");
         }
 
-        return new Internship(modelName, role, modelFrom, modelTo, description, Set.copyOf(tags), modelId);
+        return new Internship(modelName, modelRole, modelFrom, modelTo, modelDescription, Set.copyOf(tags), modelId);
     }
 
     @Override

@@ -18,6 +18,7 @@ import seedu.address.logic.commands.list.ListNoteCommand;
 import seedu.address.logic.commands.list.ListProjectCommand;
 import seedu.address.logic.commands.list.ListResumeCommand;
 import seedu.address.logic.commands.list.ListSkillCommand;
+import seedu.address.model.item.Item;
 
 public class ListCommandParserTest {
     private ListCommandParser parser = new ListCommandParser();
@@ -60,6 +61,6 @@ public class ListCommandParserTest {
 
     @Test
     public void parser_invalidType_failure() {
-        assertParseFailure(parser, ITEM_TYPE_INVALID, "Not a valid item type!");
+        assertParseFailure(parser, ITEM_TYPE_INVALID, Item.MESSAGE_INVALID_ITEM_TYPE);
     }
 }

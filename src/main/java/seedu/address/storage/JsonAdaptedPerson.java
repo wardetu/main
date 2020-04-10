@@ -9,9 +9,11 @@ import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
+import seedu.address.model.item.field.Major;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -61,12 +63,12 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         dp = source.getDisplayPicture().toString();
         name = source.getName().toString();
-        description = source.getDescription();
+        description = source.getDescription().toString();
         phone = source.getPhone().toString();
         email = source.getEmail().toString();
         github = source.getGithub().toString();
-        university = source.getUniversity();
-        major = source.getMajor();
+        university = source.getUniversity().toString();
+        major = source.getMajor().toString();
         from = source.getFrom().toString();
         to = source.getTo().toString();
         cap = String.valueOf(source.getCap());
@@ -130,6 +132,23 @@ class JsonAdaptedPerson {
         }
         final Github modelGithub = new Github(github);
 
+        if (university == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, University.class.getSimpleName()));
+        }
+        if (!University.isValidUniversity(university)) {
+            throw new IllegalValueException(University.MESSAGE_CONSTRAINTS);
+        }
+        final University modelUniversity = new University(university);
+
+        if (major == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Major.class.getSimpleName()));
+        }
+        if (!Major.isValidMajor(major)) {
+            throw new IllegalValueException(Major.MESSAGE_CONSTRAINTS);
+        }
+        final Major modelMajor = new Major(major);
+
         if (from == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Time.class.getSimpleName()));
@@ -163,7 +182,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException("The cap value must be between 0.0 and 5.0 inclusive.");
         }
 
-        return new Person(modelDisplayPicture, modelName, description, modelPhone, modelEmail,
-                modelGithub, university, major, modelFrom, modelTo, modelCap);
+        return new Person(modelDisplayPicture, modelName, modelDescription, modelPhone, modelEmail,
+                modelGithub, modelUniversity, modelMajor, modelFrom, modelTo, modelCap);
     }
 }

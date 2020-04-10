@@ -58,6 +58,7 @@ import seedu.address.model.item.Note;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
@@ -315,7 +316,8 @@ public class AddCommandParserTest {
         assertParseFailure(parser,
                 INVALID_TYPE_DESC + PREFIXED_NAME_GOOGLE + PREFIXED_ROLE_FRONTEND + PREFIXED_TIME_FROM
                         + PREFIXED_TIME_TO + PREFIXED_INTERNSHIP_DESCRIPTION + PREFIXED_TAG_FRONTEND,
-                "Not a valid item type!");
+                Item.MESSAGE_INVALID_ITEM_TYPE);
+
     }
 
     @Test
@@ -446,8 +448,8 @@ public class AddCommandParserTest {
         // invalid level
         assertParseFailure(parser,
                 ITEM_TYPE_SKILL + PREFIXED_NAME_REACT + INVALID_LEVEL_DESC + PREFIXED_TAG_FRONTEND,
-                "Level of proficiency can only be one of these three types: basic, intermediate, "
-                        + "advanced.");
+                Level.MESSAGE_CONSTRAINTS);
+
     }
 
 }

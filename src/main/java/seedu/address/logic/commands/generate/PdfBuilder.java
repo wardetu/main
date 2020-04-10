@@ -258,7 +258,7 @@ public class PdfBuilder {
      * @throws IOException
      */
     public void addEducation(Person user) throws IOException {
-        String university = user.getUniversity();
+        String university = user.getUniversity().toString();
         String from = user.getFrom().format();
         String to = user.getTo().format();
         String title = university + " | " + from + " - " + to;
@@ -282,13 +282,13 @@ public class PdfBuilder {
      */
     public void addInternship(Internship internship) throws IOException {
         String name = internship.getName().toString();
-        String role = internship.getRole();
+        String role = internship.getRole().toString();
         String from = internship.getFrom().format();
         String to = internship.getTo().format();
         String title = name + " | " + role + " | " + from + " - " + to;
         addItemTitle(title);
 
-        String description = internship.getDescription();
+        String description = internship.getDescription().toString();
         addDescription(description);
     }
 
@@ -304,7 +304,7 @@ public class PdfBuilder {
         String title = name + " | " + time + " | " + website;
         addItemTitle(title);
 
-        String description = project.getDescription();
+        String description = project.getDescription().toString();
         addDescription(description);
     }
 
