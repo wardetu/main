@@ -47,12 +47,12 @@ public class UserOverallPane extends UiPart<Region> implements Observer {
 
         String dp = this.user.getDisplayPicture().toString();
         String name = this.user.getName().toString();
-        String description = this.user.getDescription();
+        String description = this.user.getDescription().toString();
         String phone = this.user.getPhone().toString();
         String email = this.user.getEmail().toString();
         String github = this.user.getGithub().toString();
-        String university = this.user.getUniversity();
-        String major = this.user.getMajor();
+        String university = this.user.getUniversity().toString();
+        String major = this.user.getMajor().toString();
         String from = this.user.getFrom().toString();
         String to = this.user.getTo().toString();
         String cap = String.valueOf(this.user.getCap());
@@ -80,12 +80,12 @@ public class UserOverallPane extends UiPart<Region> implements Observer {
         userProfilePlaceholder.getChildren().clear();
         String dp = updatedUser.getDisplayPicture().toString();
         String name = updatedUser.getName().toString();
-        String description = updatedUser.getDescription();
+        String description = updatedUser.getDescription().toString();
         String phone = updatedUser.getPhone().toString();
         String email = updatedUser.getEmail().toString();
         String github = updatedUser.getGithub().toString();
-        String university = updatedUser.getUniversity();
-        String major = updatedUser.getMajor();
+        String university = updatedUser.getUniversity().toString();
+        String major = updatedUser.getMajor().toString();
         String from = updatedUser.getFrom().toString();
         String to = updatedUser.getTo().toString();
         String cap = String.valueOf(updatedUser.getCap());
