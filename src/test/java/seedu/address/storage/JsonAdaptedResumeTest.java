@@ -58,7 +58,7 @@ public class JsonAdaptedResumeTest {
     }
 
     @Test
-    public void loadToModel_invalidName_failure() {
+    public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedResume jsonAdaptedResume = new JsonAdaptedResume(INVALID_NAME_DESC, "4",
                 internshipIds, projectIds, skillIds, tags);
         assertThrows(IllegalValueException.class, Name.MESSAGE_CONSTRAINTS, jsonAdaptedResume::toModelType);
