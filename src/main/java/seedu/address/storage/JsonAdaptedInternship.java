@@ -104,6 +104,11 @@ public class JsonAdaptedInternship {
         }
         final Time modelTo = new Time(to);
 
+        // Enforces that to does not precede from
+        if (modelTo.compareTo(modelFrom) < 0) {
+            throw new IllegalValueException("The \"to\" field must not precede the \"from\" field.");
+        }
+
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
         }

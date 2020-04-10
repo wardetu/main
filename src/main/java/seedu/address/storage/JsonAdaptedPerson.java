@@ -148,6 +148,11 @@ class JsonAdaptedPerson {
         }
         final Time modelTo = new Time(to);
 
+        // Enforces that to does not precede from
+        if (modelTo.compareTo(modelFrom) < 0) {
+            throw new IllegalValueException("The \"to\" field must not precede the \"from\" field.");
+        }
+
         final double modelCap;
         try {
             modelCap = Double.parseDouble(cap);

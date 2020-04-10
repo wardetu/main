@@ -78,7 +78,7 @@ public class JsonAdaptedNote {
         if (isDone.equals(String.valueOf(true)) || isDone.equals(String.valueOf(false))) {
             modelIsDone = Boolean.parseBoolean(isDone);
         } else {
-            throw new IllegalValueException("A boolean field can only be true or false");
+            throw new IllegalValueException("A boolean field can only be true or false.");
         }
 
         final int modelId;

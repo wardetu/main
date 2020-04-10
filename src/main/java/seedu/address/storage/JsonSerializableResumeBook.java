@@ -109,6 +109,8 @@ class JsonSerializableResumeBook {
         Person person = user.toModelType();
         resumeBook.setUser(person);
 
+        /* To initialize
+         */
         int maxIdValue = -1;
         for (JsonAdaptedResume jsonAdaptedResume : resumes) {
             Resume resume = jsonAdaptedResume.toModelType();
