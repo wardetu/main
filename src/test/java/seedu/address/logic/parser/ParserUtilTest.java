@@ -16,13 +16,17 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.field.Cap;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Level;
+import seedu.address.model.item.field.Major;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
@@ -36,7 +40,9 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_WEBSITE = "john.a";
     private static final String INVALID_TIME = "13-2019";
-    private static final String INVALID_FILE_PATH = "";
+    private static final String INVALID_FILE_PATH_1 = "notjpeg.gif";
+    private static final String INVALID_FILE_PATH_2 = "/Users/Pictures/someone.gif";
+    private static final String INVALID_FILE_PATH_3 = "/Users/Pictures/someone.pdf";
     private static final String INVALID_GITHUB_1 = "-starthyphen";
     private static final String INVALID_GITHUB_2 = "double--hyphen";
     private static final String INVALID_UNIVERSITY = "here is a very long university name that should exceed 50 chars";
@@ -59,7 +65,8 @@ public class ParserUtilTest {
     private static final String VALID_DESCRIPTION = "This is a description of the item.";
     private static final String VALID_TIME_1 = "06-2020";
     private static final String VALID_TIME_2 = "08-2018";
-    private static final String VALID_FILE_PATH = "/Users/Pictures/someone.png";
+    private static final String VALID_FILE_PATH_PNG = "/Users/Pictures/someone.png";
+    private static final String VALID_FILE_PATH_JPG = "/Users/Pictures/someone.jpg";
     private static final String VALID_GITHUB = "validgithub";
     private static final String VALID_UNIVERSITY = "National University of Singapore";
     private static final String VALID_MAJOR = "computer science";
@@ -234,13 +241,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseDescription_validValueWithoutWhitespace_returnsDescription() throws Exception {
-        assertEquals(VALID_DESCRIPTION, ParserUtil.parseDescription(VALID_DESCRIPTION));
+        assertEquals(new Description(VALID_DESCRIPTION), ParserUtil.parseDescription(VALID_DESCRIPTION));
     }
 
     @Test
     public void parseDescription_validValueWithWhitespace_returnsTrimmedDescription() throws Exception {
         String descriptionWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
-        assertEquals(VALID_DESCRIPTION, ParserUtil.parseDescription(descriptionWithWhitespace));
+        assertEquals(new Description(VALID_DESCRIPTION), ParserUtil.parseDescription(descriptionWithWhitespace));
     }
 
     @Test
@@ -376,25 +383,31 @@ public class ParserUtilTest {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDisplayPicture((String) null));
     }
 
-    // TODO: I don't know an invalid file path. Can someone help?
-    /*
     @Test
     public void parseDisplayPicture_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDisplayPicture(INVALID_FILE_PATH));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDisplayPicture(INVALID_FILE_PATH_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDisplayPicture(INVALID_FILE_PATH_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDisplayPicture(INVALID_FILE_PATH_3));
     }
-     */
 
     @Test
     public void parseDisplayPicture_validValueWithoutWhitespace_returnsDisplayPicture() throws Exception {
-        DisplayPicture expectedDisplayPicture = new DisplayPicture(VALID_FILE_PATH);
-        assertEquals(expectedDisplayPicture, ParserUtil.parseDisplayPicture(VALID_FILE_PATH));
+        DisplayPicture expectedDisplayPictureJpg = new DisplayPicture(VALID_FILE_PATH_JPG);
+        assertEquals(expectedDisplayPictureJpg, ParserUtil.parseDisplayPicture(VALID_FILE_PATH_JPG));
+
+        DisplayPicture expectedDisplayPicturePng = new DisplayPicture(VALID_FILE_PATH_PNG);
+        assertEquals(expectedDisplayPicturePng, ParserUtil.parseDisplayPicture(VALID_FILE_PATH_PNG));
     }
 
     @Test
     public void parseDisplayPicture_validValueWithWhitespace_returnsTrimmedDisplayPicture() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_FILE_PATH + WHITESPACE;
-        DisplayPicture expectedDisplayPicture = new DisplayPicture(VALID_FILE_PATH);
-        assertEquals(expectedDisplayPicture, ParserUtil.parseDisplayPicture(emailWithWhitespace));
+        String pathWithWhitespaceJpg = WHITESPACE + VALID_FILE_PATH_JPG + WHITESPACE;
+        DisplayPicture expectedDisplayPictureJpg = new DisplayPicture(VALID_FILE_PATH_JPG);
+        assertEquals(expectedDisplayPictureJpg, ParserUtil.parseDisplayPicture(pathWithWhitespaceJpg));
+
+        String pathWithWhitespacePng = WHITESPACE + VALID_FILE_PATH_PNG + WHITESPACE;
+        DisplayPicture expectedDisplayPicturePng = new DisplayPicture(VALID_FILE_PATH_PNG);
+        assertEquals(expectedDisplayPicturePng, ParserUtil.parseDisplayPicture(pathWithWhitespacePng));
     }
 
     @Test
@@ -433,13 +446,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseUniversity_validValueWithoutWhitespace_returnsUniversity() throws Exception {
-        assertEquals(VALID_UNIVERSITY, ParserUtil.parseUniversity(VALID_UNIVERSITY));
+        assertEquals(new University(VALID_UNIVERSITY), ParserUtil.parseUniversity(VALID_UNIVERSITY));
     }
 
     @Test
     public void parseUniversity_validValueWithWhitespace_returnsTrimmedUniversity() throws Exception {
         String universityWithWhitespace = WHITESPACE + VALID_UNIVERSITY + WHITESPACE;
-        assertEquals(VALID_UNIVERSITY, ParserUtil.parseUniversity(universityWithWhitespace));
+        assertEquals(new University(VALID_UNIVERSITY), ParserUtil.parseUniversity(universityWithWhitespace));
     }
 
     @Test
@@ -454,13 +467,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseMajor_validValueWithoutWhitespace_returnsMajor() throws Exception {
-        assertEquals(VALID_MAJOR, ParserUtil.parseMajor(VALID_MAJOR));
+        assertEquals(new Major(VALID_MAJOR), ParserUtil.parseMajor(VALID_MAJOR));
     }
 
     @Test
     public void parseMajor_validValueWithWhitespace_returnsTrimmedMajor() throws Exception {
         String majorWithWhitespace = WHITESPACE + VALID_MAJOR + WHITESPACE;
-        assertEquals(VALID_MAJOR, ParserUtil.parseMajor(majorWithWhitespace));
+        assertEquals(new Major(VALID_MAJOR), ParserUtil.parseMajor(majorWithWhitespace));
     }
 
     @Test
@@ -507,13 +520,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseRole_validValueWithoutWhitespace_returnsRole() throws Exception {
-        assertEquals(VALID_ROLE, ParserUtil.parseRole(VALID_ROLE));
+        assertEquals(new Role(VALID_ROLE), ParserUtil.parseRole(VALID_ROLE));
     }
 
     @Test
     public void parseRole_validValueWithWhitespace_returnsTrimmedRole() throws Exception {
         String roleWithWhitespace = WHITESPACE + VALID_ROLE + WHITESPACE;
-        assertEquals(VALID_ROLE, ParserUtil.parseRole(roleWithWhitespace));
+        assertEquals(new Role(VALID_ROLE), ParserUtil.parseRole(roleWithWhitespace));
     }
 
     @Test

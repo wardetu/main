@@ -1,12 +1,15 @@
 package seedu.address.model.item;
 
 import seedu.address.model.item.field.Cap;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
+import seedu.address.model.item.field.Major;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 
 /**
  * Represents a Person in the address book.
@@ -16,14 +19,14 @@ public class Person {
     // Identity fields
     private final DisplayPicture displayPicture;
     private final Name name;
-    private final String description;
+    private final Description description;
     private final Phone phone;
     private final Email email;
     private final Github github;
 
     // Data fields
-    private final String university;
-    private final String major;
+    private final University university;
+    private final Major major;
     private final Time from;
     private final Time to;
     private final Cap cap;
@@ -31,8 +34,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(DisplayPicture displayPicture, Name name, String description, Phone phone, Email email,
-                  Github github, String university, String major, Time from, Time to, Cap cap) {
+    public Person(DisplayPicture displayPicture, Name name, Description description, Phone phone, Email email,
+                  Github github, University university, Major major, Time from, Time to, Cap cap) {
         this.displayPicture = displayPicture;
         this.name = name;
         this.description = description;
@@ -54,7 +57,7 @@ public class Person {
         return name;
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         return description;
     }
 
@@ -70,11 +73,11 @@ public class Person {
         return github;
     }
 
-    public String getUniversity() {
+    public University getUniversity() {
         return university;
     }
 
-    public String getMajor() {
+    public Major getMajor() {
         return major;
     }
 

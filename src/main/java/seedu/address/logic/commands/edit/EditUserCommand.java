@@ -19,13 +19,16 @@ import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.results.EditUserCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Person;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Cap;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
+import seedu.address.model.item.field.Major;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 
 /**
  * Edits user profile information.
@@ -101,12 +104,12 @@ public class EditUserCommand extends Command {
     private static Person createEditedUser(Person toEdit, EditUserDescriptor editUserDescriptor) {
         DisplayPicture displayPicture = editUserDescriptor.getDisplayPicture().orElse(toEdit.getDisplayPicture());
         Name name = editUserDescriptor.getName().orElse(toEdit.getName());
-        String description = editUserDescriptor.getDescription().orElse(toEdit.getDescription());
+        Description description = editUserDescriptor.getDescription().orElse(toEdit.getDescription());
         Phone phone = editUserDescriptor.getPhone().orElse(toEdit.getPhone());
         Email email = editUserDescriptor.getEmail().orElse(toEdit.getEmail());
         Github github = editUserDescriptor.getGithub().orElse(toEdit.getGithub());
-        String university = editUserDescriptor.getUniversity().orElse(toEdit.getUniversity());
-        String major = editUserDescriptor.getMajor().orElse(toEdit.getMajor());
+        University university = editUserDescriptor.getUniversity().orElse(toEdit.getUniversity());
+        Major major = editUserDescriptor.getMajor().orElse(toEdit.getMajor());
         Time from = editUserDescriptor.getFrom().orElse(toEdit.getFrom());
         Time to = editUserDescriptor.getTo().orElse(toEdit.getTo());
         Cap cap = editUserDescriptor.getCap().orElse(toEdit.getCap());

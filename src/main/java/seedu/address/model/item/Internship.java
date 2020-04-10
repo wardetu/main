@@ -5,7 +5,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Arrays;
 import java.util.Set;
 
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Type;
 import seedu.address.model.tag.Tag;
@@ -17,16 +19,16 @@ import seedu.address.model.util.ItemUtil;
 public class Internship extends Item {
 
     // Data fields
-    private String role;
+    private Role role;
     private Time from;
     private Time to;
-    private String description;
+    private Description description;
 
-    public Internship(Name name, String role, Time from, Time to, String description, Set<Tag> tags) {
+    public Internship(Name name, Role role, Time from, Time to, Description description, Set<Tag> tags) {
         this(name, role, from, to, description, tags, ItemUtil.yieldId(ItemUtil.INTERNSHIP_ALIAS));
     }
 
-    public Internship(Name name, String role, Time from, Time to, String description, Set<Tag> tags, int id) {
+    public Internship(Name name, Role role, Time from, Time to, Description description, Set<Tag> tags, int id) {
         super(name, id, tags);
         requireAllNonNull(role, from, to, description);
         this.type = Type.generate(ItemUtil.INTERNSHIP_ALIAS);
@@ -36,7 +38,7 @@ public class Internship extends Item {
         this.description = description;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return this.role;
     }
 
@@ -48,7 +50,7 @@ public class Internship extends Item {
         return this.to;
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         return this.description;
     }
 
@@ -83,7 +85,8 @@ public class Internship extends Item {
                 .append("Role: ").append(getRole()).append("\n")
                 .append("From: ").append(getFrom()).append(" - ")
                 .append("To: ").append(getTo()).append("\n");
-        Arrays.stream(getDescription().split("\\.")).map(x -> "- " + x.trim() + ".\n").forEach(builder::append);
+        Arrays.stream(getDescription().toString().split("\\."))
+                .map(x -> "- " + x.trim() + ".\n").forEach(builder::append);
         return builder.toString();
     }
 

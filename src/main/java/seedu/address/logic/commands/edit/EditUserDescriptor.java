@@ -4,12 +4,15 @@ import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.item.field.Cap;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
+import seedu.address.model.item.field.Major;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 
 /**
  * Descriptor for EditUserCommand.
@@ -17,12 +20,12 @@ import seedu.address.model.item.field.Time;
 public class EditUserDescriptor {
     private DisplayPicture displayPicture;
     private Name name;
-    private String description;
+    private Description description;
     private Phone phone;
     private Email email;
     private Github github;
-    private String university;
-    private String major;
+    private University university;
+    private Major major;
     private Time from;
     private Time to;
     private Cap cap;
@@ -63,11 +66,11 @@ public class EditUserDescriptor {
         return Optional.ofNullable(name);
     }
 
-    public void setDescription(String description) {
+    public void setDescription(Description description) {
         this.description = description;
     }
 
-    public Optional<String> getDescription() {
+    public Optional<Description> getDescription() {
         return Optional.ofNullable(description);
     }
 
@@ -95,19 +98,19 @@ public class EditUserDescriptor {
         return Optional.ofNullable(github);
     }
 
-    public void setUni(String uni) {
+    public void setUni(University uni) {
         this.university = uni;
     }
 
-    public Optional<String> getUniversity() {
+    public Optional<University> getUniversity() {
         return Optional.ofNullable(university);
     }
 
-    public void setMajor(String major) {
+    public void setMajor(Major major) {
         this.major = major;
     }
 
-    public Optional<String> getMajor() {
+    public Optional<Major> getMajor() {
         return Optional.ofNullable(major);
     }
 

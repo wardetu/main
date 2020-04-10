@@ -6,7 +6,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.item.Internship;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -27,15 +29,15 @@ public class InternshipBuilder {
     private Set<Tag> tags = new HashSet<>();
     private Time from;
     private Time to;
-    private String description;
-    private String role;
+    private Description description;
+    private Role role;
 
     public InternshipBuilder() {
         name = new Name(DEFAULT_NAME);
         from = new Time(DEFAULT_FROM);
         to = new Time(DEFAULT_TO);
-        role = DEFAULT_ROLE;
-        description = DEFAULT_DESCRIPTION;
+        role = new Role(DEFAULT_ROLE);
+        description = new Description(DEFAULT_DESCRIPTION);
         tags.addAll(Arrays.stream(DEFAULT_TAGS).map(Tag::new).collect(Collectors.toList()));
     }
 
@@ -64,7 +66,7 @@ public class InternshipBuilder {
      * @return InternshipBuilder with new role
      */
     public InternshipBuilder withRole(String role) {
-        this.role = role;
+        this.role = new Role(role);
         return this;
     }
 
@@ -95,7 +97,7 @@ public class InternshipBuilder {
      * @return InternshipBuilder with new description
      */
     public InternshipBuilder withDescription(String description) {
-        this.description = description;
+        this.description = new Description(description);
         return this;
     }
 

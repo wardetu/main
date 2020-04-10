@@ -28,8 +28,10 @@ import seedu.address.model.item.Note;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
@@ -59,7 +61,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Name name;
         Set<Tag> tagList;
-        String description;
+        Description description;
 
         switch (itemType) {
         case ItemUtil.RESUME_ALIAS:
@@ -88,8 +90,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 throw new ParseException(AddInternshipCommand.MESSAGE_FROM_TO_MISORDER);
             }
 
-            String role = argMultimap.getValue(PREFIX_ROLE).get().trim();
-            description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
+            Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
+            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
             Internship internship = new Internship(name, role, from, to, description, tagList);
@@ -104,7 +106,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
             Website website = ParserUtil.parseWebsite(argMultimap.getValue(PREFIX_WEBSITE).get());
-            description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
+            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
             Project project = new Project(name, time, website, description, tagList);
