@@ -241,7 +241,7 @@ public class ParserUtil {
         requireNonNull(displayFilePath);
         String trimmedDisplayFilePath = displayFilePath.trim();
         if (!DisplayPicture.isValidDisplayPicture(trimmedDisplayFilePath)) {
-            throw new ParseException(DisplayPicture.MESSAGE_CONSTRAINTS);
+            throw new ParseException(DisplayPicture.MESSAGE_CONSTRAINTS_FILE_TYPE);
         }
         return new DisplayPicture(trimmedDisplayFilePath);
     }

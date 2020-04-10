@@ -84,7 +84,7 @@ class JsonAdaptedPerson {
                     DisplayPicture.class.getSimpleName()));
         }
         if (!DisplayPicture.isValidDisplayPicture(dp)) {
-            throw new IllegalValueException(DisplayPicture.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(DisplayPicture.MESSAGE_CONSTRAINTS_FILE_TYPE);
         }
         final DisplayPicture modelDisplayPicture = new DisplayPicture(dp);
 

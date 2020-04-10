@@ -51,5 +51,4 @@ class JsonAdaptedTag {
                 || (other instanceof JsonAdaptedTag
                 && this.getTagName().equals(((JsonAdaptedTag) other).getTagName()));
     }
-
 }

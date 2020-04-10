@@ -106,6 +106,10 @@ public class JsonAdaptedProject {
         }
         final Description modelDescription = new Description(description);
 
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Id"));
+        }
+
         final int modelId;
         try {
             modelId = Integer.parseInt(id);
@@ -118,5 +122,18 @@ public class JsonAdaptedProject {
 
         return new Project(modelName, modelTime, modelWebsite, modelDescription, Set.copyOf(tags), modelId);
 
+    }
+
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof JsonAdaptedProject
+                && name.equals(((JsonAdaptedProject) other).name)
+                && time.equals(((JsonAdaptedProject) other).time)
+                && website.equals(((JsonAdaptedProject) other).website)
+                && description.equals(((JsonAdaptedProject) other).description)
+                && tagged.containsAll(((JsonAdaptedProject) other).tagged)
+                && ((JsonAdaptedProject) other).tagged.containsAll(tagged));
     }
 }
