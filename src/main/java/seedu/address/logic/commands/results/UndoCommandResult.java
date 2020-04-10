@@ -17,7 +17,6 @@ public class UndoCommandResult extends CommandResult {
     public UndoCommandResult(String feedbackToUser, String displayType) {
         super(DEFAULT_DATA_TO_USER, feedbackToUser, displayType);
         super.isShowPreview = false;
-        super.isGenerate = false;
         super.isShowHelp = false;
         super.isExit = false;
     }
