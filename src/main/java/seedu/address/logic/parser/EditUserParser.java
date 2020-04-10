@@ -50,14 +50,12 @@ public class EditUserParser implements Parser<EditUserCommand> {
         EditUserDescriptor editUserDescriptor = new EditUserDescriptor();
 
         if (argMultimap.getValue(PREFIX_DP).isPresent()) {
-            String dpPath = argMultimap.getValue(PREFIX_DP).get();
-            DisplayPicture displayProfile = new DisplayPicture(dpPath);
-            if (isValidDisplayPicturePath(dpPath)) {
+            DisplayPicture displayProfile = ParserUtil.parseDisplayPicture(argMultimap.getValue(PREFIX_DP).get());
+            if (isValidDisplayPicture(displayProfile)) {
                 editUserDescriptor.setDisplayPicture(displayProfile);
             } else {
                 editUserDescriptor.setDisplayPicture(null);
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        DisplayPicture.MESSAGE_CONSTRAINTS));
+                throw new ParseException(DisplayPicture.MESSAGE_CONSTRAINTS_VALID_PATH);
             }
         }
 
@@ -95,8 +93,8 @@ public class EditUserParser implements Parser<EditUserCommand> {
         return new EditUserCommand(editUserDescriptor);
     }
 
-    private static boolean isValidDisplayPicturePath(String dpPath) {
-        File file = new File(dpPath);
+    private static boolean isValidDisplayPicture(DisplayPicture displayPicture) {
+        File file = new File(displayPicture.value);
         return file.exists();
     }
 }
