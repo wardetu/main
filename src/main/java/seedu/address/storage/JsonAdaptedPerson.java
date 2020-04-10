@@ -79,7 +79,6 @@ class JsonAdaptedPerson {
 
     }
 
-    // TODO: CHECK FOR UNIVERSITY AND DESCRIPTION
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      */
@@ -89,7 +88,7 @@ class JsonAdaptedPerson {
                     DisplayPicture.class.getSimpleName()));
         }
         if (!DisplayPicture.isValidDisplayPicture(dp)) {
-            throw new IllegalValueException(DisplayPicture.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(DisplayPicture.MESSAGE_CONSTRAINTS_FILE_TYPE);
         }
         final DisplayPicture modelDisplayPicture = new DisplayPicture(dp);
 
@@ -180,15 +179,15 @@ class JsonAdaptedPerson {
         final double modelCurrentCap;
         try {
             modelCurrentCap = Double.parseDouble(currentCap);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException e | NullPointerException e) {
             throw new IllegalValueException("The cap field must be a numeric value");
         }
 
         final double modelMaxCap;
         try {
             modelMaxCap = Double.parseDouble(maxCap);
-        } catch (NumberFormatException e) {
-            throw new IllegalValueException("The cap field must be a numeric value");
+        } catch (NumberFormatException | NullPointerException e) {
+            throw new IllegalValueException("The max cap field must be a numeric value");
         }
 
         if (modelCurrentCap < 0 || modelMaxCap < 0) {
@@ -203,5 +202,22 @@ class JsonAdaptedPerson {
 
         return new Person(modelDisplayPicture, modelName, modelDescription, modelPhone, modelEmail,
                 modelGithub, modelUniversity, modelMajor, modelFrom, modelTo, modelCap);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof JsonAdaptedPerson
+                && dp.equals(((JsonAdaptedPerson) other).dp)
+                && name.equals(((JsonAdaptedPerson) other).name)
+                && description.equals(((JsonAdaptedPerson) other).description)
+                && phone.equals(((JsonAdaptedPerson) other).phone)
+                && email.equals(((JsonAdaptedPerson) other).email)
+                && github.equals(((JsonAdaptedPerson) other).github)
+                && university.equals(((JsonAdaptedPerson) other).university)
+                && major.equals(((JsonAdaptedPerson) other).major)
+                && from.equals(((JsonAdaptedPerson) other).from)
+                && to.equals(((JsonAdaptedPerson) other).to)
+                && cap.equals(((JsonAdaptedPerson) other).cap));
     }
 }

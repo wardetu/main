@@ -25,12 +25,28 @@ import seedu.address.model.Model;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_DP_AMY = "/images/amy.jpg";
+    public static final String VALID_DP_BOB = "/images/bob.png";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_DESCRIPTION_AMY = "I am Bob's wife";
+    public static final String VALID_DESCRIPTION_BOB = "I am amy's husband";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_GITHUB_AMY = "amychee";
+    public static final String VALID_GITHUB_BOB = "bobchoo";
+    public static final String VALID_UNIVERSITY_AMY = "National University of Singapore";
+    public static final String VALID_UNIVERSITY_BOB = "Nanyang Technological University";
+    public static final String VALID_MAJOR_AMY = "Computer Science";
+    public static final String VALID_MAJOR_BOB = "Information Systems";
+    public static final String VALID_FROM_AMY = "08-2019";
+    public static final String VALID_FROM_BOB = "08-2018";
+    public static final String VALID_TO_AMY = "05-2022";
+    public static final String VALID_TO_BOB = "05-2023";
+    public static final String VALID_CAP_AMY = "4.5";
+    public static final String VALID_CAP_BOB = "4.4";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -99,7 +115,10 @@ public class CommandTestUtil {
 
     // NOTES
     public static final String ITEM_TYPE_NOTE = " " + PREFIX_ITEM + " note";
+    public static final String VALID_NOTE_NAME_CS2103 = "Finish CS2103";
     public static final String PREFIXED_NAME_NOTE = " " + PREFIX_NAME + " Finish CS2103";
+    public static final String VALID_NOTE_TIME = "12-2020";
+    public static final String VALID_NOTE_IS_DONE = "false";
 
     // INVALID ITEM
     public static final String ITEM_TYPE_INVALID = " " + PREFIX_ITEM + " notee";
@@ -123,17 +142,33 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    // Invalid
+    public static final String INVALID_NAME = "James&"; // '&' not allowed in names
+    public static final String INVALID_TIME = "123-1998"; // Time must be of format MM-YYYY
+    public static final String INVALID_WEBSITE = "dfasdsf"; // Must match regex of website
+    public static final String INVALID_TAG = "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_DESCRIPTION = ""; // Empty strings are not allowed
+    public static final String INVALID_PHONE = "911a"; // 'a' is not allowed in phones
+    public static final String INVALID_EMAIL = "example.com"; // missing @
+    public static final String INVALID_DP = "/Users/Pictures/someone.gif"; // 'gif' extension not allowed
+    public static final String INVALID_GITHUB = "-starthyphen"; // github names cannot start with hyphens
+    public static final String INVALID_UNIVERSITY = "here is an invalid university name that should exceed 50 chars";
+    public static final String INVALID_MAJOR = "computer@science"; // only alphanumeric in major
+    public static final String INVALID_CAP = "6.1"; // CAP should be from 0.0 to 5.0
+
+
+
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + INVALID_NAME;
     public static final String INVALID_FROM_DESC = " " + PREFIX_FROM + "123-1998"; // Time must be of format MM-YYYY
     public static final String INVALID_TO_DESC = " " + PREFIX_TIME + "123-1998"; // Time must be of format MM-YYYY
-    public static final String INVALID_WEBSITE_DESC = " " + PREFIX_WEBSITE + "dfadsf"; // Must match regex of websit
+    public static final String INVALID_WEBSITE_DESC = " " + PREFIX_WEBSITE + INVALID_WEBSITE;
     public static final String INVALID_LEVEL_DESC =
             " " + PREFIX_LEVEL + "basii"; // basic / intermediate / advanced only
     public static final String INVALID_TYPE_DESC = " " + PREFIX_ITEM + "skil"; // ski / int / res / proj only
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + " 911a"; // 'a' not allowed in phones
+    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + INVALID_PHONE; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + " bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + INVALID_TAG;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
