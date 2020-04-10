@@ -16,21 +16,26 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.DoneCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ResumeBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.Note;
+import seedu.address.testutil.ResumeBookBuilder;
 import seedu.address.testutil.TypicalResumeBook;
 
 public class DoneCommandIntegrationTest {
     private Model model;
+    private Model expectedModel;
+    private ResumeBook resumeBook = new ResumeBookBuilder(TypicalResumeBook.TYPICAL).build();
+    private ResumeBook resumeBookCopy = new ResumeBookBuilder(TypicalResumeBook.TYPICAL).build();
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalResumeBook.TYPICAL, new UserPrefs());
+        model = new ModelManager(resumeBook, new UserPrefs());
+        expectedModel = new ModelManager(resumeBookCopy, new UserPrefs());
     }
 
     @Test
     public void execute_setNoteToDone_success() {
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_COPY, new UserPrefs());
         Index validIndex = INDEX_FIRST_ITEM;
         Note doneItem = expectedModel.getNote(validIndex);
         doneItem.markAsDone();

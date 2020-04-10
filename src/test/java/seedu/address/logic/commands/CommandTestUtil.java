@@ -106,7 +106,9 @@ public class CommandTestUtil {
 
     // TAGS
     public static final String VALID_TAG_TECH = "tech";
+    public static final String PREFIXED_TAG_TECH = " " + PREFIX_TAG + " " + VALID_TAG_TECH;
     public static final String VALID_TAG_BACKEND = "backend";
+    public static final String PREFIXED_TAG_BACKEND = " " + PREFIX_TAG + " " + VALID_TAG_BACKEND;
     public static final String VALID_TAG_NONE_USAGE = "noOneUseThis";
 
 
