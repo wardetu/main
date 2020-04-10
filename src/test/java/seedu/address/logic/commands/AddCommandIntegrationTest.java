@@ -43,7 +43,6 @@ public class AddCommandIntegrationTest {
     private ResumeBook resumeBook = new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build();
     private ResumeBook resumeBookCopy = new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build();
 
-
     @BeforeEach
     public void setUp() {
         model = new ModelManager(resumeBook, new UserPrefs());

@@ -49,7 +49,7 @@ public class EditInternshipCommand extends EditCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n"
             + FIELDS
             + EXAMPLE;
-    private static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
+    public static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
 
     private EditInternshipDescriptor editInternshipDescriptor;
 
@@ -87,7 +87,7 @@ public class EditInternshipCommand extends EditCommand {
         }
 
         return new EditCommandResult(editedInternship.toString(),
-                String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship),
+                String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship.getType().getFullType()),
                 model.getDisplayType());
     }
 

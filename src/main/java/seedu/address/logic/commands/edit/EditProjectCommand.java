@@ -44,7 +44,7 @@ public class EditProjectCommand extends EditCommand {
             + PREFIX_DESCRIPTION + " It washes things. "
             + PREFIX_TAG + "clean\n";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + FIELDS + EXAMPLE;
-    private static final String MESSAGE_EDIT_PROJECT_SUCCESS = "Edited Project: %1$s";
+    public static final String MESSAGE_EDIT_PROJECT_SUCCESS = "Edited Project: %1$s";
 
     private EditProjectDescriptor editProjectDescriptor;
 
@@ -78,7 +78,7 @@ public class EditProjectCommand extends EditCommand {
         }
 
         return new EditCommandResult(editedProject.toString(),
-                String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editedProject),
+                String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editedProject.getType().getFullType()),
                 model.getDisplayType());
     }
 
