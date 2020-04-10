@@ -2,6 +2,8 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TO_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_IS_DONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_NAME_CS2103;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_TIME;
@@ -62,7 +64,7 @@ public class JsonAdaptedNoteTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedNote jsonAdaptedNote =
-                new JsonAdaptedNote("&not a $name",
+                new JsonAdaptedNote(INVALID_NAME_DESC,
                         "1", VALID_NOTE_TIME, VALID_NOTE_IS_DONE, new ArrayList<>());
         assertThrows(IllegalValueException.class,
                 Name.MESSAGE_CONSTRAINTS,
@@ -83,7 +85,7 @@ public class JsonAdaptedNoteTest {
     public void toModelType_invalidTime_throwsIllegalValueException() {
         JsonAdaptedNote jsonAdaptedNote =
                 new JsonAdaptedNote(VALID_NOTE_NAME_CS2103,
-                        "1", "13-2020", VALID_NOTE_IS_DONE, new ArrayList<>());
+                        "1", INVALID_TO_DESC, VALID_NOTE_IS_DONE, new ArrayList<>());
         assertThrows(IllegalValueException.class,
                 Time.MESSAGE_CONSTRAINTS,
                 jsonAdaptedNote::toModelType);
