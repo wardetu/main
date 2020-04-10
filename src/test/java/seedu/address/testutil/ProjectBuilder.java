@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.item.Project;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
@@ -27,13 +28,13 @@ public class ProjectBuilder {
     private Set<Tag> tags = new HashSet<>();
     private Time time;
     private Website website;
-    private String description;
+    private Description description;
 
     public ProjectBuilder() {
         name = new Name(DEFAULT_NAME);
         time = new Time(DEFAULT_TIME);
         website = new Website(DEFAULT_WEBSITE);
-        description = DEFAULT_DESCRIPTION;
+        description = new Description(DEFAULT_DESCRIPTION);
         tags.addAll(Arrays.stream(DEFAULT_TAGS).map(Tag::new).collect(Collectors.toList()));
     }
 
@@ -81,7 +82,7 @@ public class ProjectBuilder {
      * @return ProjectBuilder with new desc
      */
     public ProjectBuilder withDescription(String description) {
-        this.description = description;
+        this.description = new Description(description);
         return this;
     }
 

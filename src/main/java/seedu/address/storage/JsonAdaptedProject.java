@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.item.Project;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
@@ -58,7 +59,7 @@ public class JsonAdaptedProject {
         this.id = String.valueOf(project.getId());
         this.time = project.getTime().toString();
         this.website = project.getWebsite().toString();
-        this.description = project.getDescription();
+        this.description = project.getDescription().toString();
         tagged.addAll(project.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
 
     }
@@ -97,8 +98,13 @@ public class JsonAdaptedProject {
         final Website modelWebsite = new Website(website);
 
         if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
         }
+        if (!Description.isValidDescription(description)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
+        }
+        final Description modelDescription = new Description(description);
 
         final int modelId;
         try {
@@ -110,7 +116,7 @@ public class JsonAdaptedProject {
             throw new IllegalValueException("The id field must not be negative.");
         }
 
-        return new Project(modelName, modelTime, modelWebsite, description, Set.copyOf(tags), modelId);
+        return new Project(modelName, modelTime, modelWebsite, modelDescription, Set.copyOf(tags), modelId);
 
     }
 }

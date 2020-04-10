@@ -16,13 +16,17 @@ import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Level;
+import seedu.address.model.item.field.Major;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 
@@ -92,9 +96,8 @@ public class ResumeBookTest {
      */
     private static class ResumeBookStub implements ReadOnlyResumeBook {
         private Person person = new Person(new DisplayPicture("/images/Duke.png"), new Name("Default name"),
-                "Default description",
-                new Phone("000"), new Email("000@gmail.com"),
-                new Github("000"), "Default university", "Default major",
+                new Description("Default description"), new Phone("000"), new Email("000@gmail.com"), new Github("000"),
+                new University("Default university"), new Major("Default major"),
                 new Time("12-9999"), new Time("12-9999"), 5.0);
         private ObservablePerson observableUser = new ObservablePerson(person);
         private final ObservableList<Item> itemsToDisplay = FXCollections.observableArrayList();
@@ -187,8 +190,8 @@ public class ResumeBookTest {
 
         @Override
         public Internship getInternshipByIndex(Index index) {
-            return new Internship(new Name("Company 1"), "Software Engineer", new Time("02-2019"),
-                    new Time("05-2020"), "I did nothing", new HashSet<>());
+            return new Internship(new Name("Company 1"), new Role("Software Engineer"), new Time("02-2019"),
+                    new Time("05-2020"), new Description("I did nothing"), new HashSet<>());
         }
 
         @Override
@@ -198,14 +201,14 @@ public class ResumeBookTest {
 
         @Override
         public Internship getInternshipById(int id) {
-            return new Internship(new Name("Company 1"), "Software Engineer", new Time("02-2019"),
-                    new Time("05-2020"), "I did nothing", new HashSet<>());
+            return new Internship(new Name("Company 1"), new Role("Software Engineer"), new Time("02-2019"),
+                    new Time("05-2020"), new Description("I did nothing"), new HashSet<>());
         }
 
         @Override
         public Project getProjectByIndex(Index index) {
             return new Project(new Name("Project 1"), new Time("01-2020"), new Website("www.website.com"),
-                    "I did nothing", new HashSet<>());
+                    new Description("I did nothing"), new HashSet<>());
         }
 
         @Override
@@ -216,7 +219,7 @@ public class ResumeBookTest {
         @Override
         public Project getProjectById(int id) {
             return new Project(new Name("Project 1"), new Time("01-2020"), new Website("www.website.com"),
-                    "I did nothing", new HashSet<>());
+                    new Description("I did nothing"), new HashSet<>());
         }
 
         @Override

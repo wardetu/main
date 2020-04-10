@@ -15,13 +15,17 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Level;
+import seedu.address.model.item.field.Major;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
@@ -231,13 +235,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseDescription_validValueWithoutWhitespace_returnsDescription() throws Exception {
-        assertEquals(VALID_DESCRIPTION, ParserUtil.parseDescription(VALID_DESCRIPTION));
+        assertEquals(new Description(VALID_DESCRIPTION), ParserUtil.parseDescription(VALID_DESCRIPTION));
     }
 
     @Test
     public void parseDescription_validValueWithWhitespace_returnsTrimmedDescription() throws Exception {
         String descriptionWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
-        assertEquals(VALID_DESCRIPTION, ParserUtil.parseDescription(descriptionWithWhitespace));
+        assertEquals(new Description(VALID_DESCRIPTION), ParserUtil.parseDescription(descriptionWithWhitespace));
     }
 
     @Test
@@ -430,13 +434,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseUniversity_validValueWithoutWhitespace_returnsUniversity() throws Exception {
-        assertEquals(VALID_UNIVERSITY, ParserUtil.parseUniversity(VALID_UNIVERSITY));
+        assertEquals(new University(VALID_UNIVERSITY), ParserUtil.parseUniversity(VALID_UNIVERSITY));
     }
 
     @Test
     public void parseUniversity_validValueWithWhitespace_returnsTrimmedUniversity() throws Exception {
         String universityWithWhitespace = WHITESPACE + VALID_UNIVERSITY + WHITESPACE;
-        assertEquals(VALID_UNIVERSITY, ParserUtil.parseUniversity(universityWithWhitespace));
+        assertEquals(new University(VALID_UNIVERSITY), ParserUtil.parseUniversity(universityWithWhitespace));
     }
 
     @Test
@@ -451,13 +455,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseMajor_validValueWithoutWhitespace_returnsMajor() throws Exception {
-        assertEquals(VALID_MAJOR, ParserUtil.parseMajor(VALID_MAJOR));
+        assertEquals(new Major(VALID_MAJOR), ParserUtil.parseMajor(VALID_MAJOR));
     }
 
     @Test
     public void parseMajor_validValueWithWhitespace_returnsTrimmedMajor() throws Exception {
         String majorWithWhitespace = WHITESPACE + VALID_MAJOR + WHITESPACE;
-        assertEquals(VALID_MAJOR, ParserUtil.parseMajor(majorWithWhitespace));
+        assertEquals(new Major(VALID_MAJOR), ParserUtil.parseMajor(majorWithWhitespace));
     }
 
     @Test
@@ -498,13 +502,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseRole_validValueWithoutWhitespace_returnsRole() throws Exception {
-        assertEquals(VALID_ROLE, ParserUtil.parseRole(VALID_ROLE));
+        assertEquals(new Role(VALID_ROLE), ParserUtil.parseRole(VALID_ROLE));
     }
 
     @Test
     public void parseRole_validValueWithWhitespace_returnsTrimmedRole() throws Exception {
         String roleWithWhitespace = WHITESPACE + VALID_ROLE + WHITESPACE;
-        assertEquals(VALID_ROLE, ParserUtil.parseRole(roleWithWhitespace));
+        assertEquals(new Role(VALID_ROLE), ParserUtil.parseRole(roleWithWhitespace));
     }
 
     @Test
