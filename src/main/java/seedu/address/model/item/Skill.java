@@ -64,6 +64,7 @@ public class Skill extends Item {
         return other == this // short circuit if same object
                 || (other instanceof Skill // instanceof handles nulls
                 && getName().equals(((Skill) other).getName())
-                && level.getLevelCode() == ((Skill) other).level.getLevelCode());
+                && level.getLevelCode() == ((Skill) other).level.getLevelCode()
+                && tags.containsAll(((Skill) other).tags));
     }
 }
