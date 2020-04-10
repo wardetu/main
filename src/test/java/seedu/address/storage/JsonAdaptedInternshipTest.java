@@ -77,7 +77,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_invalidName_failure() {
+    public void toModelType_invalidName_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
         tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
         tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
@@ -97,7 +97,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_missingName_failure() {
+    public void toModelType_missingName_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
         tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
         tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
@@ -117,7 +117,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_invalidId_failure() {
+    public void toModelType_invalidId_failure() {
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "abc",
@@ -145,7 +145,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_missingId_failure() {
+    public void toModelType_missingId_failure() {
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         null,
@@ -161,7 +161,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_invalidRole_failure() {
+    public void toModelType_invalidRole_failure() {
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -177,7 +177,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_missingRole_failure() {
+    public void toModelType_missingRole_failure() {
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -193,7 +193,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_invalidFrom_failure() {
+    public void toModelType_invalidFrom_failure() {
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -209,7 +209,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_missingFrom_failure() {
+    public void toModelType_missingFrom_failure() {
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -225,7 +225,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_invalidTo_failure() {
+    public void toModelType_invalidTo_failure() {
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -241,7 +241,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_missingTo_failure() {
+    public void toModelType_missingTo_failure() {
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -257,7 +257,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_invalidFromTo_failure() {
+    public void toModelType_invalidFromTo_failure() {
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -273,7 +273,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_invalidDescription_failure() {
+    public void toModelType_invalidDescription_failure() {
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -289,7 +289,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_missingDescription_failure() {
+    public void toModelType_missingDescription_failure() {
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -305,7 +305,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_invalidTags_failure() {
+    public void toModelType_invalidTags_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
         tags.add(new JsonAdaptedTag(INVALID_TAG));
         tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
