@@ -32,25 +32,25 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_viewProject_success() {
+    public void parse_deleteProject_success() {
         assertParseSuccess(parser, "3" + ITEM_TYPE_PROJECT,
                 new DeleteProjectCommand(TypicalIndexes.INDEX_THIRD_ITEM));
     }
 
     @Test
-    public void parse_viewSkill_success() {
+    public void parse_deleteSkill_success() {
         assertParseSuccess(parser, "3" + ITEM_TYPE_SKILL,
                 new DeleteSkillCommand(TypicalIndexes.INDEX_THIRD_ITEM));
     }
 
     @Test
-    public void parse_viewResume_success() {
+    public void parse_deleteResume_success() {
         assertParseSuccess(parser, "3" + ITEM_TYPE_RESUME,
                 new DeleteResumeCommand(TypicalIndexes.INDEX_THIRD_ITEM));
     }
 
     @Test
-    public void parse_viewNote_success() {
+    public void parse_deleteNote_success() {
         assertParseSuccess(parser, "3" + ITEM_TYPE_NOTE,
                 new DeleteNoteCommand(TypicalIndexes.INDEX_THIRD_ITEM));
     }
