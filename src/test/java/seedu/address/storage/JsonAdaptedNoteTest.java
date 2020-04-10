@@ -1,19 +1,20 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.storage.JsonAdaptedNote.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.testutil.NoteBuilder;
 import seedu.address.testutil.TypicalNote;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.storage.JsonAdaptedNote.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.Assert.assertThrows;
 
 public class JsonAdaptedNoteTest {
     @Test
@@ -126,14 +127,14 @@ public class JsonAdaptedNoteTest {
     @Test
     public void equals() {
         JsonAdaptedNote jsonAdaptedCS2103 = new JsonAdaptedNote(new NoteBuilder(TypicalNote.FINISH_CS_2103).build());
-        JsonAdaptedNote jsonAdaptedHW = new JsonAdaptedNote(new NoteBuilder(TypicalNote.FINISH_HOMEWORK).build());
+        JsonAdaptedNote jsonAdaptedHw = new JsonAdaptedNote(new NoteBuilder(TypicalNote.FINISH_HOMEWORK).build());
 
         // Two constructors gives the same result
         assertEquals(jsonAdaptedCS2103,
                 new JsonAdaptedNote("Finish CS2103", "1", "12-2020", "false", new ArrayList<>()));
 
         // Different json adapted notes are not equal
-        assertNotEquals(jsonAdaptedCS2103, jsonAdaptedHW);
+        assertNotEquals(jsonAdaptedCS2103, jsonAdaptedHw);
     }
 
 }
