@@ -13,14 +13,15 @@ import seedu.address.logic.commands.ResumeEditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new {@code ResumeEditCommand} object
+ * Parses input arguments and creates a new {@code ResumeEditCommand} object.
  */
 public class ResumeEditCommandParser implements Parser<ResumeEditCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ResumeEditCommand
      * and returns an ResumeEditCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     @Override
     public ResumeEditCommand parse(String args) throws ParseException {

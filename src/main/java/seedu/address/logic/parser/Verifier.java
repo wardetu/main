@@ -31,7 +31,8 @@ public class Verifier {
     public static final String ROLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     /**
-     * Check if a field is within length limit.
+     * Checks if a field is within length limit.
+     *
      * @param input field.
      * @param maxLength maximum length allowed.
      * @return true or false.
@@ -45,9 +46,7 @@ public class Verifier {
     }
 
     /**
-     * Check if an input is empty.
-     * @param input input.
-     * @return true or false.
+     * Checks if an input is empty.
      */
     public static boolean isNotEmpty(String input) {
         if (input.isEmpty()) {
@@ -58,18 +57,14 @@ public class Verifier {
     }
 
     /**
-     * Get integer value of input.
-     * @param input
-     * @return
+     * Gets the integer value of input.
      */
     public static int getInt(String input) {
         return Integer.parseInt(input);
     }
 
     /**
-     * Check if the University field is valid.
-     * @param university
-     * @return
+     * Checks if the University field is valid.
      */
     public static boolean isValidUniversity(String university) {
         if (isNotEmpty(university) && isCorrectLength(university, UNIVERSITY_MAX_LENGTH)
@@ -81,9 +76,7 @@ public class Verifier {
     }
 
     /**
-     * Check if the Major field is valid.
-     * @param major
-     * @return
+     * Checks if the Major field is valid.
      */
     public static boolean isValidMajor(String major) {
         if (isNotEmpty(major) && isCorrectLength(major, MAJOR_MAX_LENGTH)
@@ -95,9 +88,7 @@ public class Verifier {
     }
 
     /**
-     * Check if the Cap field is valid.
-     * @param cap
-     * @return
+     * Checks if the Cap field is valid.
      */
     public static boolean isValidCap(String currentCap, String maxCap) throws ParseException {
         double userCurrentCap;
@@ -118,20 +109,19 @@ public class Verifier {
     }
 
     /**
-     * Check if a number is within accepted range.
-     * @param number
-     * @param min
-     * @param max
-     * @return
+     * Checks if a number is within accepted range.
+     *
+     * @param number the number to be tested.
+     * @param min the lower bound (inclusive).
+     * @param max the upper bound (inclusive).
+     * @return true or false.
      */
     public static boolean isWithinRange(double number, double min, double max) {
         return number >= min && number <= max;
     }
 
     /**
-     * Check if the Role field is valid.
-     * @param role
-     * @return
+     * Checks if the Role field is valid.
      */
     public static boolean isValidRole(String role) {
         if (isNotEmpty(role) && isCorrectLength(role, ROLE_MAX_LENGTH)

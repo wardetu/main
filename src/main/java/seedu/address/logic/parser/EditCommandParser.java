@@ -36,14 +36,15 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditCommand object.
  */
 public class EditCommandParser implements Parser<EditCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -64,15 +65,16 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
+        // Checks for presence of values are done here to prevent dependency of ItemDescriptor to argMultimap
         switch (itemType) {
         case ItemUtil.RESUME_ALIAS:
+            // ===== Start of updating item descriptor =====
             EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptor();
-            // TODO: Not sure if I should create a method inside the respective descriptors for this checking.
-            // Considerations: If I add a method inside the descriptor, then potentially need dependencies
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editResumeDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
             }
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editResumeDescriptor::setTags);
+            // ===== End of updating item descriptor =====
 
             if (!editResumeDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditResumeCommand.MESSAGE_NOT_EDITED);
@@ -80,6 +82,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
             return new EditResumeCommand(index, editResumeDescriptor);
         case ItemUtil.INTERNSHIP_ALIAS:
+            // ===== Start of updating item descriptor =====
             EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editInternshipDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
@@ -98,6 +101,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                         argMultimap.getValue(PREFIX_DESCRIPTION).get().trim()));
             }
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editInternshipDescriptor::setTags);
+            // ===== End of updating item descriptor =====
 
             if (!editInternshipDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditInternshipCommand.MESSAGE_NOT_EDITED);
@@ -105,6 +109,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
             return new EditInternshipCommand(index, editInternshipDescriptor);
         case ItemUtil.PROJECT_ALIAS:
+            // ===== Start of updating item descriptor =====
             EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editProjectDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
@@ -121,6 +126,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editProjectDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get().trim()));
             }
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editProjectDescriptor::setTags);
+            // ===== End of updating item descriptor =====
 
             if (!editProjectDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditProjectCommand.MESSAGE_NOT_EDITED);
@@ -128,6 +134,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
             return new EditProjectCommand(index, editProjectDescriptor);
         case ItemUtil.SKILL_ALIAS:
+            // ===== Start of updating item descriptor =====
             EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptor();
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editSkillDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
@@ -136,6 +143,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editSkillDescriptor.setLevel(ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get()));
             }
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editSkillDescriptor::setTags);
+            // ===== End of updating item descriptor =====
 
             if (!editSkillDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditSkillCommand.MESSAGE_NOT_EDITED);
@@ -143,6 +151,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
             return new EditSkillCommand(index, editSkillDescriptor);
         case ItemUtil.NOTE_ALIAS:
+            // ===== Start of updating item descriptor =====
             EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptor();
             boolean isAnyFieldEdited = false;
 
@@ -154,6 +163,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 isAnyFieldEdited = true;
                 editNoteDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get()));
             }
+            // ===== End of updating item descriptor =====
 
             if (!isAnyFieldEdited) {
                 throw new ParseException(EditNoteCommand.MESSAGE_NOT_EDITED);
@@ -162,9 +172,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditNoteCommand(index, editNoteDescriptor);
 
         default:
-            // Should not have reached here
-            // TODO: Use a better Exception here
-            throw new ParseException("The item type is not detected! Something is wrong");
+            // Should not have reached here at all
+            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
         }
 
     }

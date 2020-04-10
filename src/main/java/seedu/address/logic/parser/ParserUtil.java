@@ -28,7 +28,7 @@ import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings in the various Parser classes.
  */
 public class ParserUtil {
 
@@ -40,6 +40,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -83,6 +84,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String level} into a {@code Level}.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code level} is invalid.
      */
     public static Level parseLevel(String level) throws ParseException {
@@ -100,6 +102,7 @@ public class ParserUtil {
      *
      * Parses a {@code String website} into a {@code Website}.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code level} is invalid.
      */
     public static Website parseWebsite(String website) throws ParseException {
@@ -200,6 +203,8 @@ public class ParserUtil {
 
     /**
      * Parses the Item Indices to give the required optional.
+     *
+     * @throws ParseException if the given {@code indices} is invalid.
      */
     public static Optional<List<Integer>> parseReditItemIndices(String indices) throws ParseException {
         if (indices == null) {
@@ -321,6 +326,8 @@ public class ParserUtil {
     /**
      * Parses a {@code String reverse} choice into a boolean option.
      * A default value of false is returned if null is provided.
+     *
+     * @throws ParseException if the given {@code reverse} is invalid.
      */
     public static boolean parseReverse(String reverse) throws ParseException {
         // trimming is not done before null check to avoid NullPointerException

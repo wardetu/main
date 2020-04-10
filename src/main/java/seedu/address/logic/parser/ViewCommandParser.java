@@ -15,16 +15,16 @@ import seedu.address.model.item.Item;
 import seedu.address.model.util.ItemUtil;
 
 /**
- * Parses input arguments and creates a new ViewCommand object
+ * Parses input arguments and creates a new ViewCommand object.
  */
 public class ViewCommandParser implements Parser<ViewCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the ViewCommand
      * and returns a ViewCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public ViewCommand parse(String args) throws ParseException {
-        // The code is actually identical to DeleteCommand
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM);
 
         if (argMultimap.getPreamble().isEmpty() && !argMultimap.getValue(PREFIX_ITEM).isPresent()) {
@@ -52,9 +52,8 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         case ItemUtil.NOTE_ALIAS:
             return new ViewNoteCommand(index);
         default:
-            // Should not have reached here
-            // TODO: Use a better Exception here
-            throw new ParseException("The item type is not detected! Something is wrong");
+            // Should not have reached here at all
+            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
         }
     }
 }
