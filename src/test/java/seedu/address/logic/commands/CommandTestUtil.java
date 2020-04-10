@@ -123,10 +123,16 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    // Invalid
+    public static final String INVALID_NAME = "James&"; // '&' not allowed in names
+    public static final String INVALID_TIME = "123-1998"; // Time must be of format MM-YYYY
+    public static final String INVALID_WEBSITE = "dfasdsf"; // Must match regex of website
+
+
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + INVALID_NAME;
     public static final String INVALID_FROM_DESC = " " + PREFIX_FROM + "123-1998"; // Time must be of format MM-YYYY
     public static final String INVALID_TO_DESC = " " + PREFIX_TIME + "123-1998"; // Time must be of format MM-YYYY
-    public static final String INVALID_WEBSITE_DESC = " " + PREFIX_WEBSITE + "dfadsf"; // Must match regex of websit
+    public static final String INVALID_WEBSITE_DESC = " " + PREFIX_WEBSITE + INVALID_WEBSITE;
     public static final String INVALID_LEVEL_DESC =
             " " + PREFIX_LEVEL + "basii"; // basic / intermediate / advanced only
     public static final String INVALID_TYPE_DESC = " " + PREFIX_ITEM + "skil"; // ski / int / res / proj only
