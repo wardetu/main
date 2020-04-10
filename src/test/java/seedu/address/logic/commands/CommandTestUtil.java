@@ -79,9 +79,11 @@ public class CommandTestUtil {
     public static final String ITEM_TYPE_INTERNSHIP = " " + PREFIX_ITEM + " int";
     public static final String VALID_INTERNSHIP_NAME_GOOGLE = "Google";
     public static final String VALID_INTERNSHIP_NAME_PAYPAL = "PayPal";
+    public static final String VALID_INTERNSHIP_NAME_NINJAVAN = "Ninja Van";
     public static final String PREFIXED_NAME_GOOGLE = " " + PREFIX_NAME + " " + VALID_INTERNSHIP_NAME_GOOGLE;
     public static final String VALID_INTERNSHIP_ROLE_FRONTEND = "Frontend Web Engineer";
     public static final String VALID_INTERNSHIP_ROLE_BACKEND = "Backend Software Intern";
+    public static final String VALID_INTERNSHIP_ROLE_NINJA = "Ninja Intern";
     public static final String PREFIXED_ROLE_FRONTEND = " " + PREFIX_ROLE + " " + VALID_INTERNSHIP_ROLE_FRONTEND;
     public static final String PREFIXED_ROLE_BACKEND = " " + PREFIX_ROLE + " " + VALID_INTERNSHIP_ROLE_BACKEND;
     public static final String VALID_FROM = "06-2020";
@@ -94,6 +96,7 @@ public class CommandTestUtil {
     public static final String PREFIXED_TIME_TO_2 = " " + PREFIX_TO + " " + VALID_TO_2;
     public static final String VALID_INTERNSHIP_DESCRIPTION = "I did work, I made money";
     public static final String VALID_INTERNSHIP_LEARN_DESCRIPTION = "I am learning new things";
+    public static final String VALID_INTERNSHIP_NINJA_DESCRIPTION = "My journey to become a better ninja";
     public static final String PREFIXED_INTERNSHIP_DESCRIPTION = " " + PREFIX_DESCRIPTION + " "
             + VALID_INTERNSHIP_DESCRIPTION;
     public static final String VALID_TAG_FRONTEND = "Frontend";
@@ -115,6 +118,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_BACKEND = "backend";
     public static final String PREFIXED_TAG_BACKEND = " " + PREFIX_TAG + " " + VALID_TAG_BACKEND;
     public static final String VALID_TAG_SE = "SE";
+    public static final String VALID_TAG_UX = "UX";
     public static final String VALID_TAG_NONE_USAGE = "noOneUseThis";
 
 
