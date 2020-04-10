@@ -79,7 +79,6 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
-    // TODO: BEAUTIFY THE EXCEPTION MESSAGE
     /**
      * Parses a {@code String level} into a {@code Level}.
      * Leading and trailing whitespaces will be trimmed.
@@ -94,8 +93,7 @@ public class ParserUtil {
                 return value;
             }
         }
-        throw new ParseException("Level of proficiency can only be one of these three types: basic, intermediate, "
-                + "advanced.");
+        throw new ParseException(Level.MESSAGE_CONSTRAINTS);
     }
 
     /**
@@ -181,7 +179,7 @@ public class ParserUtil {
         requireNonNull(itemType);
         String trimmedItemType = itemType.trim();
         if (!Item.isValidItemType(trimmedItemType)) {
-            throw new ParseException("Not a valid item type!");
+            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
         }
         return trimmedItemType;
     }
@@ -327,9 +325,10 @@ public class ParserUtil {
      * @throws ParseException if the given {@code reverse} is invalid.
      */
     public static boolean parseReverse(String reverse) throws ParseException {
-        if (reverse == null || reverse.equalsIgnoreCase("false")) {
+        // trimming is not done before null check to avoid NullPointerException
+        if (reverse == null || reverse.trim().equalsIgnoreCase("false")) {
             return false;
-        } else if (reverse.equalsIgnoreCase("true")) {
+        } else if (reverse.trim().equalsIgnoreCase("true")) {
             return true;
         } else {
             throw new ParseException("Reverse choice can only be true of false.");
