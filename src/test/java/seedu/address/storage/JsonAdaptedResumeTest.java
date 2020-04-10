@@ -65,7 +65,7 @@ public class JsonAdaptedResumeTest {
     }
 
     @Test
-    public void loadToModel_missingName_failure() {
+    public void toModelType_missingName_throwsIllegalValueException() {
         JsonAdaptedResume jsonAdaptedResume = new JsonAdaptedResume(null, "4",
                 internshipIds, projectIds, skillIds, tags);
         assertThrows(IllegalValueException.class,
@@ -74,7 +74,7 @@ public class JsonAdaptedResumeTest {
     }
 
     @Test
-    public void loadToModel_invalidId_failure() {
+    public void toModelType_invalidId_throwsIllegalValueException() {
         JsonAdaptedResume jsonAdaptedResume = new JsonAdaptedResume(VALID_RESUME_NAME_ME, "abc",
                 internshipIds, projectIds, skillIds, tags);
         assertThrows(IllegalValueException.class, "The id field can only be an integer.",
@@ -87,7 +87,7 @@ public class JsonAdaptedResumeTest {
     }
 
     @Test
-    public void loadToModel_missingId_failure() {
+    public void toModelType_missingId_throwsIllegalValueException() {
         JsonAdaptedResume jsonAdaptedResume = new JsonAdaptedResume(VALID_RESUME_NAME_ME, null,
                 internshipIds, projectIds, skillIds, tags);
         assertThrows(IllegalValueException.class,
@@ -95,7 +95,7 @@ public class JsonAdaptedResumeTest {
     }
 
     @Test
-    public void loadToModel_invalidItemIds_failure() {
+    public void toModelType_invalidItemIds_throwsIllegalValueException() {
         List<String> invalidInternshipIds = Arrays.asList("abc");
         List<String> invalidProjectIds = Arrays.asList("-4");
 
