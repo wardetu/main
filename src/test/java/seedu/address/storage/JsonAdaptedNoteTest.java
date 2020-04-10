@@ -102,7 +102,7 @@ public class JsonAdaptedNoteTest {
         JsonAdaptedNote jsonAdaptedNote =
                 new JsonAdaptedNote("Finish CS2103", null, "11-2020", "false", new ArrayList<>());
         assertThrows(IllegalValueException.class,
-                "The id field can only be an integer.",
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, "Id"),
                 jsonAdaptedNote::toModelType);
     }
 

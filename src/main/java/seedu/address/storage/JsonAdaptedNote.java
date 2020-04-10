@@ -86,6 +86,10 @@ public class JsonAdaptedNote {
             throw new IllegalValueException("A boolean field can only be true or false.");
         }
 
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Id"));
+        }
+
         final int modelId;
         try {
             modelId = Integer.parseInt(id);
