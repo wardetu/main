@@ -74,7 +74,6 @@ class JsonAdaptedPerson {
         cap = String.valueOf(source.getCap());
     }
 
-    // TODO: CHECK FOR UNIVERSITY AND DESCRIPTION
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      */
@@ -175,7 +174,7 @@ class JsonAdaptedPerson {
         final double modelCap;
         try {
             modelCap = Double.parseDouble(cap);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | NullPointerException e) {
             throw new IllegalValueException("The cap field must be a numeric value");
         }
         if (modelCap > 5 || modelCap < 0) {
@@ -184,5 +183,22 @@ class JsonAdaptedPerson {
 
         return new Person(modelDisplayPicture, modelName, modelDescription, modelPhone, modelEmail,
                 modelGithub, modelUniversity, modelMajor, modelFrom, modelTo, modelCap);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof JsonAdaptedPerson
+                && dp.equals(((JsonAdaptedPerson) other).dp)
+                && name.equals(((JsonAdaptedPerson) other).name)
+                && description.equals(((JsonAdaptedPerson) other).description)
+                && phone.equals(((JsonAdaptedPerson) other).phone)
+                && email.equals(((JsonAdaptedPerson) other).email)
+                && github.equals(((JsonAdaptedPerson) other).github)
+                && university.equals(((JsonAdaptedPerson) other).university)
+                && major.equals(((JsonAdaptedPerson) other).major)
+                && from.equals(((JsonAdaptedPerson) other).from)
+                && to.equals(((JsonAdaptedPerson) other).to)
+                && cap.equals(((JsonAdaptedPerson) other).cap));
     }
 }
