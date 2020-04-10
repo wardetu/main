@@ -20,9 +20,12 @@ import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Level;
+import seedu.address.model.item.field.Major;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 
@@ -130,13 +133,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code description} is invalid.
      */
-    public static String parseDescription(String description) throws ParseException {
+    public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
         if (!Description.isValidDescription(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
-        return trimmedDescription;
+        return new Description(trimmedDescription);
     }
 
     /**
@@ -253,33 +256,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String university} into a {@code String university}.
+     * Parses a {@code String university} into a {@code University university}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code github} is invalid.
      */
-    public static String parseUniversity(String university) throws ParseException {
+    public static University parseUniversity(String university) throws ParseException {
         requireNonNull(university);
         String trimmedUniversity = university.trim();
-        if (Verifier.isValidUniversity(trimmedUniversity)) {
-            return trimmedUniversity;
+        if (University.isValidUniversity(trimmedUniversity)) {
+            return new University(trimmedUniversity);
         }
-        throw new ParseException(Verifier.UNIVERSITY_MESSAGE_CONSTRAINTS);
+        throw new ParseException(University.MESSAGE_CONSTRAINTS);
     }
 
     /**
-     * Parses a {@code String major} into a {@code String major}.
+     * Parses a {@code String major} into a {@code Major major}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code major} is invalid.
      */
-    public static String parseMajor(String major) throws ParseException {
+    public static Major parseMajor(String major) throws ParseException {
         requireNonNull(major);
         String trimmedMajor = major.trim();
-        if (Verifier.isValidMajor(trimmedMajor)) {
-            return trimmedMajor;
+        if (Major.isValidMajor(trimmedMajor)) {
+            return new Major(trimmedMajor);
         }
-        throw new ParseException(Verifier.MAJOR_MESSAGE_CONSTRAINTS);
+        throw new ParseException(Major.MESSAGE_CONSTRAINTS);
     }
 
     /**
@@ -299,18 +302,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String role} into a {@code String role}.
+     * Parses a {@code String role} into a {@code Role role}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code role} is invalid.
      */
-    public static String parseRole(String role) throws ParseException {
+    public static Role parseRole(String role) throws ParseException {
         requireNonNull(role);
         String trimmedRole = role.trim();
-        if (Verifier.isValidRole(trimmedRole)) {
-            return trimmedRole;
+        if (Role.isValidRole(trimmedRole)) {
+            return new Role(trimmedRole);
         }
-        throw new ParseException(Verifier.ROLE_MESSAGE_CONSTRAINTS);
+        throw new ParseException(Role.MESSAGE_CONSTRAINTS);
     }
 
     /**
