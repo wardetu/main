@@ -8,8 +8,7 @@ public enum Level {
     INTERMEDIATE(2),
     ADVANCED(3);
 
-    public static final String MESSAGE_CONSTRAINTS = "Level of proficiency can only be one of these three types: "
-            + "basic, intermediate, advanced.";
+    public static final String MESSAGE_CONSTRAINTS = "A skill level can only be basic, intermediate, or advanced.";
 
     private final int levelCode;
 
