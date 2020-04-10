@@ -47,7 +47,7 @@ public class CommandResultTest {
 
         // different dataToUser value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),
-                new CommandResult("different","feedback", "int").hashCode());
+                new CommandResult("different", "feedback", "int").hashCode());
 
         // different feedbackToUser value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),

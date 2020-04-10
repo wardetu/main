@@ -81,6 +81,6 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(dataToUser, feedbackToUser, displayType, isShowPreview,  isShowHelp, isExit);
+        return Objects.hash(dataToUser, feedbackToUser, displayType, isShowPreview, isShowHelp, isExit);
     }
 }
