@@ -11,7 +11,6 @@ import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Note;
 import seedu.address.model.item.ObservablePerson;
-import seedu.address.model.item.Person;
 
 /**
  * API of the Logic component
@@ -54,6 +53,4 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     ObservablePerson getObservableUser();
-
-    Person getUser();
 }
