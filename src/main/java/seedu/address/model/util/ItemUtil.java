@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import java.util.TreeMap;
 
 import seedu.address.model.item.Person;
+import seedu.address.model.item.field.Cap;
 import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
@@ -25,9 +26,11 @@ public class ItemUtil {
     public static final String NOTE_ALIAS = "note";
 
     public static final Person DEFAULT_USER = new Person(new DisplayPicture("/images/Duke.png"),
-            new Name("Your Name"), new Description("Your Description"), new Phone("000"),
-            new Email("youremail@gmail.com"), new Github("yourgithub"), new University("Your University"),
-            new Major("Your Major"), new Time("12-9999"), new Time("12-9999"), 0.0);
+            new Name("Your Name"), new Description("Your Description"),
+            new Phone("000"), new Email("youremail@gmail.com"), new Github("yourgithub"),
+            new University("Your University"), new Major("Your Major"),
+            new Time("12-9999"), new Time("12-9999"), new Cap("0.0 5.0"));
+
 
     private static TreeMap<String, Integer> idGenerator = new TreeMap<>();
 
