@@ -92,7 +92,6 @@ public class AddCommandParser implements Parser<AddCommand> {
             description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            // TODO: handle this toString() thingy better
             Internship internship = new Internship(name, role, from, to, description, tagList);
             return new AddInternshipCommand(internship);
 

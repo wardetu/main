@@ -37,7 +37,6 @@ public class CliSyntax {
     /* Prefixes for different item types */
     public static final Prefix PREFIX_INTERNSHIP = new Prefix(ItemUtil.INTERNSHIP_ALIAS + "/");
     public static final Prefix PREFIX_PROJECT = new Prefix(ItemUtil.PROJECT_ALIAS + "/");
-    public static final Prefix PREFIX_RESUME = new Prefix(ItemUtil.RESUME_ALIAS + "/");
     public static final Prefix PREFIX_SKILL = new Prefix(ItemUtil.SKILL_ALIAS + "/");
 
     /* User */
@@ -50,7 +49,4 @@ public class CliSyntax {
     /* Sort keywords */
     public static final Prefix PREFIX_SORT_ORDER = new Prefix("order/");
     public static final Prefix PREFIX_REVERSE = new Prefix("reverse/");
-
-    /* Note */
-    public static final Prefix PREFIX_DONE = new Prefix("d/");
 }
