@@ -123,4 +123,17 @@ public class JsonAdaptedProject {
         return new Project(modelName, modelTime, modelWebsite, modelDescription, Set.copyOf(tags), modelId);
 
     }
+
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof JsonAdaptedProject
+                && name.equals(((JsonAdaptedProject) other).name)
+                && time.equals(((JsonAdaptedProject) other).time)
+                && website.equals(((JsonAdaptedProject) other).website)
+                && description.equals(((JsonAdaptedProject) other).description)
+                && tagged.containsAll(((JsonAdaptedProject) other).tagged)
+                && ((JsonAdaptedProject) other).tagged.containsAll(tagged));
+    }
 }
