@@ -23,14 +23,15 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.field.DisplayPicture;
 
 /**
- * Parser for EditUserCommand.
+ * Parses input arguments and creates a new EditUserCommand object.
  */
 public class EditUserParser implements Parser<EditUserCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditUserCommand
      * and returns an EditUserCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     @Override
     public EditUserCommand parse(String args) throws ParseException {

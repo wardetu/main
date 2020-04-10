@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import seedu.address.model.util.ItemUtil;
 
 /**
- * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
+ * Contains Command Line Interface (CLI) syntax definitions common to multiple commands.
  */
 public class CliSyntax {
 
