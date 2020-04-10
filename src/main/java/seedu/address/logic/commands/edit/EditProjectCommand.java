@@ -27,6 +27,9 @@ import seedu.address.model.tag.Tag;
  * Edits a Project Item in the resume book.
  */
 public class EditProjectCommand extends EditCommand {
+
+    public static final String MESSAGE_EDIT_PROJECT_SUCCESS = "Edited Project: %1$s";
+
     private static final String FIELDS = COMMAND_WORD
             + " INDEX "
             + PREFIX_ITEM + "proj "
@@ -44,7 +47,6 @@ public class EditProjectCommand extends EditCommand {
             + PREFIX_DESCRIPTION + " It washes things. "
             + PREFIX_TAG + "clean\n";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + FIELDS + EXAMPLE;
-    private static final String MESSAGE_EDIT_PROJECT_SUCCESS = "Edited Project: %1$s";
 
     private EditProjectDescriptor editProjectDescriptor;
 
@@ -88,7 +90,7 @@ public class EditProjectCommand extends EditCommand {
      * @param editProjectDescriptor Descriptor parsed from input of user
      * @return Edited Project item.
      */
-    private static Project createEditedProject(
+    static Project createEditedProject(
             Project toEdit, EditProjectDescriptor editProjectDescriptor) {
         Name updatedName = editProjectDescriptor.getName().orElse(toEdit.getName());
         Time updatedTime = editProjectDescriptor.getTime().orElse(toEdit.getTime());
