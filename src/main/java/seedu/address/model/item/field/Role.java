@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Role {
 
 
-    public static final String MESSAGE_CONSTRAINTS = "Role can take any value "
-            + " and it should not be blank.";
+    public static final String MESSAGE_CONSTRAINTS = "Role should only contain alphanumeric characters and spaces, "
+            + "with max length of 50 characters and it should not be blank";
 
     /*
      * The first character of the role must not be a whitespace,

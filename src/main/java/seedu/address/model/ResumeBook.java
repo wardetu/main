@@ -18,6 +18,7 @@ import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
+import seedu.address.model.item.field.Cap;
 import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
@@ -57,8 +58,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
     {
         Person defaultUser = new Person(new DisplayPicture("/images/Duke.png"), new Name("Default name"),
                 new Description("Default description"), new Phone("000"), new Email("000@gmail.com"), new Github("000"),
-                new University("Default university"), new Major("Default major"), new Time("12-9999"),
-                new Time("12-9999"), 0.0);
+                new University("Default university"), new Major("Default major"),
+                new Time("12-9999"), new Time("12-9999"), new Cap("0.0 5.0"));
         observableUser = new ObservablePerson(defaultUser);
         itemsToDisplay = new UniqueItemList<>();
         internships = new UniqueItemList<>();

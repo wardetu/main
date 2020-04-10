@@ -3,6 +3,7 @@ package seedu.address.logic.commands.edit;
 import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.item.field.Cap;
 import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
@@ -27,12 +28,7 @@ public class EditUserDescriptor {
     private Major major;
     private Time from;
     private Time to;
-
-    /*
-        A workaround since the default value for double is 0. The original implementation tried to wrap the value
-        in an Optional<Double> which caused the CAP field to be set to 0 everytime an edit is made to user profile.
-     */
-    private double cap = -1;
+    private Cap cap;
 
     public EditUserDescriptor() {}
 
@@ -134,12 +130,12 @@ public class EditUserDescriptor {
         return Optional.ofNullable(to);
     }
 
-    public void setCap(double cap) {
+    public void setCap(Cap cap) {
         this.cap = cap;
     }
 
-    public Double getCap() {
-        return cap;
+    public Optional<Cap> getCap() {
+        return Optional.ofNullable(cap);
     }
 
     /**
