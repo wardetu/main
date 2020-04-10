@@ -155,8 +155,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code cap} of the {@code Person} that we are building.
      */
-    public PersonBuilder withCap(double cap) {
-        this.cap = cap;
+    public PersonBuilder withCap(String cap) {
+        this.cap = new Cap(cap);
         return this;
     }
 

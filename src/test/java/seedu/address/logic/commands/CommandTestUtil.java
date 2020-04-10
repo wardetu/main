@@ -45,8 +45,10 @@ public class CommandTestUtil {
     public static final String VALID_FROM_BOB = "08-2018";
     public static final String VALID_TO_AMY = "05-2022";
     public static final String VALID_TO_BOB = "05-2023";
-    public static final String VALID_CAP_AMY = "4.5";
-    public static final String VALID_CAP_BOB = "4.4";
+    public static final String VALID_CURRENT_CAP_AMY = "4.5";
+    public static final String VALID_CAP_AMY = "4.5 5.0";
+    public static final String VALID_CAP_BOB = "4.4 5.0";
+    public static final String VALID_MAX_CAP = "5.0";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -137,18 +139,6 @@ public class CommandTestUtil {
     public static final String VALID_TAG_UX = "UX";
     public static final String VALID_TAG_NONE_USAGE = "noOneUseThis";
 
-
-    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-
     // Invalid
     public static final String INVALID_NAME = "James&"; // '&' not allowed in names
     public static final String INVALID_TIME = "123-1998"; // Time must be of format MM-YYYY
@@ -161,7 +151,10 @@ public class CommandTestUtil {
     public static final String INVALID_GITHUB = "-starthyphen"; // github names cannot start with hyphens
     public static final String INVALID_UNIVERSITY = "here is an invalid university name that should exceed 50 chars";
     public static final String INVALID_MAJOR = "computer@science"; // only alphanumeric in major
-    public static final String INVALID_CAP = "6.1"; // CAP should be from 0.0 to 5.0
+    public static final String INVALID_CURRENT_CAP = "6.5"; // CAP should be from 0.0 to 5.0
+    public static final String INVALID_CAP = "4.0 10.0";
+    public static final String INVALID_NEGATIVE_MAX_CAP = "-1.0";
+
 
 
 
@@ -179,21 +172,6 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
-    /*
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
-
-    static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-    }
-
- */
 
     /**
      * Executes the given {@code command}, confirms that <br>

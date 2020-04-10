@@ -180,14 +180,14 @@ class JsonAdaptedPerson {
         try {
             modelCurrentCap = Double.parseDouble(currentCap);
         } catch (NumberFormatException | NullPointerException e) {
-            throw new IllegalValueException("The cap field must be a numeric value");
+            throw new IllegalValueException("The cap field must be a numeric value.");
         }
 
         final double modelMaxCap;
         try {
             modelMaxCap = Double.parseDouble(maxCap);
         } catch (NumberFormatException | NullPointerException e) {
-            throw new IllegalValueException("The max cap field must be a numeric value");
+            throw new IllegalValueException("The max cap field must be a numeric value.");
         }
 
         if (modelCurrentCap < 0 || modelMaxCap < 0) {
