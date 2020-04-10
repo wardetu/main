@@ -40,9 +40,9 @@ public class ResumeBookParser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
-     * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
+     * @param userInput full user input string.
+     * @return the command based on the user input.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -54,7 +54,8 @@ public class ResumeBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        //--------------Item manipulation commands-------------
+        //--------------Item related commands-------------
+
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
@@ -76,9 +77,8 @@ public class ResumeBookParser {
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
 
-        case GenerateResumeCommand.COMMAND_WORD:
-            return new GenerateResumeCommandParser().parse(arguments);
-
+        case DoneCommand.COMMAND_WORD: // for note-taking
+            return new DoneCommandParser().parse(arguments);
 
         //-----------------Undo/Redo----------------------------
 
@@ -88,8 +88,7 @@ public class ResumeBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-
-        //-----------------Resume Editing-----------------------
+        //-----------------Resume-related commands---------
 
         case ResumeEditCommand.COMMAND_WORD:
             return new ResumeEditCommandParser().parse(arguments);
@@ -97,18 +96,16 @@ public class ResumeBookParser {
         case TagPullCommand.COMMAND_WORD:
             return new TagPullCommandParser().parse(arguments);
 
-        //-----------------Other commands-----------------------
-
         case ResumePreviewCommand.COMMAND_WORD:
             return new ResumePreviewCommandParser().parse(arguments);
 
-        case EditUserCommand.COMMAND_WORD: //"me"
-            return new EditUserParser().parse(arguments);
+        case GenerateResumeCommand.COMMAND_WORD:
+            return new GenerateResumeCommandParser().parse(arguments);
 
         //-----------------Other commands-----------------------
 
-        case DoneCommand.COMMAND_WORD:
-            return new DoneCommandParser().parse(arguments);
+        case EditUserCommand.COMMAND_WORD: // "me"
+            return new EditUserParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

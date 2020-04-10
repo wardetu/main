@@ -1,12 +1,15 @@
 package seedu.address.testutil;
 
 import seedu.address.model.item.Person;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
+import seedu.address.model.item.field.Major;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 
 /**
  * A utility class to help with building Person objects.
@@ -26,12 +29,12 @@ public class PersonBuilder {
 
     private DisplayPicture displayPicture;
     private Name name;
-    private String description;
+    private Description description;
     private Phone phone;
     private Email email;
     private Github github;
-    private String university;
-    private String major;
+    private University university;
+    private Major major;
     private Time from;
     private Time to;
     private double cap;
@@ -39,12 +42,12 @@ public class PersonBuilder {
     public PersonBuilder() {
         displayPicture = new DisplayPicture(DEFAULT_DP);
         name = new Name(DEFAULT_NAME);
-        description = DEFAULT_DESCRIPTION;
+        description = new Description(DEFAULT_DESCRIPTION);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         github = new Github(DEFAULT_GITHUB);
-        university = DEFAULT_UNIVERSITY;
-        major = DEFAULT_MAJOR;
+        university = new University(DEFAULT_UNIVERSITY);
+        major = new Major(DEFAULT_MAJOR);
         from = new Time(DEFAULT_FROM);
         to = new Time(DEFAULT_TO);
         cap = DEFAULT_CAP;
