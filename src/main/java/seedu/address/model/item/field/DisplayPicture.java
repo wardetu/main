@@ -29,7 +29,7 @@ public class DisplayPicture {
     }
 
     /**
-     * Return true is the dpPath is a valid file path.
+     * Return true if the dpPath is a valid file path.
      */
     public static boolean isValidDisplayPicture(String dpPath) {
         return dpPath.matches(VALIDATION_REGEX);

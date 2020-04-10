@@ -21,7 +21,7 @@ public class Verifier {
     public static final String MAJOR_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public static final String CAP_MESSAGE_CONSTRAINTS =
-            "CAP should only contain numeric characters and must match actual range from 0.0 to 5.0 and it "
+            "CAP should only contain numeric characters and current CAP should not be greater than maximum CAP and it "
                     + "should not be blank";
 
     public static final int ROLE_MAX_LENGTH = 50;
@@ -99,15 +99,18 @@ public class Verifier {
      * @param cap
      * @return
      */
-    public static boolean isValidCap(String cap) throws ParseException {
-        double userCap;
+    public static boolean isValidCap(String currentCap, String maxCap) throws ParseException {
+        double userCurrentCap;
+        double userMaximumCap;
+
         try {
-            userCap = Double.valueOf(cap);
+            userCurrentCap = Double.valueOf(currentCap);
+            userMaximumCap = Double.valueOf(maxCap);
         } catch (NumberFormatException ex) {
             throw new ParseException(CAP_MESSAGE_CONSTRAINTS);
         }
 
-        if (isNotEmpty(cap) && isWithinRange(userCap, 0, 5)) {
+        if (isNotEmpty(currentCap) && isNotEmpty(maxCap) && userCurrentCap <= userMaximumCap) {
             return true;
         } else {
             return false;

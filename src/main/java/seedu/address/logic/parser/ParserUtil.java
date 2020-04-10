@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.field.Cap;
 import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
@@ -289,12 +290,15 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code cap} is invalid.
      */
-    public static Double parseCap(String cap) throws ParseException {
+    public static Cap parseCap(String cap) throws ParseException {
         requireNonNull(cap);
-        String trimmedCap = cap.trim();
-        if (Verifier.isValidCap(trimmedCap)) {
-            double userCap = Double.valueOf(trimmedCap);
-            return Math.round(userCap * 100.0) / 100.0;
+        String[] trimmedValues = cap.trim().split(" ");
+        if (trimmedValues.length == 2 && Verifier.isValidCap(trimmedValues[0], trimmedValues[1])) {
+            double current = Double.valueOf(trimmedValues[0]);
+            current = Math.round(current * 100.00) / 100.00;
+            double max = Double.valueOf(trimmedValues[1]);
+            max = Math.round(max * 100.00) / 100.00;
+            return new Cap(current + " " + max);
         }
         throw new ParseException(Verifier.CAP_MESSAGE_CONSTRAINTS);
     }

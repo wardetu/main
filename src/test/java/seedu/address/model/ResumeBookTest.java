@@ -16,6 +16,7 @@ import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
+import seedu.address.model.item.field.Cap;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
@@ -95,7 +96,7 @@ public class ResumeBookTest {
                 "Default description",
                 new Phone("000"), new Email("000@gmail.com"),
                 new Github("000"), "Default university", "Default major",
-                new Time("12-9999"), new Time("12-9999"), 5.0);
+                new Time("12-9999"), new Time("12-9999"), new Cap("5.0 5.0"));
         private ObservablePerson observableUser = new ObservablePerson(person);
         private final ObservableList<Item> itemsToDisplay = FXCollections.observableArrayList();
         private final UniqueItemList<Internship> internships = new UniqueItemList<>();

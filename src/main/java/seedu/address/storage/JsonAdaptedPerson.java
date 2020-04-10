@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.item.Person;
+import seedu.address.model.item.field.Cap;
 import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
@@ -30,18 +31,19 @@ class JsonAdaptedPerson {
     private final String major;
     private final String from;
     private final String to;
-    private final String cap;
+    private final String currentCap;
+    private final String maxCap;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("dp") String dp, @JsonProperty("name") String name,
-                             @JsonProperty("description") String description,
-                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                             @JsonProperty("github") String github, @JsonProperty("university") String university,
-                             @JsonProperty("major") String major, @JsonProperty("from") String from,
-                             @JsonProperty("to") String to, @JsonProperty("cap") String cap) {
+                             @JsonProperty("description") String description, @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email, @JsonProperty("github") String github,
+                             @JsonProperty("university") String university, @JsonProperty("major") String major,
+                             @JsonProperty("from") String from, @JsonProperty("to") String to,
+                             @JsonProperty("current cap") String currentCap, @JsonProperty("max cap") String maxCap) {
         this.dp = dp;
         this.name = name;
         this.description = description;
@@ -52,7 +54,8 @@ class JsonAdaptedPerson {
         this.major = major;
         this.from = from;
         this.to = to;
-        this.cap = cap;
+        this.currentCap = currentCap;
+        this.maxCap = maxCap;
     }
 
     /**
@@ -69,7 +72,9 @@ class JsonAdaptedPerson {
         major = source.getMajor();
         from = source.getFrom().toString();
         to = source.getTo().toString();
-        cap = String.valueOf(source.getCap());
+        currentCap = String.valueOf(source.getCap().current);
+        maxCap = String.valueOf(source.getCap().max);
+
     }
 
     // TODO: CHECK FOR UNIVERSITY AND DESCRIPTION
@@ -153,15 +158,29 @@ class JsonAdaptedPerson {
             throw new IllegalValueException("The \"to\" field must not precede the \"from\" field.");
         }
 
-        final double modelCap;
+        final double modelCurrentCap;
         try {
-            modelCap = Double.parseDouble(cap);
+            modelCurrentCap = Double.parseDouble(currentCap);
         } catch (NumberFormatException e) {
             throw new IllegalValueException("The cap field must be a numeric value");
         }
-        if (modelCap > 5 || modelCap < 0) {
-            throw new IllegalValueException("The cap value must be between 0.0 and 5.0 inclusive.");
+
+        final double modelMaxCap;
+        try {
+            modelMaxCap = Double.parseDouble(maxCap);
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException("The cap field must be a numeric value");
         }
+
+        if (modelCurrentCap < 0 || modelMaxCap < 0) {
+            throw new IllegalValueException("The cap value must not be negative.");
+        }
+
+        if (modelCurrentCap > modelMaxCap) {
+            throw new IllegalValueException("The current cap value must not be greater than the maximum cap value.");
+        }
+
+        final Cap modelCap = new Cap(modelCurrentCap + " " + modelMaxCap);
 
         return new Person(modelDisplayPicture, modelName, description, modelPhone, modelEmail,
                 modelGithub, university, major, modelFrom, modelTo, modelCap);

@@ -19,6 +19,7 @@ import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.results.EditUserCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Person;
+import seedu.address.model.item.field.Cap;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
@@ -108,7 +109,7 @@ public class EditUserCommand extends Command {
         String major = editUserDescriptor.getMajor().orElse(toEdit.getMajor());
         Time from = editUserDescriptor.getFrom().orElse(toEdit.getFrom());
         Time to = editUserDescriptor.getTo().orElse(toEdit.getTo());
-        Double cap = editUserDescriptor.getCap() > -1 ? editUserDescriptor.getCap() : toEdit.getCap();
+        Cap cap = editUserDescriptor.getCap().orElse(toEdit.getCap());
 
         return new Person(displayPicture, name, description, phone, email, github, university, major, from, to, cap);
     }
