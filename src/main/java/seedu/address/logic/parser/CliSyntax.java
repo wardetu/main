@@ -9,11 +9,6 @@ public class CliSyntax {
 
     /* Prefix definitions */
 
-    /* AB3's original prefixes */
-    public static final Prefix PREFIX_PHONE = new Prefix("p/");
-    public static final Prefix PREFIX_EMAIL = new Prefix("e/");
-    public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
-
     /* Items */
     public static final Prefix PREFIX_ITEM = new Prefix("i/");
     public static final Prefix PREFIX_NAME = new Prefix("n/");
@@ -40,6 +35,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_SKILL = new Prefix(ItemUtil.SKILL_ALIAS + "/");
 
     /* User */
+    public static final Prefix PREFIX_PHONE = new Prefix("p/");
+    public static final Prefix PREFIX_EMAIL = new Prefix("e/");
+    public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_DP = new Prefix("dp/");
     public static final Prefix PREFIX_GITHUB = new Prefix("g/");
     public static final Prefix PREFIX_UNIVERSITY = new Prefix("u/");
