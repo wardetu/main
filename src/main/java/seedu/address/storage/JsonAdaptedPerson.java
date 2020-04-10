@@ -179,7 +179,7 @@ class JsonAdaptedPerson {
         final double modelCurrentCap;
         try {
             modelCurrentCap = Double.parseDouble(currentCap);
-        } catch (NumberFormatException e | NullPointerException e) {
+        } catch (NumberFormatException | NullPointerException e) {
             throw new IllegalValueException("The cap field must be a numeric value");
         }
 
