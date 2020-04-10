@@ -51,6 +51,20 @@ public class JsonAdaptedSkillTest {
     }
 
     @Test
+    public void toModelType_invalidNotIntegerId_throwsIllegalValueException() throws IllegalValueException {
+        JsonAdaptedSkill skill = new JsonAdaptedSkill(VALID_NAME, "a", VALID_LEVEL, VALID_TAGS);
+        assertThrows(IllegalValueException.class, "The id field can only be an integer.",
+                skill::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidNegativeId_throwsIllegalValueException() throws IllegalValueException {
+        JsonAdaptedSkill skill = new JsonAdaptedSkill(VALID_NAME, "-2", VALID_LEVEL, VALID_TAGS);
+        assertThrows(IllegalValueException.class, "The id field must not be negative.",
+                skill::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidLevel_throwsIllegalValueException() throws IllegalValueException {
         JsonAdaptedSkill skill = new JsonAdaptedSkill(VALID_NAME, VALID_ID, INVALID_LEVEL, VALID_TAGS);
         assertThrows(IllegalValueException.class, Level.MESSAGE_CONSTRAINTS, skill::toModelType);
