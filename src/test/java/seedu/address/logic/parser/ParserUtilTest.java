@@ -35,7 +35,9 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_WEBSITE = "john.a";
     private static final String INVALID_TIME = "13-2019";
-    private static final String INVALID_FILE_PATH = "";
+    private static final String INVALID_FILE_PATH_1 = "notjpeg.gif";
+    private static final String INVALID_FILE_PATH_2 = "/Users/Pictures/someone.gif";
+    private static final String INVALID_FILE_PATH_3 = "/Users/Pictures/someone.pdf";
     private static final String INVALID_GITHUB_1 = "-starthyphen";
     private static final String INVALID_GITHUB_2 = "double--hyphen";
     private static final String INVALID_UNIVERSITY = "here is a very long university name that should exceed 50 chars";
@@ -56,7 +58,8 @@ public class ParserUtilTest {
     private static final String VALID_DESCRIPTION = "This is a description of the item.";
     private static final String VALID_TIME_1 = "06-2020";
     private static final String VALID_TIME_2 = "08-2018";
-    private static final String VALID_FILE_PATH = "/Users/Pictures/someone.png";
+    private static final String VALID_FILE_PATH_PNG = "/Users/Pictures/someone.png";
+    private static final String VALID_FILE_PATH_JPG = "/Users/Pictures/someone.jpg";
     private static final String VALID_GITHUB = "validgithub";
     private static final String VALID_UNIVERSITY = "National University of Singapore";
     private static final String VALID_MAJOR = "computer science";
@@ -373,25 +376,31 @@ public class ParserUtilTest {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDisplayPicture((String) null));
     }
 
-    // TODO: I don't know an invalid file path. Can someone help?
-    /*
     @Test
     public void parseDisplayPicture_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDisplayPicture(INVALID_FILE_PATH));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDisplayPicture(INVALID_FILE_PATH_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDisplayPicture(INVALID_FILE_PATH_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDisplayPicture(INVALID_FILE_PATH_3));
     }
-     */
 
     @Test
     public void parseDisplayPicture_validValueWithoutWhitespace_returnsDisplayPicture() throws Exception {
-        DisplayPicture expectedDisplayPicture = new DisplayPicture(VALID_FILE_PATH);
-        assertEquals(expectedDisplayPicture, ParserUtil.parseDisplayPicture(VALID_FILE_PATH));
+        DisplayPicture expectedDisplayPictureJpg = new DisplayPicture(VALID_FILE_PATH_JPG);
+        assertEquals(expectedDisplayPictureJpg, ParserUtil.parseDisplayPicture(VALID_FILE_PATH_JPG));
+
+        DisplayPicture expectedDisplayPicturePng = new DisplayPicture(VALID_FILE_PATH_PNG);
+        assertEquals(expectedDisplayPicturePng, ParserUtil.parseDisplayPicture(VALID_FILE_PATH_PNG));
     }
 
     @Test
     public void parseDisplayPicture_validValueWithWhitespace_returnsTrimmedDisplayPicture() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_FILE_PATH + WHITESPACE;
-        DisplayPicture expectedDisplayPicture = new DisplayPicture(VALID_FILE_PATH);
-        assertEquals(expectedDisplayPicture, ParserUtil.parseDisplayPicture(emailWithWhitespace));
+        String pathWithWhitespaceJpg = WHITESPACE + VALID_FILE_PATH_JPG + WHITESPACE;
+        DisplayPicture expectedDisplayPictureJpg = new DisplayPicture(VALID_FILE_PATH_JPG);
+        assertEquals(expectedDisplayPictureJpg, ParserUtil.parseDisplayPicture(pathWithWhitespaceJpg));
+
+        String pathWithWhitespacePng = WHITESPACE + VALID_FILE_PATH_PNG + WHITESPACE;
+        DisplayPicture expectedDisplayPicturePng = new DisplayPicture(VALID_FILE_PATH_PNG);
+        assertEquals(expectedDisplayPicturePng, ParserUtil.parseDisplayPicture(pathWithWhitespacePng));
     }
 
     @Test

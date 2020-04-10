@@ -11,9 +11,10 @@ public class DisplayPicture {
             + "want to display as your profile picture. Example format: /Users/nhamquochung/Desktop/test.png";
 
     /**
-     * Check for a valid file path
+     * Must end with either '.jpg', '.png' or '.jpeg' with their cases ignored.
      */
-    public static final String VALIDATION_REGEX = "^$|[^\\s].*";
+    public static final String VALIDATION_REGEX = "([^\\s]+(\\.(?i)(jpg|png|jpeg))$)";
+
 
     public final String value;
 
