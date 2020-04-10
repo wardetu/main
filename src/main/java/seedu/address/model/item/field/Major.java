@@ -21,7 +21,7 @@ public class Major {
     public final String value;
 
     /**
-     * Constructs a {@code Descr}.
+     * Constructs a {@code Major}.
      *
      * @param major A valid major.
      */
