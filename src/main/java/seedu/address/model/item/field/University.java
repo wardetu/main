@@ -9,7 +9,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class University {
 
-    // TODO: Utilise this class in main codes
 
     public static final String MESSAGE_CONSTRAINTS = "University field can take any value "
             + " and it should not be blank.";
