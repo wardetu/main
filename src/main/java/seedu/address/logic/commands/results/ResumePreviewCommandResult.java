@@ -15,7 +15,6 @@ public class ResumePreviewCommandResult extends CommandResult {
     public ResumePreviewCommandResult(String dataToUser, String feedbackToUser, String displayType) {
         super(dataToUser, feedbackToUser, displayType);
         super.isShowPreview = true;
-        super.isGenerate = false;
         super.isShowHelp = false;
         super.isExit = false;
     }
