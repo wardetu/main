@@ -49,7 +49,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_missingName_failure()  throws DataConversionException {
+    public void loadToModel_missingName_failure() throws DataConversionException {
         Optional<JsonAdaptedInternship> jsonAdaptedInternship =
                 readJsonFile(addToTestDataPathIfNotNull("missingNameInternship.json"),
                         JsonAdaptedInternship.class);
@@ -59,7 +59,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_invalidName_failure()  throws DataConversionException {
+    public void loadToModel_invalidName_failure() throws DataConversionException {
         Optional<JsonAdaptedInternship> jsonAdaptedInternship =
                 readJsonFile(addToTestDataPathIfNotNull("invalidNameInternship.json"),
                         JsonAdaptedInternship.class);
@@ -69,7 +69,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_invalidId_failure()  throws DataConversionException {
+    public void loadToModel_invalidId_failure() throws DataConversionException {
         Optional<JsonAdaptedInternship> jsonAdaptedInternship =
                 readJsonFile(addToTestDataPathIfNotNull("invalidIdInternship.json"),
                         JsonAdaptedInternship.class);
@@ -86,7 +86,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_missingRole_failure()  throws DataConversionException {
+    public void loadToModel_missingRole_failure() throws DataConversionException {
         Optional<JsonAdaptedInternship> jsonAdaptedInternship =
                 readJsonFile(addToTestDataPathIfNotNull("missingRoleInternship.json"),
                         JsonAdaptedInternship.class);
@@ -96,7 +96,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_missingFrom_failure()  throws DataConversionException {
+    public void loadToModel_missingFrom_failure() throws DataConversionException {
         Optional<JsonAdaptedInternship> jsonAdaptedInternship =
                 readJsonFile(addToTestDataPathIfNotNull("missingFromInternship.json"),
                         JsonAdaptedInternship.class);
@@ -106,7 +106,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_invalidFrom_failure()  throws DataConversionException {
+    public void loadToModel_invalidFrom_failure() throws DataConversionException {
         Optional<JsonAdaptedInternship> jsonAdaptedInternship =
                 readJsonFile(addToTestDataPathIfNotNull("invalidFromInternship.json"),
                         JsonAdaptedInternship.class);
@@ -116,7 +116,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_missingTo_failure()  throws DataConversionException {
+    public void loadToModel_missingTo_failure() throws DataConversionException {
         Optional<JsonAdaptedInternship> jsonAdaptedInternship =
                 readJsonFile(addToTestDataPathIfNotNull("missingToInternship.json"),
                         JsonAdaptedInternship.class);
@@ -126,7 +126,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_invalidTo_failure()  throws DataConversionException {
+    public void loadToModel_invalidTo_failure() throws DataConversionException {
         Optional<JsonAdaptedInternship> jsonAdaptedInternship =
                 readJsonFile(addToTestDataPathIfNotNull("invalidToInternship.json"),
                         JsonAdaptedInternship.class);
@@ -136,7 +136,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_invalidFromTo_failure()  throws DataConversionException {
+    public void loadToModel_invalidFromTo_failure() throws DataConversionException {
         Optional<JsonAdaptedInternship> jsonAdaptedInternship =
                 readJsonFile(addToTestDataPathIfNotNull("invalidFromToInternship.json"),
                         JsonAdaptedInternship.class);
@@ -146,7 +146,7 @@ public class JsonAdaptedInternshipTest {
     }
 
     @Test
-    public void loadToModel_missingDescription_failure()  throws DataConversionException {
+    public void loadToModel_missingDescription_failure() throws DataConversionException {
         Optional<JsonAdaptedInternship> jsonAdaptedInternship =
                 readJsonFile(addToTestDataPathIfNotNull("missingDescriptionInternship.json"),
                         JsonAdaptedInternship.class);
