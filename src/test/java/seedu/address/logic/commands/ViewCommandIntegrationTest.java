@@ -107,7 +107,7 @@ public class ViewCommandIntegrationTest {
 
     @Test
     public void execute_outOfBoundsProject_throwsCommandException() {
-        assertCommandFailure(new ViewProjectCommand(Index.fromOneBased(2)),
+        assertCommandFailure(new ViewProjectCommand(Index.fromOneBased(3)),
                 model,
                 new CommandException(Messages.MESSAGE_INVALID_INDEX));
     }
@@ -127,7 +127,7 @@ public class ViewCommandIntegrationTest {
 
     @Test
     public void execute_outOfBoundsResume_throwsCommandException() {
-        assertCommandFailure(new ViewResumeCommand(Index.fromOneBased(2)),
+        assertCommandFailure(new ViewResumeCommand(Index.fromOneBased(3)),
                 model,
                 new CommandException(Messages.MESSAGE_INVALID_INDEX));
     }
@@ -147,7 +147,7 @@ public class ViewCommandIntegrationTest {
 
     @Test
     public void execute_outOfBoundsSkill_throwsCommandException() {
-        assertCommandFailure(new ViewSkillCommand(Index.fromOneBased(2)),
+        assertCommandFailure(new ViewSkillCommand(Index.fromOneBased(3)),
                 model,
                 new CommandException(Messages.MESSAGE_INVALID_INDEX));
     }

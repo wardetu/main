@@ -39,6 +39,7 @@ public class CommandTestUtil {
     // RESUME
     public static final String VALID_RESUME_NAME_SE = "Software Engineering Intern Resume";
     public static final String VALID_RESUME_NAME_ME = "Mechanical Engineering Intern Resume";
+    public static final String VALID_RESUME_NAME_CE = "Chemical Engineering Intern Resume";
     public static final String PREFIXED_NAME_ME = " " + PREFIX_NAME + " " + VALID_RESUME_NAME_ME;
     public static final String ITEM_TYPE_RESUME = " " + PREFIX_ITEM + " res";
     public static final String VALID_RESUME_NAME_FILLED = "An already filled Resume";
@@ -46,7 +47,9 @@ public class CommandTestUtil {
     // SKILL
     public static final String VALID_SKILL_NAME_GIT = "Git and Github";
     public static final String VALID_SKILL_NAME_REACT = "React";
+    public static final String VALID_SKILL_NAME_CODE = "Code";
     public static final String PREFIXED_NAME_REACT = " " + PREFIX_NAME + " " + VALID_SKILL_NAME_REACT;
+    public static final String PREFIXED_NAME_CODE = " " + PREFIX_NAME + " " + VALID_SKILL_NAME_CODE;
     public static final String LEVEL_BASIC = "BASIC";
     public static final String LEVEL_INTERMEDIATE = "INTERMEDIATE";
     public static final String PREFIXED_BASIC = " " + PREFIX_LEVEL + " " + LEVEL_BASIC;
@@ -57,23 +60,33 @@ public class CommandTestUtil {
     public static final String ITEM_TYPE_PROJECT = " " + PREFIX_ITEM + " proj";
     public static final String VALID_PROJECT_NAME_ORBITAL = "Orbital";
     public static final String VALID_PROJECT_NAME_DUKE = "Duke";
+    public static final String VALID_PROJECT_NAME_RESUME = "Resume";
     public static final String PREFIXED_NAME_ORBITAL = " " + PREFIX_NAME + " " + VALID_PROJECT_NAME_ORBITAL;
     public static final String PREFIXED_NAME_DUKE = " " + PREFIX_NAME + " " + VALID_PROJECT_NAME_DUKE;
+    public static final String PREFIXED_NAME_RESUME = " " + PREFIX_NAME + " " + VALID_PROJECT_NAME_RESUME;
     public static final String VALID_TIME_1 = "06-2020";
     public static final String VALID_TIME_2 = "08-2018";
+    public static final String VALID_TIME_3 = "09-2018";
     public static final String PREFIXED_TIME_ORBITAL = " " + PREFIX_TIME + " " + VALID_TIME_1;
     public static final String PREFIXED_TIME_2 = " " + PREFIX_TIME + " " + VALID_TIME_2;
+    public static final String PREFIXED_TIME_3 = " " + PREFIX_TIME + " " + VALID_TIME_3;
     public static final String VALID_WEBSITE_ORBITAL = "myorbital.github.io";
     public static final String VALID_WEBSITE_DUKE = "www.duke.org";
+    public static final String VALID_WEBSITE_RESUME = "www.resume.github.io";
     public static final String PREFIXED_WEBSITE_ORBITAL = " " + PREFIX_WEBSITE + " " + VALID_WEBSITE_ORBITAL;
     public static final String PREFIXED_WEBSITE_DUKE = " " + PREFIX_WEBSITE + " " + VALID_WEBSITE_DUKE;
+    public static final String PREFIXED_WEBSITE_RESUME = " " + PREFIX_WEBSITE + " " + VALID_WEBSITE_RESUME;
     public static final String VALID_DESCRIPTION_ORBITAL = "My first summer project!";
     public static final String VALID_DESCRIPTION_DUKE = "For a little mod named CS2103T";
+    public static final String VALID_DESCRIPTION_RESUME = "Resume diary.";
     public static final String PREFIXED_DESCRIPTION_ORBITAL = " " + PREFIX_DESCRIPTION
             + " " + VALID_DESCRIPTION_ORBITAL;
     public static final String PREFIXED_DESCRIPTION_DUKE = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_DUKE;
+    public static final String PREFIXED_DESCRIPTION_RESUME = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_RESUME;
     public static final String VALID_TAG_JAVA = "Java";
     public static final String PREFIXED_TAG_JAVA = " " + PREFIX_TAG + " " + VALID_TAG_JAVA;
+    public static final String VALID_TAG_INTELLIJ = "Intellij";
+    public static final String PREFIXED_TAG_INTELLIJ = " " + PREFIX_TAG + " " + VALID_TAG_INTELLIJ;
 
     // INTERNSHIP
     public static final String ITEM_TYPE_INTERNSHIP = " " + PREFIX_ITEM + " int";

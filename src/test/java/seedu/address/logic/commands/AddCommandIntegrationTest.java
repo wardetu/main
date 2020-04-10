@@ -74,7 +74,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newNote_success() {
-        Note validNote = TypicalNote.FINISH_HOMEWORK;
+        Note validNote = TypicalNote.FINISH_RESUME_2;
         expectedModel.addNote(validNote);
 
         assertCommandSuccess(new AddNoteCommand(validNote),
@@ -95,7 +95,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newResume_success() {
-        Resume validResume = TypicalResume.SE_RESUME;
+        Resume validResume = TypicalResume.CE_RESUME;
         expectedModel.addResume(validResume);
         expectedModel.setResumeToDisplay();
 
@@ -119,7 +119,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newSkill_success() {
-        Skill validSkill = TypicalSkill.GIT;
+        Skill validSkill = TypicalSkill.CODE;
         expectedModel.addSkill(validSkill);
         expectedModel.setSkillToDisplay();
 
@@ -143,7 +143,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newProject_success() {
-        Project validProject = TypicalProject.DUKE;
+        Project validProject = TypicalProject.RESUME;
         expectedModel.addProject(validProject);
         expectedModel.setProjectToDisplay();
 

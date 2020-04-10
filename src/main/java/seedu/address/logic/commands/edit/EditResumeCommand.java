@@ -22,6 +22,9 @@ import seedu.address.model.tag.Tag;
  * Edits a Resume Item in the resume book.
  */
 public class EditResumeCommand extends EditCommand {
+
+    public static final String MESSAGE_EDIT_RESUME_SUCCESS = "Edited Resume: %1$s";
+
     private static final String FIELDS = COMMAND_WORD
             + " INDEX "
             + PREFIX_ITEM + "res "
@@ -33,7 +36,6 @@ public class EditResumeCommand extends EditCommand {
             + PREFIX_NAME + " Resume 1 "
             + PREFIX_TAG + " frontend ";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + FIELDS + EXAMPLE;
-    public static final String MESSAGE_EDIT_RESUME_SUCCESS = "Edited Resume: %1$s";
     private EditResumeDescriptor editResumeDescriptor;
     /**
      * @param index                of the resume in the filtered resume list to edit

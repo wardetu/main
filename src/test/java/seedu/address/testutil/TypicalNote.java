@@ -16,4 +16,9 @@ public class TypicalNote {
             .withTime("12-2020")
             .withTags()
             .build();
+    public static final Note FINISH_RESUME_2 = new NoteBuilder()
+            .withName("Finish Resume 2")
+            .withTime("04-2020")
+            .withTags()
+            .build();
 }
