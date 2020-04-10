@@ -217,7 +217,7 @@ class JsonAdaptedPerson {
                 && university.equals(((JsonAdaptedPerson) other).university)
                 && major.equals(((JsonAdaptedPerson) other).major)
                 && from.equals(((JsonAdaptedPerson) other).from)
-                && to.equals(((JsonAdaptedPerson) other).to)  
+                && to.equals(((JsonAdaptedPerson) other).to)
                 && currentCap.equals(((JsonAdaptedPerson) other).currentCap)
                 && maxCap.equals(((JsonAdaptedPerson) other).maxCap));
     }
