@@ -53,9 +53,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         case ItemUtil.NOTE_ALIAS:
             return new DeleteNoteCommand(index);
         default:
-            // Should not have reached here
-            // TODO: Use a better Exception here
-            throw new ParseException("The item type is not detected! Something is wrong");
+            // Should not have reached here at all
+            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
         }
     }
 

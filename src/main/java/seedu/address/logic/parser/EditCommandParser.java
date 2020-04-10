@@ -163,9 +163,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditNoteCommand(index, editNoteDescriptor);
 
         default:
-            // Should not have reached here
-            // TODO: Use a better Exception here
-            throw new ParseException("The item type is not detected! Something is wrong");
+            // Should not have reached here at all
+            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
         }
 
     }

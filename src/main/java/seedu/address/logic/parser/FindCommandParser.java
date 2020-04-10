@@ -61,9 +61,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         case ItemUtil.NOTE_ALIAS:
             return new FindNoteCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         default:
-            // Should not have reached here
-            // TODO: Use a better Exception here
-            throw new ParseException("The item type is not detected! Something is wrong");
+            // Should not have reached here at all
+            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
         }
     }
 

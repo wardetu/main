@@ -10,6 +10,7 @@ import seedu.address.logic.commands.list.ListProjectCommand;
 import seedu.address.logic.commands.list.ListResumeCommand;
 import seedu.address.logic.commands.list.ListSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.item.Item;
 import seedu.address.model.util.ItemUtil;
 
 
@@ -46,9 +47,8 @@ public class ListCommandParser implements Parser<ListCommand> {
         case ItemUtil.NOTE_ALIAS:
             return new ListNoteCommand();
         default:
-            // Should not have reached here
-            // TODO: Use a better Exception here
-            throw new ParseException("The item type is not detected! Something is wrong");
+            // Should not have reached here at all
+            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
         }
     }
 }
