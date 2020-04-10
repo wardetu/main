@@ -11,9 +11,10 @@ public class EditInternshipDescriptorBuilder {
     private EditInternshipDescriptor descriptor = new EditInternshipDescriptor();
 
     public EditInternshipDescriptorBuilder(Internship internshipToCopy) {
+        descriptor.setName(internshipToCopy.getName());
         descriptor.setRole(internshipToCopy.getRole());
         descriptor.setFrom(internshipToCopy.getFrom());
-        descriptor.setTo(internshipToCopy.getFrom());
+        descriptor.setTo(internshipToCopy.getTo());
         descriptor.setDescription(internshipToCopy.getDescription());
         descriptor.setTags(internshipToCopy.getTags());
     }

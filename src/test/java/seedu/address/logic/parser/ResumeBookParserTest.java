@@ -73,6 +73,7 @@ public class ResumeBookParserTest {
         Internship internship = new InternshipBuilder().build();
         EditInternshipDescriptor descriptor = new EditInternshipDescriptorBuilder(internship).build();
         EditCommand command = (EditCommand) parser.parseCommand(InternshipUtil.getEditCommand(1, internship));
+        System.out.println(InternshipUtil.getEditCommand(1, internship));
         assertEquals(new EditInternshipCommand(INDEX_FIRST_ITEM, descriptor), command);
     }
 
