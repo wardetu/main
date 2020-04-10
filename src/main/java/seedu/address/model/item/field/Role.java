@@ -9,7 +9,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Role {
 
-    // TODO: Utilise this class in main codes
 
     public static final String MESSAGE_CONSTRAINTS = "Role can take any value "
             + " and it should not be blank.";
