@@ -26,8 +26,6 @@ public class EditProjectCommandTest {
 
     private Project sampleEditedProject = TypicalProject.ORBITAL;
 
-    private EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
-
     @Test
     public void constructor_nullProject_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new EditProjectCommand(null, null));
@@ -38,7 +36,10 @@ public class EditProjectCommandTest {
         Project validItem = new ProjectBuilder().build();
         ModelStubWithProject modelStub = new ModelStubWithProject(validItem);
         Index invalidIndex = INDEX_THIRD_ITEM;
-        setEditProjectDescriptor();
+
+        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
+        setEditProjectDescriptor(editProjectDescriptor);
+
         EditProjectCommand editProjectCommand = new EditProjectCommand(invalidIndex, editProjectDescriptor);
         assertThrows(CommandException.class,
                 Messages.MESSAGE_INVALID_INDEX, () -> editProjectCommand.execute(modelStub));
@@ -47,8 +48,10 @@ public class EditProjectCommandTest {
     @Test
     public void execute_validIndex_editSuccessful() throws CommandException {
         ModelStubContainingProjectEdited modelStub = new ModelStubContainingProjectEdited();
-        setEditProjectDescriptor();
         Index validIndex = INDEX_FIRST_ITEM;
+
+        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
+        setEditProjectDescriptor(editProjectDescriptor);
 
         Project toEdit = modelStub.getProjectByIndex(validIndex);
         EditProjectCommand editProjectCommand = new EditProjectCommand(validIndex, editProjectDescriptor);
@@ -62,8 +65,10 @@ public class EditProjectCommandTest {
 
     @Test
     public void create_withNullDescriptorField_editedProject() {
+        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
         editProjectDescriptor.setTags(null);
         editProjectDescriptor.setName(null);
+
         assertEquals(sampleEditedProject,
                 EditProjectCommand.createEditedProject(sampleEditedProject, editProjectDescriptor));
     }
@@ -73,7 +78,8 @@ public class EditProjectCommandTest {
         Index indexA = Index.fromZeroBased(5);
         Index indexB = Index.fromOneBased(19);
 
-        setEditProjectDescriptor();
+        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
+        setEditProjectDescriptor(editProjectDescriptor);
 
         EditProjectCommand editACommand = new EditProjectCommand(indexA, editProjectDescriptor);
         EditProjectCommand editBCommand = new EditProjectCommand(indexB, editProjectDescriptor);
@@ -99,7 +105,7 @@ public class EditProjectCommandTest {
     /**
      * A method to set fields in the edit project descriptor.
      */
-    public void setEditProjectDescriptor() {
+    public void setEditProjectDescriptor(EditProjectDescriptor editProjectDescriptor) {
         editProjectDescriptor.setName(sampleEditedProject.getName());
         editProjectDescriptor.setWebsite(sampleEditedProject.getWebsite());
         editProjectDescriptor.setTime(sampleEditedProject.getTime());

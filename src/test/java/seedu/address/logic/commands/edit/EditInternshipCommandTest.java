@@ -26,8 +26,6 @@ public class EditInternshipCommandTest {
 
     private Internship sampleEditedInternship = GOOGLE;
 
-    private EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
-
     @Test
     public void constructor_nullInternship_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new EditInternshipCommand(null, null));
@@ -36,18 +34,27 @@ public class EditInternshipCommandTest {
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         Internship validItem = new InternshipBuilder().build();
-        ModelStub modelStub = new EditInternshipCommandTest.ModelStubWithInternship(validItem);
+        ModelStub modelStub = new ModelStubWithInternship(validItem);
+
         Index invalidIndex = INDEX_THIRD_ITEM;
-        setEditInternshipDescriptor();
+
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
+
+        setEditInternshipDescriptor(editInternshipDescriptor);
+
         EditInternshipCommand editInternshipCommand = new EditInternshipCommand(invalidIndex, editInternshipDescriptor);
+
         assertThrows(CommandException.class,
                 Messages.MESSAGE_INVALID_INDEX, () -> editInternshipCommand.execute(modelStub));
     }
 
     @Test
     public void execute_validIndex_editSuccessful() throws CommandException {
-        ModelStubContainingInternshipEdited modelStub = new ModelStubContainingInternshipEdited(sampleEditedInternship);
-        setEditInternshipDescriptor();
+        ModelStubContainingInternshipEdited modelStub = new ModelStubContainingInternshipEdited();
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
+
+        setEditInternshipDescriptor(editInternshipDescriptor);
+
         Index validIndex = INDEX_FIRST_ITEM;
 
         Internship toEdit = modelStub.getInternshipByIndex(validIndex);
@@ -61,17 +68,8 @@ public class EditInternshipCommandTest {
     }
 
     @Test
-    public void execute_duplicateInternship_throwsCommandException() throws CommandException {
-        Index validIndex = INDEX_FIRST_ITEM;
-        setEditInternshipDescriptor();
-        EditInternshipCommand editCommand = new EditInternshipCommand(validIndex, editInternshipDescriptor);
-        ModelStubContainingInternshipEdited modelStub = new ModelStubContainingInternshipEdited(
-                new InternshipBuilder().build());
-        modelStub.addInternship(sampleEditedInternship);
-    }
-
-    @Test
     public void create_withNullDescriptorField_editedInternship() {
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
         editInternshipDescriptor.setTags(null);
         editInternshipDescriptor.setName(null);
         Index validIndex = INDEX_FIRST_ITEM;
@@ -85,7 +83,8 @@ public class EditInternshipCommandTest {
         Index indexA = Index.fromZeroBased(5);
         Index indexB = Index.fromOneBased(19);
 
-        setEditInternshipDescriptor();
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
+        setEditInternshipDescriptor(editInternshipDescriptor);
 
         EditInternshipCommand editACommand = new EditInternshipCommand(indexA, editInternshipDescriptor);
         EditInternshipCommand editBCommand = new EditInternshipCommand(indexB, editInternshipDescriptor);
@@ -111,7 +110,7 @@ public class EditInternshipCommandTest {
     /**
      * A method to set fields in the edit internship descriptor.
      */
-    public void setEditInternshipDescriptor() {
+    public void setEditInternshipDescriptor(EditInternshipDescriptor editInternshipDescriptor) {
         editInternshipDescriptor.setName(sampleEditedInternship.getName());
         editInternshipDescriptor.setFrom(sampleEditedInternship.getFrom());
         editInternshipDescriptor.setTo(sampleEditedInternship.getTo());
@@ -143,12 +142,9 @@ public class EditInternshipCommandTest {
      */
     private class ModelStubContainingInternshipEdited extends ModelStub {
         final ArrayList<Internship> internships = new ArrayList<>();
-        private final Internship item;
 
-        ModelStubContainingInternshipEdited(Internship item) {
-            requireNonNull(item);
-            this.item = item;
-            internships.add(item);
+        ModelStubContainingInternshipEdited() {
+            internships.add(new InternshipBuilder().build());
         }
 
         @Override
@@ -170,12 +166,6 @@ public class EditInternshipCommandTest {
         public void setInternship(Internship target, Internship editedInternship) {
             int index = internships.indexOf(target);
             internships.set(index, editedInternship);
-        }
-
-        @Override
-        public boolean hasInternship(Internship item) {
-            requireNonNull(item);
-            return this.item.isSame(item);
         }
     }
 }
