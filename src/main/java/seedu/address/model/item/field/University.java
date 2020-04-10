@@ -11,8 +11,8 @@ public class University {
 
 
     public static final int MAX_LENGTH = 50;
-    public static final String MESSAGE_CONSTRAINTS = "University field can take any value,"
-            + " with max length of 50 characters, and it should not be blank.";
+    public static final String MESSAGE_CONSTRAINTS = "University should only contain alphanumeric characters and "
+        + "spaces, with max length of 50 characters and it should not be blank";
 
     /*
      * The first character of the university must not be a whitespace,

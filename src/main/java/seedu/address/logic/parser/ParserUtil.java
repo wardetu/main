@@ -308,7 +308,7 @@ public class ParserUtil {
             max = Math.round(max * 100.00) / 100.00;
             return new Cap(current + " " + max);
         }
-        throw new ParseException(Verifier.CAP_MESSAGE_CONSTRAINTS);
+        throw new ParseException(Cap.MESSAGE_CONSTRAINTS);
     }
 
     /**

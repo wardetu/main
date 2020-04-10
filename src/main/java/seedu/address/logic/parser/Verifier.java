@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.item.field.Cap;
 
 /**
  * Validations for different inputs without a separate class.
@@ -8,26 +9,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class Verifier {
 
     public static final int UNIVERSITY_MAX_LENGTH = 50;
-    public static final String UNIVERSITY_MESSAGE_CONSTRAINTS =
-            "University should only contain alphanumeric characters and spaces, with max length of 50 characters"
-                    + " and it should not be blank";
     public static final String UNIVERSITY_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
 
     public static final int MAJOR_MAX_LENGTH = 50;
-    public static final String MAJOR_MESSAGE_CONSTRAINTS =
-            "Major should only contain alphanumeric characters and spaces, with max length of 50 characters"
-                    + " and it should not be blank";
     public static final String MAJOR_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public static final String CAP_MESSAGE_CONSTRAINTS =
-            "CAP should only contain numeric characters and current CAP should not be greater than maximum CAP and it "
-                    + "should not be blank";
-
     public static final int ROLE_MAX_LENGTH = 50;
-    public static final String ROLE_MESSAGE_CONSTRAINTS =
-            "Major should only contain alphanumeric characters and spaces, with max length of 50 characters"
-                    + " and it should not be blank";
     public static final String ROLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     /**
@@ -54,13 +42,6 @@ public class Verifier {
         } else {
             return true;
         }
-    }
-
-    /**
-     * Gets the integer value of input.
-     */
-    public static int getInt(String input) {
-        return Integer.parseInt(input);
     }
 
     /**
@@ -98,7 +79,7 @@ public class Verifier {
             userCurrentCap = Double.valueOf(currentCap);
             userMaximumCap = Double.valueOf(maxCap);
         } catch (NumberFormatException ex) {
-            throw new ParseException(CAP_MESSAGE_CONSTRAINTS);
+            throw new ParseException(Cap.MESSAGE_CONSTRAINTS);
         }
 
         if (isNotEmpty(currentCap) && isNotEmpty(maxCap) && userCurrentCap <= userMaximumCap) {
@@ -106,18 +87,6 @@ public class Verifier {
         } else {
             return false;
         }
-    }
-
-    /**
-     * Checks if a number is within accepted range.
-     *
-     * @param number the number to be tested.
-     * @param min the lower bound (inclusive).
-     * @param max the upper bound (inclusive).
-     * @return true or false.
-     */
-    public static boolean isWithinRange(double number, double min, double max) {
-        return number >= min && number <= max;
     }
 
     /**

@@ -7,9 +7,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's Cumulative Average Point in the resume book.
  */
 public class Cap {
-    public static final String MESSAGE_CONSTRAINTS = "A valid Cumulative Average Point must be in the format of "
-            + "\"current maximum\", where both current and maximum points are numbers and current point must not be "
-            + "greater than maximum point. Example 4.50 5.00";
+    public static final String MESSAGE_CONSTRAINTS = "CAP should only contain numeric characters and must be in the "
+            + "format of \"current maximum\", where the current CAP must not be greater than maximum CAP, and they "
+            + "must not be blank. Example 4.50 5.00";
 
     public static final String VALIDATION_REGEX = "^(-?\\d*\\.\\d*|-?\\d)\\s+(-?\\d*\\.\\d*|-?\\d)";
     public final Double current;
