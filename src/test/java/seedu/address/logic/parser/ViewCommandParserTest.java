@@ -76,6 +76,6 @@ public class ViewCommandParserTest {
     @Test
     public void parser_invalidType_failure() {
         assertParseFailure(parser, "3 " + ITEM_TYPE_INVALID,
-                "Not a valid item type!");
+                Item.MESSAGE_INVALID_ITEM_TYPE);
     }
 }

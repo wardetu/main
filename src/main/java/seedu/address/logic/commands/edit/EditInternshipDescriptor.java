@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.item.field.Description;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
@@ -14,10 +16,10 @@ import seedu.address.model.tag.Tag;
  * corresponding field value of the internship.
  */
 public class EditInternshipDescriptor extends EditItemDescriptor {
-    private String role;
+    private Role role;
     private Time from;
     private Time to;
-    private String description;
+    private Description description;
     private Set<Tag> tags;
 
     public EditInternshipDescriptor() {}
@@ -51,19 +53,19 @@ public class EditInternshipDescriptor extends EditItemDescriptor {
         return Optional.ofNullable(to);
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public Optional<String> getRole() {
+    public Optional<Role> getRole() {
         return Optional.ofNullable(role);
     }
 
-    public void setDescription(String description) {
+    public void setDescription(Description description) {
         this.description = description;
     }
 
-    public Optional<String> getDescription() {
+    public Optional<Description> getDescription() {
         return Optional.ofNullable(description);
     }
 
