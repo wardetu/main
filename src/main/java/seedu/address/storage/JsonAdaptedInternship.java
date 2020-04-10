@@ -88,7 +88,7 @@ public class JsonAdaptedInternship {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
         }
         if (!Role.isValidRole(role)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
         final Role modelRole = new Role(role);
 
@@ -102,8 +102,7 @@ public class JsonAdaptedInternship {
         final Description modelDescription = new Description(description);
 
         if (from == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Time.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "From"));
         }
         if (!Time.isValidTime(from)) {
             throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
@@ -111,8 +110,7 @@ public class JsonAdaptedInternship {
         final Time modelFrom = new Time(from);
 
         if (to == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Time.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "To"));
         }
         if (!Time.isValidTime(to)) {
             throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
@@ -122,6 +120,10 @@ public class JsonAdaptedInternship {
         // Enforces that to does not precede from
         if (modelTo.compareTo(modelFrom) < 0) {
             throw new IllegalValueException("The \"to\" field must not precede the \"from\" field.");
+        }
+
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Id"));
         }
 
         final int modelId;
