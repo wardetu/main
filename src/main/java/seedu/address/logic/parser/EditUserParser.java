@@ -15,7 +15,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
 
 import java.io.File;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.edit.EditUserCommand;
 import seedu.address.logic.commands.edit.EditUserDescriptor;
@@ -23,14 +22,15 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.field.DisplayPicture;
 
 /**
- * Parser for EditUserCommand.
+ * Parses input arguments and creates a new EditUserCommand object.
  */
 public class EditUserParser implements Parser<EditUserCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditUserCommand
      * and returns an EditUserCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     @Override
     public EditUserCommand parse(String args) throws ParseException {
@@ -98,13 +98,5 @@ public class EditUserParser implements Parser<EditUserCommand> {
     private static boolean isValidDisplayPicturePath(String dpPath) {
         File file = new File(dpPath);
         return file.exists();
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

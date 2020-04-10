@@ -83,8 +83,10 @@ import seedu.address.model.item.Note;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
@@ -398,10 +400,10 @@ public class EditCommandParserTest {
         // no internship tags
         EditInternshipDescriptor editInternshipDescriptorNoTag = new EditInternshipDescriptor();
         editInternshipDescriptorNoTag.setName(new Name(VALID_INTERNSHIP_NAME_GOOGLE));
-        editInternshipDescriptorNoTag.setRole(VALID_INTERNSHIP_ROLE_FRONTEND);
+        editInternshipDescriptorNoTag.setRole(new Role(VALID_INTERNSHIP_ROLE_FRONTEND));
         editInternshipDescriptorNoTag.setFrom(new Time(VALID_FROM));
         editInternshipDescriptorNoTag.setTo(new Time(VALID_TO));
-        editInternshipDescriptorNoTag.setDescription(VALID_INTERNSHIP_DESCRIPTION);
+        editInternshipDescriptorNoTag.setDescription(new Description(VALID_INTERNSHIP_DESCRIPTION));
 
         assertParseSuccess(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_INTERNSHIP + PREFIXED_NAME_GOOGLE
@@ -413,7 +415,7 @@ public class EditCommandParserTest {
         EditInternshipDescriptor editInternshipDescriptorNoNameNoRole = new EditInternshipDescriptor();
         editInternshipDescriptorNoNameNoRole.setFrom(new Time(VALID_FROM));
         editInternshipDescriptorNoNameNoRole.setTo(new Time(VALID_TO));
-        editInternshipDescriptorNoNameNoRole.setDescription(VALID_INTERNSHIP_DESCRIPTION);
+        editInternshipDescriptorNoNameNoRole.setDescription(new Description(VALID_INTERNSHIP_DESCRIPTION));
         Set<Tag> internshipTags = new HashSet<Tag>();
         internshipTags.add(new Tag(VALID_TAG_FRONTEND));
         editInternshipDescriptorNoNameNoRole.setTags(internshipTags);
@@ -445,7 +447,7 @@ public class EditCommandParserTest {
         editProjectDescriptorNoTag.setName(new Name(VALID_PROJECT_NAME_ORBITAL));
         editProjectDescriptorNoTag.setTime(new Time(VALID_TIME_1));
         editProjectDescriptorNoTag.setWebsite(new Website(VALID_WEBSITE_ORBITAL));
-        editProjectDescriptorNoTag.setDescription(VALID_DESCRIPTION_ORBITAL);
+        editProjectDescriptorNoTag.setDescription(new Description(VALID_DESCRIPTION_ORBITAL));
 
         assertParseSuccess(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_PROJECT + PREFIXED_NAME_ORBITAL + PREFIXED_TIME_ORBITAL
@@ -456,7 +458,7 @@ public class EditCommandParserTest {
         EditProjectDescriptor editProjectDescriptorNoNameNoTag = new EditProjectDescriptor();
         editProjectDescriptorNoNameNoTag.setTime(new Time(VALID_TIME_1));
         editProjectDescriptorNoNameNoTag.setWebsite(new Website(VALID_WEBSITE_ORBITAL));
-        editProjectDescriptorNoNameNoTag.setDescription(VALID_DESCRIPTION_ORBITAL);
+        editProjectDescriptorNoNameNoTag.setDescription(new Description(VALID_DESCRIPTION_ORBITAL));
 
         assertParseSuccess(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_PROJECT + PREFIXED_TIME_ORBITAL
@@ -505,7 +507,7 @@ public class EditCommandParserTest {
                 VALID_ITEM_INDEX + INVALID_TYPE_DESC + PREFIXED_NAME_GOOGLE + PREFIXED_ROLE_FRONTEND
                         + PREFIXED_TIME_FROM + PREFIXED_TIME_TO + PREFIXED_INTERNSHIP_DESCRIPTION
                         + PREFIXED_TAG_FRONTEND,
-                "Not a valid item type!");
+                "The item type is invalid!");
     }
 
     @Test
@@ -586,8 +588,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_SKILL + PREFIXED_NAME_REACT
                         + INVALID_LEVEL_DESC + PREFIXED_TAG_FRONTEND,
-                "Level of proficiency can only be one of these three types: basic, intermediate, "
-                        + "advanced.");
+                "A skill level can only be basic, intermediate, or advanced.");
     }
 }
 

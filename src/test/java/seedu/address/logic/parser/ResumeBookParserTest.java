@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.ITEM_TYPE_RESUME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
@@ -15,25 +16,36 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.add.AddCommand;
+import seedu.address.logic.commands.add.AddInternshipCommand;
 import seedu.address.logic.commands.delete.DeleteCommand;
 import seedu.address.logic.commands.delete.DeleteResumeCommand;
+import seedu.address.logic.commands.edit.EditCommand;
+import seedu.address.logic.commands.edit.EditInternshipCommand;
+import seedu.address.logic.commands.edit.EditInternshipDescriptor;
 import seedu.address.logic.commands.find.FindCommand;
 import seedu.address.logic.commands.find.FindInternshipCommand;
 import seedu.address.logic.commands.help.HelpCommand;
 import seedu.address.logic.commands.list.ListCommand;
+import seedu.address.logic.commands.view.ViewCommand;
+import seedu.address.logic.commands.view.ViewResumeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.item.Internship;
 import seedu.address.model.item.field.NameContainsKeywordsPredicate;
+import seedu.address.testutil.EditInternshipDescriptorBuilder;
+import seedu.address.testutil.InternshipBuilder;
+import seedu.address.testutil.InternshipUtil;
 
 public class ResumeBookParserTest {
 
     private final ResumeBookParser parser = new ResumeBookParser();
 
-    /*  @Test
+    @Test
     public void parseCommand_add() throws Exception {
-        PersonalDetail person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
-    }*/
+        Internship internship = new InternshipBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(InternshipUtil.getAddCommand(internship));
+        assertEquals(new AddInternshipCommand(internship), command);
+    }
 
     @Test
     public void parseCommand_clear() throws Exception {
@@ -41,34 +53,28 @@ public class ResumeBookParserTest {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
-    // TODO: I thought the test would be identical to DeleteCommand but turns out not really..
-    /*
     @Test
     public void parseCommand_view() throws Exception {
-        ViewCommand command = (ViewCommand) parser.parseCommand(
-                ViewResumeCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " i/ res");
-        assertEquals(new ViewResumeCommand(INDEX_FIRST_PERSON), command);
+        ViewCommand command = (ViewCommand) parser.parseCommand(ViewResumeCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_ITEM.getOneBased() + " " + ITEM_TYPE_RESUME);
+        assertEquals(new ViewResumeCommand(INDEX_FIRST_ITEM), command);
     }
-     */
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteResumeCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased() + " i/ res");
+        DeleteCommand command = (DeleteCommand) parser.parseCommand(DeleteResumeCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_ITEM.getOneBased() + " " + ITEM_TYPE_RESUME);
         assertEquals(new DeleteResumeCommand(INDEX_FIRST_ITEM), command);
     }
 
-    // TODO: Create DescriptorBuilders for testing puposes
-    /*
+    // TODO: Create DescriptorBuilders for testing purposes
     @Test
     public void parseCommand_edit() throws Exception {
-        PersonalDetail person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditInternshipCommand(INDEX_FIRST_PERSON, descriptor), command);
+        Internship internship = new InternshipBuilder().build();
+        EditInternshipDescriptor descriptor = new EditInternshipDescriptorBuilder(internship).build();
+        EditCommand command = (EditCommand) parser.parseCommand(InternshipUtil.getEditCommand(1, internship));
+        assertEquals(new EditInternshipCommand(INDEX_FIRST_ITEM, descriptor), command);
     }
-     */
 
     @Test
     public void parseCommand_exit() throws Exception {
