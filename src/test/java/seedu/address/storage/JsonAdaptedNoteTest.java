@@ -34,7 +34,7 @@ public class JsonAdaptedNoteTest {
                 new NoteBuilder(TypicalNote.FINISH_CS_2103).withTags("tech", "java").build(),
                 jsonAdaptedNote.toModelType());
 
-        List tagList = new ArrayList<>();
+        List<JsonAdaptedTag> tagList = new ArrayList<>();
         tagList.add(new JsonAdaptedTag("java"));
         tagList.add(new JsonAdaptedTag("tech"));
         jsonAdaptedNote = new JsonAdaptedNote(
