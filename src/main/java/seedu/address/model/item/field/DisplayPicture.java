@@ -3,8 +3,6 @@ package seedu.address.model.item.field;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.commons.core.Messages;
-
 /**
  * The file path to image file to display as profile picture.
  */
