@@ -15,7 +15,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
 
 import java.io.File;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.edit.EditUserCommand;
 import seedu.address.logic.commands.edit.EditUserDescriptor;
