@@ -125,4 +125,17 @@ public class JsonAdaptedInternship {
 
         return new Internship(modelName, role, modelFrom, modelTo, description, Set.copyOf(tags), modelId);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof JsonAdaptedInternship
+                && name.equals(((JsonAdaptedInternship) other).name)
+                && from.equals(((JsonAdaptedInternship) other).from)
+                && to.equals(((JsonAdaptedInternship) other).to)
+                && role.equals(((JsonAdaptedInternship) other).role)
+                && description.equals(((JsonAdaptedInternship) other).description)
+                && ((JsonAdaptedInternship) other).tagged.containsAll(tagged)
+                && tagged.containsAll(((JsonAdaptedInternship) other).tagged));
+    }
 }
