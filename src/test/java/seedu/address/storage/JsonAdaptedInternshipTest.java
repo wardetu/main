@@ -2,6 +2,18 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FROM_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TO_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_LEARN_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NAME_PAYPAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_ROLE_BACKEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BACKEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TO;
 import static seedu.address.storage.JsonAdaptedInternship.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -32,12 +44,12 @@ public class JsonAdaptedInternshipTest {
 
         List<JsonAdaptedTag> tags = new ArrayList<>();
         jsonAdaptedInternship =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
-                        "05-2020",
-                        "07-2020",
-                        "Backend Software Intern",
-                        "I am learning new things",
+                        VALID_FROM,
+                        VALID_TO,
+                        VALID_INTERNSHIP_ROLE_BACKEND,
+                        VALID_INTERNSHIP_LEARN_DESCRIPTION,
                         tags
                 );
         assertEquals(
@@ -49,16 +61,16 @@ public class JsonAdaptedInternshipTest {
                 new JsonAdaptedInternship(new InternshipBuilder(TypicalInternship.PAYPAL).build());
         assertEquals(new InternshipBuilder(TypicalInternship.PAYPAL).build(), jsonAdaptedInternship.toModelType());
 
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         jsonAdaptedInternship =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
-                        "05-2020",
-                        "07-2020",
-                        "Backend Software Intern",
-                        "I am learning new things",
+                        VALID_FROM,
+                        VALID_TO,
+                        VALID_INTERNSHIP_ROLE_BACKEND,
+                        VALID_INTERNSHIP_LEARN_DESCRIPTION,
                         tags
                         );
         assertEquals(new InternshipBuilder(TypicalInternship.PAYPAL).build(), jsonAdaptedInternship.toModelType());
@@ -67,16 +79,16 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void loadToModel_invalidName_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
-                new JsonAdaptedInternship("iV@liD Name$",
+                new JsonAdaptedInternship(INVALID_NAME_DESC,
                         "3",
-                        "05-2020",
-                        "07-2020",
-                        "Backend Software Intern",
-                        "I am learning new things",
+                        VALID_FROM,
+                        VALID_TO,
+                        VALID_INTERNSHIP_ROLE_BACKEND,
+                        VALID_INTERNSHIP_LEARN_DESCRIPTION,
                         tags
                 );
         assertThrows(IllegalValueException.class,
@@ -87,16 +99,16 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void loadToModel_missingName_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(null,
                         "3",
-                        "05-2020",
-                        "07-2020",
-                        "Backend Software Intern",
-                        "I am learning new things",
+                        VALID_FROM,
+                        VALID_TO,
+                        VALID_INTERNSHIP_ROLE_BACKEND,
+                        VALID_INTERNSHIP_LEARN_DESCRIPTION,
                         tags
                 );
         assertThrows(IllegalValueException.class,
@@ -107,28 +119,28 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void loadToModel_invalidId_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "abc",
-                        "05-2020",
-                        "07-2020",
-                        "Backend Software Intern",
-                        "I am learning new things",
+                        VALID_FROM,
+                        VALID_TO,
+                        VALID_INTERNSHIP_ROLE_BACKEND,
+                        VALID_INTERNSHIP_LEARN_DESCRIPTION,
                         tags
                 );
         assertThrows(IllegalValueException.class,
                 "The id field can only be an integer.",
                 jsonAdaptedInternship::toModelType);
 
-        jsonAdaptedInternship = new JsonAdaptedInternship("PayPal",
+        jsonAdaptedInternship = new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                 "-3",
-                "05-2020",
-                "07-2020",
-                "Backend Software Intern",
-                "I am learning new things",
+                VALID_FROM,
+                VALID_TO,
+                VALID_INTERNSHIP_ROLE_BACKEND,
+                VALID_INTERNSHIP_LEARN_DESCRIPTION,
                 tags
         );
         assertThrows(IllegalValueException.class,
@@ -139,16 +151,16 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void loadToModel_missingId_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         null,
-                        "05-2020",
-                        "07-2020",
-                        "Backend Software Intern",
-                        "I am learning new things",
+                        VALID_FROM,
+                        VALID_TO,
+                        VALID_INTERNSHIP_ROLE_BACKEND,
+                        VALID_INTERNSHIP_LEARN_DESCRIPTION,
                         tags
                 );
         assertThrows(IllegalValueException.class,
@@ -159,16 +171,16 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void loadToModel_invalidRole_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
-                        "05-2020",
-                        "07-2020",
+                        VALID_FROM,
+                        VALID_TO,
                         "",
-                        "I am learning new things",
+                        VALID_INTERNSHIP_LEARN_DESCRIPTION,
                         tags
                 );
         assertThrows(IllegalValueException.class,
@@ -179,16 +191,16 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void loadToModel_missingRole_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
-                        "05-2020",
-                        "07-2020",
+                        VALID_FROM,
+                        VALID_TO,
                         null,
-                        "I am learning new things",
+                        VALID_INTERNSHIP_LEARN_DESCRIPTION,
                         tags
                 );
         assertThrows(IllegalValueException.class,
@@ -199,16 +211,16 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void loadToModel_invalidFrom_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
-                        "032-2020",
-                        "07-2020",
-                        "Backend Software Intern",
-                        "I am learning new things",
+                        INVALID_FROM_DESC,
+                        VALID_TO,
+                        VALID_INTERNSHIP_ROLE_BACKEND,
+                        VALID_INTERNSHIP_LEARN_DESCRIPTION,
                         tags
                 );
         assertThrows(IllegalValueException.class,
@@ -219,16 +231,16 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void loadToModel_missingFrom_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
                         null,
-                        "07-2020",
-                        "Backend Software Intern",
-                        "I am learning new things",
+                        VALID_TO,
+                        VALID_INTERNSHIP_ROLE_BACKEND,
+                        VALID_INTERNSHIP_LEARN_DESCRIPTION,
                         tags
                 );
         assertThrows(IllegalValueException.class,
@@ -239,16 +251,16 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void loadToModel_invalidTo_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
-                        "03-2020",
-                        "not a time",
-                        "Backend Software Intern",
-                        "I am learning new things",
+                        VALID_FROM,
+                        INVALID_TO_DESC,
+                        VALID_INTERNSHIP_ROLE_BACKEND,
+                        VALID_INTERNSHIP_LEARN_DESCRIPTION,
                         tags
                 );
         assertThrows(IllegalValueException.class,
@@ -259,16 +271,16 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void loadToModel_missingTo_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
-                        "03-2020",
+                        VALID_FROM,
                         null,
-                        "Backend Software Intern",
-                        "I am learning new things",
+                        VALID_INTERNSHIP_ROLE_BACKEND,
+                        VALID_INTERNSHIP_LEARN_DESCRIPTION,
                         tags
                 );
         assertThrows(IllegalValueException.class,
@@ -279,16 +291,16 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void loadToModel_invalidFromTo_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
-                        "03-2030",
-                        "07-2020",
-                        "Backend Software Intern",
-                        "I am learning new things",
+                        VALID_TO,
+                        VALID_FROM,
+                        VALID_INTERNSHIP_ROLE_BACKEND,
+                        VALID_INTERNSHIP_LEARN_DESCRIPTION,
                         tags
                 );
         assertThrows(IllegalValueException.class,
@@ -299,15 +311,15 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void loadToModel_invalidDescription_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
-                        "05-2020",
-                        "07-2020",
-                        "Backend Software Intern",
+                        VALID_FROM,
+                        VALID_TO,
+                        VALID_INTERNSHIP_ROLE_BACKEND,
                         "",
                         tags
                 );
@@ -319,15 +331,15 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void loadToModel_missingDescription_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
-                        "03-2020",
-                        "07-2020",
-                        "Backend Software Intern",
+                        VALID_FROM,
+                        VALID_TO,
+                        VALID_INTERNSHIP_ROLE_BACKEND,
                         null,
                         tags
                 );
@@ -339,15 +351,15 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void loadToModel_invalidTags_failure() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("$tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(INVALID_TAG));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
-                        "03-2020",
-                        "07-2020",
-                        "Backend Software Intern",
+                        VALID_FROM,
+                        VALID_TO,
+                        VALID_INTERNSHIP_ROLE_BACKEND,
                         null,
                         tags
                 );
@@ -359,21 +371,21 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void equals() {
         List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag("tech"));
-        tags.add(new JsonAdaptedTag("backend"));
-        tags.add(new JsonAdaptedTag("SE"));
+        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
 
         JsonAdaptedInternship jsonAdaptedPayPal =
                 new JsonAdaptedInternship(new InternshipBuilder(TypicalInternship.PAYPAL).build());
         JsonAdaptedInternship jsonAdaptedGoogle =
                 new JsonAdaptedInternship(new InternshipBuilder(TypicalInternship.GOOGLE).build());
         JsonAdaptedInternship jsonAdaptedPayPalCopy =
-                new JsonAdaptedInternship("PayPal",
+                new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
-                        "05-2020",
-                        "07-2020",
-                        "Backend Software Intern",
-                        "I am learning new things",
+                        VALID_FROM,
+                        VALID_TO,
+                        VALID_INTERNSHIP_ROLE_BACKEND,
+                        VALID_INTERNSHIP_LEARN_DESCRIPTION,
                         tags
                 );
 
