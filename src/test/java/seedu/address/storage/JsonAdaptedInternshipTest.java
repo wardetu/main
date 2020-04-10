@@ -118,10 +118,6 @@ public class JsonAdaptedInternshipTest {
 
     @Test
     public void loadToModel_invalidId_failure() {
-        List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
-        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
-        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "abc",
@@ -129,7 +125,7 @@ public class JsonAdaptedInternshipTest {
                         VALID_TO,
                         VALID_INTERNSHIP_ROLE_BACKEND,
                         VALID_INTERNSHIP_LEARN_DESCRIPTION,
-                        tags
+                        new ArrayList<>()
                 );
         assertThrows(IllegalValueException.class,
                 "The id field can only be an integer.",
@@ -141,7 +137,7 @@ public class JsonAdaptedInternshipTest {
                 VALID_TO,
                 VALID_INTERNSHIP_ROLE_BACKEND,
                 VALID_INTERNSHIP_LEARN_DESCRIPTION,
-                tags
+                new ArrayList<>()
         );
         assertThrows(IllegalValueException.class,
                 "The id field must not be negative.",
@@ -150,10 +146,6 @@ public class JsonAdaptedInternshipTest {
 
     @Test
     public void loadToModel_missingId_failure() {
-        List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
-        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
-        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         null,
@@ -161,7 +153,7 @@ public class JsonAdaptedInternshipTest {
                         VALID_TO,
                         VALID_INTERNSHIP_ROLE_BACKEND,
                         VALID_INTERNSHIP_LEARN_DESCRIPTION,
-                        tags
+                        new ArrayList<>()
                 );
         assertThrows(IllegalValueException.class,
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, "Id"),
@@ -170,10 +162,6 @@ public class JsonAdaptedInternshipTest {
 
     @Test
     public void loadToModel_invalidRole_failure() {
-        List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
-        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
-        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -181,7 +169,7 @@ public class JsonAdaptedInternshipTest {
                         VALID_TO,
                         "",
                         VALID_INTERNSHIP_LEARN_DESCRIPTION,
-                        tags
+                        new ArrayList<>()
                 );
         assertThrows(IllegalValueException.class,
                 Role.MESSAGE_CONSTRAINTS,
@@ -190,10 +178,6 @@ public class JsonAdaptedInternshipTest {
 
     @Test
     public void loadToModel_missingRole_failure() {
-        List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
-        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
-        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -201,7 +185,7 @@ public class JsonAdaptedInternshipTest {
                         VALID_TO,
                         null,
                         VALID_INTERNSHIP_LEARN_DESCRIPTION,
-                        tags
+                        new ArrayList<>()
                 );
         assertThrows(IllegalValueException.class,
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()),
@@ -210,10 +194,6 @@ public class JsonAdaptedInternshipTest {
 
     @Test
     public void loadToModel_invalidFrom_failure() {
-        List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
-        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
-        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -221,7 +201,7 @@ public class JsonAdaptedInternshipTest {
                         VALID_TO,
                         VALID_INTERNSHIP_ROLE_BACKEND,
                         VALID_INTERNSHIP_LEARN_DESCRIPTION,
-                        tags
+                        new ArrayList<>()
                 );
         assertThrows(IllegalValueException.class,
                 Time.MESSAGE_CONSTRAINTS,
@@ -230,10 +210,6 @@ public class JsonAdaptedInternshipTest {
 
     @Test
     public void loadToModel_missingFrom_failure() {
-        List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
-        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
-        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -241,7 +217,7 @@ public class JsonAdaptedInternshipTest {
                         VALID_TO,
                         VALID_INTERNSHIP_ROLE_BACKEND,
                         VALID_INTERNSHIP_LEARN_DESCRIPTION,
-                        tags
+                        new ArrayList<>()
                 );
         assertThrows(IllegalValueException.class,
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, "From"),
@@ -250,10 +226,6 @@ public class JsonAdaptedInternshipTest {
 
     @Test
     public void loadToModel_invalidTo_failure() {
-        List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
-        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
-        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -261,7 +233,7 @@ public class JsonAdaptedInternshipTest {
                         INVALID_TO_DESC,
                         VALID_INTERNSHIP_ROLE_BACKEND,
                         VALID_INTERNSHIP_LEARN_DESCRIPTION,
-                        tags
+                        new ArrayList<>()
                 );
         assertThrows(IllegalValueException.class,
                 Time.MESSAGE_CONSTRAINTS,
@@ -270,10 +242,6 @@ public class JsonAdaptedInternshipTest {
 
     @Test
     public void loadToModel_missingTo_failure() {
-        List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
-        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
-        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -281,7 +249,7 @@ public class JsonAdaptedInternshipTest {
                         null,
                         VALID_INTERNSHIP_ROLE_BACKEND,
                         VALID_INTERNSHIP_LEARN_DESCRIPTION,
-                        tags
+                        new ArrayList<>()
                 );
         assertThrows(IllegalValueException.class,
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, "To"),
@@ -290,10 +258,6 @@ public class JsonAdaptedInternshipTest {
 
     @Test
     public void loadToModel_invalidFromTo_failure() {
-        List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
-        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
-        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -301,7 +265,7 @@ public class JsonAdaptedInternshipTest {
                         VALID_FROM,
                         VALID_INTERNSHIP_ROLE_BACKEND,
                         VALID_INTERNSHIP_LEARN_DESCRIPTION,
-                        tags
+                        new ArrayList<>()
                 );
         assertThrows(IllegalValueException.class,
                 "The \"to\" field must not precede the \"from\" field.",
@@ -310,10 +274,6 @@ public class JsonAdaptedInternshipTest {
 
     @Test
     public void loadToModel_invalidDescription_failure() {
-        List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
-        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
-        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -321,7 +281,7 @@ public class JsonAdaptedInternshipTest {
                         VALID_TO,
                         VALID_INTERNSHIP_ROLE_BACKEND,
                         "",
-                        tags
+                        new ArrayList<>()
                 );
         assertThrows(IllegalValueException.class,
                 Description.MESSAGE_CONSTRAINTS,
@@ -330,10 +290,6 @@ public class JsonAdaptedInternshipTest {
 
     @Test
     public void loadToModel_missingDescription_failure() {
-        List<JsonAdaptedTag> tags = new ArrayList<>();
-        tags.add(new JsonAdaptedTag(VALID_TAG_TECH));
-        tags.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
-        tags.add(new JsonAdaptedTag(VALID_TAG_SE));
         JsonAdaptedInternship jsonAdaptedInternship =
                 new JsonAdaptedInternship(VALID_INTERNSHIP_NAME_PAYPAL,
                         "3",
@@ -341,7 +297,7 @@ public class JsonAdaptedInternshipTest {
                         VALID_TO,
                         VALID_INTERNSHIP_ROLE_BACKEND,
                         null,
-                        tags
+                        new ArrayList<>()
                 );
         assertThrows(IllegalValueException.class,
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()),
