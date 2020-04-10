@@ -15,6 +15,7 @@ import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.InternshipBuilder;
 import seedu.address.testutil.TypicalInternship;
 
@@ -332,6 +333,26 @@ public class JsonAdaptedInternshipTest {
                 );
         assertThrows(IllegalValueException.class,
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()),
+                jsonAdaptedInternship::toModelType);
+    }
+
+    @Test
+    public void loadToModel_invalidTags_failure() {
+        List<JsonAdaptedTag> tags = new ArrayList<>();
+        tags.add(new JsonAdaptedTag("$tech"));
+        tags.add(new JsonAdaptedTag("backend"));
+        tags.add(new JsonAdaptedTag("SE"));
+        JsonAdaptedInternship jsonAdaptedInternship =
+                new JsonAdaptedInternship("PayPal",
+                        "3",
+                        "03-2020",
+                        "07-2020",
+                        "Backend Software Intern",
+                        null,
+                        tags
+                );
+        assertThrows(IllegalValueException.class,
+                Tag.MESSAGE_CONSTRAINTS,
                 jsonAdaptedInternship::toModelType);
     }
 
