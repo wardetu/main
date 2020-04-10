@@ -25,6 +25,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_ORBITAL
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_REACT;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_ROLE_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_ROLE_FRONTEND;
+import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TAG_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TAG_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TAG_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TIME_FROM;
@@ -34,18 +35,35 @@ import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TIME_TO;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TIME_TO_2;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_WEBSITE_DUKE;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_WEBSITE_ORBITAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_ORBITAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NAME_GOOGLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_ROLE_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_NAME_ORBITAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RESUME_NAME_ME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SKILL_NAME_REACT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WEBSITE_ORBITAL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccessNotStrictlyEqual;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalInternship.GOOGLE;
 import static seedu.address.testutil.TypicalNote.FINISH_CS_2103;
 import static seedu.address.testutil.TypicalProject.ORBITAL;
 import static seedu.address.testutil.TypicalResume.ME_RESUME;
 import static seedu.address.testutil.TypicalSkill.REACT;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -65,6 +83,7 @@ import seedu.address.model.item.Note;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
+import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
@@ -77,16 +96,12 @@ import seedu.address.testutil.SkillBuilder;
 
 public class EditCommandParserTest {
     private EditCommandParser parser = new EditCommandParser();
-    private EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
-    private EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
-    private EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptor();
-    private EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptor();
-    private EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptor();
 
     /**
      * A method to set fields in the edit internship descriptor.
      */
-    public void setEditInternshipDescriptor(Internship sampleEditedInternship) {
+    public void setEditInternshipDescriptor(Internship sampleEditedInternship,
+                                            EditInternshipDescriptor editInternshipDescriptor) {
         editInternshipDescriptor.setName(sampleEditedInternship.getName());
         editInternshipDescriptor.setFrom(sampleEditedInternship.getFrom());
         editInternshipDescriptor.setTo(sampleEditedInternship.getTo());
@@ -98,7 +113,7 @@ public class EditCommandParserTest {
     /**
      * A method to set fields in the edit project descriptor.
      */
-    public void setEditProjectDescriptor(Project sampleEditedProject) {
+    public void setEditProjectDescriptor(Project sampleEditedProject, EditProjectDescriptor editProjectDescriptor) {
         editProjectDescriptor.setName(sampleEditedProject.getName());
         editProjectDescriptor.setWebsite(sampleEditedProject.getWebsite());
         editProjectDescriptor.setTime(sampleEditedProject.getTime());
@@ -109,7 +124,7 @@ public class EditCommandParserTest {
     /**
      * A method to set fields in the edit skill descriptor.
      */
-    public void setEditSkillDescriptor(Skill sampleEditedSkill) {
+    public void setEditSkillDescriptor(Skill sampleEditedSkill, EditSkillDescriptor editSkillDescriptor) {
         editSkillDescriptor.setName(sampleEditedSkill.getName());
         editSkillDescriptor.setLevel(sampleEditedSkill.getLevel());
         editSkillDescriptor.setTags(sampleEditedSkill.getTags());
@@ -118,7 +133,7 @@ public class EditCommandParserTest {
     /**
      * A method to set fields in the edit note descriptor.
      */
-    public void setEditNoteDescriptor(Note sampleEditedNote) {
+    public void setEditNoteDescriptor(Note sampleEditedNote, EditNoteDescriptor editNoteDescriptor) {
         editNoteDescriptor.setName(sampleEditedNote.getName());
         editNoteDescriptor.setTime(sampleEditedNote.getTime());
     }
@@ -126,7 +141,7 @@ public class EditCommandParserTest {
     /**
      * A method to set fields in the resume skill descriptor.
      */
-    public void setEditResumeDescriptor(Resume sampleEditedResume) {
+    public void setEditResumeDescriptor(Resume sampleEditedResume, EditResumeDescriptor editResumeDescriptor) {
         editResumeDescriptor.setName(sampleEditedResume.getName());
         editResumeDescriptor.setTags(sampleEditedResume.getTags());
     }
@@ -134,7 +149,8 @@ public class EditCommandParserTest {
     @Test
     public void parse_editAllInternshipFieldsPresent_success() {
         Internship expectedInternship = new InternshipBuilder(GOOGLE).withTags(VALID_TAG_FRONTEND).build();
-        setEditInternshipDescriptor(expectedInternship);
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
+        setEditInternshipDescriptor(expectedInternship, editInternshipDescriptor);
 
         // Standard
         assertParseSuccess(parser,
@@ -191,20 +207,24 @@ public class EditCommandParserTest {
                 new EditInternshipCommand(INDEX_FIRST_ITEM, editInternshipDescriptor));
 
         // multiple item tags - all tags added
-        expectedInternship = new InternshipBuilder(GOOGLE).withTags(VALID_TAG_FRONTEND, VALID_TAG_JAVA).build();
-        setEditInternshipDescriptor(expectedInternship);
+        Internship expectedInternshipMultipleTags = new InternshipBuilder(GOOGLE)
+                .withTags(VALID_TAG_FRONTEND, VALID_TAG_JAVA).build();
+
+        EditInternshipDescriptor editInternshipDescriptorMultipleTags = new EditInternshipDescriptor();
+        setEditInternshipDescriptor(expectedInternshipMultipleTags, editInternshipDescriptorMultipleTags);
         assertParseSuccess(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_INTERNSHIP + PREFIXED_NAME_GOOGLE
                         + PREFIXED_ROLE_BACKEND + PREFIXED_ROLE_FRONTEND
                         + PREFIXED_TIME_FROM + PREFIXED_TIME_TO + PREFIXED_INTERNSHIP_DESCRIPTION
                         + PREFIXED_TAG_FRONTEND + PREFIXED_TAG_JAVA,
-                new EditInternshipCommand(INDEX_FIRST_ITEM, editInternshipDescriptor));
+                new EditInternshipCommand(INDEX_FIRST_ITEM, editInternshipDescriptorMultipleTags));
     }
 
     @Test
     public void parse_allAddNoteFieldsPresent_success() {
         Note expectedNote = new NoteBuilder(FINISH_CS_2103).build();
-        setEditNoteDescriptor(expectedNote);
+        EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptor();
+        setEditNoteDescriptor(expectedNote, editNoteDescriptor);
 
         // Standard
         assertParseSuccess(parser,
@@ -233,7 +253,8 @@ public class EditCommandParserTest {
     @Test
     public void parse_editAllProjectFieldsPresent_success() {
         Project expectedProject = new ProjectBuilder(ORBITAL).withTags(VALID_TAG_JAVA).build();
-        setEditProjectDescriptor(expectedProject);
+        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
+        setEditProjectDescriptor(expectedProject, editProjectDescriptor);
 
         // Standard
         assertParseSuccess(parser,
@@ -275,19 +296,25 @@ public class EditCommandParserTest {
                         + PREFIXED_TAG_JAVA, new EditProjectCommand(INDEX_FIRST_ITEM, editProjectDescriptor));
 
         // multiple item tags - all tags accepted
-        expectedProject = new ProjectBuilder(ORBITAL).withTags(VALID_TAG_JAVA, VALID_TAG_FRONTEND).build();
-        setEditProjectDescriptor(expectedProject);
+        Project expectedProjectMultipleTags = new ProjectBuilder(ORBITAL)
+                .withTags(VALID_TAG_JAVA, VALID_TAG_FRONTEND).build();
+
+        EditProjectDescriptor editProjectDescriptorMultipleTags = new EditProjectDescriptor();
+
+        setEditProjectDescriptor(expectedProjectMultipleTags, editProjectDescriptorMultipleTags);
+
         assertParseSuccess(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_PROJECT + PREFIXED_NAME_ORBITAL + PREFIXED_TIME_ORBITAL
                         + PREFIXED_WEBSITE_ORBITAL + PREFIXED_DESCRIPTION_ORBITAL
                         + PREFIXED_TAG_JAVA + PREFIXED_TAG_FRONTEND, new EditProjectCommand(INDEX_FIRST_ITEM,
-                        editProjectDescriptor));
+                        editProjectDescriptorMultipleTags));
     }
 
     @Test
     public void parse_editAllResumeFieldsPresent_success() {
         Resume expectedResume = new ResumeBuilder(ME_RESUME).withTags(VALID_TAG_FRONTEND).build();
-        setEditResumeDescriptor(expectedResume);
+        EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptor();
+        setEditResumeDescriptor(expectedResume, editResumeDescriptor);
 
         // Standard
         assertParseSuccess(parser,
@@ -308,19 +335,25 @@ public class EditCommandParserTest {
                 new EditResumeCommand(INDEX_FIRST_ITEM, editResumeDescriptor));
 
         // multiple item tags - all tags accepted
-        expectedResume = new ResumeBuilder(ME_RESUME).withTags(VALID_TAG_FRONTEND, VALID_TAG_JAVA).build();
-        setEditResumeDescriptor(expectedResume);
+        Resume expectedResumeMultipleTags = new ResumeBuilder(ME_RESUME)
+                .withTags(VALID_TAG_FRONTEND, VALID_TAG_JAVA).build();
+
+        EditResumeDescriptor editResumeDescriptorMultipleTags = new EditResumeDescriptor();
+
+        setEditResumeDescriptor(expectedResumeMultipleTags, editResumeDescriptorMultipleTags);
 
         assertParseSuccess(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_RESUME + PREFIXED_NAME_REACT + PREFIXED_NAME_ME
                         + PREFIXED_TAG_FRONTEND + PREFIXED_TAG_JAVA,
-                new EditResumeCommand(INDEX_FIRST_ITEM, editResumeDescriptor));
+                new EditResumeCommand(INDEX_FIRST_ITEM, editResumeDescriptorMultipleTags));
     }
 
     @Test
     public void parse_editAllSkillFieldsPresent_success() {
         Skill expectedSkill = new SkillBuilder(REACT).withTags(VALID_TAG_FRONTEND).build();
-        setEditSkillDescriptor(expectedSkill);
+        EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptor();
+
+        setEditSkillDescriptor(expectedSkill, editSkillDescriptor);
 
         // Standard
         assertParseSuccess(parser,
@@ -346,58 +379,116 @@ public class EditCommandParserTest {
                         + PREFIXED_BASIC + PREFIXED_TAG_FRONTEND,
                 new EditSkillCommand(INDEX_FIRST_ITEM, editSkillDescriptor));
 
-        expectedSkill = new SkillBuilder(REACT).withTags(VALID_TAG_FRONTEND, VALID_TAG_JAVA).build();
-
         // multiple item tags - all tags accepted
-        setEditSkillDescriptor(expectedSkill);
+        Skill expectedSkillMultipleTags = new SkillBuilder(REACT).withTags(VALID_TAG_FRONTEND, VALID_TAG_JAVA).build();
+
+        EditSkillDescriptor editSkillDescriptorMultipleTags = new EditSkillDescriptor();
+
+        setEditSkillDescriptor(expectedSkillMultipleTags, editSkillDescriptorMultipleTags);
+
         assertParseSuccess(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_SKILL + PREFIXED_NAME_REACT + PREFIXED_BASIC
                         + PREFIXED_TAG_FRONTEND + PREFIXED_TAG_JAVA,
-                new EditSkillCommand(INDEX_FIRST_ITEM, editSkillDescriptor));
+                new EditSkillCommand(INDEX_FIRST_ITEM, editSkillDescriptorMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        Internship expectedInternship = new InternshipBuilder(GOOGLE).withTags().build();
-        setEditInternshipDescriptor(expectedInternship);
 
-        // 0 tags
-        assertParseSuccessNotStrictlyEqual(parser,
+        // no internship tags
+        EditInternshipDescriptor editInternshipDescriptorNoTag = new EditInternshipDescriptor();
+        editInternshipDescriptorNoTag.setName(new Name(VALID_INTERNSHIP_NAME_GOOGLE));
+        editInternshipDescriptorNoTag.setRole(VALID_INTERNSHIP_ROLE_FRONTEND);
+        editInternshipDescriptorNoTag.setFrom(new Time(VALID_FROM));
+        editInternshipDescriptorNoTag.setTo(new Time(VALID_TO));
+        editInternshipDescriptorNoTag.setDescription(VALID_INTERNSHIP_DESCRIPTION);
+
+        assertParseSuccess(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_INTERNSHIP + PREFIXED_NAME_GOOGLE
                         + PREFIXED_ROLE_FRONTEND + PREFIXED_TIME_FROM
-                        + PREFIXED_TIME_TO + PREFIXED_INTERNSHIP_DESCRIPTION);
+                        + PREFIXED_TIME_TO + PREFIXED_INTERNSHIP_DESCRIPTION,
+                new EditInternshipCommand(INDEX_FIRST_ITEM, editInternshipDescriptorNoTag));
 
-        Note expectedNote = new NoteBuilder(FINISH_CS_2103).withTags().build();
-        setEditNoteDescriptor(expectedNote);
+        // no internship name, no internship role, no internship tags
+        EditInternshipDescriptor editInternshipDescriptorNoNameNoRole = new EditInternshipDescriptor();
+        editInternshipDescriptorNoNameNoRole.setFrom(new Time(VALID_FROM));
+        editInternshipDescriptorNoNameNoRole.setTo(new Time(VALID_TO));
+        editInternshipDescriptorNoNameNoRole.setDescription(VALID_INTERNSHIP_DESCRIPTION);
+        Set<Tag> internshipTags = new HashSet<Tag>();
+        internshipTags.add(new Tag(VALID_TAG_FRONTEND));
+        editInternshipDescriptorNoNameNoRole.setTags(internshipTags);
 
-        // 0 tags
+        assertParseSuccess(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_INTERNSHIP
+                        + PREFIXED_TIME_FROM + PREFIXED_TIME_TO + PREFIXED_INTERNSHIP_DESCRIPTION
+                        + PREFIXED_TAG_FRONTEND,
+                new EditInternshipCommand(INDEX_FIRST_ITEM, editInternshipDescriptorNoTag));
+
+        // no note tags
+        EditNoteDescriptor editNoteDescriptorNoTag = new EditNoteDescriptor();
+        editNoteDescriptorNoTag.setName(new Name(VALID_NOTE_NAME));
+        editNoteDescriptorNoTag.setTime(new Time(VALID_TO));
         assertParseSuccess(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_NOTE + PREFIXED_NAME_NOTE + PREFIXED_TIME_TO,
-                new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptor));
+                new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptorNoTag));
+
+        // no note name, no note tags
+        EditNoteDescriptor editNoteDescriptorNoNameNoTag = new EditNoteDescriptor();
+        editNoteDescriptorNoNameNoTag.setTime(new Time(VALID_TO));
+        assertParseSuccess(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_NOTE + PREFIXED_TIME_TO,
+                new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptorNoNameNoTag));
 
 
-        Project expectedProject = new ProjectBuilder(ORBITAL).withTags().build();
-        setEditProjectDescriptor(expectedProject);
+        // no project tags
+        EditProjectDescriptor editProjectDescriptorNoTag = new EditProjectDescriptor();
+        editProjectDescriptorNoTag.setName(new Name(VALID_PROJECT_NAME_ORBITAL));
+        editProjectDescriptorNoTag.setTime(new Time(VALID_TIME_1));
+        editProjectDescriptorNoTag.setWebsite(new Website(VALID_WEBSITE_ORBITAL));
+        editProjectDescriptorNoTag.setDescription(VALID_DESCRIPTION_ORBITAL);
 
-        // 0 tags
-        assertParseSuccessNotStrictlyEqual(parser,
+        assertParseSuccess(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_PROJECT + PREFIXED_NAME_ORBITAL + PREFIXED_TIME_ORBITAL
-                        + PREFIXED_WEBSITE_ORBITAL + PREFIXED_DESCRIPTION_ORBITAL);
+                        + PREFIXED_WEBSITE_ORBITAL + PREFIXED_DESCRIPTION_ORBITAL,
+                new EditProjectCommand(INDEX_FIRST_ITEM, editProjectDescriptorNoTag));
 
-        Resume expectedResume = new ResumeBuilder(ME_RESUME).withTags().build();
-        setEditResumeDescriptor(expectedResume);
+        // no project name, no project tag
+        EditProjectDescriptor editProjectDescriptorNoNameNoTag = new EditProjectDescriptor();
+        editProjectDescriptorNoNameNoTag.setTime(new Time(VALID_TIME_1));
+        editProjectDescriptorNoNameNoTag.setWebsite(new Website(VALID_WEBSITE_ORBITAL));
+        editProjectDescriptorNoNameNoTag.setDescription(VALID_DESCRIPTION_ORBITAL);
 
-        // 0 tags
-        assertParseSuccessNotStrictlyEqual(parser,
-                VALID_ITEM_INDEX + ITEM_TYPE_RESUME + PREFIXED_NAME_ME);
+        assertParseSuccess(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_PROJECT + PREFIXED_TIME_ORBITAL
+                        + PREFIXED_WEBSITE_ORBITAL + PREFIXED_DESCRIPTION_ORBITAL,
+                new EditProjectCommand(INDEX_FIRST_ITEM, editProjectDescriptorNoNameNoTag));
 
 
-        Skill expectedSkill = new SkillBuilder(REACT).withTags().build();
-        setEditSkillDescriptor(expectedSkill);
+        // no resume tags
+        EditResumeDescriptor editResumeDescriptorNoTag = new EditResumeDescriptor();
+        editResumeDescriptorNoTag.setName(new Name(VALID_RESUME_NAME_ME));
+        assertParseSuccess(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_RESUME + PREFIXED_NAME_ME,
+                new EditResumeCommand(INDEX_FIRST_ITEM, editResumeDescriptorNoTag));
 
-        // 0 tags
-        assertParseSuccessNotStrictlyEqual(parser,
-                VALID_ITEM_INDEX + ITEM_TYPE_SKILL + PREFIXED_NAME_REACT + PREFIXED_BASIC);
+
+        // no skill tags
+        EditSkillDescriptor editSkillDescriptorNoTag = new EditSkillDescriptor();
+        editSkillDescriptorNoTag.setName(new Name(VALID_SKILL_NAME_REACT));
+        editSkillDescriptorNoTag.setLevel(Level.BASIC);
+        assertParseSuccess(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_SKILL + PREFIXED_NAME_REACT + PREFIXED_BASIC,
+                new EditSkillCommand(INDEX_FIRST_ITEM, editSkillDescriptorNoTag));
+
+        // no skill name, no skill level
+        EditSkillDescriptor editSkillDescriptorNoNameNoLevel = new EditSkillDescriptor();
+        Set<Tag> skillTags = new HashSet<>();
+        String[] tags = {VALID_TAG_FRONTEND, VALID_TAG_BACKEND};
+        skillTags.addAll(Arrays.stream(tags).map(Tag::new).collect(Collectors.toList()));
+        editSkillDescriptorNoNameNoLevel.setTags(skillTags);
+        assertParseSuccess(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_SKILL + PREFIXED_TAG_FRONTEND + PREFIXED_TAG_BACKEND,
+                new EditSkillCommand(INDEX_FIRST_ITEM, editSkillDescriptorNoNameNoLevel));
     }
 
     @Test
