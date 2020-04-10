@@ -2,6 +2,11 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_IS_DONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_NAME_CS2103;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BACKEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECH;
 import static seedu.address.storage.JsonAdaptedNote.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -23,31 +28,32 @@ public class JsonAdaptedNoteTest {
         JsonAdaptedNote jsonAdaptedNote = new JsonAdaptedNote(new NoteBuilder(TypicalNote.FINISH_CS_2103).build());
         assertEquals(new NoteBuilder(TypicalNote.FINISH_CS_2103).build(), jsonAdaptedNote.toModelType());
 
-        jsonAdaptedNote =
-                new JsonAdaptedNote("Finish CS2103", "1", "12-2020", "false", new ArrayList<>());
+        jsonAdaptedNote = new JsonAdaptedNote(VALID_NOTE_NAME_CS2103,
+                "1", VALID_NOTE_TIME, VALID_NOTE_IS_DONE, new ArrayList<>());
         assertEquals(new NoteBuilder(TypicalNote.FINISH_CS_2103).build(), jsonAdaptedNote.toModelType());
 
         // With tags
         jsonAdaptedNote = new JsonAdaptedNote(
-                new NoteBuilder(TypicalNote.FINISH_CS_2103).withTags("tech", "java").build());
+                new NoteBuilder(TypicalNote.FINISH_CS_2103).withTags(VALID_TAG_TECH, VALID_TAG_BACKEND).build());
         assertEquals(
-                new NoteBuilder(TypicalNote.FINISH_CS_2103).withTags("tech", "java").build(),
+                new NoteBuilder(TypicalNote.FINISH_CS_2103).withTags(VALID_TAG_TECH, VALID_TAG_BACKEND).build(),
                 jsonAdaptedNote.toModelType());
 
         List<JsonAdaptedTag> tagList = new ArrayList<>();
-        tagList.add(new JsonAdaptedTag("java"));
-        tagList.add(new JsonAdaptedTag("tech"));
-        jsonAdaptedNote = new JsonAdaptedNote(
-                "Finish CS2103", "1", "12-2020", "false", tagList);
+        tagList.add(new JsonAdaptedTag(VALID_TAG_BACKEND));
+        tagList.add(new JsonAdaptedTag(VALID_TAG_TECH));
+        jsonAdaptedNote = new JsonAdaptedNote(VALID_NOTE_NAME_CS2103,
+                "1", VALID_NOTE_TIME, VALID_NOTE_IS_DONE, tagList);
         assertEquals(
-                new NoteBuilder(TypicalNote.FINISH_CS_2103).withTags("java", "tech").build(),
+                new NoteBuilder(TypicalNote.FINISH_CS_2103).withTags(VALID_TAG_BACKEND, VALID_TAG_TECH).build(),
                 jsonAdaptedNote.toModelType());
     }
 
     @Test
     public void toModelType_missingName_throwsIllegalValueException() {
         JsonAdaptedNote jsonAdaptedNote =
-                new JsonAdaptedNote(null, "1", "12-2020", "false", new ArrayList<>());
+                new JsonAdaptedNote(null,
+                        "1", VALID_NOTE_TIME, VALID_NOTE_IS_DONE, new ArrayList<>());
         assertThrows(IllegalValueException.class,
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()),
                 jsonAdaptedNote::toModelType);
@@ -56,7 +62,8 @@ public class JsonAdaptedNoteTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedNote jsonAdaptedNote =
-                new JsonAdaptedNote("&not a $name", "1", "12-2020", "false", new ArrayList<>());
+                new JsonAdaptedNote("&not a $name",
+                        "1", VALID_NOTE_TIME, VALID_NOTE_IS_DONE, new ArrayList<>());
         assertThrows(IllegalValueException.class,
                 Name.MESSAGE_CONSTRAINTS,
                 jsonAdaptedNote::toModelType);
@@ -65,7 +72,8 @@ public class JsonAdaptedNoteTest {
     @Test
     public void toModelType_missingTime_throwsIllegalValueException() {
         JsonAdaptedNote jsonAdaptedNote =
-                new JsonAdaptedNote("Finish CS2103", "1", null, "false", new ArrayList<>());
+                new JsonAdaptedNote(VALID_NOTE_NAME_CS2103,
+                        "1", null, VALID_NOTE_IS_DONE, new ArrayList<>());
         assertThrows(IllegalValueException.class,
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()),
                 jsonAdaptedNote::toModelType);
@@ -74,7 +82,8 @@ public class JsonAdaptedNoteTest {
     @Test
     public void toModelType_invalidTime_throwsIllegalValueException() {
         JsonAdaptedNote jsonAdaptedNote =
-                new JsonAdaptedNote("Finish CS2103", "1", "13-2020", "false", new ArrayList<>());
+                new JsonAdaptedNote(VALID_NOTE_NAME_CS2103,
+                        "1", "13-2020", VALID_NOTE_IS_DONE, new ArrayList<>());
         assertThrows(IllegalValueException.class,
                 Time.MESSAGE_CONSTRAINTS,
                 jsonAdaptedNote::toModelType);
@@ -83,7 +92,8 @@ public class JsonAdaptedNoteTest {
     @Test
     public void toModelType_missingDone_throwsIllegalValueException() {
         JsonAdaptedNote jsonAdaptedNote =
-                new JsonAdaptedNote("Finish CS2103", "1", "11-2020", null, new ArrayList<>());
+                new JsonAdaptedNote(VALID_NOTE_NAME_CS2103,
+                        "1", VALID_NOTE_TIME, null, new ArrayList<>());
         assertThrows(IllegalValueException.class,
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, "Done"),
                 jsonAdaptedNote::toModelType);
@@ -92,7 +102,8 @@ public class JsonAdaptedNoteTest {
     @Test
     public void toModelType_invalidDone_throwsIllegalValueException() {
         JsonAdaptedNote jsonAdaptedNote =
-                new JsonAdaptedNote("Finish CS2103", "1", "11-2020", "tru", new ArrayList<>());
+                new JsonAdaptedNote(VALID_NOTE_NAME_CS2103,
+                        "1", VALID_NOTE_TIME, "tru", new ArrayList<>());
         assertThrows(IllegalValueException.class,
                 "A boolean field can only be true or false.",
                 jsonAdaptedNote::toModelType);
@@ -101,7 +112,8 @@ public class JsonAdaptedNoteTest {
     @Test
     public void toModelType_missingId_throwsIllegalValueException() {
         JsonAdaptedNote jsonAdaptedNote =
-                new JsonAdaptedNote("Finish CS2103", null, "11-2020", "false", new ArrayList<>());
+                new JsonAdaptedNote(VALID_NOTE_NAME_CS2103,
+                        null, VALID_NOTE_TIME, VALID_NOTE_IS_DONE, new ArrayList<>());
         assertThrows(IllegalValueException.class,
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, "Id"),
                 jsonAdaptedNote::toModelType);
@@ -111,14 +123,16 @@ public class JsonAdaptedNoteTest {
     public void toModelType_invalidId_throwsIllegalValueException() {
         // Id must be an integer
         JsonAdaptedNote jsonAdaptedNote =
-                new JsonAdaptedNote("Finish CS2103", "a", "11-2020", "false", new ArrayList<>());
+                new JsonAdaptedNote(VALID_NOTE_NAME_CS2103,
+                        "a", VALID_NOTE_TIME, VALID_NOTE_IS_DONE, new ArrayList<>());
         assertThrows(IllegalValueException.class,
                 "The id field can only be an integer.",
                 jsonAdaptedNote::toModelType);
 
         // Id cannot be negative
         jsonAdaptedNote =
-                new JsonAdaptedNote("Finish CS2103", "-1", "11-2020", "false", new ArrayList<>());
+                new JsonAdaptedNote(VALID_NOTE_NAME_CS2103,
+                        "-1", VALID_NOTE_TIME, VALID_NOTE_IS_DONE, new ArrayList<>());
         assertThrows(IllegalValueException.class,
                 "The id field must not be negative.",
                 jsonAdaptedNote::toModelType);
@@ -131,7 +145,8 @@ public class JsonAdaptedNoteTest {
 
         // Two constructors gives the same result
         assertEquals(jsonAdaptedCS2103,
-                new JsonAdaptedNote("Finish CS2103", "1", "12-2020", "false", new ArrayList<>()));
+                new JsonAdaptedNote(VALID_NOTE_NAME_CS2103,
+                        "1", VALID_NOTE_TIME, VALID_NOTE_IS_DONE, new ArrayList<>()));
 
         // Different json adapted notes are not equal
         assertNotEquals(jsonAdaptedCS2103, jsonAdaptedHw);
