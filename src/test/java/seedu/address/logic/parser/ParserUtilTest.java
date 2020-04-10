@@ -225,6 +225,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseDescription_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDescription(""));
+    }
+
+    @Test
     public void parseDescription_validValueWithoutWhitespace_returnsDescription() throws Exception {
         assertEquals(VALID_DESCRIPTION, ParserUtil.parseDescription(VALID_DESCRIPTION));
     }
