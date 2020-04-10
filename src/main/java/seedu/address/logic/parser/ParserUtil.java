@@ -240,10 +240,10 @@ public class ParserUtil {
     public static DisplayPicture parseDisplayPicture(String displayFilePath) throws ParseException {
         requireNonNull(displayFilePath);
         String trimmedDisplayFilePath = displayFilePath.trim();
-        if (DisplayPicture.isValidDisplayPicture(trimmedDisplayFilePath)) {
-            return new DisplayPicture(trimmedDisplayFilePath);
+        if (!DisplayPicture.isValidDisplayPicture(trimmedDisplayFilePath)) {
+            throw new ParseException(DisplayPicture.MESSAGE_CONSTRAINTS);
         }
-        throw new ParseException(DisplayPicture.MESSAGE_CONSTRAINTS);
+        return new DisplayPicture(trimmedDisplayFilePath);
     }
 
     /**
@@ -255,10 +255,10 @@ public class ParserUtil {
     public static Github parseGithub(String github) throws ParseException {
         requireNonNull(github);
         String trimmedGithub = github.trim();
-        if (Github.isValidGithub(trimmedGithub)) {
-            return new Github(trimmedGithub);
+        if (!Github.isValidGithub(trimmedGithub)) {
+            throw new ParseException(Github.MESSAGE_CONSTRAINTS);
         }
-        throw new ParseException(Github.MESSAGE_CONSTRAINTS);
+        return new Github(trimmedGithub);
     }
 
     /**
@@ -270,10 +270,10 @@ public class ParserUtil {
     public static University parseUniversity(String university) throws ParseException {
         requireNonNull(university);
         String trimmedUniversity = university.trim();
-        if (University.isValidUniversity(trimmedUniversity)) {
-            return new University(trimmedUniversity);
+        if (!University.isValidUniversity(trimmedUniversity)) {
+            throw new ParseException(University.MESSAGE_CONSTRAINTS);
         }
-        throw new ParseException(University.MESSAGE_CONSTRAINTS);
+        return new University(trimmedUniversity);
     }
 
     /**
@@ -285,10 +285,10 @@ public class ParserUtil {
     public static Major parseMajor(String major) throws ParseException {
         requireNonNull(major);
         String trimmedMajor = major.trim();
-        if (Major.isValidMajor(trimmedMajor)) {
-            return new Major(trimmedMajor);
+        if (!Major.isValidMajor(trimmedMajor)) {
+            throw new ParseException(Major.MESSAGE_CONSTRAINTS);
         }
-        throw new ParseException(Major.MESSAGE_CONSTRAINTS);
+        return new Major(trimmedMajor);
     }
 
     /**
@@ -316,10 +316,10 @@ public class ParserUtil {
     public static Role parseRole(String role) throws ParseException {
         requireNonNull(role);
         String trimmedRole = role.trim();
-        if (Role.isValidRole(trimmedRole)) {
-            return new Role(trimmedRole);
+        if (!Role.isValidRole(trimmedRole)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
-        throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        return new Role(trimmedRole);
     }
 
     /**
