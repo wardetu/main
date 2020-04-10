@@ -67,14 +67,13 @@ public class CommandResult {
         if (other == this) {
             return true;
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof CommandResult)) {
+        if (!(other instanceof CommandResult)) { // instanceof handles nulls
             return false;
         }
-
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+            && dataToUser.equals(otherCommandResult.dataToUser)
+            && displayType.equals(otherCommandResult.displayType)
             && isShowPreview == otherCommandResult.isShowPreview
             && isShowHelp == otherCommandResult.isShowHelp
             && isExit == otherCommandResult.isExit;
@@ -84,5 +83,4 @@ public class CommandResult {
     public int hashCode() {
         return Objects.hash(dataToUser, feedbackToUser, displayType, isShowPreview,  isShowHelp, isExit);
     }
-
 }
