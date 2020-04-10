@@ -102,7 +102,7 @@ public class CommandTestUtil {
     // NOTES
     public static final String ITEM_TYPE_NOTE = " " + PREFIX_ITEM + " note";
     public static final String VALID_NOTE_NAME = "Finish CS2103";
-    public static final String PREFIXED_NAME_NOTE = " " + PREFIX_NAME + " " +VALID_NOTE_NAME;
+    public static final String PREFIXED_NAME_NOTE = " " + PREFIX_NAME + " " + VALID_NOTE_NAME;
 
     // INVALID ITEM
     public static final String ITEM_TYPE_INVALID = " " + PREFIX_ITEM + " notee";
