@@ -10,8 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class University {
 
 
-    public static final String MESSAGE_CONSTRAINTS = "University field can take any value "
-            + " and it should not be blank.";
+    public static final int MAX_LENGTH = 50;
+    public static final String MESSAGE_CONSTRAINTS = "University field can take any value,"
+            + " with max length of 50 characters, and it should not be blank.";
 
     /*
      * The first character of the university must not be a whitespace,
@@ -36,7 +37,7 @@ public class University {
      * Returns true if a given string is a valid university.
      */
     public static boolean isValidUniversity(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= MAX_LENGTH;
     }
 
     @Override
