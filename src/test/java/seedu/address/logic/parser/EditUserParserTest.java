@@ -1,6 +1,15 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CAP;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GITHUB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MAJOR;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_UNIVERSITY;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_CAP_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_CAP_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_DESCRIPTION_AMY;
@@ -41,6 +50,16 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TO_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TO_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIVERSITY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIVERSITY_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CAP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -48,9 +67,18 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.edit.EditUserCommand;
 import seedu.address.logic.commands.edit.EditUserDescriptor;
+import seedu.address.model.item.field.Cap;
+import seedu.address.model.item.field.Description;
+import seedu.address.model.item.field.Email;
+import seedu.address.model.item.field.Github;
+import seedu.address.model.item.field.Major;
+import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 import seedu.address.testutil.EditUserDescriptorBuilder;
 
-// NOTE: This test ignores display picture because the check in parser checks for existence of the file in the path
+// Note: Display Picture is currently not being tested here, because it assumes the existence of the file in the path
 public class EditUserParserTest {
     private EditUserParser parser = new EditUserParser();
 
@@ -214,5 +242,49 @@ public class EditUserParserTest {
         assertParseFailure(parser,
                 "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditUserCommand.MESSAGE_NO_ARGS));
+    }
+
+    @Test
+    public void parse_invalidChanges_failure() {
+        assertParseFailure(parser,
+                " " + PREFIX_NAME + " " + INVALID_NAME,
+                Name.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser,
+                " " + PREFIX_DESCRIPTION + " " + INVALID_DESCRIPTION,
+                Description.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser,
+                " " + PREFIX_PHONE + " " + INVALID_PHONE,
+                Phone.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser,
+                " " + PREFIX_EMAIL + " " + INVALID_EMAIL,
+                Email.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser,
+                " " + PREFIX_GITHUB + " " + INVALID_GITHUB,
+                Github.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser,
+                " " + PREFIX_UNIVERSITY + " " + INVALID_UNIVERSITY,
+                University.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser,
+                " " + PREFIX_MAJOR + " " + INVALID_MAJOR,
+                Major.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser,
+                " " + PREFIX_FROM + " " + INVALID_TIME,
+                Time.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser,
+                " " + PREFIX_TO + " " + INVALID_TIME,
+                Time.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser,
+                " " + PREFIX_CAP + " " + INVALID_CAP,
+                Cap.MESSAGE_CONSTRAINTS);
+
     }
 }
