@@ -1,76 +1,57 @@
 package seedu.address.logic.commands.edit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.item.Internship;
-import seedu.address.testutil.InternshipBuilder;
+import seedu.address.model.item.field.Description;
+import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Role;
+import seedu.address.model.item.field.Time;
+import seedu.address.model.tag.Tag;
 
 public class EditInternshipDescriptorTest {
-    private Internship sampleInternship = new InternshipBuilder().build();
+    public static final String[] DEFAULT_TAGS = {"java", "backend"};
+
+    private Name name = new Name("name");
+    private Role role = new Role("role");
+    private Time from = new Time("10-2020");
+    private Time to = new Time("12-2020");
+    private Description description = new Description("description");
+    private Set<Tag> tags = new HashSet<>();
     private EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
 
     @Test
     public void equals() {
-        editInternshipDescriptor.setName(sampleInternship.getName());
-        editInternshipDescriptor.setRole(sampleInternship.getRole());
-        editInternshipDescriptor.setFrom(sampleInternship.getFrom());
-        editInternshipDescriptor.setTo(sampleInternship.getTo());
-        editInternshipDescriptor.setDescription(sampleInternship.getDescription());
-        editInternshipDescriptor.setTags(sampleInternship.getTags());
+        editInternshipDescriptor.setName(name);
+        editInternshipDescriptor.setRole(role);
+        editInternshipDescriptor.setFrom(from);
+        editInternshipDescriptor.setTo(to);
+        editInternshipDescriptor.setDescription(description);
+        editInternshipDescriptor.setTags(tags);
+        tags.addAll(Arrays.stream(DEFAULT_TAGS).map(Tag::new).collect(Collectors.toList()));
 
         EditInternshipDescriptor editInternshipDescriptorToTest =
                 new EditInternshipDescriptor(editInternshipDescriptor);
 
         // same name -> returns true
-        assertEquals(editInternshipDescriptor.getName().get(), sampleInternship.getName());
+        assertEquals(editInternshipDescriptorToTest.getName().get(), name);
 
         // same object -> returns true
-        assertEquals(editInternshipDescriptor.getRole().get(), sampleInternship.getRole());
+        assertEquals(editInternshipDescriptorToTest.getRole().get(), role);
 
         // same object -> returns true
-        assertEquals(editInternshipDescriptor.getFrom().get(), sampleInternship.getFrom());
+        assertEquals(editInternshipDescriptorToTest.getFrom().get(), from);
 
         // same object -> returns true
-        assertEquals(editInternshipDescriptor.getTo().get(), sampleInternship.getTo());
+        assertEquals(editInternshipDescriptorToTest.getTo().get(), to);
 
         // same object -> returns true
-        assertEquals(editInternshipDescriptor.getDescription().get(), sampleInternship.getDescription());
-
-        // same object -> returns true
-        assertEquals(editInternshipDescriptor.getTags().get(), sampleInternship.getTags());
-
-        // same name -> returns true
-        assertEquals(editInternshipDescriptorToTest.getName().get(), editInternshipDescriptor.getName().get());
-
-        // same object -> returns true
-        assertEquals(editInternshipDescriptorToTest.getRole().get(), editInternshipDescriptor.getRole().get());
-
-        // same object -> returns true
-        assertEquals(editInternshipDescriptorToTest.getFrom().get(), editInternshipDescriptor.getFrom().get());
-
-        // same object -> returns true
-        assertEquals(editInternshipDescriptorToTest.getTo().get(), editInternshipDescriptor.getTo().get());
-
-        // same object -> returns true
-        assertEquals(editInternshipDescriptorToTest.getDescription().get(),
-                editInternshipDescriptor.getDescription().get());
-
-        // same object -> returns true
-        assertEquals(editInternshipDescriptorToTest.getTags().get(), editInternshipDescriptor.getTags().get());
-
-        // same descriptor object -> returns true
-        assertEquals(editInternshipDescriptor, editInternshipDescriptorToTest);
-
-        // checks two descriptors if same -> returns true
-        assertTrue(editInternshipDescriptor.equals(editInternshipDescriptorToTest));
-    }
-
-    @Test
-    public void field_isAnyNonNull_falseIfAllNull() {
-        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
-        assertEquals(editInternshipDescriptor.isAnyFieldEdited(), false);
+        assertEquals(editInternshipDescriptorToTest.getDescription().get(), description);
     }
 }

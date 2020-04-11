@@ -1,37 +1,26 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.item.field.Cap;
 
 /**
  * Validations for different inputs without a separate class.
  */
 public class Verifier {
 
-    public static final int UNIVERSITY_MAX_LENGTH = 100;
-    public static final String UNIVERSITY_MESSAGE_CONSTRAINTS =
-            "University should only contain alphanumeric characters and spaces, with max length of 50 characters"
-                    + " and it should not be blank";
+    public static final int UNIVERSITY_MAX_LENGTH = 50;
     public static final String UNIVERSITY_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
 
-    public static final int MAJOR_MAX_LENGTH = 100;
-    public static final String MAJOR_MESSAGE_CONSTRAINTS =
-            "Major should only contain alphanumeric characters and spaces, with max length of 50 characters"
-                    + " and it should not be blank";
+    public static final int MAJOR_MAX_LENGTH = 50;
     public static final String MAJOR_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public static final String CAP_MESSAGE_CONSTRAINTS =
-            "CAP should only contain numeric characters and must match actual range from 0.0 to 5.0 and it "
-                    + "should not be blank";
-
     public static final int ROLE_MAX_LENGTH = 50;
-    public static final String ROLE_MESSAGE_CONSTRAINTS =
-            "Major should only contain alphanumeric characters and spaces, with max length of 50 characters"
-                    + " and it should not be blank";
     public static final String ROLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     /**
-     * Check if a field is within length limit.
+     * Checks if a field is within length limit.
+     *
      * @param input field.
      * @param maxLength maximum length allowed.
      * @return true or false.
@@ -45,9 +34,7 @@ public class Verifier {
     }
 
     /**
-     * Check if an input is empty.
-     * @param input input.
-     * @return true or false.
+     * Checks if an input is empty.
      */
     public static boolean isNotEmpty(String input) {
         if (input.isEmpty()) {
@@ -58,18 +45,7 @@ public class Verifier {
     }
 
     /**
-     * Get integer value of input.
-     * @param input
-     * @return
-     */
-    public static int getInt(String input) {
-        return Integer.parseInt(input);
-    }
-
-    /**
-     * Check if the University field is valid.
-     * @param university
-     * @return
+     * Checks if the University field is valid.
      */
     public static boolean isValidUniversity(String university) {
         if (isNotEmpty(university) && isCorrectLength(university, UNIVERSITY_MAX_LENGTH)
@@ -81,9 +57,7 @@ public class Verifier {
     }
 
     /**
-     * Check if the Major field is valid.
-     * @param major
-     * @return
+     * Checks if the Major field is valid.
      */
     public static boolean isValidMajor(String major) {
         if (isNotEmpty(major) && isCorrectLength(major, MAJOR_MAX_LENGTH)
@@ -95,19 +69,20 @@ public class Verifier {
     }
 
     /**
-     * Check if the Cap field is valid.
-     * @param cap
-     * @return
+     * Checks if the Cap field is valid.
      */
-    public static boolean isValidCap(String cap) throws ParseException {
-        double userCap;
+    public static boolean isValidCap(String currentCap, String maxCap) throws ParseException {
+        double userCurrentCap;
+        double userMaximumCap;
+
         try {
-            userCap = Double.valueOf(cap);
+            userCurrentCap = Double.valueOf(currentCap);
+            userMaximumCap = Double.valueOf(maxCap);
         } catch (NumberFormatException ex) {
-            throw new ParseException(CAP_MESSAGE_CONSTRAINTS);
+            throw new ParseException(Cap.MESSAGE_CONSTRAINTS);
         }
 
-        if (isNotEmpty(cap) && isWithinRange(userCap, 0, 5)) {
+        if (isNotEmpty(currentCap) && isNotEmpty(maxCap) && userCurrentCap <= userMaximumCap) {
             return true;
         } else {
             return false;
@@ -115,20 +90,7 @@ public class Verifier {
     }
 
     /**
-     * Check if a number is within accepted range.
-     * @param number
-     * @param min
-     * @param max
-     * @return
-     */
-    public static boolean isWithinRange(double number, double min, double max) {
-        return number >= min && number <= max;
-    }
-
-    /**
-     * Check if the Role field is valid.
-     * @param role
-     * @return
+     * Checks if the Role field is valid.
      */
     public static boolean isValidRole(String role) {
         if (isNotEmpty(role) && isCorrectLength(role, ROLE_MAX_LENGTH)

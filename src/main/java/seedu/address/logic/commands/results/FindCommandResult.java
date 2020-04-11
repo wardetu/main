@@ -15,7 +15,6 @@ public class FindCommandResult extends CommandResult {
     public FindCommandResult(String dataToUser, String feedbackToUser, String displayType) {
         super(dataToUser, feedbackToUser, displayType);
         super.isShowPreview = false;
-        super.isGenerate = false;
         super.isShowHelp = false;
         super.isExit = false;
     }
