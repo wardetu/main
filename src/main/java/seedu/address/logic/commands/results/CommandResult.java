@@ -11,9 +11,6 @@ public class CommandResult {
     /** Preview information about a resume. */
     protected boolean isShowPreview = false;
 
-    /** Generate .pdf file from a resume. */
-    protected boolean isGenerate = false;
-
     /** Help information should be shown to the user. */
     protected boolean isShowHelp = false;
 
@@ -81,7 +78,6 @@ public class CommandResult {
                 && dataToUser.equals(otherCommandResult.dataToUser)
                 && displayType.equals(otherCommandResult.displayType)
                 && isShowPreview == otherCommandResult.isShowPreview
-                && isGenerate == otherCommandResult.isGenerate
                 && isShowHelp == otherCommandResult.isShowHelp
                 && isExit == otherCommandResult.isExit;
     }
@@ -89,7 +85,7 @@ public class CommandResult {
     @Override
     public int hashCode() {
         return Objects.hash(dataToUser, feedbackToUser, dataToUser,
-                displayType, isShowPreview, isGenerate, isShowHelp, isExit);
+                displayType, isShowPreview, isShowHelp, isExit);
     }
 
 }
