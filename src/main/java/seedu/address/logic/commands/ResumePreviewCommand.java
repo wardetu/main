@@ -35,6 +35,14 @@ public class ResumePreviewCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Previews resume at {@code targetIndex}.
+     *
+     * @param model {@code Model} where resume will be previewed.
+     * @return      {@code CommandResult} that describes changes made when command execute runs successfully.
+     *
+     * @throws      CommandException if {@code targetIndex} is out of bounds.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
