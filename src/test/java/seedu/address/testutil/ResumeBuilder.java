@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,7 +31,6 @@ public class ResumeBuilder {
 
     public ResumeBuilder() {
         name = new Name(DEFAULT_NAME);
-        tags.addAll(Arrays.stream(DEFAULT_TAGS).map(Tag::new).collect(Collectors.toList()));
     }
 
     public ResumeBuilder(Resume resumeToCopy) {
