@@ -50,21 +50,17 @@ public class TypicalEditUserDescriptor {
             .withTo(VALID_TO_AMY)
             .withCap(VALID_CAP_AMY)
             .build();
-    public final static EditUserDescriptor BOB_DESC = buildBob();
-
-    static EditUserDescriptor buildBob() {
-        EditUserDescriptor amy = new EditUserDescriptor();
-        amy.setDisplayPicture(new DisplayPicture(VALID_DP_BOB));
-        amy.setName(new Name(VALID_NAME_BOB));
-        amy.setDescription(new Description(VALID_DESCRIPTION_BOB));
-        amy.setPhone(new Phone(VALID_PHONE_BOB));
-        amy.setEmail(new Email(VALID_EMAIL_BOB));
-        amy.setGithub(new Github(VALID_GITHUB_BOB));
-        amy.setUni(new University(VALID_UNIVERSITY_BOB));
-        amy.setMajor(new Major(VALID_MAJOR_BOB));
-        amy.setFrom(new Time(VALID_FROM_BOB));
-        amy.setTo(new Time(VALID_TO_BOB));
-        amy.setCap(new Cap(VALID_CAP_BOB));
-        return amy;
-    }
+    public final static EditUserDescriptor BOB_DESC = new EditUserDescriptorBuilder()
+            .withDisplayPicture(VALID_DP_BOB)
+            .withName(VALID_NAME_BOB)
+            .withDescription(VALID_DESCRIPTION_BOB)
+            .withPhone(VALID_PHONE_BOB)
+            .withEmail(VALID_EMAIL_BOB)
+            .withGithub(VALID_GITHUB_BOB)
+            .withUniversity(VALID_UNIVERSITY_BOB)
+            .withMajor(VALID_MAJOR_BOB)
+            .withFrom(VALID_FROM_BOB)
+            .withTo(VALID_TO_BOB)
+            .withCap(VALID_CAP_BOB)
+            .build();
 }
