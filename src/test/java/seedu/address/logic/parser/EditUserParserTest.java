@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_CAP_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_CAP_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_DESCRIPTION_AMY;
@@ -40,6 +41,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TO_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TO_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIVERSITY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIVERSITY_BOB;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
@@ -198,5 +200,19 @@ public class EditUserParserTest {
         assertParseSuccess(parser,
                 PREFIXED_CAP_BOB,
                 new EditUserCommand(new EditUserDescriptorBuilder().withCap(VALID_CAP_BOB).build()));
+    }
+
+    @Test
+    public void parse_preamblePresent_failure() {
+        assertParseFailure(parser,
+                "a preamble" + PREFIXED_NAME_AMY,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditUserCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_noArgs_failure() {
+        assertParseFailure(parser,
+                "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditUserCommand.MESSAGE_NO_ARGS));
     }
 }

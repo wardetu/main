@@ -65,6 +65,7 @@ public class EditUserCommand extends Command {
             + PREFIX_TO + "2022 "
             + PREFIX_CAP + "5.0 ";
 
+    public static final String MESSAGE_NO_ARGS = "You did not specify any arguments!";
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited User Profile!";
     public static final String USER_NOT_EDITED = "User and edited User is the same!";
 
