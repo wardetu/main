@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
+import static seedu.address.testutil.TypicalProject.ORBITAL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,13 +19,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.item.Project;
+import seedu.address.testutil.EditProjectDescriptorBuilder;
 import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.ProjectBuilder;
-import seedu.address.testutil.TypicalProject;
 
 public class EditProjectCommandTest {
 
-    private Project sampleEditedProject = TypicalProject.ORBITAL;
+    private Project sampleEditedProject = ORBITAL;
 
     @Test
     public void constructor_nullProject_throwsNullPointerException() {
@@ -37,8 +38,7 @@ public class EditProjectCommandTest {
         ModelStubWithProject modelStub = new ModelStubWithProject(validItem);
         Index invalidIndex = INDEX_THIRD_ITEM;
 
-        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
-        setEditProjectDescriptor(editProjectDescriptor);
+        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptorBuilder(ORBITAL).build();
 
         EditProjectCommand editProjectCommand = new EditProjectCommand(invalidIndex, editProjectDescriptor);
         assertThrows(CommandException.class,
@@ -50,8 +50,7 @@ public class EditProjectCommandTest {
         ModelStubContainingProjectEdited modelStub = new ModelStubContainingProjectEdited();
         Index validIndex = INDEX_FIRST_ITEM;
 
-        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
-        setEditProjectDescriptor(editProjectDescriptor);
+        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptorBuilder(ORBITAL).build();
 
         Project toEdit = modelStub.getProjectByIndex(validIndex);
         EditProjectCommand editProjectCommand = new EditProjectCommand(validIndex, editProjectDescriptor);
@@ -78,8 +77,7 @@ public class EditProjectCommandTest {
         Index indexA = Index.fromZeroBased(5);
         Index indexB = Index.fromOneBased(19);
 
-        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
-        setEditProjectDescriptor(editProjectDescriptor);
+        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptorBuilder(ORBITAL).build();
 
         EditProjectCommand editACommand = new EditProjectCommand(indexA, editProjectDescriptor);
         EditProjectCommand editBCommand = new EditProjectCommand(indexB, editProjectDescriptor);
@@ -99,18 +97,6 @@ public class EditProjectCommandTest {
 
         // different index -> returns false
         assertFalse(editACommand.equals(editBCommand));
-    }
-
-
-    /**
-     * A method to set fields in the edit project descriptor.
-     */
-    public void setEditProjectDescriptor(EditProjectDescriptor editProjectDescriptor) {
-        editProjectDescriptor.setName(sampleEditedProject.getName());
-        editProjectDescriptor.setWebsite(sampleEditedProject.getWebsite());
-        editProjectDescriptor.setTime(sampleEditedProject.getTime());
-        editProjectDescriptor.setDescription(sampleEditedProject.getDescription());
-        editProjectDescriptor.setTags(sampleEditedProject.getTags());
     }
 
     /**

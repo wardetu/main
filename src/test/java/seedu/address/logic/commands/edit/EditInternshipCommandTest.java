@@ -19,6 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.item.Internship;
+import seedu.address.testutil.EditInternshipDescriptorBuilder;
 import seedu.address.testutil.InternshipBuilder;
 import seedu.address.testutil.ModelStub;
 
@@ -38,9 +39,7 @@ public class EditInternshipCommandTest {
 
         Index invalidIndex = INDEX_THIRD_ITEM;
 
-        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
-
-        setEditInternshipDescriptor(editInternshipDescriptor);
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptorBuilder(validItem).build();
 
         EditInternshipCommand editInternshipCommand = new EditInternshipCommand(invalidIndex, editInternshipDescriptor);
 
@@ -51,9 +50,8 @@ public class EditInternshipCommandTest {
     @Test
     public void execute_validIndex_editSuccessful() throws CommandException {
         ModelStubContainingInternshipEdited modelStub = new ModelStubContainingInternshipEdited();
-        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
 
-        setEditInternshipDescriptor(editInternshipDescriptor);
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptorBuilder(GOOGLE).build();
 
         Index validIndex = INDEX_FIRST_ITEM;
 
@@ -72,6 +70,7 @@ public class EditInternshipCommandTest {
         EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
         editInternshipDescriptor.setTags(null);
         editInternshipDescriptor.setName(null);
+
         Index validIndex = INDEX_FIRST_ITEM;
         EditInternshipCommand editInternshipCommand = new EditInternshipCommand(validIndex, editInternshipDescriptor);
         assertEquals(sampleEditedInternship,
@@ -83,8 +82,7 @@ public class EditInternshipCommandTest {
         Index indexA = Index.fromZeroBased(5);
         Index indexB = Index.fromOneBased(19);
 
-        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
-        setEditInternshipDescriptor(editInternshipDescriptor);
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptorBuilder(GOOGLE).build();
 
         EditInternshipCommand editACommand = new EditInternshipCommand(indexA, editInternshipDescriptor);
         EditInternshipCommand editBCommand = new EditInternshipCommand(indexB, editInternshipDescriptor);
@@ -104,19 +102,6 @@ public class EditInternshipCommandTest {
 
         // different index -> returns false
         assertFalse(editACommand.equals(editBCommand));
-    }
-
-
-    /**
-     * A method to set fields in the edit internship descriptor.
-     */
-    public void setEditInternshipDescriptor(EditInternshipDescriptor editInternshipDescriptor) {
-        editInternshipDescriptor.setName(sampleEditedInternship.getName());
-        editInternshipDescriptor.setFrom(sampleEditedInternship.getFrom());
-        editInternshipDescriptor.setTo(sampleEditedInternship.getTo());
-        editInternshipDescriptor.setRole(sampleEditedInternship.getRole());
-        editInternshipDescriptor.setDescription(sampleEditedInternship.getDescription());
-        editInternshipDescriptor.setTags(sampleEditedInternship.getTags());
     }
 
     /**
