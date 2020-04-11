@@ -17,7 +17,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.AddCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ResumeBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Note;
@@ -40,13 +39,15 @@ public class AddCommandIntegrationTest {
 
     private Model model;
     private Model expectedModel;
-    private ResumeBook resumeBook = new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build();
-    private ResumeBook resumeBookCopy = new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build();
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(resumeBook, new UserPrefs());
-        expectedModel = new ModelManager(resumeBookCopy, new UserPrefs());
+        model = new ModelManager(
+                new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build(),
+                new UserPrefs());
+        expectedModel = new ModelManager(
+                new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build(),
+                new UserPrefs());
     }
 
     @Test
@@ -80,7 +81,7 @@ public class AddCommandIntegrationTest {
         assertCommandSuccess(new AddNoteCommand(validNote),
                 model,
                 new AddCommandResult(validNote.toString(),
-                        AddNoteCommand.MESSAGE_SUCCESS, ItemUtil.INTERNSHIP_ALIAS),
+                        AddNoteCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType()),
                 expectedModel);
     }
 

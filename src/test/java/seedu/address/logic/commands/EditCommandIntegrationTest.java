@@ -48,6 +48,7 @@ import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.util.ItemUtil;
+import seedu.address.testutil.EditInternshipDescriptorBuilder;
 import seedu.address.testutil.InternshipBuilder;
 import seedu.address.testutil.NoteBuilder;
 import seedu.address.testutil.ProjectBuilder;
@@ -69,55 +70,6 @@ public class EditCommandIntegrationTest {
     private Model model;
     private Model expectedModel;
 
-    /**
-     * A method to set fields in the edit internship descriptor.
-     */
-    public void setEditInternshipDescriptor(EditInternshipDescriptor editInternshipDescriptor,
-                                            Internship sampleEditedInternship) {
-        editInternshipDescriptor.setName(sampleEditedInternship.getName());
-        editInternshipDescriptor.setFrom(sampleEditedInternship.getFrom());
-        editInternshipDescriptor.setTo(sampleEditedInternship.getTo());
-        editInternshipDescriptor.setRole(sampleEditedInternship.getRole());
-        editInternshipDescriptor.setDescription(sampleEditedInternship.getDescription());
-        editInternshipDescriptor.setTags(sampleEditedInternship.getTags());
-    }
-
-    /**
-     * A method to set fields in the edit project descriptor.
-     */
-    public void setEditProjectDescriptor(EditProjectDescriptor editProjectDescriptor, Project sampleEditedProject) {
-        editProjectDescriptor.setName(sampleEditedProject.getName());
-        editProjectDescriptor.setWebsite(sampleEditedProject.getWebsite());
-        editProjectDescriptor.setTime(sampleEditedProject.getTime());
-        editProjectDescriptor.setDescription(sampleEditedProject.getDescription());
-        editProjectDescriptor.setTags(sampleEditedProject.getTags());
-    }
-
-    /**
-     * A method to set fields in the edit skill descriptor.
-     */
-    public void setEditSkillDescriptor(EditSkillDescriptor editSkillDescriptor, Skill sampleEditedSkill) {
-        editSkillDescriptor.setName(sampleEditedSkill.getName());
-        editSkillDescriptor.setLevel(sampleEditedSkill.getLevel());
-        editSkillDescriptor.setTags(sampleEditedSkill.getTags());
-    }
-
-    /**
-     * A method to set fields in the edit note descriptor.
-     */
-    public void setEditNoteDescriptor(EditNoteDescriptor editNoteDescriptor, Note sampleEditedNote) {
-        editNoteDescriptor.setName(sampleEditedNote.getName());
-        editNoteDescriptor.setTime(sampleEditedNote.getTime());
-    }
-
-    /**
-     * A method to set fields in the edit resume descriptor.
-     */
-    public void setEditResumeDescriptor(EditResumeDescriptor editResumeDescriptor, Resume sampleEditedResume) {
-        editResumeDescriptor.setName(sampleEditedResume.getName());
-        editResumeDescriptor.setTags(sampleEditedResume.getTags());
-    }
-
     @BeforeEach
     public void setUp() {
         model = new ModelManager(new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build(),
@@ -129,8 +81,7 @@ public class EditCommandIntegrationTest {
     @Test
     public void execute_editInternship_success() {
         Internship validInternship = GOOGLE;
-        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
-        setEditInternshipDescriptor(editInternshipDescriptor, validInternship);
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptorBuilder(GOOGLE).build();
 
         expectedModel.setInternship(TypicalInternship.NINJA_VAN, validInternship);
         expectedModel.setInternshipToDisplay();
@@ -154,8 +105,7 @@ public class EditCommandIntegrationTest {
     @Test
     public void execute_fullDuplicateInternship_throwsCommandException() {
         Internship validInternship = PAYPAL;
-        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
-        setEditInternshipDescriptor(editInternshipDescriptor, validInternship);
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptorBuilder(PAYPAL).build();
 
         assertCommandFailure(new EditInternshipCommand(INDEX_FIRST_ITEM, editInternshipDescriptor),
                 model,
