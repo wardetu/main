@@ -66,6 +66,7 @@ public class EditUserCommand extends Command {
             + PREFIX_CAP + "5.0 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited User Profile!";
+    public static final String USER_NOT_EDITED = "User and edited User is the same!";
 
     private EditUserDescriptor editUserDescriptor;
 
@@ -85,6 +86,10 @@ public class EditUserCommand extends Command {
 
         if (editedUser.getFrom().compareTo(editedUser.getTo()) > 0) {
             throw new CommandException(MESSAGE_FROM_TO_MISORDER);
+        }
+
+        if (editedUser.equals(userToEdit)) {
+            throw new CommandException(USER_NOT_EDITED);
         }
 
         model.setUser(editedUser);
