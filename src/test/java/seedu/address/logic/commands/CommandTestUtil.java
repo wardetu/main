@@ -155,9 +155,7 @@ public class CommandTestUtil {
     public static final String INVALID_CAP = "4.0 10.0";
     public static final String INVALID_NEGATIVE_MAX_CAP = "-1.0";
 
-
-
-
+    // USER
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + INVALID_NAME;
     public static final String INVALID_FROM_DESC = " " + PREFIX_FROM + "123-1998"; // Time must be of format MM-YYYY
     public static final String INVALID_TO_DESC = " " + PREFIX_TIME + "123-1998"; // Time must be of format MM-YYYY
@@ -183,26 +181,12 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
-            assertEquals(expectedCommandResult.getDataToUser(), result.getDataToUser());
-            assertEquals(expectedCommandResult.getFeedbackToUser(), result.getFeedbackToUser());
+            assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel.getStatelessResumeBook(), actualModel.getStatelessResumeBook());
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }
-
-
-    /**
-     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
-     * that takes a string {@code expectedMessage}.
-     */
-
-    public static void assertCommandSuccess(Command command, Model actualModel, String expectedData,
-                                            String expectedFeedback, Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedData, expectedFeedback, "");
-        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
-    }
-
 
     /**
      * Executes the given {@code command}, confirms that <br>

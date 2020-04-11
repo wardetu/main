@@ -36,6 +36,8 @@ public class ResumeEditCommand extends Command {
             + PREFIX_SKILL + " 1 2 "
             + PREFIX_PROJECT + " 1 ";
 
+    public static final String MESSAGE_SUCCESS = "Contents of Resume has been updated!";
+
     protected final Index index;
     protected final Optional<List<Integer>> internshipIndices;
     protected final Optional<List<Integer>> projectIndices;
@@ -100,7 +102,7 @@ public class ResumeEditCommand extends Command {
         model.setResumeToDisplay();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
-        return new ResumeEditCommandResult(editedResume.toString(), "Resume is updated",
+        return new ResumeEditCommandResult(editedResume.toString(), MESSAGE_SUCCESS,
                 model.getDisplayType());
     }
 
