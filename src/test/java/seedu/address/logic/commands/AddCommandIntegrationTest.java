@@ -40,14 +40,16 @@ public class AddCommandIntegrationTest {
 
     private Model model;
     private Model expectedModel;
-    private ResumeBook resumeBook = new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build();
-    private ResumeBook resumeBookCopy = new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build();
 
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(resumeBook, new UserPrefs());
-        expectedModel = new ModelManager(resumeBookCopy, new UserPrefs());
+        model = new ModelManager(
+                new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build(),
+                new UserPrefs());
+        expectedModel = new ModelManager(
+                new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build(),
+                new UserPrefs());
     }
 
     @Test
