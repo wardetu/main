@@ -24,7 +24,7 @@ public class EditResumeDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditInternshipDescriptor} with fields containing {@code internship}'s details
+     * Returns an {@code EditResumeDescriptor} with fields containing {@code resume}'s details
      */
     public EditResumeDescriptorBuilder(Resume resume) {
         descriptor = new EditResumeDescriptor();

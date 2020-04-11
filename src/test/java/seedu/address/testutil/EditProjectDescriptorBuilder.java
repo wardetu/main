@@ -27,7 +27,7 @@ public class EditProjectDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditInternshipDescriptor} with fields containing {@code internship}'s details
+     * Returns an {@code EditProjectDescriptor} with fields containing {@code project}'s details
      */
     public EditProjectDescriptorBuilder(Project project) {
         descriptor = new EditProjectDescriptor();
