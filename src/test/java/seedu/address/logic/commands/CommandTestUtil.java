@@ -2,17 +2,22 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CAP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEBSITE;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -53,6 +58,18 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
+    // Person with prefixes
+    public static final String PREFIXED_DP_AMY = " " + PREFIX_DP + " " + VALID_DP_AMY;
+    public static final String PREFIXED_NAME_AMY = " " + PREFIX_NAME + " " + VALID_NAME_AMY;
+    public static final String PREFIXED_DESCRIPTION_AMY = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_AMY;
+    public static final String PREFIXED_PHONE_AMY = " " + PREFIX_PHONE + " " + VALID_PHONE_AMY;
+    public static final String PREFIXED_EMAIL_AMY = " " + PREFIX_EMAIL + " " + VALID_EMAIL_AMY;
+    public static final String PREFIXED_GITHUB_AMY = " " + PREFIX_GITHUB + " " + VALID_GITHUB_AMY;
+    public static final String PREFIXED_UNIVERISITY_AMY = " " + PREFIX_UNIVERSITY + " " + VALID_UNIVERSITY_AMY;
+    public static final String PREFIXED_MAJOR_AMY = " " + PREFIX_MAJOR + " " + VALID_MAJOR_AMY;
+    public static final String PREFIXED_FROM_AMY = " " + PREFIX_FROM + " " + VALID_FROM_AMY;
+    public static final String PREFIXED_CAP_AMY = " " + PREFIX_CAP + " " + VALID_CAP_AMY;
 
     // RESUME
     public static final String VALID_RESUME_NAME_SE = "Software Engineering Intern Resume";
