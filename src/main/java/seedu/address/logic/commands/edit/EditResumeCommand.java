@@ -67,7 +67,7 @@ public class EditResumeCommand extends EditCommand {
         }
 
         return new EditCommandResult(editedResume.toString(),
-                String.format(MESSAGE_EDIT_RESUME_SUCCESS, editedResume.getType().getFullType()),
+                String.format(MESSAGE_EDIT_RESUME_SUCCESS, editedResume.getName().fullName),
                 model.getDisplayType());
     }
 
@@ -86,6 +86,14 @@ public class EditResumeCommand extends EditCommand {
         editedResume.setProjectIds(toEdit.getProjectIds());
         editedResume.setSkillIds(toEdit.getSkillIds());
         return editedResume;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditResumeCommand // instanceof handles nulls
+                && this.index.equals(((EditResumeCommand) other).index)
+                && this.editResumeDescriptor.equals(((EditResumeCommand) other).editResumeDescriptor));
     }
 
 }

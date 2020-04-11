@@ -25,7 +25,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditNoteCommand extends EditCommand {
 
-    public static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edited This Note!";
+    public static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edited Note: %1$s";
 
     private static final String FIELDS = "Example: "
             + COMMAND_WORD + " "
@@ -68,7 +68,8 @@ public class EditNoteCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
-        return new EditCommandResult(editedNote.toString(), MESSAGE_EDIT_NOTE_SUCCESS, model.getDisplayType());
+        return new EditCommandResult(editedNote.toString(),
+                String.format(MESSAGE_EDIT_NOTE_SUCCESS, editedNote.getName().fullName), model.getDisplayType());
     }
 
     /**
@@ -83,5 +84,13 @@ public class EditNoteCommand extends EditCommand {
         Set<Tag> updateTags = editNoteDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
         return new Note(updatedName, updatedTime, toEdit.isDone(), updateTags, id);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditNoteCommand // instanceof handles nulls
+                && this.index.equals(((EditNoteCommand) other).index)
+                && this.editNoteDescriptor.equals(((EditNoteCommand) other).editNoteDescriptor));
     }
 }

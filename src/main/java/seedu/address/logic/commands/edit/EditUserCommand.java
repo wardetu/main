@@ -115,4 +115,11 @@ public class EditUserCommand extends Command {
 
         return new Person(displayPicture, name, description, phone, email, github, university, major, from, to, cap);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditUserCommand // instanceof handles nulls
+                && this.editUserDescriptor.equals(((EditUserCommand) other).editUserDescriptor));
+    }
 }

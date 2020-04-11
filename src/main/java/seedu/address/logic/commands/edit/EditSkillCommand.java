@@ -71,7 +71,7 @@ public class EditSkillCommand extends EditCommand {
         }
 
         return new EditCommandResult(editedSkill.toString(),
-                String.format(MESSAGE_EDIT_SKILL_SUCCESS, editedSkill.getType().getFullType()),
+                String.format(MESSAGE_EDIT_SKILL_SUCCESS, editedSkill.getName().fullName),
                 model.getDisplayType());
     }
 
@@ -87,5 +87,13 @@ public class EditSkillCommand extends EditCommand {
         Set<Tag> updatedTags = editSkillDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
         return new Skill(updatedName, level, updatedTags, id);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditSkillCommand // instanceof handles nulls
+                && this.index.equals(((EditSkillCommand) other).index)
+                && this.editSkillDescriptor.equals(((EditSkillCommand) other).editSkillDescriptor));
     }
 }

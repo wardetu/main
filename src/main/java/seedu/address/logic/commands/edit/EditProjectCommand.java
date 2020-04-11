@@ -81,7 +81,7 @@ public class EditProjectCommand extends EditCommand {
         }
 
         return new EditCommandResult(editedProject.toString(),
-                String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editedProject.getType().getFullType()),
+                String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editedProject.getName().fullName),
                 model.getDisplayType());
     }
 
@@ -100,5 +100,13 @@ public class EditProjectCommand extends EditCommand {
         Set<Tag> updatedTags = editProjectDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
         return new Project(updatedName, updatedTime, updatedWebsite, updatedDesc, updatedTags, id);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditProjectCommand // instanceof handles nulls
+                && this.index.equals(((EditProjectCommand) other).index)
+                && this.editProjectDescriptor.equals(((EditProjectCommand) other).editProjectDescriptor));
     }
 }
