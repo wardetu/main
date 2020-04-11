@@ -54,6 +54,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String VALID_ITEM_INDEX = " " + 1;
+
     // RESUME
     public static final String VALID_RESUME_NAME_SE = "Software Engineering Intern Resume";
     public static final String VALID_RESUME_NAME_ME = "Mechanical Engineering Intern Resume";
@@ -122,8 +124,10 @@ public class CommandTestUtil {
 
     // NOTES
     public static final String ITEM_TYPE_NOTE = " " + PREFIX_ITEM + " note";
+    public static final String VALID_TAG_URGENT = "urgent";
+    public static final String PREFIXED_TAG_URGENT = " " + PREFIX_TAG + " " + VALID_TAG_URGENT;
     public static final String VALID_NOTE_NAME_CS2103 = "Finish CS2103";
-    public static final String PREFIXED_NAME_NOTE = " " + PREFIX_NAME + " Finish CS2103";
+    public static final String PREFIXED_NOTE_NAME = " " + PREFIX_NAME + " " + VALID_NOTE_NAME_CS2103;
     public static final String VALID_NOTE_TIME = "12-2020";
     public static final String VALID_NOTE_IS_DONE = "false";
 
@@ -157,6 +161,7 @@ public class CommandTestUtil {
 
     // USER
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + INVALID_NAME;
+    public static final String INVALID_ROLE_DESC = " " + PREFIX_NAME + "...";
     public static final String INVALID_FROM_DESC = " " + PREFIX_FROM + "123-1998"; // Time must be of format MM-YYYY
     public static final String INVALID_TO_DESC = " " + PREFIX_TIME + "123-1998"; // Time must be of format MM-YYYY
     public static final String INVALID_WEBSITE_DESC = " " + PREFIX_WEBSITE + INVALID_WEBSITE;

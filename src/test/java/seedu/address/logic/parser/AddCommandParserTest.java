@@ -21,9 +21,9 @@ import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_INTERNSHIP_D
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_DUKE;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_GOOGLE;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_ME;
-import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_NOTE;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_ORBITAL;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_REACT;
+import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NOTE_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_ROLE_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_ROLE_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TAG_FRONTEND;
@@ -138,29 +138,29 @@ public class AddCommandParserTest {
         Note expectedNote = new NoteBuilder(FINISH_CS_2103).withTags(VALID_TAG_JAVA).build();
         // Standard
         assertParseSuccess(parser,
-                ITEM_TYPE_NOTE + PREFIXED_NAME_NOTE + PREFIXED_TIME_TO + PREFIXED_TAG_JAVA,
+                ITEM_TYPE_NOTE + PREFIXED_NOTE_NAME + PREFIXED_TIME_TO + PREFIXED_TAG_JAVA,
                 new AddNoteCommand(expectedNote));
 
         // multiple item types - last type accepted
         assertParseSuccess(parser,
-                ITEM_TYPE_INTERNSHIP + ITEM_TYPE_NOTE + PREFIXED_NAME_NOTE + PREFIXED_TIME_TO + PREFIXED_TAG_JAVA,
+                ITEM_TYPE_INTERNSHIP + ITEM_TYPE_NOTE + PREFIXED_NOTE_NAME + PREFIXED_TIME_TO + PREFIXED_TAG_JAVA,
                 new AddNoteCommand(expectedNote));
 
 
         // multiple item names - last name accepted
         assertParseSuccess(parser,
-                ITEM_TYPE_NOTE + PREFIXED_NAME_REACT + PREFIXED_NAME_NOTE + PREFIXED_TIME_TO + PREFIXED_TAG_JAVA,
+                ITEM_TYPE_NOTE + PREFIXED_NAME_REACT + PREFIXED_NOTE_NAME + PREFIXED_TIME_TO + PREFIXED_TAG_JAVA,
                 new AddNoteCommand(expectedNote));
 
         // multiple item time - last time accepted
         assertParseSuccess(parser,
-                ITEM_TYPE_NOTE + PREFIXED_NAME_NOTE + " t/ 12-2021" + PREFIXED_TIME_TO + PREFIXED_TAG_JAVA,
+                ITEM_TYPE_NOTE + PREFIXED_NOTE_NAME + " t/ 12-2021" + PREFIXED_TIME_TO + PREFIXED_TAG_JAVA,
                 new AddNoteCommand(expectedNote));
 
         // multiple item tags - all tags accepted
         expectedNote = new NoteBuilder(FINISH_CS_2103).withTags(VALID_TAG_JAVA, VALID_TAG_FRONTEND).build();
         assertParseSuccess(parser,
-                ITEM_TYPE_NOTE + PREFIXED_NAME_NOTE + PREFIXED_TIME_TO + PREFIXED_TAG_JAVA + PREFIXED_TAG_FRONTEND,
+                ITEM_TYPE_NOTE + PREFIXED_NOTE_NAME + PREFIXED_TIME_TO + PREFIXED_TAG_JAVA + PREFIXED_TAG_FRONTEND,
                 new AddNoteCommand(expectedNote));
     }
 
@@ -278,7 +278,7 @@ public class AddCommandParserTest {
 
         // 0 tags
         assertParseSuccess(parser,
-                ITEM_TYPE_NOTE + PREFIXED_NAME_NOTE + PREFIXED_TIME_TO,
+                ITEM_TYPE_NOTE + PREFIXED_NOTE_NAME + PREFIXED_TIME_TO,
                 new AddNoteCommand(expectedNote));
 
 
@@ -367,7 +367,7 @@ public class AddCommandParserTest {
 
         // missing time prefix
         assertParseFailure(parser,
-                ITEM_TYPE_NOTE + PREFIXED_NAME_NOTE + PREFIXED_TAG_FRONTEND,
+                ITEM_TYPE_NOTE + PREFIXED_NOTE_NAME + PREFIXED_TAG_FRONTEND,
                 expectedNoteErrorMessage);
 
         String expectedProjectErrorMessage =

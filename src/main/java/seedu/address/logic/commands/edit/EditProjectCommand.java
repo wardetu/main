@@ -28,6 +28,9 @@ import seedu.address.model.tag.Tag;
  * Edits a Project Item in the resume book.
  */
 public class EditProjectCommand extends EditCommand {
+
+    public static final String MESSAGE_EDIT_PROJECT_SUCCESS = "Edited Project: %1$s";
+
     private static final String FIELDS = COMMAND_WORD
             + " INDEX "
             + PREFIX_ITEM + "proj "
@@ -45,7 +48,6 @@ public class EditProjectCommand extends EditCommand {
             + PREFIX_DESCRIPTION + " It washes things. "
             + PREFIX_TAG + "clean\n";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + FIELDS + EXAMPLE;
-    public static final String MESSAGE_EDIT_PROJECT_SUCCESS = "Edited Project: %1$s";
 
     private EditProjectDescriptor editProjectDescriptor;
 
@@ -79,7 +81,7 @@ public class EditProjectCommand extends EditCommand {
         }
 
         return new EditCommandResult(editedProject.toString(),
-                String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editedProject.getType().getFullType()),
+                String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editedProject.getName().fullName),
                 model.getDisplayType());
     }
 
@@ -89,7 +91,7 @@ public class EditProjectCommand extends EditCommand {
      * @param editProjectDescriptor Descriptor parsed from input of user
      * @return Edited Project item.
      */
-    private static Project createEditedProject(
+    static Project createEditedProject(
             Project toEdit, EditProjectDescriptor editProjectDescriptor) {
         Name updatedName = editProjectDescriptor.getName().orElse(toEdit.getName());
         Time updatedTime = editProjectDescriptor.getTime().orElse(toEdit.getTime());
@@ -98,5 +100,13 @@ public class EditProjectCommand extends EditCommand {
         Set<Tag> updatedTags = editProjectDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
         return new Project(updatedName, updatedTime, updatedWebsite, updatedDesc, updatedTags, id);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditProjectCommand // instanceof handles nulls
+                && index.equals(((EditProjectCommand) other).index)
+                && editProjectDescriptor.equals(((EditProjectCommand) other).editProjectDescriptor));
     }
 }

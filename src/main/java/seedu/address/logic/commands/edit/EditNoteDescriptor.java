@@ -79,7 +79,6 @@ public class EditNoteDescriptor extends EditItemDescriptor {
         EditNoteDescriptor e = (EditNoteDescriptor) other;
 
         return getName().equals(e.getName())
-                && getTime().equals(e.getTime())
-                && getTags().equals(e.getTags());
+                && getTime().equals(e.getTime());
     }
 }
