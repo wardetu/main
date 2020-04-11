@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Type;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * Represents an Item in the address book.
@@ -18,6 +19,7 @@ import seedu.address.model.tag.Tag;
 public abstract class Item {
 
     public static final String MESSAGE_CONSTRAINTS = "You are required to specify an item type! For example: i/ res";
+    public static final String MESSAGE_INVALID_ITEM_TYPE = "The item type is invalid!";
 
 
     // Item-level fields
@@ -102,7 +104,8 @@ public abstract class Item {
      * @return true if the itemType matches any of the known item types.
      */
     public static boolean isValidItemType(String itemType) {
-        String[] correctFormats = new String[] {"int", "proj", "ski", "res", "note"};
+        String[] correctFormats = new String[] {ItemUtil.INTERNSHIP_ALIAS, ItemUtil.PROJECT_ALIAS, ItemUtil.SKILL_ALIAS,
+            ItemUtil.RESUME_ALIAS, ItemUtil.NOTE_ALIAS};
         for (String correctFormat: correctFormats) {
             if (itemType.equals(correctFormat)) {
                 return true;

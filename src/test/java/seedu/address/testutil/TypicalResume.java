@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RESUME_NAME_FILLED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RESUME_NAME_ME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RESUME_NAME_SE;
+import static seedu.address.testutil.TypicalSkill.GIT;
 
 import seedu.address.model.item.Resume;
 
@@ -16,6 +17,6 @@ public class TypicalResume {
             .withName(VALID_RESUME_NAME_FILLED)
             .withInternship(TypicalInternship.GOOGLE)
             .withProject(TypicalProject.ORBITAL)
-            .withSkill(TypicalSkill.GIT)
+            .withSkill(GIT)
             .build();
 }

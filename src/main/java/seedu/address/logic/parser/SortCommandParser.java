@@ -23,7 +23,10 @@ import seedu.address.model.util.ItemUtil;
 public class SortCommandParser implements Parser<SortCommand> {
 
     /**
-     * Parses the given {@code String} of arguments and returns a SortCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SortCommand
+     * and returns SortCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     @Override
     public SortCommand parse(String args) throws ParseException {
@@ -84,8 +87,8 @@ public class SortCommandParser implements Parser<SortCommand> {
 
 
         default:
-            // TODO: Use a better Exception here
-            throw new ParseException("The item type is not detected! Something is wrong");
+            // Should not have reached here at all
+            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
         }
     }
 

@@ -3,12 +3,16 @@ package seedu.address.logic.commands.edit;
 import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.item.field.Cap;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
+import seedu.address.model.item.field.Major;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 
 /**
  * Descriptor for EditUserCommand.
@@ -16,20 +20,15 @@ import seedu.address.model.item.field.Time;
 public class EditUserDescriptor {
     private DisplayPicture displayPicture;
     private Name name;
-    private String description;
+    private Description description;
     private Phone phone;
     private Email email;
     private Github github;
-    private String university;
-    private String major;
+    private University university;
+    private Major major;
     private Time from;
     private Time to;
-
-    /*
-        A workaround since the default value for double is 0. The original implementation tried to wrap the value
-        in an Optional<Double> which caused the CAP field to be set to 0 everytime an edit is made to user profile.
-     */
-    private double cap = -1;
+    private Cap cap;
 
     public EditUserDescriptor() {}
 
@@ -67,11 +66,11 @@ public class EditUserDescriptor {
         return Optional.ofNullable(name);
     }
 
-    public void setDescription(String description) {
+    public void setDescription(Description description) {
         this.description = description;
     }
 
-    public Optional<String> getDescription() {
+    public Optional<Description> getDescription() {
         return Optional.ofNullable(description);
     }
 
@@ -99,19 +98,19 @@ public class EditUserDescriptor {
         return Optional.ofNullable(github);
     }
 
-    public void setUni(String uni) {
+    public void setUni(University uni) {
         this.university = uni;
     }
 
-    public Optional<String> getUniversity() {
+    public Optional<University> getUniversity() {
         return Optional.ofNullable(university);
     }
 
-    public void setMajor(String major) {
+    public void setMajor(Major major) {
         this.major = major;
     }
 
-    public Optional<String> getMajor() {
+    public Optional<Major> getMajor() {
         return Optional.ofNullable(major);
     }
 
@@ -131,12 +130,12 @@ public class EditUserDescriptor {
         return Optional.ofNullable(to);
     }
 
-    public void setCap(double cap) {
+    public void setCap(Cap cap) {
         this.cap = cap;
     }
 
-    public Double getCap() {
-        return cap;
+    public Optional<Cap> getCap() {
+        return Optional.ofNullable(cap);
     }
 
     /**

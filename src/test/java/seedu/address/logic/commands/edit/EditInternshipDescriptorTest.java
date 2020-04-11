@@ -1,71 +1,81 @@
 package seedu.address.logic.commands.edit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_LEARN_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NAME_NINJAVAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NINJA_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_ROLE_BACKEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_ROLE_NINJA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BACKEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UX;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TO_2;
+import static seedu.address.testutil.TypicalEditInternshipDescriptor.NINJA_VAN;
+import static seedu.address.testutil.TypicalEditInternshipDescriptor.PAY_PAL;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.item.Internship;
-import seedu.address.testutil.InternshipBuilder;
+import seedu.address.testutil.EditInternshipDescriptorBuilder;
 
 public class EditInternshipDescriptorTest {
-    private Internship sampleInternship = new InternshipBuilder().build();
-    private EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
+    @Test
+    public void isAnyFieldMissing_noFieldEdited_returnsTrue() {
+        assertFalse(new EditInternshipDescriptorBuilder().build().isAnyFieldEdited());
+    }
 
     @Test
     public void equals() {
-        editInternshipDescriptor.setName(sampleInternship.getName());
-        editInternshipDescriptor.setRole(sampleInternship.getRole());
-        editInternshipDescriptor.setFrom(sampleInternship.getFrom());
-        editInternshipDescriptor.setTo(sampleInternship.getTo());
-        editInternshipDescriptor.setDescription(sampleInternship.getDescription());
-        editInternshipDescriptor.setTags(sampleInternship.getTags());
-
-        EditInternshipDescriptor editInternshipDescriptorToTest =
-                new EditInternshipDescriptor(editInternshipDescriptor);
-
-        // same name -> returns true
-        assertEquals(editInternshipDescriptor.getName().get(), sampleInternship.getName());
+        // same values -> returns true
+        EditInternshipDescriptor descriptorWithSameValues = new EditInternshipDescriptor(PAY_PAL);
+        assertEquals(PAY_PAL, descriptorWithSameValues);
 
         // same object -> returns true
-        assertEquals(editInternshipDescriptor.getRole().get(), sampleInternship.getRole());
+        assertEquals(PAY_PAL, PAY_PAL);
 
-        // same object -> returns true
-        assertEquals(editInternshipDescriptor.getFrom().get(), sampleInternship.getFrom());
+        // null -> returns false
+        assertNotEquals(null, PAY_PAL);
 
-        // same object -> returns true
-        assertEquals(editInternshipDescriptor.getTo().get(), sampleInternship.getTo());
+        // different types -> returns false
+        assertNotEquals(5, PAY_PAL);
 
-        // same object -> returns true
-        assertEquals(editInternshipDescriptor.getDescription().get(), sampleInternship.getDescription());
+        // different values -> returns false
+        assertNotEquals(PAY_PAL, NINJA_VAN);
 
-        // same object -> returns true
-        assertEquals(editInternshipDescriptor.getTags().get(), sampleInternship.getTags());
+        // different name -> returns false
+        EditInternshipDescriptor editedPayPal = new EditInternshipDescriptorBuilder(PAY_PAL)
+                .withName(VALID_INTERNSHIP_NAME_NINJAVAN).build();
+        assertNotEquals(PAY_PAL, editedPayPal);
 
-        // same name -> returns true
-        assertEquals(editInternshipDescriptorToTest.getName().get(), editInternshipDescriptor.getName().get());
+        // different role -> returns false
+        editedPayPal = new EditInternshipDescriptorBuilder(PAY_PAL)
+                .withRole(VALID_INTERNSHIP_ROLE_NINJA).build();
+        assertNotEquals(PAY_PAL, editedPayPal);
 
-        // same object -> returns true
-        assertEquals(editInternshipDescriptorToTest.getRole().get(), editInternshipDescriptor.getRole().get());
+        // different from -> returns false
+        editedPayPal = new EditInternshipDescriptorBuilder(PAY_PAL)
+                .withFrom(VALID_FROM_2).build();
+        assertNotEquals(PAY_PAL, editedPayPal);
 
-        // same object -> returns true
-        assertEquals(editInternshipDescriptorToTest.getFrom().get(), editInternshipDescriptor.getFrom().get());
+        // different to -> returns false
+        editedPayPal = new EditInternshipDescriptorBuilder(PAY_PAL)
+                .withTo(VALID_TO_2).build();
+        assertNotEquals(PAY_PAL, editedPayPal);
 
-        // same object -> returns true
-        assertEquals(editInternshipDescriptorToTest.getTo().get(), editInternshipDescriptor.getTo().get());
+        // different description -> returns false
+        editedPayPal = new EditInternshipDescriptorBuilder(PAY_PAL)
+                .withDescription(VALID_INTERNSHIP_NINJA_DESCRIPTION).build();
+        assertNotEquals(PAY_PAL, editedPayPal);
 
-        // same object -> returns true
-        assertEquals(editInternshipDescriptorToTest.getDescription().get(),
-                editInternshipDescriptor.getDescription().get());
-
-        // same object -> returns true
-        assertEquals(editInternshipDescriptorToTest.getTags().get(), editInternshipDescriptor.getTags().get());
-
-        // same descriptor object -> returns true
-        assertEquals(editInternshipDescriptor, editInternshipDescriptorToTest);
-
-        // checks two descriptors if same -> returns true
-        assertTrue(editInternshipDescriptor.equals(editInternshipDescriptorToTest));
+        // different tags -> returns false
+        editedPayPal = new EditInternshipDescriptorBuilder(PAY_PAL)
+                .withTags(VALID_TAG_UX, VALID_TAG_TECH).build();
+        assertNotEquals(PAY_PAL, editedPayPal);
     }
 
     @Test

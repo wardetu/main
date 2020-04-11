@@ -17,24 +17,24 @@ import seedu.address.model.tag.Tag;
  * Jackson-friendly version of {@link Resume}.
  */
 public class JsonAdaptedResume {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Resume's %s field is missing!";
 
     private final String name;
-    private final int id;
+    private final String id;
 
-    private final List<Integer> containedInternshipIds = new ArrayList<>();
-    private final List<Integer> containedProjectIds = new ArrayList<>();
-    private final List<Integer> containedSkillIds = new ArrayList<>();
+    private final List<String> containedInternshipIds = new ArrayList<>();
+    private final List<String> containedProjectIds = new ArrayList<>();
+    private final List<String> containedSkillIds = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedResume} with the given details.
      */
     @JsonCreator
-    public JsonAdaptedResume(@JsonProperty("name") String name, @JsonProperty("id") int id,
-                             @JsonProperty("internships") List<Integer> internshipIds,
-                             @JsonProperty("projects") List<Integer> projectIds,
-                             @JsonProperty("skills") List<Integer> skillIds,
+    public JsonAdaptedResume(@JsonProperty("name") String name, @JsonProperty("id") String id,
+                             @JsonProperty("internships") List<String> internshipIds,
+                             @JsonProperty("projects") List<String> projectIds,
+                             @JsonProperty("skills") List<String> skillIds,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.id = id;
@@ -48,7 +48,7 @@ public class JsonAdaptedResume {
             this.containedProjectIds.addAll(projectIds);
         }
         if (skillIds != null) {
-            this.containedProjectIds.addAll(skillIds);
+            this.containedSkillIds.addAll(skillIds);
         }
     }
 
@@ -57,11 +57,14 @@ public class JsonAdaptedResume {
      */
     public JsonAdaptedResume(Resume res) {
         this.name = res.getName().fullName;
-        this.id = res.getId();
+        this.id = String.valueOf(res.getId());
         tagged.addAll(res.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
-        containedInternshipIds.addAll(res.getInternshipIds());
-        containedProjectIds.addAll(res.getProjectIds());
-        containedSkillIds.addAll(res.getSkillIds());
+        containedInternshipIds.addAll(
+                res.getInternshipIds().stream().map(String::valueOf).collect(Collectors.toList()));
+        containedProjectIds.addAll(
+                res.getProjectIds().stream().map(String::valueOf).collect(Collectors.toList()));
+        containedSkillIds.addAll(
+                res.getSkillIds().stream().map(String::valueOf).collect(Collectors.toList()));
 
     }
 
@@ -73,18 +76,53 @@ public class JsonAdaptedResume {
         for (JsonAdaptedTag tag : tagged) {
             tags.add(tag.toModelType());
         }
-        Resume resume = new Resume(new Name(name), id, Set.copyOf(tags));
-        for (int internship : containedInternshipIds) {
-            resume.addInternshipId(internship);
+
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Name modelName = new Name(name);
+
+        final int modelId = parseId(id);
+
+        Resume resume = new Resume(modelName, modelId, Set.copyOf(tags));
+
+        for (String internship : containedInternshipIds) {
+            resume.addInternshipId(parseId(internship));
         }
 
-        for (int project : containedProjectIds) {
-            resume.addProjectId(project);
+        for (String project : containedProjectIds) {
+            resume.addProjectId(parseId(project));
         }
 
-        for (int skill : containedSkillIds) {
-            resume.addSkillId(skill);
+        for (String skill : containedSkillIds) {
+            resume.addSkillId(parseId(skill));
         }
+
         return resume;
+    }
+
+    /**
+     * Parses item index from {@code String} to {@code int}.
+     * @param index the {@code String} representing the item index.
+     * @return the {@code int} representing the item index.
+     * @throws IllegalValueException if index is not a non-negative integer.
+     */
+    private static int parseId(String index) throws IllegalValueException {
+        int id;
+        if (index == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Id"));
+        }
+        try {
+            id = Integer.parseInt(index);
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException("The id field can only be an integer.");
+        }
+        if (id < 0) {
+            throw new IllegalValueException("The id field must not be negative.");
+        }
+        return id;
     }
 }

@@ -18,6 +18,7 @@ import seedu.address.logic.commands.results.EditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.exceptions.DuplicateItemException;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
@@ -95,7 +96,7 @@ public class EditProjectCommand extends EditCommand {
         Name updatedName = editProjectDescriptor.getName().orElse(toEdit.getName());
         Time updatedTime = editProjectDescriptor.getTime().orElse(toEdit.getTime());
         Website updatedWebsite = editProjectDescriptor.getWebsite().orElse(toEdit.getWebsite());
-        String updatedDesc = editProjectDescriptor.getDescription().orElse(toEdit.getDescription());
+        Description updatedDesc = editProjectDescriptor.getDescription().orElse(toEdit.getDescription());
         Set<Tag> updatedTags = editProjectDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
         return new Project(updatedName, updatedTime, updatedWebsite, updatedDesc, updatedTags, id);

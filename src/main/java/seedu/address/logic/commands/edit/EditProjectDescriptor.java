@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
@@ -17,7 +18,7 @@ import seedu.address.model.tag.Tag;
 public class EditProjectDescriptor extends EditItemDescriptor {
     private Time time;
     private Website website;
-    private String description;
+    private Description description;
     private Set<Tag> tags;
 
     public EditProjectDescriptor() {}
@@ -42,11 +43,11 @@ public class EditProjectDescriptor extends EditItemDescriptor {
         return Optional.ofNullable(time);
     }
 
-    public void setDescription(String description) {
+    public void setDescription(Description description) {
         this.description = description;
     }
 
-    public Optional<String> getDescription() {
+    public Optional<Description> getDescription() {
         return Optional.ofNullable(description);
     }
 
