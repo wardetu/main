@@ -175,7 +175,7 @@ Format: `me [ATTRIBUTE/ VALUE]...`
 
 The specific command syntax could be found in the table below:
 
-[width="100%",cols="12%,88%",options="header",]
+[width="100%",cols="^.^12%,88%",options="header",]
 |=======================================================================
 |Type |Format
 |Person | `me dp/ FILEPATH n/ NAME p/ PHONE e/ EMAIL g/ GITHUB u/ UNIVERSITY m/ MAJOR f/ FROM t/ TO c/ CAP`
@@ -247,7 +247,7 @@ An item could have any number of tags _(including 0)_.
 
 The specific command syntax could be found in the table below:
 
-[width="100%",cols="12%,88%",options="header",]
+[width="100%",cols="^12%,88%",options="header",]
 |=======================================================================
 |Type |Format
 |Internship | `add i/ int n/ COMPANY NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
@@ -294,7 +294,7 @@ Edits an existing item in the ResuMe application.
 ****
 
 
-[width="100%",cols="16%,84%",options="header",]
+[width="100%",cols="^16%,84%",options="header",]
 |=======================================================================
 |Type |Format
 |Internship |`edit INDEX i/ int [n/ COMPANY NAME] [r/ ROLE] [f/ FROM] [t/ TO] [d/ DESCRIPTION] [#/ TAG]...`
@@ -344,7 +344,7 @@ An item could be one of the four item types: `internship`, `project`, `skill` or
 
 The specific command syntax could be found in the table below:
 
-[width="100%",cols="12%,88%",options="header",]
+[width="100%",cols="^12%,88%",options="header",]
 |=======================================================================
 |Type |Format
 |Internship | `find KEYWORD [MORE_KEYWORDS]... i/ int`
@@ -700,7 +700,7 @@ This is a summary of all commands for your convenience.
 General commands::
 Lists of all commands which has format that *do not vary* depending on item type.
 [source,sh]
-[cols="20%,80%",options="header"]
+[cols="^.^20%,80%",options="header"]
 |=======================================================================
 
 
@@ -726,7 +726,7 @@ Item specific commands::
 Lists of all commands which has format that *vary* depending on item type.
 
 [source,sh]
-[cols="5%,15%,80%",options="header"]
+[cols="^.^5%,^.^15%,80%",options="header"]
 |=======================================================================
 
 | Command | Type | Format
