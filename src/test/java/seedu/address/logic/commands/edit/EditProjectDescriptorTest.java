@@ -14,13 +14,12 @@ import static seedu.address.testutil.TypicalEditProjectDescriptor.ORBITAL;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.EditInternshipDescriptorBuilder;
 import seedu.address.testutil.EditProjectDescriptorBuilder;
 
 public class EditProjectDescriptorTest {
     @Test
     public void isAnyFieldMissing_noFieldEdited_returnsTrue() {
-        assertFalse(new EditInternshipDescriptorBuilder().build().isAnyFieldEdited());
+        assertFalse(new EditProjectDescriptorBuilder().build().isAnyFieldEdited());
     }
 
     @Test

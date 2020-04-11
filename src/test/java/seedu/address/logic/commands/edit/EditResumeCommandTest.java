@@ -67,8 +67,6 @@ public class EditResumeCommandTest {
     @Test
     public void create_withNullDescriptorField_editedResume() {
         EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptor();
-        editResumeDescriptor.setTags(null);
-        editResumeDescriptor.setName(null);
         Index validIndex = INDEX_FIRST_ITEM;
         EditResumeCommand editResumeCommand = new EditResumeCommand(validIndex, editResumeDescriptor);
         assertEquals(sampleEditedResume,

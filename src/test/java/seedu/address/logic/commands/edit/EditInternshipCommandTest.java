@@ -69,8 +69,6 @@ public class EditInternshipCommandTest {
     @Test
     public void create_withNullDescriptorField_editedInternship() {
         EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
-        editInternshipDescriptor.setTags(null);
-        editInternshipDescriptor.setName(null);
 
         Index validIndex = INDEX_FIRST_ITEM;
         EditInternshipCommand editInternshipCommand = new EditInternshipCommand(validIndex, editInternshipDescriptor);

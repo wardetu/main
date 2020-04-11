@@ -68,8 +68,6 @@ public class EditNoteCommandTest {
     @Test
     public void create_withNullDescriptorField_editedNote() {
         EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptor();
-        editNoteDescriptor.setTags(null);
-        editNoteDescriptor.setName(null);
 
         Index validIndex = INDEX_FIRST_ITEM;
         EditNoteCommand editNoteCommand = new EditNoteCommand(validIndex, editNoteDescriptor);
@@ -105,7 +103,7 @@ public class EditNoteCommandTest {
     }
 
     /**
-     * A Model stub that contains a single Internship.
+     * A Model stub that contains a single Note.
      */
     private class ModelStubWithNote extends ModelStub {
         private final Note item;
@@ -123,7 +121,7 @@ public class EditNoteCommandTest {
     }
 
     /**
-     * A Model stub that always contain the Internship being edited.
+     * A Model stub that always contain the Note being edited.
      */
     private class ModelStubContainingNoteEdited extends ModelStub {
         final ArrayList<Note> notes = new ArrayList<>();

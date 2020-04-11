@@ -67,8 +67,6 @@ public class EditSkillCommandTest {
     @Test
     public void create_withNullDescriptorField_editedSkill() {
         EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptor();
-        editSkillDescriptor.setTags(null);
-        editSkillDescriptor.setName(null);
         Index validIndex = INDEX_FIRST_ITEM;
         EditSkillCommand editSkillCommand = new EditSkillCommand(validIndex, editSkillDescriptor);
         assertEquals(sampleEditedSkill,
