@@ -64,42 +64,14 @@ public class TagPullCommand extends Command {
         int skillCountBefore = currSkillIds.size();
 
         // The item IDs with the desired tags
-        List<Integer> pulledInternshipIds = tagList
-                .stream()
-                .map(model::getInternshipsByTag)
-                .flatMap(Collection::stream)
-                .map(Internship::getId)
-                .collect(Collectors.toList());
+        List<Integer> pulledInternshipIds = pullInternshipIdsByTags(tagList, model);
+        List<Integer> pulledProjectIds = pullProjectIdsByTags(tagList, model);
+        List<Integer> pulledSkillIds = pullSkillIdsByTags(tagList, model);
 
-        List<Integer> pulledProjectIds = tagList
-                .stream()
-                .map(model::getProjectsByTag)
-                .flatMap(Collection::stream)
-                .map(Project::getId)
-                .collect(Collectors.toList());
-
-        List<Integer> pulledSkillIds = tagList
-                .stream()
-                .map(model::getSkillsByTag)
-                .flatMap(Collection::stream)
-                .map(Skill::getId)
-                .collect(Collectors.toList());
-
-        // Concatenate both sets of items as we are adding on top
-        List<Integer> newInternshipIds = Stream
-                .concat(currInternshipIds.stream(), pulledInternshipIds.stream())
-                .distinct()
-                .collect(Collectors.toList());
-
-        List<Integer> newProjectIds = Stream
-                .concat(currProjectIds.stream(), pulledProjectIds.stream())
-                .distinct()
-                .collect(Collectors.toList());
-
-        List<Integer> newSkillIds = Stream
-                .concat(currSkillIds.stream(), pulledSkillIds.stream())
-                .distinct()
-                .collect(Collectors.toList());
+        // Concatenate both sets of items as we are adding on top, distinctness is preserved
+        List<Integer> newInternshipIds = concatList(currInternshipIds, pulledInternshipIds);
+        List<Integer> newProjectIds = concatList(currProjectIds, pulledProjectIds);
+        List<Integer> newSkillIds = concatList(currSkillIds, pulledSkillIds);
 
         int internshipCountAfter = newInternshipIds.size();
         int projectCountAfter = newProjectIds.size();
@@ -121,6 +93,60 @@ public class TagPullCommand extends Command {
 
         return new TagPullCommandResult(editedResume.toString(), feedbackToUser,
                 model.getDisplayType());
+    }
+
+    /**
+     * Pulls the Ids of Internship items which matches the Tags in {@code tagList}.
+     */
+    private List<Integer> pullInternshipIdsByTags(Set<Tag> tagList, Model model) {
+        assert tagList != null;
+        assert model != null;
+
+        return tagList.stream()
+                .map(model::getInternshipsByTag)
+                .flatMap(Collection::stream)
+                .map(Internship::getId)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Pulls the Ids of Project items which matches the Tags in {@code tagList}.
+     */
+    private List<Integer> pullProjectIdsByTags(Set<Tag> tagList, Model model) {
+        assert tagList != null;
+        assert model != null;
+
+        return tagList.stream()
+                .map(model::getProjectsByTag)
+                .flatMap(Collection::stream)
+                .map(Project::getId)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Pulls the Ids of Skill items which matches the Tags in {@code tagList}.
+     */
+    private List<Integer> pullSkillIdsByTags(Set<Tag> tagList, Model model) {
+        assert tagList != null;
+        assert model != null;
+
+        return tagList.stream()
+                .map(model::getSkillsByTag)
+                .flatMap(Collection::stream)
+                .map(Skill::getId)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Concatenates two List of Integers, ensuring that they are distinct.
+     */
+    private List<Integer> concatList(List<Integer> firstList, List<Integer> secondList) {
+        assert firstList != null;
+        assert secondList != null;
+
+        return Stream.concat(firstList.stream(), secondList.stream())
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     @Override
