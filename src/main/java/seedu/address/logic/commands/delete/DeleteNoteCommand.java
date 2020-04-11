@@ -26,7 +26,7 @@ public class DeleteNoteCommand extends DeleteCommand {
      * @param model {@code Model} that the note will be deleted from.
      * @return      {@code CommandResult} that describes changes made when command execute runs successfully.
      *
-     * @throws      CommandException if index is out of bounds.
+     * @throws      CommandException if {@code targetIndex} is out of bounds.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
