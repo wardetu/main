@@ -40,6 +40,14 @@ public class AddSkillCommand extends AddCommand {
         toAdd = skill;
     }
 
+    /**
+     * Adds {@code toAdd} skill to model.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return      CommandResult that describes that to pass information back to UI.
+     *
+     * @throws      CommandException if adding the model results in duplicate skills.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
