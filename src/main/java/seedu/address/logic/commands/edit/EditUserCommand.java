@@ -67,12 +67,8 @@ public class EditUserCommand extends Command {
             + PREFIX_TO + "2022 "
             + PREFIX_CAP + "5.0 ";
 
-<<<<<<< HEAD
-=======
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited User Profile!";
     public static final String USER_NOT_EDITED = "User and edited User is the same!";
 
->>>>>>> 7e48e537aa4fe1ed2bab8e5858c0b749e0d7bbbf
     private EditUserDescriptor editUserDescriptor;
 
     /**

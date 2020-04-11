@@ -18,8 +18,15 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 import static seedu.address.testutil.TypicalInternship.GOOGLE;
 import static seedu.address.testutil.TypicalInternship.PAYPAL;
 import static seedu.address.testutil.TypicalNote.FINISH_CS_2103;
+import static seedu.address.testutil.TypicalNote.FINISH_HOMEWORK;
+import static seedu.address.testutil.TypicalNote.FINISH_RESUME_2;
+import static seedu.address.testutil.TypicalProject.DUKE;
 import static seedu.address.testutil.TypicalProject.ORBITAL;
+import static seedu.address.testutil.TypicalProject.RESUME;
+import static seedu.address.testutil.TypicalResume.CE_RESUME;
 import static seedu.address.testutil.TypicalResume.ME_RESUME;
+import static seedu.address.testutil.TypicalResume.SE_RESUME;
+import static seedu.address.testutil.TypicalSkill.CODE;
 import static seedu.address.testutil.TypicalSkill.GIT;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -49,15 +56,16 @@ import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.util.ItemUtil;
 import seedu.address.testutil.EditInternshipDescriptorBuilder;
-import seedu.address.testutil.InternshipBuilder;
-import seedu.address.testutil.NoteBuilder;
+import seedu.address.testutil.EditNoteDescriptorBuilder;
+import seedu.address.testutil.EditProjectDescriptorBuilder;
+import seedu.address.testutil.EditResumeDescriptorBuilder;
+import seedu.address.testutil.EditSkillDescriptorBuilder;
 import seedu.address.testutil.ProjectBuilder;
 import seedu.address.testutil.ResumeBookBuilder;
 import seedu.address.testutil.ResumeBuilder;
 import seedu.address.testutil.SkillBuilder;
 import seedu.address.testutil.TypicalInternship;
 import seedu.address.testutil.TypicalNote;
-import seedu.address.testutil.TypicalProject;
 import seedu.address.testutil.TypicalResume;
 import seedu.address.testutil.TypicalResumeBook;
 import seedu.address.testutil.TypicalSkill;
@@ -114,10 +122,9 @@ public class EditCommandIntegrationTest {
 
     @Test
     public void execute_isSameDuplicateInternship_throwsCommandException() {
-        Internship validInternship = new InternshipBuilder().withName(VALID_INTERNSHIP_NAME_PAYPAL)
-                .withRole(VALID_INTERNSHIP_ROLE_BACKEND).withFrom(VALID_FROM).withTo(VALID_TO).build();
-        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
-        setEditInternshipDescriptor(editInternshipDescriptor, validInternship);
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptorBuilder()
+                .withName(VALID_INTERNSHIP_NAME_PAYPAL).withRole(VALID_INTERNSHIP_ROLE_BACKEND)
+                .withFrom(VALID_FROM).withTo(VALID_TO).build();
 
         assertCommandFailure(new EditInternshipCommand(INDEX_FIRST_ITEM, editInternshipDescriptor),
                 model,
@@ -125,10 +132,9 @@ public class EditCommandIntegrationTest {
     }
 
     @Test
-    public void execute_editNote_success() {
+    public void execute_editNote_success() throws CommandException {
         Note validNote = TypicalNote.FINISH_RESUME_2;
-        EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptor();
-        setEditNoteDescriptor(editNoteDescriptor, validNote);
+        EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptorBuilder(FINISH_RESUME_2).build();
 
         expectedModel.setNote(FINISH_CS_2103, validNote);
 
@@ -151,8 +157,7 @@ public class EditCommandIntegrationTest {
     @Test
     public void execute_duplicateNote_throwsCommandException() {
         Note validNote = TypicalNote.FINISH_HOMEWORK;
-        EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptor();
-        setEditNoteDescriptor(editNoteDescriptor, validNote);
+        EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptorBuilder(FINISH_HOMEWORK).build();
 
         assertCommandFailure(new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptor),
                 model,
@@ -161,9 +166,8 @@ public class EditCommandIntegrationTest {
 
     @Test
     public void execute_isSameDuplicateNote_throwsCommandException() {
-        Note validNote = new NoteBuilder().withName("Finish Homework").withTime("03-2020").build();
-        EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptor();
-        setEditNoteDescriptor(editNoteDescriptor, validNote);
+        EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptorBuilder()
+                .withName("Finish Homework").withTime("03-2020").build();
 
         assertCommandFailure(new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptor),
                 model,
@@ -172,9 +176,8 @@ public class EditCommandIntegrationTest {
 
     @Test
     public void execute_editProject_success() {
-        Project validProject = TypicalProject.RESUME;
-        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
-        setEditProjectDescriptor(editProjectDescriptor, validProject);
+        Project validProject = RESUME;
+        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptorBuilder(RESUME).build();
 
         expectedModel.setProject(ORBITAL, validProject);
         expectedModel.setProjectToDisplay();
@@ -197,9 +200,8 @@ public class EditCommandIntegrationTest {
 
     @Test
     public void execute_duplicateProject_throwsCommandException() {
-        Project validProject = TypicalProject.DUKE;
-        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
-        setEditProjectDescriptor(editProjectDescriptor, validProject);
+        Project validProject = DUKE;
+        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptorBuilder(DUKE).build();
 
         assertCommandFailure(new EditProjectCommand(INDEX_FIRST_ITEM, editProjectDescriptor),
                 model,
@@ -210,8 +212,8 @@ public class EditCommandIntegrationTest {
     public void execute_isSameDuplicateProject_throwsCommandException() {
         Project validProject = new ProjectBuilder().withName(VALID_PROJECT_NAME_DUKE)
                 .withTime(VALID_TIME_2).withWebsite(VALID_WEBSITE_DUKE).build();
-        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
-        setEditProjectDescriptor(editProjectDescriptor, validProject);
+        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptorBuilder()
+                .withName(VALID_PROJECT_NAME_DUKE).withTime(VALID_TIME_2).withWebsite(VALID_WEBSITE_DUKE).build();
 
         assertCommandFailure(new EditProjectCommand(INDEX_FIRST_ITEM, editProjectDescriptor),
                 model,
@@ -220,9 +222,8 @@ public class EditCommandIntegrationTest {
 
     @Test
     public void execute_editSkill_success() {
-        Skill validSkill = TypicalSkill.CODE;
-        EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptor();
-        setEditSkillDescriptor(editSkillDescriptor, validSkill);
+        Skill validSkill = CODE;
+        EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptorBuilder(CODE).build();
 
         expectedModel.setSkill(TypicalSkill.REACT, validSkill);
         expectedModel.setSkillToDisplay();
@@ -246,8 +247,7 @@ public class EditCommandIntegrationTest {
     @Test
     public void execute_duplicateSkill_throwsCommandException() {
         Skill validSkill = TypicalSkill.GIT;
-        EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptor();
-        setEditSkillDescriptor(editSkillDescriptor, validSkill);
+        EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptorBuilder(GIT).build();
 
         assertCommandFailure(new EditSkillCommand(INDEX_FIRST_ITEM, editSkillDescriptor),
                 model,
@@ -257,8 +257,8 @@ public class EditCommandIntegrationTest {
     @Test
     public void execute_isSameDuplicateSkill_throwsCommandException() {
         Skill validSkill = new SkillBuilder().withName(VALID_SKILL_NAME_GIT).build();
-        EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptor();
-        setEditSkillDescriptor(editSkillDescriptor, validSkill);
+        EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptorBuilder()
+                .withName(VALID_SKILL_NAME_GIT).build();
 
         assertCommandFailure(new EditSkillCommand(INDEX_FIRST_ITEM, editSkillDescriptor),
                 model,
@@ -268,8 +268,7 @@ public class EditCommandIntegrationTest {
     @Test
     public void execute_editResume_success() {
         Resume validResume = TypicalResume.CE_RESUME;
-        EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptor();
-        setEditResumeDescriptor(editResumeDescriptor, validResume);
+        EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptorBuilder(CE_RESUME).build();
 
         expectedModel.setResume(ME_RESUME, validResume);
         expectedModel.setResumeToDisplay();
@@ -293,8 +292,7 @@ public class EditCommandIntegrationTest {
     @Test
     public void execute_duplicateResume_throwsCommandException() {
         Resume validResume = TypicalResume.SE_RESUME;
-        EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptor();
-        setEditResumeDescriptor(editResumeDescriptor, validResume);
+        EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptorBuilder(SE_RESUME).build();
 
         assertCommandFailure(new EditResumeCommand(INDEX_FIRST_ITEM, editResumeDescriptor),
                 model,
@@ -304,8 +302,8 @@ public class EditCommandIntegrationTest {
     @Test
     public void execute_isSameDuplicateResume_throwsCommandException() {
         Resume validResume = new ResumeBuilder().withName(VALID_RESUME_NAME_SE).build();
-        EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptor();
-        setEditResumeDescriptor(editResumeDescriptor, validResume);
+        EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptorBuilder()
+                .withName(VALID_RESUME_NAME_SE).build();
 
         assertCommandFailure(new EditResumeCommand(INDEX_FIRST_ITEM, editResumeDescriptor),
                 model,
@@ -314,17 +312,12 @@ public class EditCommandIntegrationTest {
 
     @Test
     public void equals() {
-        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
-        EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptor();
-        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
-        EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptor();
-        EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptor();
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptorBuilder(GOOGLE).build();
+        EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptorBuilder(GIT).build();
+        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptorBuilder(ORBITAL).build();
+        EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptorBuilder(ME_RESUME).build();
+        EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptorBuilder(FINISH_CS_2103).build();
 
-        setEditInternshipDescriptor(editInternshipDescriptor, GOOGLE);
-        setEditProjectDescriptor(editProjectDescriptor, ORBITAL);
-        setEditSkillDescriptor(editSkillDescriptor, GIT);
-        setEditResumeDescriptor(editResumeDescriptor, ME_RESUME);
-        setEditNoteDescriptor(editNoteDescriptor, FINISH_CS_2103);
         EditCommand validEditInternship = new EditInternshipCommand(INDEX_FIRST_ITEM, editInternshipDescriptor);
         EditCommand validEditProject = new EditProjectCommand(INDEX_FIRST_ITEM, editProjectDescriptor);
         EditCommand validEditResume = new EditResumeCommand(INDEX_FIRST_ITEM, editResumeDescriptor);

@@ -28,7 +28,7 @@ public class DeleteNoteCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Note toDelete = model.getNote(targetIndex);
+        Note toDelete = model.getNoteByIndex(targetIndex);
 
         model.deleteNote(toDelete);
         model.updateFilteredNoteList(PREDICATE_SHOW_ALL_ITEMS);

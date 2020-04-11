@@ -91,7 +91,7 @@ public class EditProjectCommand extends EditCommand {
      * @param editProjectDescriptor Descriptor parsed from input of user
      * @return Edited Project item.
      */
-    private static Project createEditedProject(
+    static Project createEditedProject(
             Project toEdit, EditProjectDescriptor editProjectDescriptor) {
         Name updatedName = editProjectDescriptor.getName().orElse(toEdit.getName());
         Time updatedTime = editProjectDescriptor.getTime().orElse(toEdit.getTime());

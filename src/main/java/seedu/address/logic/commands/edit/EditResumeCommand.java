@@ -77,7 +77,7 @@ public class EditResumeCommand extends EditCommand {
      * @param editResumeDescriptor Descriptor parsed from input of user
      * @return Edited Resume item.
      */
-    private static Resume createEditedResume(Resume toEdit, EditResumeDescriptor editResumeDescriptor) {
+    public static Resume createEditedResume(Resume toEdit, EditResumeDescriptor editResumeDescriptor) {
         Name updatedName = editResumeDescriptor.getName().orElse(toEdit.getName());
         Set<Tag> updatedTags = editResumeDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();

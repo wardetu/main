@@ -19,6 +19,7 @@ import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * Edits a specified Note.
@@ -57,9 +58,9 @@ public class EditNoteCommand extends EditCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Note toEdit = model.getNote(index);
+        Note toEdit = model.getNoteByIndex(index);
 
-        Note editedNote = createEditedNoteEntry(toEdit, editNoteDescriptor);
+        Note editedNote = createEditedNote(toEdit, editNoteDescriptor);
         try {
             model.setNote(toEdit, editedNote);
             model.updateFilteredNoteList(PREDICATE_SHOW_ALL_ITEMS);
@@ -69,7 +70,8 @@ public class EditNoteCommand extends EditCommand {
         }
 
         return new EditCommandResult(editedNote.toString(),
-                String.format(MESSAGE_EDIT_NOTE_SUCCESS, editedNote.getName().fullName), model.getDisplayType());
+                String.format(MESSAGE_EDIT_NOTE_SUCCESS, editedNote.getName().fullName),
+                ItemUtil.NOTE_ALIAS);
     }
 
     /**
@@ -78,7 +80,7 @@ public class EditNoteCommand extends EditCommand {
      * @param editNoteDescriptor describes how the note will be edited.
      * @return the edited note
      */
-    public Note createEditedNoteEntry(Note toEdit, EditNoteDescriptor editNoteDescriptor) {
+    public Note createEditedNote(Note toEdit, EditNoteDescriptor editNoteDescriptor) {
         Name updatedName = editNoteDescriptor.getName().orElse(toEdit.getName());
         Time updatedTime = editNoteDescriptor.getTime().orElse(toEdit.getTime());
         Set<Tag> updateTags = editNoteDescriptor.getTags().orElse(toEdit.getTags());

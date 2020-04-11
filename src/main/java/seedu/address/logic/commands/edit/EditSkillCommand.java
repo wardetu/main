@@ -81,7 +81,7 @@ public class EditSkillCommand extends EditCommand {
      * @param editSkillDescriptor Descriptor parsed from input of user
      * @return Edited Skill item.
      */
-    private static Skill createEditedSkill(Skill toEdit, EditSkillDescriptor editSkillDescriptor) {
+    public static Skill createEditedSkill(Skill toEdit, EditSkillDescriptor editSkillDescriptor) {
         Name updatedName = editSkillDescriptor.getName().orElse(toEdit.getName());
         Level level = editSkillDescriptor.getLevel().orElse(toEdit.getLevel());
         Set<Tag> updatedTags = editSkillDescriptor.getTags().orElse(toEdit.getTags());

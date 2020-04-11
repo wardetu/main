@@ -37,7 +37,7 @@ public class DoneCommandIntegrationTest {
     @Test
     public void execute_setNoteToDone_success() {
         Index validIndex = INDEX_FIRST_ITEM;
-        Note doneItem = expectedModel.getNote(validIndex);
+        Note doneItem = expectedModel.getNoteByIndex(validIndex);
         doneItem.markAsDone();
         DoneCommand doneCommand = new DoneCommand(validIndex);
         assertCommandSuccess(doneCommand,
