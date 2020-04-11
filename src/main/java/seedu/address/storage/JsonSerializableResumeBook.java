@@ -168,4 +168,16 @@ class JsonSerializableResumeBook {
 
         return resumeBook;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return (this == other)
+                || (other instanceof JsonSerializableResumeBook
+                && user.equals(((JsonSerializableResumeBook) other).user)
+                && resumes.equals(((JsonSerializableResumeBook) other).resumes)
+                && internships.equals(((JsonSerializableResumeBook) other).internships)
+                && projects.equals(((JsonSerializableResumeBook) other).projects)
+                && skills.equals(((JsonSerializableResumeBook) other).skills)
+                && notes.equals(((JsonSerializableResumeBook) other).notes));
+    }
 }

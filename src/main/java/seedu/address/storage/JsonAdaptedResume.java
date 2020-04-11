@@ -134,6 +134,8 @@ public class JsonAdaptedResume {
                 && containedInternshipIds.equals(((JsonAdaptedResume) other).containedInternshipIds)
                 && containedProjectIds.equals(((JsonAdaptedResume) other).containedProjectIds)
                 && containedSkillIds.equals(((JsonAdaptedResume) other).containedSkillIds)
-                && tagged.containsAll(((JsonAdaptedResume) other).tagged));
+                && tagged.containsAll(((JsonAdaptedResume) other).tagged))
+                && ((JsonAdaptedResume) other).tagged.containsAll(tagged);
+
     }
 }
