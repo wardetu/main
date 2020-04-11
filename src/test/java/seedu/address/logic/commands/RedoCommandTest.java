@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
-import seedu.address.logic.commands.results.UndoCommandResult;
+import seedu.address.logic.commands.results.RedoCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -26,7 +26,7 @@ import seedu.address.testutil.TypicalResume;
 import seedu.address.testutil.TypicalResumeBook;
 
 
-public class UndoCommandTest {
+public class RedoCommandTest {
     private Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITH_FILLED_RESUME, new UserPrefs());
     private Model model = new ModelManager(TypicalResumeBook.TYPICAL_WITH_FILLED_RESUME, new UserPrefs());
 
@@ -41,13 +41,17 @@ public class UndoCommandTest {
         Person newUser = new PersonBuilder(model.getUser()).withName("Michael Ng").build();
         model.setUser(newUser);
         model.commitResumeBook();
+        model.undoResumeBook();
+
         expectedModel.setUser(newUser);
         expectedModel.commitResumeBook();
         expectedModel.undoResumeBook();
+        expectedModel.redoResumeBook();
 
-        CommandResult commandResult = new UndoCommandResult("Undo successfully!", model.getDisplayType());
-        assertCommandSuccess(new UndoCommand(), model, commandResult, expectedModel);
+        CommandResult commandResult = new RedoCommandResult(RedoCommand.MESSAGE_SUCCESS, model.getDisplayType());
+        assertCommandSuccess(new RedoCommand(), model, commandResult, expectedModel);
     }
+
 
     @Test
     public void execute_deleteResume_success() {
@@ -55,14 +59,17 @@ public class UndoCommandTest {
         model.deleteResume(meResume);
         model.setResumeToDisplay();
         model.commitResumeBook();
+        model.undoResumeBook();
+
         expectedModel.deleteResume(meResume);
         expectedModel.setResumeToDisplay();
         expectedModel.commitResumeBook();
         expectedModel.undoResumeBook();
+        expectedModel.redoResumeBook();
 
         CommandResult commandResult =
-                new UndoCommandResult("Undo successfully!", expectedModel.getDisplayType());
-        assertCommandSuccess(new UndoCommand(), model, commandResult, expectedModel);
+                new RedoCommandResult(RedoCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType());
+        assertCommandSuccess(new RedoCommand(), model, commandResult, expectedModel);
     }
 
     @Test
@@ -71,14 +78,17 @@ public class UndoCommandTest {
         model.addInternship(paypal);
         model.setInternshipToDisplay();
         model.commitResumeBook();
+        model.undoResumeBook();
+
         expectedModel.addInternship(paypal);
         expectedModel.setInternshipToDisplay();
         expectedModel.commitResumeBook();
         expectedModel.undoResumeBook();
+        expectedModel.redoResumeBook();
 
         CommandResult commandResult =
-                new UndoCommandResult("Undo successfully!", expectedModel.getDisplayType());
-        assertCommandSuccess(new UndoCommand(), model, commandResult, expectedModel);
+                new RedoCommandResult(RedoCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType());
+        assertCommandSuccess(new RedoCommand(), model, commandResult, expectedModel);
     }
 
     @Test
@@ -86,19 +96,22 @@ public class UndoCommandTest {
         model.sortProjects(Comparator.comparing(Project::getTime));
         model.setProjectToDisplay();
         model.commitResumeBook();
+        model.undoResumeBook();
+
         expectedModel.sortProjects(Comparator.comparing(Project::getTime));
         expectedModel.setProjectToDisplay();
         expectedModel.commitResumeBook();
         expectedModel.undoResumeBook();
+        expectedModel.redoResumeBook();
 
         CommandResult commandResult =
-                new UndoCommandResult("Undo successfully!", expectedModel.getDisplayType());
-        assertCommandSuccess(new UndoCommand(), model, commandResult, expectedModel);
+                new RedoCommandResult(RedoCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType());
+        assertCommandSuccess(new RedoCommand(), model, commandResult, expectedModel);
     }
 
     @Test
     public void execute_multipleChanges_success() {
-        // Changes to the model copied from the tests above
+        // Changes to the model are copied from the tests above
         Resume meResume = new ResumeBuilder(TypicalResume.ME_RESUME).build();
         model.deleteResume(meResume);
         model.setResumeToDisplay();
@@ -122,38 +135,40 @@ public class UndoCommandTest {
         expectedModel.setProjectToDisplay();
         expectedModel.commitResumeBook();
 
+        model.undoResumeBook();
+        model.undoResumeBook();
+        model.undoResumeBook();
+
         expectedModel.undoResumeBook();
+        expectedModel.undoResumeBook();
+        expectedModel.undoResumeBook();
+
+        expectedModel.redoResumeBook();
         CommandResult commandResult1 =
-                new UndoCommandResult("Undo successfully!", expectedModel.getDisplayType());
-        assertCommandSuccess(new UndoCommand(), model, commandResult1, expectedModel);
+                new RedoCommandResult(RedoCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType());
+        assertCommandSuccess(new RedoCommand(), model, commandResult1, expectedModel);
 
-        expectedModel.undoResumeBook();
+        expectedModel.redoResumeBook();
         CommandResult commandResult2 =
-                new UndoCommandResult("Undo successfully!", expectedModel.getDisplayType());
-        assertCommandSuccess(new UndoCommand(), model, commandResult2, expectedModel);
+                new RedoCommandResult(RedoCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType());
+        assertCommandSuccess(new RedoCommand(), model, commandResult2, expectedModel);
 
-        expectedModel.undoResumeBook();
+
+        expectedModel.redoResumeBook();
         CommandResult commandResult3 =
-                new UndoCommandResult("Undo successfully!", expectedModel.getDisplayType());
-        assertCommandSuccess(new UndoCommand(), model, commandResult3, expectedModel);
+                new RedoCommandResult(RedoCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType());
+        assertCommandSuccess(new RedoCommand(), model, commandResult3, expectedModel);
+
     }
 
     @Test
-    public void execute_moreUndosThanChanges_throwsCommandException() {
-        // Same thing but this round we try to undo a fourth time
+    public void execute_moreRedosThanUndos_throwsCommandException() {
         Resume meResume = new ResumeBuilder(TypicalResume.ME_RESUME).build();
         model.deleteResume(meResume);
         model.setResumeToDisplay();
         model.commitResumeBook();
         expectedModel.deleteResume(meResume);
         expectedModel.setResumeToDisplay();
-        expectedModel.commitResumeBook();
-
-        model.sortProjects(Comparator.comparing(Project::getTime));
-        model.setProjectToDisplay();
-        model.commitResumeBook();
-        expectedModel.sortProjects(Comparator.comparing(Project::getTime));
-        expectedModel.setProjectToDisplay();
         expectedModel.commitResumeBook();
 
         Internship paypal = new InternshipBuilder(TypicalInternship.PAYPAL).build();
@@ -164,15 +179,54 @@ public class UndoCommandTest {
         expectedModel.setInternshipToDisplay();
         expectedModel.commitResumeBook();
 
-        expectedModel.undoResumeBook();
-        expectedModel.undoResumeBook();
-        expectedModel.undoResumeBook();
+        model.sortProjects(Comparator.comparing(Project::getTime));
+        model.setProjectToDisplay();
+        model.commitResumeBook();
+        expectedModel.sortProjects(Comparator.comparing(Project::getTime));
+        expectedModel.setProjectToDisplay();
+        expectedModel.commitResumeBook();
 
         model.undoResumeBook();
         model.undoResumeBook();
         model.undoResumeBook();
 
-        assertThrows(CommandException.class, UndoCommand.MESSAGE_FAILURE, () -> new UndoCommand().execute(model));
+        expectedModel.undoResumeBook();
+        expectedModel.undoResumeBook();
+        expectedModel.undoResumeBook();
+
+        expectedModel.redoResumeBook();
+        expectedModel.redoResumeBook();
+        expectedModel.redoResumeBook();
+
+        model.redoResumeBook();
+        model.redoResumeBook();
+        model.redoResumeBook();
+
+        assertThrows(CommandException.class, RedoCommand.MESSAGE_FAILURE, () -> new RedoCommand().execute(model));
+    }
+
+    @Test
+    public void execute_redoAfterCommit_throwsCommandException() {
+        // Here the model undoes twice before commiting.
+        Resume meResume = new ResumeBuilder(TypicalResume.ME_RESUME).build();
+        model.deleteResume(meResume);
+        model.setResumeToDisplay();
+        model.commitResumeBook();
+
+        Internship paypal = new InternshipBuilder(TypicalInternship.PAYPAL).build();
+        model.addInternship(paypal);
+        model.setInternshipToDisplay();
+        model.commitResumeBook();
+
+        model.undoResumeBook();
+        model.undoResumeBook();
+
+        // A commit is done thereby erasing all future states.
+        model.sortProjects(Comparator.comparing(Project::getTime));
+        model.setProjectToDisplay();
+        model.commitResumeBook();
+
+        assertThrows(CommandException.class, RedoCommand.MESSAGE_FAILURE, () -> new RedoCommand().execute(model));
     }
 
 }
