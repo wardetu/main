@@ -153,19 +153,17 @@ public class EditCommandParser implements Parser<EditCommand> {
         case ItemUtil.NOTE_ALIAS:
             // ===== Start of updating item descriptor =====
             EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptor();
-            boolean isAnyFieldEdited = false;
 
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                isAnyFieldEdited = true;
                 editNoteDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
             }
             if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
-                isAnyFieldEdited = true;
                 editNoteDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get()));
             }
+            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editNoteDescriptor::setTags);
             // ===== End of updating item descriptor =====
 
-            if (!isAnyFieldEdited) {
+            if (!editNoteDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditNoteCommand.MESSAGE_NOT_EDITED);
             }
 

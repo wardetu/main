@@ -9,7 +9,7 @@ public class TypicalNote {
     public static final Note FINISH_HOMEWORK = new NoteBuilder()
             .withName("Finish Homework")
             .withTime("03-2020")
-            .withTags()
+            .withTags("noturgent")
             .build();
     public static final Note FINISH_CS_2103 = new NoteBuilder()
             .withName("Finish CS2103")

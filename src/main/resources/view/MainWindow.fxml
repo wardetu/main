@@ -34,7 +34,7 @@
         </MenuBar>
             <HBox fx:id="mainContainer" minWidth="700" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox fx:id="userExperiencePlaceholder" minWidth="330.0" styleClass="pane-with-border">
+                  <VBox fx:id="userExperiencePlaceholder" maxWidth="350.0" minWidth="330.0" styleClass="pane-with-border">
                      <padding>
                         <Insets bottom="5.0" top="5.0" />
                      </padding>
@@ -54,17 +54,13 @@
                        <items>
                           <VBox fx:id="resultAndItem">
                              <children>
-                             <StackPane fx:id="resultDisplayPlaceholder" maxHeight="200.0" minWidth="200.0">
+                             <StackPane fx:id="resultDisplayPlaceholder" maxHeight="250.0" minWidth="300.0">
                              </StackPane>
                              <StackPane fx:id="itemDisplayPlaceholder" minWidth="300.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-                              <padding>
-                                <Insets bottom="5" left="5" right="10" top="5" />
-                              </padding>
                                  <VBox.margin>
-                                     <Insets bottom="5" top="5" />
+                                     <Insets />
                                  </VBox.margin>
                              </StackPane>
-                                    <StackPane styleClass="pane-with-border" />
                              </children>
                           </VBox>
 

@@ -5,20 +5,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox minWidth="340" prefHeight="400.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox minWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox fx:id="userProfilePlaceholder" HBox.hgrow="ALWAYS">
          <padding>
-            <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
          <styleClass>
             <String fx:value="pane-with-border" />
             <String fx:value="user" />
          </styleClass>
       </HBox>
-      <VBox fx:id="userDetailPlaceholder" VBox.vgrow="ALWAYS">
+      <VBox fx:id="userDetailPlaceholder" maxHeight="265.0" minHeight="265.0" VBox.vgrow="ALWAYS">
          <padding>
-            <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
          <styleClass>
             <String fx:value="pane-with-border" />

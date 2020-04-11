@@ -47,6 +47,10 @@
     -fx-font-family: "Segoe UI Semibold";
 }
 
+.text-area .scroll-bar:vertical:disabled {
+    -fx-opacity: 0;
+}
+
 .tab-pane {
     -fx-padding: 0 0 0 1;
 }
@@ -63,6 +67,16 @@
     -fx-table-cell-border-color: transparent !important;
     -fx-table-header-border-color: transparent !important;
     -fx-padding: 5;
+}
+
+.scroll-bar * {
+    -fx-min-width: 0;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+
+    -fx-min-height: 0;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
 }
 
 .table-view .column-header-background {
@@ -321,12 +335,13 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #5a6872;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
-    -fx-background-insets: 1;
+    -fx-background-color: #5a6872;
+    -fx-background-insets: 0;
+    -fx-opacity: 0;
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
@@ -339,11 +354,11 @@
 }
 
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 1 4 1 4;
+    -fx-padding: 0 0 0 0;
 }
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 4 1 4 1;
+    -fx-padding: 0 0 0 0;
 }
 
 #cardPane {
@@ -372,11 +387,6 @@
 
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, #3a8aae, 10, 0, 0, 0);
-}
-
-#resultDisplay .content {
-    -fx-background-color: transparent, #434e56, transparent, #434e56;
-    -fx-background-radius: 0;
 }
 
 #tags {
