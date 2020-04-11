@@ -42,7 +42,7 @@ public class EditNoteDescriptorBuilder {
     /**
      * Sets the {@code Time} of the {@code EditNoteDescriptor} that we are building.
      */
-    public EditNoteDescriptorBuilder withFrom(String time) {
+    public EditNoteDescriptorBuilder withTime(String time) {
         descriptor.setTime(new Time(time));
         return this;
     }
