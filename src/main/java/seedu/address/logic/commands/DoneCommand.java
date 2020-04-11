@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Note toSetDone = model.getNote(targetIndex);
+        Note toSetDone = model.getNoteByIndex(targetIndex);
 
         if (toSetDone.isDone()) {
             throw new CommandException(MESSAGE_DONE_FAILURE);

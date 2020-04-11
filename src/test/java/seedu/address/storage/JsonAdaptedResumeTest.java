@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RESUME_NAME_ME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JAVA;
@@ -26,6 +27,8 @@ import seedu.address.testutil.TypicalResume;
 
 public class JsonAdaptedResumeTest {
     private Resume resumeWithoutTags = new ResumeBuilder(TypicalResume.ME_RESUME)
+            .withInternship(NINJA_VAN).withProject(ORBITAL).withSkill(REACT).build();
+    private Resume resumeSeWithoutTags = new ResumeBuilder(TypicalResume.SE_RESUME)
             .withInternship(NINJA_VAN).withProject(ORBITAL).withSkill(REACT).build();
     private Resume resumeWithTags = new ResumeBuilder(TypicalResume.ME_RESUME)
             .withInternship(NINJA_VAN).withProject(ORBITAL).withSkill(REACT)
@@ -108,5 +111,22 @@ public class JsonAdaptedResumeTest {
                 internshipIds, invalidProjectIds, skillIds, tags);
         assertThrows(IllegalValueException.class, "The id field must not be negative.",
                 jsonAdaptedResume::toModelType);
+    }
+
+    @Test
+    public void equals() {
+
+        JsonAdaptedResume jsonAdaptedResumeMeWithNoTag =
+                new JsonAdaptedResume(VALID_RESUME_NAME_ME, "0", internshipIds, projectIds, skillIds, emptyTags);
+
+        JsonAdaptedResume jsonAdaptedResumeMeWithTag =
+                new JsonAdaptedResume(VALID_RESUME_NAME_ME, "0", internshipIds, projectIds, skillIds, tags);
+
+        assertEquals(jsonAdaptedResumeMeWithNoTag, new JsonAdaptedResume(resumeWithoutTags));
+
+        // Different names
+        assertNotEquals(new JsonAdaptedResume(resumeSeWithoutTags), new JsonAdaptedResume(resumeWithoutTags));
+
+        assertEquals(jsonAdaptedResumeMeWithTag, new JsonAdaptedResume(resumeWithTags));
     }
 }
