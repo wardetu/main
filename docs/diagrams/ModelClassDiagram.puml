@@ -5,6 +5,10 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 skinparam defaultFontSize 20
 
+Class LogicManager LOGIC_COLOR
+Class ItemCard UI_COLOR
+Class MainApp MAIN_COLOR
+
 Package Model <<Rectangle>>{
 Interface ObservableList <<interface>>
 Interface Model <<interface>>
@@ -53,10 +57,11 @@ Class Time
 Class Description
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside .d.> Model
-Model .u.> ObservableList
-ModelManager .u.> Model
+MainApp -d-> Model
+LogicManager -d-> Model
+ItemCard .d.> Model
+Model ..> ObservableList
+ModelManager .u.|> Model
 
 ModelManager o-l-> "1" UserPrefs
 UserPrefs .l.|> ReadOnlyUserPrefs
