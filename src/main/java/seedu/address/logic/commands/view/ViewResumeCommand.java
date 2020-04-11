@@ -24,7 +24,6 @@ public class ViewResumeCommand extends ViewCommand {
      *
      * @param model {@code Model} where resume will be viewed.
      * @return      {@code CommandResult} that describes changes made when command execute runs successfully.
-     *
      * @throws      CommandException if {@code targetIndex} is out of bounds.
      */
     @Override

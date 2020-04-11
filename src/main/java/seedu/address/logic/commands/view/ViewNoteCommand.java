@@ -24,7 +24,6 @@ public class ViewNoteCommand extends ViewCommand {
      *
      * @param model {@code Model} where note will be viewed.
      * @return      {@code CommandResult} that describes changes made when command execute runs successfully.
-     *
      * @throws      CommandException if {@code targetIndex} is out of bounds.
      */
     @Override

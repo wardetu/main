@@ -48,7 +48,6 @@ public class AddNoteCommand extends AddCommand {
      *
      * @param model {@code Model} which note will be added.
      * @return      {@code CommandResult} that describes changes made when command execute runs successfully.
-     *
      * @throws      CommandException if adding the model results in duplicate notes.
      */
     @Override
