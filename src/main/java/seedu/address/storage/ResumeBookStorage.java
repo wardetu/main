@@ -36,11 +36,11 @@ public interface ResumeBookStorage {
      * @param resumeBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyResumeBook resumeBook) throws IOException;
+    void saveResumeBook(ReadOnlyResumeBook resumeBook) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyResumeBook)
+     * @see #saveResumeBook(ReadOnlyResumeBook)
      */
-    void saveAddressBook(ReadOnlyResumeBook resumeBook, Path filePath) throws IOException;
+    void saveResumeBook(ReadOnlyResumeBook resumeBook, Path filePath) throws IOException;
 
 }

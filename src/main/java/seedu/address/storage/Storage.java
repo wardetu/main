@@ -27,6 +27,6 @@ public interface Storage extends ResumeBookStorage, UserPrefsStorage {
     Optional<ReadOnlyResumeBook> readResumeBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyResumeBook addressBook) throws IOException;
+    void saveResumeBook(ReadOnlyResumeBook addressBook) throws IOException;
 
 }

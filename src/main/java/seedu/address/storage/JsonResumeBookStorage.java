@@ -60,21 +60,21 @@ public class JsonResumeBookStorage implements ResumeBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyResumeBook addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveResumeBook(ReadOnlyResumeBook resumeBook) throws IOException {
+        saveResumeBook(resumeBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyResumeBook)}.
+     * Similar to {@link #saveResumeBook(ReadOnlyResumeBook)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyResumeBook addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveResumeBook(ReadOnlyResumeBook resumeBook, Path filePath) throws IOException {
+        requireNonNull(resumeBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableResumeBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableResumeBook(resumeBook), filePath);
     }
 
 }
