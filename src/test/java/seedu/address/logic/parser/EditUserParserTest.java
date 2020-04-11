@@ -78,7 +78,7 @@ import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.University;
 import seedu.address.testutil.EditUserDescriptorBuilder;
 
-// Note: Display Picture is currently not being tested here, because it assumes the existence of the file in the path
+// Note: Display Picture is currently not being tested here; because it assumes the existence of the file in the path
 public class EditUserParserTest {
     private EditUserParser parser = new EditUserParser();
 
