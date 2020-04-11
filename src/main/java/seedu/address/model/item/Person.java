@@ -1,5 +1,6 @@
 package seedu.address.model.item;
 
+import seedu.address.model.item.field.Cap;
 import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
@@ -28,13 +29,13 @@ public class Person {
     private final Major major;
     private final Time from;
     private final Time to;
-    private final double cap;
+    private final Cap cap;
 
     /**
      * Every field must be present and not null.
      */
     public Person(DisplayPicture displayPicture, Name name, Description description, Phone phone, Email email,
-                  Github github, University university, Major major, Time from, Time to, double cap) {
+                  Github github, University university, Major major, Time from, Time to, Cap cap) {
         this.displayPicture = displayPicture;
         this.name = name;
         this.description = description;
@@ -88,7 +89,7 @@ public class Person {
         return to;
     }
 
-    public double getCap() {
+    public Cap getCap() {
         return cap;
     }
 
@@ -141,6 +142,6 @@ public class Person {
                 && to.equals(((Person) other).to)
                 && major.equals(((Person) other).major)
                 && displayPicture.equals(((Person) other).displayPicture)
-                && cap == ((Person) other).cap);
+                && cap.equals(((Person) other).cap));
     }
 }

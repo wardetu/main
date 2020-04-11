@@ -15,6 +15,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.item.field.Cap;
 import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
@@ -39,13 +40,17 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_WEBSITE = "john.a";
     private static final String INVALID_TIME = "13-2019";
-    private static final String INVALID_FILE_PATH = "";
+    private static final String INVALID_FILE_PATH_1 = "notjpeg.gif";
+    private static final String INVALID_FILE_PATH_2 = "/Users/Pictures/someone.gif";
+    private static final String INVALID_FILE_PATH_3 = "/Users/Pictures/someone.pdf";
     private static final String INVALID_GITHUB_1 = "-starthyphen";
     private static final String INVALID_GITHUB_2 = "double--hyphen";
     private static final String INVALID_UNIVERSITY = "here is a very long university name that should exceed 50 chars";
     private static final String INVALID_MAJOR = "computer@science";
     private static final String INVALID_CAP_1 = "6.1";
     private static final String INVALID_CAP_2 = "@@";
+    private static final String INVALID_CAP_3 = "4.0 abc";
+    private static final String INVALID_CAP_4 = "5.0 4.0";
     private static final String INVALID_ROLE = "ComputerScientist@BestPlace";
 
 
@@ -60,12 +65,13 @@ public class ParserUtilTest {
     private static final String VALID_DESCRIPTION = "This is a description of the item.";
     private static final String VALID_TIME_1 = "06-2020";
     private static final String VALID_TIME_2 = "08-2018";
-    private static final String VALID_FILE_PATH = "/Users/Pictures/someone.png";
+    private static final String VALID_FILE_PATH_PNG = "/Users/Pictures/someone.png";
+    private static final String VALID_FILE_PATH_JPG = "/Users/Pictures/someone.jpg";
     private static final String VALID_GITHUB = "validgithub";
     private static final String VALID_UNIVERSITY = "National University of Singapore";
     private static final String VALID_MAJOR = "computer science";
-    private static final String VALID_CAP_1 = "4.5";
-    private static final String VALID_CAP_2 = "4.5394";
+    private static final String VALID_CAP_1 = "4 5";
+    private static final String VALID_CAP_2 = "4.5394 5.0";
     private static final String VALID_ROLE = "Frontend Engineer";
 
 
@@ -377,25 +383,31 @@ public class ParserUtilTest {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDisplayPicture((String) null));
     }
 
-    // TODO: I don't know an invalid file path. Can someone help?
-    /*
     @Test
     public void parseDisplayPicture_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDisplayPicture(INVALID_FILE_PATH));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDisplayPicture(INVALID_FILE_PATH_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDisplayPicture(INVALID_FILE_PATH_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDisplayPicture(INVALID_FILE_PATH_3));
     }
-     */
 
     @Test
     public void parseDisplayPicture_validValueWithoutWhitespace_returnsDisplayPicture() throws Exception {
-        DisplayPicture expectedDisplayPicture = new DisplayPicture(VALID_FILE_PATH);
-        assertEquals(expectedDisplayPicture, ParserUtil.parseDisplayPicture(VALID_FILE_PATH));
+        DisplayPicture expectedDisplayPictureJpg = new DisplayPicture(VALID_FILE_PATH_JPG);
+        assertEquals(expectedDisplayPictureJpg, ParserUtil.parseDisplayPicture(VALID_FILE_PATH_JPG));
+
+        DisplayPicture expectedDisplayPicturePng = new DisplayPicture(VALID_FILE_PATH_PNG);
+        assertEquals(expectedDisplayPicturePng, ParserUtil.parseDisplayPicture(VALID_FILE_PATH_PNG));
     }
 
     @Test
     public void parseDisplayPicture_validValueWithWhitespace_returnsTrimmedDisplayPicture() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_FILE_PATH + WHITESPACE;
-        DisplayPicture expectedDisplayPicture = new DisplayPicture(VALID_FILE_PATH);
-        assertEquals(expectedDisplayPicture, ParserUtil.parseDisplayPicture(emailWithWhitespace));
+        String pathWithWhitespaceJpg = WHITESPACE + VALID_FILE_PATH_JPG + WHITESPACE;
+        DisplayPicture expectedDisplayPictureJpg = new DisplayPicture(VALID_FILE_PATH_JPG);
+        assertEquals(expectedDisplayPictureJpg, ParserUtil.parseDisplayPicture(pathWithWhitespaceJpg));
+
+        String pathWithWhitespacePng = WHITESPACE + VALID_FILE_PATH_PNG + WHITESPACE;
+        DisplayPicture expectedDisplayPicturePng = new DisplayPicture(VALID_FILE_PATH_PNG);
+        assertEquals(expectedDisplayPicturePng, ParserUtil.parseDisplayPicture(pathWithWhitespacePng));
     }
 
     @Test
@@ -473,21 +485,27 @@ public class ParserUtilTest {
     public void parseCap_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseCap(INVALID_CAP_1));
         assertThrows(ParseException.class, () -> ParserUtil.parseCap(INVALID_CAP_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseCap(INVALID_CAP_3));
+        assertThrows(ParseException.class, () -> ParserUtil.parseCap(INVALID_CAP_4));
     }
 
     @Test
-    public void parseCap_validValueWithoutWhitespace_returnsCap() throws Exception {
-        assertEquals(4.5 , ParserUtil.parseCap(VALID_CAP_1));
-        assertEquals(4.54 , ParserUtil.parseCap(VALID_CAP_2));
+    public void parseCap_validValueWithoutTrailingWhitespace_returnsCap() throws Exception {
+        Cap expectedCap1 = new Cap("4 5");
+        assertEquals(expectedCap1 , ParserUtil.parseCap(VALID_CAP_1));
+        Cap expectedCap2 = new Cap("4.54 5.0");
+        assertEquals(expectedCap2 , ParserUtil.parseCap(VALID_CAP_2));
     }
 
     @Test
-    public void parseCap_validValueWithWhitespace_returnsTrimmedCap() throws Exception {
+    public void parseCap_validValueWithTrailingWhitespace_returnsTrimmedCap() throws Exception {
         String capWithWhitespace1 = WHITESPACE + VALID_CAP_1 + WHITESPACE;
-        assertEquals(4.5, ParserUtil.parseCap(capWithWhitespace1));
+        Cap expectedCap1 = new Cap("4 5");
+        assertEquals(expectedCap1, ParserUtil.parseCap(capWithWhitespace1));
 
         String capWithWhitespace2 = WHITESPACE + VALID_CAP_2 + WHITESPACE;
-        assertEquals(4.54, ParserUtil.parseCap(capWithWhitespace2));
+        Cap expectedCap2 = new Cap("4.54 5.0");
+        assertEquals(expectedCap2, ParserUtil.parseCap(capWithWhitespace2));
     }
 
     @Test

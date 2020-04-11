@@ -39,10 +39,10 @@ public class InternshipUtil {
     public static String getInternshipDetails(Internship internship) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + internship.getName().fullName + " ");
-        sb.append(PREFIX_ROLE + internship.getRole().toString() + " ");
+        sb.append(PREFIX_ROLE + internship.getRole().value + " ");
         sb.append(PREFIX_FROM + internship.getFrom().value + " ");
         sb.append(PREFIX_TO + internship.getTo().value + " ");
-        sb.append(PREFIX_DESCRIPTION + internship.getDescription().toString() + " ");
+        sb.append(PREFIX_DESCRIPTION + internship.getDescription().value + " ");
         internship.getTags().stream().map(x -> x.tagName).map(x -> (PREFIX_TAG + x + " ")).forEach(sb::append);
         return sb.toString();
     }

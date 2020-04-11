@@ -48,7 +48,7 @@ public class JsonAdaptedResume {
             this.containedProjectIds.addAll(projectIds);
         }
         if (skillIds != null) {
-            this.containedProjectIds.addAll(skillIds);
+            this.containedSkillIds.addAll(skillIds);
         }
     }
 
@@ -85,34 +85,44 @@ public class JsonAdaptedResume {
         }
         final Name modelName = new Name(name);
 
-        final int modelId;
-        try {
-            modelId = Integer.parseInt(id);
-        } catch (NumberFormatException e) {
-            throw new IllegalValueException("The id field can only be an integer.");
-        }
-        if (modelId < 0) {
-            throw new IllegalValueException("The id field must not be negative.");
-        }
+        final int modelId = parseId(id);
 
         Resume resume = new Resume(modelName, modelId, Set.copyOf(tags));
 
-        try {
-            for (String internship : containedInternshipIds) {
-                resume.addInternshipId(Integer.parseInt(internship));
-            }
+        for (String internship : containedInternshipIds) {
+            resume.addInternshipId(parseId(internship));
+        }
 
-            for (String project : containedProjectIds) {
-                resume.addProjectId(Integer.parseInt(project));
-            }
+        for (String project : containedProjectIds) {
+            resume.addProjectId(parseId(project));
+        }
 
-            for (String skill : containedSkillIds) {
-                resume.addSkillId(Integer.parseInt(skill));
-            }
-        } catch (NumberFormatException e) {
-            throw new IllegalValueException("The id field of items contained in a resume can only be integer.");
+        for (String skill : containedSkillIds) {
+            resume.addSkillId(parseId(skill));
         }
 
         return resume;
+    }
+
+    /**
+     * Parses item index from {@code String} to {@code int}.
+     * @param index the {@code String} representing the item index.
+     * @return the {@code int} representing the item index.
+     * @throws IllegalValueException if index is not a non-negative integer.
+     */
+    private static int parseId(String index) throws IllegalValueException {
+        int id;
+        if (index == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Id"));
+        }
+        try {
+            id = Integer.parseInt(index);
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException("The id field can only be an integer.");
+        }
+        if (id < 0) {
+            throw new IllegalValueException("The id field must not be negative.");
+        }
+        return id;
     }
 }

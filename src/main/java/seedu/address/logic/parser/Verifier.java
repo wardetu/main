@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.item.field.Cap;
 
 /**
  * Validations for different inputs without a separate class.
@@ -8,26 +9,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class Verifier {
 
     public static final int UNIVERSITY_MAX_LENGTH = 50;
-    public static final String UNIVERSITY_MESSAGE_CONSTRAINTS =
-            "University should only contain alphanumeric characters and spaces, with max length of 50 characters"
-                    + " and it should not be blank";
     public static final String UNIVERSITY_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
 
     public static final int MAJOR_MAX_LENGTH = 50;
-    public static final String MAJOR_MESSAGE_CONSTRAINTS =
-            "Major should only contain alphanumeric characters and spaces, with max length of 50 characters"
-                    + " and it should not be blank";
     public static final String MAJOR_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public static final String CAP_MESSAGE_CONSTRAINTS =
-            "CAP should only contain numeric characters and must match actual range from 0.0 to 5.0 and it "
-                    + "should not be blank";
-
     public static final int ROLE_MAX_LENGTH = 50;
-    public static final String ROLE_MESSAGE_CONSTRAINTS =
-            "Major should only contain alphanumeric characters and spaces, with max length of 50 characters"
-                    + " and it should not be blank";
     public static final String ROLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     /**
@@ -57,13 +45,6 @@ public class Verifier {
     }
 
     /**
-     * Gets the integer value of input.
-     */
-    public static int getInt(String input) {
-        return Integer.parseInt(input);
-    }
-
-    /**
      * Checks if the University field is valid.
      */
     public static boolean isValidUniversity(String university) {
@@ -90,31 +71,22 @@ public class Verifier {
     /**
      * Checks if the Cap field is valid.
      */
-    public static boolean isValidCap(String cap) throws ParseException {
-        double userCap;
+    public static boolean isValidCap(String currentCap, String maxCap) throws ParseException {
+        double userCurrentCap;
+        double userMaximumCap;
+
         try {
-            userCap = Double.valueOf(cap);
+            userCurrentCap = Double.valueOf(currentCap);
+            userMaximumCap = Double.valueOf(maxCap);
         } catch (NumberFormatException ex) {
-            throw new ParseException(CAP_MESSAGE_CONSTRAINTS);
+            throw new ParseException(Cap.MESSAGE_CONSTRAINTS);
         }
 
-        if (isNotEmpty(cap) && isWithinRange(userCap, 0, 5)) {
+        if (isNotEmpty(currentCap) && isNotEmpty(maxCap) && userCurrentCap <= userMaximumCap) {
             return true;
         } else {
             return false;
         }
-    }
-
-    /**
-     * Checks if a number is within accepted range.
-     *
-     * @param number the number to be tested.
-     * @param min the lower bound (inclusive).
-     * @param max the upper bound (inclusive).
-     * @return true or false.
-     */
-    public static boolean isWithinRange(double number, double min, double max) {
-        return number >= min && number <= max;
     }
 
     /**

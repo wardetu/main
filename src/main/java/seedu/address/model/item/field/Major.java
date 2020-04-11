@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Major {
 
-    public static final String MESSAGE_CONSTRAINTS = "Major can take any value "
-            + " and it should not be blank.";
+    public static final String MESSAGE_CONSTRAINTS = "Major should only contain alphanumeric characters and spaces, "
+        + "with max length of 50 characters and it should not be blank";
 
     /*
      * The first character of the major must not be a whitespace,
