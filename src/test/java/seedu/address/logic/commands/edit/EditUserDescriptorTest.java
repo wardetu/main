@@ -23,7 +23,7 @@ import seedu.address.testutil.EditUserDescriptorBuilder;
 
 public class EditUserDescriptorTest {
     @Test
-    public void isAnyFieldMissing_noFieldEdited_returnsTrue() {
+    public void isAnyFieldMissing_noFieldEdited_returnsFalse() {
         assertFalse(new EditUserDescriptorBuilder().build().isAnyFieldEdited());
     }
 
