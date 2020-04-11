@@ -180,31 +180,26 @@ image::helpStart.png[width="790"]
 Edits and updates user's display information.
 
 [NOTE]
-A user profile contains the following fields: `Display Picture`, `Name`, `Phone`, `Email`, `Github`, `University`, `Major`, `From`, `To`, `CAP`.
+A user profile contains the following fields: `Display Picture`, `Name`, `Description`, `Phone`, `Email`, `Github`, `University`, `Major`, `From`, `To`, `CAP`.
 
 ****
-Format: `me [ATTRIBUTE/ VALUE]...`
+Format: `me [dp/ FILEPATH] [n/ NAME] [d/ DESCRIPTION] [p/ PHONE] [e/ EMAIL] [g/ GITHUB] [u/ UNIVERSITY] [m/ MAJOR] [f/ FROM] [t/ TO] [c/ CURRENT_CAP MAX_CAP]`
 ****
 
-The specific command syntax could be found in the table below:
+*Example 1:* Update user profile details +
 
-[width="100%",cols="^.^12%,88%",options="header",]
-|=======================================================================
-|Type |Format
-|Person | `me dp/ FILEPATH n/ NAME p/ PHONE e/ EMAIL g/ GITHUB u/ UNIVERSITY m/ MAJOR f/ FROM t/ TO c/ CAP`
-|=======================================================================
+Try typing in the command box this command:
 
-*Example 1:* Try typing in the command box this command!
-
-. `me n/ My Name p/ 12345678 e/ test@gmail.com g/ mygithub u/ NUS m/ CS f/ 08-2018 t/ 05-2022 c/ 5.0`
+`me n/ My Name p/ 12345678 e/ test@gmail.com d/ I like solving problems and creating things! g/ mygithub u/ NUS m/ CS f/ 08-2018 t/ 05-2022 c/ 5.0 5.0`
 
 *Outcome:*
 
-. The user profile panel is updated accordingly as below.
-+
+The user profile panel is updated accordingly as below.
+
+// TODO: update screenshot
 image::user_profile.png[width="400"]
 
-*Example 2:* Edit user profile image
+*Example 2:* Update user profile picture
 
 Follow the steps in one of these two links to copy a file path according to your respective Operating System.
 
@@ -212,14 +207,15 @@ Follow the steps in one of these two links to copy a file path according to your
 
 . Windows: https://www.laptopmag.com/articles/show-full-folder-path-file-explorer
 
-Afterwards, try a command similar to the one below!
+Afterwards, try a command similar to the one below:
 
-. `me dp//Users/nhamquochung/Desktop/test.png`
+`me dp//Users/nhamquochung/Desktop/test.png`
 
 *Outcome:*
 
-. The user profile picture is updated accordingly as below.
-+
+The user profile picture is updated accordingly as below.
+
+// TODO: update screenshot
 image::user_profile1.png[width="400"]
 
 === Listing all items : `list`
