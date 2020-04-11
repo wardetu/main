@@ -15,7 +15,7 @@ import seedu.address.model.util.SampleDataUtil;
  * A utility class to help with building Note objects.
  */
 public class NoteBuilder {
-    public static final String DEFAULT_NAME = "Finish homework";
+    public static final String DEFAULT_NAME = "Finish Homework";
     public static final String DEFAULT_TIME = "03-2020";
     public static final String[] DEFAULT_TAGS = {"java", "2103"};
 

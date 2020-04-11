@@ -91,9 +91,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void addNote(Note note) {
-
-    }
+    public void addNote(Note note) {}
 
     @Override
     public void setNote(Note target, Note editedNote) {
@@ -106,7 +104,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Note getNote(Index index) {
+    public Note getNoteByIndex(Index index) {
         return null;
     }
 

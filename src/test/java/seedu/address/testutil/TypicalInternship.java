@@ -1,14 +1,24 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_LEARN_DESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NAME_GOOGLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NAME_NINJAVAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NAME_PAYPAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NINJA_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_ROLE_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_ROLE_FRONTEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_ROLE_NINJA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UX;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TO_2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,13 +31,14 @@ import seedu.address.model.item.Internship;
  * A utility class containing a list of {@code Internship} objects to be used in tests.
  */
 public class TypicalInternship {
-    public static final Internship PAYPAL = new InternshipBuilder().withName("PayPal")
-            .withRole("Backend Software Intern").withFrom("05-2020").withTo("07-2020")
-            .withDescription("I am learning new things").withTags(VALID_TAG_BACKEND, "SE", VALID_TAG_TECH).build();
+    public static final Internship PAYPAL = new InternshipBuilder().withName(VALID_INTERNSHIP_NAME_PAYPAL)
+            .withRole(VALID_INTERNSHIP_ROLE_BACKEND).withFrom(VALID_FROM).withTo(VALID_TO)
+            .withDescription(VALID_INTERNSHIP_LEARN_DESCRIPTION)
+            .withTags(VALID_TAG_BACKEND, VALID_TAG_SE, VALID_TAG_TECH).build();
 
-    public static final Internship NINJA_VAN = new InternshipBuilder().withName("Ninja Van")
-            .withRole("Ninja Intern").withFrom("05-2020").withTo("07-2020")
-            .withDescription("My journey to become a better ninja").withTags("UX", VALID_TAG_TECH).build();
+    public static final Internship NINJA_VAN = new InternshipBuilder().withName(VALID_INTERNSHIP_NAME_NINJAVAN)
+            .withRole(VALID_INTERNSHIP_ROLE_NINJA).withFrom(VALID_FROM_2).withTo(VALID_TO_2)
+            .withDescription(VALID_INTERNSHIP_NINJA_DESCRIPTION).withTags(VALID_TAG_UX, VALID_TAG_TECH).build();
 
     // Manually added - internship's details found in {@code CommandTestUtil}
     public static final Internship GOOGLE = new InternshipBuilder().withName(VALID_INTERNSHIP_NAME_GOOGLE)

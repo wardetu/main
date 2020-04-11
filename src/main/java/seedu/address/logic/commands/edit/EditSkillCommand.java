@@ -25,6 +25,9 @@ import seedu.address.model.tag.Tag;
  * TODO: CONNECT LEVEL TO SKILL
  */
 public class EditSkillCommand extends EditCommand {
+
+    public static final String MESSAGE_EDIT_SKILL_SUCCESS = "Edited Skill: %1$s";
+
     private static final String FIELDS = COMMAND_WORD
             + " INDEX "
             + PREFIX_ITEM + "res "
@@ -36,7 +39,6 @@ public class EditSkillCommand extends EditCommand {
             + PREFIX_ITEM + " ski "
             + PREFIX_NAME + " Software Engineering";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + FIELDS + EXAMPLE;
-    private static final String MESSAGE_EDIT_SKILL_SUCCESS = "Edited Skill: %1$s";
 
     private EditSkillDescriptor editSkillDescriptor;
     /**
@@ -69,7 +71,7 @@ public class EditSkillCommand extends EditCommand {
         }
 
         return new EditCommandResult(editedSkill.toString(),
-                String.format(MESSAGE_EDIT_SKILL_SUCCESS, editedSkill),
+                String.format(MESSAGE_EDIT_SKILL_SUCCESS, editedSkill.getName().fullName),
                 model.getDisplayType());
     }
 
@@ -79,11 +81,28 @@ public class EditSkillCommand extends EditCommand {
      * @param editSkillDescriptor Descriptor parsed from input of user
      * @return Edited Skill item.
      */
-    private static Skill createEditedSkill(Skill toEdit, EditSkillDescriptor editSkillDescriptor) {
+    public static Skill createEditedSkill(Skill toEdit, EditSkillDescriptor editSkillDescriptor) {
         Name updatedName = editSkillDescriptor.getName().orElse(toEdit.getName());
         Level level = editSkillDescriptor.getLevel().orElse(toEdit.getLevel());
         Set<Tag> updatedTags = editSkillDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
         return new Skill(updatedName, level, updatedTags, id);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditSkillCommand)) {
+            return false;
+        }
+
+        // state check
+        EditSkillCommand e = (EditSkillCommand) other;
+        return index.equals(e.index) && editSkillDescriptor.equals(e.editSkillDescriptor);
     }
 }

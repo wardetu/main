@@ -78,6 +78,7 @@ public class EditSkillDescriptor extends EditItemDescriptor {
         EditSkillDescriptor e = (EditSkillDescriptor) other;
 
         return getName().equals(e.getName())
+                && getLevel().equals(e.getLevel())
                 && getTags().equals(e.getTags());
     }
 }

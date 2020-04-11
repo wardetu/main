@@ -22,6 +22,9 @@ import seedu.address.model.tag.Tag;
  * Edits a Resume Item in the resume book.
  */
 public class EditResumeCommand extends EditCommand {
+
+    public static final String MESSAGE_EDIT_RESUME_SUCCESS = "Edited Resume: %1$s";
+
     private static final String FIELDS = COMMAND_WORD
             + " INDEX "
             + PREFIX_ITEM + "res "
@@ -33,7 +36,6 @@ public class EditResumeCommand extends EditCommand {
             + PREFIX_NAME + " Resume 1 "
             + PREFIX_TAG + " frontend ";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + FIELDS + EXAMPLE;
-    private static final String MESSAGE_EDIT_RESUME_SUCCESS = "Edited Resume: %1$s";
     private EditResumeDescriptor editResumeDescriptor;
     /**
      * @param index                of the resume in the filtered resume list to edit
@@ -65,7 +67,7 @@ public class EditResumeCommand extends EditCommand {
         }
 
         return new EditCommandResult(editedResume.toString(),
-                String.format(MESSAGE_EDIT_RESUME_SUCCESS, editedResume),
+                String.format(MESSAGE_EDIT_RESUME_SUCCESS, editedResume.getName().fullName),
                 model.getDisplayType());
     }
 
@@ -75,7 +77,7 @@ public class EditResumeCommand extends EditCommand {
      * @param editResumeDescriptor Descriptor parsed from input of user
      * @return Edited Resume item.
      */
-    private static Resume createEditedResume(Resume toEdit, EditResumeDescriptor editResumeDescriptor) {
+    public static Resume createEditedResume(Resume toEdit, EditResumeDescriptor editResumeDescriptor) {
         Name updatedName = editResumeDescriptor.getName().orElse(toEdit.getName());
         Set<Tag> updatedTags = editResumeDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
@@ -84,6 +86,23 @@ public class EditResumeCommand extends EditCommand {
         editedResume.setProjectIds(toEdit.getProjectIds());
         editedResume.setSkillIds(toEdit.getSkillIds());
         return editedResume;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditResumeCommand)) {
+            return false;
+        }
+
+        // state check
+        EditResumeCommand e = (EditResumeCommand) other;
+        return index.equals(e.index) && editResumeDescriptor.equals(e.editResumeDescriptor);
     }
 
 }

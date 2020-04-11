@@ -29,7 +29,11 @@ import seedu.address.model.tag.Tag;
  * Edits an Internship Item in the resume book.
  */
 public class EditInternshipCommand extends EditCommand {
+
+    public static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
+
     public static final String MESSAGE_FROM_TO_MISORDER = "\'from\' cannot be later than \'to\' field. ";
+
     private static final String FIELDS = "Examples: "
             + COMMAND_WORD + " "
             + PREFIX_ITEM + "int "
@@ -51,7 +55,6 @@ public class EditInternshipCommand extends EditCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n"
             + FIELDS
             + EXAMPLE;
-    private static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
 
     private EditInternshipDescriptor editInternshipDescriptor;
 
@@ -89,7 +92,7 @@ public class EditInternshipCommand extends EditCommand {
         }
 
         return new EditCommandResult(editedInternship.toString(),
-                String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship),
+                String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship.getName().fullName),
                 model.getDisplayType());
     }
 
@@ -99,7 +102,7 @@ public class EditInternshipCommand extends EditCommand {
      * @param editInternshipDescriptor Descriptor parsed from input of user
      * @return Edited Internship item.
      */
-    private static Internship createEditedInternship(
+    static Internship createEditedInternship(
             Internship toEdit, EditInternshipDescriptor editInternshipDescriptor) {
         Name updatedName = editInternshipDescriptor.getName().orElse(toEdit.getName());
         Time updatedFrom = editInternshipDescriptor.getFrom().orElse(toEdit.getFrom());
@@ -109,5 +112,13 @@ public class EditInternshipCommand extends EditCommand {
         Set<Tag> updatedTags = editInternshipDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
         return new Internship(updatedName, updatedRole, updatedFrom, updatedTo, updatedDesc, updatedTags, id);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditInternshipCommand // instanceof handles nulls
+                && index.equals(((EditInternshipCommand) other).index)
+                && editInternshipDescriptor.equals(((EditInternshipCommand) other).editInternshipDescriptor));
     }
 }
