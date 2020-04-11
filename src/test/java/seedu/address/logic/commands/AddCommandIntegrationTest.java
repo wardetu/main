@@ -17,7 +17,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.AddCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ResumeBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Note;
@@ -40,7 +39,6 @@ public class AddCommandIntegrationTest {
 
     private Model model;
     private Model expectedModel;
-
 
     @BeforeEach
     public void setUp() {
@@ -83,7 +81,7 @@ public class AddCommandIntegrationTest {
         assertCommandSuccess(new AddNoteCommand(validNote),
                 model,
                 new AddCommandResult(validNote.toString(),
-                        AddNoteCommand.MESSAGE_SUCCESS, ItemUtil.INTERNSHIP_ALIAS),
+                        AddNoteCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType()),
                 expectedModel);
     }
 
