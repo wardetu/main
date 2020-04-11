@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -15,6 +16,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -30,6 +33,7 @@ public class ModelManager implements Model {
     private final VersionedResumeBook versionedResumeBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Item> filteredItems;
+    private final FilteredList<Note> filteredNotes;
 
     /**
      * Initializes a ModelManager with the given resumeBook and userPrefs.
@@ -43,6 +47,7 @@ public class ModelManager implements Model {
         this.versionedResumeBook = new VersionedResumeBook(resumeBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredItems = new FilteredList<>(this.versionedResumeBook.getItemToDisplayList());
+        filteredNotes = new FilteredList<>(this.versionedResumeBook.getNoteToDisplayList());
     }
 
     public ModelManager() {
@@ -103,14 +108,60 @@ public class ModelManager implements Model {
 
     //=========== User ================================================================================
 
+
     @Override
     public void setUser(Person person) {
+        // Wrap the Person object so it is consistent with the setUser method in ResumeBook
         versionedResumeBook.setUser(person);
     }
 
     @Override
     public Person getUser() {
         return versionedResumeBook.getUser();
+    }
+
+    @Override
+    public ObservablePerson getObservableUser() {
+        return versionedResumeBook.getObservableUser();
+    }
+
+    //======================================= Internships ==================================================
+    @Override
+    public boolean hasNote(Note note) {
+        requireNonNull(note);
+        return versionedResumeBook.hasNote(note);
+    }
+
+    @Override
+    public void addNote(Note note) {
+        versionedResumeBook.addNote(note);
+        updateFilteredNoteList(PREDICATE_SHOW_ALL_ITEMS);
+    }
+
+    @Override
+    public void setNote(Note target, Note editedNote) {
+        requireAllNonNull(target, editedNote);
+        versionedResumeBook.setNote(target, editedNote);
+    }
+
+    @Override
+    public void deleteNote(Note note) {
+        versionedResumeBook.deleteNote(note);
+    }
+
+    @Override
+    public Note getNote(Index index) {
+        return versionedResumeBook.getNoteByIndex(index);
+    }
+
+    @Override
+    public void sortNotes(Comparator<Note> sortComparator) {
+        versionedResumeBook.sortNotes(sortComparator);
+    }
+
+    @Override
+    public int getNoteListSize() {
+        return versionedResumeBook.getNoteListSize();
     }
 
     //=========== Internships ================================================================================
@@ -159,6 +210,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortInternships(Comparator<Internship> sortComparator) {
+        versionedResumeBook.sortInternships(sortComparator);
+    }
+
+    @Override
     public int getInternshipSize() {
         return versionedResumeBook.getInternshipSize();
     }
@@ -168,7 +224,7 @@ public class ModelManager implements Model {
         versionedResumeBook.setInternshipToDisplay();
     }
 
-    //=========== Projects ================================================================================
+    //======================================= Projects ==========================================
 
     @Override
     public boolean hasProject(Project project) {
@@ -214,6 +270,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortProjects(Comparator<Project> sortComparator) {
+        versionedResumeBook.sortProjects(sortComparator);
+    }
+
+    @Override
     public int getProjectSize() {
         return versionedResumeBook.getProjectSize();
     }
@@ -223,7 +284,7 @@ public class ModelManager implements Model {
         versionedResumeBook.setProjectToDisplay();
     }
 
-    //=========== Skill ================================================================================
+    //======================================= Skill ===================================================
 
     @Override
     public boolean hasSkill(Skill skill) {
@@ -269,6 +330,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortSkills(Comparator<Skill> sortComparator) {
+        versionedResumeBook.sortSkills(sortComparator);
+    }
+
+    @Override
     public int getSkillSize() {
         return versionedResumeBook.getSkillSize();
     }
@@ -278,7 +344,7 @@ public class ModelManager implements Model {
         versionedResumeBook.setSkillToDisplay();
     }
 
-    //=========== Resume ================================================================================
+    //========================================== Resume =======================================================
 
     @Override
     public boolean hasResume(Resume resume) {
@@ -312,6 +378,11 @@ public class ModelManager implements Model {
     @Override
     public Resume getResumeByIndex(Index index) {
         return versionedResumeBook.getResumeByIndex(index);
+    }
+
+    @Override
+    public void sortResumes(Comparator<Resume> sortComparator) {
+        versionedResumeBook.sortResumes(sortComparator);
     }
 
     @Override
@@ -352,27 +423,19 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public String getDisplayType() {
-        return versionedResumeBook.getDisplayType();
+    public void updateFilteredNoteList(Predicate<Item> predicate) {
+        requireNonNull(predicate);
+        filteredNotes.setPredicate(predicate);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        // short circuit if same object
-        if (obj == this) {
-            return true;
-        }
+    public ObservableList<Note> getFilteredNoteList() {
+        return filteredNotes;
+    }
 
-        // instanceof handles nulls
-        if (!(obj instanceof ModelManager)) {
-            return false;
-        }
 
-        // state check
-        ModelManager other = (ModelManager) obj;
-        return versionedResumeBook.equals(other.versionedResumeBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredItems.equals(other.filteredItems);
+    public String getDisplayType() {
+        return versionedResumeBook.getDisplayType();
     }
 
     //=========== Undo/Redo =================================================================================
@@ -401,5 +464,27 @@ public class ModelManager implements Model {
     public void commitResumeBook() {
         versionedResumeBook.commit();
     }
+
+    //========================================================================================================
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof ModelManager)) {
+            return false;
+        }
+
+        // state check
+        ModelManager other = (ModelManager) obj;
+        return versionedResumeBook.equals(other.versionedResumeBook)
+                && userPrefs.equals(other.userPrefs)
+                && filteredItems.equals(other.filteredItems);
+    }
+
 
 }

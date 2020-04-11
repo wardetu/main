@@ -13,13 +13,15 @@ import seedu.address.testutil.TypicalResumeBook;
 
 public class ClearCommandTest {
 
+    private final String clearDataToUser = " ";
+
     @Test
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager(new ResumeBook(), new UserPrefs());
         Model expectedModel = new ModelManager(new ResumeBook(), new UserPrefs());
         assertCommandSuccess(new ClearCommand(),
                 model,
-                new ClearCommandResult(" ",
+                new ClearCommandResult(clearDataToUser,
                         ClearCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType()),
                 expectedModel);
     }
@@ -31,7 +33,7 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(new ResumeBook(), new UserPrefs());
         assertCommandSuccess(new ClearCommand(),
                 model,
-                new ClearCommandResult(" ",
+                new ClearCommandResult(clearDataToUser,
                         ClearCommand.MESSAGE_SUCCESS, model.getDisplayType()),
                 expectedModel);
     }

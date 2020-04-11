@@ -12,14 +12,15 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new {@code TagPullCommand} object
+ * Parses input arguments and creates a new TagPullCommand object
  */
 public class TagPullCommandParser implements Parser<TagPullCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the TagPullCommand
-     * and returns an TagPullCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns TagPullCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     @Override
     public TagPullCommand parse(String args) throws ParseException {

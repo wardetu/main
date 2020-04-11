@@ -22,4 +22,8 @@ public class ListInternshipCommand extends ListCommand {
                 model.getDisplayType());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof ListInternshipCommand;
+    }
 }

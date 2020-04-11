@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Project;
 
 /**
- * The command for viewing the details of a Project item.
+ * Views the details of a Project item.
  */
 public class ViewProjectCommand extends ViewCommand {
 

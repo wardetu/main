@@ -15,7 +15,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.Person;
+import seedu.address.model.item.Note;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.storage.Storage;
 
 /**
@@ -41,6 +42,7 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = resumeBookParser.parseCommand(commandText);
+
         commandResult = command.execute(model);
 
         try {
@@ -63,12 +65,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Person getUser() {
-        return model.getUser();
+    public ObservableList<Note> getFilteredNoteEntryList() {
+        return model.getFilteredNoteList();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getResumeBookFilePath() {
         return model.getResumeBookFilePath();
     }
 
@@ -80,5 +82,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ObservablePerson getObservableUser() {
+        return model.getObservableUser();
     }
 }

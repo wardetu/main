@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ResumeEditCommand;
 import seedu.address.logic.commands.ResumePreviewCommand;
@@ -18,10 +18,12 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.delete.DeleteCommand;
 import seedu.address.logic.commands.edit.EditCommand;
+import seedu.address.logic.commands.edit.EditUserCommand;
 import seedu.address.logic.commands.find.FindCommand;
 import seedu.address.logic.commands.generate.GenerateResumeCommand;
+import seedu.address.logic.commands.help.HelpCommand;
 import seedu.address.logic.commands.list.ListCommand;
-import seedu.address.logic.commands.me.EditUserCommand;
+import seedu.address.logic.commands.sort.SortCommand;
 import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -38,9 +40,9 @@ public class ResumeBookParser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
-     * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
+     * @param userInput full user input string.
+     * @return the command based on the user input.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -52,7 +54,8 @@ public class ResumeBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        //--------------Item manipulation commands-------------
+        //--------------Item related commands-------------
+
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
@@ -68,12 +71,14 @@ public class ResumeBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
 
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
+
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
 
-        case GenerateResumeCommand.COMMAND_WORD:
-            return new GenerateResumeParser().parse(arguments);
-
+        case DoneCommand.COMMAND_WORD: // for note-taking
+            return new DoneCommandParser().parse(arguments);
 
         //-----------------Undo/Redo----------------------------
 
@@ -83,7 +88,7 @@ public class ResumeBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-        //-----------------Resume Editing-----------------------
+        //-----------------Resume-related commands---------
 
         case ResumeEditCommand.COMMAND_WORD:
             return new ResumeEditCommandParser().parse(arguments);
@@ -91,19 +96,22 @@ public class ResumeBookParser {
         case TagPullCommand.COMMAND_WORD:
             return new TagPullCommandParser().parse(arguments);
 
-        //-----------------Other commands-----------------------
-
         case ResumePreviewCommand.COMMAND_WORD:
             return new ResumePreviewCommandParser().parse(arguments);
 
-        case EditUserCommand.COMMAND_WORD: //"me"
+        case GenerateResumeCommand.COMMAND_WORD:
+            return new GenerateResumeCommandParser().parse(arguments);
+
+        //-----------------Other commands-----------------------
+
+        case EditUserCommand.COMMAND_WORD: // "me"
             return new EditUserParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommandParser().parse(arguments.trim());
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

@@ -1,26 +1,4 @@
 package seedu.address.model;
-//
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertFalse;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-//import static seedu.address.testutil.Assert.assertThrows;
-//import static seedu.address.testutil.TypicalPersonalDetails.ALICE;
-//import static seedu.address.testutil.TypicalPersonalDetails.getTypicalAddressBook;
-//
-//import java.util.Arrays;
-//import java.util.Collection;
-//import java.util.Collections;
-//import java.util.List;
-//
-//import org.junit.jupiter.api.Test;
-//
-//import javafx.collections.FXCollections;
-//import javafx.collections.ObservableList;
-//import seedu.address.model.item.Item;
-//import seedu.address.model.item.exceptions.DuplicateItemException;
-//import seedu.address.testutil.PersonalDetailBuilder;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -31,18 +9,25 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
+import seedu.address.model.item.field.Cap;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Level;
+import seedu.address.model.item.field.Major;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 
@@ -111,15 +96,17 @@ public class ResumeBookTest {
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class ResumeBookStub implements ReadOnlyResumeBook {
-        private Person user = new Person(new DisplayPicture("/images/Duke.png"), new Name("Default name"),
-                new Phone("000"), new Email("000@gmail.com"),
-                new Github("000"), "Default university", "Default major",
-                new Time("12-9999"), new Time("12-9999"), 5.0);
+        private Person person = new Person(new DisplayPicture("/images/Duke.png"), new Name("Default name"),
+                new Description("Default description"), new Phone("000"), new Email("000@gmail.com"), new Github("000"),
+                new University("Default university"), new Major("Default major"),
+                new Time("12-9999"), new Time("12-9999"), new Cap("5.0 5.0"));
+        private ObservablePerson observableUser = new ObservablePerson(person);
         private final ObservableList<Item> itemsToDisplay = FXCollections.observableArrayList();
         private final UniqueItemList<Internship> internships = new UniqueItemList<>();
         private final UniqueItemList<Project> projects = new UniqueItemList<>();
         private final UniqueItemList<Skill> skills = new UniqueItemList<>();
         private final UniqueItemList<Resume> resumes = new UniqueItemList<>();
+        private final UniqueItemList<Note> notes = new UniqueItemList<>();
 
         ResumeBookStub(Collection<Item> itemsToDisplay) {
             this.itemsToDisplay.setAll(itemsToDisplay);
@@ -132,12 +119,17 @@ public class ResumeBookTest {
 
         @Override
         public Person getUser() {
-            return user;
+            return observableUser.getInternalPerson();
         }
 
         @Override
         public ObservableList<Item> getItemToDisplayList() {
             return itemsToDisplay;
+        }
+
+        @Override
+        public ObservableList<Note> getNoteToDisplayList() {
+            return null;
         }
 
         @Override
@@ -161,6 +153,28 @@ public class ResumeBookTest {
         }
 
         @Override
+        public UniqueItemList<Note> getNoteList() {
+            return notes;
+        }
+
+        @Override
+        public ObservablePerson getObservableUser() {
+            return null;
+        }
+
+        public void setNote(Note target, Note editedNote) {
+
+        }
+
+        public void addNote(Note note) {
+
+        }
+
+        public boolean hasNote(Note note) {
+            return false;
+        }
+
+        @Override
         public boolean hasResumeId(int resumeIndex) {
             return false;
         }
@@ -177,8 +191,8 @@ public class ResumeBookTest {
 
         @Override
         public Internship getInternshipByIndex(Index index) {
-            return new Internship(new Name("Company 1"), "Software Engineer", new Time("02-2019"),
-                    new Time("05-2020"), "I did nothing", new HashSet<>());
+            return new Internship(new Name("Company 1"), new Role("Software Engineer"), new Time("02-2019"),
+                    new Time("05-2020"), new Description("I did nothing"), new HashSet<>());
         }
 
         @Override
@@ -188,14 +202,14 @@ public class ResumeBookTest {
 
         @Override
         public Internship getInternshipById(int id) {
-            return new Internship(new Name("Company 1"), "Software Engineer", new Time("02-2019"),
-                    new Time("05-2020"), "I did nothing", new HashSet<>());
+            return new Internship(new Name("Company 1"), new Role("Software Engineer"), new Time("02-2019"),
+                    new Time("05-2020"), new Description("I did nothing"), new HashSet<>());
         }
 
         @Override
         public Project getProjectByIndex(Index index) {
             return new Project(new Name("Project 1"), new Time("01-2020"), new Website("www.website.com"),
-                    "I did nothing", new HashSet<>());
+                    new Description("I did nothing"), new HashSet<>());
         }
 
         @Override
@@ -206,7 +220,7 @@ public class ResumeBookTest {
         @Override
         public Project getProjectById(int id) {
             return new Project(new Name("Project 1"), new Time("01-2020"), new Website("www.website.com"),
-                    "I did nothing", new HashSet<>());
+                    new Description("I did nothing"), new HashSet<>());
         }
 
         @Override
@@ -247,6 +261,16 @@ public class ResumeBookTest {
         @Override
         public int getResumeSize() {
             return 1;
+        }
+
+        @Override
+        public Note getNoteByIndex(Index index) {
+            return null;
+        }
+
+        @Override
+        public int getNoteListSize() {
+            return 0;
         }
 
     }

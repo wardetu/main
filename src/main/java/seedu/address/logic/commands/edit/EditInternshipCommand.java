@@ -19,14 +19,17 @@ import seedu.address.logic.commands.results.EditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.exceptions.DuplicateItemException;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits an Internship Item in the address book.
+ * Edits an Internship Item in the resume book.
  */
 public class EditInternshipCommand extends EditCommand {
+    public static final String MESSAGE_FROM_TO_MISORDER = "\'from\' cannot be later than \'to\' field. ";
     private static final String FIELDS = "Examples: "
             + COMMAND_WORD + " "
             + PREFIX_ITEM + "int "
@@ -73,6 +76,10 @@ public class EditInternshipCommand extends EditCommand {
 
         Internship editedInternship = createEditedInternship(toEdit, editInternshipDescriptor);
 
+        if (editedInternship.getFrom().compareTo(editedInternship.getTo()) > 0) {
+            throw new CommandException(MESSAGE_FROM_TO_MISORDER);
+        }
+
         try {
             model.setInternship(toEdit, editedInternship);
             model.setInternshipToDisplay();
@@ -97,8 +104,8 @@ public class EditInternshipCommand extends EditCommand {
         Name updatedName = editInternshipDescriptor.getName().orElse(toEdit.getName());
         Time updatedFrom = editInternshipDescriptor.getFrom().orElse(toEdit.getFrom());
         Time updatedTo = editInternshipDescriptor.getTo().orElse(toEdit.getTo());
-        String updatedDesc = editInternshipDescriptor.getDescription().orElse(toEdit.getDescription());
-        String updatedRole = editInternshipDescriptor.getRole().orElse(toEdit.getRole());
+        Description updatedDesc = editInternshipDescriptor.getDescription().orElse(toEdit.getDescription());
+        Role updatedRole = editInternshipDescriptor.getRole().orElse(toEdit.getRole());
         Set<Tag> updatedTags = editInternshipDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
         return new Internship(updatedName, updatedRole, updatedFrom, updatedTo, updatedDesc, updatedTags, id);

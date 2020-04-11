@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Arrays;
 import java.util.Set;
 
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Type;
@@ -20,13 +21,13 @@ public class Project extends Item {
     // Data fields
     private Time time;
     private Website website;
-    private String description;
+    private Description description;
 
-    public Project(Name name, Time time, Website website, String description, Set<Tag> tags) {
+    public Project(Name name, Time time, Website website, Description description, Set<Tag> tags) {
         this(name, time, website, description, tags, ItemUtil.yieldId(ItemUtil.PROJECT_ALIAS));
     }
 
-    public Project(Name name, Time time, Website website, String description, Set<Tag> tags, int id) {
+    public Project(Name name, Time time, Website website, Description description, Set<Tag> tags, int id) {
         super(name, id, tags);
         requireAllNonNull(time, website, description);
         this.type = Type.generate(ItemUtil.PROJECT_ALIAS);
@@ -43,7 +44,7 @@ public class Project extends Item {
         return this.website;
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         return this.description;
     }
 
@@ -64,7 +65,8 @@ public class Project extends Item {
         builder.append("Name: ").append(getName()).append("\n")
                 .append("Website: ").append(getWebsite()).append(" ")
                 .append("Time: ").append(getTime()).append("\n");
-        Arrays.stream(getDescription().split("\\.")).map(x -> "- " + x.trim() + ".\n").forEach(builder::append);
+        Arrays.stream(getDescription().toString().trim().split("\\."))
+                .map(x -> "- " + x.trim() + ".\n").forEach(builder::append);
         return builder.toString();
     }
 

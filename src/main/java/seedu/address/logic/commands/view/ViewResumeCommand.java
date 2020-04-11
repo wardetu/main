@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Resume;
 
 /**
- * The command for viewing the details of a Resume item.
+ * Views the details of a Resume item.
  */
 public class ViewResumeCommand extends ViewCommand {
 

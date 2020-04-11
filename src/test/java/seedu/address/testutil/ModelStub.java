@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -12,6 +13,8 @@ import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -78,6 +81,46 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservablePerson getObservableUser() {
+        return null;
+    }
+
+    @Override
+    public boolean hasNote(Note note) {
+        return false;
+    }
+
+    @Override
+    public void addNote(Note note) {
+
+    }
+
+    @Override
+    public void setNote(Note target, Note editedNote) {
+
+    }
+
+    @Override
+    public void deleteNote(Note note) {
+
+    }
+
+    @Override
+    public Note getNote(Index index) {
+        return null;
+    }
+
+    @Override
+    public void sortNotes(Comparator<Note> sortComparator) {
+
+    }
+
+    @Override
+    public int getNoteListSize() {
+        return 0;
+    }
+
+    @Override
     public boolean hasInternship(Internship internship) {
         return false;
     }
@@ -110,6 +153,11 @@ public class ModelStub implements Model {
     @Override
     public List<Internship> getInternshipsByTag(Tag tag) {
         return null;
+    }
+
+    @Override
+    public void sortInternships(Comparator<Internship> sortComparator) {
+
     }
 
     @Override
@@ -158,6 +206,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void sortProjects(Comparator<Project> sortComparator) {
+
+    }
+
+    @Override
     public int getProjectSize() {
         return 0;
     }
@@ -200,6 +253,11 @@ public class ModelStub implements Model {
     @Override
     public List<Skill> getSkillsByTag(Tag tag) {
         return null;
+    }
+
+    @Override
+    public void sortSkills(Comparator<Skill> sortComparator) {
+
     }
 
     @Override
@@ -249,6 +307,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void sortResumes(Comparator<Resume> sortComparator) {
+
+    }
+
+    @Override
     public int getResumeSize() {
         return 0;
     }
@@ -272,6 +335,14 @@ public class ModelStub implements Model {
     public void updateFilteredItemList(Predicate<Item> predicate) {
 
     }
+
+    @Override
+    public ObservableList<Note> getFilteredNoteList() {
+        return null;
+    }
+
+    @Override
+    public void updateFilteredNoteList(Predicate<Item> predicate) {}
 
     @Override
     public String getDisplayType() {

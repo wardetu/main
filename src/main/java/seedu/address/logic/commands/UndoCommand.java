@@ -27,6 +27,6 @@ public class UndoCommand extends Command {
 
         model.undoResumeBook();
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        return new UndoCommandResult("", MESSAGE_SUCCESS, model.getDisplayType());
+        return new UndoCommandResult(MESSAGE_SUCCESS, model.getDisplayType());
     }
 }

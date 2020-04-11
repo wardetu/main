@@ -15,28 +15,35 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.field.Address;
+import seedu.address.model.item.field.Cap;
 import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
 import seedu.address.model.item.field.Level;
+import seedu.address.model.item.field.Major;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings in the various Parser classes.
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX =
+            "Invalid index: The index provided is not a non-zero unsigned integer!";
+    public static final String MESSAGE_INVALID_REDIT_ITEM_INDEX = "Invalid index: The index provided for one of the"
+            + "items is not a non-zero unsigned integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -77,10 +84,10 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
-    // TODO: BEAUTIFY THE EXCEPTION MESSAGE
     /**
      * Parses a {@code String level} into a {@code Level}.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code level} is invalid.
      */
     public static Level parseLevel(String level) throws ParseException {
@@ -91,14 +98,14 @@ public class ParserUtil {
                 return value;
             }
         }
-        throw new ParseException("Level of proficiency can only be one of these three types: basic, intermediate, "
-                + "advanced.");
+        throw new ParseException(Level.MESSAGE_CONSTRAINTS);
     }
 
     /**
      *
      * Parses a {@code String website} into a {@code Website}.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code level} is invalid.
      */
     public static Website parseWebsite(String website) throws ParseException {
@@ -108,21 +115,6 @@ public class ParserUtil {
             throw new ParseException(Website.MESSAGE_CONSTRAINTS);
         }
         return new Website(trimmedWebsite);
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
     }
 
     /**
@@ -138,6 +130,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String description} into an {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
     }
 
     /**
@@ -177,7 +184,7 @@ public class ParserUtil {
         requireNonNull(itemType);
         String trimmedItemType = itemType.trim();
         if (!Item.isValidItemType(trimmedItemType)) {
-            throw new ParseException("Not a valid item type!");
+            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
         }
         return trimmedItemType;
     }
@@ -198,20 +205,29 @@ public class ParserUtil {
     }
 
     /**
-     * Parses the Item Indices to give the required optional
+     * Parses the Item Indices to give the required optional.
+     *
+     * @throws ParseException if the given {@code indices} is invalid.
      */
     public static Optional<List<Integer>> parseReditItemIndices(String indices) throws ParseException {
         if (indices == null) {
             return Optional.empty();
         } else if (indices.equals("")) {
-            // Empty string will return an InvokationTargetException in the streams
+            // Empty string will return an InvocationTargetException in the streams
             // TODO: Investigate how this can be combined with the else block
             return Optional.of(new ArrayList<>());
         } else {
-            List<Integer> mappedIndices = Arrays.stream(indices.split("\\s+"))
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
+            boolean isValidIndices = Arrays
+                    .stream(indices.split("\\s+"))
+                    .allMatch(StringUtil::isNonZeroUnsignedInteger);
 
+            if (!isValidIndices) {
+                throw new ParseException(MESSAGE_INVALID_REDIT_ITEM_INDEX);
+            }
+
+            List<Integer> mappedIndices = Arrays.stream(indices.split("\\s+"))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList());
             return Optional.of(mappedIndices);
         }
     }
@@ -225,10 +241,10 @@ public class ParserUtil {
     public static DisplayPicture parseDisplayPicture(String displayFilePath) throws ParseException {
         requireNonNull(displayFilePath);
         String trimmedDisplayFilePath = displayFilePath.trim();
-        if (DisplayPicture.isValidDisplayPicture(trimmedDisplayFilePath)) {
-            return new DisplayPicture(trimmedDisplayFilePath);
+        if (!DisplayPicture.isValidDisplayPicture(trimmedDisplayFilePath)) {
+            throw new ParseException(DisplayPicture.MESSAGE_CONSTRAINTS_FILE_TYPE);
         }
-        throw new ParseException(DisplayPicture.MESSAGE_CONSTRAINTS);
+        return new DisplayPicture(trimmedDisplayFilePath);
     }
 
     /**
@@ -240,40 +256,40 @@ public class ParserUtil {
     public static Github parseGithub(String github) throws ParseException {
         requireNonNull(github);
         String trimmedGithub = github.trim();
-        if (Github.isValidGithub(trimmedGithub)) {
-            return new Github(trimmedGithub);
+        if (!Github.isValidGithub(trimmedGithub)) {
+            throw new ParseException(Github.MESSAGE_CONSTRAINTS);
         }
-        throw new ParseException(Github.MESSAGE_CONSTRAINTS);
+        return new Github(trimmedGithub);
     }
 
     /**
-     * Parses a {@code String university} into a {@code String university}.
+     * Parses a {@code String university} into a {@code University university}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code github} is invalid.
      */
-    public static String parseUniversity(String university) throws ParseException {
+    public static University parseUniversity(String university) throws ParseException {
         requireNonNull(university);
         String trimmedUniversity = university.trim();
-        if (Verifier.isValidUniversity(trimmedUniversity)) {
-            return trimmedUniversity;
+        if (!University.isValidUniversity(trimmedUniversity)) {
+            throw new ParseException(University.MESSAGE_CONSTRAINTS);
         }
-        throw new ParseException(Verifier.UNIVERSITY_MESSAGE_CONSTRAINTS);
+        return new University(trimmedUniversity);
     }
 
     /**
-     * Parses a {@code String major} into a {@code String major}.
+     * Parses a {@code String major} into a {@code Major major}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code major} is invalid.
      */
-    public static String parseMajor(String major) throws ParseException {
+    public static Major parseMajor(String major) throws ParseException {
         requireNonNull(major);
         String trimmedMajor = major.trim();
-        if (Verifier.isValidMajor(trimmedMajor)) {
-            return trimmedMajor;
+        if (!Major.isValidMajor(trimmedMajor)) {
+            throw new ParseException(Major.MESSAGE_CONSTRAINTS);
         }
-        throw new ParseException(Verifier.MAJOR_MESSAGE_CONSTRAINTS);
+        return new Major(trimmedMajor);
     }
 
     /**
@@ -282,43 +298,49 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code cap} is invalid.
      */
-    public static Double parseCap(String cap) throws ParseException {
+    public static Cap parseCap(String cap) throws ParseException {
         requireNonNull(cap);
-        String trimmedCap = cap.trim();
-        if (Verifier.isValidCap(trimmedCap)) {
-            double userCap = Double.valueOf(trimmedCap);
-            return Math.round(userCap * 100.0) / 100.0;
+        String[] trimmedValues = cap.trim().split(" ");
+        if (trimmedValues.length == 2 && Verifier.isValidCap(trimmedValues[0], trimmedValues[1])) {
+            double current = Double.valueOf(trimmedValues[0]);
+            current = Math.round(current * 100.00) / 100.00;
+            double max = Double.valueOf(trimmedValues[1]);
+            max = Math.round(max * 100.00) / 100.00;
+            return new Cap(current + " " + max);
         }
-        throw new ParseException(Verifier.CAP_MESSAGE_CONSTRAINTS);
+        throw new ParseException(Cap.MESSAGE_CONSTRAINTS);
     }
 
     /**
-     * Parses a {@code String description} into a {@code Description}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code description} is invalid.
-     */
-    public static String parseDescription(String description) throws ParseException {
-        requireNonNull(description);
-        String trimmedDescription = description.trim();
-        if (!Description.isValidDescription(trimmedDescription)) {
-            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
-        }
-        return trimmedDescription;
-    }
-
-    /**
-     * Parses a {@code String role} into a {@code String role}.
+     * Parses a {@code String role} into a {@code Role role}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code role} is invalid.
      */
-    public static String parseRole(String role) throws ParseException {
+    public static Role parseRole(String role) throws ParseException {
         requireNonNull(role);
         String trimmedRole = role.trim();
-        if (Verifier.isValidRole(trimmedRole)) {
-            return trimmedRole;
+        if (!Role.isValidRole(trimmedRole)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
-        throw new ParseException(Verifier.ROLE_MESSAGE_CONSTRAINTS);
+        return new Role(trimmedRole);
+    }
+
+    /**
+     * Parses a {@code String reverse} choice into a boolean option.
+     * A default value of false is returned if null is provided.
+     *
+     * @throws ParseException if the given {@code reverse} is invalid.
+     */
+    public static boolean parseReverse(String reverse) throws ParseException {
+        // trimming is not done before null check to avoid NullPointerException
+        if (reverse == null || reverse.trim().equalsIgnoreCase("false")) {
+            return false;
+        } else if (reverse.trim().equalsIgnoreCase("true")) {
+            return true;
+        } else {
+            throw new ParseException("Reverse choice can only be true of false.");
+        }
+
     }
 }

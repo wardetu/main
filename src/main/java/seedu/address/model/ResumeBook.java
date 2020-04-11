@@ -1,9 +1,9 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.util.ItemUtil.DEFAULT_USER;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,11 +11,23 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
+import seedu.address.model.item.ObservablePerson;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.item.UniqueItemList;
+import seedu.address.model.item.field.Cap;
+import seedu.address.model.item.field.Description;
+import seedu.address.model.item.field.DisplayPicture;
+import seedu.address.model.item.field.Email;
+import seedu.address.model.item.field.Github;
+import seedu.address.model.item.field.Major;
+import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Phone;
+import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 
@@ -26,13 +38,15 @@ import seedu.address.model.util.ItemUtil;
 public class ResumeBook implements ReadOnlyResumeBook {
 
     // Should be all caps but check style complain
-    private Person user;
     private final UniqueItemList<Item> itemsToDisplay;
     private final UniqueItemList<Internship> internships;
     private final UniqueItemList<Project> projects;
     private final UniqueItemList<Skill> skills;
     private final UniqueItemList<Resume> resumes;
+    private final UniqueItemList<Note> notesToDisplay;
+    private final UniqueItemList<Note> notes;
     private String displayType = "";
+    private ObservablePerson observableUser;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -42,12 +56,18 @@ public class ResumeBook implements ReadOnlyResumeBook {
      *   among constructors.
      */
     {
-        user = DEFAULT_USER;
+        Person defaultUser = new Person(new DisplayPicture("/images/Duke.png"), new Name("Default name"),
+                new Description("Default description"), new Phone("000"), new Email("000@gmail.com"), new Github("000"),
+                new University("Default university"), new Major("Default major"),
+                new Time("12-9999"), new Time("12-9999"), new Cap("0.0 5.0"));
+        observableUser = new ObservablePerson(defaultUser);
         itemsToDisplay = new UniqueItemList<>();
         internships = new UniqueItemList<>();
         projects = new UniqueItemList<>();
         skills = new UniqueItemList<>();
         resumes = new UniqueItemList<>();
+        notesToDisplay = new UniqueItemList<>();
+        notes = new UniqueItemList<>();
     }
 
     public ResumeBook() {}
@@ -136,7 +156,8 @@ public class ResumeBook implements ReadOnlyResumeBook {
      * Replaces the user profile detail with that of {@code person}.
      */
     public void setUser(Person user) {
-        this.user = user;
+        // Method's name is setPerson so it is consistent with the Observable class name.
+        this.observableUser.setPerson(user);
     }
 
     /**
@@ -172,6 +193,15 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     /**
+     * Replaces the contents of the note list with {@code notes}.
+     * {@code notes} must not contain duplicate items.
+     */
+    private void setNotes(UniqueItemList<Note> notes) {
+        this.notes.setItems(notes);
+        setNotesToDisplay();
+    }
+
+    /**
      * Resets the existing data of this {@code ResumeBook} with {@code newData}.
      */
     public void resetData(ReadOnlyResumeBook newData) {
@@ -181,6 +211,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
         setProjects(newData.getProjectList());
         setSkills(newData.getSkillList());
         setResumes(newData.getResumeList());
+        setNotes(newData.getNoteList());
         setItemsToDisplay(((ResumeBook) newData).getDisplayType());
     }
 
@@ -250,7 +281,9 @@ public class ResumeBook implements ReadOnlyResumeBook {
             .collect(Collectors.toList());
     }
 
-
+    public void sortInternships(Comparator<Internship> sortComparator) {
+        internships.sort(sortComparator);
+    }
 
     @Override
     public boolean hasInternshipId(int id) {
@@ -336,6 +369,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
             .filter(x -> x.hasTag(tag))
             .map(x -> (Project) x)
             .collect(Collectors.toList());
+    }
+
+    public void sortProjects(Comparator<Project> sortComparator) {
+        projects.sort(sortComparator);
     }
 
     @Override
@@ -424,6 +461,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
             .collect(Collectors.toList());
     }
 
+    public void sortSkills(Comparator<Skill> sortComparator) {
+        skills.sort(sortComparator);
+    }
+
     @Override
     public boolean hasSkillId(int id) {
         for (Skill item : skills) {
@@ -495,6 +536,10 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return resumes.asUnmodifiableObservableList().get(index.getZeroBased());
     }
 
+    public void sortResumes(Comparator<Resume> sortComparator) {
+        resumes.sort(sortComparator);
+    }
+
     @Override
     public boolean hasResumeId(int resumeIndex) {
         for (Resume item : resumes) {
@@ -510,22 +555,99 @@ public class ResumeBook implements ReadOnlyResumeBook {
         return resumes.getSize();
     }
 
+
+    //=========== Notes ================================================================================
+
+    /**
+     * Returns true if a skill with the same identity as {@code skill} exists in the resume book.
+     */
+    public boolean hasNote(Note note) {
+        requireNonNull(note);
+        return notes.contains(note);
+    }
+
+    /**
+     * Adds a skill to the resume book.
+     * The skill must not already exist in the resume book.
+     */
+    public void addNote(Note note) {
+        requireNonNull(note);
+        notes.add(note);
+        setNotesToDisplay();
+    }
+
+    /**
+     * Replaces the given skill {@code target} in the list with {@code editedSkill}.
+     * {@code target} must exist in the resume book.
+     * The identity of {@code editedSkill} must not be the same as another existing skill in the resume book.
+     */
+    public void setNote(Note target, Note editedNote) {
+        notes.setItem(target, editedNote);
+        setNotesToDisplay();
+    }
+
+    /**
+     * Removes {@code key} from this {@code notes}.
+     * {@code key} must exist in the note list.
+     */
+    public void deleteNote(Note key) {
+        notes.remove(key);
+        setNotesToDisplay();
+    }
+
+    /**
+     * Resets the list of notes in UI to be consistent with the list kept in model {@code notes}.
+     * This must be called after any changes made to notes!
+     */
+    private void setNotesToDisplay() {
+        this.notesToDisplay.setItems(notes.getItemList().stream().map(x -> (Note) x).collect(Collectors.toList()));
+    }
+
+    @Override
+    public Note getNoteByIndex(Index index) {
+        return notes.asUnmodifiableObservableList().get(index.getZeroBased());
+    }
+
+    @Override
+    public int getNoteListSize() {
+        return notes.getSize();
+    }
+
+    /**
+     * Sorts the list of notes in the resume book using the provided {@code sortComparator}.
+     */
+    public void sortNotes(Comparator<Note> sortComparator) {
+        notes.sort(sortComparator);
+        setNotesToDisplay();
+    }
+
+    @Override
+    public Person getUser() {
+        return this.observableUser.getInternalPerson();
+    }
+
     //=========== Util methods ================================================================================
 
+    /**
+     * Returns the String form the item list currently on display.
+     */
     @Override
     public String toString() {
         return itemsToDisplay.asUnmodifiableObservableList().size() + " items";
         // TODO: refine later
     }
 
-    @Override
-    public Person getUser() {
-        return this.user;
-    }
-
+    /**
+     * Returns the current list of items for display as an {@code ObservableList<Item>}
+     */
     @Override
     public ObservableList<Item> getItemToDisplayList() {
         return itemsToDisplay.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Note> getNoteToDisplayList() {
+        return notesToDisplay.asUnmodifiableObservableList();
     }
 
     @Override
@@ -549,19 +671,31 @@ public class ResumeBook implements ReadOnlyResumeBook {
     }
 
     @Override
+    public UniqueItemList<Note> getNoteList() {
+        return notes;
+    }
+
+    @Override
+    public ObservablePerson getObservableUser() {
+        return observableUser;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ResumeBook // instanceof handles nulls
-                && user.equals(((ResumeBook) other).user)
+                && observableUser.equals(((ResumeBook) other).observableUser)
                 && itemsToDisplay.equals(((ResumeBook) other).itemsToDisplay)
                 && internships.equals(((ResumeBook) other).internships)
                 && projects.equals(((ResumeBook) other).projects)
                 && skills.equals(((ResumeBook) other).skills)
-                && resumes.equals(((ResumeBook) other).resumes));
+                && resumes.equals(((ResumeBook) other).resumes)
+                && notes.equals(((ResumeBook) other).notes));
     }
 
     @Override
     public int hashCode() {
         return itemsToDisplay.hashCode();
     }
+
 }

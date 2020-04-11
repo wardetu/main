@@ -14,18 +14,23 @@ import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.results.ViewCommandResult;
 import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.commands.view.ViewInternshipCommand;
+import seedu.address.logic.commands.view.ViewNoteCommand;
 import seedu.address.logic.commands.view.ViewProjectCommand;
 import seedu.address.logic.commands.view.ViewResumeCommand;
 import seedu.address.logic.commands.view.ViewSkillCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ResumeBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.Internship;
+import seedu.address.model.item.Note;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
 import seedu.address.model.item.Skill;
 import seedu.address.model.util.ItemUtil;
+import seedu.address.testutil.ResumeBookBuilder;
 import seedu.address.testutil.TypicalInternship;
+import seedu.address.testutil.TypicalNote;
 import seedu.address.testutil.TypicalProject;
 import seedu.address.testutil.TypicalResume;
 import seedu.address.testutil.TypicalResumeBook;
@@ -37,17 +42,19 @@ import seedu.address.testutil.TypicalSkill;
 public class ViewCommandIntegrationTest {
 
     private Model model;
+    private Model expectedModel;
+    private ResumeBook resumeBook = new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build();
+    private ResumeBook resumeBookCopy = new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build();
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE, new UserPrefs());
+        model = new ModelManager(resumeBook, new UserPrefs());
+        expectedModel = new ModelManager(resumeBookCopy, new UserPrefs());
     }
 
     @Test
     public void execute_viewInternship_success() {
         Internship validInternship = TypicalInternship.NINJA_VAN;
-
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
         expectedModel.setInternshipToDisplay();
 
         assertCommandSuccess(new ViewInternshipCommand(Index.fromOneBased(1)),
@@ -66,10 +73,30 @@ public class ViewCommandIntegrationTest {
     }
 
     @Test
+    public void execute_viewNote_success() {
+        Note validNote = TypicalNote.FINISH_CS_2103;
+
+        assertCommandSuccess(new ViewNoteCommand(Index.fromOneBased(1)),
+                model,
+                new CommandResult(validNote.toString(),
+                        ViewNoteCommand.MESSAGE_VIEW_SUCCESS,
+                        expectedModel.getDisplayType()),
+                expectedModel);
+    }
+
+    @Test
+    public void execute_outOfBoundsNote_throwsCommandException() {
+        assertCommandFailure(new ViewNoteCommand(Index.fromOneBased(3)),
+                model,
+                new CommandException(Messages.MESSAGE_INVALID_INDEX));
+    }
+
+
+
+    @Test
     public void execute_viewProject_success() {
         Project validProject = TypicalProject.ORBITAL;
 
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
         expectedModel.setProjectToDisplay();
 
         assertCommandSuccess(new ViewProjectCommand(Index.fromOneBased(1)),
@@ -90,8 +117,6 @@ public class ViewCommandIntegrationTest {
     @Test
     public void execute_viewResume_success() {
         Resume validResume = TypicalResume.ME_RESUME;
-
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
         expectedModel.setResumeToDisplay();
 
         assertCommandSuccess(new ViewResumeCommand(Index.fromOneBased(1)),
@@ -112,8 +137,6 @@ public class ViewCommandIntegrationTest {
     @Test
     public void execute_viewSkill_success() {
         Skill validSkill = TypicalSkill.REACT;
-
-        Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE_COPY, new UserPrefs());
         expectedModel.setSkillToDisplay();
 
         assertCommandSuccess(new ViewSkillCommand(Index.fromOneBased(1)),

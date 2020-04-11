@@ -3,16 +3,11 @@ package seedu.address.logic.parser;
 import seedu.address.model.util.ItemUtil;
 
 /**
- * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
+ * Contains Command Line Interface (CLI) syntax definitions common to multiple commands.
  */
 public class CliSyntax {
 
     /* Prefix definitions */
-
-    /* AB3's original prefixes */
-    public static final Prefix PREFIX_PHONE = new Prefix("p/");
-    public static final Prefix PREFIX_EMAIL = new Prefix("e/");
-    public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
 
     /* Items */
     public static final Prefix PREFIX_ITEM = new Prefix("i/");
@@ -37,13 +32,19 @@ public class CliSyntax {
     /* Prefixes for different item types */
     public static final Prefix PREFIX_INTERNSHIP = new Prefix(ItemUtil.INTERNSHIP_ALIAS + "/");
     public static final Prefix PREFIX_PROJECT = new Prefix(ItemUtil.PROJECT_ALIAS + "/");
-    public static final Prefix PREFIX_RESUME = new Prefix(ItemUtil.RESUME_ALIAS + "/");
     public static final Prefix PREFIX_SKILL = new Prefix(ItemUtil.SKILL_ALIAS + "/");
 
     /* User */
+    public static final Prefix PREFIX_PHONE = new Prefix("p/");
+    public static final Prefix PREFIX_EMAIL = new Prefix("e/");
+    public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_DP = new Prefix("dp/");
     public static final Prefix PREFIX_GITHUB = new Prefix("g/");
     public static final Prefix PREFIX_UNIVERSITY = new Prefix("u/");
     public static final Prefix PREFIX_MAJOR = new Prefix("m/");
     public static final Prefix PREFIX_CAP = new Prefix("c/");
+
+    /* Sort keywords */
+    public static final Prefix PREFIX_SORT_ORDER = new Prefix("order/");
+    public static final Prefix PREFIX_REVERSE = new Prefix("reverse/");
 }

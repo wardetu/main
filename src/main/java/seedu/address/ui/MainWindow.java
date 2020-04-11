@@ -17,7 +17,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.HelpCommandResult;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.note.NoteListPanel;
 import seedu.address.ui.personbio.UserOverallPane;
 
 /**
@@ -41,6 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private UserOverallPane userOverallPane;
     private ItemDisplayList itemDisplayList;
     private ObservableList<String> observableItemList;
+    private NoteListPanel noteListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -65,6 +68,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane testPanelPlaceholder;
+
+    @FXML
+    private StackPane notePlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -127,21 +133,24 @@ public class MainWindow extends UiPart<Stage> {
         itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
 
-        userOverallPane = new UserOverallPane(logic.getUser());
+        userOverallPane = new UserOverallPane(logic.getObservableUser());
+
         profilePlaceholder.getChildren().add(userOverallPane.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        noteListPanel = new NoteListPanel(logic.getFilteredNoteEntryList());
+        notePlaceholder.getChildren().add(noteListPanel.getRoot());
+
         itemDisplayList = new ItemDisplayList(FXCollections.observableArrayList(new String[0]));
         itemDisplayPlaceholder.getChildren().add(itemDisplayList.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getResumeBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-
     }
 
     /**
@@ -209,12 +218,13 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+
             logger.info("Result: " + commandResult.getFeedbackToUser());
             logger.info("Item Display: " + commandResult.getDataToUser());
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            userOverallPane.updateUserProfile(logic.getUser());
             itemListPanel.changeStyle(commandResult.getDisplayType());
+
 
             if (commandResult.hasItemChanged()) {
                 itemDisplayList.updateDisplayItem(commandResult.getDataToUser().split("\n"));
@@ -226,6 +236,8 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowHelp()) {
+                HelpCommandResult helpCommandResult = (HelpCommandResult) commandResult;
+                helpWindow.setText(helpCommandResult.getPopUpContent());
                 handleHelp();
             }
 
