@@ -156,8 +156,22 @@ For example in `add i/ TYPE n/ NAME`, `TYPE` and `NAME` are parameters which can
 
 Lists out the function and usage of each command.
 ****
-Format: `help`
+Format: `help OPTION`
 ****
+
+There are two possible `help` options that you can choose from, as shown in the table below:
+[width="100%",cols="^.^15%,^.^25%,60%",options="header",]
+|=======================================================================
+|Option |Format |Result
+|command |`help command` |Opens a pop-up window with a summary of available commands, their syntax and usages.
+|start |`help start` |Opens a pop-up window with detailed guide on how to get started.
+|=======================================================================
+
+These are screenshots of the two pop-up windows:
+
+image::helpCommand.png[width="790"]
+
+image::helpStart.png[width="790"]
 
 // end::help[]
 
