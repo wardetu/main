@@ -9,5 +9,5 @@
       "z" : 99
     }
   },
-  "addressBookFilePath" : "resume.json"
+  "resumeBookFilePath" : "data\\resume.json"
 }

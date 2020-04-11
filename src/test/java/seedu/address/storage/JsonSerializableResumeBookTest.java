@@ -159,6 +159,7 @@ public class JsonSerializableResumeBookTest {
                 JsonSerializableResumeBook.class).get();
         assertEquals(dataFromFile, new JsonSerializableResumeBook(typicalResumeBook));
 
+
         // Not equals
         JsonSerializableResumeBook alternateDataFromFile = JsonUtil.readJsonFile(OTHER_TYPICAL_RESUME_BOOK_FILE,
                 JsonSerializableResumeBook.class).get();
