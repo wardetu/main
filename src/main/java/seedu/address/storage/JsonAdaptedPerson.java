@@ -5,13 +5,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.item.Person;
+import seedu.address.model.item.field.Cap;
 import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.DisplayPicture;
 import seedu.address.model.item.field.Email;
 import seedu.address.model.item.field.Github;
+import seedu.address.model.item.field.Major;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Phone;
 import seedu.address.model.item.field.Time;
+import seedu.address.model.item.field.University;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -30,18 +33,19 @@ class JsonAdaptedPerson {
     private final String major;
     private final String from;
     private final String to;
-    private final String cap;
+    private final String currentCap;
+    private final String maxCap;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("dp") String dp, @JsonProperty("name") String name,
-                             @JsonProperty("description") String description,
-                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                             @JsonProperty("github") String github, @JsonProperty("university") String university,
-                             @JsonProperty("major") String major, @JsonProperty("from") String from,
-                             @JsonProperty("to") String to, @JsonProperty("cap") String cap) {
+                             @JsonProperty("description") String description, @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email, @JsonProperty("github") String github,
+                             @JsonProperty("university") String university, @JsonProperty("major") String major,
+                             @JsonProperty("from") String from, @JsonProperty("to") String to,
+                             @JsonProperty("current cap") String currentCap, @JsonProperty("max cap") String maxCap) {
         this.dp = dp;
         this.name = name;
         this.description = description;
@@ -52,7 +56,8 @@ class JsonAdaptedPerson {
         this.major = major;
         this.from = from;
         this.to = to;
-        this.cap = cap;
+        this.currentCap = currentCap;
+        this.maxCap = maxCap;
     }
 
     /**
@@ -61,18 +66,19 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         dp = source.getDisplayPicture().toString();
         name = source.getName().toString();
-        description = source.getDescription();
+        description = source.getDescription().toString();
         phone = source.getPhone().toString();
         email = source.getEmail().toString();
         github = source.getGithub().toString();
-        university = source.getUniversity();
-        major = source.getMajor();
+        university = source.getUniversity().toString();
+        major = source.getMajor().toString();
         from = source.getFrom().toString();
         to = source.getTo().toString();
-        cap = String.valueOf(source.getCap());
+        currentCap = String.valueOf(source.getCap().current);
+        maxCap = String.valueOf(source.getCap().max);
+
     }
 
-    // TODO: CHECK FOR UNIVERSITY AND DESCRIPTION
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      */
@@ -82,7 +88,7 @@ class JsonAdaptedPerson {
                     DisplayPicture.class.getSimpleName()));
         }
         if (!DisplayPicture.isValidDisplayPicture(dp)) {
-            throw new IllegalValueException(DisplayPicture.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(DisplayPicture.MESSAGE_CONSTRAINTS_FILE_TYPE);
         }
         final DisplayPicture modelDisplayPicture = new DisplayPicture(dp);
 
@@ -130,6 +136,23 @@ class JsonAdaptedPerson {
         }
         final Github modelGithub = new Github(github);
 
+        if (university == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, University.class.getSimpleName()));
+        }
+        if (!University.isValidUniversity(university)) {
+            throw new IllegalValueException(University.MESSAGE_CONSTRAINTS);
+        }
+        final University modelUniversity = new University(university);
+
+        if (major == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Major.class.getSimpleName()));
+        }
+        if (!Major.isValidMajor(major)) {
+            throw new IllegalValueException(Major.MESSAGE_CONSTRAINTS);
+        }
+        final Major modelMajor = new Major(major);
+
         if (from == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Time.class.getSimpleName()));
@@ -153,17 +176,49 @@ class JsonAdaptedPerson {
             throw new IllegalValueException("The \"to\" field must not precede the \"from\" field.");
         }
 
-        final double modelCap;
+        final double modelCurrentCap;
         try {
-            modelCap = Double.parseDouble(cap);
-        } catch (NumberFormatException e) {
-            throw new IllegalValueException("The cap field must be a numeric value");
-        }
-        if (modelCap > 5 || modelCap < 0) {
-            throw new IllegalValueException("The cap value must be between 0.0 and 5.0 inclusive.");
+            modelCurrentCap = Double.parseDouble(currentCap);
+        } catch (NumberFormatException | NullPointerException e) {
+            throw new IllegalValueException("The cap field must be a numeric value.");
         }
 
-        return new Person(modelDisplayPicture, modelName, description, modelPhone, modelEmail,
-                modelGithub, university, major, modelFrom, modelTo, modelCap);
+        final double modelMaxCap;
+        try {
+            modelMaxCap = Double.parseDouble(maxCap);
+        } catch (NumberFormatException | NullPointerException e) {
+            throw new IllegalValueException("The max cap field must be a numeric value.");
+        }
+
+        if (modelCurrentCap < 0 || modelMaxCap < 0) {
+            throw new IllegalValueException("The cap value must not be negative.");
+        }
+
+        if (modelCurrentCap > modelMaxCap) {
+            throw new IllegalValueException("The current cap value must not be greater than the maximum cap value.");
+        }
+
+        final Cap modelCap = new Cap(modelCurrentCap + " " + modelMaxCap);
+
+        return new Person(modelDisplayPicture, modelName, modelDescription, modelPhone, modelEmail,
+                modelGithub, modelUniversity, modelMajor, modelFrom, modelTo, modelCap);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof JsonAdaptedPerson
+                && dp.equals(((JsonAdaptedPerson) other).dp)
+                && name.equals(((JsonAdaptedPerson) other).name)
+                && description.equals(((JsonAdaptedPerson) other).description)
+                && phone.equals(((JsonAdaptedPerson) other).phone)
+                && email.equals(((JsonAdaptedPerson) other).email)
+                && github.equals(((JsonAdaptedPerson) other).github)
+                && university.equals(((JsonAdaptedPerson) other).university)
+                && major.equals(((JsonAdaptedPerson) other).major)
+                && from.equals(((JsonAdaptedPerson) other).from)
+                && to.equals(((JsonAdaptedPerson) other).to)
+                && currentCap.equals(((JsonAdaptedPerson) other).currentCap)
+                && maxCap.equals(((JsonAdaptedPerson) other).maxCap));
     }
 }

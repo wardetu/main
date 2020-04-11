@@ -74,11 +74,20 @@ public class JsonAdaptedNote {
         final Time modelTime = new Time(time);
 
         final boolean modelIsDone;
+
+        if (isDone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Done"));
+        }
+
         // Workaround check to ensure the stored data is indeed either "true" or "false"
         if (isDone.equals(String.valueOf(true)) || isDone.equals(String.valueOf(false))) {
             modelIsDone = Boolean.parseBoolean(isDone);
         } else {
             throw new IllegalValueException("A boolean field can only be true or false.");
+        }
+
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Id"));
         }
 
         final int modelId;
@@ -92,5 +101,16 @@ public class JsonAdaptedNote {
         }
 
         return new Note(modelName, modelTime, modelIsDone, Set.copyOf(tags), modelId);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof JsonAdaptedNote
+                && name.equals(((JsonAdaptedNote) other).name)
+                && time.equals(((JsonAdaptedNote) other).time)
+                && isDone.equals(((JsonAdaptedNote) other).isDone)
+                && tagged.containsAll(((JsonAdaptedNote) other).tagged)
+                && ((JsonAdaptedNote) other).tagged.containsAll(tagged));
     }
 }

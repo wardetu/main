@@ -15,7 +15,6 @@ public class GenerateResumeCommandResult extends CommandResult {
     public GenerateResumeCommandResult(String dataToUser, String feedbackToUser, String displayType) {
         super(dataToUser, feedbackToUser, displayType);
         super.isShowPreview = false;
-        super.isGenerate = true;
         super.isShowHelp = false;
         super.isExit = false;
     }

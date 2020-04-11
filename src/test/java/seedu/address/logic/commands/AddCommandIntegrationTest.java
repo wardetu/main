@@ -45,8 +45,12 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(resumeBook, new UserPrefs());
-        expectedModel = new ModelManager(resumeBookCopy, new UserPrefs());
+        model = new ModelManager(
+                new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build(),
+                new UserPrefs());
+        expectedModel = new ModelManager(
+                new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build(),
+                new UserPrefs());
     }
 
     @Test
@@ -80,7 +84,7 @@ public class AddCommandIntegrationTest {
         assertCommandSuccess(new AddNoteCommand(validNote),
                 model,
                 new AddCommandResult(validNote.toString(),
-                        AddNoteCommand.MESSAGE_SUCCESS, ItemUtil.INTERNSHIP_ALIAS),
+                        AddNoteCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType()),
                 expectedModel);
     }
 

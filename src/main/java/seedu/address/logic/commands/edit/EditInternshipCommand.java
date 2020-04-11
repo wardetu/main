@@ -19,7 +19,9 @@ import seedu.address.logic.commands.results.EditCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.exceptions.DuplicateItemException;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
@@ -102,8 +104,8 @@ public class EditInternshipCommand extends EditCommand {
         Name updatedName = editInternshipDescriptor.getName().orElse(toEdit.getName());
         Time updatedFrom = editInternshipDescriptor.getFrom().orElse(toEdit.getFrom());
         Time updatedTo = editInternshipDescriptor.getTo().orElse(toEdit.getTo());
-        String updatedDesc = editInternshipDescriptor.getDescription().orElse(toEdit.getDescription());
-        String updatedRole = editInternshipDescriptor.getRole().orElse(toEdit.getRole());
+        Description updatedDesc = editInternshipDescriptor.getDescription().orElse(toEdit.getDescription());
+        Role updatedRole = editInternshipDescriptor.getRole().orElse(toEdit.getRole());
         Set<Tag> updatedTags = editInternshipDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
         return new Internship(updatedName, updatedRole, updatedFrom, updatedTo, updatedDesc, updatedTags, id);

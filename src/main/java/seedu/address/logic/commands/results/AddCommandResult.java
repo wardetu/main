@@ -15,7 +15,6 @@ public class AddCommandResult extends CommandResult {
     public AddCommandResult(String dataToUser, String feedbackToUser, String displayType) {
         super(dataToUser, feedbackToUser, displayType);
         super.isShowPreview = false;
-        super.isGenerate = false;
         super.isShowHelp = false;
         super.isExit = false;
     }

@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.item.Internship;
+import seedu.address.model.item.field.Description;
 import seedu.address.model.item.field.Name;
+import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
@@ -58,8 +60,8 @@ public class JsonAdaptedInternship {
         this.id = String.valueOf(internship.getId());
         this.from = internship.getFrom().toString();
         this.to = internship.getTo().toString();
-        this.role = internship.getRole();
-        this.description = internship.getDescription();
+        this.role = internship.getRole().toString();
+        this.description = internship.getDescription().toString();
         tagged.addAll(internship.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
 
     }
@@ -83,12 +85,24 @@ public class JsonAdaptedInternship {
         final Name modelName = new Name(name);
 
         if (role == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "role"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
         }
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        }
+        final Role modelRole = new Role(role);
+
+        if (description == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+        }
+        if (!Description.isValidDescription(description)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
+        }
+        final Description modelDescription = new Description(description);
 
         if (from == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Time.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "From"));
         }
         if (!Time.isValidTime(from)) {
             throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
@@ -96,8 +110,7 @@ public class JsonAdaptedInternship {
         final Time modelFrom = new Time(from);
 
         if (to == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Time.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "To"));
         }
         if (!Time.isValidTime(to)) {
             throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
@@ -109,8 +122,8 @@ public class JsonAdaptedInternship {
             throw new IllegalValueException("The \"to\" field must not precede the \"from\" field.");
         }
 
-        if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Id"));
         }
 
         final int modelId;
@@ -123,6 +136,19 @@ public class JsonAdaptedInternship {
             throw new IllegalValueException("The id field must not be negative.");
         }
 
-        return new Internship(modelName, role, modelFrom, modelTo, description, Set.copyOf(tags), modelId);
+        return new Internship(modelName, modelRole, modelFrom, modelTo, modelDescription, Set.copyOf(tags), modelId);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof JsonAdaptedInternship
+                && name.equals(((JsonAdaptedInternship) other).name)
+                && from.equals(((JsonAdaptedInternship) other).from)
+                && to.equals(((JsonAdaptedInternship) other).to)
+                && role.equals(((JsonAdaptedInternship) other).role)
+                && description.equals(((JsonAdaptedInternship) other).description)
+                && ((JsonAdaptedInternship) other).tagged.containsAll(tagged)
+                && tagged.containsAll(((JsonAdaptedInternship) other).tagged));
     }
 }

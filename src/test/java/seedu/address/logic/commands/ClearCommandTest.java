@@ -9,10 +9,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ResumeBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.testutil.ResumeBookBuilder;
 import seedu.address.testutil.TypicalResumeBook;
 
 public class ClearCommandTest {
+
+    private final String clearDataToUser = " ";
 
     @Test
     public void execute_emptyAddressBook_success() {
@@ -20,20 +21,19 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(new ResumeBook(), new UserPrefs());
         assertCommandSuccess(new ClearCommand(),
                 model,
-                new ClearCommandResult(" ",
-                        ClearCommand.MESSAGE_SUCCESS, model.getDisplayType()),
+                new ClearCommandResult(clearDataToUser,
+                        ClearCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType()),
                 expectedModel);
     }
 
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build(),
-                new UserPrefs());
+        Model model = new ModelManager(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE, new UserPrefs());
         Model expectedModel = new ModelManager(new ResumeBook(), new UserPrefs());
         assertCommandSuccess(new ClearCommand(),
                 model,
-                new ClearCommandResult(" ",
+                new ClearCommandResult(clearDataToUser,
                         ClearCommand.MESSAGE_SUCCESS, model.getDisplayType()),
                 expectedModel);
     }
