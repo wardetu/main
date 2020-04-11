@@ -29,8 +29,7 @@ import seedu.address.model.Model;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
-    public static final String VALID_DP_AMY = "/images/amy.jpg";
+    public static final String VALID_DP_AMY = "/images/amy.png";
     public static final String VALID_DP_BOB = "/images/bob.png";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -66,9 +65,10 @@ public class CommandTestUtil {
     public static final String PREFIXED_PHONE_AMY = " " + PREFIX_PHONE + " " + VALID_PHONE_AMY;
     public static final String PREFIXED_EMAIL_AMY = " " + PREFIX_EMAIL + " " + VALID_EMAIL_AMY;
     public static final String PREFIXED_GITHUB_AMY = " " + PREFIX_GITHUB + " " + VALID_GITHUB_AMY;
-    public static final String PREFIXED_UNIVERISITY_AMY = " " + PREFIX_UNIVERSITY + " " + VALID_UNIVERSITY_AMY;
+    public static final String PREFIXED_UNIVERSITY_AMY = " " + PREFIX_UNIVERSITY + " " + VALID_UNIVERSITY_AMY;
     public static final String PREFIXED_MAJOR_AMY = " " + PREFIX_MAJOR + " " + VALID_MAJOR_AMY;
     public static final String PREFIXED_FROM_AMY = " " + PREFIX_FROM + " " + VALID_FROM_AMY;
+    public static final String PREFIXED_TO_AMY = " " + PREFIX_TO + " " + VALID_TO_AMY;
     public static final String PREFIXED_CAP_AMY = " " + PREFIX_CAP + " " + VALID_CAP_AMY;
 
     // RESUME

@@ -173,4 +173,12 @@ public class EditUserDescriptor {
                 && getTo().equals(e.getTo())
                 && getCap().equals(e.getCap());
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder()
+                .append(getDisplayPicture())
+                .append(getDescription());
+        return sb.toString();
+    }
 }
