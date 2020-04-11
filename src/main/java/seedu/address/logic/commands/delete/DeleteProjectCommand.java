@@ -19,6 +19,14 @@ public class DeleteProjectCommand extends DeleteCommand {
         super(targetIndex);
     }
 
+    /**
+     * Deletes project at {@code targetIndex}.
+     *
+     * @param model {@code Model} that the project will be deleted from.
+     * @return      CommandResult that describes that to pass information back to UI.
+     *
+     * @throws      CommandException if index is out of bounds.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

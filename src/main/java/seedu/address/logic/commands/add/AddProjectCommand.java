@@ -49,7 +49,7 @@ public class AddProjectCommand extends AddCommand {
     /**
      * Adds {@code toAdd} project to model.
      *
-     * @param model {@code Model} which the command should operate on.
+     * @param model {@code Model} which project will be added.
      * @return      CommandResult that describes that to pass information back to UI.
      *
      * @throws      CommandException if adding the model results in duplicate projects.

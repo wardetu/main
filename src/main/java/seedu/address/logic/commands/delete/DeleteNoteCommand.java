@@ -20,6 +20,14 @@ public class DeleteNoteCommand extends DeleteCommand {
         super(targetIndex);
     }
 
+    /**
+     * Deletes note at {@code targetIndex}.
+     *
+     * @param model {@code Model} that the note will be deleted from.
+     * @return      CommandResult that describes that to pass information back to UI.
+     *
+     * @throws      CommandException if index is out of bounds.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

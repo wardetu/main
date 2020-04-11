@@ -19,6 +19,14 @@ public class DeleteInternshipCommand extends DeleteCommand {
         super(targetIndex);
     }
 
+    /**
+     * Deletes internship at {@code targetIndex}.
+     *
+     * @param model {@code Model} that the internship will be deleted from.
+     * @return      CommandResult that describes that to pass information back to UI.
+     *
+     * @throws      CommandException if index is out of bounds.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
