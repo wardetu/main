@@ -29,7 +29,7 @@ public class EditNoteCommandTest {
 
     @Test
     public void constructor_nullNote_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new EditInternshipCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new EditNoteCommand(null, null));
     }
 
     @Test
