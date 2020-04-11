@@ -7,6 +7,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 :xrefstyle: full
+:icons: font
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -14,7 +15,12 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-F10-1/main
 
-By: `Team F10-1`      Since: `Jan 2020`
+By: `CS2103T F10-1`      Since: `Feb 2020`      Licence: `MIT`
+
+== Introduction
+This developer guide documents the system design and implementation of *ResuMe*. We hope that it would be a useful reference
+for software developers who wish to contribute to the project, or to simply gain deeper insight into our development process
+and considerations.
 
 == Setting up
 
@@ -129,9 +135,8 @@ NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X
 [[Design-Model]]
 === Model component
 
-// TODO: Fix diagram layout
 .Structure of the Model Component
-image::ModelClassDiagram.png[]
+image::ModelClassDiagram.png[width="1000"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
@@ -143,7 +148,7 @@ The `Model`,
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Resume Book`, which `Item` can reference. This would allow `Resume Book` to only require one `Tag` object per unique `Tag`, instead of each `Item` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `ResumeBook`, which `Item` can reference. This would allow `ResumeBook` to only require one `Tag` object per unique `Tag`, instead of each `Item` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:BetterModelClassDiagram.png[]
 

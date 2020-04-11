@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-ResumeBook *-right-> "4" UniqueItemList
+ResumeBook *-right-> "5" UniqueItemList
 ResumeBook *-right-> "1" UniqueTagList
 UniqueTagList -[hidden]down- UniqueItemList
 UniqueTagList -[hidden]down- UniqueItemList
@@ -17,6 +17,6 @@ Item o-up-> "*" Tag
 Item *--> "1" Name
 Item *--> "1" Type
 Item *--> "*" Time
-Item *--> "1" Description
+Item *--> "*" Description
 
 @enduml

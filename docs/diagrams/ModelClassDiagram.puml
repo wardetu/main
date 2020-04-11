@@ -3,39 +3,44 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam defaultFontSize 20
 
 Package Model <<Rectangle>>{
-Interface Model <<Interface>>
-Interface ObservableList <<Interface>>
-Interface ReadOnlyResumeBook <<Interface>>
-Class Model
+Interface ObservableList <<interface>>
+Interface Model <<interface>>
+Interface ReadOnlyUserPrefs <<interface>>
+Interface ReadOnlyResumeBook <<interface>>
 Class ModelManager
 Class UserPrefs
-Class ReadOnlyUserPrefs
 Class ResumeBook
-Class ReadOnlyResumeBook
+Class VersionedResumeBook
 Class UniqueItemList
+Class ObservablePerson
 
 Package User {
 Class Person
 Package UserField {
+Class DisplayPicture
 Class Phone
 Class Email
 Class Github
 Class University
+Class Major
+Class CAP
 }
 }
 
 Package Item {
-Class Item
+Class Item <<abstract>>
 Class Resume
 Class Internship
 Class Project
 Class Skill
+Class Note
 
 Package ItemField {
 Class Type
-Class Description
+Class Role
 Class Website
 Class Level
 Class Tag
@@ -45,6 +50,7 @@ Class Tag
 Package SharedField {
 Class Name
 Class Time
+Class Description
 }
 
 Class HiddenOutside #FFFFFF
@@ -55,33 +61,41 @@ ModelManager .u.> Model
 ModelManager o-l-> "1" UserPrefs
 UserPrefs .l.|> ReadOnlyUserPrefs
 
-ModelManager o-r-> "1" ResumeBook
+ModelManager o-r-> "1" VersionedResumeBook
+VersionedResumeBook -r-|> ResumeBook
 ResumeBook .u.|> ReadOnlyResumeBook
 
-ResumeBook *-d-> "1" Person
+ResumeBook *-d-> "1" ObservablePerson
+ObservablePerson *-d-> "1" Person
 Person *---> "1" Name
+Person *---> "1" DisplayPicture
+Person *---> "1" Description
 Person *---> "2" Time
 Person *---> "1" Phone
 Person *---> "1" Email
 Person *---> "1" Github
 Person *---> "1" University
+Person *---> "1" Major
+Person *---> "1" CAP
 
-ResumeBook *--> "4" UniqueItemList
+ResumeBook *--> "5" UniqueItemList
 UniqueItemList o--> "*" Item
 
 Item *---> "1" Name
 Item *---> "*" Time
 Item *---> "1" Type
-Item *---> "1" Description
+Item *---> "*" Description
 Item *---> "*" Tag
 
-Project ..|> Item
-Skill ..|> Item
-Resume ..|> Item
-Internship ..|> Item
+Project --|> Item
+Skill --|> Item
+Resume --|> Item
+Internship --|> Item
+Note --|> Item
 
 Project *-> "1" Website
 Skill *-> "1" Level
+Internship *-> "1" Role
 
 }
 @enduml
