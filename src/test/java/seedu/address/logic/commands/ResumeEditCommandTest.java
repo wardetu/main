@@ -150,7 +150,7 @@ public class ResumeEditCommandTest {
                 skillIndices);
 
         CommandResult commandResult = resumeEditCommand.execute(model);
-        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+        assertEquals(ResumeEditCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
 
         Resume changedResume = model.getResumeByIndex(validIndex);
         Resume expectedResume = new ResumeBuilder(TypicalResume.ME_RESUME)
@@ -172,7 +172,7 @@ public class ResumeEditCommandTest {
                 skillIndices);
 
         CommandResult commandResult = resumeEditCommand.execute(model);
-        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+        assertEquals(ResumeEditCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
 
         Resume changedResume = model.getResumeByIndex(validIndex);
         Resume expectedResume = new ResumeBuilder(TypicalResume.ME_RESUME)
@@ -193,7 +193,7 @@ public class ResumeEditCommandTest {
                 skillIndices);
 
         CommandResult commandResult = resumeEditCommand.execute(model);
-        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+        assertEquals(ResumeEditCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
 
         Resume changedResume = model.getResumeByIndex(validIndex);
         Resume expectedResume = new ResumeBuilder(TypicalResume.ME_RESUME)
@@ -214,7 +214,7 @@ public class ResumeEditCommandTest {
                 skillIndices);
 
         CommandResult commandResult = resumeEditCommand.execute(model);
-        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+        assertEquals(ResumeEditCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
 
         Resume changedResume = model.getResumeByIndex(validIndex);
         Resume expectedResume = new ResumeBuilder(TypicalResume.ME_RESUME)
@@ -233,7 +233,7 @@ public class ResumeEditCommandTest {
                 skillIndices);
 
         CommandResult commandResult = resumeEditCommand.execute(model);
-        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+        assertEquals(ResumeEditCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
 
         Resume changedResume = model.getResumeByIndex(validIndex);
         Resume expectedResume = new ResumeBuilder(TypicalResume.ME_RESUME)
@@ -253,7 +253,7 @@ public class ResumeEditCommandTest {
                 skillIndices);
 
         CommandResult commandResult = resumeEditCommand.execute(model);
-        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+        assertEquals(ResumeEditCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
 
         Resume changedResume = model.getResumeByIndex(validIndex);
         Resume expectedResume = new ResumeBuilder(TypicalResume.FILLED_RESUME)
@@ -272,7 +272,7 @@ public class ResumeEditCommandTest {
                 skillIndices);
 
         CommandResult commandResult = resumeEditCommand.execute(model);
-        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+        assertEquals(ResumeEditCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
 
         Resume changedResume = model.getResumeByIndex(validIndex);
         Resume expectedResume = new ResumeBuilder(TypicalResume.FILLED_RESUME)
@@ -292,7 +292,7 @@ public class ResumeEditCommandTest {
                 skillIndices);
 
         CommandResult commandResult = resumeEditCommand.execute(model);
-        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+        assertEquals(ResumeEditCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
 
         Resume changedResume = model.getResumeByIndex(validIndex);
         Resume expectedResume = new ResumeBuilder(TypicalResume.FILLED_RESUME)
@@ -313,7 +313,7 @@ public class ResumeEditCommandTest {
                 skillIndices);
 
         CommandResult commandResult = resumeEditCommand.execute(model);
-        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+        assertEquals(ResumeEditCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
 
         Resume changedResume = model.getResumeByIndex(validIndex);
         Resume expectedResume = new ResumeBuilder(TypicalResume.FILLED_RESUME)
@@ -335,7 +335,7 @@ public class ResumeEditCommandTest {
                 skillIndices);
 
         CommandResult commandResult = resumeEditCommand.execute(model);
-        assertEquals("Resume is updated", commandResult.getFeedbackToUser());
+        assertEquals(ResumeEditCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
 
         Resume changedResume = model.getResumeByIndex(validIndex);
         Resume expectedResume = new ResumeBuilder(TypicalResume.ME_RESUME)

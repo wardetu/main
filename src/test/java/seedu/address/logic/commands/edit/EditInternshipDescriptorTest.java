@@ -1,57 +1,80 @@
 package seedu.address.logic.commands.edit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NAME_NINJAVAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NINJA_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_ROLE_NINJA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UX;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TO_2;
+import static seedu.address.testutil.TypicalEditInternshipDescriptor.NINJA_VAN;
+import static seedu.address.testutil.TypicalEditInternshipDescriptor.PAY_PAL;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.item.field.Description;
-import seedu.address.model.item.field.Name;
-import seedu.address.model.item.field.Role;
-import seedu.address.model.item.field.Time;
-import seedu.address.model.tag.Tag;
+import seedu.address.testutil.EditInternshipDescriptorBuilder;
 
 public class EditInternshipDescriptorTest {
-    public static final String[] DEFAULT_TAGS = {"java", "backend"};
-
-    private Name name = new Name("name");
-    private Role role = new Role("role");
-    private Time from = new Time("10-2020");
-    private Time to = new Time("12-2020");
-    private Description description = new Description("description");
-    private Set<Tag> tags = new HashSet<>();
-    private EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
+    @Test
+    public void isAnyFieldMissing_noFieldEdited_returnsTrue() {
+        assertFalse(new EditInternshipDescriptorBuilder().build().isAnyFieldEdited());
+    }
 
     @Test
     public void equals() {
-        editInternshipDescriptor.setName(name);
-        editInternshipDescriptor.setRole(role);
-        editInternshipDescriptor.setFrom(from);
-        editInternshipDescriptor.setTo(to);
-        editInternshipDescriptor.setDescription(description);
-        editInternshipDescriptor.setTags(tags);
-        tags.addAll(Arrays.stream(DEFAULT_TAGS).map(Tag::new).collect(Collectors.toList()));
-
-        EditInternshipDescriptor editInternshipDescriptorToTest =
-                new EditInternshipDescriptor(editInternshipDescriptor);
-
-        // same name -> returns true
-        assertEquals(editInternshipDescriptorToTest.getName().get(), name);
+        // same values -> returns true
+        EditInternshipDescriptor descriptorWithSameValues = new EditInternshipDescriptor(PAY_PAL);
+        assertEquals(PAY_PAL, descriptorWithSameValues);
 
         // same object -> returns true
-        assertEquals(editInternshipDescriptorToTest.getRole().get(), role);
+        assertEquals(PAY_PAL, PAY_PAL);
 
-        // same object -> returns true
-        assertEquals(editInternshipDescriptorToTest.getFrom().get(), from);
+        // null -> returns false
+        assertNotEquals(null, PAY_PAL);
 
-        // same object -> returns true
-        assertEquals(editInternshipDescriptorToTest.getTo().get(), to);
+        // different types -> returns false
+        assertNotEquals(5, PAY_PAL);
 
-        // same object -> returns true
-        assertEquals(editInternshipDescriptorToTest.getDescription().get(), description);
+        // different values -> returns false
+        assertNotEquals(PAY_PAL, NINJA_VAN);
+
+        // different name -> returns false
+        EditInternshipDescriptor editedPayPal = new EditInternshipDescriptorBuilder(PAY_PAL)
+                .withName(VALID_INTERNSHIP_NAME_NINJAVAN).build();
+        assertNotEquals(PAY_PAL, editedPayPal);
+
+        // different role -> returns false
+        editedPayPal = new EditInternshipDescriptorBuilder(PAY_PAL)
+                .withRole(VALID_INTERNSHIP_ROLE_NINJA).build();
+        assertNotEquals(PAY_PAL, editedPayPal);
+
+        // different from -> returns false
+        editedPayPal = new EditInternshipDescriptorBuilder(PAY_PAL)
+                .withFrom(VALID_FROM_2).build();
+        assertNotEquals(PAY_PAL, editedPayPal);
+
+        // different to -> returns false
+        editedPayPal = new EditInternshipDescriptorBuilder(PAY_PAL)
+                .withTo(VALID_TO_2).build();
+        assertNotEquals(PAY_PAL, editedPayPal);
+
+        // different description -> returns false
+        editedPayPal = new EditInternshipDescriptorBuilder(PAY_PAL)
+                .withDescription(VALID_INTERNSHIP_NINJA_DESCRIPTION).build();
+        assertNotEquals(PAY_PAL, editedPayPal);
+
+        // different tags -> returns false
+        editedPayPal = new EditInternshipDescriptorBuilder(PAY_PAL)
+                .withTags(VALID_TAG_UX, VALID_TAG_TECH).build();
+        assertNotEquals(PAY_PAL, editedPayPal);
+    }
+
+    @Test
+    public void field_isAnyNonNull_falseIfAllNull() {
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
+        assertEquals(editInternshipDescriptor.isAnyFieldEdited(), false);
     }
 }

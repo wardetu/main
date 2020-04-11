@@ -36,7 +36,6 @@ import seedu.address.testutil.TypicalSkill;
 
 public class TagPullCommandTest {
     private Model model;
-    private String feedbackToUser = "Items pulled:\n%1$d internship(s), %2$d project(s), %3$d skill(s).";
 
     @BeforeEach
     public void setUp() {
@@ -81,14 +80,16 @@ public class TagPullCommandTest {
 
         // Resume at first index
         CommandResult commandResultFirstIndex = new TagPullCommand(firstIndex, tags).execute(model);
-        assertEquals(String.format(feedbackToUser, 2, 2, 2), commandResultFirstIndex.getFeedbackToUser());
+        assertEquals(String.format(TagPullCommand.MESSAGE_SUCCESS, 2, 2, 2),
+                commandResultFirstIndex.getFeedbackToUser());
 
         Resume firstIndexResume = model.getResumeByIndex(firstIndex);
         assertEquals(firstIndexResume, expectedFirstResume);
 
         // Resume at third index
         CommandResult commandResultThirdIndex = new TagPullCommand(thirdIndex, tags).execute(model);
-        assertEquals(String.format(feedbackToUser, 1, 1, 1), commandResultThirdIndex.getFeedbackToUser());
+        assertEquals(String.format(TagPullCommand.MESSAGE_SUCCESS, 1, 1, 1),
+                commandResultThirdIndex.getFeedbackToUser());
 
         Resume thirdIndexResume = model.getResumeByIndex(thirdIndex);
         assertEquals(thirdIndexResume, expectedThirdResume);
@@ -108,7 +109,7 @@ public class TagPullCommandTest {
                 .build();
 
         CommandResult commandResult = new TagPullCommand(index, tags).execute(model);
-        assertEquals(String.format(feedbackToUser, 0, 0, 1), commandResult.getFeedbackToUser());
+        assertEquals(String.format(TagPullCommand.MESSAGE_SUCCESS, 0, 0, 1), commandResult.getFeedbackToUser());
 
         Resume resume = model.getResumeByIndex(index);
         assertEquals(resume, expectedResume);
@@ -126,7 +127,7 @@ public class TagPullCommandTest {
                 .build();
 
         CommandResult commandResult = new TagPullCommand(index, tags).execute(model);
-        assertEquals(String.format(feedbackToUser, 1, 0, 1), commandResult.getFeedbackToUser());
+        assertEquals(String.format(TagPullCommand.MESSAGE_SUCCESS, 1, 0, 1), commandResult.getFeedbackToUser());
 
         Resume resume = model.getResumeByIndex(index);
         assertEquals(resume, expectedResume);
@@ -150,14 +151,16 @@ public class TagPullCommandTest {
 
         // Resume at first index
         CommandResult commandResultFirstIndex = new TagPullCommand(firstIndex, tags).execute(model);
-        assertEquals(String.format(feedbackToUser, 0, 0, 0), commandResultFirstIndex.getFeedbackToUser());
+        assertEquals(String.format(TagPullCommand.MESSAGE_SUCCESS, 0, 0, 0),
+                commandResultFirstIndex.getFeedbackToUser());
 
         Resume firstIndexResume = model.getResumeByIndex(firstIndex);
         assertEquals(firstIndexResume, expectedFirstResume);
 
         // Resume at third index
         CommandResult commandResultThirdIndex = new TagPullCommand(thirdIndex, tags).execute(model);
-        assertEquals(String.format(feedbackToUser, 0, 0, 0), commandResultThirdIndex.getFeedbackToUser());
+        assertEquals(String.format(TagPullCommand.MESSAGE_SUCCESS, 0, 0, 0),
+                commandResultThirdIndex.getFeedbackToUser());
 
         Resume thirdIndexResume = model.getResumeByIndex(thirdIndex);
         assertEquals(thirdIndexResume, expectedThirdResume);
@@ -179,13 +182,13 @@ public class TagPullCommandTest {
                 .build();
 
         CommandResult commandResult = new TagPullCommand(index, tags).execute(model);
-        assertEquals(String.format(feedbackToUser, 2, 2, 2), commandResult.getFeedbackToUser());
+        assertEquals(String.format(TagPullCommand.MESSAGE_SUCCESS, 2, 2, 2), commandResult.getFeedbackToUser());
 
         Resume resume = model.getResumeByIndex(index);
         assertEquals(resume, expectedResume);
 
         CommandResult commandResultAgain = new TagPullCommand(index, tags).execute(model);
-        assertEquals(String.format(feedbackToUser, 0, 0, 0), commandResultAgain.getFeedbackToUser());
+        assertEquals(String.format(TagPullCommand.MESSAGE_SUCCESS, 0, 0, 0), commandResultAgain.getFeedbackToUser());
 
         Resume resumeAgain = model.getResumeByIndex(index);
         assertEquals(resumeAgain, expectedResume);
@@ -215,14 +218,16 @@ public class TagPullCommandTest {
 
         // Resume at first index
         CommandResult commandResultFirstIndex = new TagPullCommand(firstIndex, tags).execute(model);
-        assertEquals(String.format(feedbackToUser, 1, 1, 1), commandResultFirstIndex.getFeedbackToUser());
+        assertEquals(String.format(TagPullCommand.MESSAGE_SUCCESS, 1, 1, 1),
+                commandResultFirstIndex.getFeedbackToUser());
 
         Resume firstIndexResume = model.getResumeByIndex(firstIndex);
         assertEquals(firstIndexResume, expectedFirstResume);
 
         // Resume at third index
         CommandResult commandResultThirdIndex = new TagPullCommand(thirdIndex, tags).execute(model);
-        assertEquals(String.format(feedbackToUser, 0, 1, 1), commandResultThirdIndex.getFeedbackToUser());
+        assertEquals(String.format(TagPullCommand.MESSAGE_SUCCESS, 0, 1, 1),
+                commandResultThirdIndex.getFeedbackToUser());
 
         Resume thirdIndexResume = model.getResumeByIndex(thirdIndex);
         assertEquals(thirdIndexResume, expectedThirdResume);
