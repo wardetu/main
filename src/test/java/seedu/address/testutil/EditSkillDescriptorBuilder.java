@@ -10,6 +10,9 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
+/**
+ * A utility class to help with building EditSkillDescriptor objects.
+ */
 public class EditSkillDescriptorBuilder {
     private EditSkillDescriptor descriptor;
 

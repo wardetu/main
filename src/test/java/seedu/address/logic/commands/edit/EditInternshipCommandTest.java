@@ -61,7 +61,8 @@ public class EditInternshipCommandTest {
 
         CommandResult commandResult = editInternshipCommand.execute(modelStub);
 
-        assertEquals(String.format(EditInternshipCommand.MESSAGE_EDIT_INTERNSHIP_SUCCESS, sampleEditedInternship),
+        assertEquals(String.format(EditInternshipCommand.MESSAGE_EDIT_INTERNSHIP_SUCCESS,
+                sampleEditedInternship.getName().fullName),
                 commandResult.getFeedbackToUser());
     }
 

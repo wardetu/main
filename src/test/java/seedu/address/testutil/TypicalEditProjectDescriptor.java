@@ -23,6 +23,9 @@ import seedu.address.model.item.field.Time;
 import seedu.address.model.item.field.Website;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Returns a typical project descriptor.
+ */
 public class TypicalEditProjectDescriptor {
     public static final EditProjectDescriptor ORBITAL = new EditProjectDescriptorBuilder()
             .withName(VALID_PROJECT_NAME_ORBITAL)
@@ -33,6 +36,10 @@ public class TypicalEditProjectDescriptor {
 
     public static final EditProjectDescriptor DUKE = buildDuke();
 
+    /**
+     * Builds a EditProjectDescriptor for Duke.
+     * @return
+     */
     static EditProjectDescriptor buildDuke() {
         EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
         editProjectDescriptor.setName(new Name(VALID_PROJECT_NAME_DUKE));
@@ -40,10 +47,12 @@ public class TypicalEditProjectDescriptor {
         editProjectDescriptor.setWebsite(new Website(VALID_WEBSITE_DUKE));
         editProjectDescriptor.setDescription(new Description(VALID_DESCRIPTION_DUKE));
         Set<Tag> tagSet = new HashSet<Tag>();
-        String[] TAGS = {VALID_TAG_TECH, VALID_TAG_JAVA};
-        tagSet.addAll(Arrays.stream(TAGS).map(Tag::new).collect(Collectors.toList()));
+        String[] tags = {VALID_TAG_TECH, VALID_TAG_JAVA};
+        tagSet.addAll(Arrays.stream(tags).map(Tag::new).collect(Collectors.toList()));
         editProjectDescriptor.setTags(tagSet);
 
         return editProjectDescriptor;
     }
 }
+
+

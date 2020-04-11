@@ -27,6 +27,9 @@ import seedu.address.model.item.field.Role;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Returns a typical edit internship descriptor.
+ */
 public class TypicalEditInternshipDescriptor {
     public static final EditInternshipDescriptor PAY_PAL = new EditInternshipDescriptorBuilder()
             .withName(VALID_INTERNSHIP_NAME_PAYPAL)
@@ -38,6 +41,10 @@ public class TypicalEditInternshipDescriptor {
 
     public static final EditInternshipDescriptor NINJA_VAN = buildNinjaVan();
 
+    /**
+     * Build an internship descriptor for ninja van.
+     * @return
+     */
     static EditInternshipDescriptor buildNinjaVan() {
         EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
         editInternshipDescriptor.setName(new Name(VALID_INTERNSHIP_NAME_NINJAVAN));
@@ -46,10 +53,11 @@ public class TypicalEditInternshipDescriptor {
         editInternshipDescriptor.setTo(new Time(VALID_TO_2));
         editInternshipDescriptor.setDescription(new Description(VALID_INTERNSHIP_NINJA_DESCRIPTION));
         Set<Tag> tagSet = new HashSet<Tag>();
-        String[] TAGS = {VALID_TAG_UX, VALID_TAG_TECH};
-        tagSet.addAll(Arrays.stream(TAGS).map(Tag::new).collect(Collectors.toList()));
+        String[] tags = {VALID_TAG_UX, VALID_TAG_TECH};
+        tagSet.addAll(Arrays.stream(tags).map(Tag::new).collect(Collectors.toList()));
         editInternshipDescriptor.setTags(tagSet);
 
         return editInternshipDescriptor;
     }
 }
+

@@ -58,7 +58,8 @@ public class EditProjectCommandTest {
 
         CommandResult commandResult = editProjectCommand.execute(modelStub);
 
-        assertEquals(String.format(EditProjectCommand.MESSAGE_EDIT_PROJECT_SUCCESS, sampleEditedProject),
+        assertEquals(String.format(EditProjectCommand.MESSAGE_EDIT_PROJECT_SUCCESS,
+                sampleEditedProject.getName().fullName),
                 commandResult.getFeedbackToUser());
     }
 
