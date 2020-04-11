@@ -63,7 +63,7 @@ public class ListCommandIntegrationTest {
                 model,
                 new ListCommandResult("",
                         String.format(ListCommand.MESSAGE_SUCCESS, "Project"),
-                        ItemUtil.INTERNSHIP_ALIAS),
+                        ItemUtil.PROJECT_ALIAS),
                 expectedModel);
     }
 
@@ -75,7 +75,7 @@ public class ListCommandIntegrationTest {
                 model,
                 new ListCommandResult("",
                         String.format(ListCommand.MESSAGE_SUCCESS, "Resume"),
-                        ItemUtil.INTERNSHIP_ALIAS),
+                        ItemUtil.RESUME_ALIAS),
                 expectedModel);
     }
 
@@ -87,7 +87,7 @@ public class ListCommandIntegrationTest {
                 model,
                 new ListCommandResult("",
                         String.format(ListCommand.MESSAGE_SUCCESS, "Skill"),
-                        ItemUtil.INTERNSHIP_ALIAS),
+                        ItemUtil.SKILL_ALIAS),
                 expectedModel);
     }
 

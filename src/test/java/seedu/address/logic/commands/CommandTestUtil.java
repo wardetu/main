@@ -183,26 +183,12 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
-            assertEquals(expectedCommandResult.getDataToUser(), result.getDataToUser());
-            assertEquals(expectedCommandResult.getFeedbackToUser(), result.getFeedbackToUser());
+            assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel.getStatelessResumeBook(), actualModel.getStatelessResumeBook());
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }
-
-
-    /**
-     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
-     * that takes a string {@code expectedMessage}.
-     */
-
-    public static void assertCommandSuccess(Command command, Model actualModel, String expectedData,
-                                            String expectedFeedback, Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedData, expectedFeedback, "");
-        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
-    }
-
 
     /**
      * Executes the given {@code command}, confirms that <br>

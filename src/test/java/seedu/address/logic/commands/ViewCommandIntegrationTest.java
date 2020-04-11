@@ -11,6 +11,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
+import seedu.address.logic.commands.results.ViewCommandResult;
 import seedu.address.logic.commands.view.ViewCommand;
 import seedu.address.logic.commands.view.ViewInternshipCommand;
 import seedu.address.logic.commands.view.ViewNoteCommand;
@@ -79,7 +80,7 @@ public class ViewCommandIntegrationTest {
                 model,
                 new CommandResult(validNote.toString(),
                         ViewNoteCommand.MESSAGE_VIEW_SUCCESS,
-                        ItemUtil.INTERNSHIP_ALIAS),
+                        expectedModel.getDisplayType()),
                 expectedModel);
     }
 
@@ -95,13 +96,14 @@ public class ViewCommandIntegrationTest {
     @Test
     public void execute_viewProject_success() {
         Project validProject = TypicalProject.ORBITAL;
+
         expectedModel.setProjectToDisplay();
 
         assertCommandSuccess(new ViewProjectCommand(Index.fromOneBased(1)),
                 model,
                 new CommandResult(validProject.toString(),
                         ViewProjectCommand.MESSAGE_VIEW_SUCCESS,
-                        ItemUtil.INTERNSHIP_ALIAS),
+                        ItemUtil.PROJECT_ALIAS),
                 expectedModel);
     }
 
@@ -119,9 +121,9 @@ public class ViewCommandIntegrationTest {
 
         assertCommandSuccess(new ViewResumeCommand(Index.fromOneBased(1)),
                 model,
-                new CommandResult(validResume.toString(),
+                new ViewCommandResult(validResume.toString(),
                         ViewResumeCommand.MESSAGE_VIEW_SUCCESS,
-                        ItemUtil.INTERNSHIP_ALIAS),
+                        ItemUtil.RESUME_ALIAS),
                 expectedModel);
     }
 
@@ -141,7 +143,7 @@ public class ViewCommandIntegrationTest {
                 model,
                 new CommandResult(validSkill.toString(),
                         ViewSkillCommand.MESSAGE_VIEW_SUCCESS,
-                        ItemUtil.INTERNSHIP_ALIAS),
+                        ItemUtil.SKILL_ALIAS),
                 expectedModel);
     }
 
