@@ -88,6 +88,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Parses the arguments in the context of adding a Resume item.
      */
     private AddResumeCommand parseResume(ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddResumeCommand.MESSAGE_USAGE));
@@ -104,6 +106,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Parses the arguments in the context of adding an Internship item.
      */
     private AddInternshipCommand parseInternship(ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FROM, PREFIX_TO, PREFIX_ROLE, PREFIX_DESCRIPTION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -129,6 +133,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Parses the arguments in the context of adding a Project item.
      */
     private AddProjectCommand parseProject(ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TIME, PREFIX_WEBSITE, PREFIX_DESCRIPTION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -149,6 +155,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Parses the arguments in the context of adding a Skill item.
      */
     private AddSkillCommand parseSkill(ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LEVEL) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddSkillCommand.MESSAGE_USAGE));
@@ -165,6 +173,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Parses the arguments in the context of adding a Note item.
      */
     private AddNoteCommand parseNote(ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddNoteCommand.MESSAGE_USAGE));
