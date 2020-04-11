@@ -8,6 +8,7 @@
 :stylesDir: stylesheets
 :xrefstyle: full
 :experimental:
+:icons: font
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -34,7 +35,7 @@ and job application woes.
 *ResuMe* allows the management of five different item types:
 
 [source,sh]
-[cols="10%,10%,20%,60%",options="header",]
+[cols="^.^10%,^.^10%,^.^20%,.^60%",options="header",]
 |=======================================================================
 |No. |Item type |Alias |Attributes
 |1 |internship |int |name, role, from, to, description, tag
@@ -49,7 +50,6 @@ and job application woes.
 |=======================================================================
 
 As you may have noticed from number 4, we are able to manage different resumes as well!
-(As if this is not the whole reason why we decided to build this app in the firs place :D)
 Items from number 1 to 3 can be shared across different resumes.
 
 === Preview
@@ -88,20 +88,21 @@ This section is, well... a guide on how to use this guide :) We will be explaini
 as well notes and tips for a better user experience.
 
 === Symbols and Formatting
+
 Most of us are visual learners, and we figured, what is a better way to present information than using some shapes and colours?
 
-[width="100%",cols="20%,80%",options="header",]
+[width="100%",cols="^.^20%,80%",options="header",]
 |=======================================================================
 |Symbol / Format|Explanation
-|icon:fa-info-circle[role="blue"] | Important information to take note
-|icon:fa-lightbulb-o[role="yellow"] | Tips
-|icon:fa-exclamation-triangle[role="red"] | Warnings on potential misuse
+|icon:info-circle[role="blue"] | Important information to take note
+|icon:lightbulb-o[role="yellow"] | Tips
+|icon:exclamation-triangle[role="red"] | Warnings on potential misuse
 |`consola font` | Keywords you could type in the command box and could be be executed by the application
 |=======================================================================
 
 === Key terms
 You will come across these little guys a lot in this document, so let's get to know them first!
-[width="100%",cols="20%,80%",options="header",]
+[width="100%",cols="^.^20%,80%",options="header",]
 |=======================================================================
 |Term |Explanation
 |`type` | Consisting of five different types: `internship`, `project`, `skill`, `resume` or `note`
