@@ -31,7 +31,7 @@ understands your struggle and strives to cater to your specific resume needs
 and job application woes.
 
 === Overview
-*ResuMe* allows the management of four different item types:
+*ResuMe* allows the management of five different item types:
 
 [source,sh]
 [cols="10%,10%,20%,60%",options="header",]
@@ -44,6 +44,8 @@ and job application woes.
 |3 |skill |ski |name, level, tag
 
 |4 |resume |res |name, description, tag
+
+|5 |note |note |name, time
 |=======================================================================
 
 As you may have noticed from number 4, we are able to manage different resumes as well!
@@ -58,20 +60,20 @@ image::GUI.png[width="790"]
 ****
 The GUI includes:
 
-1. Command box: where you enter your commands.
+. *Command box:* where you enter your commands.
 
-2. Result box: where the result of a command is shown. It can show a success message or a failure
+. *Result box:* where the result of a command is shown. It can show a success message or a failure
 message if something wrong happens.
 
-3. View box: where the detailed information is shown if needed. For instance, if you are viewing an
-internship item, this box shows in full the item's name, timing, description, and other pieces of information.
+. *View box:* where the detailed information about an item is shown. For instance, if you are viewing an
+`internship` item, this box shows in full the `company name`, `role`, `from`, `to`, `description` and `tags`.
 
-4. List box: where all items of a type are listed. Only a type is displayed at a time. You can change
-the view of this list. Also, when a command results in the change of one or more items of an item type,
-the list box will be set to displaying that type.
+. *List box:* where all items of a type are listed. Only one type is displayed at a time. You can change
+the view of this list using `list` command. Additionally, when other commands change items of a type,
+the list box will be set to display that type.
 
-5. User box: where you can view your information like name, email address, or phone number. If you make any update
-that change will be reflected.
+. *User box:* where you can view your personal information like name, email address, or phone number. Any changes made
+to your user profile will be automatically reflected here.
 ****
 
 Interested? Jump to <<Quick Start>> to get started. Enjoy!
@@ -91,9 +93,9 @@ Most of us are visual learners, and we figured, what is a better way to present 
 [width="100%",cols="20%,80%",options="header",]
 |=======================================================================
 |Symbol / Format|Explanation
-|:note-caption: | Important information to take note
-|:tip-caption: | Tips
-|:warning-caption: | Warnings on potential misuse
+|icon:fa-info-circle[role="blue"] | Important information to take note
+|icon:fa-lightbulb-o[role="yellow"] | Tips
+|icon:fa-exclamation-triangle[role="red"] | Warnings on potential misuse
 |`consola font` | Keywords you could type in the command box and could be be executed by the application
 |=======================================================================
 
@@ -102,8 +104,8 @@ You will come across these little guys a lot in this document, so let's get to k
 [width="100%",cols="20%,80%",options="header",]
 |=======================================================================
 |Term |Explanation
-|`type` | Consisting of four different types: `internship`, `project`, `skill` or `resume`
-|`item` | An item stored in the application, which could be any one of the four types above
+|`type` | Consisting of five different types: `internship`, `project`, `skill`, `resume` or `note`
+|`item` | An item stored in the application, which could be any one of the five types above
 |`command` | A line of text that you could type into the command box and execute
 |`parameter` | Specific information about an `item` supplied by you
 |`index` | The position of the `item` in the currently displayed list
@@ -115,14 +117,14 @@ You will come across these little guys a lot in this document, so let's get to k
 
 .  Ensure you have Java `11` or above installed in your Computer.
 .  Download the latest `resumebook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Resume Book.
+.  Copy the file to the folder you want to use as the home folder for your `ResuMe` application.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+.  Try out these example commands:
 
 * **`list`**`i/ res` : lists all resumes
 * **`add`**`i/ res n/ Software Engineering Resume #/SE #frontend`: adds a resume named `Software Engineering Resume`.
@@ -136,13 +138,17 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/ TYPE n/ NAME`,
-`TYPE` and `NAME` are parameters which can be used as `add i/ proj n/ Orbital`.
-* Items in square brackets are optional e.g `n/ NAME [#/TAG]` can be used as `n/ Orbital #/ SE` or as `n/ Orbital`.
-* Items with `…` after them can be used multiple times including zero times e.g. `[\#/ TAG]...`
-can be used as (i.e. 0 times), `#/ friend`, `\#/ friend`, `#/ family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/ NAME p/ PHONE`,
-`p/ PHONE_NUMBER n/ NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the you. +
+For example in `add i/ TYPE n/ NAME`, `TYPE` and `NAME` are parameters which can be customised to be `add i/ proj n/ Orbital`.
+* Parameters in square brackets are optional. +
+ For example, `n/ NAME [#/TAG]` can be used as `n/ Orbital #/ SE` or as `n/ Orbital`.
+* Parameters with `…` after them can be used multiple times including zero times. +
+ For example, `[\#/ TAG]...` can be used as:
+** (i.e. 0 times)
+** `#/ friend`
+** `#/ friend #/ family` etc.
+* Parameters can be in any order. +
+ For example, if the command specifies `n/ NAME p/ PHONE`, `p/ PHONE_NUMBER n/ NAME` is also acceptable.
 ====
 
 // tag::help[]
