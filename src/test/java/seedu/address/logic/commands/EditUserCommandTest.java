@@ -11,8 +11,8 @@ import static seedu.address.testutil.TypicalPerson.AMY;
 import static seedu.address.testutil.TypicalPerson.BOB;
 
 import org.junit.jupiter.api.BeforeEach;
-
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.edit.EditUserCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.EditUserCommandResult;

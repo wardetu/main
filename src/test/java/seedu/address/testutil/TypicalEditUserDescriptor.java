@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.edit.EditUserDescriptor;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CAP_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CAP_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_AMY;
@@ -24,8 +23,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TO_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIVERSITY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIVERSITY_BOB;
 
+import seedu.address.logic.commands.edit.EditUserDescriptor;
+
+/**
+ * A utility class containing a list of {@code EditUserDescriptor} objects to be used in tests.
+ */
 public class TypicalEditUserDescriptor {
-    public final static EditUserDescriptor AMY_DESC = new EditUserDescriptorBuilder()
+    public static final EditUserDescriptor AMY_DESC = new EditUserDescriptorBuilder()
             .withDisplayPicture(VALID_DP_AMY)
             .withName(VALID_NAME_AMY)
             .withDescription(VALID_DESCRIPTION_AMY)
@@ -38,7 +42,7 @@ public class TypicalEditUserDescriptor {
             .withTo(VALID_TO_AMY)
             .withCap(VALID_CAP_AMY)
             .build();
-    public final static EditUserDescriptor BOB_DESC = new EditUserDescriptorBuilder()
+    public static final EditUserDescriptor BOB_DESC = new EditUserDescriptorBuilder()
             .withDisplayPicture(VALID_DP_BOB)
             .withName(VALID_NAME_BOB)
             .withDescription(VALID_DESCRIPTION_BOB)
