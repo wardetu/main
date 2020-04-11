@@ -70,6 +70,17 @@ public class CommandTestUtil {
     public static final String PREFIXED_FROM_AMY = " " + PREFIX_FROM + " " + VALID_FROM_AMY;
     public static final String PREFIXED_TO_AMY = " " + PREFIX_TO + " " + VALID_TO_AMY;
     public static final String PREFIXED_CAP_AMY = " " + PREFIX_CAP + " " + VALID_CAP_AMY;
+    public static final String PREFIXED_DP_BOB = " " + PREFIX_DP + " " + VALID_DP_BOB;
+    public static final String PREFIXED_NAME_BOB = " " + PREFIX_NAME + " " + VALID_NAME_BOB;
+    public static final String PREFIXED_DESCRIPTION_BOB = " " + PREFIX_DESCRIPTION + " " + VALID_DESCRIPTION_BOB;
+    public static final String PREFIXED_PHONE_BOB = " " + PREFIX_PHONE + " " + VALID_PHONE_BOB;
+    public static final String PREFIXED_EMAIL_BOB = " " + PREFIX_EMAIL + " " + VALID_EMAIL_BOB;
+    public static final String PREFIXED_GITHUB_BOB = " " + PREFIX_GITHUB + " " + VALID_GITHUB_BOB;
+    public static final String PREFIXED_UNIVERSITY_BOB = " " + PREFIX_UNIVERSITY + " " + VALID_UNIVERSITY_BOB;
+    public static final String PREFIXED_MAJOR_BOB = " " + PREFIX_MAJOR + " " + VALID_MAJOR_BOB;
+    public static final String PREFIXED_FROM_BOB = " " + PREFIX_FROM + " " + VALID_FROM_BOB;
+    public static final String PREFIXED_TO_BOB = " " + PREFIX_TO + " " + VALID_TO_BOB;
+    public static final String PREFIXED_CAP_BOB = " " + PREFIX_CAP + " " + VALID_CAP_BOB;
 
     // RESUME
     public static final String VALID_RESUME_NAME_SE = "Software Engineering Intern Resume";
