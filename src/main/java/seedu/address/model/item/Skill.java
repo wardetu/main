@@ -65,6 +65,7 @@ public class Skill extends Item {
                 || (other instanceof Skill // instanceof handles nulls
                 && getName().equals(((Skill) other).getName())
                 && level.getLevelCode() == ((Skill) other).level.getLevelCode()
-                && tags.containsAll(((Skill) other).tags));
+                && tags.containsAll(((Skill) other).tags)
+                && ((Skill) other).tags.containsAll(tags));
     }
 }
