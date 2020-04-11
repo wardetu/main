@@ -14,7 +14,6 @@ public abstract class Command {
      *
      * @param model {@code Model} which the command should operate on.
      * @return      results from executing the command.
-     *
      * @throws      CommandException If an error occurs during command execution.
      */
     public abstract CommandResult execute(Model model) throws CommandException;
