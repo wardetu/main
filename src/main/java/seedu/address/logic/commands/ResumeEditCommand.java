@@ -20,7 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Resume;
 
 /**
- * Edits the content of a Resume.
+ * Modifies the content of the resume by specifying the indices of the items.
  */
 public class ResumeEditCommand extends Command {
     public static final String COMMAND_WORD = "redit";

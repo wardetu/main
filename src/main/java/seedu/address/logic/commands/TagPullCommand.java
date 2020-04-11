@@ -23,7 +23,7 @@ import seedu.address.model.item.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the content of a Resume.
+ * Modifies the content of the resume by adding items with the specified tags.
  */
 public class TagPullCommand extends Command {
     public static final String COMMAND_WORD = "tagpull";
