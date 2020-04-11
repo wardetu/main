@@ -44,6 +44,13 @@ public class TagPullCommand extends Command {
         this.tagList = tagList;
     }
 
+    /**
+     * Modifies the content of the resume by adding items with the specified tags.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return      {@code CommandResult} that describes changes made when command execute runs successfully.
+     * @throws      CommandException if the index specified is greater than the number of resumes.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
