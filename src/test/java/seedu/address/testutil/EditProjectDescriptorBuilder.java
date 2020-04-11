@@ -46,7 +46,7 @@ public class EditProjectDescriptorBuilder {
     /**
      * Sets the {@code Time} of the {@code EditProjectDescriptor} that we are building.
      */
-    public EditProjectDescriptorBuilder withRole(String time) {
+    public EditProjectDescriptorBuilder withTime(String time) {
         descriptor.setTime(new Time(time));
         return this;
     }
