@@ -1,10 +1,14 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NAME_PAYPAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_ROLE_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_NAME_DUKE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RESUME_NAME_SE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SKILL_NAME_GIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEBSITE_DUKE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -159,9 +163,9 @@ public class EditCommandIntegrationTest {
     }
 
     @Test
-    public void execute_isSameDuplicateInternship_throwsCommandException() throws CommandException {
-        Internship validInternship = new InternshipBuilder().withName("PayPal")
-                .withRole("Backend Software Intern").withFrom("05-2020").withTo("07-2020").build();
+    public void execute_isSameDuplicateInternship_throwsCommandException() {
+        Internship validInternship = new InternshipBuilder().withName(VALID_INTERNSHIP_NAME_PAYPAL)
+                .withRole(VALID_INTERNSHIP_ROLE_BACKEND).withFrom(VALID_FROM).withTo(VALID_TO).build();
         EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
         setEditInternshipDescriptor(editInternshipDescriptor, validInternship);
 
