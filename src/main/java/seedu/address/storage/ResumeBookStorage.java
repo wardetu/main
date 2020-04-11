@@ -11,7 +11,7 @@ import seedu.address.model.ResumeBook;
 /**
  * Represents a storage for {@link ResumeBook}.
  */
-public interface AddressBookStorage {
+public interface ResumeBookStorage {
 
     /**
      * Returns the file path of the data file.

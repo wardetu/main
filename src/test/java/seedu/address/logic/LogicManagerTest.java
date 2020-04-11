@@ -31,7 +31,7 @@ import seedu.address.model.ResumeBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.VersionedResumeBook;
 import seedu.address.model.item.Resume;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonResumeBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.ResumeBuilder;
@@ -47,8 +47,8 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("resume.json"));
+        JsonResumeBookStorage addressBookStorage =
+                new JsonResumeBookStorage(temporaryFolder.resolve("resume.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -75,9 +75,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        // Setup LogicManager with JsonResumeBookIoExceptionThrowingStub
+        JsonResumeBookStorage addressBookStorage =
+                new JsonResumeBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
@@ -167,8 +167,8 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonResumeBookIoExceptionThrowingStub extends JsonResumeBookStorage {
+        private JsonResumeBookIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
