@@ -48,24 +48,24 @@ public class StorageManager implements Storage {
     // ================ AddressBook methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return resumeBookStorage.getAddressBookFilePath();
+    public Path getResumeBookFilePath() {
+        return resumeBookStorage.getResumeBookFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyResumeBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(resumeBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyResumeBook> readResumeBook() throws DataConversionException, IOException {
+        return readResumeBook(resumeBookStorage.getResumeBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyResumeBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyResumeBook> readResumeBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return resumeBookStorage.readAddressBook(filePath);
+        return resumeBookStorage.readResumeBook(filePath);
     }
 
     @Override
     public void saveAddressBook(ReadOnlyResumeBook addressBook) throws IOException {
-        saveAddressBook(addressBook, resumeBookStorage.getAddressBookFilePath());
+        saveAddressBook(addressBook, resumeBookStorage.getResumeBookFilePath());
     }
 
     @Override

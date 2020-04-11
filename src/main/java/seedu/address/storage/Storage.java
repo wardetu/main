@@ -21,10 +21,10 @@ public interface Storage extends ResumeBookStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getResumeBookFilePath();
 
     @Override
-    Optional<ReadOnlyResumeBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyResumeBook> readResumeBook() throws DataConversionException, IOException;
 
     @Override
     void saveAddressBook(ReadOnlyResumeBook addressBook) throws IOException;

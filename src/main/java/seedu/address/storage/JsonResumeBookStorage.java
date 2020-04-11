@@ -27,22 +27,22 @@ public class JsonResumeBookStorage implements ResumeBookStorage {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getResumeBookFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyResumeBook> readAddressBook() throws DataConversionException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyResumeBook> readResumeBook() throws DataConversionException {
+        return readResumeBook(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readResumeBook()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyResumeBook> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyResumeBook> readResumeBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableResumeBook> jsonAddressBook = JsonUtil.readJsonFile(
