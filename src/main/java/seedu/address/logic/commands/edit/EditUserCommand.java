@@ -129,9 +129,4 @@ public class EditUserCommand extends Command {
                 || (other instanceof EditUserCommand // instanceof handles nulls
                 && editUserDescriptor.equals(((EditUserCommand) other).editUserDescriptor));
     }
-
-    @Override
-    public String toString() {
-        return editUserDescriptor.toString();
-    }
 }

@@ -285,6 +285,5 @@ public class EditUserParserTest {
         assertParseFailure(parser,
                 " " + PREFIX_CAP + " " + INVALID_CAP,
                 Cap.MESSAGE_CONSTRAINTS);
-
     }
 }
