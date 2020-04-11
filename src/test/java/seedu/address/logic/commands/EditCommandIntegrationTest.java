@@ -181,8 +181,8 @@ public class EditCommandIntegrationTest {
         assertCommandSuccess(new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptor),
                 model,
                 new EditCommandResult(validNote.toString(),
-                        String.format(EditNoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, validNote.getName().fullName)
-                                , ItemUtil.NOTE_ALIAS),
+                        String.format(EditNoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, validNote.getName().fullName),
+                        ItemUtil.NOTE_ALIAS),
                 expectedModel);
     }
 
