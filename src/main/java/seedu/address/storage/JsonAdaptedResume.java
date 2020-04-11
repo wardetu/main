@@ -125,4 +125,15 @@ public class JsonAdaptedResume {
         }
         return id;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return (this == other)
+                || (other instanceof JsonAdaptedResume
+                && name.equals(((JsonAdaptedResume) other).name)
+                && containedInternshipIds.equals(((JsonAdaptedResume) other).containedInternshipIds)
+                && containedProjectIds.equals(((JsonAdaptedResume) other).containedProjectIds)
+                && containedSkillIds.equals(((JsonAdaptedResume) other).containedSkillIds)
+                && tagged.containsAll(((JsonAdaptedResume) other).tagged));
+    }
 }

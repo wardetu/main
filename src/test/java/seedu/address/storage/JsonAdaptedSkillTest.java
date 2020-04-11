@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import static seedu.address.storage.JsonAdaptedSkill.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -16,12 +17,15 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.item.field.Level;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.TypicalSkill;
 
 public class JsonAdaptedSkillTest {
 
     private static final String VALID_NAME = REACT.getName().toString();
     private static final String VALID_LEVEL = REACT.getLevel().toString();
     private static final String VALID_ID = String.valueOf(REACT.getId());
+
+    private static final List<JsonAdaptedTag> EMPTY_TAGS = new ArrayList<>();
     private static final List<JsonAdaptedTag> VALID_TAGS = REACT.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -83,5 +87,18 @@ public class JsonAdaptedSkillTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedSkill skill = new JsonAdaptedSkill(VALID_NAME, VALID_ID, VALID_LEVEL, invalidTags);
         assertThrows(IllegalValueException.class, Tag.MESSAGE_CONSTRAINTS, skill::toModelType);
+    }
+
+    @Test
+    public void equals() {
+        JsonAdaptedSkill skillWithNoTags = new JsonAdaptedSkill(VALID_NAME, VALID_ID, VALID_LEVEL, EMPTY_TAGS);
+        JsonAdaptedSkill skillWithTags = new JsonAdaptedSkill(VALID_NAME, VALID_ID, VALID_LEVEL, VALID_TAGS);
+        JsonAdaptedSkill skillWithTagsButDifferentName =
+                new JsonAdaptedSkill("Angular", VALID_ID, VALID_LEVEL, VALID_TAGS);
+
+        assertEquals(skillWithTags, new JsonAdaptedSkill(TypicalSkill.REACT));
+
+        assertNotEquals(skillWithNoTags, new JsonAdaptedSkill(TypicalSkill.REACT));
+        assertNotEquals(skillWithTagsButDifferentName, new JsonAdaptedSkill(TypicalSkill.REACT));
     }
 }
