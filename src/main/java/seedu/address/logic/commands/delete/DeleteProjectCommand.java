@@ -23,7 +23,7 @@ public class DeleteProjectCommand extends DeleteCommand {
      * Deletes project at {@code targetIndex}.
      *
      * @param model {@code Model} that the project will be deleted from.
-     * @return      CommandResult that describes that to pass information back to UI.
+     * @return      {@code CommandResult} that describes changes made when command execute runs successfully.
      *
      * @throws      CommandException if index is out of bounds.
      */

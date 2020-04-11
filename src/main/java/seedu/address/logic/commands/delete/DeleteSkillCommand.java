@@ -23,7 +23,7 @@ public class DeleteSkillCommand extends DeleteCommand {
      * Deletes skill at {@code targetIndex}.
      *
      * @param model {@code Model} that the skill will be deleted from.
-     * @return      CommandResult that describes that to pass information back to UI.
+     * @return      {@code CommandResult} that describes changes made when command execute runs successfully.
      *
      * @throws      CommandException if index is out of bounds.
      */

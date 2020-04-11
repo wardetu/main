@@ -55,7 +55,7 @@ public class AddInternshipCommand extends AddCommand {
      * Adds {@code toAdd} internship to model.
      *
      * @param model {@code Model} which internship will be added.
-     * @return      CommandResult that describes that to pass information back to UI.
+     * @return      {@code CommandResult} that describes changes made when command execute runs successfully.
      *
      * @throws      CommandException if adding the model results in duplicate internships.
      */
