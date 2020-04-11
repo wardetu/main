@@ -127,7 +127,7 @@ public class EditUserDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code From} of the {@code EditUserDescriptor} that we are building.
+     * Sets the {@code To} of the {@code EditUserDescriptor} that we are building.
      */
     public EditUserDescriptorBuilder withTo(String to) {
         descriptor.setTo(new Time(to));
