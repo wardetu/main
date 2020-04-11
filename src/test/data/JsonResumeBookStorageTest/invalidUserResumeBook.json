@@ -1,7 +1,7 @@
 {
   "user": {
     "dp": "/images/Duke.png",
-    "name": "Alice Pauline",
+    "name": "Alice P@uline",
     "description": "I am an aspiring software engineer.",
     "phone": "94351253",
     "email": "alice@example.com",
@@ -19,7 +19,7 @@
     "containedInternshipIds": [],
     "containedProjectIds": [],
     "containedSkillIds": [],
-    "tagged": ["backend", "naps"]
+    "tagged": []
   }],
   "internships": [
     {
@@ -56,13 +56,6 @@
       "website": "myorbital.github.io",
       "description": "My first summer project!",
       "tagged": ["tech"]
-    }, {
-      "name": "Orbital",
-      "id": "1",
-      "time": "06-2020",
-      "website": "myorbital.github.io",
-      "description": "My second summer project!",
-      "tagged": ["tech", "poetry"]
     }
   ],
   "notes": [
@@ -75,4 +68,3 @@
     }
   ]
 }
-

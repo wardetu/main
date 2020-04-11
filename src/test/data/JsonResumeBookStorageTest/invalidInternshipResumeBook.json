@@ -19,14 +19,14 @@
     "containedInternshipIds": [],
     "containedProjectIds": [],
     "containedSkillIds": [],
-    "tagged": ["backend", "naps"]
+    "tagged": []
   }],
   "internships": [
     {
-      "name": "Ninja Van",
+      "name": "Invalid date",
       "id": "0",
       "from": "07-2020",
-      "to": "11-2020",
+      "to": "13-2020",
       "role": "Ninja Intern",
       "description": "My journey to become a better ninja",
       "tagged": ["tech", "UX"]
@@ -56,13 +56,6 @@
       "website": "myorbital.github.io",
       "description": "My first summer project!",
       "tagged": ["tech"]
-    }, {
-      "name": "Orbital",
-      "id": "1",
-      "time": "06-2020",
-      "website": "myorbital.github.io",
-      "description": "My second summer project!",
-      "tagged": ["tech", "poetry"]
     }
   ],
   "notes": [
@@ -75,4 +68,3 @@
     }
   ]
 }
-

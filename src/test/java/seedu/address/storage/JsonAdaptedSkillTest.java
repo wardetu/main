@@ -101,5 +101,4 @@ public class JsonAdaptedSkillTest {
         assertNotEquals(skillWithNoTags, new JsonAdaptedSkill(TypicalSkill.REACT));
         assertNotEquals(skillWithTagsButDifferentName, new JsonAdaptedSkill(TypicalSkill.REACT));
     }
-
 }

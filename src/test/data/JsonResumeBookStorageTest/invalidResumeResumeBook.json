@@ -14,12 +14,12 @@
     "max cap": "5.0"
   },
   "resumes": [{
-    "name": "Mechanical Engineering Intern Resume",
-    "id": "0",
+    "name": "Invalid id",
+    "id": "0.3",
     "containedInternshipIds": [],
     "containedProjectIds": [],
     "containedSkillIds": [],
-    "tagged": ["backend", "naps"]
+    "tagged": []
   }],
   "internships": [
     {
@@ -56,13 +56,6 @@
       "website": "myorbital.github.io",
       "description": "My first summer project!",
       "tagged": ["tech"]
-    }, {
-      "name": "Orbital",
-      "id": "1",
-      "time": "06-2020",
-      "website": "myorbital.github.io",
-      "description": "My second summer project!",
-      "tagged": ["tech", "poetry"]
     }
   ],
   "notes": [
@@ -75,4 +68,3 @@
     }
   ]
 }
-
