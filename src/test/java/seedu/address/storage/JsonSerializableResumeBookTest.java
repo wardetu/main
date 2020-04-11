@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.storage.JsonSerializableResumeBook.MESSAGE_DUPLICATE_INTERNSHIP;
 import static seedu.address.storage.JsonSerializableResumeBook.MESSAGE_DUPLICATE_NOTE;
 import static seedu.address.storage.JsonSerializableResumeBook.MESSAGE_DUPLICATE_PROJECT;
@@ -26,6 +27,7 @@ public class JsonSerializableResumeBookTest {
     private static final Path TEST_DATA_FOLDER = Paths.get(
             "src", "test", "data", "JsonSerializableResumeBookTest");
     private static final Path TYPICAL_RESUME_BOOK_FILE = TEST_DATA_FOLDER.resolve("typicalResumeBook.json");
+    private static final Path OTHER_TYPICAL_RESUME_BOOK_FILE = TEST_DATA_FOLDER.resolve("otherTypicalResumeBook.json");
 
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonResumeBook.json");
 
@@ -145,5 +147,22 @@ public class JsonSerializableResumeBookTest {
         assertThrows(
                 IllegalValueException.class,
                 "The current cap value must not be greater than the maximum cap value.", dataFromFile::toModelType);
+    }
+
+    @Test
+    public void equals() throws Exception {
+        // This should be congruent with the content of typicalResumeBook.json
+        ResumeBook typicalResumeBook = TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE;
+
+        // Equals
+        JsonSerializableResumeBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_RESUME_BOOK_FILE,
+                JsonSerializableResumeBook.class).get();
+
+        // Not equals
+        JsonSerializableResumeBook alternateDataFromFile = JsonUtil.readJsonFile(OTHER_TYPICAL_RESUME_BOOK_FILE,
+                JsonSerializableResumeBook.class).get();
+
+        assertEquals(dataFromFile, new JsonSerializableResumeBook(typicalResumeBook));
+        assertNotEquals(alternateDataFromFile, new JsonSerializableResumeBook(typicalResumeBook));
     }
 }
