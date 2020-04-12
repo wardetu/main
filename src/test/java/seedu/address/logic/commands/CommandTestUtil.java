@@ -181,6 +181,7 @@ public class CommandTestUtil {
     public static final String INVALID_MAJOR = "computer@science"; // only alphanumeric in major
     public static final String INVALID_CURRENT_CAP = "6.5"; // CAP should be from 0.0 to 5.0
     public static final String INVALID_CAP = "11.0 10.0"; // CAP exceeds the maximum CAP
+    public static final String INVALID_CAP_NEGATIVE = "-1 2"; // CAP is negative
     public static final String INVALID_NEGATIVE_MAX_CAP = "-1.0";
 
     // USER

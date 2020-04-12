@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CAP;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CAP_NEGATIVE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GITHUB;
@@ -284,6 +285,10 @@ public class EditUserParserTest {
 
         assertParseFailure(parser,
                 " " + PREFIX_CAP + " " + INVALID_CAP,
+                Cap.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser,
+                " " + PREFIX_CAP + " " + INVALID_CAP_NEGATIVE,
                 Cap.MESSAGE_CONSTRAINTS);
     }
 
