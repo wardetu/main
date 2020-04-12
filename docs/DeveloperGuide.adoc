@@ -173,43 +173,26 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::redit[]
 === Resume Edit feature
-==== Proposed Implementation
-The Resume Edit feature or `redit` allows users to edit which `Item` belongs to the `Resume` (for example, adding a `Skill` item or removing an `Internship` item).
-It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`.
+The Resume Edit feature or `redit` allows user to modify the `Item` contents of a `Resume` (for example, adding a `Skill` item or removing an `Internship` item). It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`.
 
-The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`.
-Therefore, like any other `Command` classes, it will have an `execute` method.
+==== Implementation
+The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`. Therefore, like any other `Command` classes, it will have an `execute` method.
 
-===== Adding into the resume
-The following screenshot illustrates what happens when we use `redit` to add item into the resume. The numbers in the command represent the index of the item in the list. After the end of the command, the number of item in the resume would have increased.
+Given below is an example usage scenario and how the `redit` works at each step.
 
-image::ReditAddIntoResume.png[][AddIntoResume,442,337]
+Step 1. The user launches the application, and uses the `add` command to add several resumes, internships, projects, and skills.
 
-For modifications and removal of item from the resume, all we have to do is to run the same command again, specifying which item we want to *retain* in the resume.
+Step 2. The user executes `redit 1 int/ 2` command to add the second internship in the list of internships to the first resume in the list of resumes.
 
-===== Removing all from the resume
-The following sreenshot illustrates what happens if you want to remove all the items in the resume, starting from a an already-filled resume:
+Step 3. This would call `ResumeBookParser#parseCommand()`, which would create a new `ResumeEditCommandParser` object and call the `ResumeEditCommandParser#parse()` method.
 
-image::ReditRemoveEverything.png[][RemoveEverything,442,337]
-
-===== Removing some from the resume
-And the following screenshot illustrates what happens if you want to remove some items:
-
-image::ReditWantSomeThings.png[][WantSomeThings,442,337]
-
-===== Changing content using tags
-On top of these methods to change the content of the resume, `redit` can also make changes to the resume by making use of tags.
-Regardless of what the original content is, after running the command, the resume will then only have items with the desired tags.
-
-An example is shown in the following screenshot:
-
-image::ReditTags.png[][ReditWithTags,442,337]
+Step 4. A new `ResumeEditCommand` object is created. It contains the index of the `Resume` that is to be modified, and three `Optional<List<Integer>>` representing the indices of internships, projects and skills to be modified into the resume.
 
 ==== Design Considerations
 ===== Aspect: Whether `ResumeEditCommand` should extend `EditCommand`
 * ** Alternative 1 (current choice):** `ResumeEditCommand` does not extend `EditCommand`, but extends `Command`. This design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the resume such as its name, while `redit` is supposed to change the content that the resume holds.
 
-** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Pricniple is observed.
+** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Principle is observed.
 ** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may be confusing to have both `redit` and `edit`.
 
 image::ResumeEditCommandAlt1.png[]
