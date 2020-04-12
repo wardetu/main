@@ -36,9 +36,8 @@ public class GenerateResumeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Generates a .pdf file from a resume in the ResuMe application with the specified index.\n"
             + "If no name is provided for the output .pdf file, the default name is the same as the resume name.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "FILE_NAME]\n"
-            + "Example: " + COMMAND_WORD + " 1 [" + PREFIX_NAME + "MyResume]";
+            + "Format: rgen INDEX [" + PREFIX_NAME + "FILE_NAME]\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "MyResume";
     public static final String MESSAGE_GENERATE_SUCCESS = "Generated %s from %s";
     private static final String rootPath = "";
 
