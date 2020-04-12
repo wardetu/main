@@ -26,6 +26,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TIME_TO;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TO_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TO_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_UNIVERSITY_AMY;
@@ -284,6 +285,40 @@ public class EditUserParserTest {
 
         assertParseFailure(parser,
                 " " + PREFIX_CAP + " " + INVALID_CAP,
+                Cap.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidChangesWithOtherValidFields_failure() {
+        // Name invalid, but description valid
+        assertParseFailure(parser,
+                " " + PREFIX_NAME + " " + INVALID_NAME + PREFIXED_DESCRIPTION_AMY,
+                Name.MESSAGE_CONSTRAINTS);
+
+        // Name invalid, but description valid, order swapped
+        assertParseFailure(parser,
+                PREFIXED_DESCRIPTION_AMY + " " + PREFIX_NAME + " " + INVALID_NAME,
+                Name.MESSAGE_CONSTRAINTS);
+
+        // Phone invalid, but email valid
+        assertParseFailure(parser,
+                " " + PREFIX_PHONE + " " + INVALID_PHONE + PREFIXED_EMAIL_AMY,
+                Phone.MESSAGE_CONSTRAINTS);
+
+        // Github invalid, but university valid
+        assertParseFailure(parser,
+                " " + PREFIX_GITHUB + " " + INVALID_GITHUB + PREFIXED_UNIVERSITY_AMY,
+                Github.MESSAGE_CONSTRAINTS);
+
+        // University invalid, but description valid
+        assertParseFailure(parser,
+                " " + PREFIX_UNIVERSITY + " " + INVALID_UNIVERSITY + PREFIXED_DESCRIPTION_AMY,
+                University.MESSAGE_CONSTRAINTS);
+
+        // Cap invalid, but sevaral other fields are valid
+        assertParseFailure(parser,
+                " " + PREFIX_CAP + " " + INVALID_CAP + PREFIXED_NAME_AMY + PREFIXED_DESCRIPTION_AMY
+                + PREFIXED_PHONE_AMY + PREFIXED_GITHUB_AMY,
                 Cap.MESSAGE_CONSTRAINTS);
     }
 }
