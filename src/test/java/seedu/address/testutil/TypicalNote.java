@@ -14,6 +14,6 @@ public class TypicalNote {
     public static final Note FINISH_CS_2103 = new NoteBuilder()
             .withName("Finish CS2103")
             .withTime("12-2020")
-            .withTags()
+            .withTags("urgent")
             .build();
 }

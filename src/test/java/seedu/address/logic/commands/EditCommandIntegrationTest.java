@@ -127,7 +127,7 @@ public class EditCommandIntegrationTest {
                 model,
                 new EditCommandResult(validInternship.toString(),
                         String.format(EditInternshipCommand.MESSAGE_EDIT_INTERNSHIP_SUCCESS,
-                                validInternship.getType().getFullType()), ItemUtil.INTERNSHIP_ALIAS),
+                                validInternship.getName().fullName), ItemUtil.INTERNSHIP_ALIAS),
                 expectedModel);
     }
 
@@ -158,7 +158,8 @@ public class EditCommandIntegrationTest {
         assertCommandSuccess(new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptor),
                 model,
                 new EditCommandResult(validNote.toString(),
-                        EditNoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, ItemUtil.NOTE_ALIAS),
+                        String.format(EditNoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, validNote.getName().fullName)
+                                , ItemUtil.NOTE_ALIAS),
                 expectedModel);
     }
 
@@ -174,7 +175,7 @@ public class EditCommandIntegrationTest {
                 model,
                 new EditCommandResult(validProject.toString(),
                         String.format(EditProjectCommand.MESSAGE_EDIT_PROJECT_SUCCESS,
-                                validProject.getType().getFullType()), ItemUtil.PROJECT_ALIAS),
+                                validProject.getName().fullName), ItemUtil.PROJECT_ALIAS),
                 expectedModel);
     }
 
@@ -190,7 +191,7 @@ public class EditCommandIntegrationTest {
                 model,
                 new EditCommandResult(validSkill.toString(),
                         String.format(EditSkillCommand.MESSAGE_EDIT_SKILL_SUCCESS,
-                                validSkill.getType().getFullType()), ItemUtil.SKILL_ALIAS),
+                                validSkill.getName().fullName), ItemUtil.SKILL_ALIAS),
                 expectedModel);
     }
 
@@ -206,7 +207,7 @@ public class EditCommandIntegrationTest {
                 model,
                 new EditCommandResult(validResume.toString(),
                         String.format(EditResumeCommand.MESSAGE_EDIT_RESUME_SUCCESS,
-                                validResume.getType().getFullType()), ItemUtil.RESUME_ALIAS),
+                                validResume.getName().fullName), ItemUtil.RESUME_ALIAS),
                 expectedModel);
     }
 

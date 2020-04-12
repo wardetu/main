@@ -29,6 +29,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TAG_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TAG_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TAG_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TAG_TECH;
+import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TAG_URGENT;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TIME_FROM;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TIME_FROM_2;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TIME_ORBITAL;
@@ -167,25 +168,27 @@ public class EditCommandParserTest {
 
         // Standard
         assertParseSuccess(parser,
-                VALID_ITEM_INDEX + ITEM_TYPE_NOTE + PREFIXED_NOTE_NAME + PREFIXED_TIME_TO,
+                VALID_ITEM_INDEX + ITEM_TYPE_NOTE + PREFIXED_NOTE_NAME + PREFIXED_TIME_TO
+                + PREFIXED_TAG_URGENT,
                 new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptor));
 
         // multiple item types - last type accepted
         assertParseSuccess(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_INTERNSHIP + ITEM_TYPE_NOTE
-                        + PREFIXED_NOTE_NAME + PREFIXED_TIME_TO,
+                        + PREFIXED_NOTE_NAME + PREFIXED_TIME_TO + PREFIXED_TAG_URGENT,
                 new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptor));
 
 
         // multiple item names - last name accepted
         assertParseSuccess(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_NOTE + PREFIXED_NAME_REACT
-                        + PREFIXED_NOTE_NAME + PREFIXED_TIME_TO,
+                        + PREFIXED_NOTE_NAME + PREFIXED_TIME_TO + PREFIXED_TAG_URGENT,
                 new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptor));
 
         // multiple item time - last time accepted
         assertParseSuccess(parser,
-                VALID_ITEM_INDEX + ITEM_TYPE_NOTE + PREFIXED_NOTE_NAME + " t/ 12-2021" + PREFIXED_TIME_TO,
+                VALID_ITEM_INDEX + ITEM_TYPE_NOTE + PREFIXED_NOTE_NAME + " t/ 12-2021" + PREFIXED_TIME_TO
+                        + PREFIXED_TAG_URGENT,
                 new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptor));
     }
 
