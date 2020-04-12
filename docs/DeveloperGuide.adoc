@@ -214,7 +214,7 @@ The following activity diagram summarises the execution of `ResumeEditCommand`:
 image::ResumeEditActivityDiagram.png[]
 ==== Design Considerations
 ===== Aspect: Whether `ResumeEditCommand` should extend `EditCommand`
-* ** Alternative 1 (current choice):** `ResumeEditCommand` does not extend `EditCommand`, but extends `Command`. This design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the resume such as its name, while `redit` is supposed to change the content that the resume holds.
+* ** Alternative 1 (current choice):** `ResumeEditCommand` does not extend `EditCommand`, but extends `Command`.
 
 ** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Principle is observed.
 ** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may be confusing to have both `redit` and `edit`.
@@ -228,6 +228,27 @@ image::ResumeEditCommandAlt1.png[]
 
 image::ResumeEditCommandAlt2.png[]
 
+****
+*Conclusion:* The first design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the resume such as its name, while `redit` is supposed to change the content that the resume holds.
+
+This also reduces bloating of code and increases the flexibility of `ResumeEditCommand` class if the behaviour of `redit` needs to be changed in the future.
+****
+===== Aspect: Representation of indices after parsing
+* **Alternative 1 (current choice):** Usage of `Optional<List<Integer>>`
+
+** Pros: The 3 different cases is naturally represented when `List<Integer>` is wrapped with `Optional`. Enhanced safety, reducing risk of `NullPointerException`.
+** Cons: More checks are required to ensure that the `Optional` is not empty before getting its value.
+
+* **Alternative 2:** Usage of `null` and `List<Integer>`
+
+** Pros: Implementation is much simpler, and code becomes much more concise.
+** Cons: High risk of getting a `NullPointerException` if `null` is not handled carefully.
+
+****
+*Conclusion:* We went with `Optional` as it is more expressive than using `null`. It has a clearer semantic when checking whether the value of `Optional` is empty or not than to check whether the variable is a `null` value.
+
+Additionally, using `Optional` provides much less risk to getting `NullPointerException`. The reduced risk allows the developers to potentially save some debugging time, and developers need not worry about handling the `NullPointerException`.
+****
 === Implementation of `Command` classes
 ==== Current Implementation
 Currently, there are several object `Type` which are subclasses of `Item`, namely `Resume`, `Internship`, `Skill`,
