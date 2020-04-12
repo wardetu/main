@@ -1,6 +1,5 @@
 package seedu.address.logic.commands.sort;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.util.Comparator;
@@ -32,10 +31,9 @@ public class SortInternshipsCommandTest {
         expectedModel.sortInternships(Comparator.comparing(Internship::getName));
         expectedModel.setInternshipToDisplay();
 
-        assertEquals(ItemUtil.INTERNSHIP_ALIAS, expectedModel.getDisplayType());
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, Internship.class.getSimpleName());
         CommandResult commandResult =
-                new SortCommandResult(expectedMessage, expectedModel.getDisplayType());
+                new SortCommandResult(expectedMessage, ItemUtil.INTERNSHIP_ALIAS);
         assertCommandSuccess(new SortInternshipsCommand("name", false), model, commandResult, expectedModel);
     }
 
@@ -44,10 +42,9 @@ public class SortInternshipsCommandTest {
         expectedModel.sortInternships(Comparator.comparing(Internship::getFrom).reversed());
         expectedModel.setInternshipToDisplay();
 
-        assertEquals(ItemUtil.INTERNSHIP_ALIAS, expectedModel.getDisplayType());
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, Internship.class.getSimpleName());
         CommandResult commandResult =
-                new SortCommandResult(expectedMessage, expectedModel.getDisplayType());
+                new SortCommandResult(expectedMessage, ItemUtil.INTERNSHIP_ALIAS);
         assertCommandSuccess(
                 new SortInternshipsCommand("time", true), model, commandResult, expectedModel);
     }

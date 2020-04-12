@@ -1,6 +1,5 @@
 package seedu.address.logic.commands.sort;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.util.Comparator;
@@ -32,10 +31,9 @@ public class SortSkillsCommandTest {
         expectedModel.sortSkills(Comparator.comparing(Skill::getName));
         expectedModel.setSkillToDisplay();
 
-        assertEquals(ItemUtil.SKILL_ALIAS, expectedModel.getDisplayType());
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, Skill.class.getSimpleName());
         CommandResult commandResult =
-                new SortCommandResult(expectedMessage, expectedModel.getDisplayType());
+                new SortCommandResult(expectedMessage, ItemUtil.SKILL_ALIAS);
         assertCommandSuccess(new SortSkillsCommand("name", false), model, commandResult, expectedModel);
     }
 
@@ -44,10 +42,9 @@ public class SortSkillsCommandTest {
         expectedModel.sortSkills(Comparator.comparing(Skill::getLevel).reversed());
         expectedModel.setSkillToDisplay();
 
-        assertEquals(ItemUtil.SKILL_ALIAS, expectedModel.getDisplayType());
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, Skill.class.getSimpleName());
         CommandResult commandResult =
-                new SortCommandResult(expectedMessage, expectedModel.getDisplayType());
+                new SortCommandResult(expectedMessage, ItemUtil.SKILL_ALIAS);
         assertCommandSuccess(
                 new SortSkillsCommand("level", true), model, commandResult, expectedModel);
     }
