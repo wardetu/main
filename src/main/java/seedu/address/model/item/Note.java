@@ -104,8 +104,7 @@ public class Note extends Item {
     @Override
     public boolean isSame(Item otherNote) {
         return super.isSame(otherNote)
-                && ((Note) otherNote).getTime().equals(getTime())
-                && ((Note) otherNote).isDone() == isDone();
+                && ((Note) otherNote).getTime().equals(getTime());
     }
 
     @Override
