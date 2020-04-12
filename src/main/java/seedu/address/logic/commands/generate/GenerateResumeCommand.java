@@ -78,17 +78,37 @@ public class GenerateResumeCommand extends Command {
             fileName = resumeToGenerate.getName().toString();
         }
 
-        // Get lists of item ids
-        List<Integer> internshipsToAdd = resumeToGenerate.getInternshipIds();
-        List<Integer> projectsToAdd = resumeToGenerate.getProjectIds();
-        List<Integer> skillsToAdd = resumeToGenerate.getSkillIds();
+        // Get lists of items
+        List<Internship> internshipsToAdd = resumeToGenerate.getInternshipIds().stream()
+                .map(x -> model.hasInternshipId(x) ? model.getInternshipById(x) : null)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());;
+
+        List<Project> projectsToAdd = resumeToGenerate.getProjectIds().stream()
+                .map(x -> model.hasProjectId(x) ? model.getProjectById(x) : null)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
+        List<Skill> skillsToAdd = resumeToGenerate.getSkillIds().stream()
+                .map(x -> model.hasSkillId(x) ? model.getSkillById(x) : null)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
 
         try {
             builder.addPage();
-            addPersonalDetails(user);
-            addInternships(model, internshipsToAdd);
-            addProjects(model, projectsToAdd);
-            addSkills(model, skillsToAdd);
+            builder.addPersonalDetails(user);
+
+            if (!internshipsToAdd.isEmpty()) {
+                builder.addInternships(internshipsToAdd);
+            }
+
+            if (!projectsToAdd.isEmpty()) {
+                builder.addProjects(projectsToAdd);
+            }
+
+            if (!skillsToAdd.isEmpty()) {
+                builder.addSkills(skillsToAdd);
+            }
 
             PDDocument resume = builder.build();
             resume.save(rootPath + fileName + ".pdf");
@@ -101,69 +121,6 @@ public class GenerateResumeCommand extends Command {
         return new GenerateResumeCommandResult(resumeToGenerate.toString(),
                 String.format(MESSAGE_GENERATE_SUCCESS, fileName, resumeToGenerate.getName().toString()),
                 model.getDisplayType());
-    }
-
-    /**
-     * Adds the user's name, bio, contact information and education to the .pdf file.
-     * @param user the user of the application.
-     * @throws IOException
-     */
-    private void addPersonalDetails(Person user) throws IOException {
-        builder.addResumeTitle(user);
-        builder.addBio(user);
-        builder.addContact(user);
-
-        builder.addSectionTitle("EDUCATION");
-        builder.addEducation(user);
-    }
-
-    /**
-     * Adds the user's internship experiences to the .pdf file.
-     * @param model {@code Model} which the command should operate on.
-     * @param internshipsToAdd the list of {@code Internship} ids to be added to the .pdf file.
-     * @throws IOException
-     */
-    private void addInternships(Model model, List<Integer> internshipsToAdd) throws IOException {
-        if (!internshipsToAdd.isEmpty()) {
-            builder.addSectionTitle("INTERNSHIPS");
-            for (Integer id: internshipsToAdd) {
-                Internship toAdd = model.getInternshipById(id);
-                builder.addInternship(toAdd);
-            }
-        }
-    }
-
-    /**
-     * Adds the user's projects to the .pdf file.
-     * @param model {@code Model} which the command should operate on.
-     * @param projectsToAdd the list of {@code Project} ids to be added to the .pdf file.
-     * @throws IOException
-     */
-    private void addProjects(Model model, List<Integer> projectsToAdd) throws IOException {
-        if (!projectsToAdd.isEmpty()) {
-            builder.addSectionTitle("PROJECTS");
-            for (Integer id: projectsToAdd) {
-                Project toAdd = model.getProjectById(id);
-                builder.addProject(toAdd);
-            }
-        }
-    }
-
-    /**
-     * Adds the user's skills to the .pdf file.
-     * @param model {@code Model} which the command should operate on.
-     * @param skillsToAdd the list of {@code Skill} ids to be added to the .pdf file.
-     * @throws IOException
-     */
-    private void addSkills(Model model, List<Integer> skillsToAdd) throws IOException {
-        if (!skillsToAdd.isEmpty()) {
-            builder.addSectionTitle("SKILLS");
-            List<Skill> skills = skillsToAdd.stream()
-                    .map(x -> model.hasSkillId(x) ? model.getSkillById(x) : null)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList());
-            builder.addSkills(skills);
-        }
     }
 
     /**
