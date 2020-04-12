@@ -214,7 +214,6 @@ public class ParserUtil {
             return Optional.empty();
         } else if (indices.equals("")) {
             // Empty string will return an InvocationTargetException in the streams
-            // TODO: Investigate how this can be combined with the else block
             return Optional.of(new ArrayList<>());
         } else {
             boolean isValidIndices = Arrays
