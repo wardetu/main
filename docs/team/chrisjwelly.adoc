@@ -7,17 +7,34 @@
 
 ---
 
-== Overview
+== 1. Overview
 
-ResuMe is a desktop application for you to manage all of your resumes from a centralised location. It is easy to build, customise and export different resume versions using only Command Line Interface.
+=== 1.1 About the Project
+ResuMe is a desktop resume management application developed by a team of students from National University of Singapore (NUS). The application is aimed at university students, who may want to manage different resumes due to internship and job applications.
 
-== Summary of contributions
+The name ResuMe comes from the words "Resume" (as in "to continue") and "Me". Our product tag is "to never start from blank pages", which ties in with the meaning of "Resume", as we want to resume from where we left off when writing a resume. The "Me" focuses on the user, as the application is intended for personal use.
 
-==== *Code contributed*:
+The project builds upon the code from https://github.com/nus-cs2103-AY1920S2/addressbook-level3[Address Book Level 3 (AB3)], a desktop Address Book application. ResuMe retains the characteristics of AB3, and thus ResuMe has a Graphical User Interface (GUI) while most interactions happen through the Command Line Interface (CLI).
 
-[https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=&sort=variance&sortWithin=variance&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&since=2020-02-14&tabOpen=true&tabType=authorship&tabAuthor=chrisjwelly&tabRepo=AY1920S2-CS2103T-F10-1%2Fmain%5Bmaster%5D[Functional and Test code]] +
+The application is developed using Java, and within a short span of 6 weeks we have contributed a total of more than 25,000 lines of code to the application.
 
-==== Enhancement implemented
+=== 1.2 About the Team
+The team consists of 5 Year 2 Computer Science students from NUS, taking the Software Engineering module, CS2103T.
+
+=== 1.3 About my Role
+In the initial phase of the project, I was tasked to morph the `Parser` in the application to suit the needs of our application. Over time, we developed by features and I was tasked to write the Resume Edit and Tag Pull feature.
+
+I also played various roles in the team such as managing the milestones and keeping track of deliverables.
+
+The following section provides a summary of my contributions:
+
+== 2. Summary of Contributions
+
+==== 2.1 Code Contributed
+
+My code contributions can be found here: https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=&sort=variance&sortWithin=variance&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&since=2020-02-14&tabOpen=true&tabType=authorship&tabAuthor=chrisjwelly&tabRepo=AY1920S2-CS2103T-F10-1%2Fmain%5Bmaster%5D[Functional and Test code (via RepoSense)] +
+
+==== 2.2 Enhancements Implemented
 
 * *Major enhancement*: added *the ability to modify items in the resume*: `redit`
 ** What it does: allows the user to selectively modify items in a specified resume.
@@ -28,7 +45,11 @@ ResuMe is a desktop application for you to manage all of your resumes from a cen
 ** What it does: allows the user to add items that have been given a particular tag.
 ** Justification: This increases the convenience of modifying a resume, since items that have the same tags are likely to be included togehter in the resume.
 
-* *Minor enhancement*: modified the `add` command and its parser to suit the application as it requires handling of various item types such as `Internship`, `Project` and `Skill` items.
+* *Minor enhancement*: modified the `edit` command and its parser to suit the application
+** Justification: ResuMe requires handling of various item types such as `Internship`, `Project` and `Skill` items. Therefore, it is necessary to morph the existing `Parser` from AB3 to suit our needs.
+
+* *Minor enhancement*: wrote the `view` command
+** Justification: Items such as `Internship` omit a lot of details in our list in the GUI. The `view` command helps include more details about the `Item`.
 
 === Contributions to team-based tasks:
 
@@ -55,10 +76,17 @@ https://github.com/chrisjwelly/ped/issues/10[2], https://github.com/chrisjwelly/
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
+{start of extract 1: Resume Edit}
 
 include::../UserGuide.adoc[tag=redit]
 
+{end of extract 1}
+
+{start of extract 2: Tag Pull}
+
 include::../UserGuide.adoc[tag=tagpull]
+
+{end of extract 2}
 
 == Contributions to the Developer Guide
 
@@ -66,11 +94,21 @@ include::../UserGuide.adoc[tag=tagpull]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+{start of extract 1: Logic}
+
 include::../DeveloperGuide.adoc[tag=logic]
+
+{end of extract 1}
+
+{start of extract 2: Resume Edit}
 
 include::../DeveloperGuide.adoc[tag=redit]
 
+{end of extract 2}
+
+{start of extract 3: Tag Pull}
+
 include::../DeveloperGuide.adoc[tag=tagpull]
 
-
+{end of extract 3}
 ---
