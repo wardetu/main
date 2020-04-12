@@ -1,23 +1,19 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.LEVEL_BASIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NAME_GOOGLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NAME_NINJAVAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NAME_PAYPAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_ROLE_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_NAME_CS2103;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_TIME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_NAME_DUKE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_NAME_ORBITAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_RESUME_NAME_ME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RESUME_NAME_SE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SKILL_NAME_GIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SKILL_NAME_REACT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRONTEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_URGENT;
