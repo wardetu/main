@@ -182,7 +182,7 @@ This section describes some noteworthy details on how certain features are imple
 === Resume Edit feature
 The Resume Edit feature or `redit` allows user to modify the `Item` contents of a `Resume` (for example, adding a `Skill` item or removing an `Internship` item). It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`.
 
-==== Implementation
+==== Current Implementation
 The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`. Therefore, like any other `Command` classes, it will have an `execute` method.
 
 Given below is an example usage scenario and how the `redit` works at each step.
@@ -263,6 +263,51 @@ Additionally, using `Optional` provides much less risk to getting `NullPointerEx
 ****
 // end::redit[]
 
+// tag::tagpull[]
+=== Tag Pull feature
+The Tag Pull feature is similar to <<Resume Edit Feature, Resume Edit Feature>> in the sense that it modifies the content of the `Resume`. Unlike Resume Edit which modifies using item indices, the Tag Pull feature modifies the resume by _adding_ items with the specified tags on top of existing items in the `Resume`.
+
+==== Current Implementation
+The `tagpull` command is facilitated by `TagPullCommand`, which extends `Command`. Therefore, like any other `Command` classes, it will have an `execute` method.
+
+Given below is an example usage scenario and how the `tagpull` works at each step.
+
+Step 1. The user launches the application, and uses the `add` command to add several `Resume`, `Internship`, `Project`, and `Skill` items.
+
+Step 2. The user executes `tagpull 1 #/ tech` command to add all items that have been tagged with `tech` to the first `Resume` in the list of `Resume` items.
+
+Step 3. This calls `ResumeBookParser#parseCommand()`, which would create a new `TagPullCommandParser` object and call the `TagPullCommandParser#parse()` method.
+
+Step 4. A new `TagPullCommand` object is created. It contains the index of the `Resume` that is to be modified, and the tags of the items which the user wants to add. In this example, it will only have the `tech` tag.
+
+Step 5. The `TagPullCommand#execute()` method is called with the current `model`. A copy of the `Resume` is created and all the items with matching tags are retrieved from `model`. The content of the copied `Resume` is updated to now contain all the items with matching tags, on top of existing ones.
+
+Step 6. A new `TagPullCommand` object, which contains the edited copy of the `Resume`, is created and returned.
+
+The following sequence diagram shows how `tagpull` works:
+
+// TODO: Add Sequence Diagram
+
+==== Design Considerations
+===== Aspect: Integrating Tag Pull to Resume Edit
+* **Alternative 1 (current choice):** Separating `redit` and `tagpull`
+
+** Pros: Separation of concerns. `redit` handles updates of `Resume` using indices and `tagpull` handles updates of `Resume` using tags.
+** Cons: There is some code duplication due to similarities in behaviour.
+
+* **Alternative 2:** Combine `redit` with `tagpull`, making use of `#/` as prefix for `redit` command
+
+** Pros: It may be intuitive for user to only have a single command that handles modification of `Resume`
+** Cons: The implementation of `redit` becomes much more complicated as various combinations of input has to be considered. For example, considerations of what the expected behaviour should be if indices and tags are given.
+
+****
+*Conclusion:* We decided to separate the two commands in order to have a simpler implementation of the commands. By separating the two, there is a separation of concerns and there is no need to consider the behaviour when both indices and tags are given as arguments.
+
+It may also save the user some confusion since the `redit` feature specifically handles only updates using indices while the `tagpull` feature handles only updates using tags.
+
+// We also considered a use case: "As a user, I want to easily have items of the same category (tags) in my resume". We felt that users will find it easier to use `tagpull` to retrieve items of the same tags ok idk what im smoking hahahha help pls
+****
+// end:tagpull[]
 // tag::command-classes[]
 === Implementation of `Command` classes
 ==== Current Implementation
