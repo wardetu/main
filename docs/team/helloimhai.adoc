@@ -62,3 +62,27 @@ https://github.com/AY1920S2-CS2103T-F10-1/main/pull/252[#252],
 https://github.com/AY1920S2-CS2103T-F10-1/main/pull/228[#228],
 https://github.com/AY1920S2-CS2103T-F10-1/main/pull/148[#148] and more)
 
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=intro-para]
+
+include::../UserGuide.adoc[tag=list]
+
+include::../UserGuide.adoc[tag=rpreview]
+
+include::../UserGuide.adoc[tag=clear]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=overall-architecture]
+
+include::../DeveloperGuide.adoc[tag=command-classes]
+

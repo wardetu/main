@@ -18,6 +18,7 @@ endif::[]
 
 By: `CS2103T F10-1`      Since: `Jan 2020`      Licence: `MIT`
 
+// tag::intro-para[]
 == Introduction
 
 Hello fellow University friends! Have you ever found writing resumes
@@ -30,6 +31,8 @@ If this sounds like you, *ResuMe* is _the_ resume managing application for you!
 Made by University students for University students with _looovee_, this wonder
 understands your struggle and strives to cater to your specific resume needs
 and job application woes.
+
+// end::intro-para[]
 
 === Overview
 *ResuMe* allows the management of five different item types:
@@ -218,6 +221,7 @@ The user profile picture is updated accordingly as below.
 // TODO: update screenshot
 image::user_profile1.png[width="400"]
 
+// tag::list[]
 === Listing all items : `list`
 
 List items in the storage.
@@ -238,6 +242,7 @@ To view items in full details, use `view`.
 Lists all `resume` items.
 * `list i/ proj`
 Lists all project items.
+// end::list[]
 
 // tag::add[]
 === Adding an item: `add`
@@ -633,6 +638,7 @@ image::redo_success.png[width="790"]
 
 // end::redo[]
 
+// tag::rpreview[]
 === Previewing a resume: `rpreview`
 
 Previews a `resume` in text format in a pop-up window.
@@ -644,16 +650,22 @@ Previews a `resume` in text format in a pop-up window.
 [NOTE]
 `INDEX` is the index of the `resume` seen when `list i/res` is called.
 
-*Example:*
+*Example:* Let's try out the following commands!
 
-`rpreview 2`
+. `list i/ res`
+. `rpreview 2`
 
 *Outcome:*
+
+. The first command lists out all `resumes`. Assuming that you want to generate the second `resume` in the list box.
++
 
 Suppose the `resume` at index 2 is named "Summer Internship". A pop-up window will be opened,
 featuring a text-based view of the content of "Summer Internship".
 
 image::RPreviewSummerInternship.png[width = "790"]
+
+// end::rpreview[]
 
 // tag::rgen[]
 
@@ -695,6 +707,8 @@ image::PdfFile.PNG[width="790"]
 
 // end::rgen[]
 
+// tag::clear[]
+
 === Clearing all data: `clear`
 Clears all data from *ResuMe*.
 
@@ -702,8 +716,7 @@ Clears all data from *ResuMe*.
 *Format:* `clear`
 ****
 
-[WARNING]
-This command cannot be undone. Please be careful when exercising this power.
+// end::clear[]
 
 
 === Exiting the program : `exit`
