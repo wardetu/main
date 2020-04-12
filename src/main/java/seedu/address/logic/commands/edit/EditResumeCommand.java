@@ -90,19 +90,10 @@ public class EditResumeCommand extends EditCommand {
 
     @Override
     public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof EditResumeCommand)) {
-            return false;
-        }
-
-        // state check
-        EditResumeCommand e = (EditResumeCommand) other;
-        return index.equals(e.index) && editResumeDescriptor.equals(e.editResumeDescriptor);
+        return other == this // short circuit if same object
+                || (other instanceof EditResumeCommand // instanceof handles nulls
+                && this.index.equals(((EditResumeCommand) other).index)
+                && this.editResumeDescriptor.equals(((EditResumeCommand) other).editResumeDescriptor));
     }
 
 }

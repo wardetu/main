@@ -118,7 +118,7 @@ public class EditInternshipCommand extends EditCommand {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EditInternshipCommand // instanceof handles nulls
-                && index.equals(((EditInternshipCommand) other).index)
-                && editInternshipDescriptor.equals(((EditInternshipCommand) other).editInternshipDescriptor));
+                && this.index.equals(((EditInternshipCommand) other).index)
+                && this.editInternshipDescriptor.equals(((EditInternshipCommand) other).editInternshipDescriptor));
     }
 }

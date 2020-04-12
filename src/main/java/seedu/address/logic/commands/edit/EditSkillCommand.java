@@ -91,18 +91,9 @@ public class EditSkillCommand extends EditCommand {
 
     @Override
     public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof EditSkillCommand)) {
-            return false;
-        }
-
-        // state check
-        EditSkillCommand e = (EditSkillCommand) other;
-        return index.equals(e.index) && editSkillDescriptor.equals(e.editSkillDescriptor);
+        return other == this // short circuit if same object
+                || (other instanceof EditSkillCommand // instanceof handles nulls
+                && this.index.equals(((EditSkillCommand) other).index)
+                && this.editSkillDescriptor.equals(((EditSkillCommand) other).editSkillDescriptor));
     }
 }

@@ -106,7 +106,7 @@ public class EditProjectCommand extends EditCommand {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EditProjectCommand // instanceof handles nulls
-                && index.equals(((EditProjectCommand) other).index)
-                && editProjectDescriptor.equals(((EditProjectCommand) other).editProjectDescriptor));
+                && this.index.equals(((EditProjectCommand) other).index)
+                && this.editProjectDescriptor.equals(((EditProjectCommand) other).editProjectDescriptor));
     }
 }

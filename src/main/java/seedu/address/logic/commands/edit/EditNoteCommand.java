@@ -19,6 +19,7 @@ import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * Edits a specified Note.
@@ -70,7 +71,7 @@ public class EditNoteCommand extends EditCommand {
 
         return new EditCommandResult(editedNote.toString(),
                 String.format(MESSAGE_EDIT_NOTE_SUCCESS, editedNote.getName().fullName),
-                model.getDisplayType());
+                ItemUtil.NOTE_ALIAS);
     }
 
     /**
@@ -91,7 +92,7 @@ public class EditNoteCommand extends EditCommand {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EditNoteCommand // instanceof handles nulls
-                && index.equals(((EditNoteCommand) other).index)
-                && editNoteDescriptor.equals(((EditNoteCommand) other).editNoteDescriptor));
+                && this.index.equals(((EditNoteCommand) other).index)
+                && this.editNoteDescriptor.equals(((EditNoteCommand) other).editNoteDescriptor));
     }
 }

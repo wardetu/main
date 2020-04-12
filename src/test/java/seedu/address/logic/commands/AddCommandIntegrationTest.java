@@ -17,7 +17,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.AddCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ResumeBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Note;
@@ -40,8 +39,6 @@ public class AddCommandIntegrationTest {
 
     private Model model;
     private Model expectedModel;
-    private ResumeBook resumeBook = new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build();
-    private ResumeBook resumeBookCopy = new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build();
 
     @BeforeEach
     public void setUp() {
@@ -78,7 +75,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newNote_success() {
-        Note validNote = TypicalNote.FINISH_HOMEWORK;
+        Note validNote = TypicalNote.FINISH_RESUME_2;
         expectedModel.addNote(validNote);
 
         assertCommandSuccess(new AddNoteCommand(validNote),
@@ -99,7 +96,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newResume_success() {
-        Resume validResume = TypicalResume.SE_RESUME;
+        Resume validResume = TypicalResume.CE_RESUME;
         expectedModel.addResume(validResume);
         expectedModel.setResumeToDisplay();
 
@@ -123,7 +120,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newSkill_success() {
-        Skill validSkill = TypicalSkill.GIT;
+        Skill validSkill = TypicalSkill.CODE;
         expectedModel.addSkill(validSkill);
         expectedModel.setSkillToDisplay();
 
@@ -147,7 +144,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newProject_success() {
-        Project validProject = TypicalProject.DUKE;
+        Project validProject = TypicalProject.RESUME;
         expectedModel.addProject(validProject);
         expectedModel.setProjectToDisplay();
 

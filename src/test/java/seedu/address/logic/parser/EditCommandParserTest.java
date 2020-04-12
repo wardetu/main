@@ -23,6 +23,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_ME;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_ORBITAL;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_REACT;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NOTE_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NOTE_TIME;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_ROLE_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_ROLE_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TAG_BACKEND;
@@ -50,6 +51,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SKILL_NAME_REAC
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRONTEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_URGENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEBSITE_ORBITAL;
@@ -190,6 +192,16 @@ public class EditCommandParserTest {
                 VALID_ITEM_INDEX + ITEM_TYPE_NOTE + PREFIXED_NOTE_NAME + " t/ 12-2021" + PREFIXED_TIME_TO
                         + PREFIXED_TAG_URGENT,
                 new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptor));
+
+        // multiple item tags - all tags added
+        EditNoteDescriptor editNoteDescriptorMultipleTags = new EditNoteDescriptorBuilder(FINISH_CS_2103)
+                .withTags(VALID_TAG_URGENT, VALID_TAG_FRONTEND)
+                .build();
+
+        assertParseSuccess(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_NOTE + PREFIXED_NOTE_NAME
+                        + PREFIXED_NOTE_TIME + PREFIXED_TAG_URGENT + PREFIXED_TAG_FRONTEND,
+                new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptorMultipleTags));
     }
 
     @Test
