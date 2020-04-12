@@ -12,12 +12,17 @@ import static seedu.address.testutil.TypicalInternship.PAYPAL;
 import static seedu.address.testutil.TypicalNote.FINISH_CS_2103;
 import static seedu.address.testutil.TypicalNote.FINISH_RESUME_2;
 import static seedu.address.testutil.TypicalNote.FINISH_HOMEWORK;
+import static seedu.address.testutil.TypicalPerson.ALICE;
+import static seedu.address.testutil.TypicalPerson.BOB;
 import static seedu.address.testutil.TypicalProject.DUKE;
 import static seedu.address.testutil.TypicalProject.ORBITAL;
 import static seedu.address.testutil.TypicalProject.RESUME;
 import static seedu.address.testutil.TypicalResume.CE_RESUME;
 import static seedu.address.testutil.TypicalResume.ME_RESUME;
 import static seedu.address.testutil.TypicalResume.SE_RESUME;
+import static seedu.address.testutil.TypicalSkill.CODE;
+import static seedu.address.testutil.TypicalSkill.GIT;
+import static seedu.address.testutil.TypicalSkill.REACT;
 
 
 import java.nio.file.Path;
@@ -38,6 +43,7 @@ import seedu.address.model.item.Item;
 import seedu.address.model.item.Note;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
+import seedu.address.model.item.Skill;
 import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.exceptions.ItemNotFoundException;
 import seedu.address.model.tag.Tag;
@@ -48,6 +54,7 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.ProjectBuilder;
 import seedu.address.testutil.ResumeBookBuilder;
 import seedu.address.testutil.ResumeBuilder;
+import seedu.address.testutil.SkillBuilder;
 import seedu.address.testutil.TypicalResumeBook;
 
 public class ModelManagerTest {
@@ -65,7 +72,8 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new ResumeBook(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE), new ResumeBook(modelManager.getResumeBook()));
+        assertEquals(new ResumeBook(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE),
+                new ResumeBook(modelManager.getResumeBook()));
     }
 
     @Test
@@ -466,51 +474,113 @@ public class ModelManagerTest {
         assertEquals(Arrays.asList(SE_RESUME, ME_RESUME), modelManager.getFilteredItemList());
     }
 
-//    @Test
-//    public void deletePerson_personIsSelectedAndFirstPersonInFilteredPersonList_selectionCleared() {
-//        modelManager.addInternship(new InternshipBuilder(GOOGLE).build());
-//        modelManager.setSelected(ALICE);
-//        modelManager.deletePerson(ALICE);
-//        assertEquals(null, modelManager.getSelectedPerson());
-//    }
-//
-//    @Test
-//    public void deletePerson_personIsSelectedAndSecondPersonInFilteredPersonList_firstPersonSelected() {
-//        modelManager.addPerson(ALICE);
-//        modelManager.addPerson(BOB);
-//        assertEquals(Arrays.asList(ALICE, BOB), modelManager.getFilteredPersonList());
-//        modelManager.setSelectedPerson(BOB);
-//        modelManager.deletePerson(BOB);
-//        assertEquals(ALICE, modelManager.getSelectedPerson());
-//    }
-//
-//    @Test
-//    public void setPerson_personIsSelected_selectedPersonUpdated() {
-//        modelManager.addPerson(ALICE);
-//        modelManager.setSelectedPerson(ALICE);
-//        Person updatedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-//        modelManager.setPerson(ALICE, updatedAlice);
-//        assertEquals(updatedAlice, modelManager.getSelectedPerson());
-//    }
-//
-//    @Test
-//    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-//        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
-//    }
-//
-//    @Test
-//    public void setSelectedPerson_personNotInFilteredPersonList_throwsPersonNotFoundException() {
-//        assertThrows(PersonNotFoundException.class, () -> modelManager.setSelectedPerson(ALICE));
-//    }
-//
-//    @Test
-//    public void setSelectedPerson_personInFilteredPersonList_setsSelectedPerson() {
-//        modelManager.addPerson(ALICE);
-//        assertEquals(Collections.singletonList(ALICE), modelManager.getFilteredPersonList());
-//        modelManager.setSelectedPerson(ALICE);
-//        assertEquals(ALICE, modelManager.getSelectedPerson());
-//    }
+    // Skill-related tests
 
+    @Test
+    public void hasSkill_nullSkill_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasSkill(null));
+    }
 
+    @Test
+    public void hasSkill_internshipNotInResumeBook_returnsFalse() {
+        assertFalse(modelManager.hasSkill(new SkillBuilder(CODE).build()));
+    }
 
+    @Test
+    public void hasSkill_internshipInResumeBook_returnsTrue() {
+        assertTrue(modelManager.hasSkill(new SkillBuilder(GIT).build()));
+    }
+
+    @Test
+    public void addSkill_internshipNotInResumeBook_success() {
+        modelManager.addSkill(new SkillBuilder(CODE).build());
+        assertTrue(modelManager.hasSkill(new SkillBuilder(CODE).build()));
+    }
+
+    @Test
+    public void addSkill_internshipAlreadyInResumeBook_throwsDuplicateItemException() {
+        assertThrows( DuplicateItemException.class,
+                () -> modelManager.addSkill(new SkillBuilder(GIT).build()));
+    }
+
+    @Test
+    public void deleteSkill_internshipExists_success() {
+        modelManager.deleteSkill(new SkillBuilder(GIT).build());
+        assertFalse(modelManager.hasSkill(new SkillBuilder(GIT).build()));
+    }
+
+    @Test
+    public void deleteSkill_internshipNotInResumeBook_throwsItemNotFoundException() {
+        assertThrows(ItemNotFoundException.class,
+                () -> modelManager.deleteSkill(new SkillBuilder(CODE).build()));
+    }
+
+    @Test
+    public void setSkill_internshipInResumeBook_success() {
+        modelManager.setSkill(new SkillBuilder(GIT).build(), new SkillBuilder(CODE).build());
+        assertTrue(modelManager.hasSkill(new SkillBuilder(CODE).build()));
+    }
+
+    @Test
+    public void setSkill_toEditNotInResumeBook_throwsItemNotFoundException() {
+        assertThrows(ItemNotFoundException.class,
+                () -> modelManager.setSkill(CODE, GIT));
+    }
+
+    @Test
+    public void getSkillSize_internshipsInResumeBook_returnsSkillListSize() {
+        assertEquals(2, modelManager.getSkillSize());
+    }
+
+    @Test
+    public void getSkillByIndex_withinBounds_returnsSkill() {
+        assertEquals(new SkillBuilder(GIT).build(),
+                modelManager.getSkillByIndex(Index.fromOneBased(2)));
+    }
+
+    @Test
+    public void getSkillByIndex_outOfBounds_throwsOutOfBoundsException() {
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> modelManager.getSkillByIndex(Index.fromOneBased(3)));
+    }
+
+    @Test
+    public void getSkillByTag_internshipWithTagInResumeBook_returnsSkillList() {
+        assertEquals(Arrays.asList(REACT, GIT),
+                modelManager.getSkillsByTag(new Tag(VALID_TAG_TECH)));
+    }
+
+    @Test
+    public void getSkillByTag_noSkillWithTagInResumeBook_returnsEmptyList() {
+        assertEquals(Collections.emptyList(),
+                modelManager.getSkillsByTag(new Tag("abc")));
+    }
+
+    @Test
+    public void setSkillsToDisplay_internshipInResumeBook_success() {
+        modelManager.setSkillToDisplay();
+        assertEquals(modelManager.getDisplayType(), ItemUtil.SKILL_ALIAS);
+        assertEquals(Arrays.asList(REACT, GIT), modelManager.getFilteredItemList());
+    }
+
+    @Test
+    public void sortSkills_internshipInResumeBook_success() {
+        modelManager.sortSkills(Comparator.comparing(Skill::getName));
+        modelManager.setSkillToDisplay();
+        assertEquals(modelManager.getDisplayType(), ItemUtil.SKILL_ALIAS);
+        assertEquals(Arrays.asList(GIT, REACT), modelManager.getFilteredItemList());
+    }
+
+    // User related methods
+
+    @Test
+    public void getUser_defaultUserInResumeBook_returnsUser() {
+        assertEquals(ALICE, modelManager.getUser());
+    }
+
+    @Test
+    public void setUser_defaultUserInResumeBook_success() {
+        modelManager.setUser(BOB);
+        assertEquals(BOB, modelManager.getUser());
+    }
 }

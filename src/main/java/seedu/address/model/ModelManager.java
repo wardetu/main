@@ -108,7 +108,6 @@ public class ModelManager implements Model {
 
     //=========== User ================================================================================
 
-
     @Override
     public void setUser(Person person) {
         // Wrap the Person object so it is consistent with the setUser method in ResumeBook
