@@ -55,7 +55,7 @@ public class EditUserCommand extends Command {
             + PREFIX_MAJOR + "MAJOR "
             + PREFIX_FROM + "FROM "
             + PREFIX_TO + "TO "
-            + PREFIX_CAP + "CAP\n"
+            + PREFIX_CAP + "CURRENT_CAP MAX_CAP\n"
             + "Example: \n" + COMMAND_WORD + " "
             + PREFIX_DP + "/Users/nhamquochung/Desktop/test.png "
             + PREFIX_NAME + "HUNG "
@@ -65,9 +65,9 @@ public class EditUserCommand extends Command {
             + PREFIX_GITHUB + "nhamhung "
             + PREFIX_UNIVERSITY + "National University of Singapore "
             + PREFIX_MAJOR + "Computer Science "
-            + PREFIX_FROM + "2018 "
-            + PREFIX_TO + "2022 "
-            + PREFIX_CAP + "5.0 ";
+            + PREFIX_FROM + "08-2018 "
+            + PREFIX_TO + "05-2022 "
+            + PREFIX_CAP + "4.0 5.0";
 
     public static final String USER_NOT_EDITED = "User and edited User is the same!";
 

@@ -3,6 +3,7 @@ package seedu.address.logic.commands.edit;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
@@ -26,18 +27,21 @@ import seedu.address.model.util.ItemUtil;
  */
 public class EditNoteCommand extends EditCommand {
 
-    public static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edited Note: %1$s";
+    public static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edited Note: %1$s.";
 
-    private static final String FIELDS = "Example: "
-            + COMMAND_WORD + " "
+    private static final String FIELDS = "\n" + COMMAND_WORD
+            + " INDEX "
             + PREFIX_ITEM + " note "
             + "[" + PREFIX_NAME + "NOTE NAME] "
-            + "[" + PREFIX_TIME + "TIME] ";
-    private static final String EXAMPLE = "Example: "
+            + "[" + PREFIX_TIME + "TIME] "
+            + "[" + PREFIX_TAG + "TAG]....\n";
+    private static final String EXAMPLE = "\n" + "Example: "
             + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + " note "
             + PREFIX_NAME + " Complete Resume 3 "
-            + PREFIX_TIME + " 04-2020 ";
+            + PREFIX_TIME + " 04-2020 "
+            + PREFIX_TAG + " urgent ";
+
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n"
             + FIELDS
