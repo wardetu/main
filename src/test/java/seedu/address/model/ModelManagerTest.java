@@ -12,6 +12,12 @@ import static seedu.address.testutil.TypicalInternship.PAYPAL;
 import static seedu.address.testutil.TypicalNote.FINISH_CS_2103;
 import static seedu.address.testutil.TypicalNote.FINISH_RESUME_2;
 import static seedu.address.testutil.TypicalNote.FINISH_HOMEWORK;
+import static seedu.address.testutil.TypicalProject.DUKE;
+import static seedu.address.testutil.TypicalProject.ORBITAL;
+import static seedu.address.testutil.TypicalProject.RESUME;
+import static seedu.address.testutil.TypicalResume.CE_RESUME;
+import static seedu.address.testutil.TypicalResume.ME_RESUME;
+import static seedu.address.testutil.TypicalResume.SE_RESUME;
 
 
 import java.nio.file.Path;
@@ -30,6 +36,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Note;
+import seedu.address.model.item.Project;
+import seedu.address.model.item.Resume;
 import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.exceptions.ItemNotFoundException;
 import seedu.address.model.tag.Tag;
@@ -37,7 +45,9 @@ import seedu.address.model.util.ItemUtil;
 import seedu.address.testutil.InternshipBuilder;
 import seedu.address.testutil.NoteBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ProjectBuilder;
 import seedu.address.testutil.ResumeBookBuilder;
+import seedu.address.testutil.ResumeBuilder;
 import seedu.address.testutil.TypicalResumeBook;
 
 public class ModelManagerTest {
@@ -160,6 +170,18 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getInternshipByIndex_withinBounds_returnsInternship() {
+        assertEquals(new InternshipBuilder(PAYPAL).build(),
+                modelManager.getInternshipByIndex(Index.fromOneBased(2)));
+    }
+
+    @Test
+    public void getInternshipByIndex_outOfBounds_throwsOutOfBoundsException() {
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> modelManager.getInternshipByIndex(Index.fromOneBased(3)));
+    }
+
+    @Test
     public void getInternshipByTag_internshipWithTagInResumeBook_returnsInternshipList() {
         assertEquals(Arrays.asList(NINJA_VAN, PAYPAL),
                 modelManager.getInternshipsByTag(new Tag(VALID_TAG_TECH)));
@@ -240,6 +262,18 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getNoteByIndex_withinBounds_returnsNote() {
+        assertEquals(new NoteBuilder(FINISH_HOMEWORK).build(),
+                modelManager.getNoteByIndex(Index.fromOneBased(2)));
+    }
+
+    @Test
+    public void getNoteByIndex_outOfBounds_throwsOutOfBoundsException() {
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> modelManager.getNoteByIndex(Index.fromOneBased(3)));
+    }
+
+    @Test
     public void getNoteSize_notesInResumeBook_returnsNoteListSize() {
         assertEquals(2, modelManager.getNoteListSize());
     }
@@ -248,6 +282,188 @@ public class ModelManagerTest {
     public void sortNotes_noteInResumeBook_success() {
         modelManager.sortNotes(Comparator.comparing(Note::getName).reversed());
         assertEquals(Arrays.asList(FINISH_HOMEWORK, FINISH_CS_2103), modelManager.getFilteredNoteList());
+    }
+
+    // Project-related tests
+
+    @Test
+    public void hasProject_nullProject_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasProject(null));
+    }
+
+    @Test
+    public void hasProject_projectNotInResumeBook_returnsFalse() {
+        assertFalse(modelManager.hasProject(new ProjectBuilder(RESUME).build()));
+    }
+
+    @Test
+    public void hasProject_projectInResumeBook_returnsTrue() {
+        assertTrue(modelManager.hasProject(new ProjectBuilder(DUKE).build()));
+    }
+
+    @Test
+    public void addProject_projectNotInResumeBook_success() {
+        modelManager.addProject(new ProjectBuilder(RESUME).build());
+        assertTrue(modelManager.hasProject(new ProjectBuilder(RESUME).build()));
+    }
+
+    @Test
+    public void addProject_projectAlreadyInResumeBook_throwsDuplicateItemException() {
+        assertThrows( DuplicateItemException.class,
+                () -> modelManager.addProject(new ProjectBuilder(DUKE).build()));
+    }
+
+    @Test
+    public void deleteProject_projectExists_success() {
+        modelManager.deleteProject(new ProjectBuilder(DUKE).build());
+        assertFalse(modelManager.hasProject(new ProjectBuilder(DUKE).build()));
+    }
+
+    @Test
+    public void deleteProject_projectNotInResumeBook_throwsItemNotFoundException() {
+        assertThrows(ItemNotFoundException.class,
+                () -> modelManager.deleteProject(new ProjectBuilder(RESUME).build()));
+    }
+
+    @Test
+    public void setProject_projectInResumeBook_success() {
+        modelManager.setProject(new ProjectBuilder(DUKE).build(), new ProjectBuilder(RESUME).build());
+        assertTrue(modelManager.hasProject(new ProjectBuilder(RESUME).build()));
+    }
+
+    @Test
+    public void setProject_toEditNotInResumeBook_throwsItemNotFoundException() {
+        assertThrows(ItemNotFoundException.class,
+                () -> modelManager.setProject(RESUME, DUKE));
+    }
+
+    @Test
+    public void getProjectByIndex_withinBounds_returnsProject() {
+        assertEquals(new ProjectBuilder(DUKE).build(),
+                modelManager.getProjectByIndex(Index.fromOneBased(2)));
+    }
+
+    @Test
+    public void getProjectByIndex_outOfBounds_throwsOutOfBoundsException() {
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> modelManager.getProjectByIndex(Index.fromOneBased(3)));
+    }
+
+    @Test
+    public void getProjectSize_projectsInResumeBook_returnsProjectListSize() {
+        assertEquals(2, modelManager.getProjectSize());
+    }
+
+    @Test
+    public void getProjectByTag_projectWithTagInResumeBook_returnsProjectList() {
+        assertEquals(Arrays.asList(ORBITAL, DUKE),
+                modelManager.getProjectsByTag(new Tag(VALID_TAG_TECH)));
+    }
+
+    @Test
+    public void getProjectByTag_noProjectWithTagInResumeBook_returnsEmptyList() {
+        assertEquals(Collections.emptyList(),
+                modelManager.getProjectsByTag(new Tag("abc")));
+    }
+
+    @Test
+    public void setProjectsToDisplay_projectInResumeBook_success() {
+        modelManager.setProjectToDisplay();
+        assertEquals(modelManager.getDisplayType(), ItemUtil.PROJECT_ALIAS);
+        assertEquals(Arrays.asList(ORBITAL, DUKE), modelManager.getFilteredItemList());
+    }
+
+    @Test
+    public void sortProjects_projectInResumeBook_success() {
+        modelManager.sortProjects(Comparator.comparing(Project::getName));
+        modelManager.setProjectToDisplay();
+        assertEquals(modelManager.getDisplayType(), ItemUtil.PROJECT_ALIAS);
+        assertEquals(Arrays.asList(DUKE, ORBITAL), modelManager.getFilteredItemList());
+    }
+
+    // Resume-related tests
+
+    @Test
+    public void hasResume_nullResume_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasResume(null));
+    }
+
+    @Test
+    public void hasResume_resumeNotInResumeBook_returnsFalse() {
+        assertFalse(modelManager.hasResume(new ResumeBuilder(CE_RESUME).build()));
+    }
+
+    @Test
+    public void hasResume_resumeInResumeBook_returnsTrue() {
+        assertTrue(modelManager.hasResume(new ResumeBuilder(SE_RESUME).build()));
+    }
+
+    @Test
+    public void addResume_resumeNotInResumeBook_success() {
+        modelManager.addResume(new ResumeBuilder(CE_RESUME).build());
+        assertTrue(modelManager.hasResume(new ResumeBuilder(CE_RESUME).build()));
+    }
+
+    @Test
+    public void addResume_resumeAlreadyInResumeBook_throwsDuplicateItemException() {
+        assertThrows( DuplicateItemException.class,
+                () -> modelManager.addResume(new ResumeBuilder(SE_RESUME).build()));
+    }
+
+    @Test
+    public void deleteResume_resumeExists_success() {
+        modelManager.deleteResume(new ResumeBuilder(SE_RESUME).build());
+        assertFalse(modelManager.hasResume(new ResumeBuilder(SE_RESUME).build()));
+    }
+
+    @Test
+    public void deleteResume_resumeNotInResumeBook_throwsItemNotFoundException() {
+        assertThrows(ItemNotFoundException.class,
+                () -> modelManager.deleteResume(new ResumeBuilder(CE_RESUME).build()));
+    }
+
+    @Test
+    public void setResume_resumeInResumeBook_success() {
+        modelManager.setResume(new ResumeBuilder(SE_RESUME).build(), new ResumeBuilder(CE_RESUME).build());
+        assertTrue(modelManager.hasResume(new ResumeBuilder(CE_RESUME).build()));
+    }
+
+    @Test
+    public void setResume_toEditNotInResumeBook_throwsItemNotFoundException() {
+        assertThrows(ItemNotFoundException.class,
+                () -> modelManager.setResume(CE_RESUME, SE_RESUME));
+    }
+
+    @Test
+    public void getResumeByIndex_withinBounds_returnsResume() {
+        assertEquals(new ResumeBuilder(SE_RESUME).build(),
+                modelManager.getResumeByIndex(Index.fromOneBased(2)));
+    }
+
+    @Test
+    public void getResumeByIndex_outOfBounds_throwsOutOfBoundsException() {
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> modelManager.getResumeByIndex(Index.fromOneBased(3)));
+    }
+
+    @Test
+    public void getResumeSize_resumesInResumeBook_returnsResumeListSize() {
+        assertEquals(2, modelManager.getResumeSize());
+    }
+
+    @Test
+    public void setResumesToDisplay_resumeInResumeBook_success() {
+        modelManager.setResumeToDisplay();
+        assertEquals(modelManager.getDisplayType(), ItemUtil.RESUME_ALIAS);
+        assertEquals(Arrays.asList(ME_RESUME, SE_RESUME), modelManager.getFilteredItemList());
+    }
+
+    @Test
+    public void sortResumes_resumeInResumeBook_success() {
+        modelManager.sortResumes(Comparator.comparing(Resume::getName).reversed());
+        modelManager.setResumeToDisplay();
+        assertEquals(modelManager.getDisplayType(), ItemUtil.RESUME_ALIAS);
+        assertEquals(Arrays.asList(SE_RESUME, ME_RESUME), modelManager.getFilteredItemList());
     }
 
 //    @Test
