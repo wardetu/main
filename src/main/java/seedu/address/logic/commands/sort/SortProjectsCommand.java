@@ -31,4 +31,11 @@ public class SortProjectsCommand extends SortCommand {
         return new SortCommandResult(
                 String.format(MESSAGE_SUCCESS, Project.class.getSimpleName()), model.getDisplayType());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof SortProjectsCommand
+                && sortComparator.equals(((SortProjectsCommand) other).sortComparator));
+    }
 }

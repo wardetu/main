@@ -27,4 +27,11 @@ public class SortResumesCommand extends SortCommand {
         return new SortCommandResult(
                 String.format(MESSAGE_SUCCESS, Resume.class.getSimpleName()), model.getDisplayType());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof SortResumesCommand
+                && sortComparator.equals(((SortResumesCommand) other).sortComparator));
+    }
 }

@@ -31,4 +31,11 @@ public class SortSkillsCommand extends SortCommand {
         return new SortCommandResult(
                 String.format(MESSAGE_SUCCESS, Skill.class.getSimpleName()), model.getDisplayType());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof SortSkillsCommand
+                && sortComparator.equals(((SortSkillsCommand) other).sortComparator));
+    }
 }

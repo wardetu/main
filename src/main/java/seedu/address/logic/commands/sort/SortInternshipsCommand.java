@@ -32,4 +32,11 @@ public class SortInternshipsCommand extends SortCommand {
         return new SortCommandResult(
                 String.format(MESSAGE_SUCCESS, Internship.class.getSimpleName()), model.getDisplayType());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof SortInternshipsCommand
+                && sortComparator.equals(((SortInternshipsCommand) other).sortComparator));
+    }
 }

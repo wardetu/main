@@ -33,4 +33,11 @@ public class SortNotesCommand extends SortCommand {
         return new SortCommandResult(
                 String.format(MESSAGE_SUCCESS, Note.class.getSimpleName()), model.getDisplayType());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof SortNotesCommand
+                && sortComparator.equals(((SortNotesCommand) other).sortComparator));
+    }
 }
