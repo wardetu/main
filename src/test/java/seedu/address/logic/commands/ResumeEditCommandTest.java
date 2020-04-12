@@ -40,11 +40,6 @@ public class ResumeEditCommandTest {
     }
 
     @Test
-    public void constructor_nullInternship_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddInternshipCommand(null));
-    }
-
-    @Test
     public void execute_invalidResumeIndex_throwsCommandException() {
         Index invalidIndex = INDEX_FOURTH_ITEM;
         Optional<List<Integer>> internshipIndices = ItemIndicesBuilder.empty();
