@@ -257,7 +257,7 @@ image::CommandClassDiagram.png[]
 The following is the activity diagram for execution of `AddResumeCommand` when the user adds a resume.
 
 .Activity diagram for execution of `AddResumeCommand`
-image::AddResumeCommandActivityDiagram.png[]
+image::AddResumeCommandActivityDiagram.png[width="450"]
 
 This leads to a cleaner execution method of each ABCItemCommand as each command class has a clear goal.
 
@@ -268,7 +268,7 @@ This leads to a cleaner execution method of each ABCItemCommand as each command 
 The following is the activity diagram for execution of `AddCommand` when the user adds a resume.
 
 .Activity diagram for execution of `AddCommand`
-image::AddCommandActivityDiagram.png[]
+image::AddCommandActivityDiagram.png[width="350"]
 
 Implementing `ABCCommand` this way forces execute to be switch-cased.
 Functionality of execute would vary depending on the item `Type`.
