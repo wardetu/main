@@ -14,7 +14,7 @@ import seedu.address.model.item.Resume;
 public class SortResumesCommand extends SortCommand {
     private final Comparator<Resume> sortComparator;
     public SortResumesCommand(String sortOrder, boolean reverse) {
-        Comparator<Resume> baseComparator = (res1, res2) -> res1.getName().compareTo(res2.getName());
+        Comparator<Resume> baseComparator = Comparator.comparing(Resume::getName);
         sortComparator = reverse ? baseComparator.reversed() : baseComparator;
     }
 
@@ -24,6 +24,14 @@ public class SortResumesCommand extends SortCommand {
         model.setResumeToDisplay();
         model.commitResumeBook();
 
-        return new SortCommandResult(String.format(MESSAGE_SUCCESS, "Resume"), model.getDisplayType());
+        return new SortCommandResult(
+                String.format(MESSAGE_SUCCESS, Resume.class.getSimpleName()), model.getDisplayType());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof SortResumesCommand
+                && sortComparator.equals(((SortResumesCommand) other).sortComparator));
     }
 }

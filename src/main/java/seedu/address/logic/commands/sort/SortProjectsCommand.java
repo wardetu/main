@@ -15,13 +15,10 @@ public class SortProjectsCommand extends SortCommand {
     private final Comparator<Project> sortComparator;
 
     public SortProjectsCommand(String sortOrder, boolean reverse) {
-        Comparator<Project> baseComparator = (proj1, proj2) -> {
-            if (sortOrder.equalsIgnoreCase("name")) {
-                return proj1.getName().compareTo(proj2.getName());
-            } else {
-                return proj1.getTime().compareTo(proj2.getTime());
-            }
-        };
+        Comparator<Project> baseComparator =
+                sortOrder.equalsIgnoreCase("name")
+                        ? Comparator.comparing(Project::getName)
+                        : Comparator.comparing(Project::getTime);
         sortComparator = reverse ? baseComparator.reversed() : baseComparator;
     }
 
@@ -31,6 +28,14 @@ public class SortProjectsCommand extends SortCommand {
         model.setProjectToDisplay();
         model.commitResumeBook();
 
-        return new SortCommandResult(String.format(MESSAGE_SUCCESS, "Resume"), model.getDisplayType());
+        return new SortCommandResult(
+                String.format(MESSAGE_SUCCESS, Project.class.getSimpleName()), model.getDisplayType());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof SortProjectsCommand
+                && sortComparator.equals(((SortProjectsCommand) other).sortComparator));
     }
 }
