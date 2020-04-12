@@ -43,7 +43,7 @@ public class EditUserCommand extends Command {
 
     public static final String MESSAGE_FROM_TO_MISORDER = "\'from\' cannot be later than \'to\' field. ";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the user profile in our resuMeme. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the user profile in the ResuMe application. "
             + "Parameters: "
             + PREFIX_DP + "DISPLAY PICTURE "
             + PREFIX_NAME + "NAME "
