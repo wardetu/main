@@ -180,13 +180,34 @@ The `redit` command is facilitated by `ResumeEditCommand`, which extends `Comman
 
 Given below is an example usage scenario and how the `redit` works at each step.
 
-Step 1. The user launches the application, and uses the `add` command to add several resumes, internships, projects, and skills.
+Step 1. The user launches the application, and uses the `add` command to add several `Resume`, `Internship`, `Project`, and `Skill` items.
 
-Step 2. The user executes `redit 1 int/ 2` command to add the second internship in the list of internships to the first resume in the list of resumes.
+Step 2. The user executes `redit 1 int/ 2` command to add the second `Internship` in the list of `Internship` items to the first `Resume` in the list of `Resume` items.
 
-Step 3. This would call `ResumeBookParser#parseCommand()`, which would create a new `ResumeEditCommandParser` object and call the `ResumeEditCommandParser#parse()` method.
+Step 3. This calls `ResumeBookParser#parseCommand()`, which would create a new `ResumeEditCommandParser` object and call the `ResumeEditCommandParser#parse()` method.
 
-Step 4. A new `ResumeEditCommand` object is created. It contains the index of the `Resume` that is to be modified, and three `Optional<List<Integer>>` representing the indices of internships, projects and skills to be modified into the resume.
+Step 4. A new `ResumeEditCommand` object is created. It contains the index of the `Resume` that is to be modified, and three `Optional<List<Integer>>` representing the indices of `Internship`, `Project` and `Skill` to be modified into the `Resume`. In this example, the `Project` and `Skill` indices are represented by empty `Optional` because the user did not specify any project or skill indices.
+
+Step 5. The `ResumeEditCommand#execute()` method is called with the current `model`. A copy of the `Resume` is created and its content is set to refer to the internships, projects and skills specified by the user.
+
+Step 6. A new `ResumeEditCommandResult` object, which contains the edited copy of the `Resume`, is created and returned. 
+
+===== Representation of indices after parsing
+
+In Step 4. above, it is mentioned that `Optional<List<Integer>>` is used to represent the indices of `Internship`, `Project`, and `Skill` items. This section elaborates further on the representation.
+
+To explain the various representations, we will use the example of executing `redit 1 int/ 2 3 proj/`:
+
+* A non-empty `List<Integer>` wrapped with `Optional` is used to represent the indices when the user specifies both the item prefix and the item indices. In the above example, indices of `Internship` items will be represented by a `List<Integer>` of `2` and `3`, wrapped with `Optional`.
+* An empty `List<Integer>` wrapped with `Optional` is used to represent the indices when the user specifies the item prefix, but no item indices are given. In the above example, indices of `Project` items will be represented by an empty `List<Integer>` wrapped with `Optional`.
+* An empty `Optional` is used to represent the indices when the user does not specify the item prefix. In the above example, indices of `Skill` items will be represented with an empty `Optional`.
+
+The three representations are used because `redit` facilitates the following:
+
+* If the prefix and indices are both present, the resume will be modified to contain the items of that prefix at the specified indices. In the same example above, `Resume` at index 1 will be modified to contain `Internship` items at indices 2 and 3.
+* If the prefix is specified but no indices are present, the resume will be modified to remove all the items of that prefix. In the example above, `Resume` at index 1 will be modified to have all its `Project` items removed. 
+* If the prefix is not specified, the resume will have the items of that prefix unmodified. In the example above, `Resume` at index 1 will not have its `Skill` items modified. If originally there were 4 `Skill` items, then after the command execution, it will still have 4 `Skill` items.
+
 
 ==== Design Considerations
 ===== Aspect: Whether `ResumeEditCommand` should extend `EditCommand`
