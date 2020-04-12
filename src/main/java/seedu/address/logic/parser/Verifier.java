@@ -82,11 +82,15 @@ public class Verifier {
             throw new ParseException(Cap.MESSAGE_CONSTRAINTS);
         }
 
-        if (isNotEmpty(currentCap) && isNotEmpty(maxCap) && userCurrentCap <= userMaximumCap) {
-            return true;
-        } else {
+        if (!isNotEmpty(currentCap)
+                || !isNotEmpty(maxCap)
+                || userCurrentCap > userMaximumCap
+                || userCurrentCap < 0
+                || userMaximumCap < 0) {
             return false;
         }
+
+        return true;
     }
 
     /**

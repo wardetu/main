@@ -17,9 +17,9 @@ public class CommandResult {
     /** The application should exit. */
     protected boolean isExit = false;
 
-    private final String feedbackToUser;
-    private final String dataToUser;
-    private final String displayType;
+    protected final String feedbackToUser;
+    protected final String dataToUser;
+    protected final String displayType;
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code dataToUser} and {@code feedbackToUser},

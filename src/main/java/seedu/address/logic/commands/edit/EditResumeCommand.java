@@ -88,4 +88,12 @@ public class EditResumeCommand extends EditCommand {
         return editedResume;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditResumeCommand // instanceof handles nulls
+                && this.index.equals(((EditResumeCommand) other).index)
+                && this.editResumeDescriptor.equals(((EditResumeCommand) other).editResumeDescriptor));
+    }
+
 }
