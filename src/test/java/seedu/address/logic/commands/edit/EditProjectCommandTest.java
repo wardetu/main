@@ -66,7 +66,6 @@ public class EditProjectCommandTest {
     @Test
     public void create_withNullDescriptorField_editedProject() {
         EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
-
         assertEquals(sampleEditedProject,
                 EditProjectCommand.createEditedProject(sampleEditedProject, editProjectDescriptor));
     }
