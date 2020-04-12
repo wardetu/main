@@ -22,7 +22,7 @@ The application is developed using Java, and within a short span of 6 weeks we h
 The team consists of 5 Year 2 Computer Science students from NUS, taking the Software Engineering module, CS2103T.
 
 === 1.3 About my Role
-In the initial phase of the project, I was tasked to morph the `Parser` in the application to suit the needs of our application. Over time, we developed by features and I was tasked to write the Resume Edit and Tag Pull feature.
+In the initial phase of the project, I was tasked to morph the `Parser` in the application to suit the needs of our application. Over time, we developed by features and a major contribution by myself was to write the Resume Edit and Tag Pull feature.
 
 I also played various roles in the team such as managing the milestones and keeping track of deliverables.
 
@@ -30,11 +30,11 @@ The following section provides a summary of my contributions:
 
 == 2. Summary of Contributions
 
-==== 2.1 Code Contributed
+=== 2.1 Individual Contributions
 
 My code contributions can be found here: https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=&sort=variance&sortWithin=variance&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&since=2020-02-14&tabOpen=true&tabType=authorship&tabAuthor=chrisjwelly&tabRepo=AY1920S2-CS2103T-F10-1%2Fmain%5Bmaster%5D[Functional and Test code (via RepoSense)] +
 
-==== 2.2 Enhancements Implemented
+==== 2.1.1 Enhancements Implemented
 
 * *Major enhancement*: added *the ability to modify items in the resume*: `redit`
 ** What it does: allows the user to selectively modify items in a specified resume.
@@ -51,18 +51,18 @@ My code contributions can be found here: https://nus-cs2103-ay1920s2.github.io/t
 * *Minor enhancement*: wrote the `view` command
 ** Justification: Items such as `Internship` omit a lot of details in our list in the GUI. The `view` command helps include more details about the `Item`.
 
-=== Contributions to team-based tasks:
+=== 2.2 Contributions to team-based tasks:
 
-==== Morphed CommandResult in overall architecture
+==== 2.2.1 Morphed CommandResult in overall architecture
 * What it means: `CommandResult` has been separated to many different subclasses which correspond to the different `Command`.
 * Justification: Several `CommandResult` require a special boolean value to indicate that it is the result of a certain `Command`. With only one class, the constructor would have to take in many booleans in the constructor and this gets very messy.
 
-==== Project management
+==== 2.2.2 Project management
 * Managed releases `v1.2` - `v1.4` (3 releases) on GitHub
 * Managed GitHub issue tracker
 * Set-up Travis and Coveralls
 
-==== Reviewing contributions:
+==== 2.2.3 Reviewing contributions:
 *** PRs reviewed with non-trivial review comments (https://github.com/AY1920S2-CS2103T-F10-1/main/pull/135[#135],
 https://github.com/AY1920S2-CS2103T-F10-1/main/pull/145[#145],
 https://github.com/AY1920S2-CS2103T-F10-1/main/pull/159[#159],
@@ -71,7 +71,7 @@ https://github.com/AY1920S2-CS2103T-F10-1/main/pull/204[#204])
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/chrisjwelly/ped/issues/8[1],
 https://github.com/chrisjwelly/ped/issues/10[2], https://github.com/chrisjwelly/ped/issues/16[3])
 
-== Contributions to the User Guide
+== 3. Contributions to the User Guide
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
@@ -88,7 +88,7 @@ include::../UserGuide.adoc[tag=tagpull]
 
 {end of extract 2}
 
-== Contributions to the Developer Guide
+== 4. Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
