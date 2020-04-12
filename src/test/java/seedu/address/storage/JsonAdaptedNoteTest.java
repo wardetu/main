@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_NAME_CS210
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_TIME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BACKEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_URGENT;
 import static seedu.address.storage.JsonAdaptedNote.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -32,7 +33,7 @@ public class JsonAdaptedNoteTest {
 
         jsonAdaptedNote = new JsonAdaptedNote(VALID_NOTE_NAME_CS2103,
                 "1", VALID_NOTE_TIME, VALID_NOTE_IS_DONE, new ArrayList<>());
-        assertEquals(new NoteBuilder(TypicalNote.FINISH_CS_2103).build(), jsonAdaptedNote.toModelType());
+        assertEquals(new NoteBuilder(TypicalNote.FINISH_CS_2103).withTags().build(), jsonAdaptedNote.toModelType());
 
         // With tags
         jsonAdaptedNote = new JsonAdaptedNote(
@@ -145,10 +146,13 @@ public class JsonAdaptedNoteTest {
         JsonAdaptedNote jsonAdaptedCS2103 = new JsonAdaptedNote(new NoteBuilder(TypicalNote.FINISH_CS_2103).build());
         JsonAdaptedNote jsonAdaptedHw = new JsonAdaptedNote(new NoteBuilder(TypicalNote.FINISH_HOMEWORK).build());
 
+        List<JsonAdaptedTag> tags = new ArrayList<>();
+        tags.add(new JsonAdaptedTag(VALID_TAG_URGENT));
+
         // Two constructors gives the same result
         assertEquals(jsonAdaptedCS2103,
                 new JsonAdaptedNote(VALID_NOTE_NAME_CS2103,
-                        "1", VALID_NOTE_TIME, VALID_NOTE_IS_DONE, new ArrayList<>()));
+                        "1", VALID_NOTE_TIME, VALID_NOTE_IS_DONE, tags));
 
         // Different json adapted notes are not equal
         assertNotEquals(jsonAdaptedCS2103, jsonAdaptedHw);

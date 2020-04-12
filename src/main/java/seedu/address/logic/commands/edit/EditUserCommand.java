@@ -37,6 +37,10 @@ public class EditUserCommand extends Command {
 
     public static final String COMMAND_WORD = "me";
 
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited User Profile!";
+
+    public static final String MESSAGE_NO_ARGS = "You did not specify any arguments!";
+
     public static final String MESSAGE_FROM_TO_MISORDER = "\'from\' cannot be later than \'to\' field. ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the user profile in our resuMeme. "
@@ -65,8 +69,6 @@ public class EditUserCommand extends Command {
             + PREFIX_TO + "2022 "
             + PREFIX_CAP + "5.0 ";
 
-    public static final String MESSAGE_NO_ARGS = "You did not specify any arguments!";
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited User Profile!";
     public static final String USER_NOT_EDITED = "User and edited User is the same!";
 
     private EditUserDescriptor editUserDescriptor;

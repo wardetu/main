@@ -101,4 +101,12 @@ public class EditProjectCommand extends EditCommand {
         int id = toEdit.getId();
         return new Project(updatedName, updatedTime, updatedWebsite, updatedDesc, updatedTags, id);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditProjectCommand // instanceof handles nulls
+                && this.index.equals(((EditProjectCommand) other).index)
+                && this.editProjectDescriptor.equals(((EditProjectCommand) other).editProjectDescriptor));
+    }
 }

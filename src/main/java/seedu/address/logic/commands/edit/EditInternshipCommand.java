@@ -113,4 +113,12 @@ public class EditInternshipCommand extends EditCommand {
         int id = toEdit.getId();
         return new Internship(updatedName, updatedRole, updatedFrom, updatedTo, updatedDesc, updatedTags, id);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditInternshipCommand // instanceof handles nulls
+                && this.index.equals(((EditInternshipCommand) other).index)
+                && this.editInternshipDescriptor.equals(((EditInternshipCommand) other).editInternshipDescriptor));
+    }
 }

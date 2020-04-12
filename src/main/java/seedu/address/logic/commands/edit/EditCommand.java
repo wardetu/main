@@ -49,21 +49,4 @@ public abstract class EditCommand extends Command {
 
         this.index = index;
     }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
-            return false;
-        }
-
-        // state check
-        EditCommand e = (EditCommand) other;
-        return index.equals(e.index);
-    }
 }

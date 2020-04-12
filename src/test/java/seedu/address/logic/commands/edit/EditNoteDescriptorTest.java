@@ -46,7 +46,7 @@ public class EditNoteDescriptorTest {
 
         // different tags -> returns false
         editedFinishHomework = new EditNoteDescriptorBuilder(FINISH_HOMEWORK)
-                .withTags("test").build();
+                .withTags("urgent").build();
         assertNotEquals(FINISH_HOMEWORK, editedFinishHomework);
     }
 
