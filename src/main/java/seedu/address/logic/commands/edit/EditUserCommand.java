@@ -39,6 +39,8 @@ public class EditUserCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited User Profile!";
 
+    public static final String MESSAGE_NO_ARGS = "You did not specify any arguments!";
+
     public static final String MESSAGE_FROM_TO_MISORDER = "\'from\' cannot be later than \'to\' field. ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the user profile in our resuMeme. "
@@ -127,6 +129,6 @@ public class EditUserCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EditUserCommand // instanceof handles nulls
-                && this.editUserDescriptor.equals(((EditUserCommand) other).editUserDescriptor));
+                && editUserDescriptor.equals(((EditUserCommand) other).editUserDescriptor));
     }
 }
