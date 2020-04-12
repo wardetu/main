@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
@@ -174,7 +175,7 @@ public class ResumeEditCommandParserTest {
     }
 
     @Test
-    public void parse_nothingSpecified_success() {
+    public void parse_noPrefixesSpecified_success() {
         assertParseSuccess(parser,
                 "1",
                 new ResumeEditCommand(INDEX_FIRST_ITEM, ItemIndicesBuilder.empty(), ItemIndicesBuilder.empty(),
@@ -252,6 +253,13 @@ public class ResumeEditCommandParserTest {
                         + PREFIX_SKILL + " 2 1", ParserUtil.MESSAGE_INVALID_INDEX);
         assertParseFailure(parser, "-1 " + PREFIX_PROJECT + " 4 1 2", ParserUtil.MESSAGE_INVALID_INDEX);
         assertParseFailure(parser, "1 1 " + PREFIX_PROJECT + " 4 1 2", ParserUtil.MESSAGE_INVALID_INDEX);
+    }
+
+    @Test
+    public void parse_noArgsSupplied_throwsParseException() {
+        assertParseFailure(parser,
+                "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ResumeEditCommand.MESSAGE_USAGE));
     }
 
     @Test
