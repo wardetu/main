@@ -27,7 +27,7 @@ public class ViewNoteCommand extends ViewCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Note toView = model.getNote(targetIndex);
+        Note toView = model.getNoteByIndex(targetIndex);
 
         return new ViewCommandResult(toView.toString(),
                 String.format(MESSAGE_VIEW_SUCCESS, toView), model.getDisplayType());
