@@ -21,7 +21,7 @@ By: `Team F10-1`      Since: `Jan 2020`
 Refer to the guide <<SettingUp#, here>>.
 
 == Design
-
+// tag::overall-architecture[]
 [[Design-Architecture]]
 === Architecture
 
@@ -64,11 +64,15 @@ image::LogicClassDiagram.png[]
 [discrete]
 ==== How the architecture components interact with each other
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1 i/ ski`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1 i/ ski`, delete skill at index 1.
 
 .Component interactions for `delete 1 i/ ski` command
-
 image::ArchitectureSequenceDiagram.png[]
+
+The figure above explains quite clearly how the input of the user is passed into the system through `Ui` that calls
+`Logic` to make changes in the `Model` and saves to `Storage`. However, it may not be immediately clear how the `Ui` is
+then updated to give visual feedback to the User. The updating of the Ui is actually done through a combination
+of observables and data passing through `commandResult`. Head to <<UI component>> to read more.
 
 [discrete]
 ==== How the architecture components interact at start up
@@ -81,6 +85,7 @@ image::ArchitectureInitSequenceDiagram.png[]
 
 The sections below give more details of each component.
 
+// end::overall-architecture[]
 
 [[Design-Ui]]
 === UI component
@@ -123,6 +128,8 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 image::DeleteSequenceDiagram.png[]
 
 NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+// end::logic[]
+
 // end::logic[]
 
 // tag::model[]
@@ -220,32 +227,51 @@ image::ResumeEditCommandAlt1.png[]
 ** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely.
 
 image::ResumeEditCommandAlt2.png[]
+// end::redit[]
 
+// tag::command-classes[]
 === Implementation of `Command` classes
 ==== Current Implementation
 Currently, there are several object `Type` which are subclasses of `Item`, namely `Resume`, `Internship`, `Skill`,
 and `Project`.
 
-Commands that are dependent on item `Type`, namely `EditCommand`, `AddCommand`, `DeleteCommand`, `FindCommand`,
-`ListCommand`, and `ViewCommand` are implemented as abstract classes that inherits from `Command` and would have a
+Commands that are dependent on item `Type`, namely `AddCommand`, `DeleteCommand`, `EditCommand`, `FindCommand`,
+`ListCommand`, `SortCommand`, and `ViewCommand` are implemented as abstract classes that inherits from `Command` and would have a
 concrete classes that corresponds to each item `Type`. For example, `AddCommand` is an abstract class that
 `AddInternshipCommand` and `AddSkillCommand` inherits from.
 
-Commands that are not dependent on item `Type` (eg. `EditUserCommand`, `HelpCommand`) are implemented as concrete
-classes that inherits from `Command`.
+Commands that are not dependent on item `Type` (eg. `EditUserCommand`, `ResumeEditCommand`) are implemented as concrete
+classes that inherits directly from `Command`.
+
+From this point onwards, for the sake of clarity in our discussion, commands that are dependent on type will be called `ABCCommand` whereas those who are independent of type will be called `XYZCommand`.
+
+The following is the class diagram for `Command` and its subclasses.
 
 .Component `XYZCommand` is independent of `Type` whereas `ABCCommand` is dependent on `Type`.
 image::CommandClassDiagram.png[]
 
 ==== Design Considerations
 ===== Aspect: Whether to separate the `ABCCommand` that is dependent on type into many `ABCItemCommand`
-* ** Alternative 1 (current choice):** `ABCCommand` is separated into many `ABCItemCommand`.
 
-** Pros: More OOP. Flexible behaviour of `ABCItemCommand` and can be easily changed as required. No
-casing required. Each `ABCItemCommand` has it's own and distinct functionality.
+*Alternative 1 (current choice):* `ABCCommand` is separated into many `ABCItemCommand`. Parser will parse user input and create the exact `ABCItemCommand`.
+The following is the activity diagram for execution of `AddResumeCommand` when the user adds a resume.
+
+.Activity diagram for execution of `AddResumeCommand`
+image::AddResumeCommandActivityDiagram.png[width="450"]
+
+This leads to a cleaner execution method of each ABCItemCommand as each command class has a clear goal.
+
+** Pros: More OOP. Each `ABCItemCommand` has its own and distinct functionality. Each `ABCItemCommand` has more flexible behaviour and can be easily changed as required.
 ** Cons: Many classes have to be maintained.
 
-* ** Alternative 2: ** Do not separate `ABCCommand`.
+*Alternative 2:* `ABCCommand` is not separated into many `ABCItemCommand`.
+The following is the activity diagram for execution of `AddCommand` when the user adds a resume.
+
+.Activity diagram for execution of `AddCommand`
+image::AddCommandActivityDiagram.png[width="350"]
+
+Implementing `ABCCommand` this way forces execute to be switch-cased.
+Functionality of execute would vary depending on the item `Type`.
 
 ** Pros: Only one command is required, regardless of number of items. Low overhead.
 ** Cons: Long `execute` method due to the need for handling the different item types. Item `Type` would also need to be stored.
@@ -260,7 +286,9 @@ our many command classes would only have a single reason to change. Moreover, ou
 reduces double work as `Parser` will not have to parse `Type` in the user input to create the `ABCCommand`, then only to
 be switch-cased again in `ABCCommand`.
 ****
-// end::redit[]
+
+// end::command-classes[]
+
 === Me Feature
 This feature allows a user to make changes and updates his/her user profile which is reflected by the user profile panel.
 At the same time, it also allows user to personalise his/her experience using the app with certain sub-features. They are

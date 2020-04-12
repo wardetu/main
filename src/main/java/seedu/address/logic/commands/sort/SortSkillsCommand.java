@@ -12,16 +12,18 @@ import seedu.address.model.item.Skill;
  * Sorts Skill items in the resume book.
  */
 public class SortSkillsCommand extends SortCommand {
+
     private final Comparator<Skill> sortComparator;
+    private final String sortOrder;
+    private final boolean reverse;
 
     public SortSkillsCommand(String sortOrder, boolean reverse) {
-        Comparator<Skill> baseComparator = (ski1, ski2) -> {
-            if (sortOrder.equals("name")) {
-                return ski1.getName().compareTo(ski2.getName());
-            } else {
-                return ski1.getLevel().compareTo(ski2.getLevel());
-            }
-        };
+        this.sortOrder = sortOrder;
+        this.reverse = reverse;
+        Comparator<Skill> baseComparator =
+                sortOrder.equalsIgnoreCase("name")
+                        ? Comparator.comparing(Skill::getName)
+                        : Comparator.comparing(Skill::getLevel);
         sortComparator = reverse ? baseComparator.reversed() : baseComparator;
     }
 
@@ -31,6 +33,15 @@ public class SortSkillsCommand extends SortCommand {
         model.setSkillToDisplay();
         model.commitResumeBook();
 
-        return new SortCommandResult(String.format(MESSAGE_SUCCESS, "Internship"), model.getDisplayType());
+        return new SortCommandResult(
+                String.format(MESSAGE_SUCCESS, Skill.class.getSimpleName()), model.getDisplayType());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof SortSkillsCommand
+                && sortOrder.equals(((SortSkillsCommand) other).sortOrder)
+                && reverse == ((SortSkillsCommand) other).reverse);
     }
 }

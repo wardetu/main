@@ -13,6 +13,7 @@ Class ABCInternshipCommand
 Class ABCSkillCommand
 Class ABCResumeCommand
 Class ABCProjectCommand
+Class ABCNoteCommand
 
 }
 
@@ -20,6 +21,7 @@ ABCInternshipCommand -up-|> ABCCommand
 ABCSkillCommand -up-|> ABCCommand
 ABCResumeCommand -up-|> ABCCommand
 ABCProjectCommand -up-|> ABCCommand
+ABCNoteCommand -up-|> ABCCommand
 ABCCommand -up-|> Command
 XYZCommand -up-|> Command
 
