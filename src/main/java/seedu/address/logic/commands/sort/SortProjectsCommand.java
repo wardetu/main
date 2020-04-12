@@ -13,8 +13,12 @@ import seedu.address.model.item.Project;
  */
 public class SortProjectsCommand extends SortCommand {
     private final Comparator<Project> sortComparator;
+    private final String sortOrder;
+    private final boolean reverse;
 
     public SortProjectsCommand(String sortOrder, boolean reverse) {
+        this.sortOrder = sortOrder;
+        this.reverse = reverse;
         Comparator<Project> baseComparator =
                 sortOrder.equalsIgnoreCase("name")
                         ? Comparator.comparing(Project::getName)
@@ -36,6 +40,7 @@ public class SortProjectsCommand extends SortCommand {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof SortProjectsCommand
-                && sortComparator.equals(((SortProjectsCommand) other).sortComparator));
+                && sortOrder.equals(((SortProjectsCommand) other).sortOrder)
+                && reverse == ((SortProjectsCommand) other).reverse);
     }
 }
