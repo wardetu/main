@@ -171,8 +171,8 @@ public class EditCommandIntegrationTest {
 
     @Test
     public void execute_editSingleFieldNoteTime_success() {
-        Note validNote = new NoteBuilder(FINISH_RESUME_2).withTime(VALID_TIME_2).build();
-        EditNoteDescriptor editNoteDescriptorSingleTime = new EditNoteDescriptorBuilder(FINISH_RESUME_2)
+        Note validNote = new NoteBuilder(FINISH_CS_2103).withTime(VALID_TIME_2).build();
+        EditNoteDescriptor editNoteDescriptorSingleTime = new EditNoteDescriptorBuilder()
                 .withTime(VALID_TIME_2)
                 .build();
 
@@ -232,7 +232,7 @@ public class EditCommandIntegrationTest {
     @Test
     public void execute_editSingleFieldProjectWebsite_success() {
         Project validProject = new ProjectBuilder(ORBITAL).withWebsite(VALID_WEBSITE_DUKE).build();
-        EditProjectDescriptor editProjectDescriptorSingleWebsite = new EditProjectDescriptorBuilder(ORBITAL)
+        EditProjectDescriptor editProjectDescriptorSingleWebsite = new EditProjectDescriptorBuilder()
                 .withWebsite(VALID_WEBSITE_DUKE)
                 .build();
 
@@ -293,7 +293,7 @@ public class EditCommandIntegrationTest {
     @Test
     public void execute_editSingleFieldSkillLevel_success() {
         Skill validSkill = new SkillBuilder(REACT).withLevel(Level.INTERMEDIATE).build();
-        EditSkillDescriptor editSkillDescriptorSingleLevel = new EditSkillDescriptorBuilder(REACT)
+        EditSkillDescriptor editSkillDescriptorSingleLevel = new EditSkillDescriptorBuilder()
                 .withLevel(Level.INTERMEDIATE)
                 .build();
 
@@ -354,7 +354,7 @@ public class EditCommandIntegrationTest {
     @Test
     public void execute_editSingleFieldResumeTags_success() {
         Resume validResume = new ResumeBuilder(ME_RESUME).withTags(VALID_TAG_TECH).build();
-        EditResumeDescriptor editResumeDescriptorSingleTagField = new EditResumeDescriptorBuilder(ME_RESUME)
+        EditResumeDescriptor editResumeDescriptorSingleTagField = new EditResumeDescriptorBuilder()
                 .withTags(VALID_TAG_TECH)
                 .build();
 
