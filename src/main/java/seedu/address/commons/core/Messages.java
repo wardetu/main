@@ -7,7 +7,8 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command!";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_INDEX = "Invalid index: The index provided is out of bound!";
+    public static final String MESSAGE_INVALID_INDEX = "Invalid index: The index provided is out "
+            + "of bound for this list!";
     public static final String MESSAGE_ITEMS_LISTED = "%1$d %2$s listed!";
 
     public static final String MESSAGE_INVALID_REDIT_ITEM_INDEX = "Invalid index provided for %s item: %s";
