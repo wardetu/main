@@ -64,7 +64,7 @@
       "id": "0",
       "time": "12-2020",
       "isDone": "false",
-      "tagged": []
+      "tagged": ["urgent"]
     }, {
       "name": "Finish CS2103",
       "id": "1",
