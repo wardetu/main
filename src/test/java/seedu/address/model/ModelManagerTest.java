@@ -3,15 +3,14 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECH;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInternship.GOOGLE;
 import static seedu.address.testutil.TypicalInternship.NINJA_VAN;
 import static seedu.address.testutil.TypicalInternship.PAYPAL;
 import static seedu.address.testutil.TypicalNote.FINISH_CS_2103;
-import static seedu.address.testutil.TypicalNote.FINISH_RESUME_2;
 import static seedu.address.testutil.TypicalNote.FINISH_HOMEWORK;
+import static seedu.address.testutil.TypicalNote.FINISH_RESUME_2;
 import static seedu.address.testutil.TypicalPerson.ALICE;
 import static seedu.address.testutil.TypicalPerson.BOB;
 import static seedu.address.testutil.TypicalProject.DUKE;
@@ -24,10 +23,8 @@ import static seedu.address.testutil.TypicalSkill.CODE;
 import static seedu.address.testutil.TypicalSkill.GIT;
 import static seedu.address.testutil.TypicalSkill.REACT;
 
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -37,9 +34,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.item.Internship;
-import seedu.address.model.item.Item;
 import seedu.address.model.item.Note;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
@@ -50,7 +45,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 import seedu.address.testutil.InternshipBuilder;
 import seedu.address.testutil.NoteBuilder;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.ProjectBuilder;
 import seedu.address.testutil.ResumeBookBuilder;
 import seedu.address.testutil.ResumeBuilder;
@@ -63,8 +57,7 @@ public class ModelManagerTest {
 
     @BeforeEach
     public void setUp() {
-        modelManager = new ModelManager(
-                new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build(),
+        modelManager = new ModelManager(new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build(),
                 new UserPrefs());
     }
 
@@ -144,8 +137,8 @@ public class ModelManagerTest {
 
     @Test
     public void addInternship_internshipAlreadyInResumeBook_throwsDuplicateItemException() {
-        assertThrows( DuplicateItemException.class,
-                () -> modelManager.addInternship(new InternshipBuilder(PAYPAL).build()));
+        assertThrows(DuplicateItemException.class, () ->
+                modelManager.addInternship(new InternshipBuilder(PAYPAL).build()));
     }
 
     @Test
@@ -156,8 +149,8 @@ public class ModelManagerTest {
 
     @Test
     public void deleteInternship_internshipNotInResumeBook_throwsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class,
-                () -> modelManager.deleteInternship(new InternshipBuilder(GOOGLE).build()));
+        assertThrows(ItemNotFoundException.class, () ->
+                modelManager.deleteInternship(new InternshipBuilder(GOOGLE).build()));
     }
 
     @Test
@@ -168,8 +161,7 @@ public class ModelManagerTest {
 
     @Test
     public void setInternship_toEditNotInResumeBook_throwsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class,
-                () -> modelManager.setInternship(GOOGLE, PAYPAL));
+        assertThrows(ItemNotFoundException.class, () -> modelManager.setInternship(GOOGLE, PAYPAL));
     }
 
     @Test
@@ -179,26 +171,22 @@ public class ModelManagerTest {
 
     @Test
     public void getInternshipByIndex_withinBounds_returnsInternship() {
-        assertEquals(new InternshipBuilder(PAYPAL).build(),
-                modelManager.getInternshipByIndex(Index.fromOneBased(2)));
+        assertEquals(new InternshipBuilder(PAYPAL).build(), modelManager.getInternshipByIndex(Index.fromOneBased(2)));
     }
 
     @Test
     public void getInternshipByIndex_outOfBounds_throwsOutOfBoundsException() {
-        assertThrows(IndexOutOfBoundsException.class,
-                () -> modelManager.getInternshipByIndex(Index.fromOneBased(3)));
+        assertThrows(IndexOutOfBoundsException.class, () -> modelManager.getInternshipByIndex(Index.fromOneBased(3)));
     }
 
     @Test
     public void getInternshipByTag_internshipWithTagInResumeBook_returnsInternshipList() {
-        assertEquals(Arrays.asList(NINJA_VAN, PAYPAL),
-                modelManager.getInternshipsByTag(new Tag(VALID_TAG_TECH)));
+        assertEquals(Arrays.asList(NINJA_VAN, PAYPAL), modelManager.getInternshipsByTag(new Tag(VALID_TAG_TECH)));
     }
 
     @Test
     public void getInternshipByTag_noInternshipWithTagInResumeBook_returnsEmptyList() {
-        assertEquals(Collections.emptyList(),
-                modelManager.getInternshipsByTag(new Tag("abc")));
+        assertEquals(Collections.emptyList(), modelManager.getInternshipsByTag(new Tag("abc")));
     }
 
     @Test
@@ -241,8 +229,8 @@ public class ModelManagerTest {
 
     @Test
     public void addNote_noteAlreadyInResumeBook_throwsDuplicateItemException() {
-        assertThrows( DuplicateItemException.class,
-                () -> modelManager.addNote(new NoteBuilder(FINISH_HOMEWORK).build()));
+        assertThrows(DuplicateItemException.class, () ->
+                modelManager.addNote(new NoteBuilder(FINISH_HOMEWORK).build()));
     }
 
     @Test
@@ -253,8 +241,8 @@ public class ModelManagerTest {
 
     @Test
     public void deleteNote_noteNotInResumeBook_throwsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class,
-                () -> modelManager.deleteNote(new NoteBuilder(FINISH_RESUME_2).build()));
+        assertThrows(ItemNotFoundException.class, () ->
+                modelManager.deleteNote(new NoteBuilder(FINISH_RESUME_2).build()));
     }
 
     @Test
@@ -265,20 +253,17 @@ public class ModelManagerTest {
 
     @Test
     public void setNote_toEditNotInResumeBook_throwsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class,
-                () -> modelManager.setNote(FINISH_RESUME_2, FINISH_HOMEWORK));
+        assertThrows(ItemNotFoundException.class, () -> modelManager.setNote(FINISH_RESUME_2, FINISH_HOMEWORK));
     }
 
     @Test
     public void getNoteByIndex_withinBounds_returnsNote() {
-        assertEquals(new NoteBuilder(FINISH_HOMEWORK).build(),
-                modelManager.getNoteByIndex(Index.fromOneBased(2)));
+        assertEquals(new NoteBuilder(FINISH_HOMEWORK).build(), modelManager.getNoteByIndex(Index.fromOneBased(2)));
     }
 
     @Test
     public void getNoteByIndex_outOfBounds_throwsOutOfBoundsException() {
-        assertThrows(IndexOutOfBoundsException.class,
-                () -> modelManager.getNoteByIndex(Index.fromOneBased(3)));
+        assertThrows(IndexOutOfBoundsException.class, () -> modelManager.getNoteByIndex(Index.fromOneBased(3)));
     }
 
     @Test
@@ -317,8 +302,7 @@ public class ModelManagerTest {
 
     @Test
     public void addProject_projectAlreadyInResumeBook_throwsDuplicateItemException() {
-        assertThrows( DuplicateItemException.class,
-                () -> modelManager.addProject(new ProjectBuilder(DUKE).build()));
+        assertThrows(DuplicateItemException.class, () -> modelManager.addProject(new ProjectBuilder(DUKE).build()));
     }
 
     @Test
@@ -329,8 +313,7 @@ public class ModelManagerTest {
 
     @Test
     public void deleteProject_projectNotInResumeBook_throwsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class,
-                () -> modelManager.deleteProject(new ProjectBuilder(RESUME).build()));
+        assertThrows(ItemNotFoundException.class, () -> modelManager.deleteProject(new ProjectBuilder(RESUME).build()));
     }
 
     @Test
@@ -341,20 +324,17 @@ public class ModelManagerTest {
 
     @Test
     public void setProject_toEditNotInResumeBook_throwsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class,
-                () -> modelManager.setProject(RESUME, DUKE));
+        assertThrows(ItemNotFoundException.class, () -> modelManager.setProject(RESUME, DUKE));
     }
 
     @Test
     public void getProjectByIndex_withinBounds_returnsProject() {
-        assertEquals(new ProjectBuilder(DUKE).build(),
-                modelManager.getProjectByIndex(Index.fromOneBased(2)));
+        assertEquals(new ProjectBuilder(DUKE).build(), modelManager.getProjectByIndex(Index.fromOneBased(2)));
     }
 
     @Test
     public void getProjectByIndex_outOfBounds_throwsOutOfBoundsException() {
-        assertThrows(IndexOutOfBoundsException.class,
-                () -> modelManager.getProjectByIndex(Index.fromOneBased(3)));
+        assertThrows(IndexOutOfBoundsException.class, () -> modelManager.getProjectByIndex(Index.fromOneBased(3)));
     }
 
     @Test
@@ -364,14 +344,12 @@ public class ModelManagerTest {
 
     @Test
     public void getProjectByTag_projectWithTagInResumeBook_returnsProjectList() {
-        assertEquals(Arrays.asList(ORBITAL, DUKE),
-                modelManager.getProjectsByTag(new Tag(VALID_TAG_TECH)));
+        assertEquals(Arrays.asList(ORBITAL, DUKE), modelManager.getProjectsByTag(new Tag(VALID_TAG_TECH)));
     }
 
     @Test
     public void getProjectByTag_noProjectWithTagInResumeBook_returnsEmptyList() {
-        assertEquals(Collections.emptyList(),
-                modelManager.getProjectsByTag(new Tag("abc")));
+        assertEquals(Collections.emptyList(), modelManager.getProjectsByTag(new Tag("abc")));
     }
 
     @Test
@@ -414,8 +392,7 @@ public class ModelManagerTest {
 
     @Test
     public void addResume_resumeAlreadyInResumeBook_throwsDuplicateItemException() {
-        assertThrows( DuplicateItemException.class,
-                () -> modelManager.addResume(new ResumeBuilder(SE_RESUME).build()));
+        assertThrows(DuplicateItemException.class, () -> modelManager.addResume(new ResumeBuilder(SE_RESUME).build()));
     }
 
     @Test
@@ -426,8 +403,8 @@ public class ModelManagerTest {
 
     @Test
     public void deleteResume_resumeNotInResumeBook_throwsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class,
-                () -> modelManager.deleteResume(new ResumeBuilder(CE_RESUME).build()));
+        assertThrows(ItemNotFoundException.class, () ->
+                modelManager.deleteResume(new ResumeBuilder(CE_RESUME).build()));
     }
 
     @Test
@@ -438,20 +415,17 @@ public class ModelManagerTest {
 
     @Test
     public void setResume_toEditNotInResumeBook_throwsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class,
-                () -> modelManager.setResume(CE_RESUME, SE_RESUME));
+        assertThrows(ItemNotFoundException.class, () -> modelManager.setResume(CE_RESUME, SE_RESUME));
     }
 
     @Test
     public void getResumeByIndex_withinBounds_returnsResume() {
-        assertEquals(new ResumeBuilder(SE_RESUME).build(),
-                modelManager.getResumeByIndex(Index.fromOneBased(2)));
+        assertEquals(new ResumeBuilder(SE_RESUME).build(), modelManager.getResumeByIndex(Index.fromOneBased(2)));
     }
 
     @Test
     public void getResumeByIndex_outOfBounds_throwsOutOfBoundsException() {
-        assertThrows(IndexOutOfBoundsException.class,
-                () -> modelManager.getResumeByIndex(Index.fromOneBased(3)));
+        assertThrows(IndexOutOfBoundsException.class, () -> modelManager.getResumeByIndex(Index.fromOneBased(3)));
     }
 
     @Test
@@ -499,8 +473,7 @@ public class ModelManagerTest {
 
     @Test
     public void addSkill_internshipAlreadyInResumeBook_throwsDuplicateItemException() {
-        assertThrows( DuplicateItemException.class,
-                () -> modelManager.addSkill(new SkillBuilder(GIT).build()));
+        assertThrows(DuplicateItemException.class, () -> modelManager.addSkill(new SkillBuilder(GIT).build()));
     }
 
     @Test
@@ -511,8 +484,7 @@ public class ModelManagerTest {
 
     @Test
     public void deleteSkill_internshipNotInResumeBook_throwsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class,
-                () -> modelManager.deleteSkill(new SkillBuilder(CODE).build()));
+        assertThrows(ItemNotFoundException.class, () -> modelManager.deleteSkill(new SkillBuilder(CODE).build()));
     }
 
     @Test
@@ -523,8 +495,7 @@ public class ModelManagerTest {
 
     @Test
     public void setSkill_toEditNotInResumeBook_throwsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class,
-                () -> modelManager.setSkill(CODE, GIT));
+        assertThrows(ItemNotFoundException.class, () -> modelManager.setSkill(CODE, GIT));
     }
 
     @Test
@@ -534,26 +505,22 @@ public class ModelManagerTest {
 
     @Test
     public void getSkillByIndex_withinBounds_returnsSkill() {
-        assertEquals(new SkillBuilder(GIT).build(),
-                modelManager.getSkillByIndex(Index.fromOneBased(2)));
+        assertEquals(new SkillBuilder(GIT).build(), modelManager.getSkillByIndex(Index.fromOneBased(2)));
     }
 
     @Test
     public void getSkillByIndex_outOfBounds_throwsOutOfBoundsException() {
-        assertThrows(IndexOutOfBoundsException.class,
-                () -> modelManager.getSkillByIndex(Index.fromOneBased(3)));
+        assertThrows(IndexOutOfBoundsException.class, () -> modelManager.getSkillByIndex(Index.fromOneBased(3)));
     }
 
     @Test
     public void getSkillByTag_internshipWithTagInResumeBook_returnsSkillList() {
-        assertEquals(Arrays.asList(REACT, GIT),
-                modelManager.getSkillsByTag(new Tag(VALID_TAG_TECH)));
+        assertEquals(Arrays.asList(REACT, GIT), modelManager.getSkillsByTag(new Tag(VALID_TAG_TECH)));
     }
 
     @Test
     public void getSkillByTag_noSkillWithTagInResumeBook_returnsEmptyList() {
-        assertEquals(Collections.emptyList(),
-                modelManager.getSkillsByTag(new Tag("abc")));
+        assertEquals(Collections.emptyList(), modelManager.getSkillsByTag(new Tag("abc")));
     }
 
     @Test
