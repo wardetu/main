@@ -12,9 +12,14 @@ import seedu.address.model.item.Skill;
  * Sorts Skill items in the resume book.
  */
 public class SortSkillsCommand extends SortCommand {
+
     private final Comparator<Skill> sortComparator;
+    private final String sortOrder;
+    private final boolean reverse;
 
     public SortSkillsCommand(String sortOrder, boolean reverse) {
+        this.sortOrder = sortOrder;
+        this.reverse = reverse;
         Comparator<Skill> baseComparator =
                 sortOrder.equalsIgnoreCase("name")
                         ? Comparator.comparing(Skill::getName)
@@ -36,6 +41,7 @@ public class SortSkillsCommand extends SortCommand {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof SortSkillsCommand
-                && sortComparator.equals(((SortSkillsCommand) other).sortComparator));
+                && sortOrder.equals(((SortSkillsCommand) other).sortOrder)
+                && reverse == ((SortSkillsCommand) other).reverse);
     }
 }
