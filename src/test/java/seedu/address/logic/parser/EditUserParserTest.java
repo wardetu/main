@@ -26,7 +26,6 @@ import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TIME_TO;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TO_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_TO_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIXED_UNIVERSITY_AMY;
