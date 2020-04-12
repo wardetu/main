@@ -32,11 +32,11 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
-            <HBox fx:id="mainContainer" minWidth="700" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+            <HBox fx:id="mainContainer" minWidth="700" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER">
                <children>
-                  <VBox fx:id="userExperiencePlaceholder" maxWidth="350.0" minWidth="330.0" styleClass="pane-with-border">
+                  <VBox fx:id="userExperiencePlaceholder" maxWidth="350.0" minWidth="330.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                      <children>
-                        <StackPane fx:id="profilePlaceholder" styleClass="pane-with-border" />
+                        <StackPane fx:id="profilePlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
                         <StackPane fx:id="notePlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
@@ -51,7 +51,7 @@
                        <items>
                           <VBox fx:id="resultAndItem">
                              <children>
-                             <StackPane fx:id="resultDisplayPlaceholder" maxHeight="250.0" minWidth="300.0">
+                             <StackPane fx:id="resultDisplayPlaceholder" maxHeight="250.0" minWidth="300.0" VBox.vgrow="ALWAYS">
                              </StackPane>
                              <StackPane fx:id="itemDisplayPlaceholder" minWidth="300.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                                  <VBox.margin>
