@@ -130,8 +130,6 @@ image::DeleteSequenceDiagram.png[]
 NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 // end::logic[]
 
-// end::logic[]
-
 // tag::model[]
 [[Design-Model]]
 === Model component
@@ -217,7 +215,7 @@ To explain the various representations, we will use the example of executing `re
 The three representations are used because `redit` facilitates the following:
 
 * If the prefix and indices are both present, the resume will be modified to contain the items of that prefix at the specified indices. In the same example above, `Resume` at index 1 will be modified to contain `Internship` items at indices 2 and 3.
-* If the prefix is specified but no indices are present, the resume will be modified to remove all the items of that prefix. In the example above, `Resume` at index 1 will be modified to have all its `Project` items removed. 
+* If the prefix is specified but no indices are present, the resume will be modified to remove all the items of that prefix. In the example above, `Resume` at index 1 will be modified to have all its `Project` items removed.
 * If the prefix is not specified, the resume will have the items of that prefix unmodified. In the example above, `Resume` at index 1 will not have its `Skill` items modified. If originally there were 4 `Skill` items, then after the command execution, it will still have 4 `Skill` items.
 
 The following activity diagram summarises the execution of `ResumeEditCommand`:

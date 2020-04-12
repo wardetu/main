@@ -28,7 +28,7 @@ ResuMe is a desktop application for you to manage all of your resumes from a cen
 ** What it does: allows the user to add items that have been given a particular tag.
 ** Justification: This increases the convenience of modifying a resume, since items that have the same tags are likely to be included togehter in the resume.
 
-* *Minor enhancement*: modified the `add` command and its parser to suit the application as it requires handling of various item types such as `Internship`, `Project` and `Skill` items. 
+* *Minor enhancement*: modified the `add` command and its parser to suit the application as it requires handling of various item types such as `Internship`, `Project` and `Skill` items.
 
 === Contributions to team-based tasks:
 
