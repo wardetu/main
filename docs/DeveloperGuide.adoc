@@ -190,7 +190,12 @@ Step 4. A new `ResumeEditCommand` object is created. It contains the index of th
 
 Step 5. The `ResumeEditCommand#execute()` method is called with the current `model`. A copy of the `Resume` is created and its content is set to refer to the internships, projects and skills specified by the user.
 
-Step 6. A new `ResumeEditCommandResult` object, which contains the edited copy of the `Resume`, is created and returned. 
+Step 6. A new `ResumeEditCommandResult` object, which contains the edited copy of the `Resume`, is created and returned.
+
+The following sequence diagram shows how `redit` works:
+
+.Sequence diagram for ResumeEdit.
+image::ResumeEditSequenceDiagram.png[]
 
 ===== Representation of indices after parsing
 
