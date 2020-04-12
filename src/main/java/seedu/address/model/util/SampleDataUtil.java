@@ -11,7 +11,7 @@ import seedu.address.model.item.field.Name;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code ResumeBook} with sample data.
  */
 public class SampleDataUtil {
     public static Resume[] getSampleResumes() {
@@ -21,12 +21,12 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyResumeBook getSampleAddressBook() {
-        ResumeBook sampleAb = new ResumeBook();
+    public static ReadOnlyResumeBook getSampleResumeBook() {
+        ResumeBook sampleRb = new ResumeBook();
         for (Resume sampleResume : getSampleResumes()) {
-            sampleAb.addResume(sampleResume);
+            sampleRb.addResume(sampleResume);
         }
-        return sampleAb;
+        return sampleRb;
     }
 
     /**

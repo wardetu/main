@@ -19,13 +19,13 @@
     "containedInternshipIds": [],
     "containedProjectIds": [],
     "containedSkillIds": [],
-    "tagged": ["backend", "naps"]
+    "tagged": []
   }],
   "internships": [
     {
-      "name": "Ninja Van",
+      "name": "Bad time order",
       "id": "0",
-      "from": "07-2020",
+      "from": "12-2020",
       "to": "11-2020",
       "role": "Ninja Intern",
       "description": "My journey to become a better ninja",
@@ -42,37 +42,29 @@
   ],
   "skills": [
     {
-      "name": "React",
+      "name": "Level does not exist",
       "id": "0",
-      "level": "BASIC",
+      "level": "CASIC",
       "tagged": ["tech", "Frontend"]
     }
   ],
   "projects": [
     {
-      "name": "Orbital",
+      "name": "Bad website format",
       "id": "0",
       "time": "06-2020",
-      "website": "myorbital.github.io",
+      "website": "myorbitalio",
       "description": "My first summer project!",
       "tagged": ["tech"]
-    }, {
-      "name": "Orbital",
-      "id": "1",
-      "time": "06-2020",
-      "website": "myorbital.github.io",
-      "description": "My second summer project!",
-      "tagged": ["tech", "poetry"]
     }
   ],
   "notes": [
     {
-      "name": "Finish CS2103",
+      "name": "I didnt take 2102",
       "id": "0",
       "time": "12-2020",
-      "isDone": "false",
+      "isDone": "unknown",
       "tagged": []
     }
   ]
 }
-

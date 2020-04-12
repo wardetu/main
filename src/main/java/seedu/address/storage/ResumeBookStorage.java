@@ -11,36 +11,36 @@ import seedu.address.model.ResumeBook;
 /**
  * Represents a storage for {@link ResumeBook}.
  */
-public interface AddressBookStorage {
+public interface ResumeBookStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getResumeBookFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyResumeBook}.
+     * Returns ResumeBook data as a {@link ReadOnlyResumeBook}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyResumeBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyResumeBook> readResumeBook() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getResumeBookFilePath()
      */
-    Optional<ReadOnlyResumeBook> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyResumeBook> readResumeBook(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyResumeBook} to the storage.
-     * @param addressBook cannot be null.
+     * @param resumeBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyResumeBook addressBook) throws IOException;
+    void saveResumeBook(ReadOnlyResumeBook resumeBook) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyResumeBook)
+     * @see #saveResumeBook(ReadOnlyResumeBook)
      */
-    void saveAddressBook(ReadOnlyResumeBook addressBook, Path filePath) throws IOException;
+    void saveResumeBook(ReadOnlyResumeBook resumeBook, Path filePath) throws IOException;
 
 }
