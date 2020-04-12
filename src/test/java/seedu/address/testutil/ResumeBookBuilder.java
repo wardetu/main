@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.model.ReadOnlyResumeBook;
 import seedu.address.model.ResumeBook;
 import seedu.address.model.item.Internship;
 import seedu.address.model.item.Note;
@@ -21,7 +22,7 @@ public class ResumeBookBuilder {
         resumeBook = new ResumeBook();
     }
 
-    public ResumeBookBuilder(ResumeBook resumeBook) {
+    public ResumeBookBuilder(ReadOnlyResumeBook resumeBook) {
         this.resumeBook = new ResumeBook();
         this.resumeBook.setUser(new PersonBuilder(resumeBook.getUser()).build());
         resumeBook.getInternshipList().getItemList().stream()

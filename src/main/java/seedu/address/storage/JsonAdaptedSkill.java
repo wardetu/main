@@ -71,7 +71,7 @@ public class JsonAdaptedSkill {
         final Name modelName = new Name(name);
 
         if (level == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "level"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Level.class.getSimpleName()));
         }
         Level modelLevel;
         try {
@@ -92,5 +92,15 @@ public class JsonAdaptedSkill {
 
         return new Skill(modelName, modelLevel, Set.copyOf(tags), modelId);
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof JsonAdaptedSkill
+                && name.equals(((JsonAdaptedSkill) other).name)
+                && level.equals(((JsonAdaptedSkill) other).level)
+                && tagged.containsAll(((JsonAdaptedSkill) other).tagged)
+                && ((JsonAdaptedSkill) other).tagged.containsAll(tagged));
     }
 }

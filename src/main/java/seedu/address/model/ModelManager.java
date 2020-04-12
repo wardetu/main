@@ -150,7 +150,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Note getNote(Index index) {
+    public Note getNoteByIndex(Index index) {
         return versionedResumeBook.getNoteByIndex(index);
     }
 

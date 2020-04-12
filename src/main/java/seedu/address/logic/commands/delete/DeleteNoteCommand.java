@@ -20,6 +20,13 @@ public class DeleteNoteCommand extends DeleteCommand {
         super(targetIndex);
     }
 
+    /**
+     * Deletes note at {@code targetIndex}.
+     *
+     * @param model {@code Model} that the note will be deleted from.
+     * @return      {@code CommandResult} that describes changes made when command execute runs successfully.
+     * @throws      CommandException if {@code targetIndex} is out of bounds.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -28,7 +35,7 @@ public class DeleteNoteCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Note toDelete = model.getNote(targetIndex);
+        Note toDelete = model.getNoteByIndex(targetIndex);
 
         model.deleteNote(toDelete);
         model.updateFilteredNoteList(PREDICATE_SHOW_ALL_ITEMS);

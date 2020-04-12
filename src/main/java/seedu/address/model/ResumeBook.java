@@ -198,7 +198,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     private void setNotes(UniqueItemList<Note> notes) {
         this.notes.setItems(notes);
-        setNotesToDisplay();
+        setNoteToDisplay();
     }
 
     /**
@@ -573,7 +573,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
     public void addNote(Note note) {
         requireNonNull(note);
         notes.add(note);
-        setNotesToDisplay();
+        setNoteToDisplay();
     }
 
     /**
@@ -583,7 +583,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     public void setNote(Note target, Note editedNote) {
         notes.setItem(target, editedNote);
-        setNotesToDisplay();
+        setNoteToDisplay();
     }
 
     /**
@@ -592,14 +592,14 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     public void deleteNote(Note key) {
         notes.remove(key);
-        setNotesToDisplay();
+        setNoteToDisplay();
     }
 
     /**
      * Resets the list of notes in UI to be consistent with the list kept in model {@code notes}.
      * This must be called after any changes made to notes!
      */
-    private void setNotesToDisplay() {
+    private void setNoteToDisplay() {
         this.notesToDisplay.setItems(notes.getItemList().stream().map(x -> (Note) x).collect(Collectors.toList()));
     }
 
@@ -618,7 +618,7 @@ public class ResumeBook implements ReadOnlyResumeBook {
      */
     public void sortNotes(Comparator<Note> sortComparator) {
         notes.sort(sortComparator);
-        setNotesToDisplay();
+        setNoteToDisplay();
     }
 
     @Override

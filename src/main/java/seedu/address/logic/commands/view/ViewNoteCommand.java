@@ -19,6 +19,13 @@ public class ViewNoteCommand extends ViewCommand {
         super(targetIndex);
     }
 
+    /**
+     * Views note at {@code targetIndex}.
+     *
+     * @param model {@code Model} where note will be viewed.
+     * @return      {@code CommandResult} that describes changes made when command execute runs successfully.
+     * @throws      CommandException if {@code targetIndex} is out of bounds.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -27,7 +34,7 @@ public class ViewNoteCommand extends ViewCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Note toView = model.getNote(targetIndex);
+        Note toView = model.getNoteByIndex(targetIndex);
 
         return new ViewCommandResult(toView.toString(),
                 String.format(MESSAGE_VIEW_SUCCESS, toView), model.getDisplayType());

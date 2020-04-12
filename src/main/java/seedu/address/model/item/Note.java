@@ -81,8 +81,8 @@ public class Note extends Item {
     @Override
     public String getSummary() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Note: ").append(getName()).append("\n")
-                .append(getTime()).append("\n");
+        builder.append("Time: ").append(getTime()).append("\n")
+                .append("Status: ").append(isDoneToString()).append("\n");
         return builder.toString();
     }
 
@@ -104,19 +104,15 @@ public class Note extends Item {
     @Override
     public boolean isSame(Item otherNote) {
         return super.isSame(otherNote)
-                && ((Note) otherNote).getTime().equals(getTime())
-                && ((Note) otherNote).isDone() == isDone();
+                && ((Note) otherNote).getTime().equals(getTime());
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Title: ")
-                .append(getName() + "\n")
-                .append("Time: ")
-                .append(getTime() + "\n")
-                .append("Status: ")
-                .append(isDoneToString() + "\n");
+                .append(super.toString()).append("\n")
+                .append(getSummary());
         return builder.toString();
     }
 }

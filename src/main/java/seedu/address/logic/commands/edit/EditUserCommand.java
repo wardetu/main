@@ -37,9 +37,13 @@ public class EditUserCommand extends Command {
 
     public static final String COMMAND_WORD = "me";
 
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited User Profile!";
+
+    public static final String MESSAGE_NO_ARGS = "You did not specify any arguments!";
+
     public static final String MESSAGE_FROM_TO_MISORDER = "\'from\' cannot be later than \'to\' field. ";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the user profile in our resuMeme. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the user profile in the ResuMe application. "
             + "Parameters: "
             + PREFIX_DP + "DISPLAY PICTURE "
             + PREFIX_NAME + "NAME "
@@ -51,7 +55,7 @@ public class EditUserCommand extends Command {
             + PREFIX_MAJOR + "MAJOR "
             + PREFIX_FROM + "FROM "
             + PREFIX_TO + "TO "
-            + PREFIX_CAP + "CAP\n"
+            + PREFIX_CAP + "CURRENT_CAP MAX_CAP\n"
             + "Example: \n" + COMMAND_WORD + " "
             + PREFIX_DP + "/Users/nhamquochung/Desktop/test.png "
             + PREFIX_NAME + "HUNG "
@@ -61,11 +65,10 @@ public class EditUserCommand extends Command {
             + PREFIX_GITHUB + "nhamhung "
             + PREFIX_UNIVERSITY + "National University of Singapore "
             + PREFIX_MAJOR + "Computer Science "
-            + PREFIX_FROM + "2018 "
-            + PREFIX_TO + "2022 "
-            + PREFIX_CAP + "5.0 ";
+            + PREFIX_FROM + "08-2018 "
+            + PREFIX_TO + "05-2022 "
+            + PREFIX_CAP + "4.0 5.0";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited User Profile!";
     public static final String USER_NOT_EDITED = "User and edited User is the same!";
 
     private EditUserDescriptor editUserDescriptor;
@@ -120,5 +123,12 @@ public class EditUserCommand extends Command {
         Cap cap = editUserDescriptor.getCap().orElse(toEdit.getCap());
 
         return new Person(displayPicture, name, description, phone, email, github, university, major, from, to, cap);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditUserCommand // instanceof handles nulls
+                && editUserDescriptor.equals(((EditUserCommand) other).editUserDescriptor));
     }
 }

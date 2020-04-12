@@ -65,112 +65,19 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
-        // Checks for presence of values are done here to prevent dependency of ItemDescriptor to argMultimap
+        // Checks for presence of values are done inside the parseXXX methods instead of ItemDescriptors to prevent
+        // dependency of ItemDescriptor to argMultimap
         switch (itemType) {
         case ItemUtil.RESUME_ALIAS:
-            // ===== Start of updating item descriptor =====
-            EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptor();
-            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                editResumeDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-            }
-            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editResumeDescriptor::setTags);
-            // ===== End of updating item descriptor =====
-
-            if (!editResumeDescriptor.isAnyFieldEdited()) {
-                throw new ParseException(EditResumeCommand.MESSAGE_NOT_EDITED);
-            }
-
-            return new EditResumeCommand(index, editResumeDescriptor);
+            return parseResume(index, argMultimap);
         case ItemUtil.INTERNSHIP_ALIAS:
-            // ===== Start of updating item descriptor =====
-            EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
-            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                editInternshipDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-            }
-            if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-                editInternshipDescriptor.setRole(ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get().trim()));
-            }
-            if (argMultimap.getValue(PREFIX_FROM).isPresent()) {
-                editInternshipDescriptor.setFrom(ParserUtil.parseTime(argMultimap.getValue(PREFIX_FROM).get().trim()));
-            }
-            if (argMultimap.getValue(PREFIX_TO).isPresent()) {
-                editInternshipDescriptor.setTo(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TO).get().trim()));
-            }
-            if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-                editInternshipDescriptor.setDescription(ParserUtil.parseDescription(
-                        argMultimap.getValue(PREFIX_DESCRIPTION).get().trim()));
-            }
-            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editInternshipDescriptor::setTags);
-            // ===== End of updating item descriptor =====
-
-            if (!editInternshipDescriptor.isAnyFieldEdited()) {
-                throw new ParseException(EditInternshipCommand.MESSAGE_NOT_EDITED);
-            }
-
-            return new EditInternshipCommand(index, editInternshipDescriptor);
+            return parseInternship(index, argMultimap);
         case ItemUtil.PROJECT_ALIAS:
-            // ===== Start of updating item descriptor =====
-            EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
-            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                editProjectDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-            }
-            if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-                editProjectDescriptor.setDescription(
-                        ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get().trim()));
-            }
-            if (argMultimap.getValue(PREFIX_WEBSITE).isPresent()) {
-                editProjectDescriptor.setWebsite(ParserUtil
-                        .parseWebsite(argMultimap.getValue(PREFIX_WEBSITE).get().trim()));
-            }
-            if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
-                editProjectDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get().trim()));
-            }
-            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editProjectDescriptor::setTags);
-            // ===== End of updating item descriptor =====
-
-            if (!editProjectDescriptor.isAnyFieldEdited()) {
-                throw new ParseException(EditProjectCommand.MESSAGE_NOT_EDITED);
-            }
-
-            return new EditProjectCommand(index, editProjectDescriptor);
+            return parseProject(index, argMultimap);
         case ItemUtil.SKILL_ALIAS:
-            // ===== Start of updating item descriptor =====
-            EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptor();
-            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                editSkillDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-            }
-            if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
-                editSkillDescriptor.setLevel(ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get()));
-            }
-            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editSkillDescriptor::setTags);
-            // ===== End of updating item descriptor =====
-
-            if (!editSkillDescriptor.isAnyFieldEdited()) {
-                throw new ParseException(EditSkillCommand.MESSAGE_NOT_EDITED);
-            }
-
-            return new EditSkillCommand(index, editSkillDescriptor);
+            return parseSkill(index, argMultimap);
         case ItemUtil.NOTE_ALIAS:
-            // ===== Start of updating item descriptor =====
-            EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptor();
-            boolean isAnyFieldEdited = false;
-
-            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                isAnyFieldEdited = true;
-                editNoteDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-            }
-            if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
-                isAnyFieldEdited = true;
-                editNoteDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get()));
-            }
-            // ===== End of updating item descriptor =====
-
-            if (!isAnyFieldEdited) {
-                throw new ParseException(EditNoteCommand.MESSAGE_NOT_EDITED);
-            }
-
-            return new EditNoteCommand(index, editNoteDescriptor);
-
+            return parseNote(index, argMultimap);
         default:
             // Should not have reached here at all
             throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
@@ -193,4 +100,139 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Parses the arguments in the context of editing a Resume item.
+     */
+    private EditResumeCommand parseResume(Index index, ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
+        // ===== Start of updating item descriptor =====
+        EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptor();
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editResumeDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editResumeDescriptor::setTags);
+        // ===== End of updating item descriptor =====
+
+        if (!editResumeDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditResumeCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditResumeCommand(index, editResumeDescriptor);
+    }
+
+    /**
+     * Parses the arguments in the context of editing a Internship item.
+     */
+    private EditInternshipCommand parseInternship(Index index, ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
+        // ===== Start of updating item descriptor =====
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editInternshipDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            editInternshipDescriptor.setRole(ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get().trim()));
+        }
+        if (argMultimap.getValue(PREFIX_FROM).isPresent()) {
+            editInternshipDescriptor.setFrom(ParserUtil.parseTime(argMultimap.getValue(PREFIX_FROM).get().trim()));
+        }
+        if (argMultimap.getValue(PREFIX_TO).isPresent()) {
+            editInternshipDescriptor.setTo(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TO).get().trim()));
+        }
+        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+            editInternshipDescriptor.setDescription(ParserUtil.parseDescription(
+                    argMultimap.getValue(PREFIX_DESCRIPTION).get().trim()));
+        }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editInternshipDescriptor::setTags);
+        // ===== End of updating item descriptor =====
+
+        if (!editInternshipDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditInternshipCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditInternshipCommand(index, editInternshipDescriptor);
+    }
+
+    /**
+     * Parses the arguments in the context of editing a Project item.
+     */
+    private EditProjectCommand parseProject(Index index, ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
+        // ===== Start of updating item descriptor =====
+        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editProjectDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+            editProjectDescriptor.setDescription(
+                    ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get().trim()));
+        }
+        if (argMultimap.getValue(PREFIX_WEBSITE).isPresent()) {
+            editProjectDescriptor.setWebsite(ParserUtil
+                    .parseWebsite(argMultimap.getValue(PREFIX_WEBSITE).get().trim()));
+        }
+        if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
+            editProjectDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get().trim()));
+        }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editProjectDescriptor::setTags);
+        // ===== End of updating item descriptor =====
+
+        if (!editProjectDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditProjectCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditProjectCommand(index, editProjectDescriptor);
+    }
+
+    /**
+     * Parses the arguments in the context of editing a Skill item.
+     */
+    private EditSkillCommand parseSkill(Index index, ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
+        // ===== Start of updating item descriptor =====
+        EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptor();
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editSkillDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
+            editSkillDescriptor.setLevel(ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get()));
+        }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editSkillDescriptor::setTags);
+        // ===== End of updating item descriptor =====
+
+        if (!editSkillDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditSkillCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditSkillCommand(index, editSkillDescriptor);
+    }
+
+    /**
+     * Parses the arguments in the context of editing a Note item.
+     */
+    private EditNoteCommand parseNote(Index index, ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
+        // ===== Start of updating item descriptor =====
+        EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptor();
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editNoteDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
+            editNoteDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get()));
+        }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editNoteDescriptor::setTags);
+        // ===== End of updating item descriptor =====
+
+        if (!editNoteDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditNoteCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditNoteCommand(index, editNoteDescriptor);
+    }
 }

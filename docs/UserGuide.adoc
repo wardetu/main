@@ -18,6 +18,7 @@ endif::[]
 
 By: `CS2103T F10-1`      Since: `Jan 2020`      Licence: `MIT`
 
+// tag::intro-para[]
 == Introduction
 
 Hello fellow University friends! Have you ever found writing resumes
@@ -30,6 +31,8 @@ If this sounds like you, *ResuMe* is _the_ resume managing application for you!
 Made by University students for University students with _looovee_, this wonder
 understands your struggle and strives to cater to your specific resume needs
 and job application woes.
+
+// end::intro-para[]
 
 === Overview
 *ResuMe* allows the management of five different item types:
@@ -199,7 +202,7 @@ Try typing in the command box this command:
 The user box is updated accordingly as below:
 
 // TODO: update screenshot
-image::user_profile.png[width="300"]
+image::user_profile.png[width="400"]
 
 *Example 2:* Update user profile picture
 
@@ -211,7 +214,7 @@ Follow the steps in one of these two links to copy a file path according to your
 
 Afterwards, try a command similar to the one below:
 
-`me dp//Users/nhamquochung/Desktop/test.png`
+`me dp/ /Users/nhamquochung/Desktop/test.png`
 
 *Outcome:*
 
@@ -220,6 +223,7 @@ The user profile picture is updated accordingly as below:
 // TODO: update screenshot
 image::user_profile1.png[width="400"]
 
+// tag::list[]
 === Listing all items : `list`
 
 Lists items in the storage.
@@ -229,18 +233,26 @@ Lists items in the storage.
 ====
 
 [TIP]
-Listed items are in short form, only showing their `index`, `name`, `tags` and a short summary.
+--
+* Listed items are in short form, only showing their `index`, `name`, `tags` and a short summary.
 To view items in full details, use <<Viewing an item in details: `view`, view>>.
+* The type of items listed will light up in orange.
+--
 
 *Examples:*
 
-* `list i/ res` +
-//TODO: add screenshots
+* `list i/ res`
 Lists all `resume` items.
++
+image::ListAllResumes.png[width = "450"]
 
-* `list i/ proj` +
-//TODO: add screenshots
-Lists all `project` items.
+* `list i/ int`
+Lists all internship items.
++
+image::ListAllInternships.png[width = "450"]
+
+
+// end::list[]
 
 // tag::add[]
 === Adding an item: `add`
@@ -628,6 +640,7 @@ image::redo_success.png[width="790"]
 
 // end::redo[]
 
+// tag::rpreview[]
 === Previewing a resume: `rpreview`
 
 Previews a `resume` in text format in a pop-up window.
@@ -637,18 +650,29 @@ Previews a `resume` in text format in a pop-up window.
 ====
 
 [NOTE]
-`INDEX` is the index of the `resume` seen when `list i/res` is called.
+--
+* `INDEX` is the index of the `resume` seen when `list i/res` is called.
+* `description` of `internship` and `project` is automatically separated into bullet points when the program detects full sentences.
+--
 
-*Example:*
+*Example:* Let's try out the following commands!
 
-`rpreview 2`
+. `list i/ res`
+. `rpreview 2`
 
 *Outcome:*
 
-Suppose the `resume` at index 2 is named _"Summer Internship"_. A pop-up window will be opened,
-featuring a text-based view of the content of _"Summer Internship"_.
+. The first command lists out all `resumes`. Assuming that you want to preview the second `resume` in the list box.
++
+image::ListResumeRPreview.png[width="790"]
 
-image::RPreviewSummerInternship.png[width = "790"]
+. The second command will preview the `resume` at index 2 named "Software Engineering". A pop-up window will be opened,
+featuring a text-based view of the content of "Software Engineering". The screenshots of the results are as shown below:
++
+image::RPreview.png[width = "790"]
+image::RPreviewIndex2.png[width = "790"]
+
+// end::rpreview[]
 
 // tag::rgen[]
 
@@ -685,15 +709,21 @@ image::PdfFile.PNG[width="790"]
 
 // end::rgen[]
 
+// tag::clear[]
+
 === Clearing all data: `clear`
-Clears all data from *ResuMe*.
+Clears all data from *ResuMe*. Empties all data in the resume book, user information is replaced with default user information.
 
 ====
 *Format:* `clear`
 ====
 
-[WARNING]
-This command cannot be undone. Please be careful when exercising this power.
+[NOTE]
+This command can be undone.
+
+
+
+// end::clear[]
 
 
 === Exiting the program : `exit`
