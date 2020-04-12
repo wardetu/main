@@ -3,85 +3,111 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam defaultFontSize 20
+skinparam nodesep 100
+skinparam ranksep 180
+
+Class LogicManager LOGIC_COLOR
+Class ItemCard UI_COLOR
+Class MainApp MAIN_COLOR
 
 Package Model <<Rectangle>>{
-Interface Model <<Interface>>
-Interface ObservableList <<Interface>>
-Interface ReadOnlyResumeBook <<Interface>>
-Class Model
+Interface ObservableList <<interface>>
+Interface Model <<interface>>
+Interface ReadOnlyUserPrefs <<interface>>
+Interface ReadOnlyResumeBook <<interface>>
 Class ModelManager
 Class UserPrefs
-Class ReadOnlyUserPrefs
 Class ResumeBook
-Class ReadOnlyResumeBook
+Class VersionedResumeBook
 Class UniqueItemList
+Class ObservablePerson
 
 Package User {
 Class Person
-Package UserField {
+
+Class DisplayPicture
 Class Phone
 Class Email
 Class Github
 Class University
-}
+Class Major
+Class CAP
+
 }
 
 Package Item {
-Class Item
+Class Item <<abstract>>
 Class Resume
 Class Internship
 Class Project
 Class Skill
+Class Note
 
-Package ItemField {
 Class Type
-Class Description
+Class Role
 Class Website
 Class Level
 Class Tag
 }
-}
 
-Package SharedField {
+Package SharedFiled\n {
 Class Name
 Class Time
+Class Description
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside .d.> Model
-Model .u.> ObservableList
-ModelManager .u.> Model
 
-ModelManager o-l-> "1" UserPrefs
-UserPrefs .l.|> ReadOnlyUserPrefs
+MainApp -d-> Model
+LogicManager -d-> Model
+ItemCard .d.> Model
+Model .l.> ObservableList
+ModelManager .l.|> Model
 
-ModelManager o-r-> "1" ResumeBook
+ModelManager o-r- "1" UserPrefs
+UserPrefs .r.|> ReadOnlyUserPrefs
+
+ModelManager o-- "1" VersionedResumeBook
+VersionedResumeBook --|> ResumeBook
 ResumeBook .u.|> ReadOnlyResumeBook
 
-ResumeBook *-d-> "1" Person
-Person *---> "1" Name
-Person *---> "2" Time
-Person *---> "1" Phone
-Person *---> "1" Email
-Person *---> "1" Github
-Person *---> "1" University
+ResumeBook *- "1" ObservablePerson
+ObservablePerson *-- "1" Person
 
-ResumeBook *--> "4" UniqueItemList
-UniqueItemList o--> "*" Item
+Person *-u- "1" Phone
+Person *-u- "1" Email
+Person *-u- "1" Github
+Person *-l-- "1" University
+Person *-- "1" Major
+Person *-- "1" CAP
+Person *-- "1" DisplayPicture
+Person *-- "1" Name
+Person *-- "1" Description
+Person *-- "2" Time
 
-Item *---> "1" Name
-Item *---> "*" Time
-Item *---> "1" Type
-Item *---> "1" Description
-Item *---> "*" Tag
+ResumeBook *-r- "5" UniqueItemList
+UniqueItemList o-- "*" Item
 
-Project ..|> Item
-Skill ..|> Item
-Resume ..|> Item
-Internship ..|> Item
+Item *-- "1" Name
+Item *-u- "1" Type
+Item *-u- "*" Tag
 
-Project *-> "1" Website
-Skill *-> "1" Level
+Skill -|> Item
+Resume --|> Item
+Project -l-|> Item
+Note -u-|> Item
+Internship --|> Item
 
+Internship *-r- "1" Role
+Internship *- "2" Time
+Internship *- "1" Description
+
+Project *-r- "1" Website
+Project *-- "1" Time
+Project *- "1" Description
+
+Skill *-- "1" Level
+
+Note *-- "1" Time
 }
 @enduml

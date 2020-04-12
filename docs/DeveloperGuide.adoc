@@ -7,6 +7,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 :xrefstyle: full
+:icons: font
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -14,7 +15,12 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-F10-1/main
 
-By: `Team F10-1`      Since: `Jan 2020`
+By: `CS2103T F10-1`      Since: `Feb 2020`      Licence: `MIT`
+
+== Introduction
+This developer guide documents the system design and implementation of *ResuMe*. We hope that it would be a useful reference
+for software developers who wish to contribute to the project, or to simply gain deeper insight into our development process
+and considerations.
 
 == Setting up
 
@@ -136,9 +142,8 @@ NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X
 [[Design-Model]]
 === Model component
 
-// TODO: Fix diagram layout
 .Structure of the Model Component
-image::ModelClassDiagram.png[]
+image::ModelClassDiagram.png[width="1000"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
@@ -146,11 +151,14 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Resume Book data.
-* exposes an unmodifiable `ObservableList<Item>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the Resume Book state using `VersionedResumeBook` to facilitate `undo`/`redo`.
+* exposes an `Observable` that contains an internal `Person` with user's data, and two unmodifiable `ObservableList<Item>`,
+one for `Note` and one for `Internship`, `Project`, `Skill` and `Resume`.
+* has the UI bound to its observables so that the UI automatically updates when the data change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Resume Book`, which `Item` can reference. This would allow `Resume Book` to only require one `Tag` object per unique `Tag`, instead of each `Item` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `ResumeBook`, which `Item` can reference. This would allow `ResumeBook` to only require one `Tag` object per unique `Tag`, instead of each `Item` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:BetterModelClassDiagram.png[]
 
@@ -386,23 +394,23 @@ with the app.
 This allows the user to change the background and font color using rgb or hex color codes.
 
 //tag::export[]
-=== Export Resume feature
-The Export Resume feature supports two main actions: previewing the content of a `Resume` item, and
-then exporting it as a .pdf file.
+=== Export Feature
+The Export Feature supports two main actions: previewing the content of a `Resume` item, and
+then generating a `.pdf` file from it.
 
-==== rpreview: preview a `Resume`
+==== Previewing a resume: `rpreview`
 ===== Implementation
-`rpreview` is supported by the new `Command`, `ResumePreviewCommand` and the additional method `Resume#getPreview()`
-which return the content of the `Resume` in textual format.
+`rpreview` is supported by the new `Command`, `ResumePreviewCommand` and the additional method `toPreview()` implemented
+in `Internship`, `Project` and `Skill`, which return the content of the item in textual format.
 
 Given below is an example usage scenario:
 
-Step 1. The user launches the ResuMe application. After loading data from storage to the application memory, the list of
-resumes in the ResumeBook could either contain some resumes, or is empty.
+Step 1. The user launches the *ResuMe* application. After loading data from storage to the application memory, the list of
+`resumes` in the `ResumeBook` could either contain some resumes, or is empty.
 
-Step 2. The user executes `rpreview INDEX`. If the specified resume index is out of bound, ResuMe throws an error message.
+Step 2. The user executes `rpreview INDEX`. If the specified resume `INDEX` is out of bound, *ResuMe* throws an error message.
 
-Step 3. The application retrieves the correct `Resume` item and call `getPreview()` on that resume.
+Step 3. The application retrieves the correct `Resume` item and calls `toPreview()` on the items contained in that resume.
 
 The following activity diagram summarises what happens when a user executes `rpreview` command:
 
@@ -412,46 +420,55 @@ image::ExportPreviewActivityDiagram.png[]
 ===== Design Considerations
 ===== Aspect: Where `rpreview` is displayed
 
-* *Alternative 1 (current choice):* Display in the same panel as `view`
+* *Alternative 1 (current choice):* Displays in a separate preview pop-up window.
+** Pros: The preview is separated from the application and does not clutter the application view. It is also no longer
+confined to a small space and hence improves readability.
+** Cons: Additional non-command-line action needed to close the pop-up window after previewing.
+
+* *Alternative 2:* Display in the same panel as `view`
 ** Pros: No significant change to UI component.
 ** Cons: Multiple commands needed if user finds out about a typo in an item, wants to view the item in details,
 fix the typo and then check the preview again to ensure there is no more error.
 
-* *Alternative 2:* Create a separate UI panel to display the resume preview. Additionally, this panel could be implemented
+* *Alternative 3:* Create a separate preview box to display the resume preview. Additionally, this box could be implemented
 such that it automatically updates when the content of the `Resume` item is edited.
-** Pros: User can see the resume preview and the item detail panels at the same time, hence saving time switching between views.
+** Pros: User can see the resume preview in the preview box, and the item details in the view box at the same time,
+hence saving time switching between views.
 ** Cons: Too many panels could be confusing for the user to navigate. The space is also often wasted since user does not
 need to use `rpreview` regularly.
 
 ****
-*Conclusion:* Given that the application already has quite a number of panels (User Profile, Command Input,
-Command Result, Item Detail and List View), alternative 1 is chosen to minimise the layout and improve on user experience.
-The Command Result panel will display a confirmation message for any successful item edit, hence the user will not need
-to call `rpreview` after each edit, reducing the number of switches between views.
+*Conclusion:* Given that the application already has quite a number of panels (User Box, Command Box, Result Box,
+View Box and List Box), alternative 1 is chosen to minimise the layout and improve on user experience.
+
+Every time the user makes an edit, the Result Box will display a confirmation message, and the View Box will shows the
+edited details. Hence, user will not need to call `rpreview` after each edit just to confirm that the command is
+successfully executed and error-free. As such, `rpreview` will not be a command that is used often, and the benefits of
+a clean UI outweighs the compromise made when additional action to close the pop-up window is required.
+
 ****
 
-==== rgen: generate a .pdf file from a `Resume`
+==== Generating a `.pdf` file from a resume: `rgen`
 ===== Implementation
-This feature utilises the external *iText* library. When using `rgen`, the user could specify the desired name of
+This feature utilises the external *Apache Pdf Box* library. When using `rgen`, the user could specify the desired name of
 the generated file, which will be saved in the root directory of the project.
 
-`rgen` implements the following operations:
+The executing of `rgen` is facilitated by an addition `PdfBuilder` class, which implements the following main operations:
 
-* `create(String)` and `create()` - initialises the .pdf file, either with the input `String` name specified by the user,
-or with the same name as the `Resume` name if the file name is not specified.
-* `addSection(String)` - starts a new section with the `String` name (e.g. "Internship").
-* `populateSection(UniqueItemList)` and `insertItem(Item)` - populates the section with items in the same order as they
-are in the `UniqueItemList`. When an `Item` is inserted, it is correctly formatted depending on the item type.
+* `addPage()` - starts a new page in the `.pdf` file. This method is called dynamically to fit the content of the resume
+to be generated.
+* `addPersonalDetails()` - adds the relevant resume and user details to the `.pdf` file.
+* `addInternships()`, `addProjects()` and `addSkills()` - adds the resume content to the `.pdf` file in the same
+order that they appear in the resume. If a section is empty, it will not be added to the output file.
 
 Given below is an example usage scenario:
 
-Step 1. The user launches ResuMe. After loading data from storage to the application memory, the list of resumes in the
-ResumeBook could either contain some resumes, or is empty.
+Step 1. The user launches *ResuMe*. After loading data from storage to the application memory, the list of `resumes` in the
+`ResumeBook` could either contain some resumes, or is empty.
 
-Step 2. The user executes `rgen INDEX n/ FILE_NAME`. If the specified resume index is out of bound,
-ResuMe throws an error message.
+Step 2. The user executes `rgen INDEX n/ FILE_NAME`. If the specified resume `INDEX` is out of bound, *ResuMe* throws an error message.
 
-Step 3. The application retrieves the correct `Resume` item, create a new .pdf file and populates it with the corresponding
+Step 3. The application retrieves the correct `Resume` item, create a new `.pdf` file and populates it with the corresponding
 items inside the `Resume`.
 
 The following activity diagram summarises what happens when a user executes `rgen` command:
@@ -465,17 +482,17 @@ image::ExportSequenceDiagram.png[, 1000]
 ==== Design Considerations
 ===== Aspect: How `rgen` executes
 
-* *Alternative 1 (current choice):* Generate .pdf file by iteratively reading and inserting details of `Item` from inside the `Resume` itself.
+* *Alternative 1 (current choice):* Generate `.pdf` file by iteratively adding `items` contained in `resume`.
 ** Pros: Better control of the output layout, as the position and formatting of each section could be set individually.
 Additionaly, `rgen` is dynamic, in the sense that even without calling `rpreview` every time, the generated file will be
 consistent with any item update.
 ** Cons: Coupled with `rpreview`, the content of a `Resume` must be read twice every time the user wishes to export.
 
-* *Alternative 2:* Generate .pdf file directly from the previewed text output by `rpreview`
-** Pros: Faster `rgen`
-** Cons: Limited formatting options (font and font size at most) since the whole document is input as one long string.
-`rgen` implemented this way is also static, and might not reflect the most updated content if there are item changes
-after `rpreview` is called.
+* *Alternative 2:* Generate `.pdf` file directly from the previewed text output by `rpreview`
+** Pros: Faster and simpler `rgen`
+** Cons: Limited formatting options (font type, font size and page layout) since the whole document is now input as one
+long string of text. `rgen` implemented this way is also static, and might not reflect the most updated content
+if there are item changes after `rpreview` is called.
 
 ****
 *Conclusion:* Alternative 1 is chosen because each resume is not likely to hold more than 20 items, hence the cost
@@ -483,7 +500,7 @@ of reading its content twice (once during `rpreview` and once during `rgen`) is 
 will further allows the application to have more control when formatting the output file, and leaving room for potential
 extended features (e.g. allow user to choose from a variety of pre-defined resume templates).
 ****
-end::export[]
+//end::export[]
 
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
