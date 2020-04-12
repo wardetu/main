@@ -19,11 +19,14 @@ import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.field.Name;
 import seedu.address.model.item.field.Time;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.ItemUtil;
 
 /**
  * Edits a specified Note.
  */
 public class EditNoteCommand extends EditCommand {
+
+    public static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edited Note: %1$s";
 
     private static final String FIELDS = "Example: "
             + COMMAND_WORD + " "
@@ -40,8 +43,6 @@ public class EditNoteCommand extends EditCommand {
             + FIELDS
             + EXAMPLE;
 
-    private static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edited This Note!";
-
     private EditNoteDescriptor editNoteDescriptor;
 
     public EditNoteCommand(Index index, EditNoteDescriptor editNoteDescriptor) {
@@ -57,9 +58,9 @@ public class EditNoteCommand extends EditCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Note toEdit = model.getNote(index);
+        Note toEdit = model.getNoteByIndex(index);
 
-        Note editedNote = createEditedNoteEntry(toEdit, editNoteDescriptor);
+        Note editedNote = createEditedNote(toEdit, editNoteDescriptor);
         try {
             model.setNote(toEdit, editedNote);
             model.updateFilteredNoteList(PREDICATE_SHOW_ALL_ITEMS);
@@ -68,7 +69,9 @@ public class EditNoteCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
-        return new EditCommandResult(editedNote.toString(), MESSAGE_EDIT_NOTE_SUCCESS, model.getDisplayType());
+        return new EditCommandResult(editedNote.toString(),
+                String.format(MESSAGE_EDIT_NOTE_SUCCESS, editedNote.getName().fullName),
+                ItemUtil.NOTE_ALIAS);
     }
 
     /**
@@ -77,11 +80,19 @@ public class EditNoteCommand extends EditCommand {
      * @param editNoteDescriptor describes how the note will be edited.
      * @return the edited note
      */
-    public Note createEditedNoteEntry(Note toEdit, EditNoteDescriptor editNoteDescriptor) {
+    public Note createEditedNote(Note toEdit, EditNoteDescriptor editNoteDescriptor) {
         Name updatedName = editNoteDescriptor.getName().orElse(toEdit.getName());
         Time updatedTime = editNoteDescriptor.getTime().orElse(toEdit.getTime());
         Set<Tag> updateTags = editNoteDescriptor.getTags().orElse(toEdit.getTags());
         int id = toEdit.getId();
         return new Note(updatedName, updatedTime, toEdit.isDone(), updateTags, id);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditNoteCommand // instanceof handles nulls
+                && this.index.equals(((EditNoteCommand) other).index)
+                && this.editNoteDescriptor.equals(((EditNoteCommand) other).editNoteDescriptor));
     }
 }

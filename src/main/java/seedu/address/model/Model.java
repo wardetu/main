@@ -92,7 +92,7 @@ public interface Model {
 
     void deleteNote(Note note);
 
-    Note getNote(Index index);
+    Note getNoteByIndex(Index index);
 
     /**
      * Sorts all Note items in the resume book using the supplied Comparator.

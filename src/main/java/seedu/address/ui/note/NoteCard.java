@@ -1,9 +1,12 @@
 package seedu.address.ui.note;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.item.Note;
@@ -30,6 +33,8 @@ public class NoteCard extends UiPart<Region> {
     private Label time;
     @FXML
     private ImageView tickBox;
+    @FXML
+    private FlowPane tags;
 
     public NoteCard(Note note, int displayIndex) {
         super(FXML);
@@ -37,6 +42,10 @@ public class NoteCard extends UiPart<Region> {
         id.setText(displayIndex + ". ");
         title.setText(note.getName().toString());
         time.setText(note.getTime().toString());
+
+        note.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         Image image;
 

@@ -36,6 +36,8 @@ public class TagPullCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + " tech";
 
+    public static final String MESSAGE_SUCCESS = "Items pulled:\n%1$d internship(s), %2$d project(s), %3$d skill(s).";
+
     protected final Index index;
     protected final Set<Tag> tagList;
 
@@ -91,12 +93,11 @@ public class TagPullCommand extends Command {
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitResumeBook();
 
-        String feedbackToUser = new StringBuilder()
-                .append("Items pulled:\n")
-                .append(internshipCountAfter - internshipCountBefore).append(" internship(s), ")
-                .append(projectCountAfter - projectCountBefore).append(" project(s), ")
-                .append(skillCountAfter - skillCountBefore).append(" skill(s).")
-                .toString();
+        int internshipCountChange = internshipCountAfter - internshipCountBefore;
+        int projectCountChange = projectCountAfter - projectCountBefore;
+        int skillCountChange = skillCountAfter - skillCountBefore;
+        String feedbackToUser = String.format(MESSAGE_SUCCESS, internshipCountChange, projectCountChange,
+                skillCountChange);
 
         return new TagPullCommandResult(editedResume.toString(), feedbackToUser,
                 model.getDisplayType());
