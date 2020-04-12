@@ -303,7 +303,7 @@ The following sequence diagram shows how `tagpull` works:
 
 It may also save the user some confusion since the `redit` feature specifically handles only updates using indices while the `tagpull` feature handles only updates using tags.
 
-// We also considered a use case: "As a user, I want to easily have items of the same category (tags) in my resume". We felt that users will find it easier to use `tagpull` to retrieve items of the same tags ok idk what im smoking hahahha help pls
+As we have separated the two commands, we can then also vary the behaviour of the two commands slightly. Instead of both commands modifying the `Resume`, we have implemented `redit` to _modify_ the `Resume` item, while `tagpull` _adds_ onto existing items in the `Resume`.
 ****
 // end::tagpull[]
 
