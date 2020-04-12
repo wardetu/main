@@ -171,7 +171,7 @@ public class EditCommandParserTest {
         // Standard
         assertParseSuccess(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_NOTE + PREFIXED_NOTE_NAME + PREFIXED_TIME_TO
-                + PREFIXED_TAG_URGENT,
+                        + PREFIXED_TAG_URGENT,
                 new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptor));
 
         // multiple item types - last type accepted
@@ -449,7 +449,7 @@ public class EditCommandParserTest {
                 VALID_ITEM_INDEX + INVALID_TYPE_DESC + PREFIXED_NAME_GOOGLE + PREFIXED_ROLE_FRONTEND
                         + PREFIXED_TIME_FROM + PREFIXED_TIME_TO + PREFIXED_INTERNSHIP_DESCRIPTION
                         + PREFIXED_TAG_FRONTEND,
-                "The item type is invalid!");
+                Item.MESSAGE_INVALID_ITEM_TYPE);
     }
 
     @Test
@@ -491,7 +491,7 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValue_failure() {
+    public void parse_invalidValueAmongValidValues_failure() {
         // invalid name
         assertParseFailure(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_INTERNSHIP + INVALID_NAME_DESC
@@ -530,7 +530,73 @@ public class EditCommandParserTest {
         assertParseFailure(parser,
                 VALID_ITEM_INDEX + ITEM_TYPE_SKILL + PREFIXED_NAME_REACT
                         + INVALID_LEVEL_DESC + PREFIXED_TAG_FRONTEND,
-                "A skill level can only be basic, intermediate, or advanced.");
+                Level.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_singleInvalidValue_failure() {
+        // invalid name
+        assertParseFailure(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_INTERNSHIP + INVALID_NAME_DESC,
+                Name.MESSAGE_CONSTRAINTS);
+
+        // invalid from
+        assertParseFailure(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_INTERNSHIP + INVALID_FROM_DESC,
+                Time.MESSAGE_CONSTRAINTS);
+
+        // invalid to
+        assertParseFailure(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_INTERNSHIP + INVALID_TO_DESC,
+                Time.MESSAGE_CONSTRAINTS);
+
+        // invalid tag
+        assertParseFailure(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_INTERNSHIP + INVALID_TAG_DESC,
+                Tag.MESSAGE_CONSTRAINTS);
+
+        // invalid website
+        assertParseFailure(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_PROJECT + INVALID_WEBSITE_DESC,
+                Website.MESSAGE_CONSTRAINTS);
+
+        // invalid level
+        assertParseFailure(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_SKILL + INVALID_LEVEL_DESC,
+                Level.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_singleInvalidValueWithSingleValidValue_failure() {
+        // invalid name
+        assertParseFailure(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_INTERNSHIP + PREFIXED_NAME_GOOGLE + INVALID_NAME_DESC,
+                Name.MESSAGE_CONSTRAINTS);
+
+        // invalid from
+        assertParseFailure(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_INTERNSHIP + PREFIXED_TIME_FROM + INVALID_FROM_DESC,
+                Time.MESSAGE_CONSTRAINTS);
+
+        // invalid to
+        assertParseFailure(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_INTERNSHIP + PREFIXED_TIME_TO + INVALID_TO_DESC,
+                Time.MESSAGE_CONSTRAINTS);
+
+        // invalid tag
+        assertParseFailure(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_INTERNSHIP + PREFIXED_TAG_TECH + INVALID_TAG_DESC,
+                Tag.MESSAGE_CONSTRAINTS);
+
+        // invalid website
+        assertParseFailure(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_PROJECT + PREFIXED_WEBSITE_DUKE + INVALID_WEBSITE_DESC,
+                Website.MESSAGE_CONSTRAINTS);
+
+        // invalid level
+        assertParseFailure(parser,
+                VALID_ITEM_INDEX + ITEM_TYPE_SKILL + PREFIXED_BASIC + INVALID_LEVEL_DESC,
+                Level.MESSAGE_CONSTRAINTS);
     }
 }
 
