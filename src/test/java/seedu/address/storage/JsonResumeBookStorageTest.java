@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -36,7 +37,7 @@ public class JsonResumeBookStorageTest {
         assertThrows(NullPointerException.class, () -> readResumeBook(null));
     }
 
-    private java.util.Optional<ReadOnlyResumeBook> readResumeBook(String filePath) throws Exception {
+    private Optional<ReadOnlyResumeBook> readResumeBook(String filePath) throws Exception {
         return new JsonResumeBookStorage(Paths.get(filePath)).readResumeBook(addToTestDataPathIfNotNull(filePath));
     }
 
