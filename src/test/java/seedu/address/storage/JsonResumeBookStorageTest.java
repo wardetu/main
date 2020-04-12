@@ -77,7 +77,7 @@ public class JsonResumeBookStorageTest {
     @Test
     public void readAndSaveResumeBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempResumeBook.json");
-        ResumeBook original = new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build();
+        ResumeBook original = new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOGGLE).build();
         JsonResumeBookStorage jsonResumeBookStorage = new JsonResumeBookStorage(filePath);
 
         // Save in new file and read back

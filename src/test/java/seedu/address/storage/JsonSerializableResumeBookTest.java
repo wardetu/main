@@ -52,7 +52,7 @@ public class JsonSerializableResumeBookTest {
         JsonSerializableResumeBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_RESUME_BOOK_FILE,
                 JsonSerializableResumeBook.class).get();
         ResumeBook resumeBookFromFile = dataFromFile.toModelType();
-        ResumeBook typicalResumeBook = TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE;
+        ResumeBook typicalResumeBook = TypicalResumeBook.TYPICAL_WITHOUT_GOGGLE;
         assertEquals(resumeBookFromFile, typicalResumeBook);
     }
 
@@ -152,7 +152,7 @@ public class JsonSerializableResumeBookTest {
     @Test
     public void equals() throws Exception {
         // This should be congruent with the content of typicalResumeBook.json
-        ResumeBook typicalResumeBook = TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE;
+        ResumeBook typicalResumeBook = TypicalResumeBook.TYPICAL_WITHOUT_GOGGLE;
 
         // Equals
         JsonSerializableResumeBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_RESUME_BOOK_FILE,
