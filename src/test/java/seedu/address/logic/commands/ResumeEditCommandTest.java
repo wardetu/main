@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.add.AddInternshipCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.model.Model;
@@ -37,11 +36,6 @@ public class ResumeEditCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(TypicalResumeBook.TYPICAL_WITH_FILLED_RESUME, new UserPrefs());
-    }
-
-    @Test
-    public void constructor_nullInternship_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddInternshipCommand(null));
     }
 
     @Test

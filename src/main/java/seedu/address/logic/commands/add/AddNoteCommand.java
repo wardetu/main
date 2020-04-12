@@ -3,6 +3,7 @@ package seedu.address.logic.commands.add;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,7 +25,8 @@ public class AddNoteCommand extends AddCommand {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ITEM + "note "
             + PREFIX_NAME + "Finish Resume 3 "
-            + PREFIX_TIME + "04-2020 ";
+            + PREFIX_TIME + "04-2020 "
+            + PREFIX_TAG + "urgent";
 
     public static final String MESSAGE_SUCCESS = "New note added!";
 

@@ -20,7 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Resume;
 
 /**
- * Edits the content of a Resume.
+ * Modifies the content of the resume by specifying the indices of the items.
  */
 public class ResumeEditCommand extends Command {
     public static final String COMMAND_WORD = "redit";
@@ -51,6 +51,13 @@ public class ResumeEditCommand extends Command {
         this.skillIndices = skillIndices;
     }
 
+    /**
+     * Modifies the content of the resume with the given indices.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return      {@code CommandResult} that describes changes made when command execute runs successfully.
+     * @throws      CommandException if the index specified is greater than the number of resumes.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -70,30 +77,15 @@ public class ResumeEditCommand extends Command {
         // If any of the indices are present (user keys in the prefix), then use what the user uses
         // Else, use the one currently being used by the resume
         if (internshipIndices.isPresent()) {
-            internshipIds = internshipIndices
-                    .get()
-                    .stream()
-                    .distinct()
-                    .map(x -> model.getInternshipByIndex(Index.fromOneBased(x)).getId())
-                    .collect(Collectors.toList());
+            internshipIds = mapToInternshipIds(internshipIndices.get(), model);
         }
 
         if (projectIndices.isPresent()) {
-            projectIds = projectIndices
-                    .get()
-                    .stream()
-                    .distinct()
-                    .map(x -> model.getProjectByIndex(Index.fromOneBased(x)).getId())
-                    .collect(Collectors.toList());
+            projectIds = mapToProjectIds(projectIndices.get(), model);
         }
 
         if (skillIndices.isPresent()) {
-            skillIds = skillIndices
-                    .get()
-                    .stream()
-                    .distinct()
-                    .map(x -> model.getSkillByIndex(Index.fromOneBased(x)).getId())
-                    .collect(Collectors.toList());
+            skillIds = mapToSkillIds(skillIndices.get(), model);
         }
 
         Resume editedResume = new Resume(toEdit.getName(), toEdit.getId(), toEdit.getTags());
@@ -104,6 +96,48 @@ public class ResumeEditCommand extends Command {
         model.commitResumeBook();
         return new ResumeEditCommandResult(editedResume.toString(), MESSAGE_SUCCESS,
                 model.getDisplayType());
+    }
+
+    /**
+     * Maps the Internship indices to its Ids.
+     */
+    private List<Integer> mapToInternshipIds(List<Integer> internshipIndices, Model model) {
+        assert internshipIndices != null;
+        assert model != null;
+
+        return internshipIndices
+                .stream()
+                .distinct()
+                .map(x -> model.getInternshipByIndex(Index.fromOneBased(x)).getId())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Maps the Project indices to its Ids.
+     */
+    private List<Integer> mapToProjectIds(List<Integer> projectIndices, Model model) {
+        assert projectIndices != null;
+        assert model != null;
+
+        return projectIndices
+                .stream()
+                .distinct()
+                .map(x -> model.getProjectByIndex(Index.fromOneBased(x)).getId())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Maps the Skill indices to its Ids.
+     */
+    private List<Integer> mapToSkillIds(List<Integer> skillIndices, Model model) {
+        assert skillIndices != null;
+        assert model != null;
+
+        return skillIndices
+                .stream()
+                .distinct()
+                .map(x -> model.getSkillByIndex(Index.fromOneBased(x)).getId())
+                .collect(Collectors.toList());
     }
 
     /**
