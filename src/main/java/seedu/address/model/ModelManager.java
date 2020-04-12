@@ -125,7 +125,7 @@ public class ModelManager implements Model {
         return versionedResumeBook.getObservableUser();
     }
 
-    //======================================= Internships ==================================================
+    //======================================= Notes ==================================================
     @Override
     public boolean hasNote(Note note) {
         requireNonNull(note);

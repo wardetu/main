@@ -9,6 +9,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInternship.GOOGLE;
 import static seedu.address.testutil.TypicalInternship.NINJA_VAN;
 import static seedu.address.testutil.TypicalInternship.PAYPAL;
+import static seedu.address.testutil.TypicalNote.FINISH_CS_2103;
+import static seedu.address.testutil.TypicalNote.FINISH_RESUME_2;
+import static seedu.address.testutil.TypicalNote.FINISH_HOMEWORK;
 
 
 import java.nio.file.Path;
@@ -16,25 +19,43 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.item.Internship;
+import seedu.address.model.item.Item;
+import seedu.address.model.item.Note;
+import seedu.address.model.item.exceptions.DuplicateItemException;
+import seedu.address.model.item.exceptions.ItemNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ItemUtil;
 import seedu.address.testutil.InternshipBuilder;
+import seedu.address.testutil.NoteBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ResumeBookBuilder;
+import seedu.address.testutil.TypicalResumeBook;
 
 public class ModelManagerTest {
 
-    private ModelManager modelManager = new ModelManager();
+    private ModelManager modelManager;
+
+    @BeforeEach
+    public void setUp() {
+        modelManager = new ModelManager(
+                new ResumeBookBuilder(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE).build(),
+                new UserPrefs());
+    }
 
     @Test
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new ResumeBook(), new ResumeBook(modelManager.getResumeBook()));
+        assertEquals(new ResumeBook(TypicalResumeBook.TYPICAL_WITHOUT_GOOGLE), new ResumeBook(modelManager.getResumeBook()));
     }
 
     @Test
@@ -90,50 +111,143 @@ public class ModelManagerTest {
     @Test
     public void hasInternship_internshipNotInResumeBook_returnsFalse() {
         assertFalse(modelManager.hasInternship(new InternshipBuilder(GOOGLE).build()));
-
-        // add then delete
-        modelManager.addInternship(new InternshipBuilder(GOOGLE).build());
-        modelManager.deleteInternship(new InternshipBuilder(GOOGLE).build());
-        assertFalse(modelManager.hasInternship(new InternshipBuilder(GOOGLE).build()));
-
-        // add then set
-        modelManager.addInternship(new InternshipBuilder(GOOGLE).build());
-        modelManager.setInternship(new InternshipBuilder(GOOGLE).build(), PAYPAL);
-        assertFalse(modelManager.hasInternship(new InternshipBuilder(GOOGLE).build()));
     }
 
     @Test
     public void hasInternship_internshipInResumeBook_returnsTrue() {
+        assertTrue(modelManager.hasInternship(new InternshipBuilder(PAYPAL).build()));
+    }
+
+    @Test
+    public void addInternship_internshipNotInResumeBook_success() {
         modelManager.addInternship(new InternshipBuilder(GOOGLE).build());
         assertTrue(modelManager.hasInternship(new InternshipBuilder(GOOGLE).build()));
     }
 
     @Test
-    public void getInternshipSize_emptyResumeBook_returnsZero() {
-        assertEquals(0, modelManager.getInternshipSize());
+    public void addInternship_internshipAlreadyInResumeBook_throwsDuplicateItemException() {
+        assertThrows( DuplicateItemException.class,
+                () -> modelManager.addInternship(new InternshipBuilder(PAYPAL).build()));
     }
 
     @Test
-    public void getInternshipByTag_emptyResumeBook_returnsEmptyList() {
-        assertEquals(new ArrayList<Internship>(), modelManager.getInternshipsByTag(new Tag(VALID_TAG_TECH)));
+    public void deleteInternship_internshipExists_success() {
+        modelManager.deleteInternship(new InternshipBuilder(PAYPAL).build());
+        assertFalse(modelManager.hasInternship(new InternshipBuilder(PAYPAL).build()));
+    }
+
+    @Test
+    public void deleteInternship_internshipNotInResumeBook_throwsItemNotFoundException() {
+        assertThrows(ItemNotFoundException.class,
+                () -> modelManager.deleteInternship(new InternshipBuilder(GOOGLE).build()));
+    }
+
+    @Test
+    public void setInternship_internshipInResumeBook_success() {
+        modelManager.setInternship(new InternshipBuilder(PAYPAL).build(), new InternshipBuilder(GOOGLE).build());
+        assertTrue(modelManager.hasInternship(new InternshipBuilder(GOOGLE).build()));
+    }
+
+    @Test
+    public void setInternship_toEditNotInResumeBook_throwsItemNotFoundException() {
+        assertThrows(ItemNotFoundException.class,
+                () -> modelManager.setInternship(GOOGLE, PAYPAL));
+    }
+
+    @Test
+    public void getInternshipSize_internshipsInResumeBook_returnsInternshipListSize() {
+        assertEquals(2, modelManager.getInternshipSize());
+    }
+
+    @Test
+    public void getInternshipByTag_internshipWithTagInResumeBook_returnsInternshipList() {
+        assertEquals(Arrays.asList(NINJA_VAN, PAYPAL),
+                modelManager.getInternshipsByTag(new Tag(VALID_TAG_TECH)));
+    }
+
+    @Test
+    public void getInternshipByTag_noInternshipWithTagInResumeBook_returnsEmptyList() {
+        assertEquals(Collections.emptyList(),
+                modelManager.getInternshipsByTag(new Tag("abc")));
     }
 
     @Test
     public void setInternshipsToDisplay_internshipInResumeBook_success() {
-        modelManager.addInternship(new InternshipBuilder(GOOGLE).build());
-        modelManager.addInternship(new InternshipBuilder(PAYPAL).build());
         modelManager.setInternshipToDisplay();
         assertEquals(modelManager.getDisplayType(), ItemUtil.INTERNSHIP_ALIAS);
-        assertEquals(Arrays.asList(GOOGLE, PAYPAL), modelManager.getFilteredItemList());
+        assertEquals(Arrays.asList(NINJA_VAN, PAYPAL), modelManager.getFilteredItemList());
     }
 
     @Test
     public void sortInternships_internshipInResumeBook_success() {
-        modelManager.addInternship(new InternshipBuilder(GOOGLE).build());
-        modelManager.addInternship(new InternshipBuilder(PAYPAL).build());
+        modelManager.sortInternships(Comparator.comparing(Internship::getName).reversed());
         modelManager.setInternshipToDisplay();
         assertEquals(modelManager.getDisplayType(), ItemUtil.INTERNSHIP_ALIAS);
-        assertEquals(Arrays.asList(GOOGLE, PAYPAL), modelManager.getFilteredItemList());
+        assertEquals(Arrays.asList(PAYPAL, NINJA_VAN), modelManager.getFilteredItemList());
+    }
+
+    // Note-related tests
+
+    @Test
+    public void hasNote_nullNote_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasNote(null));
+    }
+
+    @Test
+    public void hasNote_noteNotInResumeBook_returnsFalse() {
+        assertFalse(modelManager.hasNote(new NoteBuilder(FINISH_RESUME_2).build()));
+    }
+
+    @Test
+    public void hasNote_noteInResumeBook_returnsTrue() {
+        assertTrue(modelManager.hasNote(new NoteBuilder(FINISH_HOMEWORK).build()));
+    }
+
+    @Test
+    public void addNote_noteNotInResumeBook_success() {
+        modelManager.addNote(new NoteBuilder(FINISH_RESUME_2).build());
+        assertTrue(modelManager.hasNote(new NoteBuilder(FINISH_RESUME_2).build()));
+    }
+
+    @Test
+    public void addNote_noteAlreadyInResumeBook_throwsDuplicateItemException() {
+        assertThrows( DuplicateItemException.class,
+                () -> modelManager.addNote(new NoteBuilder(FINISH_HOMEWORK).build()));
+    }
+
+    @Test
+    public void deleteNote_noteExists_success() {
+        modelManager.deleteNote(new NoteBuilder(FINISH_HOMEWORK).build());
+        assertFalse(modelManager.hasNote(new NoteBuilder(FINISH_HOMEWORK).build()));
+    }
+
+    @Test
+    public void deleteNote_noteNotInResumeBook_throwsItemNotFoundException() {
+        assertThrows(ItemNotFoundException.class,
+                () -> modelManager.deleteNote(new NoteBuilder(FINISH_RESUME_2).build()));
+    }
+
+    @Test
+    public void setNote_noteInResumeBook_success() {
+        modelManager.setNote(new NoteBuilder(FINISH_HOMEWORK).build(), new NoteBuilder(FINISH_RESUME_2).build());
+        assertTrue(modelManager.hasNote(new NoteBuilder(FINISH_RESUME_2).build()));
+    }
+
+    @Test
+    public void setNote_toEditNotInResumeBook_throwsItemNotFoundException() {
+        assertThrows(ItemNotFoundException.class,
+                () -> modelManager.setNote(FINISH_RESUME_2, FINISH_HOMEWORK));
+    }
+
+    @Test
+    public void getNoteSize_notesInResumeBook_returnsNoteListSize() {
+        assertEquals(2, modelManager.getNoteListSize());
+    }
+
+    @Test
+    public void sortNotes_noteInResumeBook_success() {
+        modelManager.sortNotes(Comparator.comparing(Note::getName).reversed());
+        assertEquals(Arrays.asList(FINISH_HOMEWORK, FINISH_CS_2103), modelManager.getFilteredNoteList());
     }
 
 //    @Test
