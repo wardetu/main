@@ -38,10 +38,14 @@ public class TypicalResumeBook {
             .withInternship(new InternshipBuilder(TypicalInternship.NINJA_VAN).build())
             .withInternship(new InternshipBuilder(TypicalInternship.PAYPAL).build())
             .withNote(new NoteBuilder(TypicalNote.FINISH_CS_2103).build())
+            .withNote((new NoteBuilder(TypicalNote.FINISH_HOMEWORK).build()))
             .withPerson(new PersonBuilder(TypicalPerson.ALICE).build())
             .withProject(new ProjectBuilder(TypicalProject.ORBITAL).build())
+            .withProject(new ProjectBuilder(TypicalProject.DUKE).build())
             .withSkill(new SkillBuilder(TypicalSkill.REACT).build())
+            .withSkill(new SkillBuilder(TypicalSkill.GIT).build())
             .withResume(new ResumeBuilder(TypicalResume.ME_RESUME).build())
+            .withResume(new ResumeBuilder(TypicalResume.SE_RESUME).build())
             .build();
 
     // This TypicalResumeBook is used mainly for the ResumeEdit and TagPull Command tests

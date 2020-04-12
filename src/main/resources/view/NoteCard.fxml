@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -26,7 +27,7 @@
                <children>
                   <ImageView fx:id="tickBox" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="6.0" />
                      </HBox.margin></ImageView>
                   <Label fx:id="title" text="\\\$title" underline="true">
                      <HBox.margin>
@@ -45,7 +46,7 @@
                      <children>
                         <HBox>
                            <children>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -54,6 +55,14 @@
                                  </image></ImageView>
                               <Label id="header" text="Time: " />
                               <Label id="details" fx:id="time" text="\\\$time" />
+                              <FlowPane fx:id="tags" prefWrapLength="150.0">
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                              </FlowPane>
                            </children>
                            <VBox.margin>
                               <Insets />
