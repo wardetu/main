@@ -1,7 +1,8 @@
 package seedu.address.model.item;
 
-import java.util.Observable;
+import static java.util.Objects.requireNonNull;
 
+import java.util.Observable;
 
 /**
  * A wrapper class for the person contained in the resume book.
@@ -15,6 +16,7 @@ public class ObservablePerson extends Observable {
     }
 
     public void setPerson(Person person) {
+        requireNonNull(person);
         this.internalPerson = person;
         this.setChanged();
         // Triggers all the observers
