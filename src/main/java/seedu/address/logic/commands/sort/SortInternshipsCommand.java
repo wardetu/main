@@ -37,6 +37,7 @@ public class SortInternshipsCommand extends SortCommand {
                 String.format(MESSAGE_SUCCESS, Internship.class.getSimpleName()), model.getDisplayType());
     }
 
+    // This equals implementation is a bit crude but it saves us the hassle of comparing two Comparator<> objects.
     @Override
     public boolean equals(Object other) {
         return other == this
