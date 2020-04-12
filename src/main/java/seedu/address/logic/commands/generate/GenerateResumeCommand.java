@@ -28,26 +28,23 @@ import seedu.address.model.item.Skill;
 import seedu.address.model.item.field.Name;
 
 /**
- * Generate pdf file from a Resume item
+ * Generates .pdf file from a resume.
  */
 public class GenerateResumeCommand extends Command {
 
     public static final String COMMAND_WORD = "rgen";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Generate a pdf file from a Resume item identified by the index number used in the resume list. "
-            + "If no name is provided for the output .pdf file, default name is the same as resume name.\n"
+            + ": Generates a .pdf file from a resume in the ResuMe application with the specified index.\n"
+            + "If no name is provided for the output .pdf file, the default name is the same as the resume name.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME]\n"
+            + "[" + PREFIX_NAME + "FILE_NAME]\n"
             + "Example: " + COMMAND_WORD + " 1 [" + PREFIX_NAME + "MyResume]";
     public static final String MESSAGE_GENERATE_SUCCESS = "Generated %s from %s";
     private static final String rootPath = "";
 
-    protected String fileName;
-    protected final Index targetIndex;
-
+    private String fileName;
+    private final Index targetIndex;
     private final PdfBuilder builder = new PdfBuilder();
-
-
 
     public GenerateResumeCommand(Index targetIndex) {
         requireNonNull(targetIndex);
@@ -61,9 +58,14 @@ public class GenerateResumeCommand extends Command {
         this.fileName = resumeName.toString();
     }
 
+    /**
+     * Generates .pdf file from the resume.
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} that describes changes made when command execute runs successfully.
+     * @throws CommandException if the index specified is greater than the number of resumes.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-
         // Get resume item
         requireNonNull(model);
         if (targetIndex.getZeroBased() >= model.getResumeSize()) {
@@ -77,63 +79,103 @@ public class GenerateResumeCommand extends Command {
             fileName = resumeToGenerate.getName().toString();
         }
 
-        // Get internships to add
+        // Get lists of item ids
         List<Integer> internshipsToAdd = resumeToGenerate.getInternshipIds();
-
-        // Get projects to add
         List<Integer> projectsToAdd = resumeToGenerate.getProjectIds();
-
-        // Get skills to add
         List<Integer> skillsToAdd = resumeToGenerate.getSkillIds();
 
         try {
             builder.addPage();
-            builder.addResumeTitle(user);
-            builder.addBio(user);
-            builder.addContact(user);
-
-            builder.addSectionTitle("EDUCATION");
-            builder.addEducation(user);
-
-            if (!internshipsToAdd.isEmpty()) {
-                builder.addSectionTitle("INTERNSHIPS");
-                for (Integer id: internshipsToAdd) {
-                    Internship toAdd = model.getInternshipById(id);
-                    builder.addInternship(toAdd);
-                }
-            }
-
-            if (!projectsToAdd.isEmpty()) {
-                builder.addSectionTitle("PROJECTS");
-                for (Integer id: projectsToAdd) {
-                    Project toAdd = model.getProjectById(id);
-                    builder.addProject(toAdd);
-                }
-            }
-
-            if (!skillsToAdd.isEmpty()) {
-                builder.addSectionTitle("SKILLS");
-                List<Skill> skills = resumeToGenerate.getSkillIds().stream()
-                        .map(x -> model.hasSkillId(x) ? model.getSkillById(x) : null)
-                        .filter(Objects::nonNull)
-                        .collect(Collectors.toList());
-                builder.addSkills(skills);
-            }
+            addPersonalDetails(user);
+            addInternships(model, internshipsToAdd);
+            addProjects(model, projectsToAdd);
+            addSkills(model, skillsToAdd);
 
             PDDocument resume = builder.build();
             resume.save(rootPath + fileName + ".pdf");
+            openPopUp();
 
-            if (Desktop.isDesktopSupported()) {
-                File file = new File(rootPath + fileName + ".pdf");
-                Desktop.getDesktop().open(file);
-            }
         } catch (IOException e) {
-            err.println("Exception while trying to create simple document - " + e);
+            err.println("Error while trying to create .pdf file - " + e);
         }
 
         return new GenerateResumeCommandResult(resumeToGenerate.toString(),
                 String.format(MESSAGE_GENERATE_SUCCESS, fileName, resumeToGenerate.getName().toString()),
                 model.getDisplayType());
+    }
+
+    /**
+     * Adds the user's name, bio, contact information and education to the .pdf file.
+     * @param user the user of the application.
+     * @throws IOException
+     */
+    private void addPersonalDetails(Person user) throws IOException {
+        builder.addResumeTitle(user);
+        builder.addBio(user);
+        builder.addContact(user);
+
+        builder.addSectionTitle("EDUCATION");
+        builder.addEducation(user);
+    }
+
+    /**
+     * Adds the user's internship experiences to the .pdf file.
+     * @param model {@code Model} which the command should operate on.
+     * @param internshipsToAdd the list of {@code Internship} ids to be added to the .pdf file.
+     * @throws IOException
+     */
+    private void addInternships(Model model, List<Integer> internshipsToAdd) throws IOException {
+        if (!internshipsToAdd.isEmpty()) {
+            builder.addSectionTitle("INTERNSHIPS");
+            for (Integer id: internshipsToAdd) {
+                Internship toAdd = model.getInternshipById(id);
+                builder.addInternship(toAdd);
+            }
+        }
+    }
+
+    /**
+     * Adds the user's projects to the .pdf file.
+     * @param model {@code Model} which the command should operate on.
+     * @param projectsToAdd the list of {@code Project} ids to be added to the .pdf file.
+     * @throws IOException
+     */
+    private void addProjects(Model model, List<Integer> projectsToAdd) throws IOException {
+        if (!projectsToAdd.isEmpty()) {
+            builder.addSectionTitle("PROJECTS");
+            for (Integer id: projectsToAdd) {
+                Project toAdd = model.getProjectById(id);
+                builder.addProject(toAdd);
+            }
+        }
+    }
+
+    /**
+     * Adds the user's skills to the .pdf file.
+     * @param model {@code Model} which the command should operate on.
+     * @param skillsToAdd the list of {@code Skill} ids to be added to the .pdf file.
+     * @throws IOException
+     */
+    private void addSkills(Model model, List<Integer> skillsToAdd) throws IOException {
+        if (!skillsToAdd.isEmpty()) {
+            builder.addSectionTitle("SKILLS");
+            List<Skill> skills = skillsToAdd.stream()
+                    .map(x -> model.hasSkillId(x) ? model.getSkillById(x) : null)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+            builder.addSkills(skills);
+        }
+    }
+
+    /**
+     * Opens the generated .pdf file in a pop-up window.
+     * @throws IOException
+     */
+    private void openPopUp() throws IOException {
+        if (Desktop.isDesktopSupported()) {
+            File file = new File(rootPath + fileName + ".pdf");
+            Desktop.getDesktop().open(file);
+        }
     }
 
     @Override
