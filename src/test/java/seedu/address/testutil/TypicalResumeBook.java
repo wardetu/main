@@ -20,6 +20,20 @@ public class TypicalResumeBook {
             .withResume(new ResumeBuilder(TypicalResume.SE_RESUME).build())
             .build();
 
+    /*
+        DO NOT CHANGE THIS unless JsonSerializableResumeBookTest and JsonResumeBookStorageTest contents are updated
+        accordingly. The json files are based against this.
+     */
+    public static final ResumeBook TYPICAL_WITHOUT_GOGGLE = new ResumeBookBuilder()
+            .withInternship(new InternshipBuilder(TypicalInternship.NINJA_VAN).build())
+            .withInternship(new InternshipBuilder(TypicalInternship.PAYPAL).build())
+            .withNote(new NoteBuilder(TypicalNote.FINISH_CS_2103).build())
+            .withPerson(new PersonBuilder(TypicalPerson.ALICE).build())
+            .withProject(new ProjectBuilder(TypicalProject.ORBITAL).build())
+            .withSkill(new SkillBuilder(TypicalSkill.REACT).build())
+            .withResume(new ResumeBuilder(TypicalResume.ME_RESUME).build())
+            .build();
+
     public static final ResumeBook TYPICAL_WITHOUT_GOOGLE = new ResumeBookBuilder()
             .withInternship(new InternshipBuilder(TypicalInternship.NINJA_VAN).build())
             .withInternship(new InternshipBuilder(TypicalInternship.PAYPAL).build())
