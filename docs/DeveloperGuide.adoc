@@ -69,8 +69,9 @@ The _Sequence Diagram_ below shows how the components interact with each other f
 .Component interactions for `delete 1 i/ ski` command
 image::ArchitectureSequenceDiagram.png[]
 
-The figure above explains quite clearly how the input of the user is passed into the system through `Ui` that calls `Logic` to make changes in the `Model` and saves to `Storage`.
-However, it may not be immediately clear how the `Ui` is then updated to give visual feedback to the User. The updating of the Ui is actually done through a combination 
+The figure above explains quite clearly how the input of the user is passed into the system through `Ui` that calls
+`Logic` to make changes in the `Model` and saves to `Storage`. However, it may not be immediately clear how the `Ui` is
+then updated to give visual feedback to the User. The updating of the Ui is actually done through a combination
 of observables and data passing through `commandResult`. Head to <<UI component>> to read more.
 
 [discrete]
@@ -263,13 +264,14 @@ This leads to a cleaner execution method of each ABCItemCommand as each command 
 ** Pros: More OOP. Each `ABCItemCommand` has its own and distinct functionality. Each `ABCItemCommand` has more flexible behaviour and can be easily changed as required.
 ** Cons: Many classes have to be maintained.
 
-*Alternative 2:* `ABCCommand` is not separated into many `ABCItemCommand`. 
+*Alternative 2:* `ABCCommand` is not separated into many `ABCItemCommand`.
 The following is the activity diagram for execution of `AddCommand` when the user adds a resume.
 
 .Activity diagram for execution of `AddCommand`
 image::AddCommandActivityDiagram.png[]
 
-Implementing `ABCCommand` this way forces execute to be switch-cased. Functionality of execute would vary depending on the item `Type`. 
+Implementing `ABCCommand` this way forces execute to be switch-cased.
+Functionality of execute would vary depending on the item `Type`.
 
 ** Pros: Only one command is required, regardless of number of items. Low overhead.
 ** Cons: Long `execute` method due to the need for handling the different item types. Item `Type` would also need to be stored.
