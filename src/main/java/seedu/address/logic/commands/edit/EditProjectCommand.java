@@ -81,7 +81,7 @@ public class EditProjectCommand extends EditCommand {
         }
 
         return new EditCommandResult(editedProject.toString(),
-                String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editedProject),
+                String.format(MESSAGE_EDIT_PROJECT_SUCCESS, editedProject.getName().fullName),
                 model.getDisplayType());
     }
 

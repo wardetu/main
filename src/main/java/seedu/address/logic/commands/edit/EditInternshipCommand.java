@@ -92,7 +92,7 @@ public class EditInternshipCommand extends EditCommand {
         }
 
         return new EditCommandResult(editedInternship.toString(),
-                String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship),
+                String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship.getName().fullName),
                 model.getDisplayType());
     }
 

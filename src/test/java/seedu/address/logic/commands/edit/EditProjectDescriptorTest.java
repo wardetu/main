@@ -1,65 +1,69 @@
 package seedu.address.logic.commands.edit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_DUKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_NAME_DUKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WEBSITE_DUKE;
+import static seedu.address.testutil.TypicalEditProjectDescriptor.DUKE;
+import static seedu.address.testutil.TypicalEditProjectDescriptor.ORBITAL;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.item.Project;
-import seedu.address.testutil.ProjectBuilder;
+import seedu.address.testutil.EditProjectDescriptorBuilder;
 
 public class EditProjectDescriptorTest {
-    private Project sampleProject = new ProjectBuilder().build();
-    private EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
+    @Test
+    public void isAnyFieldMissing_noFieldEdited_returnsTrue() {
+        assertFalse(new EditProjectDescriptorBuilder().build().isAnyFieldEdited());
+    }
 
     @Test
     public void equals() {
-        editProjectDescriptor.setName(sampleProject.getName());
-        editProjectDescriptor.setTime(sampleProject.getTime());
-        editProjectDescriptor.setWebsite(sampleProject.getWebsite());
-        editProjectDescriptor.setDescription(sampleProject.getDescription());
-        editProjectDescriptor.setTags(sampleProject.getTags());
-
-        EditProjectDescriptor editProjectDescriptorToTest =
-                new EditProjectDescriptor(editProjectDescriptor);
-
-        // same name -> returns true
-        assertEquals(editProjectDescriptor.getName().get(), sampleProject.getName());
+        // same values -> returns true
+        EditProjectDescriptor descriptorWithSameValues = new EditProjectDescriptor(ORBITAL);
+        assertEquals(ORBITAL, descriptorWithSameValues);
 
         // same object -> returns true
-        assertEquals(editProjectDescriptor.getTime().get(), sampleProject.getTime());
+        assertEquals(ORBITAL, ORBITAL);
 
-        // same object -> returns true
-        assertEquals(editProjectDescriptor.getWebsite().get(), sampleProject.getWebsite());
+        // null -> returns false
+        assertNotEquals(null, ORBITAL);
 
-        // same object -> returns true
-        assertEquals(editProjectDescriptor.getDescription().get(), sampleProject.getDescription());
+        // different types -> returns false
+        assertNotEquals(5, ORBITAL);
 
-        // same object -> returns true
-        assertEquals(editProjectDescriptor.getTags().get(), sampleProject.getTags());
+        // different values -> returns false
+        assertNotEquals(ORBITAL, DUKE);
 
-        // same name -> returns true
-        assertEquals(editProjectDescriptorToTest.getName().get(), editProjectDescriptor.getName().get());
+        // different name -> returns false
+        EditProjectDescriptor editedOrbital = new EditProjectDescriptorBuilder(ORBITAL)
+                .withName(VALID_PROJECT_NAME_DUKE).build();
+        assertNotEquals(ORBITAL, editedOrbital);
 
-        // same object -> returns true
-        assertEquals(editProjectDescriptorToTest.getTime().get(), editProjectDescriptor.getTime().get());
+        // different time -> returns false
+        editedOrbital = new EditProjectDescriptorBuilder(ORBITAL)
+                .withTime(VALID_TIME_2).build();
+        assertNotEquals(ORBITAL, editedOrbital);
 
-        // same object -> returns true
-        assertEquals(editProjectDescriptorToTest.getWebsite().get(), editProjectDescriptor.getWebsite().get());
+        // different website -> returns false
+        editedOrbital = new EditProjectDescriptorBuilder(ORBITAL)
+                .withWebsite(VALID_WEBSITE_DUKE).build();
+        assertNotEquals(ORBITAL, editedOrbital);
 
-        // same object -> returns true
-        assertEquals(editProjectDescriptorToTest.getDescription().get(),
-                editProjectDescriptor.getDescription().get());
+        // different description -> returns false
+        editedOrbital = new EditProjectDescriptorBuilder(ORBITAL)
+                .withDescription(VALID_DESCRIPTION_DUKE).build();
+        assertNotEquals(ORBITAL, editedOrbital);
 
-        // same object -> returns true
-        assertEquals(editProjectDescriptorToTest.getTags().get(),
-                editProjectDescriptor.getTags().get());
-
-        // same descriptor object -> returns true
-        assertEquals(editProjectDescriptor, editProjectDescriptorToTest);
-
-        // checks two descriptors if same -> returns true
-        assertTrue(editProjectDescriptor.equals(editProjectDescriptorToTest));
+        // different tags -> returns false
+        editedOrbital = new EditProjectDescriptorBuilder(ORBITAL)
+                .withTags(VALID_TAG_TECH, VALID_TAG_JAVA).build();
+        assertNotEquals(ORBITAL, editedOrbital);
     }
 
     @Test

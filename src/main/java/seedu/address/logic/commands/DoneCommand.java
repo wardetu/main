@@ -28,6 +28,14 @@ public class DoneCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Sets note at {@code targetIndex} as done.
+     *
+     * @param model {@code Model} where note will be marked as done.
+     * @return      {@code CommandResult} that describes changes made when command execute runs successfully.
+     * @throws      CommandException if {@code targetIndex} is out of bounds or note at {@code targetIndex} is
+     *              already marked as done.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -36,7 +44,7 @@ public class DoneCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
-        Note toSetDone = model.getNote(targetIndex);
+        Note toSetDone = model.getNoteByIndex(targetIndex);
 
         if (toSetDone.isDone()) {
             throw new CommandException(MESSAGE_DONE_FAILURE);
