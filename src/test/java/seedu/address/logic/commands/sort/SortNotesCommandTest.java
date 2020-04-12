@@ -33,7 +33,7 @@ public class SortNotesCommandTest {
 
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, Note.class.getSimpleName());
         CommandResult commandResult =
-                new SortCommandResult(expectedMessage, expectedModel.getDisplayType());
+                new SortCommandResult(expectedMessage, "");
         assertCommandSuccess(new SortNotesCommand("name", true), model, commandResult, expectedModel);
     }
 
@@ -43,7 +43,7 @@ public class SortNotesCommandTest {
 
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, Note.class.getSimpleName());
         CommandResult commandResult =
-                new SortCommandResult(expectedMessage, expectedModel.getDisplayType());
+                new SortCommandResult(expectedMessage, "");
         assertCommandSuccess(
                 new SortNotesCommand("time", false), model, commandResult, expectedModel);
     }

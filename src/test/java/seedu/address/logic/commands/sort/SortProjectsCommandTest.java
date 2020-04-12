@@ -1,6 +1,5 @@
 package seedu.address.logic.commands.sort;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.util.Comparator;
@@ -32,10 +31,9 @@ public class SortProjectsCommandTest {
         expectedModel.sortProjects(Comparator.comparing(Project::getName));
         expectedModel.setProjectToDisplay();
 
-        assertEquals(ItemUtil.PROJECT_ALIAS, expectedModel.getDisplayType());
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, Project.class.getSimpleName());
         CommandResult commandResult =
-                new SortCommandResult(expectedMessage, expectedModel.getDisplayType());
+                new SortCommandResult(expectedMessage, ItemUtil.PROJECT_ALIAS);
         assertCommandSuccess(new SortProjectsCommand("name", false), model, commandResult, expectedModel);
     }
 
@@ -44,10 +42,9 @@ public class SortProjectsCommandTest {
         expectedModel.sortProjects(Comparator.comparing(Project::getTime).reversed());
         expectedModel.setProjectToDisplay();
 
-        assertEquals(ItemUtil.PROJECT_ALIAS, expectedModel.getDisplayType());
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, Project.class.getSimpleName());
         CommandResult commandResult =
-                new SortCommandResult(expectedMessage, expectedModel.getDisplayType());
+                new SortCommandResult(expectedMessage, ItemUtil.PROJECT_ALIAS);
         assertCommandSuccess(
                 new SortProjectsCommand("time", true), model, commandResult, expectedModel);
     }
