@@ -16,7 +16,6 @@ import seedu.address.model.tag.Tag;
 public class EditNoteDescriptor extends EditItemDescriptor {
     private Time time;
     private Set<Tag> tags;
-    private boolean isDoneUpdated = false;
 
     public EditNoteDescriptor() {}
 
@@ -60,7 +59,7 @@ public class EditNoteDescriptor extends EditItemDescriptor {
      */
     @Override
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(name, time);
+        return CollectionUtil.isAnyNonNull(name, time, tags);
     }
 
     @Override

@@ -99,17 +99,19 @@ public class VersionedResumeBook extends ResumeBook {
     }
 
     public ReadOnlyResumeBook getStatelessResumeBook() {
-        this.currentStatePointer = 0;
-        this.resumeBookStateList.clear();
-        return this;
+        ResumeBook newResumeBook = new ResumeBook();
+        newResumeBook.resetData(this);
+        return newResumeBook;
     }
 
     /**
      * Thrown when trying to {@code undo()} but can't.
      */
     public static class NoUndoableStateException extends RuntimeException {
+        public static final String MESSAGE_NO_UNDO_STATE =
+                "Current state pointer is at start of resumeBookState list, unable to undo.";
         private NoUndoableStateException() {
-            super("Current state pointer at start of resumeBookState list, unable to undo.");
+            super(MESSAGE_NO_UNDO_STATE);
         }
     }
 
@@ -117,8 +119,10 @@ public class VersionedResumeBook extends ResumeBook {
      * Thrown when trying to {@code redo()} but can't.
      */
     public static class NoRedoableStateException extends RuntimeException {
+        public static final String MESSAGE_NO_REDO_STATE =
+                "Current state pointer is at end of resumeBookState list, unable to redo.";
         private NoRedoableStateException() {
-            super("Current state pointer at end of resumeBookState list, unable to redo.");
+            super(MESSAGE_NO_REDO_STATE);
         }
     }
 }

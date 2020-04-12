@@ -3,6 +3,7 @@ package seedu.address.logic.commands.add;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,7 +25,8 @@ public class AddNoteCommand extends AddCommand {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ITEM + "note "
             + PREFIX_NAME + "Finish Resume 3 "
-            + PREFIX_TIME + "04-2020 ";
+            + PREFIX_TIME + "04-2020 "
+            + PREFIX_TAG + "urgent";
 
     public static final String MESSAGE_SUCCESS = "New note added!";
 
@@ -36,8 +38,7 @@ public class AddNoteCommand extends AddCommand {
     private final Note toAdd;
 
     /**
-     * Constructor.
-     * @param note is a Note.
+     * Creates an AddNoteCommand to add the specified {@code note}.
      */
     public AddNoteCommand(Note note) {
         requireNonNull(note);
@@ -45,10 +46,11 @@ public class AddNoteCommand extends AddCommand {
     }
 
     /**
-     * Add a Note to the list.
-     * @param model {@code Model} which the command should operate on.
-     * @return Command Result.
-     * @throws CommandException
+     * Adds {@code toAdd} note to model.
+     *
+     * @param model {@code Model} which note will be added.
+     * @return      {@code CommandResult} that describes changes made when command execute runs successfully.
+     * @throws      CommandException if adding the model results in duplicate notes.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {

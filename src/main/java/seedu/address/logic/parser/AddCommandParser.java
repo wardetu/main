@@ -59,89 +59,17 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         String itemType = ParserUtil.parseItemType(argMultimap.getValue(PREFIX_ITEM).get());
 
-        Name name;
-        Set<Tag> tagList;
-        Description description;
-
         switch (itemType) {
         case ItemUtil.RESUME_ALIAS:
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
-                    || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddResumeCommand.MESSAGE_USAGE));
-            }
-
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            Resume resume = new Resume(name, tagList);
-            return new AddResumeCommand(resume);
-
+            return parseResume(argMultimap);
         case ItemUtil.INTERNSHIP_ALIAS:
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FROM, PREFIX_TO, PREFIX_ROLE, PREFIX_DESCRIPTION)
-                    || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddInternshipCommand.MESSAGE_USAGE));
-            }
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Time from = ParserUtil.parseTime(argMultimap.getValue(PREFIX_FROM).get());
-            Time to = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TO).get());
-
-            if (from.compareTo(to) > 0) {
-                throw new ParseException(AddInternshipCommand.MESSAGE_FROM_TO_MISORDER);
-            }
-
-            Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
-            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            Internship internship = new Internship(name, role, from, to, description, tagList);
-            return new AddInternshipCommand(internship);
-
+            return parseInternship(argMultimap);
         case ItemUtil.PROJECT_ALIAS:
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TIME, PREFIX_WEBSITE, PREFIX_DESCRIPTION)
-                    || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddProjectCommand.MESSAGE_USAGE));
-            }
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
-            Website website = ParserUtil.parseWebsite(argMultimap.getValue(PREFIX_WEBSITE).get());
-            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            Project project = new Project(name, time, website, description, tagList);
-            return new AddProjectCommand(project);
-
+            return parseProject(argMultimap);
         case ItemUtil.SKILL_ALIAS:
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LEVEL) || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddSkillCommand.MESSAGE_USAGE));
-            }
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            Skill skill = new Skill(name, level, tagList);
-            return new AddSkillCommand(skill);
-
+            return parseSkill(argMultimap);
         case ItemUtil.NOTE_ALIAS:
-            if (!argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddNoteCommand.MESSAGE_USAGE));
-            }
-
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TIME)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddNoteCommand.MESSAGE_USAGE));
-            }
-
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Time noteTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
-            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            Note note = new Note(name, noteTime, tagList);
-            return new AddNoteCommand(note);
-
+            return parseNote(argMultimap);
         default:
             // Should not have reached here at all
             throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
@@ -156,4 +84,112 @@ public class AddCommandParser implements Parser<AddCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Parses the arguments in the context of adding a Resume item.
+     */
+    private AddResumeCommand parseResume(ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddResumeCommand.MESSAGE_USAGE));
+        }
+
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        Resume resume = new Resume(name, tagList);
+        return new AddResumeCommand(resume);
+    }
+
+    /**
+     * Parses the arguments in the context of adding an Internship item.
+     */
+    private AddInternshipCommand parseInternship(ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FROM, PREFIX_TO, PREFIX_ROLE, PREFIX_DESCRIPTION)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddInternshipCommand.MESSAGE_USAGE));
+        }
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Time from = ParserUtil.parseTime(argMultimap.getValue(PREFIX_FROM).get());
+        Time to = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TO).get());
+
+        if (from.compareTo(to) > 0) {
+            throw new ParseException(AddInternshipCommand.MESSAGE_FROM_TO_MISORDER);
+        }
+
+        Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
+        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        Internship internship = new Internship(name, role, from, to, description, tagList);
+        return new AddInternshipCommand(internship);
+    }
+
+    /**
+     * Parses the arguments in the context of adding a Project item.
+     */
+    private AddProjectCommand parseProject(ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TIME, PREFIX_WEBSITE, PREFIX_DESCRIPTION)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddProjectCommand.MESSAGE_USAGE));
+        }
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
+        Website website = ParserUtil.parseWebsite(argMultimap.getValue(PREFIX_WEBSITE).get());
+        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        Project project = new Project(name, time, website, description, tagList);
+        return new AddProjectCommand(project);
+    }
+
+
+    /**
+     * Parses the arguments in the context of adding a Skill item.
+     */
+    private AddSkillCommand parseSkill(ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LEVEL) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddSkillCommand.MESSAGE_USAGE));
+        }
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        Skill skill = new Skill(name, level, tagList);
+        return new AddSkillCommand(skill);
+    }
+
+    /**
+     * Parses the arguments in the context of adding a Note item.
+     */
+    private AddNoteCommand parseNote(ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddNoteCommand.MESSAGE_USAGE));
+        }
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TIME)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddNoteCommand.MESSAGE_USAGE));
+        }
+
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Time noteTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        Note note = new Note(name, noteTime, tagList);
+        return new AddNoteCommand(note);
+    }
 }
