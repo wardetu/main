@@ -233,15 +233,22 @@ List items in the storage.
 [TIP]
 Listed items are in short form, only showing their name, index, `tags` and a short summary.
 To view items in full details, use `view`.
+[TIP]
+The type of items listed will light up in orange.
 
 *Examples:*
 
-//TODO: add screenshots
-
 * `list i/ res`
 Lists all `resume` items.
-* `list i/ proj`
-Lists all project items.
++
+image::ListAllResumes.png[width = "450"]
+
+* `list i/ int`
+Lists all internship items.
++
+image::ListAllInternships.png[width = "450"]
+
+
 // end::list[]
 
 // tag::add[]
@@ -650,6 +657,9 @@ Previews a `resume` in text format in a pop-up window.
 [NOTE]
 `INDEX` is the index of the `resume` seen when `list i/res` is called.
 
+[NOTE]
+`description` of `internship` and `project` is automatically separated into bullet points when the program detects full sentences.
+
 *Example:* Let's try out the following commands!
 
 . `list i/ res`
@@ -657,13 +667,15 @@ Previews a `resume` in text format in a pop-up window.
 
 *Outcome:*
 
-. The first command lists out all `resumes`. Assuming that you want to generate the second `resume` in the list box.
+. The first command lists out all `resumes`. Assuming that you want to preview the second `resume` in the list box.
 +
+image::ListResumeRPreview.png[width="790"]
 
-Suppose the `resume` at index 2 is named "Summer Internship". A pop-up window will be opened,
-featuring a text-based view of the content of "Summer Internship".
-
-image::RPreviewSummerInternship.png[width = "790"]
+. The second command will preview the `resume` at index 2 named "Software Engineering". A pop-up window will be opened,
+featuring a text-based view of the content of "Software Engineering". The screenshots of the results are as shown below:
++
+image::RPreview.png[width = "790"]
+image::RPreviewIndex2.png[width = "790"]
 
 // end::rpreview[]
 
@@ -710,7 +722,10 @@ image::PdfFile.PNG[width="790"]
 // tag::clear[]
 
 === Clearing all data: `clear`
-Clears all data from *ResuMe*.
+Clears all data from *ResuMe*. Empties all data in the resume book, user information is replaced with default user information.
+
+[NOTE]
+This command can be undone.
 
 ****
 *Format:* `clear`
