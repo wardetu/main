@@ -50,15 +50,40 @@ to update and give visual feedback to users.
 * What it does: Allows users clear all their data to start fresh.
 * Highlights: This feature was morphed from AddressBook so that it can work with our data types, undo, and redo.
 
-==== Wrote tests for `add`, `clear`, `done`, `list`, `rpreview`, `view`
+==== Wrote tests for `add`, `clear`, `done`, `list`, `rpreview`, `view`, `JsonAdaptedInternship`, `EditUserCommand`...
 
 === *Review/mentoring contributions*:
 ** Took part in reviewing of many PRs (Pull requests
 https://github.com/AY1920S2-CS2103T-F10-1/main/pull/234[#234],
 https://github.com/AY1920S2-CS2103T-F10-1/main/pull/159[#159],
-https://github.com/AY1920S2-CS2103T-F10-1/main/pull/238[#238] and more)
-** Took part in fixing bugs in other teammates' contributions (Pull requests
+https://github.com/AY1920S2-CS2103T-F10-1/main/pull/327[#327] and more)
+** Took part in fixing bugs in application to make sure app runs wells as a whole(Pull requests
 https://github.com/AY1920S2-CS2103T-F10-1/main/pull/252[#252],
+https://github.com/AY1920S2-CS2103T-F10-1/main/pull/331[#331],
 https://github.com/AY1920S2-CS2103T-F10-1/main/pull/228[#228],
 https://github.com/AY1920S2-CS2103T-F10-1/main/pull/148[#148] and more)
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=intro-para]
+
+include::../UserGuide.adoc[tag=list]
+
+include::../UserGuide.adoc[tag=rpreview]
+
+include::../UserGuide.adoc[tag=clear]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=overall-architecture]
+
+include::../DeveloperGuide.adoc[tag=command-classes]
 
