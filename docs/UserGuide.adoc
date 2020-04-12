@@ -209,7 +209,7 @@ Follow the steps in one of these two links to copy a file path according to your
 
 Afterwards, try a command similar to the one below:
 
-`me dp//Users/nhamquochung/Desktop/test.png`
+`me dp/ /Users/nhamquochung/Desktop/test.png`
 
 *Outcome:*
 
