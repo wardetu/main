@@ -29,8 +29,8 @@ import seedu.address.testutil.TypicalResumeBook;
 
 
 public class UndoCommandTest {
-    private Model expectedModel = new ModelManager(TypicalResumeBook.TYPICAL_WITH_FILLED_RESUME, new UserPrefs());
-    private Model model = new ModelManager(TypicalResumeBook.TYPICAL_WITH_FILLED_RESUME, new UserPrefs());
+    private Model expectedModel;
+    private Model model;
 
     @BeforeEach
     public void setUp() {

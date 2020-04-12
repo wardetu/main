@@ -16,7 +16,12 @@ import seedu.address.model.item.Note;
 public class SortNotesCommand extends SortCommand {
 
     private final Comparator<Note> sortComparator;
+    private final String sortOrder;
+    private final boolean reverse;
+
     public SortNotesCommand(String sortOrder, boolean reverse) {
+        this.sortOrder = sortOrder;
+        this.reverse = reverse;
         Comparator<Note> baseComparator =
                 sortOrder.equalsIgnoreCase("name")
                         ? Comparator.comparing(Note::getName)
@@ -38,6 +43,7 @@ public class SortNotesCommand extends SortCommand {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof SortNotesCommand
-                && sortComparator.equals(((SortNotesCommand) other).sortComparator));
+                && sortOrder.equals(((SortNotesCommand) other).sortOrder)
+                && reverse == ((SortNotesCommand) other).reverse);
     }
 }

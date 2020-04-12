@@ -14,8 +14,12 @@ import seedu.address.model.item.Internship;
 public class SortInternshipsCommand extends SortCommand {
 
     private final Comparator<Internship> sortComparator;
+    private final String sortOrder;
+    private final boolean reverse;
 
     public SortInternshipsCommand(String sortOrder, boolean reverse) {
+        this.sortOrder = sortOrder;
+        this.reverse = reverse;
         Comparator<Internship> baseComparator =
                 sortOrder.equalsIgnoreCase("name")
                         ? Comparator.comparing(Internship::getName)
@@ -33,10 +37,12 @@ public class SortInternshipsCommand extends SortCommand {
                 String.format(MESSAGE_SUCCESS, Internship.class.getSimpleName()), model.getDisplayType());
     }
 
+    // This equals implementation is a bit crude but it saves us the hassle of comparing two Comparator<> objects.
     @Override
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof SortInternshipsCommand
-                && sortComparator.equals(((SortInternshipsCommand) other).sortComparator));
+                && sortOrder.equals(((SortInternshipsCommand) other).sortOrder)
+                && reverse == ((SortInternshipsCommand) other).reverse);
     }
 }
