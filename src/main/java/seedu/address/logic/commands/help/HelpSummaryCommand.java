@@ -11,9 +11,11 @@ import seedu.address.model.Model;
  */
 public class HelpSummaryCommand extends HelpCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-            + "Example: " + COMMAND_WORD + " command";
-
+    /**
+     * Opens a pop-up window with the summary of all available commands.
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} that describes changes made when command execute runs successfully.
+     */
     @Override
     public CommandResult execute(Model model) {
         return new HelpCommandResult("", SHOWING_HELP_MESSAGE, model.getDisplayType(), HELP_COMMAND_SUMMARY);
