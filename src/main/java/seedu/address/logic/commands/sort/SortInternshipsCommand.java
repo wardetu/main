@@ -13,17 +13,17 @@ import seedu.address.model.item.Internship;
  */
 public class SortInternshipsCommand extends SortCommand {
 
-    // TODO: more defensive
     private final Comparator<Internship> sortComparator;
+    private final String sortOrder;
+    private final boolean reverse;
 
     public SortInternshipsCommand(String sortOrder, boolean reverse) {
-        Comparator<Internship> baseComparator = (int1, int2) -> {
-            if (sortOrder.equalsIgnoreCase("name")) {
-                return int1.getName().compareTo(int2.getName());
-            } else {
-                return int1.getFrom().compareTo(int2.getFrom());
-            }
-        };
+        this.sortOrder = sortOrder;
+        this.reverse = reverse;
+        Comparator<Internship> baseComparator =
+                sortOrder.equalsIgnoreCase("name")
+                        ? Comparator.comparing(Internship::getName)
+                        : Comparator.comparing(Internship::getFrom);
         sortComparator = reverse ? baseComparator.reversed() : baseComparator;
     }
 
@@ -33,6 +33,16 @@ public class SortInternshipsCommand extends SortCommand {
         model.setInternshipToDisplay();
         model.commitResumeBook();
 
-        return new SortCommandResult(String.format(MESSAGE_SUCCESS, "Internship"), model.getDisplayType());
+        return new SortCommandResult(
+                String.format(MESSAGE_SUCCESS, Internship.class.getSimpleName()), model.getDisplayType());
+    }
+
+    // This equals implementation is a bit crude but it saves us the hassle of comparing two Comparator<> objects.
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof SortInternshipsCommand
+                && sortOrder.equals(((SortInternshipsCommand) other).sortOrder)
+                && reverse == ((SortInternshipsCommand) other).reverse);
     }
 }
