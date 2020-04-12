@@ -69,7 +69,7 @@ public class EditUserCommand extends Command {
             + PREFIX_TO + "05-2022 "
             + PREFIX_CAP + "4.0 5.0";
 
-    public static final String USER_NOT_EDITED = "User and edited User is the same!";
+    public static final String USER_NOT_EDITED = "You are not making any changes to your personal details.";
 
     private EditUserDescriptor editUserDescriptor;
 
