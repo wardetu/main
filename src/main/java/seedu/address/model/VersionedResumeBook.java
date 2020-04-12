@@ -94,7 +94,7 @@ public class VersionedResumeBook extends ResumeBook {
 
         // state check
         return super.equals(otherVersionedResumeBook)
-                //&& resumeBookStateList.equals(otherVersionedResumeBook.resumeBookStateList)
+                && resumeBookStateList.equals(otherVersionedResumeBook.resumeBookStateList)
                 && currentStatePointer == otherVersionedResumeBook.currentStatePointer;
     }
 

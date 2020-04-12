@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -18,6 +19,7 @@ import seedu.address.model.item.Internship;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
+import seedu.address.model.util.ItemUtil;
 import seedu.address.testutil.InternshipBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.ResumeBuilder;
@@ -48,6 +50,7 @@ public class RedoCommandTest {
         expectedModel.undoResumeBook();
         expectedModel.redoResumeBook();
 
+        assertEquals("", expectedModel.getDisplayType());
         CommandResult commandResult = new RedoCommandResult(RedoCommand.MESSAGE_SUCCESS, model.getDisplayType());
         assertCommandSuccess(new RedoCommand(), model, commandResult, expectedModel);
     }
@@ -67,6 +70,7 @@ public class RedoCommandTest {
         expectedModel.undoResumeBook();
         expectedModel.redoResumeBook();
 
+        assertEquals(ItemUtil.RESUME_ALIAS, expectedModel.getDisplayType());
         CommandResult commandResult =
                 new RedoCommandResult(RedoCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType());
         assertCommandSuccess(new RedoCommand(), model, commandResult, expectedModel);
@@ -86,6 +90,7 @@ public class RedoCommandTest {
         expectedModel.undoResumeBook();
         expectedModel.redoResumeBook();
 
+        assertEquals(ItemUtil.INTERNSHIP_ALIAS, expectedModel.getDisplayType());
         CommandResult commandResult =
                 new RedoCommandResult(RedoCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType());
         assertCommandSuccess(new RedoCommand(), model, commandResult, expectedModel);
@@ -104,6 +109,7 @@ public class RedoCommandTest {
         expectedModel.undoResumeBook();
         expectedModel.redoResumeBook();
 
+        assertEquals(ItemUtil.PROJECT_ALIAS, expectedModel.getDisplayType());
         CommandResult commandResult =
                 new RedoCommandResult(RedoCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType());
         assertCommandSuccess(new RedoCommand(), model, commandResult, expectedModel);
@@ -143,18 +149,23 @@ public class RedoCommandTest {
         expectedModel.undoResumeBook();
         expectedModel.undoResumeBook();
 
+        // Redo -> do delete resume
         expectedModel.redoResumeBook();
+        assertEquals(ItemUtil.RESUME_ALIAS, expectedModel.getDisplayType());
         CommandResult commandResult1 =
                 new RedoCommandResult(RedoCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType());
         assertCommandSuccess(new RedoCommand(), model, commandResult1, expectedModel);
 
+        // Redo -> do add internship
         expectedModel.redoResumeBook();
+        assertEquals(ItemUtil.INTERNSHIP_ALIAS, expectedModel.getDisplayType());
         CommandResult commandResult2 =
                 new RedoCommandResult(RedoCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType());
         assertCommandSuccess(new RedoCommand(), model, commandResult2, expectedModel);
 
-
+        // Redo -> do sort project
         expectedModel.redoResumeBook();
+        assertEquals(ItemUtil.PROJECT_ALIAS, expectedModel.getDisplayType());
         CommandResult commandResult3 =
                 new RedoCommandResult(RedoCommand.MESSAGE_SUCCESS, expectedModel.getDisplayType());
         assertCommandSuccess(new RedoCommand(), model, commandResult3, expectedModel);

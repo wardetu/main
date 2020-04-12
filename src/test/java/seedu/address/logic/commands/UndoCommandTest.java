@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -18,6 +19,7 @@ import seedu.address.model.item.Internship;
 import seedu.address.model.item.Person;
 import seedu.address.model.item.Project;
 import seedu.address.model.item.Resume;
+import seedu.address.model.util.ItemUtil;
 import seedu.address.testutil.InternshipBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.ResumeBuilder;
@@ -45,6 +47,8 @@ public class UndoCommandTest {
         expectedModel.commitResumeBook();
         expectedModel.undoResumeBook();
 
+        // Empty string because set user does not cause change to any item list
+        assertEquals("", expectedModel.getDisplayType());
         CommandResult commandResult = new UndoCommandResult("Undo successfully!", model.getDisplayType());
         assertCommandSuccess(new UndoCommand(), model, commandResult, expectedModel);
     }
@@ -60,6 +64,8 @@ public class UndoCommandTest {
         expectedModel.commitResumeBook();
         expectedModel.undoResumeBook();
 
+        // We need to ensure that the display type of the resume book is set correctly
+        assertEquals(ItemUtil.RESUME_ALIAS, expectedModel.getDisplayType());
         CommandResult commandResult =
                 new UndoCommandResult("Undo successfully!", expectedModel.getDisplayType());
         assertCommandSuccess(new UndoCommand(), model, commandResult, expectedModel);
@@ -76,6 +82,7 @@ public class UndoCommandTest {
         expectedModel.commitResumeBook();
         expectedModel.undoResumeBook();
 
+        assertEquals(ItemUtil.INTERNSHIP_ALIAS, expectedModel.getDisplayType());
         CommandResult commandResult =
                 new UndoCommandResult("Undo successfully!", expectedModel.getDisplayType());
         assertCommandSuccess(new UndoCommand(), model, commandResult, expectedModel);
@@ -91,6 +98,8 @@ public class UndoCommandTest {
         expectedModel.commitResumeBook();
         expectedModel.undoResumeBook();
 
+
+        assertEquals(ItemUtil.PROJECT_ALIAS, expectedModel.getDisplayType());
         CommandResult commandResult =
                 new UndoCommandResult("Undo successfully!", expectedModel.getDisplayType());
         assertCommandSuccess(new UndoCommand(), model, commandResult, expectedModel);
@@ -122,17 +131,23 @@ public class UndoCommandTest {
         expectedModel.setProjectToDisplay();
         expectedModel.commitResumeBook();
 
+        // Undo the sort project command
         expectedModel.undoResumeBook();
+        assertEquals(ItemUtil.PROJECT_ALIAS, expectedModel.getDisplayType());
         CommandResult commandResult1 =
                 new UndoCommandResult("Undo successfully!", expectedModel.getDisplayType());
         assertCommandSuccess(new UndoCommand(), model, commandResult1, expectedModel);
 
+        // Undo the add internship command
         expectedModel.undoResumeBook();
+        assertEquals(ItemUtil.INTERNSHIP_ALIAS, expectedModel.getDisplayType());
         CommandResult commandResult2 =
                 new UndoCommandResult("Undo successfully!", expectedModel.getDisplayType());
         assertCommandSuccess(new UndoCommand(), model, commandResult2, expectedModel);
 
+        // Undo the delete resume command
         expectedModel.undoResumeBook();
+        assertEquals(ItemUtil.RESUME_ALIAS, expectedModel.getDisplayType());
         CommandResult commandResult3 =
                 new UndoCommandResult("Undo successfully!", expectedModel.getDisplayType());
         assertCommandSuccess(new UndoCommand(), model, commandResult3, expectedModel);
