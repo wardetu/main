@@ -5,6 +5,7 @@ import java.util.Comparator;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.commands.results.SortCommandResult;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.item.Project;
 
@@ -15,13 +16,10 @@ public class SortProjectsCommand extends SortCommand {
     private final Comparator<Project> sortComparator;
 
     public SortProjectsCommand(String sortOrder, boolean reverse) {
-        Comparator<Project> baseComparator = (proj1, proj2) -> {
-            if (sortOrder.equalsIgnoreCase("name")) {
-                return proj1.getName().compareTo(proj2.getName());
-            } else {
-                return proj1.getTime().compareTo(proj2.getTime());
-            }
-        };
+        Comparator<Project> baseComparator =
+                sortOrder.equalsIgnoreCase("name")
+                        ? Comparator.comparing(Project::getName)
+                        : Comparator.comparing(Project::getTime);
         sortComparator = reverse ? baseComparator.reversed() : baseComparator;
     }
 
@@ -31,6 +29,7 @@ public class SortProjectsCommand extends SortCommand {
         model.setProjectToDisplay();
         model.commitResumeBook();
 
-        return new SortCommandResult(String.format(MESSAGE_SUCCESS, "Resume"), model.getDisplayType());
+        return new SortCommandResult(
+                String.format(MESSAGE_SUCCESS, Project.class.getSimpleName()), model.getDisplayType());
     }
 }

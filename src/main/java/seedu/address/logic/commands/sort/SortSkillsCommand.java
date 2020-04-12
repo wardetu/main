@@ -15,13 +15,10 @@ public class SortSkillsCommand extends SortCommand {
     private final Comparator<Skill> sortComparator;
 
     public SortSkillsCommand(String sortOrder, boolean reverse) {
-        Comparator<Skill> baseComparator = (ski1, ski2) -> {
-            if (sortOrder.equals("name")) {
-                return ski1.getName().compareTo(ski2.getName());
-            } else {
-                return ski1.getLevel().compareTo(ski2.getLevel());
-            }
-        };
+        Comparator<Skill> baseComparator =
+                sortOrder.equalsIgnoreCase("name")
+                        ? Comparator.comparing(Skill::getName)
+                        : Comparator.comparing(Skill::getLevel);
         sortComparator = reverse ? baseComparator.reversed() : baseComparator;
     }
 
@@ -31,6 +28,7 @@ public class SortSkillsCommand extends SortCommand {
         model.setSkillToDisplay();
         model.commitResumeBook();
 
-        return new SortCommandResult(String.format(MESSAGE_SUCCESS, "Internship"), model.getDisplayType());
+        return new SortCommandResult(
+                String.format(MESSAGE_SUCCESS, Skill.class.getSimpleName()), model.getDisplayType());
     }
 }
