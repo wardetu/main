@@ -1,24 +1,82 @@
 @startuml
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor UI_COLOR_T4
+skinparam arrowColor UI_COLOR
 skinparam classBackgroundColor UI_COLOR
 
 package UI <<Rectangle>>{
 Interface Ui <<Interface>>
-Class "{abstract}\nUiPart" as UiPart
+Class "            {abstract}            \n            UiPart            " as UiPart
 Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class ItemDisplay
-Class ItemListPanel
-Class PersonPane
-Class Profile
-Class PersonDetailPane
+Class ItemDisplayList
 Class ItemCard
+Class ItemListPanel
+Class UserDetailPane
+Class UserOverallPane
+Class UserProfilePane
+Class NoteListPanel
+Class NoteCard
 Class StatusBarFooter
 Class CommandBox
+Class PreviewWindow
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Ui
+
+UiManager ..|> Ui
+UiManager --> MainWindow
+
+MainWindow ---> HelpWindow
+MainWindow ---> CommandBox
+
+MainWindow *---> ResultDisplay
+MainWindow *---> StatusBarFooter
+MainWindow *---> PreviewWindow
+MainWindow *---> ItemDisplayList
+
+MainWindow *---> ItemListPanel
+MainWindow *---> UserOverallPane
+MainWindow *---> NoteListPanel
+
+ItemListPanel --> ItemCard
+NoteListPanel --> NoteCard
+UserOverallPane *->UserProfilePane
+UserOverallPane *->UserDetailPane
+
+MainWindow ---|> UiPart
+ItemDisplayList ---|> UiPart
+ResultDisplay ---|> UiPart
+CommandBox ---|> UiPart
+PreviewWindow ---|> UiPart
+ItemCard --|> UiPart
+NoteCard --|> UiPart
+StatusBarFooter ---|> UiPart
+UserDetailPane -left-|> UiPart
+UserProfilePane -left-|> UiPart
+HelpWindow ---|> UiPart
+UserOverallPane ---|> UiPart
+ItemListPanel ---|> UiPart
+NoteListPanel ---|> UiPart
+
+UiManager -u-> Logic
+MainWindow -u-> Logic
+ItemCard ...> Model
+NoteCard ...> Model
+UserOverallPane ...> Model
+
+HelpWindow -[hidden]right- CommandBox
+CommandBox -[hidden]left- ResultDisplay
+ResultDisplay -[hidden]left- StatusBarFooter
+
+NoteListPanel -[hidden]left- PreviewWindow
+NoteListPanel -[hidden]left- UserOverallPane
+
+
+MainWindow -[hidden]-|> UiPart
+
 }
 
 package Model <<Rectangle>> {
@@ -28,46 +86,4 @@ Class HiddenModel #FFFFFF
 package Logic <<Rectangle>> {
 Class HiddenLogic #FFFFFF
 }
-
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
-
-UiManager .left.|> Ui
-UiManager -down-> MainWindow
-MainWindow --> HelpWindow
-
-MainWindow *-down-> ItemDisplay
-MainWindow *-down-> CommandBox
-MainWindow *-down-> ResultDisplay
-MainWindow *-down-> ItemListPanel
-MainWindow *-down-> StatusBarFooter
-MainWindow *-down-> PersonPane
-MainWindow *-down-> PersonDetailPane
-MainWindow *-down-> Profile
-
-ItemListPanel -down-> ItemCard
-
-MainWindow -left-|> UiPart
-ItemDisplay --|> UiPart
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-ItemListPanel --|> UiPart
-ItemCard --|> UiPart
-StatusBarFooter --|> UiPart
-PersonDetailPane --|> UiPart
-PersonPane --|> UiPart
-Profile --|> UiPart
-HelpWindow -down-|> UiPart
-
-UiManager -right-> Logic
-MainWindow -left-> Logic
-ItemCard ..> Model
-
-
-ItemListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
-
-MainWindow -[hidden]-|> UiPart
 @enduml
