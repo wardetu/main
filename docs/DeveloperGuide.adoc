@@ -182,7 +182,9 @@ Classes used by multiple components are in the `seedu.resumebook.commons` packag
 
 This section describes some noteworthy details on how certain features are implemented.
 
+{ start of Resume Edit feature implementation written by: Christian James Welly }
 // tag::redit[]
+
 === Resume Edit feature
 The Resume Edit feature or `redit` allows user to modify the <<content-item, content items>> of the `Resume` (for example, adding a `Skill` item or removing an `Internship` item). It is not to be confused with the `edit` command, which simply modifies the fields of an `Item` (such as name).
 
@@ -268,7 +270,9 @@ This also reduces bloating of code and increases the flexibility of `ResumeEditC
 Additionally, using `Optional` provides much less risk to getting `NullPointerException`. The reduced risk allows the developers to potentially save some debugging time, and developers worry less about handling the `NullPointerException`.
 ****
 // end::redit[]
+{ end of Resume Edit feature implementation written by: Christian James Welly }
 
+{ start of Tag Pull feature implementation written by: Christian James Welly }
 // tag::tagpull[]
 === Tag Pull feature
 The Tag Pull feature is similar to <<Resume Edit Feature, Resume Edit Feature>> in the sense that it modifies the <<content-item, content items>> of the `Resume`. Unlike Resume Edit which modifies using the content item indices, the Tag Pull feature modifies the resume by _adding_ items with the specified tags on top of existing items in the `Resume`.
@@ -319,6 +323,7 @@ It may also save the user some confusion since the `redit` feature specifically 
 As we have separated the two commands, we can then also vary the behaviour of the two commands slightly. We have implemented `redit` to be able to _modify_  (adding, changing, and removing) the `Resume` item, while `tagpull` modifies only by _adding_ onto existing content items in the `Resume`.
 ****
 // end::tagpull[]
+{ end of Tag Pull feature implementation written by: Christian James Welly }
 
 // tag::command-classes[]
 === Implementation of `Command` classes
