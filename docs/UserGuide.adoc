@@ -201,7 +201,6 @@ Try typing in the command box this command:
 
 The user box is updated accordingly as below:
 
-// TODO: update screenshot
 image::ug.png[width="450"]
 
 *Example 2:* Update user profile picture
@@ -220,7 +219,6 @@ Afterwards, try a command similar to the one below:
 
 The user profile picture is updated accordingly as below:
 
-// TODO: update screenshot
 image::ugu.png[width="450"]
 
 // end::me[]
@@ -403,7 +401,6 @@ The specific command syntax could be found in the table below:
 
 *Outcome*
 
-// TODO: add screenshot
 . All `project` items are listed in the list box. A sample project list is shown below.
 +
 
