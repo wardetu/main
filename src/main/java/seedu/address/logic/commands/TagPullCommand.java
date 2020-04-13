@@ -32,7 +32,7 @@ public class TagPullCommand extends Command {
             + "resume in the application with the specified index. "
             + "Existing values will be added on top the new items to be added.\n"
             + "Format: " + COMMAND_WORD
-            + " INDEX "
+            + " RESUME_INDEX "
             + "[#/ TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + " tech "

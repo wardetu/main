@@ -27,7 +27,7 @@ public class ResumePreviewCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Previews the details of the resume identified "
             + "by the index number used in the displayed resume list. \n"
             + "Format: " + COMMAND_WORD
-            + " INDEX \n"
+            + " RESUME_INDEX \n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
     private Index index;

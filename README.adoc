@@ -1,35 +1,28 @@
-[.text-center]
-== ResuMe
+= ResuMe
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.com/AY1920S2-CS2103T-F10-1/main[image:https://travis-ci.com/AY1920S2-CS2103T-F10-1/main.svg?branch=master[Build Status]]
 https://coveralls.io/github/AY1920S2-CS2103T-F10-1/main?branch=master[image:https://coveralls.io/repos/github/AY1920S2-CS2103T-F10-1/main/badge.svg?branch=master[Coverage Status]]
 
-[.text-left]
-=== What is ResuMe?
+
+== What is ResuMe?
 *ResuMe* is a desktop application for you to manage all of your resumes from a centralised location.
 It is easy to build, customise and export different resume versions using only Command Line Interface. If you are a busy student
 in need of a clean and functional resume, whether for an internship or a job position, *ResuMe* can deliver that in no time!
 
-[.text-center]
-ifdef::env-github[]
-image::docs/images/Ui.png[width="600"]
-endif::[]
-
 ifndef::env-github[]
-image::images/Ui.png[width="600"]
+image::images/Ui.png[width="790"]
 endif::[]
 
-[.text-left]
-=== Site Map
+== Site Map
 
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
 * <<AboutUs#, About Us>>
 * <<ContactUs#, Contact Us>>
 
-[.text-left]
-=== Acknowledgements
+== Acknowledgements
 * This application was developed as a build-up from AddressBook-Level3 project created by https://se-education.org[SE-EDU initiative]
+* Libraries used: https://openjfx.io/[JavaFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/junit-team/junit5[JUnit5], https://pdfbox.apache.org/[Apache PDFBox]
 
 == Licence : link:LICENSE[MIT]

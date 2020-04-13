@@ -9,8 +9,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Description {
 
-    // TODO: Utilise this class in main codes
-
     public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any values "
             + " and it should not be blank.";
 

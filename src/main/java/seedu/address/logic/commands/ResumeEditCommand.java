@@ -28,7 +28,7 @@ public class ResumeEditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits what an existing resume contains in the ResuMe "
             + "application with the specified index.\n"
             + "Existing values will be overwritten by the input values.\n"
-            + "Format: " + COMMAND_WORD + " INDEX "
+            + "Format: " + COMMAND_WORD + " RESUME_INDEX "
             + "TYPE/ [ITEM_INDEX] "
             + "[MORE_TYPE/ [ITEM_ID...]]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
