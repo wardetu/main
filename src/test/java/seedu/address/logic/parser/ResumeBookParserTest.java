@@ -67,7 +67,6 @@ public class ResumeBookParserTest {
         assertEquals(new DeleteResumeCommand(INDEX_FIRST_ITEM), command);
     }
 
-    // TODO: Create DescriptorBuilders for testing purposes
     @Test
     public void parseCommand_edit() throws Exception {
         Internship internship = new InternshipBuilder().build();

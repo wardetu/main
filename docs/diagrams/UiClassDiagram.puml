@@ -3,6 +3,9 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR
 skinparam classBackgroundColor UI_COLOR
+skinparam defaultFontSize 15
+skinparam nodesep 90
+skinparam ranksep 130
 
 package UI <<Rectangle>>{
 Interface Ui <<Interface>>

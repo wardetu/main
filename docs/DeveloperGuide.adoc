@@ -17,10 +17,14 @@ endif::[]
 
 By: `CS2103T F10-1`      Since: `Feb 2020`      Licence: `MIT`
 
+{ start of `introduction` section written by: Pham Thuy Duong }
+
 == Introduction
 This developer guide documents the system design and implementation of *ResuMe*. We hope that it would be a useful reference
 for software developers who wish to contribute to the project, or to simply gain deeper insight into our development process
 and considerations.
+
+{ end of `introduction` section written by: Pham Thuy Duong }
 
 == Setting up
 
@@ -96,6 +100,9 @@ The sections below give more details of each component.
 
 // end::overall-architecture[]
 
+{ start of `ui` section written by: Nham Quoc Hung }
+
+// tag::ui[]
 [[Design-Ui]]
 === UI component
 
@@ -113,6 +120,9 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 * Responds to events raised by various commands and the UI can be updated accordingly.
+// end::ui[]
+
+{ end of `ui` section written by: Nham Quoc Hung }
 
 // tag::logic[]
 [[Design-Logic]]
@@ -139,7 +149,9 @@ image::DeleteSequenceDiagram.png[]
 NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 // end::logic[]
 
+{ start of `model` section written by: Pham Thuy Duong }
 // tag::model[]
+
 [[Design-Model]]
 === Model component
 
@@ -159,6 +171,7 @@ one for `Note` and one for `Internship`, `Project`, `Skill` and `Resume`.
 * does not depend on any of the other three components.
 
 // end::model[]
+{ end of `model` section written by: Pham Thuy Duong }
 
 // tag::storage[]
 [[Design-Storage]]
@@ -186,7 +199,9 @@ Classes used by multiple components are in the `seedu.resumebook.commons` packag
 
 This section describes some noteworthy details on how certain features are implemented.
 
+{ start of Resume Edit feature implementation written by: Christian James Welly }
 // tag::redit[]
+
 === Resume Edit feature
 The Resume Edit feature or `redit` allows user to modify the <<content-item, content items>> of the `Resume` (for example, adding a `Skill` item or removing an `Internship` item). It is not to be confused with the `edit` command, which simply modifies the fields of an `Item` (such as name).
 
@@ -272,8 +287,11 @@ This also reduces bloating of code and increases the flexibility of `ResumeEditC
 Additionally, using `Optional` provides much less risk to getting `NullPointerException`. The reduced risk allows the developers to potentially save some debugging time, and developers worry less about handling the `NullPointerException`.
 ****
 // end::redit[]
+{ end of Resume Edit feature implementation written by: Christian James Welly }
 
+{ start of Tag Pull feature implementation written by: Christian James Welly }
 // tag::tagpull[]
+
 === Tag Pull feature
 The Tag Pull feature is similar to <<Resume Edit Feature, Resume Edit Feature>> in the sense that it modifies the <<content-item, content items>> of the `Resume`. Unlike Resume Edit which modifies using the content item indices, the Tag Pull feature modifies the resume by _adding_ items with the specified tags on top of existing items in the `Resume`.
 
@@ -323,6 +341,7 @@ It may also save the user some confusion since the `redit` feature specifically 
 As we have separated the two commands, we can then also vary the behaviour of the two commands slightly. We have implemented `redit` to be able to _modify_  (adding, changing, and removing) the `Resume` item, while `tagpull` modifies only by _adding_ onto existing content items in the `Resume`.
 ****
 // end::tagpull[]
+{ end of Tag Pull feature implementation written by: Christian James Welly }
 
 // tag::command-classes[]
 === Implementation of `Command` classes
@@ -402,7 +421,7 @@ breached many Software Engineering principles and we decided to amend it.
 ** Cons: The two classes are deprecated in `Java 9` due to various shortcomings.
 
 * **Alternative 2**: Use `java.beans` package
-** Pros: Is designed to replace `Observable` and `Observer` and the industry standard.
+** Pros: Is designed to replace `Observable` and `Observer` and is currently the industry standard.
 ** Cons: Is harder to implement and would require a lot of refactoring of the existing codes.
 
 ==== Conclusion
@@ -411,10 +430,12 @@ After deliberation we decided to go with the first alternative, due to time cons
 havoc that would arise from refactoring the code base. In addition, the limitations of `Observable` and `Observer` are
 not likely to manifest considering the usage scenarios for our application (offline and not multi-threaded).
 
-We would, however, make it a priority to change the implementation to Alternative 1, since we want to scale up
+We would, however, make it a priority to change the implementation to Alternative 2, since we want to scale up
 our application and it is not recommendable to build it on top of something that is no longer supported.
 
 // end::observableuser[]
+
+{ start of `me` section written by: Nham Quoc Hung }
 
 // tag::me[]
 === Me feature
@@ -457,6 +478,7 @@ every command.
 
 The following sequence diagram shows how the `me` feature allows user to edit his/her user profile:
 
+.Sequence Diagram for EditUserCommand
 image::MeSequenceDiagram.png[]
 
 ===== Design Considerations
@@ -500,6 +522,10 @@ and to be updated with a simple and powerful command.
 ****
 // end::me[]
 
+{ end of `me` section written by: Nham Quoc Hung }
+
+{ start of `note` section written by: Nham Quoc Hung }
+
 // tag::note[]
 ==== Note taking feature: take simple notes or reminders
 
@@ -535,6 +561,7 @@ Step 4. If no duplicate error is thrown, ResuMe will replace the note at this in
 
 The following activity diagram summarises this process when user executes `edit i/ note` command:
 
+.Activity Diagram for EditNoteCommand
 image::EditNoteCommandActivityDiagram.png[]
 
 ===== Scenario 3. Mark an existing note as done: `done`
@@ -594,7 +621,12 @@ and so this design suits our needs given the short time frame that we have.
 ****
 // end::note[]
 
+{ end of `note` section written by: Nham Quoc Hung }
+
+{ start of `export` section written by: Pham Thuy Duong }
+
 //tag::export[]
+
 === Export Feature
 The Export Feature supports two main actions: previewing the content of a `Resume` item, and
 then generating a `.pdf` file from it.
@@ -615,6 +647,7 @@ Step 3. The application retrieves the correct `Resume` item and calls `toPreview
 
 The following activity diagram summarises what happens when a user executes `rpreview` command:
 
+.Activity Diagram for ResumePreviewCommand
 image::ExportPreviewActivityDiagram.png[width="200"]
 
 
@@ -674,10 +707,12 @@ items inside the `Resume`.
 
 The following activity diagram summarises what happens when a user executes `rgen` command:
 
+.Activity Command for GenerateResumeCommand
 image::ExportActivityDiagram.png[, 250]
 
 Detailed steps are shown in the sequence diagram below:
 
+.Sequence Diagram for GenerateResumeCommand
 image::ExportSequenceDiagram.png[, 1000]
 
 ==== Design Considerations
@@ -701,7 +736,9 @@ of reading its content twice (once during `rpreview` and once during `rgen`) is 
 will further allows the application to have more control when formatting the output file, and leaving room for potential
 extended features (e.g. allow user to choose from a variety of pre-defined resume templates).
 ****
+
 //end::export[]
+{ end of `export` section written by: Pham Thuy Duong }
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -753,6 +790,7 @@ If the `currentStatePointer` is at index 0, pointing to the initial resume book 
 
 The following sequence diagram shows how the undo operation works:
 
+.Sequence Diagram for UndoCommand
 image::UndoSequenceDiagram.png[]
 
 NOTE: The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -776,6 +814,7 @@ image::UndoRedoState5.png[]
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
+.Activity Diagram when a user executes a new command
 image::CommitActivityDiagram.png[]
 
 ==== Design Considerations
@@ -871,8 +910,10 @@ Refer to the guide <<Testing#, here>>.
 
 Refer to the guide <<DevOps#, here>>.
 
+{ start of `product-scope` section written by: Pham Thuy Duong }
 [appendix]
 // tag::product-scope[]
+
 == Product Scope
 
 *Target user profile*:
@@ -887,6 +928,7 @@ Refer to the guide <<DevOps#, here>>.
 *Value proposition*: build and manage resumes faster than a typical mouse/GUI driven app
 
 // end::product-scope[]
+{ end of `product-scope` section written by: Pham Thuy Duong }
 
 // tag::user-stories[]
 
@@ -1007,8 +1049,10 @@ Use case ends.
 
 _{More to be added}_
 
+{ start of `nfr` section written by: Pham Thuy Duong }
 [appendix]
 // tag::nfr[]
+
 == Non Functional Requirements
 
 .  The system should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
@@ -1021,11 +1065,14 @@ the data file) without any network connection.
 .  A user with some familiarity with Command Line Interface (CLI) should be able to accomplish most of the tasks faster
 using commands than using the mouse to navigate the Graphic User Interface (GUI).
 . The product is not required to handle the printing of resumes.
+
 // end::nfr[]
+{ end of `nfr` section written by: Pham Thuy Duong }
 
+{ start of `glossary` section written by: Pham Thuy Duong }
 [appendix]
-
 // tag::glossary[]
+
 == Glossary
 
 [[mainstream-os]] Mainstream OS::
@@ -1035,6 +1082,8 @@ Windows, Linux, Unix, OS-X
 A contact detail that is not meant to be shared with others
 
 // end::glossary[]
+{ end of `glossary` section written by: Pham Thuy Duong }
+
 [appendix]
 == Product Survey
 

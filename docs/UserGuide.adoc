@@ -58,7 +58,8 @@ Items from number 1 to 3 can be shared across different `resumes`.
 === Preview
 The following is the GUI for our application:
 
-image::GUI.png[width="790"]
+.The GUI Components of ResuMe
+image::Ui_annotated.png[width="790"]
 
 ====
 *GUI Components:*
@@ -71,16 +72,21 @@ message if something wrong happens.
 . *_View box:_* where the detailed information about an item is shown. For instance, if you are viewing an
 `internship` item, this box shows in full the `company name`, `role`, `from`, `to`, `description` and `tags`.
 
-. *_List box:_* where all items of a type are listed. Only one type is displayed at a time. You can change
-the view of this list using `list` command. Additionally, when other commands change items of a type,
+. *_List box:_* where all items of a certain type are listed. Only one type is displayed at a time. You can change
+the view of this list using `list` command. Additionally, when other commands change items of a certain type,
 the list box will be set to display that type.
 
 . *_User box:_* where you can view your personal information like `name`, `email`, or `phone number`. Any changes made
 to your user profile will be automatically reflected here.
+
+. *_Note box:_* where you can view your list of notes. You can also change the view of this list by using `list` command.
+When a note is marked as done, this box will be automatically updated.
+
 ====
 
 Interested? Jump to <<Quick Start>> to get started. Enjoy!
 
+{ start of `about guide` section written by: Pham Thuy Duong }
 // tag::guide[]
 
 == About this guide
@@ -115,14 +121,16 @@ You will come across these little guys a lot in this document, so let's get to k
 |=======================================================================
 
 // end::guide[]
+{ end of `about guide` section written by: Pham Thuy Duong }
 
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `resumebook.jar` link:{repoURL}/releases[here].
+.  Download the latest `CS2103T-F10-1.ResuMe.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your *ResuMe* application.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
+.The GUI of ResuMe
 image::Ui.png[width="790"]
 +
 .  Type a command in the command box and press kbd:[Enter] to execute it. +
@@ -138,6 +146,8 @@ with `tags` _"SE"_ and _"frontend"_.
 .  Refer to <<Features>> for details of each command.
 
 == Features
+
+For this section, we will introduce you to all of the available features of our application.
 
 ====
 *Command Format*
@@ -155,7 +165,9 @@ For example, in `add i/ TYPE n/ NAME`, `TYPE` and `NAME` are parameters which ca
  For example, if the command specifies `n/ NAME p/ PHONE_NUMBER`, `p/ PHONE_NUMBER n/ NAME` is also acceptable.
 ====
 
+{ start of `help` section written by: Pham Thuy Duong }
 // tag::help[]
+
 === Viewing help : `help`
 
 Lists out the function and usage of each command.
@@ -173,16 +185,21 @@ There are two possible `help` options that you can choose from, as shown in the 
 
 These are screenshots of the two pop-up windows:
 
+.Command Summary Pop-up Window
 image::helpCommand.png[width="790"]
 
+.Getting Started Pop-up Window
 image::helpStart.png[width="790"]
 
 // end::help[]
+{ end of `help` section written by: Pham Thuy Duong }
+
+{ start of `me` section written by: Nham Quoc Hung }
 
 // tag::me[]
 === Editing user profile: `me`
 
-Edits and updates user's display profile.
+You can edit your display profile here! It will then be updated accordingly in the user box. Feel free to edit only one or multiple fields at a time :)
 
 ====
 *Format:* `me [dp/ FILE_PATH] [n/ NAME] [d/ DESCRIPTION] [p/ PHONE_NUMBER] [e/ EMAIL] [g/ GITHUB] [u/ UNIVERSITY] [m/ MAJOR] [f/ FROM] [t/ TO] [c/ CURRENT_CAP MAX_CAP]`
@@ -199,29 +216,35 @@ Try typing in the command box this command:
 
 *Outcome:*
 
-The user box is updated accordingly as below:
+The user box will be swiftly updated to showcase all your essential information:
 
+.User Box with updated personal details
 image::ug.png[width="450"]
 
 *Example 2:* Update user profile picture
 
-Follow the steps in one of these two links to copy an absolute file path according to your respective Operating System.
+Now, let's make your profile even more customisable. Follow the steps in one of these two links below if you do not know how to copy an full file path from your computer.
 
 . Mac: https://osxdaily.com/2013/06/19/copy-file-folder-path-mac-os-x/
 
 . Windows: https://www.laptopmag.com/articles/show-full-folder-path-file-explorer
 
-Afterwards, try a command similar to the one below:
+Afterwards, try a command similar to the one of the two below, depending on your operating system:
 
-`me dp/ /Users/nhamquochung/Desktop/test.png`
+`me dp/ /Users/nhamquochung/Desktop/test.png` (for Mac)
+
+`me dp/ C:\Users\Christian J. Welly\Pictures\chrisjwelly.jpg` (for Windows)
 
 *Outcome:*
 
-The user profile picture is updated accordingly as below:
+Tada! The user box will be updated to display your beautiful picture:
 
+.User Box with updated profile picture
 image::ugu.png[width="450"]
 
 // end::me[]
+
+{ end of `me` section written by: Nham Quoc Hung }
 
 // tag::list[]
 === Listing all items : `list`
@@ -241,25 +264,27 @@ To view items in full details, use <<Viewing an item in details: `view`, view>>.
 
 *Examples:*
 
-* `list i/ res`
-Lists all `resume` items.
+* `list i/ res`: Lists all `resume` items.
 +
+.List of all resume items
 image::ListAllResumes.png[width = "450"]
 
-* `list i/ int`
-Lists all internship items.
+* `list i/ int`: Lists all `internship` items.
 +
+.List of all internship items
 image::ListAllInternships.png[width = "450"]
 
-* `list i/ note`
-Lists all note items.
+* `list i/ note`: Lists all `note` items.
 +
+.List of all note items
 image::ListAllNotes.png[width = "450"]
 
 
 // end::list[]
 
+{ start of `add` section written by: Pham Thuy Duong }
 // tag::add[]
+
 === Adding an item: `add`
 
 Adds an item to the *ResuMe* application.
@@ -304,12 +329,17 @@ _(refer to <<Generating a resume: `rgen`, rgen>> for more details)_
 
 . All `project` items are listed in the list box.
 +
+.List of all project items
 image::ListProject.png[width="600"]
 . A new `project` item named `Duke` with the specified fields is added. This item is automatically reflected in the list box.
 +
+.Application view after project "Duke" is added
 image::AddDukeProject.png[width="600"]
 
 // end::add[]
+{ end of `add` section written by: Pham Thuy Duong }
+
+{ start of `edit` section written by: Christian James Welly }
 
 // tag::edit[]
 === Editing an item : `edit`
@@ -349,13 +379,15 @@ Try typing in the command box these two commands one by one!
 
 . The first command lists all `resume` items in the list box. Assuming you want to edit the `resume` item at index 1.
 +
+.List of all resume items
 image::ListResume2.png[width="790"]
 
-. The second command edits the `resume` item at index 1. It has its name changed from _"Winter 2019"_ to _"Software Engineering Resume"_ and its tag set to _"agile"_.
+. The second command edits the `resume` item at index 1. It has its name changed from _"Winter 2019"_ to _"Software Engineering Resume"_ and its `tag` set to _"agile"_.
 +
+.Application view after editing the resume item at index 1
 image::EditResumeExample.png[width="790"]
 
-*Example 2:* Try typing in the command box these two commands one by one!
+*Example 2:* Here is another way you can use `edit`. This time, we will try an example using `skill` items. Try typing in the command box these two commands one by one!
 
 . `list i/ ski`
 . `edit 2 i/ ski l/ ADVANCED #/`
@@ -364,14 +396,20 @@ image::EditResumeExample.png[width="790"]
 
 . The first command lists all `skill` items in the list box. Assuming you want to edit the `skill` item at index 2.
 +
+.List of all skill items
 image::ListSkill1.png[width="790"]
 
-. The second command edits the `skill` item at index 2. It has its level changed to from `INTERMEDIATE` to `ADVANCED` and all its existing tags cleared.
+. The second command edits the `skill` item at index 2. It has its level changed to from `INTERMEDIATE` to `ADVANCED` and all its existing `tags` cleared.
 +
+.Application view after editing the skill item at index 2
 image::EditSkillExample.png[width="790"]
 // end::edit[]
 
+{ end of `edit` section written by: Christian James Welly }
+
 // tag::find[]
+
+{ start of `find` section written by: Nham Quoc Hung }
 
 === Finding items by name: `find`
 
@@ -406,15 +444,19 @@ The specific command syntax could be found in the table below:
 
 . All `project` items are listed in the list box. A sample project list is shown below.
 +
-
+.List of all project items
 image::list-orbital.png[width="790"]
 
 . `Projects` whose names match keywords are listed in the list box.
 +
-
+.Filtered list of project items whose names contain "Orbital"
 image::find-orbital.png[width="790"]
 
 // end::find[]
+
+{ end of `find` section written by: Nham Quoc Hung }
+
+{ start of `delete` section written by: Nguyen Minh Hoang}
 
 // tag::delete[]
 
@@ -442,21 +484,26 @@ correct `index` for deletion. Or just fall back on `undo` if you accidentally de
 . Suppose we start with the following original list of `resume` items, as seen using the command `list i/ res`. Pay attention
 to the second `resume` item.
 +
-
+.List of all resume items
 image::BeforeDeleteResumeList.png[width="790"]
 
-. Delete the 2nd `resume` with `delete 2 i/ res` .
+. We delete the 2nd `resume` with `delete 2 i/ res` .
 +
-
+.Application view after deleting the resume item at index 2
 image::ResumeDelete2.png[width="790"]
 
-. Delete the 3rd `skill` with `delete 3 i/ ski` . Do note how it is not a must for the list box to display `skill` items for
+. We delete the 3rd `skill` with `delete 3 i/ ski` . Do note how it is not a must for the list box to display `skill` items for
 deletion to proceed. After the deletion the list box is set to show `skill` items.
 +
-
+.Application view after deleteing the skill item at index 3
 image::DeleteSkill3.png[width="790"]
 
 // end::delete[]
+
+{ end of `delete` section written by: Nguyen Minh Hoang}
+
+
+{ start of `sort` section written by: Nguyen Minh Hoang}
 
 // tag::sort[]
 
@@ -502,26 +549,29 @@ recent internships to a resume. So easy!
 |`note` |`time` |Deadline of `note`
 |=======================================================================
 
-
 *Example:*
 
-. Sort all `resume` items by their name in ascending order with `sort i/ res order/ name`.
+. We sort all `resume` items by their name in ascending order with `sort i/ res order/ name`.
 +
-
+.List of resume items sorted by name in ascending order
 image::SortResByName.png[width="790"]
 
-. Sort all `skill` items in descending level of proficiency with `sort i/ ski order/ level reverse/ true` .
+. We sort all `skill` items in descending level of proficiency with `sort i/ ski order/ level reverse/ true` .
 +
-
+.List of skill items sorted by level in descending order
 image::SortSkiByLevelReverse.png[width="790"]
 
-. Sort all `internship` by their start date in ascending order with `sort i/ int order/ time reverse/ false`, specifying
+. We sort all `internship` by their start date in ascending order with `sort i/ int order/ time reverse/ false`, specifying
 `reverse/` this time because we really like to type.
 +
-
+.List of all note items sorted by deadline in ascending order
 image::SortIntByTime.png[width="790"]
 
 // end::sort[]
+
+{ end of `sort` section written by: Nguyen Minh Hoang}
+
+{ start of `view` section written by: Christian James Welly }
 
 // tag::view[]
 === Viewing an item in details: `view`
@@ -544,12 +594,18 @@ Certain details of specific items, for example the `website` and `description` o
 
 . The first command lists out all the `project` items in the list box. Assuming you want to view the details of the `project` item at index 1.
 +
+.List of all project items
 image::ListProject2.png[width="790"]
-. The second command shows full details of the `project` at index 1, displayed in the view box. These includes details that were not shown in the list box, such as its website (_"github.com/zheng-code/detask"_) and its description (_"An all-in-one task managing app."_).
+. The second command shows full details of the `project` at index 1, displayed in the view box. These includes details that were not shown in the list box, such as its `website` (_"github.com/zheng-code/detask"_) and its `description` (_"An all-in-one task managing app."_).
 +
+.Updated View Box with the details of the project item at index 1
 image::ViewDetaskProject.png[width="790"]
 
 // end::view[]
+
+{ end of `view` section written by: Christian James Welly }
+
+{ start of `redit` section written by: Christian James Welly }
 
 // tag::redit[]
 === Modifying the content a resume: `redit`
@@ -573,9 +629,9 @@ If you find it a hassle to manually enter items into the `resume`, you can consi
 
 *Example 1: Adding items into a new resume*
 
-Before you try this example, ensure you have added at least one `internship`, one `project`, and two `skill` items. You may verify for their presence by using the `list` command.
+Before you try this example, please ensure you have added at least one `internship`, one `project`, and two `skill` items. You may verify for their presence by using the `list` command.
 
-Type in these commands:
+Try typing in these commands:
 
 . `list i/ res`
 . `redit 1 int/ 1 proj/ 1 ski/ 1 2`
@@ -584,20 +640,22 @@ Type in these commands:
 
 . The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box.
 +
+.List of all resume items
 image::ReditListRes.png[width = "790"]
 
 . The second command modifies the `resume` at index 1, named "Winter 2019". The `resume` now contains the `internship` item at index 1,
 `project` item at index 1, and `skill` items at indices 1 and 2. The following screenshot illustrates what happens after this command:
 +
+.Resume content after adding new items
 image::ReditAddIntoResume.png[width = "790"]
 
 *Example 2: Modifying the contents of the resume*
 
 Following from example 1, you realise that you actually wanted to use a different set of items for your "Winter 2019" `resume`. Here is how you can rectify this!
 
-Before you try this example, ensure you have added at least one `internship` and three `skill` items. You may verify for their presence by using the `list` command.
+Before you try this example, please ensure you have added at least one `internship` and three `skill` items. You may verify for their presence by using the `list` command.
 
-Type in these commands:
+Try typing in these commands:
 
 . `list i/ res`
 . `redit 1 int/ 1 proj/ ski/ 3`
@@ -606,21 +664,23 @@ Type in these commands:
 
 . The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box. Since we are following from example 1, the "Winter 2019" `resume` would already have some items in it.
 +
+.List of all resume items
 image::ReditListRes2.png[width = "790"]
 
 . Before the second command, the `resume` contains the same set of items as the one in example 1. The command modifies the `resume` at index 1, named "Winter 2019". The `resume` now still contains the `internship` item at index 1, no `project` items, and `skill` item at index 3. The following screenshot illustrates what happens after this command:
 +
+.Resume content after modification
 image::ReditWantSomeThings.png[width = "790"]
 
-You can think of this command as using only the items that has been specified in the command. In this example, we no longer want the items we have previously added, and we would like the "Winter 2019" `resume` to contain only the first internship item and the third skill item.
+You can think of this command as using only the items that has been specified in the command. In this example, we no longer want the items we have previously added, and we would like the "Winter 2019" `resume` to contain only the first `internship` item and the third `skill` item.
 
 *Example 3: No modifications to `internship` and `skill` items*
 
 Following from example 2, you are now satisfied with the `internship` and `skill` items, but you would like to add a `project` item without changing the `internship` and `skill` items. Here is how you can do it!
 
-Before you try out this example, ensure you have at least two `project` items.
+Before you try out this example, please ensure you have at least two `project` items.
 
-Type in these commands:
+Try typing in these commands:
 
 . `list i/ res`
 . `redit 1 proj/ 2`
@@ -629,21 +689,25 @@ Type in these commands:
 
 . The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box. Since we are following from example 2, the "Winter 2019" `resume` would already have some items in it.
 +
+.List of all resume items
 image::ReditListRes3.png[width = "790"]
 
 . Before the second command, the `resume` contains the same set of items as the one in example 2. The command modifies the `resume` at index 1, named "Winter 2019". The `resume` will now contain the the `project` item at index 2. The `internship` and `skill` items remain unchanged. The following screenshot illustrates what happens after this command:
 +
+.Resume content after modification
 image::ReditKeepSomeThings.png[width = "790"]
 
 So by leaving out one of the prefixes (`TYPE/ ITEM_INDEX...`) from the command, you can keep some of the items in your `resume`!
 
-
 // end::redit[]
+{ end of `redit` section written by: Christian James Welly }
+
+{ start of `tagpull` section written by: Christian James Welly }
 
 // tag::tagpull[]
 === Pulling tagged items into the resume: `tagpull`
 
-Pull all the `Internship`, `Project` and `Skill` items with the specified tag(s) into a `resume`.
+Pulls all the `internship`, `project` and `skill` items with the specified tag(s) into a `resume`.
 
 ====
 *Format:* `tagpull RESUME_INDEX [#/ TAG]...`
@@ -654,9 +718,9 @@ This command does not remove items from the `resume` and will add items on top o
 
 *Example 1: Pulling items using one tag*
 
-Before you try this example, ensure you have added some items with the tag `SE`. You may verify for their presence by using the `list` command.
+Before you try this example, please ensure you have added some items with the tag "SE". You may verify for their presence by using the `list` command.
 
-Type in these commands:
+Try typing in these commands:
 
 . `list i/ res`
 . `tagpull 1 #/ SE`
@@ -665,17 +729,21 @@ Type in these commands:
 
 . The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box.
 +
+.List of all resume items
 image::ReditListRes.png[width = "790"]
 
-. The second command pulls all items which has `SE` as the tag into the `resume` at index 1, named "Winter 2019". The following screenshot illustrates the outcome of the command if we have 1 `internship` item and 2 `project` items tagged with `SE`.
+. The second command pulls all items which has "SE" as the tag into the `resume` at index 1, named "Winter 2019". The following screenshot illustrates the outcome of the command if we have 1 `internship` item and 2 `project` items tagged with "SE".
 +
+.Resume content after `tagpull`
 image::TagPullOneTag.png[width = "790"]
 
 *Example 2: Pulling items using multiple tags*
 
-Before you try this example, ensure you have added some items with the tag `SE` and/or `github`. You may verify for their presence by using the `list` command.
+Now, maybe you have categorised your items by using multiple tags. So, you think just pulling items using one tags is not sufficient. Our `tagpull` supports that too!
 
-Type in these commands:
+Before you try this example, please ensure you have added some items with the tag "SE" and/or "github". You may verify for their presence by using the `list` command.
+
+Try typing in these commands:
 
 . `list i/ res`
 . `tagpull 1 #/ SE #/ github`
@@ -684,14 +752,19 @@ Type in these commands:
 
 . The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box.
 +
+.List of all resume items
 image::ReditListRes.png[width = "790"]
 
-. The second command pulls all items which has `SE` _or_ `github` as the tag into the `resume` at index 1, named "Winter 2019". The following screenshot illustrates the outcome of the command if we have 1 `internship` item and 2 `project` items tagged with `SE`, and 1 `skill` item tagged with `github`.
+. The second command pulls all items which has "SE" _or_ "github" as the tag into the `resume` at index 1, named "Winter 2019". The following screenshot illustrates the outcome of the command if we have 1 `internship` item and 2 `project` items tagged with "SE", and 1 `skill` item tagged with "github".
 +
+.Resume content after `tagpull`
 image::TagPullMultiTags.png[width = "790"]
 
 // end::tagpull[]
+{ end of `tagpull` section written by: Christian James Welly }
 
+
+{ start of `undo` section written by: Nguyen Minh Hoang}
 // tag::undo[]
 
 === Undoing a command: `undo`
@@ -704,10 +777,10 @@ Undoes the previous command and restores the state of the application to before 
 
 [NOTE]
 --
-* An `undo` is done per command and not change. If you make multiple changes to your user profile,
+* An `undo` is done per command and not per change. If you make multiple changes to your user profile,
 for instance, using a single `me` command, then `undo` will revert all the changes.
 
-* Commands that can be undone are: `add`, `delete`, `edit`, `sort`, `redit`, `tagpull` and `me`.
+* Commands that can be undone are: `add`, `delete`, `edit`, `sort`, `redit`, `tagpull`, `done`, `clear` and `me`.
 
 * Commands that make no change to the application state, namely `list`, `view`, `find`, `rpreview` and `rgen`, cannot be undone.
 
@@ -721,20 +794,23 @@ for instance, using a single `me` command, then `undo` will revert all the chang
 . Suppose we hate Java and therefore want to delete it from the list of `skill` items using a `delete 1 i/ ski` command. We
 also do a `list i/ proj` to switch to viewing projects because that is how staging for an example works.
 +
-
+.List of all skill items after deleting "Java"
 image::deleteJava_beforeUndo.png[width="790"]
 +
-
+.List of all project items
 image::beforeUndo_switchToProj.png[width="790"]
 
 . But Stockholm's syndrome kicks in and we decide that Java has its merits, so we revert our action with `undo`.
 Voila, Java is back, and our list box now displays `skill` items.
 +
-
+.List of all skill items after undo
 image::postUndo_JavaIsBack.png[width="790"]
 
 // end::undo[]
 
+{ end of `undo` section written by: Nguyen Minh Hoang}
+
+{ start of `redo` section written by: Nguyen Minh Hoang}
 // tag::redo[]
 
 === Redoing a command: `redo`
@@ -748,10 +824,10 @@ of that command.
 
 [NOTE]
 --
-* A `redo` is done per command and not change. If you undo a command that can make multiple changes like
+* A `redo` is done per command and not per change. If you undo a command that can make multiple changes like
 `redit`, then redoing it will resurrect all the changes. Spooky!
 
-* If a new `add`, `delete`, `edit`, `sort`, `redit`, `tagpull` or `me` command is performed after an `undo`,
+* If a new `add`, `delete`, `edit`, `sort`, `redit`, `tagpull`, `done`, `clear`, or `me` command is performed after an `undo`,
 then all states currently available for `redo` will be erased and you will not be able to go to these states
 anymore.
 
@@ -764,9 +840,12 @@ After the Java deletion incidence in the previous example section (for <<Undo a 
 decide that the merits of Java do not warrant the pain it wreaks so we want to `redo` our original decision to delete
 Java. Once again, Java is removed from our life.
 
+.List of all skill items after redo
 image::redo_success.png[width="790"]
 
 // end::redo[]
+
+{ end of `redo` section written by: Nguyen Minh Hoang}
 
 // tag::rpreview[]
 === Previewing a resume: `rpreview`
@@ -779,7 +858,7 @@ Previews a `resume` in text format in a pop-up window.
 
 [NOTE]
 --
-* `RESUME_INDEX` is the index of the `resume` seen when `list i/res` is called.
+* `RESUME_INDEX` is the index of the `resume` seen when `list i/ res` is called.
 * `description` of `internship` and `project` is automatically separated into bullet points when the program detects full sentences.
 --
 
@@ -790,18 +869,22 @@ Previews a `resume` in text format in a pop-up window.
 
 *Outcome:*
 
-. The first command lists out all `resumes`. Assuming that you want to preview the second `resume` in the list box.
+. The first command lists out all `resume` items. Assuming that you want to preview the second `resume` in the list box.
 +
+.List of all resume items
 image::ListResumeRPreview.png[width="790"]
 
 . The second command will preview the `resume` at index 2 named "Software Engineering". A pop-up window will be opened,
 featuring a text-based view of the content of "Software Engineering". The screenshots of the results are as shown below:
 +
+.Application view after `rpreview` is executed
 image::RPreview.png[width = "790"]
+.Preview pop-up window
 image::RPreviewIndexTwo.png[width = "790"]
 
 // end::rpreview[]
 
+{ start of `rgen` section written by: Pham Thuy Duong }
 // tag::rgen[]
 
 === Generating a resume: `rgen`
@@ -828,17 +911,24 @@ If no name is specified, the filename will be set, by default, to the name of th
 
 . The first command lists out all `resumes`. Assuming that you want to generate the first `resume` in the list box.
 +
+.List of all resume items
 image::ListResume.PNG[width="790"]
 
 . The second command generates a `My Resume.pdf` file from the specified resume. The screenshots of the application view
 and of the generated file are as below:
 +
+.Application view after `rgen` is executed
 image::GenerateResume.PNG[width="790"]
+.Generated `.pdf` file
 image::PdfFile.PNG[width="790"]
 
 // end::rgen[]
+{ end of `rgen` section written by: Pham Thuy Duong }
 
-// tag::note[]
+{ start of `done` section written by: Nham Quoc Hung }
+
+// tag::done[]
+
 === Mark a note as done: `done`
 Mark a `Note` at a specific index from the current note list as `done`.
 
@@ -858,12 +948,16 @@ Mark a `Note` at a specific index from the current note list as `done`.
 
 . The first command lists out all `notes`. Assuming that you want to mark the first `note` in the list as `done`.
 +
+.List of all note items
 image::ListAllNotes.png[width="450"]
 
 . The second command marks this `note` as done, by updating the tick box.
 +
+.List of all note items after `done` command is executed
 image::note-done.png[width="450"]
 // end::note[]
+
+{ end of `done` section written by: Nham Quoc Hung }
 
 // tag::clear[]
 
@@ -879,6 +973,8 @@ This command can be undone.
 
 // end::clear[]
 
+{ start of `exit` section written by: Nham Quoc Hung }
+
 // tag::exit[]
 
 === Exiting the program : `exit`
@@ -891,6 +987,12 @@ Exits from *ResuMe*.
 
 // end::exit[]
 
+{ end of `exit` section written by: Nham Quoc Hung }
+
+
+{ start of `data-encryption` section written by: Nguyen Minh Hoang}
+
+// tag::data-encryption[]
 === Saving the data
 *ResuMe* data is saved in the hard disk automatically after any command
 that changes the data. There is no need to save manually.
@@ -900,7 +1002,9 @@ We are currently working on a login feature that will let you set password for R
 your locally stored data encrypted, so that no one (even us) can gain access to your precious information.
 
 We value your privacy and we want you to feel safe. Stay tuned!
-// end::dataencryption[]
+// end::data-encryption[]
+
+{ end of `data-encryption` section written by: Nguyen Minh Hoang}
 
 == FAQ
 
@@ -924,7 +1028,7 @@ ____
 This is a summary of all available commands for your reference.
 
 === General commands
-These are commands have consistent format regardless of item type.
+These are commands that have consistent format regardless of item type.
 [source,sh]
 [cols="20%,80%",options="header"]
 |=======================================================================
@@ -980,7 +1084,7 @@ These are commands specific to `resume` items.
 | Command | Format
 
 | Edit Resume | `redit RESUME_INDEX TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]...`
-| Generate Resume | `rgen RESUME_INDEX`
+| Generate Resume | `rgen RESUME_INDEX n/ FILE_NAME`
 | Preview Resume | `rpreview RESUME_INDEX`
 | Tag Pull | `tagpull RESUME_INDEX [#/ TAG]`
 
