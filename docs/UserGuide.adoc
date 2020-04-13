@@ -72,8 +72,8 @@ message if something wrong happens.
 . *_View box:_* where the detailed information about an item is shown. For instance, if you are viewing an
 `internship` item, this box shows in full the `company name`, `role`, `from`, `to`, `description` and `tags`.
 
-. *_List box:_* where all items of a type are listed. Only one type is displayed at a time. You can change
-the view of this list using `list` command. Additionally, when other commands change items of a type,
+. *_List box:_* where all items of a certain type are listed. Only one type is displayed at a time. You can change
+the view of this list using `list` command. Additionally, when other commands change items of a certain type,
 the list box will be set to display that type.
 
 . *_User box:_* where you can view your personal information like `name`, `email`, or `phone number`. Any changes made
@@ -126,7 +126,7 @@ You will come across these little guys a lot in this document, so let's get to k
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `resumebook.jar` link:{repoURL}/releases[here].
+.  Download the latest `CS2103T-F10-1.ResuMe.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your *ResuMe* application.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -146,6 +146,8 @@ with `tags` _"SE"_ and _"frontend"_.
 .  Refer to <<Features>> for details of each command.
 
 == Features
+
+For this section, we will introduce you to all of the available features of our application.
 
 ====
 *Command Format*
@@ -197,7 +199,7 @@ image::helpStart.png[width="790"]
 // tag::me[]
 === Editing user profile: `me`
 
-You can edit your display profile here! It will then be updated accordingly in the user profile area. Feel free to edit only one or multiple fields at a time :)
+You can edit your display profile here! It will then be updated accordingly in the user box. Feel free to edit only one or multiple fields at a time :)
 
 ====
 *Format:* `me [dp/ FILE_PATH] [n/ NAME] [d/ DESCRIPTION] [p/ PHONE_NUMBER] [e/ EMAIL] [g/ GITHUB] [u/ UNIVERSITY] [m/ MAJOR] [f/ FROM] [t/ TO] [c/ CURRENT_CAP MAX_CAP]`
@@ -214,7 +216,7 @@ Try typing in the command box this command:
 
 *Outcome:*
 
-The user profile area will be swiftly updated to showcase all your essential information:
+The user box will be swiftly updated to showcase all your essential information:
 
 .User Box with updated personal details
 image::ug.png[width="450"]
@@ -235,7 +237,7 @@ Afterwards, try a command similar to the one of the two below, depending on your
 
 *Outcome:*
 
-Tada! The user profile area will be updated to display your beautiful picture:
+Tada! The user box will be updated to display your beautiful picture:
 
 .User Box with updated profile picture
 image::ugu.png[width="450"]
@@ -272,7 +274,7 @@ image::ListAllResumes.png[width = "450"]
 .List of all internship items
 image::ListAllInternships.png[width = "450"]
 
-* `list i/ note`: Lists all note items.
+* `list i/ note`: Lists all `note` items.
 +
 .List of all note items
 image::ListAllNotes.png[width = "450"]
@@ -380,7 +382,7 @@ Try typing in the command box these two commands one by one!
 .List of all resume items
 image::ListResume2.png[width="790"]
 
-. The second command edits the `resume` item at index 1. It has its name changed from _"Winter 2019"_ to _"Software Engineering Resume"_ and its tag set to _"agile"_.
+. The second command edits the `resume` item at index 1. It has its name changed from _"Winter 2019"_ to _"Software Engineering Resume"_ and its `tag` set to _"agile"_.
 +
 .Application view after editing the resume item at index 1
 image::EditResumeExample.png[width="790"]
@@ -397,7 +399,7 @@ image::EditResumeExample.png[width="790"]
 .List of all skill items
 image::ListSkill1.png[width="790"]
 
-. The second command edits the `skill` item at index 2. It has its level changed to from `INTERMEDIATE` to `ADVANCED` and all its existing tags cleared.
+. The second command edits the `skill` item at index 2. It has its level changed to from `INTERMEDIATE` to `ADVANCED` and all its existing `tags` cleared.
 +
 .Application view after editing the skill item at index 2
 image::EditSkillExample.png[width="790"]
@@ -585,7 +587,7 @@ Certain details of specific items, for example the `website` and `description` o
 +
 .List of all project items
 image::ListProject2.png[width="790"]
-. The second command shows full details of the `project` at index 1, displayed in the view box. These includes details that were not shown in the list box, such as its website (_"github.com/zheng-code/detask"_) and its description (_"An all-in-one task managing app."_).
+. The second command shows full details of the `project` at index 1, displayed in the view box. These includes details that were not shown in the list box, such as its `website` (_"github.com/zheng-code/detask"_) and its `description` (_"An all-in-one task managing app."_).
 +
 .Updated View Box with the details of the project item at index 1
 image::ViewDetaskProject.png[width="790"]
@@ -661,7 +663,7 @@ image::ReditListRes2.png[width = "790"]
 .Resume content after modification
 image::ReditWantSomeThings.png[width = "790"]
 
-You can think of this command as using only the items that has been specified in the command. In this example, we no longer want the items we have previously added, and we would like the "Winter 2019" `resume` to contain only the first internship item and the third skill item.
+You can think of this command as using only the items that has been specified in the command. In this example, we no longer want the items we have previously added, and we would like the "Winter 2019" `resume` to contain only the first `internship` item and the third `skill` item.
 
 *Example 3: No modifications to `internship` and `skill` items*
 
@@ -696,7 +698,7 @@ So by leaving out one of the prefixes (`TYPE/ ITEM_INDEX...`) from the command, 
 // tag::tagpull[]
 === Pulling tagged items into the resume: `tagpull`
 
-Pull all the `Internship`, `Project` and `Skill` items with the specified tag(s) into a `resume`.
+Pulls all the `internship`, `project` and `skill` items with the specified tag(s) into a `resume`.
 
 ====
 *Format:* `tagpull RESUME_INDEX [#/ TAG]...`
@@ -707,7 +709,7 @@ This command does not remove items from the `resume` and will add items on top o
 
 *Example 1: Pulling items using one tag*
 
-Before you try this example, please ensure you have added some items with the tag `SE`. You may verify for their presence by using the `list` command.
+Before you try this example, please ensure you have added some items with the tag "SE". You may verify for their presence by using the `list` command.
 
 Try typing in these commands:
 
@@ -721,7 +723,7 @@ Try typing in these commands:
 .List of all resume items
 image::ReditListRes.png[width = "790"]
 
-. The second command pulls all items which has `SE` as the tag into the `resume` at index 1, named "Winter 2019". The following screenshot illustrates the outcome of the command if we have 1 `internship` item and 2 `project` items tagged with `SE`.
+. The second command pulls all items which has "SE" as the tag into the `resume` at index 1, named "Winter 2019". The following screenshot illustrates the outcome of the command if we have 1 `internship` item and 2 `project` items tagged with "SE".
 +
 .Resume content after `tagpull`
 image::TagPullOneTag.png[width = "790"]
@@ -730,7 +732,7 @@ image::TagPullOneTag.png[width = "790"]
 
 Now, maybe you have categorised your items by using multiple tags. So, you think just pulling items using one tags is not sufficient. Our `tagpull` supports that too!
 
-Before you try this example, please ensure you have added some items with the tag `SE` and/or `github`. You may verify for their presence by using the `list` command.
+Before you try this example, please ensure you have added some items with the tag "SE" and/or "github". You may verify for their presence by using the `list` command.
 
 Try typing in these commands:
 
@@ -744,7 +746,7 @@ Try typing in these commands:
 .List of all resume items
 image::ReditListRes.png[width = "790"]
 
-. The second command pulls all items which has `SE` _or_ `github` as the tag into the `resume` at index 1, named "Winter 2019". The following screenshot illustrates the outcome of the command if we have 1 `internship` item and 2 `project` items tagged with `SE`, and 1 `skill` item tagged with `github`.
+. The second command pulls all items which has "SE" _or_ "github" as the tag into the `resume` at index 1, named "Winter 2019". The following screenshot illustrates the outcome of the command if we have 1 `internship` item and 2 `project` items tagged with "SE", and 1 `skill` item tagged with "github".
 +
 .Resume content after `tagpull`
 image::TagPullMultiTags.png[width = "790"]
@@ -764,10 +766,10 @@ Undoes the previous command and restores the state of the application to before 
 
 [NOTE]
 --
-* An `undo` is done per command and not change. If you make multiple changes to your user profile,
+* An `undo` is done per command and not per change. If you make multiple changes to your user profile,
 for instance, using a single `me` command, then `undo` will revert all the changes.
 
-* Commands that can be undone are: `add`, `delete`, `edit`, `sort`, `redit`, `tagpull` and `me`.
+* Commands that can be undone are: `add`, `delete`, `edit`, `sort`, `redit`, `tagpull`, `done`, `clear` and `me`.
 
 * Commands that make no change to the application state, namely `list`, `view`, `find`, `rpreview` and `rgen`, cannot be undone.
 
@@ -808,10 +810,10 @@ of that command.
 
 [NOTE]
 --
-* A `redo` is done per command and not change. If you undo a command that can make multiple changes like
+* A `redo` is done per command and not per change. If you undo a command that can make multiple changes like
 `redit`, then redoing it will resurrect all the changes. Spooky!
 
-* If a new `add`, `delete`, `edit`, `sort`, `redit`, `tagpull` or `me` command is performed after an `undo`,
+* If a new `add`, `delete`, `edit`, `sort`, `redit`, `tagpull`, `done`, `clear`, or `me` command is performed after an `undo`,
 then all states currently available for `redo` will be erased and you will not be able to go to these states
 anymore.
 
@@ -840,7 +842,7 @@ Previews a `resume` in text format in a pop-up window.
 
 [NOTE]
 --
-* `RESUME_INDEX` is the index of the `resume` seen when `list i/res` is called.
+* `RESUME_INDEX` is the index of the `resume` seen when `list i/ res` is called.
 * `description` of `internship` and `project` is automatically separated into bullet points when the program detects full sentences.
 --
 
@@ -851,7 +853,7 @@ Previews a `resume` in text format in a pop-up window.
 
 *Outcome:*
 
-. The first command lists out all `resumes`. Assuming that you want to preview the second `resume` in the list box.
+. The first command lists out all `resume` items. Assuming that you want to preview the second `resume` in the list box.
 +
 .List of all resume items
 image::ListResumeRPreview.png[width="790"]
@@ -1004,7 +1006,7 @@ ____
 This is a summary of all available commands for your reference.
 
 === General commands
-These are commands have consistent format regardless of item type.
+These are commands that have consistent format regardless of item type.
 [source,sh]
 [cols="20%,80%",options="header"]
 |=======================================================================
@@ -1060,7 +1062,7 @@ These are commands specific to `resume` items.
 | Command | Format
 
 | Edit Resume | `redit RESUME_INDEX TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]...`
-| Generate Resume | `rgen RESUME_INDEX`
+| Generate Resume | `rgen RESUME_INDEX n/ FILE_NAME`
 | Preview Resume | `rpreview RESUME_INDEX`
 | Tag Pull | `tagpull RESUME_INDEX [#/ TAG]`
 
