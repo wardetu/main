@@ -93,6 +93,8 @@ The sections below give more details of each component.
 
 // end::overall-architecture[]
 
+{ start of `ui` section written by: Nham Quoc Hung }
+
 // tag::ui[]
 [[Design-Ui]]
 === UI component
@@ -112,6 +114,8 @@ The `UI` component,
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 * Responds to events raised by various commands and the UI can be updated accordingly.
 // end::ui[]
+
+{ end of `ui` section written by: Nham Quoc Hung }
 
 // tag::logic[]
 [[Design-Logic]]
@@ -377,6 +381,8 @@ be switch-cased again in `ABCCommand`.
 
 // end::command-classes[]
 
+{ start of `me` section written by: Nham Quoc Hung }
+
 // tag::me[]
 === Me feature
 This feature intends to serve a single user of the application to sets and updates his/her user profile. The profile
@@ -554,6 +560,8 @@ faster and more reliable to make `Note` an `Item` so as to minimise double work 
 and so this design suits our needs given the short time frame that we have.
 ****
 // end::note[]
+
+{ end of `me` section written by: Nham Quoc Hung }
 
 //tag::export[]
 === Export Feature
