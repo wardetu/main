@@ -49,7 +49,7 @@ My code contributions can be found here: https://nus-cs2103-ay1920s2.github.io/t
 * Justification: Several `CommandResult` require a special boolean value to indicate that it is the result of a certain `Command`. With only one class, the constructor would have to take in many booleans in the constructor and this gets very messy.
 
 ==== 2.2.2 Project management
-* Managed releases `v1.2` - `v1.4` (3 releases) on GitHub
+* Managed releases `v1.1` - `v1.2` (2 releases) on GitHub
 * Managed GitHub issue tracker
 * Set-up Travis and Coveralls
 
