@@ -49,7 +49,7 @@ and job application woes.
 
 |4 |Resume |res |name, tag
 
-|5 |Note |note |name, time
+|5 |Note |note |name, time, tag
 |=======================================================================
 
 As you may have noticed from number 4, we are able to manage different `resumes` as well!
@@ -265,18 +265,18 @@ Adds an item to the *ResuMe* application.
 
 The specific command syntax could be found in the table below:
 
-[width="100%",cols="^12%,88%",options="header",]
+[width="100%",cols="^.^12%,88%",options="header",]
 |=======================================================================
 |Type |Format
 |Internship | `add i/ int n/ COMPANY_NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
 
-|Project |`add i/ proj n/ PROJECT_NAME t/ TIME w/ WEBSITE d/ DESCRIPTION [#/ TAG]....`
+|Project |`add i/ proj n/ PROJECT_NAME t/ TIME w/ WEBSITE d/ DESCRIPTION [#/ TAG]...`
 
-|Skill |`add i/ ski n/ SKILL_NAME l/ LEVEL [#/ TAG]....`
+|Skill |`add i/ ski n/ SKILL_NAME l/ LEVEL [#/ TAG]...`
 
 |Resume |`add i/ res n/ RESUME_NAME [#/ TAG]...`
 
-|Note |`add i/ note n/ NOTE_NAME t/ TIME`
+|Note |`add i/ note n/ NOTE_NAME t/ TIME [#/ TAG]...`
 |=======================================================================
 
 [NOTE]
