@@ -29,13 +29,13 @@ public class EditNoteCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edited Note: %1$s.";
 
-    private static final String FIELDS = "\n" + COMMAND_WORD
+    private static final String FIELDS = COMMAND_WORD
             + " INDEX "
             + PREFIX_ITEM + " note "
             + "[" + PREFIX_NAME + "NOTE NAME] "
             + "[" + PREFIX_TIME + "TIME] "
             + "[" + PREFIX_TAG + "TAG]....\n";
-    private static final String EXAMPLE = "\n" + "Example: "
+    private static final String EXAMPLE = "Example: "
             + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + " note "
             + PREFIX_NAME + " Complete Resume 3 "

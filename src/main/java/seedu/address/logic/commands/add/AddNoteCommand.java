@@ -20,7 +20,7 @@ public class AddNoteCommand extends AddCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to your note list.\n"
             + COMMAND_WORD + " "
             + PREFIX_ITEM + "TYPE "
-            + PREFIX_NAME + "TITLE "
+            + PREFIX_NAME + "NAME "
             + PREFIX_TIME + "TIME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ITEM + "note "
