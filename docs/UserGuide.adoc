@@ -670,7 +670,6 @@ image::ListResumeRPreview.png[width="790"]
 featuring a text-based view of the content of "Software Engineering". The screenshots of the results are as shown below:
 +
 image::RPreview.png[width = "790"]
-+
 image::RPreviewIndexTwo.png[width = "790"]
 
 // end::rpreview[]
