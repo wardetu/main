@@ -100,6 +100,7 @@ The sections below give more details of each component.
 
 // end::overall-architecture[]
 
+// tag::ui[]
 [[Design-Ui]]
 === UI component
 
@@ -117,6 +118,7 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 * Responds to events raised by various commands and the UI can be updated accordingly.
+// end::ui[]
 
 // tag::logic[]
 [[Design-Logic]]
@@ -189,7 +191,9 @@ Classes used by multiple components are in the `seedu.resumebook.commons` packag
 
 This section describes some noteworthy details on how certain features are implemented.
 
+{ start of Resume Edit feature implementation written by: Christian James Welly }
 // tag::redit[]
+
 === Resume Edit feature
 The Resume Edit feature or `redit` allows user to modify the <<content-item, content items>> of the `Resume` (for example, adding a `Skill` item or removing an `Internship` item). It is not to be confused with the `edit` command, which simply modifies the fields of an `Item` (such as name).
 
@@ -275,7 +279,9 @@ This also reduces bloating of code and increases the flexibility of `ResumeEditC
 Additionally, using `Optional` provides much less risk to getting `NullPointerException`. The reduced risk allows the developers to potentially save some debugging time, and developers worry less about handling the `NullPointerException`.
 ****
 // end::redit[]
+{ end of Resume Edit feature implementation written by: Christian James Welly }
 
+{ start of Tag Pull feature implementation written by: Christian James Welly }
 // tag::tagpull[]
 === Tag Pull feature
 The Tag Pull feature is similar to <<Resume Edit Feature, Resume Edit Feature>> in the sense that it modifies the <<content-item, content items>> of the `Resume`. Unlike Resume Edit which modifies using the content item indices, the Tag Pull feature modifies the resume by _adding_ items with the specified tags on top of existing items in the `Resume`.
@@ -326,6 +332,7 @@ It may also save the user some confusion since the `redit` feature specifically 
 As we have separated the two commands, we can then also vary the behaviour of the two commands slightly. We have implemented `redit` to be able to _modify_  (adding, changing, and removing) the `Resume` item, while `tagpull` modifies only by _adding_ onto existing content items in the `Resume`.
 ****
 // end::tagpull[]
+{ end of Tag Pull feature implementation written by: Christian James Welly }
 
 // tag::command-classes[]
 === Implementation of `Command` classes
@@ -386,6 +393,38 @@ be switch-cased again in `ABCCommand`.
 ****
 
 // end::command-classes[]
+
+// tag::observableuser[]
+=== Usage of `Observable` and `Observer`
+==== Reason for Implementation
+ResuMe inherits a lot of implementations from AddressBook Level 3, one of which is the usage of `ObservableList` that
+allows a list of item to be automatically updated in the UI every time a change is made to the underlying model.
+
+When we added functionality for a user profile and sequentially a user profile window, the need for auto UI update surfaced.
+We could not use the existing implementation since it is only for `ObservableList`. The initial rectification is to explicitly
+call a UI update, but that requires the UI to directly reach out to the Model to get the user profile data. This seriously
+breached many Software Engineering principles and we decided to amend it.
+
+==== Design Considerations
+
+* **Alternative 1**: Use `Observable` and `Observer`
+** Pros: Is way easier to implement and does not disrupt the existing code base much.
+** Cons: The two classes are deprecated in `Java 9` due to various shortcomings.
+
+* **Alternative 2**: Use `java.beans` package
+** Pros: Is designed to replace `Observable` and `Observer` and is currently the industry standard.
+** Cons: Is harder to implement and would require a lot of refactoring of the existing codes.
+
+==== Conclusion
+
+After deliberation we decided to go with the first alternative, due to time constraint and to avoid the potential
+havoc that would arise from refactoring the code base. In addition, the limitations of `Observable` and `Observer` are
+not likely to manifest considering the usage scenarios for our application (offline and not multi-threaded).
+
+We would, however, make it a priority to change the implementation to Alternative 2, since we want to scale up
+our application and it is not recommendable to build it on top of something that is no longer supported.
+
+// end::observableuser[]
 
 // tag::me[]
 === Me feature
@@ -700,8 +739,8 @@ These operations are exposed in the `Model` interface as `Model#commitResumeBook
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedResumeBook` will be initialized with the initial resume book state, and the `currentStatePointer` pointing to that single resume book state.
-Do note that all resume books begin with an empty string set for display type. Display type of a resume book lets it know
-what item list to show.
+Do note that all resume books begin with its display type set to an empty string. Display type of a resume book determines which item
+list will be selected for display (e.g. if the display type is "res" - an alias for resume, then the list of all resumes will be selected).
 
 image::UndoRedoState0.png[]
 
@@ -751,7 +790,7 @@ while the resume book state pointed to by the `currentStatePointer` still mainta
 image::UndoRedoState4.png[]
 
 Step 6. The user executes `sort i/ ski order/ name`, which calls `Model#commitResumeBook()`. Since the `currentStatePointer` is not pointing at the end of the `resumeBookStateList`, all resume book states after the `currentStatePointer` will be purged.
-We designed it this way because it no longer makes sense to redo the `add i/ ski ...` command. This is the behavior that most modern desktop applications follow.
+We designed it this way because it no longer makes sense to redo the `add i/ int ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoState5.png[]
 
@@ -765,12 +804,15 @@ image::CommitActivityDiagram.png[]
 ===== Aspect: How undo & redo executes
 
 * **Alternative 1 (current choice):** Saves the entire resume book.
+
 ** Pros: Easy to implement. Easy to understand.
 ** Cons: May have performance issues in terms of memory usage.
+
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
+
 ** Pros: Will use less memory (e.g. for `delete`, just save the item being deleted).
 ** Cons: We must ensure that the implementation of each individual command is correct. It is further complicated by the fact that
-there is an `add`, `delete`, and `edit` command for each of item type. Also, Separation of Concerns Principle is violated as in essence, the `undo()` method of a command
+there is an `add`, `delete`, `edit`, and `sort` command for each item type. Also, Separation of Concerns Principle is violated as in essence, the `undo()` method of a command
 is doing more than what the command is responsible for, e.g. undoing a `delete` command is essentially performing an `add` command.
 
 
@@ -778,7 +820,9 @@ is doing more than what the command is responsible for, e.g. undoing a `delete` 
 
 * **Alternative 1 (current choice):** Use a list to store the history of resume book states.
 ** Pros: Very straightforward. Developers, even the novice ones, can easily understand and pick up if they wish to improve upon our application.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedResumeBook`.
+** Cons: We need handle the `currentStatePointer` accurately; this is further complicated as we also need to reach to the undone
+resume book state to retrieve the correct display type for the current resume book.
+
 * **Alternative 2:** Use `HistoryManager` for undo/redo. `HistoryManager` will contain two stacks: `UndoStack` and `RedoStack`. We push a command into the former stack
 when it is executed; when an `undo` is performed, we pop the top of the `UndoStack` and store the command in the `RedoStack`.
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase. We also just need to store the history of commands as opposed to the entire

@@ -83,28 +83,50 @@ as it involves most components including Ui, Logic, Model and Storage.
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+{start of extract 1: me}
+
 include::../UserGuide.adoc[tag=me]
 
-include::../UserGuide.adoc[tag=note]
+{end of extract 1}
+
+{start of extract 2: find}
+
+include::../UserGuide.adoc[tag=find]
+
+{end of extract 2}
+
+{start of extract 3: done}
 
 include::../UserGuide.adoc[tag=done]
 
+{end of extract 3}
+
+{start of extract 4: exit}
+
 include::../UserGuide.adoc[tag=exit]
+
+{end of extract 4}
 
 ==== Contributions to the Developer Guide (Extracts)
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-{start of extract 1: Me}
+{start of extract 1: Ui}
 
-include::../DeveloperGuide.adoc[tag=me]
+include::../DeveloperGuide.adoc[tag=ui]
 
 {end of extract 1}
 
-{start of extract 2: Note}
+{start of extract 2: Me}
+
+include::../DeveloperGuide.adoc[tag=me]
+
+{end of extract 2}
+
+{start of extract 3: Note}
 
 include::../DeveloperGuide.adoc[tag=note]
 
-{end of extract 2}
+{end of extract 3}
 
