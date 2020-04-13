@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox minWidth="340.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox minWidth="340.0" prefHeight="90.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="profilePicture" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER" />
-      <ScrollPane fitToWidth="true" maxWidth="230.0" minWidth="230.0" HBox.hgrow="NEVER">
+      <ScrollPane fitToWidth="true" maxWidth="240.0" minWidth="240.0" HBox.hgrow="NEVER">
          <content>
-            <VBox maxHeight="Infinity" maxWidth="230.0">
+            <VBox maxHeight="Infinity" maxWidth="240.0">
                <children>
                   <Label fx:id="name" lineSpacing="5.0" maxHeight="Infinity" styleClass="name" text="Label">
                      <VBox.margin>

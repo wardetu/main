@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SKILL_NAME_REACT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
@@ -49,7 +50,8 @@ public class EditSkillCommandTest {
     public void execute_validIndex_editSuccessful() throws CommandException {
         ModelStubContainingSkillEdited modelStub = new ModelStubContainingSkillEdited(sampleEditedSkill);
 
-        EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptorBuilder(GIT).build();
+        EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptorBuilder()
+                .withName(VALID_SKILL_NAME_REACT).build();
 
         Index validIndex = INDEX_FIRST_ITEM;
 
@@ -60,7 +62,7 @@ public class EditSkillCommandTest {
         CommandResult commandResult = editSkillCommand.execute(modelStub);
 
         assertEquals(String.format(EditSkillCommand.MESSAGE_EDIT_SKILL_SUCCESS,
-                sampleEditedSkill.getName().fullName),
+                VALID_SKILL_NAME_REACT),
                 commandResult.getFeedbackToUser());
     }
 
