@@ -34,7 +34,6 @@ import seedu.address.testutil.TypicalResumeBook;
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
  * {@code DeleteCommand}.
- * TODO: TEST UNDO AND REDO TOO!
  */
 public class DeleteCommandIntegrationTest {
     private Model model;

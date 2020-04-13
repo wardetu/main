@@ -28,9 +28,9 @@ My code contributions can be found here: https://nus-cs2103-ay1920s2.github.io/t
 ==== 2.1.1 Enhancements Implemented
 
 * *Major enhancement*: added *the ability to modify items in the resume*: `redit`
-** What it does: allows the user to selectively modify items in a specified resume.
+** What it does: allows the user to selectively modify the items in a specified resume.
 ** Justification: This is a key feature in the application because a user would need to select existing items in the resume to be included before generating them.
-** Highlights: This enhancement is particularly tricky to implement due to the various possibilities of input that a user can give. Careful parsing of the input is required before the command is processed.
+** Highlights: This enhancement is particularly tricky to implement due to the various possibilities of input that a user can give. For example, a combination of internship and project items. Careful parsing of the input is required before the command is processed.
 
 * *Major enhancement*: added *the ability to add items in the resume based on tags*: `tagpull`
 ** What it does: allows the user to add items that have been given a particular tag.
@@ -40,7 +40,7 @@ My code contributions can be found here: https://nus-cs2103-ay1920s2.github.io/t
 ** Justification: ResuMe requires handling of various item types such as `Internship`, `Project` and `Skill` items. Therefore, it is necessary to morph the existing `Parser` from AB3 to suit our needs.
 
 * *Minor enhancement*: wrote the `view` command
-** Justification: Items such as `Internship` omit a lot of details in our list in the GUI. The `view` command helps include more details about the `Item`.
+** Justification: Items such as `Project` omit a lot of details in our list in the GUI. The `view` command helps include more details about the `Item`.
 
 === 2.2 Contributions to team-based tasks:
 
@@ -56,9 +56,10 @@ My code contributions can be found here: https://nus-cs2103-ay1920s2.github.io/t
 ==== 2.2.3 Reviewing contributions:
 *** PRs reviewed with non-trivial review comments (https://github.com/AY1920S2-CS2103T-F10-1/main/pull/135[#135],
 https://github.com/AY1920S2-CS2103T-F10-1/main/pull/145[#145],
-https://github.com/AY1920S2-CS2103T-F10-1/main/pull/159[#159],
-https://github.com/AY1920S2-CS2103T-F10-1/main/pull/245[#245],
-https://github.com/AY1920S2-CS2103T-F10-1/main/pull/204[#204])
+https://github.com/AY1920S2-CS2103T-F10-1/main/pull/159[#159], https://github.com/AY1920S2-CS2103T-F10-1/main/pull/204[#204],
+https://github.com/AY1920S2-CS2103T-F10-1/main/pull/245[#245], https://github.com/AY1920S2-CS2103T-F10-1/main/pull/326[#326]
+ ...)
+
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/chrisjwelly/ped/issues/8[1],
 https://github.com/chrisjwelly/ped/issues/10[2], https://github.com/chrisjwelly/ped/issues/16[3])
 
@@ -67,17 +68,8 @@ https://github.com/chrisjwelly/ped/issues/10[2], https://github.com/chrisjwelly/
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
-{start of extract 1: Resume Edit}
-
-include::../UserGuide.adoc[tag=redit]
-
-{end of extract 1}
-
-{start of extract 2: Tag Pull}
 
 include::../UserGuide.adoc[tag=tagpull]
-
-{end of extract 2}
 
 == 4. Contributions to the Developer Guide
 
@@ -85,21 +77,5 @@ include::../UserGuide.adoc[tag=tagpull]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-{start of extract 1: Logic}
-
-include::../DeveloperGuide.adoc[tag=logic]
-
-{end of extract 1}
-
-{start of extract 2: Resume Edit}
-
 include::../DeveloperGuide.adoc[tag=redit]
-
-{end of extract 2}
-
-{start of extract 3: Tag Pull}
-
-include::../DeveloperGuide.adoc[tag=tagpull]
-
-{end of extract 3}
 ---
