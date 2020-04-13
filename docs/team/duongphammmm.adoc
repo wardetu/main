@@ -44,13 +44,13 @@ and facilitate easy cross-reference.
 
 ==== 1.2. Contributions to Documentation:
 ** Updated README (https://github.com/AY1920S2-CS2103T-F10-1/main/pull/161[#161])
-** Updated the <<Contributions to the User Guide, User Guide>> to reflect my feature enhancements. Sections contributed includes:
+** Updated the <<Contributions to the User Guide (Extracts), User Guide>> to reflect my feature enhancements. Sections contributed includes:
 *** About this guide
 *** Viewing help: `help`
 *** Adding an item: `add`
 *** Generating a resume: `rgen`
 
-** Updated the <<Contributions to the Developer Guide, Developer Guide>> to reflect my feature enhancements. Sections contributed includes:
+** Updated the <<Contributions to the Developer Guide (Extracts), Developer Guide>> to reflect my feature enhancements. Sections contributed includes:
 *** Model Component
 *** Export Feature
 *** Appendix A: Product Scope
@@ -83,8 +83,7 @@ https://github.com/AY1920S2-CS2103T-F10-1/main/pull/256[#256],...
 https://github.com/duongphammmm/ped/issues/7[2], https://github.com/duongphammmm/ped/issues/9[3])
 
 
-== Contributions to the User Guide
-
+== Contributions to the User Guide (Extracts)
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
@@ -97,7 +96,7 @@ include::../UserGuide.adoc[tag=add]
 
 include::../UserGuide.adoc[tag=rgen]
 
-== Contributions to the Developer Guide
+== Contributions to the Developer Guide (Extracts)
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
