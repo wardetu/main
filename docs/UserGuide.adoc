@@ -211,9 +211,11 @@ Follow the steps in one of these two links to copy an absolute file path accordi
 
 . Windows: https://www.laptopmag.com/articles/show-full-folder-path-file-explorer
 
-Afterwards, try a command similar to the one below:
+Afterwards, try a command similar to the one of the two below:
 
-`me dp/ /Users/nhamquochung/Desktop/test.png`
+`me dp/ /Users/nhamquochung/Desktop/test.png` (for Mac)
+
+`me dp/ C:\Users\Christian J. Welly\Pictures\chrisjwelly.jpg` (for Windows)
 
 *Outcome:*
 
