@@ -36,6 +36,8 @@ deactivate storage
 logic --[LOGIC_COLOR]> ui: commandResult
 deactivate logic
 
+note right of ui: Ui will then update UI to user according to commandResult
+
 ui--[UI_COLOR]> user
 deactivate ui
 @enduml
