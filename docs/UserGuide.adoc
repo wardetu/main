@@ -52,8 +52,8 @@ and job application woes.
 |5 |Note |note |name, time, tag
 |=======================================================================
 
-As you may have noticed from number 4, we are able to manage different `resumes` as well!
-Items from number 1 to 3 can be shared across different `resumes`.
+As you may have noticed from number 4, we are able to manage different `resume` items as well!
+Items from number 1 to 3 can be shared across different `resume` items.
 
 === Preview
 The following is the GUI for our application:
@@ -79,8 +79,8 @@ the list box will be set to display that type.
 . *_User box:_* where you can view your personal information like `name`, `email`, or `phone number`. Any changes made
 to your user profile will be automatically reflected here.
 
-. *_Note box:_* where you can view your list of notes. You can also change the view of this list by using `list` command.
-When a note is marked as done, this box will be automatically updated.
+. *_Note box:_* where you can view your list of `note` items. You can also change the view of this list by using `list` command.
+When a `note` is marked as done, this box will be automatically updated.
 
 ====
 
@@ -137,7 +137,7 @@ image::Ui.png[width="790"]
 e.g. typing *`help start`* and pressing kbd:[Enter] will open the help window for getting started.
 .  Try out these example commands:
 
-* **`list`**`i/ res` : lists all `resumes`.
+* **`list`**`i/ res` : lists all `resume` items.
 * **`add`**`i/ res n/ Software Engineering Resume #/ SE #/ frontend`: adds a `resume` named `Software Engineering Resume`
 with `tags` _"SE"_ and _"frontend"_.
 * **`delete`**`1 i/ res` : deletes the 1st `resume` shown in the resume list.
@@ -206,7 +206,7 @@ You can edit your display profile here! It will then be updated accordingly in t
 ====
 
 [NOTE]
-A user profile contains the following fields: `Display Picture`, `Name`, `Description`, `Phone`, `Email`, `Github`, `University`, `Major`, `From`, `To`, `CAP`.
+A user profile contains the following fields: `DisplayPicture`, `Name`, `Description`, `Phone`, `Email`, `Github`, `University`, `Major`, `From`, `To`, `CAP`.
 
 *Example 1:* Update user profile details +
 
@@ -257,7 +257,7 @@ Lists items in the storage.
 
 [TIP]
 --
-* Listed items are in short form, only showing their `index`, `name`, `tags` and a short summary.
+* Listed items are in short form, only showing their index, `name`, `tags` and a short summary.
 To view items in full details, use <<Viewing an item in details: `view`, view>>.
 * The type of items listed will light up in orange.
 --
@@ -331,7 +331,7 @@ _(refer to <<Generating a resume: `rgen`, rgen>> for more details)_
 +
 .List of all project items
 image::ListProject.png[width="600"]
-. A new `project` item named `Duke` with the specified fields is added. This item is automatically reflected in the list box.
+. A new `project` item named "Duke" with the specified fields is added. This item is automatically reflected in the list box.
 +
 .Application view after project "Duke" is added
 image::AddDukeProject.png[width="600"]
@@ -884,7 +884,7 @@ will be located in the same folder as the application `.jar` file.
 
 [TIP]
 It is optional to specify a `FILE_NAME` for the .pdf file.
-If no name is specified, the filename will be set, by default, to the name of the generated `Resume`.
+If no name is specified, the filename will be set, by default, to the name of the generated `resume`.
 
 *Example:* Let's try out the following commands!
 
@@ -893,17 +893,17 @@ If no name is specified, the filename will be set, by default, to the name of th
 
 *Outcome:*
 
-. The first command lists out all `resumes`. Assuming that you want to generate the first `resume` in the list box.
+. The first command lists out all `resume` items. Assuming that you want to generate the first `resume` in the list box.
 +
 .List of all resume items
 image::ListResume.PNG[width="790"]
 
-. The second command generates a `My Resume.pdf` file from the specified resume. The screenshots of the application view
+. The second command generates a "My Resume.pdf" file from the specified resume. The screenshots of the application view
 and of the generated file are as below:
 +
-.Application view after `rgen` is executed
+.Application view after rgen is executed
 image::GenerateResume.PNG[width="790"]
-.Generated `.pdf` file
+.Generated .pdf file
 image::PdfFile.PNG[width="790"]
 
 // end::rgen[]
