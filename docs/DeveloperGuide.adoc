@@ -529,7 +529,7 @@ a clean UI outweighs the compromise made when additional action to close the pop
 ==== Generating a `.pdf` file from a resume: `rgen`
 ===== Implementation
 This feature utilises the external *Apache Pdf Box* library. When using `rgen`, the user could specify the desired name of
-the generated file, which will be saved in the <<root-directory, root directory>> of the project.
+the generated file, which will be saved in the root directory of the project.
 
 The executing of `rgen` is facilitated by an addition `PdfBuilder` class, which implements the following main operations:
 
@@ -544,9 +544,9 @@ Given below is an example usage scenario:
 Step 1. The user launches *ResuMe*. After loading data from storage to the application memory, the list of `resumes` in the
 `ResumeBook` could either contain some resumes, or is empty.
 
-Step 2. The user executes `rgen INDEX n/ FILE_NAME`.
+Step 2. The user executes `rgen INDEX n/ FILE_NAME`. If the specified resume `INDEX` is out of bound, *ResuMe* throws an error message.
 
-Step 3. If the specified resume `INDEX` is out of bound, *ResuMe* throws an error message. Otherwise, the application retrieves the correct `Resume` item, create a new `.pdf` file and populates it with the corresponding
+Step 3. The application retrieves the correct `Resume` item, create a new `.pdf` file and populates it with the corresponding
 items inside the `Resume`.
 
 The following activity diagram summarises what happens when a user executes `rgen` command:
@@ -712,13 +712,14 @@ Refer to the guide <<DevOps#, here>>.
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* is a University student looking for internship or job
+* has a need to manage a significant number of personal experiences and resumes for different purposes
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: build and manage resumes faster than a typical mouse/GUI driven app
 
 [appendix]
 == User Stories
@@ -858,8 +859,9 @@ using commands than using the mouse to navigate the Graphic User Interface (GUI)
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[content-item]] Content item::
-`internship`, `skill`, `project`
+[[private-contact-detail]] Private contact detail::
+A contact detail that is not meant to be shared with others
+
 [appendix]
 == Product Survey
 
