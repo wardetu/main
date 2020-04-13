@@ -355,7 +355,7 @@ image::ListResume2.png[width="790"]
 +
 image::EditResumeExample.png[width="790"]
 
-*Example 2:* Try typing in the command box these two commands one by one!
+*Example 2:* Here is another way you can use `edit`. This time, we will try an example using `skill` items. Try typing in the command box these two commands one by one!
 
 . `list i/ ski`
 . `edit 2 i/ ski l/ ADVANCED #/`
