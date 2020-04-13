@@ -37,7 +37,7 @@ Model -> VersionedResumeBook : undo()
 activate VersionedResumeBook
 
 VersionedResumeBook -> VersionedResumeBook :resetData(ReadOnlyResumeBook)
-VersionedResumeBook -> VersionedResumeBook :(String)
+VersionedResumeBook -> VersionedResumeBook :setItemsToDisplay(String)
 VersionedResumeBook --> Model :
 deactivate VersionedResumeBook
 

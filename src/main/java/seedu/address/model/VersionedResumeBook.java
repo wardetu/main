@@ -48,9 +48,9 @@ public class VersionedResumeBook extends ResumeBook {
          */
         currentStatePointer--;
         resetData(resumeBookStateList.get(currentStatePointer));
-        /* currentStatePointer + 1 now points to the just undone command, whose displayType we want to set the
-        VersionedResumeBook to */
-        this.setItemsToDisplay(resumeBookStateList.get(currentStatePointer + 1).getDisplayType());
+        /* currentStatePointer + 1 now points to the just undone command, to whose displayType we want to set the
+        VersionedResumeBook*/
+        setItemsToDisplay(resumeBookStateList.get(currentStatePointer + 1).getDisplayType());
     }
 
     /**
