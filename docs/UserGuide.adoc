@@ -339,7 +339,7 @@ Edits an existing item in the *ResuMe* application.
 |=======================================================================
 
 
-*Example 1:* 
+*Example 1:*
 Try typing in the command box these two commands one by one!
 
 . `list i/ res`
