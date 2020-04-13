@@ -30,10 +30,10 @@ public class EditNoteCommand extends EditCommand {
     public static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edited Note: %1$s.";
     public static final String MESSAGE_SAME_NOTE = "You are not making any changes to this note.";
 
-    private static final String FIELDS = COMMAND_WORD
+    private static final String FIELDS = "Format: " + COMMAND_WORD
             + " INDEX "
             + PREFIX_ITEM + " note "
-            + "[" + PREFIX_NAME + "NOTE NAME] "
+            + "[" + PREFIX_NAME + "NOTE_NAME] "
             + "[" + PREFIX_TIME + "TIME] "
             + "[" + PREFIX_TAG + "TAG]....\n";
     private static final String EXAMPLE = "Example: "

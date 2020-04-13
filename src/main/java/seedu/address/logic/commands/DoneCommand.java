@@ -18,7 +18,8 @@ public class DoneCommand extends Command {
 
     public static final String MESSAGE_DONE_SUCCESS = "Marked this note as done!";
     public static final String MESSAGE_DONE_FAILURE = "This note is already marked as done!";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " INDEX \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a note Item as done.\n"
+            + "Format: " + COMMAND_WORD + " INDEX \n"
             + "Example: done 1 ";
 
     protected final Index targetIndex;

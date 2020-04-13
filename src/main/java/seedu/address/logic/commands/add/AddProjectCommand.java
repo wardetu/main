@@ -20,21 +20,22 @@ import seedu.address.model.item.Project;
 public class AddProjectCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an project to the address book.\n"
+            + "Format: "
             + COMMAND_WORD + " "
-            + PREFIX_ITEM + "TYPE "
-            + PREFIX_NAME + "PROJECT NAME "
-            + PREFIX_TIME + "TIME "
-            + PREFIX_WEBSITE + "WEBSITE "
-            + PREFIX_DESCRIPTION + "DESC "
-            + "[" + PREFIX_TAG + "TAG]....\n"
+            + PREFIX_ITEM + " TYPE "
+            + PREFIX_NAME + " PROJECT NAME "
+            + PREFIX_TIME + " TIME "
+            + PREFIX_WEBSITE + " WEBSITE "
+            + PREFIX_DESCRIPTION + " DESC "
+            + "[" + PREFIX_TAG + " TAG]....\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ITEM + "proj "
-            + PREFIX_NAME + "Duke "
-            + PREFIX_TIME + "06-2020 "
-            + PREFIX_WEBSITE + "abc.github.io "
-            + PREFIX_DESCRIPTION + "For a little module named CS2103T. "
-            + PREFIX_TAG + "java "
-            + PREFIX_TAG + "tech";
+            + PREFIX_ITEM + " proj "
+            + PREFIX_NAME + " Duke "
+            + PREFIX_TIME + " 06-2020 "
+            + PREFIX_WEBSITE + " abc.github.io "
+            + PREFIX_DESCRIPTION + " For a little module named CS2103T. "
+            + PREFIX_TAG + " java "
+            + PREFIX_TAG + " tech";
 
     private final Project toAdd;
 
