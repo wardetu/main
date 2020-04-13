@@ -17,10 +17,14 @@ endif::[]
 
 By: `CS2103T F10-1`      Since: `Feb 2020`      Licence: `MIT`
 
+{ start of `introduction` section written by: Pham Thuy Duong }
+
 == Introduction
 This developer guide documents the system design and implementation of *ResuMe*. We hope that it would be a useful reference
 for software developers who wish to contribute to the project, or to simply gain deeper insight into our development process
 and considerations.
+
+{ end of `introduction` section written by: Pham Thuy Duong }
 
 == Setting up
 
@@ -141,7 +145,9 @@ image::DeleteSequenceDiagram.png[]
 NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 // end::logic[]
 
+{ start of `model` section written by: Pham Thuy Duong }
 // tag::model[]
+
 [[Design-Model]]
 === Model component
 
@@ -161,6 +167,7 @@ one for `Note` and one for `Internship`, `Project`, `Skill` and `Resume`.
 * does not depend on any of the other three components.
 
 // end::model[]
+{ end of `model` section written by: Pham Thuy Duong }
 
 [[Design-Storage]]
 === Storage component
@@ -461,6 +468,7 @@ every command.
 
 The following sequence diagram shows how the `me` feature allows user to edit his/her user profile:
 
+.Sequence Diagram for EditUserCommand
 image::MeSequenceDiagram.png[]
 
 ===== Design Considerations
@@ -539,6 +547,7 @@ Step 4. If no duplicate error is thrown, ResuMe will replace the note at this in
 
 The following activity diagram summarises this process when user executes `edit i/ note` command:
 
+.Activity Diagram for EditNoteCommand
 image::EditNoteCommandActivityDiagram.png[]
 
 ===== Scenario 3. Mark an existing note as done: `done`
@@ -598,7 +607,9 @@ and so this design suits our needs given the short time frame that we have.
 ****
 // end::note[]
 
+{ start of `export` section written by: Pham Thuy Duong }
 //tag::export[]
+
 === Export Feature
 The Export Feature supports two main actions: previewing the content of a `Resume` item, and
 then generating a `.pdf` file from it.
@@ -619,6 +630,7 @@ Step 3. The application retrieves the correct `Resume` item and calls `toPreview
 
 The following activity diagram summarises what happens when a user executes `rpreview` command:
 
+.Activity Diagram for ResumePreviewCommand
 image::ExportPreviewActivityDiagram.png[width="200"]
 
 
@@ -678,10 +690,12 @@ items inside the `Resume`.
 
 The following activity diagram summarises what happens when a user executes `rgen` command:
 
+.Activity Command for GenerateResumeCommand
 image::ExportActivityDiagram.png[, 250]
 
 Detailed steps are shown in the sequence diagram below:
 
+.Sequence Diagram for GenerateResumeCommand
 image::ExportSequenceDiagram.png[, 1000]
 
 ==== Design Considerations
@@ -705,7 +719,9 @@ of reading its content twice (once during `rpreview` and once during `rgen`) is 
 will further allows the application to have more control when formatting the output file, and leaving room for potential
 extended features (e.g. allow user to choose from a variety of pre-defined resume templates).
 ****
+
 //end::export[]
+{ end of `export` section written by: Pham Thuy Duong }
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -757,6 +773,7 @@ If the `currentStatePointer` is at index 0, pointing to the initial resume book 
 
 The following sequence diagram shows how the undo operation works:
 
+.Sequence Diagram for UndoCommand
 image::UndoSequenceDiagram.png[]
 
 NOTE: The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -780,6 +797,7 @@ image::UndoRedoState5.png[]
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
+.Activity Diagram when a user executes a new command
 image::CommitActivityDiagram.png[]
 
 ==== Design Considerations
@@ -875,8 +893,10 @@ Refer to the guide <<Testing#, here>>.
 
 Refer to the guide <<DevOps#, here>>.
 
+{ start of `product-scope` section written by: Pham Thuy Duong }
 [appendix]
 // tag::product-scope[]
+
 == Product Scope
 
 *Target user profile*:
@@ -891,6 +911,7 @@ Refer to the guide <<DevOps#, here>>.
 *Value proposition*: build and manage resumes faster than a typical mouse/GUI driven app
 
 // end::product-scope[]
+{ end of `product-scope` section written by: Pham Thuy Duong }
 
 // tag::user-stories[]
 
@@ -1011,8 +1032,10 @@ Use case ends.
 
 _{More to be added}_
 
+{ start of `nfr` section written by: Pham Thuy Duong }
 [appendix]
 // tag::nfr[]
+
 == Non Functional Requirements
 
 .  The system should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
@@ -1025,11 +1048,14 @@ the data file) without any network connection.
 .  A user with some familiarity with Command Line Interface (CLI) should be able to accomplish most of the tasks faster
 using commands than using the mouse to navigate the Graphic User Interface (GUI).
 . The product is not required to handle the printing of resumes.
+
 // end::nfr[]
+{ end of `nfr` section written by: Pham Thuy Duong }
 
+{ start of `glossary` section written by: Pham Thuy Duong }
 [appendix]
-
 // tag::glossary[]
+
 == Glossary
 
 [[mainstream-os]] Mainstream OS::
@@ -1039,6 +1065,8 @@ Windows, Linux, Unix, OS-X
 A contact detail that is not meant to be shared with others
 
 // end::glossary[]
+{ end of `glossary` section written by: Pham Thuy Duong }
+
 [appendix]
 == Product Survey
 
