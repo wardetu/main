@@ -311,6 +311,7 @@ image::AddDukeProject.png[width="790"]
 
 // end::add[]
 
+// tag::edit[]
 === Editing an item : `edit`
 
 Edits an existing item in the *ResuMe* application.
@@ -346,12 +347,11 @@ Try typing in the command box these two commands one by one!
 
 *Outcome:*
 
-. All `resume` items are listed in the list box.
+. All `resume` items are listed in the list box. Assuming you want to edit the `resume` item at index 1.
 +
 image::ListResume2.png[width="790"]
 
-. The `resume` at index 1 has its name changed from _"Winter 2019"_ to _"Software Engineering Resume"_ and its
-tag set to _"agile"_.
+. The `resume` at index 1 has its name changed from _"Winter 2019"_ to _"Software Engineering Resume"_ and its tag set to _"agile"_.
 +
 image::EditResumeExample.png[width="790"]
 
@@ -362,13 +362,14 @@ image::EditResumeExample.png[width="790"]
 
 *Outcome:*
 
-. All `skill` items are listed in the list box.
+. All `skill` items are listed in the list box. Assuming you want to edit the `skill` item at index 2.
 +
-// TODO: add screenshot
+image::ListSkill1.png[width="790"]
 
 . The `skill` at index 2 has its level changed to `ADVANCED` and all its existing tags cleared.
 +
-// TODO: add screenshot
+image::EditSkillExample.png[width="790"]
+// end::edit[]
 
 // tag::find[]
 
