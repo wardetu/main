@@ -31,7 +31,7 @@ Responsibilities: Storage
 
 === Nguyen Chi Hai
 image::helloimhai.png[width="150", align="left"]
-{empty}[http://github.com/helloImHai[github]] [<<helloImHai#, portfolio>>]
+{empty}[http://github.com/helloImHai[github]] [<<helloimhai#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Commands
