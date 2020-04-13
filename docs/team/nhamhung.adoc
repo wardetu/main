@@ -73,7 +73,7 @@ as it involves most components including Ui, Logic, Model and Storage.
 ==== 2.2. Testing
 * Wrote additional tests for existing features to increase coverage (https://github.com/AY1920S2-CS2103T-F10-1/main/pull/285[#285], https://github.com/AY1920S2-CS2103T-F10-1/main/pull/328[#328], https://github.com/AY1920S2-CS2103T-F10-1/main/pull/300[#300])
 
-==== 2.2/ Reviewing contributions:
+==== 2.2 Reviewing contributions:
 * PRs reviewed with non-trivial review comments (https://github.com/AY1920S2-CS2103T-F10-1/main/pull/320[#320], https://github.com/AY1920S2-CS2103T-F10-1/main/pull/260[#260])
 * Reported bugs and suggestions for other teams in class (examples: https://github.com/nhamhung/ped/issues/4[1], https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/25[2])
 
@@ -87,9 +87,9 @@ include::../UserGuide.adoc[tag=me]
 
 include::../UserGuide.adoc[tag=note]
 
-include::../UserGuide.adoc[tag=exit]
-
 include::../UserGuide.adoc[tag=done]
+
+include::../UserGuide.adoc[tag=exit]
 
 ==== Contributions to the Developer Guide (Extracts)
 |===
