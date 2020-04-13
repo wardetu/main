@@ -100,6 +100,8 @@ The sections below give more details of each component.
 
 // end::overall-architecture[]
 
+{ start of `ui` section written by: Nham Quoc Hung }
+
 // tag::ui[]
 [[Design-Ui]]
 === UI component
@@ -119,6 +121,8 @@ The `UI` component,
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 * Responds to events raised by various commands and the UI can be updated accordingly.
 // end::ui[]
+
+{ end of `ui` section written by: Nham Quoc Hung }
 
 // tag::logic[]
 [[Design-Logic]]
@@ -427,6 +431,8 @@ our application and it is not recommendable to build it on top of something that
 
 // end::observableuser[]
 
+{ start of `me` section written by: Nham Quoc Hung }
+
 // tag::me[]
 === Me feature
 This feature intends to serve a single user of the application to sets and updates his/her user profile. The profile
@@ -511,6 +517,10 @@ background needs to be managed to be included in every generated resume. This us
 and to be updated with a simple and powerful command.
 ****
 // end::me[]
+
+{ end of `me` section written by: Nham Quoc Hung }
+
+{ start of `note` section written by: Nham Quoc Hung }
 
 // tag::note[]
 ==== Note taking feature: take simple notes or reminders
@@ -607,7 +617,10 @@ and so this design suits our needs given the short time frame that we have.
 ****
 // end::note[]
 
+{ end of `note` section written by: Nham Quoc Hung }
+
 { start of `export` section written by: Pham Thuy Duong }
+
 //tag::export[]
 
 === Export Feature

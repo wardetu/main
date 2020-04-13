@@ -192,10 +192,12 @@ image::helpStart.png[width="790"]
 // end::help[]
 { end of `help` section written by: Pham Thuy Duong }
 
+{ start of `me` section written by: Nham Quoc Hung }
+
 // tag::me[]
 === Editing user profile: `me`
 
-Edits and updates user's display profile.
+You can edit your display profile here! It will then be updated accordingly in the user profile area. Feel free to edit only one or multiple fields at a time :)
 
 ====
 *Format:* `me [dp/ FILE_PATH] [n/ NAME] [d/ DESCRIPTION] [p/ PHONE_NUMBER] [e/ EMAIL] [g/ GITHUB] [u/ UNIVERSITY] [m/ MAJOR] [f/ FROM] [t/ TO] [c/ CURRENT_CAP MAX_CAP]`
@@ -212,20 +214,20 @@ Try typing in the command box this command:
 
 *Outcome:*
 
-The user box is updated accordingly as below:
+The user profile area will be swiftly updated to showcase all your essential information:
 
 .User Box with updated personal details
 image::ug.png[width="450"]
 
 *Example 2:* Update user profile picture
 
-Follow the steps in one of these two links to copy an absolute file path according to your respective Operating System.
+Now, let's make your profile even more customisable. Follow the steps in one of these two links below if you do not know how to copy an full file path from your computer.
 
 . Mac: https://osxdaily.com/2013/06/19/copy-file-folder-path-mac-os-x/
 
 . Windows: https://www.laptopmag.com/articles/show-full-folder-path-file-explorer
 
-Afterwards, try a command similar to the one of the two below:
+Afterwards, try a command similar to the one of the two below, depending on your operating system:
 
 `me dp/ /Users/nhamquochung/Desktop/test.png` (for Mac)
 
@@ -233,12 +235,14 @@ Afterwards, try a command similar to the one of the two below:
 
 *Outcome:*
 
-The user profile picture is updated accordingly as below:
+Tada! The user profile area will be updated to display your beautiful picture:
 
 .User Box with updated profile picture
 image::ugu.png[width="450"]
 
 // end::me[]
+
+{ end of `me` section written by: Nham Quoc Hung }
 
 // tag::list[]
 === Listing all items : `list`
@@ -403,6 +407,8 @@ image::EditSkillExample.png[width="790"]
 
 // tag::find[]
 
+{ start of `find` section written by: Nham Quoc Hung }
+
 === Finding items by name: `find`
 
 Finds items of a specific `type` in the corresponding list of items whose names contain the specified keyword(s).
@@ -445,6 +451,8 @@ image::list-orbital.png[width="790"]
 image::find-orbital.png[width="790"]
 
 // end::find[]
+
+{ end of `find` section written by: Nham Quoc Hung }
 
 // tag::delete[]
 
@@ -899,6 +907,8 @@ image::PdfFile.PNG[width="790"]
 // end::rgen[]
 { end of `rgen` section written by: Pham Thuy Duong }
 
+{ start of `done` section written by: Nham Quoc Hung }
+
 // tag::done[]
 
 === Mark a note as done: `done`
@@ -929,6 +939,8 @@ image::ListAllNotes.png[width="450"]
 image::note-done.png[width="450"]
 // end::note[]
 
+{ end of `done` section written by: Nham Quoc Hung }
+
 // tag::clear[]
 
 === Clearing all data: `clear`
@@ -943,6 +955,8 @@ This command can be undone.
 
 // end::clear[]
 
+{ start of `exit` section written by: Nham Quoc Hung }
+
 // tag::exit[]
 
 === Exiting the program : `exit`
@@ -954,6 +968,8 @@ Exits from *ResuMe*.
 ====
 
 // end::exit[]
+
+{ end of `exit` section written by: Nham Quoc Hung }
 
 === Saving the data
 *ResuMe* data is saved in the hard disk automatically after any command
