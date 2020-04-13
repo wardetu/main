@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.UNREACHABLE_STATEMENT_REACHED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REVERSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
@@ -87,7 +88,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
 
         default:
-            throw new AssertionError("Able to reach unreachable statement");
+            throw new AssertionError(UNREACHABLE_STATEMENT_REACHED);
         }
     }
 
