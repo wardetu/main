@@ -15,9 +15,10 @@ public abstract class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists all items of specified type in the resume book.\n"
+            + "Format: "
             + COMMAND_WORD + " "
-            + PREFIX_ITEM + "TYPE "
+            + PREFIX_ITEM + " TYPE \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ITEM + "res ";
+            + PREFIX_ITEM + " res ";
 
 }

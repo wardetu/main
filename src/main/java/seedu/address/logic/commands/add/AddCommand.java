@@ -14,15 +14,16 @@ public abstract class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an Item to the resume book.\n"
+            + "Format: "
             + COMMAND_WORD + " "
-            + PREFIX_ITEM + "TYPE "
-            + PREFIX_NAME + "NAME "
-            + "[" + PREFIX_TAG + "TAG]....\n"
+            + PREFIX_ITEM + " TYPE "
+            + PREFIX_NAME + " NAME "
+            + "[" + PREFIX_TAG + " TAG]....\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ITEM + "res "
-            + PREFIX_NAME + "Resume 1 "
-            + PREFIX_TAG + "frontend "
-            + PREFIX_TAG + "tech";
+            + PREFIX_ITEM + " res "
+            + PREFIX_NAME + " Resume 1 "
+            + PREFIX_TAG + " frontend "
+            + PREFIX_TAG + " tech";
 
     public static final String MESSAGE_SUCCESS = "New %1$s added";
     public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the resume book";

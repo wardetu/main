@@ -26,11 +26,11 @@ public class EditResumeCommand extends EditCommand {
     public static final String MESSAGE_EDIT_RESUME_SUCCESS = "Edited Resume: %1$s";
     public static final String MESSAGE_SAME_RESUME = "You are not making any changes to this resume.";
 
-    private static final String FIELDS = COMMAND_WORD
+    private static final String FIELDS = "Format: " + COMMAND_WORD
             + " INDEX "
-            + PREFIX_ITEM + "res "
-            + "[" + PREFIX_NAME + "RESUME NAME] "
-            + "[" + PREFIX_TAG + "TAG]....\n";
+            + PREFIX_ITEM + " res "
+            + "[" + PREFIX_NAME + " RESUME_NAME] "
+            + "[" + PREFIX_TAG + " TAG]....\n";
     private static final String EXAMPLE = "Example: "
             + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + " res "
