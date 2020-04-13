@@ -602,6 +602,7 @@ Following from example 1, you realise that you actually wanted to use a differen
 Before you try this example, ensure you have added at least one `internship` and three `skill` items. You may verify for their presence by using the `list` command.
 
 Type in these commands:
+
 . `list i/ res`
 . `redit 1 int/ 1 proj/ ski/ 3`
 
@@ -624,6 +625,7 @@ Following from example 2, you are now satisfied with the `internship` and `skill
 Before you try out this example, ensure you have at least two `project` items.
 
 Type in these commands:
+
 . `list i/ res`
 . `redit 1 proj/ 2`
 
@@ -645,7 +647,7 @@ So by leaving out one of the prefixes (`TYPE/ ITEM_INDEX...`) from the command, 
 // tag::tagpull[]
 === Pulling tagged items into the resume: `tagpull`
 
-Pull the `Internship`, `Project` and `Skill` items with the specified tag(s) into a `resume`.
+Pull all the `Internship`, `Project` and `Skill` items with the specified tag(s) into a `resume`.
 
 ====
 *Format:* `tagpull RESUME_INDEX [#/ TAG]...`
@@ -654,27 +656,43 @@ Pull the `Internship`, `Project` and `Skill` items with the specified tag(s) int
 [NOTE]
 This command does not remove items from the `resume` and will add items on top of the existing items.
 
-*Example 1:*
+*Example 1: Pulling with one tag*
 
-`tagpull 1 #/ tech`
+Before you try this example, ensure you have added some items with the tag `SE`. You may verify for their presence by using the `list` command.
+
+Type in these commands:
+
+. `list i/ res`
+. `tagpull 1 #/ SE`
 
 *Outcome:*
 
-The `resume` at index 1 is modified. On top of the existing items, all `internship`, `project`, and `skill` items with
-the tag `tech` are added into the `resume`.
+. The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box.
++
+image::ReditListRes.png[width = "790"]
 
-// TODO: add screenshot
+. The second command pulls all items which has `SE` as the tag into the `resume` at index 1, named "Winter 2019". The following screenshot illustrates the outcome of the command if we have 1 `internship` item and 2 `project` items tagged with `SE`.
++
+image::TagPullOneTag.png[width = "790"]
 
 *Example 2:*
 
-`tagpull 2 #/ tech #/ frontend`
+Before you try this example, ensure you have added some items with the tag `SE` and/or `github`. You may verify for their presence by using the `list` command.
+
+Type in these commands:
+
+. `list i/ res`
+. `tagpull 1 #/ SE #/ github`
 
 *Outcome:*
 
-The `resume` at index 2 is modified. On top of the existing items, all `internship`, `project`, and `skill` items with
-either the tag `tech` or `frontend` are added into the `resume`.
+. The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box.
++
+image::ReditListRes.png[width = "790"]
 
-// TODO: add screenshot
+. The second command pulls all items which has `SE` _or_ `github` as the tag into the `resume` at index 1, named "Winter 2019". The following screenshot illustrates the outcome of the command if we have 1 `internship` item and 2 `project` items tagged with `SE`, and 1 `skill` item tagged with `github`.
++
+image::TagPullMultiTags.png[width = "790"]
 
 // end::tagpull[]
 
