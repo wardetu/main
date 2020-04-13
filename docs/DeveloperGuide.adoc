@@ -271,7 +271,7 @@ Additionally, using `Optional` provides much less risk to getting `NullPointerEx
 
 // tag::tagpull[]
 === Tag Pull feature
-The Tag Pull feature is similar to <<Resume Edit Feature, Resume Edit Feature>> in the sense that it modifies the content of the `Resume`. Unlike Resume Edit which modifies using item indices, the Tag Pull feature modifies the resume by _adding_ items with the specified tags on top of existing items in the `Resume`.
+The Tag Pull feature is similar to <<Resume Edit Feature, Resume Edit Feature>> in the sense that it modifies the <<content-item, content items>> of the `Resume`. Unlike Resume Edit which modifies using the content item indices, the Tag Pull feature modifies the resume by _adding_ items with the specified tags on top of existing items in the `Resume`.
 
 ==== Current Implementation
 The `tagpull` command is facilitated by `TagPullCommand`, which extends `Command`. Therefore, like any other `Command` classes, it will have an `execute` method.
@@ -280,7 +280,7 @@ Given below is an example usage scenario and how the `tagpull` works at each ste
 
 Step 1. The user launches the application, and uses the `add` command to add several `Resume`, `Internship`, `Project`, and `Skill` items.
 
-Step 2. The user executes `tagpull 1 #/ tech` command to add all items that have been tagged with `tech` to the first `Resume` in the list of `Resume` items.
+Step 2. The user executes `tagpull 2 #/ tech` command to add all items that have been tagged with `tech` to the first `Resume` in the list of `Resume` items.
 
 Step 3. This calls `ResumeBookParser#parseCommand()`, which would create a new `TagPullCommandParser` object and call the `TagPullCommandParser#parse()` method.
 
@@ -304,14 +304,14 @@ image::TagPullSequenceDiagram.png[]
 * **Alternative 2:** Combine `redit` with `tagpull`, making use of `#/` as prefix for `redit` command
 
 ** Pros: It may be intuitive for user to only have a single command that handles modification of `Resume`
-** Cons: The implementation of `redit` becomes much more complicated as various combinations of input has to be considered. For example, considerations of what the expected behaviour should be if indices and tags are given.
+** Cons: The implementation of `redit` becomes much more complicated as various combinations of input has to be considered. For example, considerations of what the expected behaviour should be if both indices and tags are given as arguments.
 
 ****
 *Conclusion:* We decided to separate the two commands in order to have a simpler implementation of the commands. By separating the two, there is a separation of concerns and there is no need to consider the behaviour when both indices and tags are given as arguments.
 
 It may also save the user some confusion since the `redit` feature specifically handles only updates using indices while the `tagpull` feature handles only updates using tags.
 
-As we have separated the two commands, we can then also vary the behaviour of the two commands slightly. Instead of both commands modifying the `Resume`, we have implemented `redit` to _modify_ the `Resume` item, while `tagpull` _adds_ onto existing items in the `Resume`.
+As we have separated the two commands, we can then also vary the behaviour of the two commands slightly. We have implemented `redit` to be able to _modify_  (adding, changing, and removing) the `Resume` item, while `tagpull` modifies only by _adding_ onto existing content items in the `Resume`.
 ****
 // end::tagpull[]
 
