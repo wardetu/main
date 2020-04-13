@@ -27,7 +27,7 @@ and considerations.
 Refer to the guide <<SettingUp#, here>>.
 
 == Design
-// tag::overall-architecture[]
+
 [[Design-Architecture]]
 === Architecture
 
@@ -67,6 +67,8 @@ For example, the `Logic` component (see the class diagram given below) defines i
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[]
 
+// tag::overall-architecture[]
+
 [discrete]
 ==== How the architecture components interact with each other
 
@@ -78,7 +80,8 @@ image::ArchitectureSequenceDiagram.png[]
 The figure above explains quite clearly how the input of the user is passed into the system through `Ui` that calls
 `Logic` to make changes in the `Model` and saves to `Storage`. However, it may not be immediately clear how the `Ui` is
 then updated to give visual feedback to the User. The updating of the Ui is actually done through a combination
-of observables and data passing through `commandResult`. Head to <<UI component>> to read more.
+of observable items, lists, and updating of the Ui with data passed through `commandResult`.
+Head to <<UI component>> to read more.
 
 [discrete]
 ==== How the architecture components interact at start up
@@ -155,11 +158,6 @@ one for `Note` and one for `Internship`, `Project`, `Skill` and `Resume`.
 * has the UI bound to its observables so that the UI automatically updates when the data change.
 * does not depend on any of the other three components.
 
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `ResumeBook`, which `Item` can reference. This would allow `ResumeBook` to only require one `Tag` object per unique `Tag`, instead of each `Item` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:BetterModelClassDiagram.png[]
-
 // end::model[]
 
 [[Design-Storage]]
@@ -205,7 +203,7 @@ Step 5. The `ResumeEditCommand#execute()` method is called with the current `mod
 
 Step 6. A new `ResumeEditCommandResult` object, which contains the edited copy of the `Resume`, is created and returned.
 
-The following sequence diagram shows how `redit` works:
+The following sequence diagram shows the process of invokation for `redit`:
 
 .Sequence diagram for ResumeEdit.
 image::ResumeEditSequenceDiagram.png[]
@@ -237,6 +235,7 @@ image::ResumeEditActivityDiagram.png[]
 ** Pros: Since `redit` modifies the content items of the `Resume` and not the `Resume` details, this reduces the size of responsibility for `EditCommand`. Each command class now does one and only one thing so Single Responsibility Principle is observed.
 ** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may also be confusing to have both `redit` and `edit`.
 
+.ResumeEditCommand and EditCommand extends Command.
 image::ResumeEditCommandAlt1.png[]
 
 * ** Alternative 2:** `ResumeEditCommand` extends `EditCommand`
@@ -244,6 +243,7 @@ image::ResumeEditCommandAlt1.png[]
 ** Pros: Some methods in `EditCommand` may be able to inherited by `ResumeEditCommand`, reducing code duplication.
 ** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely. If the intention of `EditCommand` is to change the `Item` _details_ (such as name), and `ResumeEditCommand` only modifies the content items of the `Resume` (without changing any _details_), then this is also a violation of the Liskov Substitution Principle.
 
+.ResumeEditCommand extends EditCommand.
 image::ResumeEditCommandAlt2.png[]
 
 ****
@@ -290,10 +290,15 @@ Step 5. The `TagPullCommand#execute()` method is called with the current `model`
 
 Step 6. A new `TagPullCommand` object, which contains the edited copy of the `Resume`, is created and returned.
 
-The following sequence diagram shows how `tagpull` works:
+The following sequence diagram shows the process of invokation for `tagpull`:
 
+.Sequence Diagram for Tag Pull.
 image::TagPullSequenceDiagram.png[]
 
+The following activity diagram summarises the execution of `tagpull`:
+
+.Activity Diagram for Tag Pull.
+image::TagPullActivityDiagram.png[]
 ==== Design Considerations
 ===== Aspect: Integrating Tag Pull to Resume Edit
 * **Alternative 1 (current choice):** Separating `redit` and `tagpull`
@@ -574,7 +579,7 @@ Step 3. The application retrieves the correct `Resume` item and calls `toPreview
 
 The following activity diagram summarises what happens when a user executes `rpreview` command:
 
-image::ExportPreviewActivityDiagram.png[]
+image::ExportPreviewActivityDiagram.png[width="200"]
 
 
 ===== Design Considerations
@@ -633,7 +638,7 @@ items inside the `Resume`.
 
 The following activity diagram summarises what happens when a user executes `rgen` command:
 
-image::ExportActivityDiagram.png[, 400]
+image::ExportActivityDiagram.png[, 250]
 
 Detailed steps are shown in the sequence diagram below:
 
@@ -831,6 +836,7 @@ Refer to the guide <<Testing#, here>>.
 Refer to the guide <<DevOps#, here>>.
 
 [appendix]
+// tag::product-scope[]
 == Product Scope
 
 *Target user profile*:
@@ -843,6 +849,10 @@ Refer to the guide <<DevOps#, here>>.
 * is reasonably comfortable using CLI apps
 
 *Value proposition*: build and manage resumes faster than a typical mouse/GUI driven app
+
+// end::product-scope[]
+
+// tag::user-stories[]
 
 [appendix]
 == User Stories
@@ -883,7 +893,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 _'items' refers to a resume field of type personal details, project, education, skills, internship, and achievement._
 
-_{More to be added}_
+// end::user-stories[]
 
 [appendix]
 == Use Cases
@@ -962,6 +972,7 @@ Use case ends.
 _{More to be added}_
 
 [appendix]
+// tag::nfr[]
 == Non Functional Requirements
 
 .  The system should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
@@ -974,9 +985,11 @@ the data file) without any network connection.
 .  A user with some familiarity with Command Line Interface (CLI) should be able to accomplish most of the tasks faster
 using commands than using the mouse to navigate the Graphic User Interface (GUI).
 . The product is not required to handle the printing of resumes.
-
+// end::nfr[]
 
 [appendix]
+
+// tag::glossary[]
 == Glossary
 
 [[mainstream-os]] Mainstream OS::
@@ -985,6 +998,7 @@ Windows, Linux, Unix, OS-X
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
 
+// end::glossary[]
 [appendix]
 == Product Survey
 
@@ -1002,6 +1016,7 @@ Cons:
 * ...
 * ...
 
+//tag::manual-testing[]
 [appendix]
 == Instructions for Manual Testing
 
@@ -1055,7 +1070,7 @@ Expected: No internship is added is added. Error details shown in the status mes
 Expected: No internship is added is added. Error details shown in the status message. Status bar remains the same.
 
 .. Other incorrect add internship commands to try: commands where other compulsory parameters such as `to`, `from`, and `description`
-are missing _{give more}_ +
+are missing. +
    Expected: Similar to previous.
 
 . Adding items of other types
@@ -1083,4 +1098,4 @@ Expected: No skill is deleted. Error details shown in the status message. Status
 . Deleting items of other types
 .. Simlar to deleting skills above, please make sure that you follow our User Guide for the correct formatting of the
 commands if you are expecting a positive test case.
-
+//end::manual-testing[]
