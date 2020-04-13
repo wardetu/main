@@ -14,16 +14,16 @@ import seedu.address.model.item.Project;
 public class SortProjectsCommand extends SortCommand {
     private final Comparator<Project> sortComparator;
     private final String sortOrder;
-    private final boolean reverse;
+    private final boolean isReverse;
 
-    public SortProjectsCommand(String sortOrder, boolean reverse) {
+    public SortProjectsCommand(String sortOrder, boolean isReverse) {
         this.sortOrder = sortOrder;
-        this.reverse = reverse;
+        this.isReverse = isReverse;
         Comparator<Project> baseComparator =
                 sortOrder.equalsIgnoreCase("name")
                         ? Comparator.comparing(Project::getName)
                         : Comparator.comparing(Project::getTime);
-        sortComparator = reverse ? baseComparator.reversed() : baseComparator;
+        sortComparator = isReverse ? baseComparator.reversed() : baseComparator;
     }
 
     @Override
@@ -41,6 +41,6 @@ public class SortProjectsCommand extends SortCommand {
         return other == this
                 || (other instanceof SortProjectsCommand
                 && sortOrder.equals(((SortProjectsCommand) other).sortOrder)
-                && reverse == ((SortProjectsCommand) other).reverse);
+                && isReverse == ((SortProjectsCommand) other).isReverse);
     }
 }
