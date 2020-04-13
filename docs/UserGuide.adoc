@@ -790,10 +790,10 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 ____
-*Q:* What is the difference between `redit` and `edit i/res`? +
+*Q:* What is the difference between `redit` and `edit i/ res`? +
 
 *A:* `redit` is used when you want to edit the content of a `resume`, in other words, add or remove certain items
-from that `resume`. Meanwhile, `edit i/res` is used when you want to edit attributes of the `resume`, like its `name` or `tags`.
+from that `resume`. Meanwhile, `edit i/ res` is used when you want to edit attributes of the `resume`, like its `name` or `tags`.
 ____
 
 ____
