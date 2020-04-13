@@ -400,7 +400,7 @@ breached many Software Engineering principles and we decided to amend it.
 ** Cons: The two classes are deprecated in `Java 9` due to various shortcomings.
 
 * **Alternative 2**: Use `java.beans` package
-** Pros: Is designed to replace `Observable` and `Observer` and the industry standard.
+** Pros: Is designed to replace `Observable` and `Observer` and is currently the industry standard.
 ** Cons: Is harder to implement and would require a lot of refactoring of the existing codes.
 
 ==== Conclusion
@@ -409,8 +409,10 @@ After deliberation we decided to go with the first alternative, due to time cons
 havoc that would arise from refactoring the code base. In addition, the limitations of `Observable` and `Observer` are
 not likely to manifest considering the usage scenarios for our application (offline and not multi-threaded).
 
-We would, however, make it a priority to change the implementation to Alternative 1, since we want to scale up
+We would, however, make it a priority to change the implementation to Alternative 2, since we want to scale up
 our application and it is not recommendable to build it on top of something that is no longer supported.
+
+// end::observableuser[]
 
 // tag::me[]
 === Me feature
