@@ -418,7 +418,7 @@ image::find_command.png[width="790"]
 
 === Deleting an item : `delete`
 
-Deletes an item from the *ResuMe* application.
+Deletes an existing item from the *ResuMe* application.
 
 ====
 *Format:* `delete INDEX i/ TYPE`
@@ -456,6 +456,75 @@ deletion to proceed.
 image::DeleteSkill3.png[width="790"]
 
 // end::delete[]
+
+// tag::sort[]
+
+=== Sorting an item list : `sort`
+
+Sorts an item list in the *ResuMe* application.
+
+====
+*Format:* `sort i/ TYPE order/ SORT_ORDER [reverse/ TRUE_OR_FALSE]`
+====
+
+[NOTE]
+--
+* The default sort order is ascending. You can specify `reverse/` to reverse this ordering.
+So use `reverse/ true` if you want to sort in descending order, and `reverse/ false` if you
+just like to type.
+
+* Sorting an item list will set the list box to display items of that type.
+--
+[TIP]
+--
+* <<Modifying the content a resume: `redit`,`redit`>> can be very potent when used in conjunction with
+`sort`. Sort internships by latest, then call `redit` with `int/ 1 2 3` to add the three most
+recent internships to a resume. So easy!
+--
+
+* For the selected `TYPE`, the list of items of that type will be sorted according to
+`SORT_ORDER` (see the note above for what  `reverse/` does).
+
+* Below is the list of criteria by which different item types can be sorted:
+
+[width="100%",cols=3*,options="header",]
+|=======================================================================
+|Item type |`SORT_ORDER` |Criterion
+|Internship |`name` |Name of internship
+|Internship |`time` |Start date of internship
+|Project |`name` |Name of project
+|Project |`time` |Date of project
+|Skill |`name` |Name of skill
+|Skill |`level` |Level of proficiency of skill
+|Resume |`name` |Name of resume
+|Note |`name` |Name of note
+|Note |`time` |Deadline of note
+|=======================================================================
+
+
+*Example:*
+
+. Sort all resumes by their name in ascending order with `sort i/ res order/ name`.
++
+
+image::
+// TODO: add screenshot
+
+. Sort all skills in descending level of proficiency with `sort i/ ski order/ level reverse/ true` .
++
+
+image::
+// TODO: add screenshot
+
+. Sort all notes by their deadline in ascending order with `sort i/ note order/ time reverse/ false`, specifying
+`reverse/` this time because we really like to type.
++
+
+image::
+
+// TODO: add screenshot
+
+// end::sort[]
 
 // tag::view[]
 === Viewing an item in details: `view`
@@ -591,11 +660,12 @@ Undoes the previous command and restores the state of the application to before 
 
 [NOTE]
 --
-* An `undo` is done per command and not change.
+* An `undo` is done per command and not change. If you make multiple changes to your user profile,
+for instance, using a single `me` command, then `undo` will revert all the changes.
 
-* Commands that can be undone are: `add`, `delete`, `edit`, `redit`, `tagpull` and `me`.
+* Commands that can be undone are: `add`, `delete`, `edit`, `sort`, `redit`, `tagpull` and `me`.
 
-* Commands that make no change to the application state, like `list`, `view`, `find`, `rpreview` or `rgen`, cannot be undone.
+* Commands that make no change to the application state, namely `list`, `view`, `find`, `rpreview` and `rgen`, cannot be undone.
 
 * Successive `undo` commands will bring the application further back, until there is no more change to `undo`.
 
@@ -625,7 +695,7 @@ image::postUndo_JavaIsBack.png[width="790"]
 
 === Redo a command: `redo`
 
-Reverts the most recent undone command and brings the application state to after the (re)execution
+Redoes the most recent undone command and brings the application state to after the (re)execution
 of that command.
 
 ====
@@ -634,19 +704,21 @@ of that command.
 
 [NOTE]
 --
-* A redo is done per command and not change.
+* A `redo` is done per command and not change. If you undo a command that can make multiple changes like
+`redit`, then redoing it will resurrect all the changes. Spooky!
 
-* If a new `add`, `delete`, `edit`, `redit`, `tagpull` or `me` command is performed after an `undo`,
-then all `redo` states will be deleted and you will not be able to go to these states.
+* If a new `add`, `delete`, `edit`, `sort`, `redit`, `tagpull` or `me` command is performed after an `undo`,
+then all states currently available for `redo` will be erased and you will not be able to go to these states
+anymore.
 
 * You cannot `redo` if there is no forward state to go to.
 --
 
 *Example:*
 
-After with the Java deletion incidence in the previous section (on `undo`), we decide that the merits of Java
-do not warrant the pain that comes along with it and so we want to use `redo` our original choice . Afterwards, Java is
-once again removed from our life.
+After the Java deletion incidence in the previous example section (for <<Undo a command: `undo`, `undo`>>), we
+decide that the merits of Java do not warrant the pain it wreaks so we want to `redo` our original decision to delete
+Java. Once again, Java is removed from our life.
 
 image::redo_success.png[width="790"]
 
@@ -753,7 +825,10 @@ Exits the program.
 that changes the data. There is no need to save manually.
 
 === Encrypting data files `[coming in v2.0]`
-_{explain how the user can enable/disable data encryption}_
+We are currently working on a login feature that will let you set password for ResuMe. You will also be able to have
+your locally stored data encrypted, so that no one (even us) can gain access to your precious information.
+
+We value your privacy and we want you to feel safe. Stay tuned!
 // end::dataencryption[]
 
 == FAQ
