@@ -1011,7 +1011,7 @@ Data box is filled with the data of the internship that you just added.
 +
 image::AddingGoogleTest.png[]
 
-.. Test case *adding an duplicate internship* (do this after part b): `add i/ int n/ Google r/ Frontend Web Engineer f/ 06-2020 t/ 12-2020 d /I did work, made money. #/ frontend #/ tech` +
+.. Test case *adding an duplicate internship* (do this after part b): `add i/ int n/ Google r/ Frontend Web Engineer f/ 06-2020 t/ 12-2020 d/ I did work, made money. #/ frontend #/ tech` +
 Expected: No internship is added is added. Error details shown in the status message. Status bar remains the same.
 
 .. Test case *adding an internship with compulsory parameters missing*: `add i/ int n/ Shopee f/ 06-2020 t/ 12-2020 d/ I did work, made money. #/ frontend #/tech` +
