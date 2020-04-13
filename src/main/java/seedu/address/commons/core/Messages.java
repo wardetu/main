@@ -23,7 +23,9 @@ public class Messages {
                 .append("GENERAL COMMANDS:\n")
                 .append("===========================================================================\n")
                 .append("Help: help OPTION\n")
-                .append("Update user profile: me [dp/ FILE_PATH] [n/ NAME] [d/ DESCRIPTION] [p/ PHONE_NUMBER] [e/ EMAIL] [g/ GITHUB] [u/ UNIVERSITY] [m/ MAJOR] [f/ FROM] [t/ TO] [c/ CURRENT_CAP MAX_CAP]\n")
+                .append("Update user profile: me [dp/ FILE_PATH] [n/ NAME] [d/ DESCRIPTION] [p/ PHONE_NUMBER] "
+                        + "[e/ EMAIL] [g/ GITHUB] [u/ UNIVERSITY] [m/ MAJOR] [f/ FROM] [t/ TO] "
+                        + "[c/ CURRENT_CAP MAX_CAP]\n")
                 .append("List items of a specific type: list i/ TYPE\n")
                 .append("View an item: view INDEX i/ TYPE\n")
                 .append("Find items containing keywords: find KEYWORD [MORE_KEYWORDS]… i/ TYPE\n")
@@ -44,8 +46,8 @@ public class Messages {
                 .append("Add a skill: add i/ ski n/ SKILL_NAME l/ LEVEL [#/ TAG]…\n")
                 .append("Add a resume: add i/ res n/ RESUME_NAME [#/ TAG]…\n")
                 .append("Add a note: add i/ note n/ NOTE_NAME t/ TIME [#/ TAG]…\n\n")
-                .append("Edit an internship: "
-                        + "edit INDEX i/ int [n/ COMPANY_NAME] [r/ ROLE] [f/ FROM] [t/ TO] [d/ DESCRIPTION] [#/ TAG]…\n")
+                .append("Edit an internship: edit "
+                        + "INDEX i/ int [n/ COMPANY_NAME] [r/ ROLE] [f/ FROM] [t/ TO] [d/ DESCRIPTION] [#/ TAG]…\n")
                 .append("Edit a project: "
                         + "edit INDEX i/ proj [n/ PROJECT_NAME] [t/ TIME] [w/ WEBSITE] [d/ DESCRIPTION] [#/ TAG]…\n")
                 .append("Edit a skill: edit INDEX i/ ski [n/ SKILL_NAME] [l/ LEVEL] [#/ TAG]…\n")
