@@ -427,18 +427,17 @@ Deletes an existing item from the *ResuMe* application.
 --
 * The `INDEX` argument comes before the `TYPE` argument.
 * Deleting an item will set the list box to display items of that type.
-* All `resumes` that contain the deleted item will also be updated to reflect the change.
+* All `resume` items that contain the deleted item will also be updated to reflect the change.
 --
 
 [TIP]
 Use `list` command to navigate to the correct list to ensure that 1) the item exists, and 2) you know the
 correct `index` for deletion. Or just fall back on `undo` if you accidentally delete the wrong item.
 
-
-
 *Example:*
 
-. Suppose we start with the following original list of `resumes`, as seen using the command `list i/ res`.
+. Suppose we start with the following original list of `resume` items, as seen using the command `list i/ res`. Pay attention
+to the second `resume` item.
 +
 
 image::BeforeDeleteResumeList.png[width="790"]
@@ -448,8 +447,8 @@ image::BeforeDeleteResumeList.png[width="790"]
 
 image::ResumeDelete2.png[width="790"]
 
-. Delete the 3rd `skill` with `delete 3 i/ ski` . Do note how it is not a must for the list box to display `skills` for
-deletion to proceed.
+. Delete the 3rd `skill` with `delete 3 i/ ski` . Do note how it is not a must for the list box to display `skill` items for
+deletion to proceed. After the deletion the list box is set to show `skill` items.
 +
 
 image::DeleteSkill3.png[width="790"]
@@ -468,7 +467,7 @@ Sorts an item list in the *ResuMe* application.
 
 [NOTE]
 --
-* The default sort order is ascending. You can specify `reverse/` to reverse this ordering.
+* The default sort order is ascending. You can specify `reverse/` to reverse this order.
 So use `reverse/ true` if you want to sort in descending order, and `reverse/ false` if you
 just like to type.
 
@@ -489,39 +488,35 @@ recent internships to a resume. So easy!
 [width="100%",cols=3*,options="header",]
 |=======================================================================
 |Item type |`SORT_ORDER` |Criterion
-|Internship |`name` |Name of internship
-|Internship |`time` |Start date of internship
-|Project |`name` |Name of project
-|Project |`time` |Date of project
-|Skill |`name` |Name of skill
-|Skill |`level` |Level of proficiency of skill
-|Resume |`name` |Name of resume
-|Note |`name` |Name of note
-|Note |`time` |Deadline of note
+|`internship` |`name` |Name of `internship`
+|`internship` |`time` |Start date of `internship`
+|`project` |`name` |Name of `project`
+|`project` |`time` |Date of `project`
+|`skill` |`name` |Name of `skill`
+|`skill` |`level` |Level of proficiency of `skill`
+|`resume` |`name` |Name of `resume`
+|`note` |`name` |Name of `note`
+|`note` |`time` |Deadline of `note`
 |=======================================================================
 
 
 *Example:*
 
-. Sort all resumes by their name in ascending order with `sort i/ res order/ name`.
+. Sort all `resume` items by their name in ascending order with `sort i/ res order/ name`.
 +
 
-image::
-// TODO: add screenshot
+image::SortResByName.png[width="790"]
 
-. Sort all skills in descending level of proficiency with `sort i/ ski order/ level reverse/ true` .
+. Sort all `skill` items in descending level of proficiency with `sort i/ ski order/ level reverse/ true` .
 +
 
-image::
-// TODO: add screenshot
+image::SortSkiByLevelReverse.png[width="790"]
 
-. Sort all notes by their deadline in ascending order with `sort i/ note order/ time reverse/ false`, specifying
+. Sort all `internship` by their start date in ascending order with `sort i/ int order/ time reverse/ false`, specifying
 `reverse/` this time because we really like to type.
 +
 
-image::
-
-// TODO: add screenshot
+image::SortIntByTime.png[width="790"]
 
 // end::sort[]
 
@@ -721,8 +716,8 @@ for instance, using a single `me` command, then `undo` will revert all the chang
 
 *Example:*
 
-. Suppose we hate Java and therefore want to delete it from the list of skills using a `delete 2 i/ ski` command. We
-also do a `list i/ proj` to switch to viewing projects because this is how staging for an example works.
+. Suppose we hate Java and therefore want to delete it from the list of `skill` items using a `delete 1 i/ ski` command. We
+also do a `list i/ proj` to switch to viewing projects because that is how staging for an example works.
 +
 
 image::deleteJava_beforeUndo.png[width="790"]
@@ -731,7 +726,7 @@ image::deleteJava_beforeUndo.png[width="790"]
 image::beforeUndo_switchToProj.png[width="790"]
 
 . But Stockholm's syndrome kicks in and we decide that Java has its merits, so we revert our action with `undo`.
-Voila, Java is back, and our list box now displays skills.
+Voila, Java is back, and our list box now displays `skill` items.
 +
 
 image::postUndo_JavaIsBack.png[width="790"]
