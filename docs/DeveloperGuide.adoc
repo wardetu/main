@@ -391,16 +391,12 @@ Given below is an example usage scenario:
 Step 1. User launches the ResuMe application for the first time. The user profile data is not yet edited and will thus be
 initialized with the initial json data stored.
 
-image::user-default.png[]
-
 Step 2. User executes `me dp/ FILEPATH n/ NAME d/ DESCRIPTION p/ PHONE e/ EMAIL g/ GITHUB u/ UNIVERSITY m/ MAJOR f/ FROM t/ TO c/ CAP`
 so as to update the Person object currently stored in Model as well as Storage.
 
  me dp/ /Users/nhamquochung/Desktop/test.png n/ HUNG d/ I am an aspiring software engineer. p/ 91648888 e/ nhamhung.gttn@gmail.com g/ nhamhung u/ National University of Singapore m/ Computer Science f/ 08-2018 t/ 05-2022 c/ 4.0 5.0
 
 Step 3. The user profile panel will be updated accordingly.
-
-image::user.png[]
 
 *Note:* To set customised user picture, the file path of your display picture has to be absolute and from the root directory of your computer.
 
@@ -472,7 +468,7 @@ support the user in his/her resume building and management.
 
 Given below is an example usage scenario:
 
-===== Scenario 1. Add a reminder note: `add i/note`
+===== Scenario 1. Add a reminder note: `add i/ note`
 Step 1. The user launches the ResuMe application. Data will be loaded from storage to fill the note list in model.
 
 Step 2. The user executes `add i/ note n/ NAME t/ TIME #/ TAG`. In `ResumeBook`, the note list is implemented as a `UniqueItemList`
@@ -482,7 +478,7 @@ note name and time. If a same note already exists, ResuMe throws a duplicate err
 
 Step 3. If no error is thrown, the note will be created, defaulted as `not done` and added to the current note list with according `Ui` update.
 
-===== Scenario 2. Edit an existing note: `edit i/note`
+===== Scenario 2. Edit an existing note: `edit i/ note`
 
 Step 1. Once data has been loaded from `storage` to `model`, the list of notes in the ResumeBook could either contain some
 notes, or is empty.
