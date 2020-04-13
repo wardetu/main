@@ -312,7 +312,7 @@ The specific command syntax could be found in the table below:
 [NOTE]
 --
 * An item could have any number of tags _(including 0)_.
-* There are three possible levels for a `skill` item: `ADVANCED`, `INTERMEDIATE` and `BASIC`.
+* There are three possible `levels` for a `skill` item: `ADVANCED`, `INTERMEDIATE` and `BASIC`.
 * A newly added note will be automatically marked as `undone`.
 --
 [TIP]
@@ -399,7 +399,7 @@ image::EditResumeExample.png[width="790"]
 .List of all skill items
 image::ListSkill1.png[width="790"]
 
-. The second command edits the `skill` item at index 2. It has its level changed to from `INTERMEDIATE` to `ADVANCED` and all its existing `tags` cleared.
+. The second command edits the `skill` item at index 2. It has its `level` changed to from `INTERMEDIATE` to `ADVANCED` and all its existing `tags` cleared.
 +
 .Application view after editing the skill item at index 2
 image::EditSkillExample.png[width="790"]
