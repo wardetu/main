@@ -475,8 +475,8 @@ image::ViewDukeProject.png[width="790"]
 // end::view[]
 
 // tag::redit[]
-=== Editing a resume: `redit`
-Edits the content of a `resume` to contain the items specified in the command.
+=== Modifying the content a resume: `redit`
+Modifies the content of a `resume` to contain the items specified in the command.
 
 [NOTE]
 `redit` is a different command from `edit`. Please visit <<FAQ, FAQ>> for more information.
@@ -534,7 +534,7 @@ image::ReditWantSomeThings.png[WantSomeThings,442,337]
 // tag::tagpull[]
 === Pulling tagged items into the resume: `tagpull`
 
-Pull the `internship`, `project` and `skill` items with the specified tag(s) into a `resume`.
+Pull the `Internship`, `Project` and `Skill` items with the specified tag(s) into a `resume`.
 
 ====
 *Format:* `tagpull INDEX [#/ TAG]`
