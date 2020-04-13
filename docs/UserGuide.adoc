@@ -543,17 +543,16 @@ Certain details of specific items, for example the `website` and `description` o
 *Example:* Try typing in the command box these two commands one by one!
 
 . `list i/ proj`
-. `view 2 i/ proj`
+. `view 1 i/ proj`
 
 *Outcome:*
 
-. All `project` items are listed in the list box.
+. The first command lists out all the `project` items in the list box. Assuming you want to view the details of the `project` item at index 1.
 +
 image::ListProject2.png[width="790"]
-. Full details of the `project` at index 2 are displayed in the view box. These includes details that were not shown
-in the list box, such as its website (_"abc.github.io"_) and its description (_"For a little module named CS2103T"_).
+. The second command shows full details of the `project` at index 1, displayed in the view box. These includes details that were not shown in the list box, such as its website (_"github.com/zheng-code/detask"_) and its description (_"An all-in-one task managing app."_).
 +
-image::ViewDukeProject.png[width="790"]
+image::ViewDetaskProject.png[width="790"]
 
 // end::view[]
 
