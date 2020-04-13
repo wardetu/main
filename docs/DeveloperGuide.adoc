@@ -380,6 +380,36 @@ be switch-cased again in `ABCCommand`.
 
 // end::command-classes[]
 
+// tag::observableuser[]
+=== Usage of `Observable` and `Observer`
+==== Reason for Implementation
+ResuMe inherits a lot of implementations from AddressBook Level 3, one of which is the usage of `ObservableList` that
+allows a list of item to be automatically updated in the UI every time a change is made to the underlying model.
+
+When we added functionality for a user profile and sequentially a user profile window, the need for auto UI update surfaced.
+We could not use the existing implementation since it is only for `ObservableList`. The initial rectification is to explicitly
+call a UI update, but that requires the UI to directly reach out to the Model to get the user profile data. This seriously
+breached many Software Engineering principles and we decided to amend it.
+
+==== Design Considerations
+
+* **Alternative 1**: Use `Observable` and `Observer`
+** Pros: Is way easier to implement and does not disrupt the existing code base much.
+** Cons: The two classes are deprecated in `Java 9` due to various shortcomings.
+
+* **Alternative 2**: Use `java.beans` package
+** Pros: Is designed to replace `Observable` and `Observer` and the industry standard.
+** Cons: Is harder to implement and would require a lot of refactoring of the existing codes.
+
+==== Conclusion
+
+After deliberation we decided to go with the first alternative, due to time constraint and to avoid the potential
+havoc that would arise from refactoring the code base. In addition, the limitations of `Observable` and `Observer` are
+not likely to manifest considering the usage scenarios for our application (offline and not multi-threaded).
+
+We would, however, make it a priority to change the implementation to Alternative 1, since we want to scale up
+our application and it is not recommendable to build it on top of something that is no longer supported.
+
 // tag::me[]
 === Me feature
 This feature intends to serve a single user of the application to sets and updates his/her user profile. The profile
