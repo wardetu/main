@@ -1074,8 +1074,8 @@ using commands than using the mouse to navigate the Graphic User Interface (GUI)
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
+[[content-item]] Content items::
+`Internship`, `Project`, `Skill`
 
 // end::glossary[]
 { end of `glossary` section written by: Pham Thuy Duong }
