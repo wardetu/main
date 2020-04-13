@@ -311,6 +311,8 @@ image::AddDukeProject.png[width="600"]
 
 // end::add[]
 
+{ start of `edit` section written by: Christian James Welly }
+
 // tag::edit[]
 === Editing an item : `edit`
 
@@ -355,7 +357,7 @@ image::ListResume2.png[width="790"]
 +
 image::EditResumeExample.png[width="790"]
 
-*Example 2:* Try typing in the command box these two commands one by one!
+*Example 2:* Here is another way you can use `edit`. This time, we will try an example using `skill` items. Try typing in the command box these two commands one by one!
 
 . `list i/ ski`
 . `edit 2 i/ ski l/ ADVANCED #/`
@@ -370,6 +372,8 @@ image::ListSkill1.png[width="790"]
 +
 image::EditSkillExample.png[width="790"]
 // end::edit[]
+
+{ end of `edit` section written by: Christian James Welly }
 
 // tag::find[]
 
@@ -522,6 +526,8 @@ image::SortIntByTime.png[width="790"]
 
 // end::sort[]
 
+{ start of `view` section written by: Christian James Welly }
+
 // tag::view[]
 === Viewing an item in details: `view`
 
@@ -550,6 +556,10 @@ image::ViewDetaskProject.png[width="790"]
 
 // end::view[]
 
+{ end of `view` section written by: Christian James Welly }
+
+{ start of `redit` section written by: Christian James Welly }
+
 // tag::redit[]
 === Modifying the content a resume: `redit`
 Modifies the content of a `resume` to contain the items specified in the command.
@@ -572,9 +582,9 @@ If you find it a hassle to manually enter items into the `resume`, you can consi
 
 *Example 1: Adding items into a new resume*
 
-Before you try this example, ensure you have added at least one `internship`, one `project`, and two `skill` items. You may verify for their presence by using the `list` command.
+Before you try this example, please ensure you have added at least one `internship`, one `project`, and two `skill` items. You may verify for their presence by using the `list` command.
 
-Type in these commands:
+Try typing in these commands:
 
 . `list i/ res`
 . `redit 1 int/ 1 proj/ 1 ski/ 1 2`
@@ -594,9 +604,9 @@ image::ReditAddIntoResume.png[width = "790"]
 
 Following from example 1, you realise that you actually wanted to use a different set of items for your "Winter 2019" `resume`. Here is how you can rectify this!
 
-Before you try this example, ensure you have added at least one `internship` and three `skill` items. You may verify for their presence by using the `list` command.
+Before you try this example, please ensure you have added at least one `internship` and three `skill` items. You may verify for their presence by using the `list` command.
 
-Type in these commands:
+Try typing in these commands:
 
 . `list i/ res`
 . `redit 1 int/ 1 proj/ ski/ 3`
@@ -617,9 +627,9 @@ You can think of this command as using only the items that has been specified in
 
 Following from example 2, you are now satisfied with the `internship` and `skill` items, but you would like to add a `project` item without changing the `internship` and `skill` items. Here is how you can do it!
 
-Before you try out this example, ensure you have at least two `project` items.
+Before you try out this example, please ensure you have at least two `project` items.
 
-Type in these commands:
+Try typing in these commands:
 
 . `list i/ res`
 . `redit 1 proj/ 2`
@@ -636,8 +646,10 @@ image::ReditKeepSomeThings.png[width = "790"]
 
 So by leaving out one of the prefixes (`TYPE/ ITEM_INDEX...`) from the command, you can keep some of the items in your `resume`!
 
-
 // end::redit[]
+{ end of `redit` section written by: Christian James Welly }
+
+{ start of `tagpull` section written by: Christian James Welly }
 
 // tag::tagpull[]
 === Pulling tagged items into the resume: `tagpull`
@@ -653,9 +665,9 @@ This command does not remove items from the `resume` and will add items on top o
 
 *Example 1: Pulling items using one tag*
 
-Before you try this example, ensure you have added some items with the tag `SE`. You may verify for their presence by using the `list` command.
+Before you try this example, please ensure you have added some items with the tag `SE`. You may verify for their presence by using the `list` command.
 
-Type in these commands:
+Try typing in these commands:
 
 . `list i/ res`
 . `tagpull 1 #/ SE`
@@ -672,9 +684,11 @@ image::TagPullOneTag.png[width = "790"]
 
 *Example 2: Pulling items using multiple tags*
 
-Before you try this example, ensure you have added some items with the tag `SE` and/or `github`. You may verify for their presence by using the `list` command.
+Now, maybe you have categorised your items by using multiple tags. So, you think just pulling items using one tags is not sufficient. Our `tagpull` supports that too!
 
-Type in these commands:
+Before you try this example, please ensure you have added some items with the tag `SE` and/or `github`. You may verify for their presence by using the `list` command.
+
+Try typing in these commands:
 
 . `list i/ res`
 . `tagpull 1 #/ SE #/ github`
@@ -690,6 +704,7 @@ image::ReditListRes.png[width = "790"]
 image::TagPullMultiTags.png[width = "790"]
 
 // end::tagpull[]
+{ end of `tagpull` section written by: Christian James Welly }
 
 // tag::undo[]
 
