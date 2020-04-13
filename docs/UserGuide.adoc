@@ -482,7 +482,7 @@ Modifies the content of a `resume` to contain the items specified in the command
 `redit` is a different command from `edit`. Please visit <<FAQ, FAQ>> for more information.
 
 ====
-*Format:* `redit RESUME_INDEX TYPE/ [ITEM_INDEX...] [MORE_TYPE/ [ITEM_INDEX...]]`
+*Format:* `redit RESUME_INDEX TYPE/ [ITEM_INDEX...] [MORE_TYPE/ [ITEM_INDEX...]]...`
 ====
 
 [TIP]
@@ -537,7 +537,7 @@ image::ReditWantSomeThings.png[WantSomeThings,442,337]
 Pull the `Internship`, `Project` and `Skill` items with the specified tag(s) into a `resume`.
 
 ====
-*Format:* `tagpull INDEX [#/ TAG]`
+*Format:* `tagpull RESUME_INDEX [#/ TAG]...`
 ====
 
 [NOTE]
@@ -556,7 +556,7 @@ the tag `tech` are added into the `resume`.
 
 *Example 2:*
 
-`tagpull 2 #/ tech frontend`
+`tagpull 2 #/ tech #/ frontend`
 
 *Outcome:*
 
