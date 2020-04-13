@@ -71,6 +71,8 @@ For example, the `Logic` component (see the class diagram given below) defines i
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[]
 
+{ start of Overall Architecture section written by: Nguyen Chi Hai }
+
 // tag::overall-architecture[]
 
 [discrete]
@@ -99,6 +101,8 @@ image::ArchitectureInitSequenceDiagram.png[]
 The sections below give more details of each component.
 
 // end::overall-architecture[]
+
+{ end of Overall Architecture section written by: Nguyen Chi Hai }
 
 { start of `ui` section written by: Nham Quoc Hung }
 
@@ -343,10 +347,12 @@ As we have separated the two commands, we can then also vary the behaviour of th
 // end::tagpull[]
 { end of Tag Pull feature implementation written by: Christian James Welly }
 
+{ start of Implementation of `Command` section written by: Nguyen Chi Hai }
+
 // tag::command-classes[]
 === Implementation of `Command` classes
 ==== Current Implementation
-Currently, there are several object `Type` which are subclasses of `Item`, namely `Resume`, `Internship`, `Skill`,
+Currently, there are several object `Type` which are subclasses of `Item`, namely `Resume`, `Internship`, `Skill`, `Note`
 and `Project`.
 
 Commands that are dependent on item `Type`, namely `AddCommand`, `DeleteCommand`, `EditCommand`, `FindCommand`,
@@ -379,7 +385,8 @@ This leads to a cleaner execution method of each ABCItemCommand as each command 
 ** Cons: Many classes have to be maintained.
 
 *Alternative 2:* `ABCCommand` is not separated into many `ABCItemCommand`.
-The following is the activity diagram for execution of `AddCommand` when the user adds a resume.
+The following is the activity diagram for execution of `AddCommand` if `AddCommand` is not separated into `AddResumeCommand`,
+`AddNoteCommand`, `AddInternshipCommand`, `AddProjectCommand`, and `AddSkillCommand` when the user adds a resume.
 
 .Activity diagram for execution of `AddCommand`
 image::AddCommandActivityDiagram.png[width="350"]
@@ -388,8 +395,9 @@ Implementing `ABCCommand` this way forces execute to be switch-cased.
 Functionality of execute would vary depending on the item `Type`.
 
 ** Pros: Only one command is required, regardless of number of items. Low overhead.
-** Cons: Long `execute` method due to the need for handling the different item types. Item `Type` would also need to be stored.
-Undesirable variable functionality of `execute` command depending on the `Type` field despite it being from the same class.
+** Cons: Long `execute` method due to the need for handling the different item types as seen from the logic of the activity
+diagram. Item `Type` would also need to be stored. Undesirable variable functionality of `execute` command depending on
+the `Type` field despite it being from the same class.
 ie. `AddItem` can add `Internship` to the `Internship` list, or add `Skill` to `Skill` list.
 
 ****
@@ -402,6 +410,8 @@ be switch-cased again in `ABCCommand`.
 ****
 
 // end::command-classes[]
+
+{ end of Implementation of `Command` section written by: Nguyen Chi Hai }
 
 // tag::observableuser[]
 === Usage of `Observable` and `Observer`
@@ -930,6 +940,8 @@ Refer to the guide <<DevOps#, here>>.
 // end::product-scope[]
 { end of `product-scope` section written by: Pham Thuy Duong }
 
+{ start of User Stories section written by: Nguyen Chi Hai }
+
 // tag::user-stories[]
 
 [appendix]
@@ -972,6 +984,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 _'items' refers to a resume field of type personal details, project, education, skills, internship, and achievement._
 
 // end::user-stories[]
+
+{ end of User Stories section written by: Nguyen Chi Hai }
 
 [appendix]
 == Use Cases
@@ -1101,6 +1115,8 @@ Cons:
 * ...
 * ...
 
+{ start of Manual Testing section written by: Nguyen Chi Hai }
+
 //tag::manual-testing[]
 [appendix]
 == Instructions for Manual Testing
@@ -1184,3 +1200,5 @@ Expected: No skill is deleted. Error details shown in the status message. Status
 .. Simlar to deleting skills above, please make sure that you follow our User Guide for the correct formatting of the
 commands if you are expecting a positive test case.
 //end::manual-testing[]
+
+{ end of Manual Testing section written by: Nguyen Chi Hai }
