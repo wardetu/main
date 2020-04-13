@@ -173,7 +173,7 @@ image::StorageClassDiagram.png[]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Resume Book data in json format and read it back.
+* can save the `ResumeBook` data in json format and read it back.
 
 [[Design-Commons]]
 === Common classes
@@ -391,8 +391,6 @@ Given below is an example usage scenario:
 Step 1. User launches the ResuMe application for the first time. The user profile data is not yet edited and will thus be
 initialized with the initial json data stored.
 
-image::user-default.png[]
-
 Step 2. User executes `me dp/ FILEPATH n/ NAME d/ DESCRIPTION p/ PHONE e/ EMAIL g/ GITHUB u/ UNIVERSITY m/ MAJOR f/ FROM t/ TO c/ CAP`
 so as to update the Person object currently stored in Model as well as Storage.
 
@@ -400,13 +398,11 @@ so as to update the Person object currently stored in Model as well as Storage.
 
 Step 3. The user profile panel will be updated accordingly.
 
-image::user.png[]
-
 *Note:* To set customised user picture, the file path of your display picture has to be absolute and from the root directory of your computer.
 
 Command sequence:
 
-1. User type `me [dp/FILEPATH] [n/NAME] ...` command in the command box.
+1. User type `me [dp/ FILEPATH] [n/ NAME] ...` command in the command box.
 2. Command is executed by Logic Manager.
 3. Command is parsed by `ResumeBookParser` which identifies what type of command it is. An `EditUserParser` is returned accordingly.
 4. `EditUserParser` extracts out different fields specified in the command based on their prefixes and returns an `EditUserCommand` with
@@ -472,7 +468,7 @@ support the user in his/her resume building and management.
 
 Given below is an example usage scenario:
 
-===== Scenario 1. Add a reminder note: `add i/note`
+===== Scenario 1. Add a reminder note: `add i/ note`
 Step 1. The user launches the ResuMe application. Data will be loaded from storage to fill the note list in model.
 
 Step 2. The user executes `add i/ note n/ NAME t/ TIME #/ TAG`. In `ResumeBook`, the note list is implemented as a `UniqueItemList`
@@ -482,7 +478,7 @@ note name and time. If a same note already exists, ResuMe throws a duplicate err
 
 Step 3. If no error is thrown, the note will be created, defaulted as `not done` and added to the current note list with according `Ui` update.
 
-===== Scenario 2. Edit an existing note: `edit i/note`
+===== Scenario 2. Edit an existing note: `edit i/ note`
 
 Step 1. Once data has been loaded from `storage` to `model`, the list of notes in the ResumeBook could either contain some
 notes, or is empty.
@@ -496,7 +492,7 @@ be edited becomes another similar note in the list, a duplicate item error will 
 
 Step 4. If no duplicate error is thrown, ResuMe will replace the note at this index with its edited version.
 
-The following activity diagram summarises this process when user executes `edit i/note` command:
+The following activity diagram summarises this process when user executes `edit i/ note` command:
 
 image::EditNoteCommandActivityDiagram.png[]
 
@@ -667,7 +663,7 @@ extended features (e.g. allow user to choose from a variety of pre-defined resum
 //end::export[]
 
 // tag::undoredo[]
-=== [Proposed] Undo/Redo feature
+=== Undo/Redo feature
 ==== Implementation
 
 The undo/redo mechanism is facilitated by `VersionedResumeBook`.
@@ -683,21 +679,31 @@ These operations are exposed in the `Model` interface as `Model#commitResumeBook
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedResumeBook` will be initialized with the initial resume book state, and the `currentStatePointer` pointing to that single resume book state.
+Do note that all resume books begin with an empty string set for display type. Display type of a resume book lets it know
+what item list to show.
 
 image::UndoRedoState0.png[]
 
 Step 2. The user executes `delete 5 i/ res` command to delete the 5th resume in the resume book. The `delete` command calls `Model#commitResumeBook()`, causing the modified state of the resume book after the `delete 5 i/ res` command executes to be saved in the `resumeBookStateList`, and the `currentStatePointer` is shifted to the newly inserted resume book state.
+In addition, the display type of the current resume book will be set to resume.
 
 image::UndoRedoState1.png[]
 
-Step 3. The user executes `add i/ res n/ Summer Resume ...` to add a new resume. The `add` command also calls `Model#commitResumeBook()`, causing another modified resume book state to be saved into the `resumeBookStateList`.
+Step 3. The user executes `add i/ int n/ RESUME Internship ...` to add a new internship. The `add` command also calls `Model#commitResumeBook()`, causing another modified resume book state to be saved into the `resumeBookStateList`. This resume
+book has its display type set to `int` - which is an alias for internship.
 
 image::UndoRedoState2.png[]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitResumeBook()`, so the resume book state will not be saved into the `resumeBookStateList`.
 
-Step 4. The user now decides that adding the resume was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoResumeBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous resume book state, and restores the resume book to that state.
+Step 4. The user now decides that adding the internship was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoResumeBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous resume book state, and restores the resume book to that state.
+This resume book state, however, does not has the display type that we want. Thus, `VersionedResumeBook#setItemsToDisplay()` will be called to set the current resume book's
+display type to that of the resume book state one to the right of the `currentStatePointer` - which corresponds to the command that just has been undone.
+
+Note: `resumeBookStateList` stores resume book states as `ReadOnlyResumeBook`, thereby allowing these states to stay unmodified throughout
+their life cycle. Operations like `Model#commitResumeBook()`, `Model#undoResumeBook()`, and `VersionedResumeBook#setItemsToDisplay()` will not
+change any of these state at all. Immutable state like this is desirable because it gives rise to fewer bugs and fewer unexpected behaviours.
 
 image::UndoRedoState3.png[]
 
@@ -715,11 +721,15 @@ The `redo` command does the opposite -- it calls `Model#redoResumeBook()`, which
 [NOTE]
 If the `currentStatePointer` is at index `resumeBookStateList.size() - 1`, pointing to the latest resume book state, then there are no undone resume book states to restore. The `redo` command uses `Model#canRedoResumeBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list i/ res`. Commands that do not modify the resume book, such as `list`, will usually not call `Model#commitResumeBook()`, `Model#undoResumeBook()` or `Model#redoResumeBook()`. Thus, the `resumeBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list i/ ski`. Commands that do not modify the resume book, such as `list`, will usually not call `Model#commitResumeBook()`, `Model#undoResumeBook()` or `Model#redoResumeBook()`. Thus, the `resumeBookStateList` remains unchanged.
+
+Here we also see how the stored resume book states are immutable. `list i/ ski` causes the display type of the current resume book to switch to skill (whose alias is "ski"),
+while the resume book state pointed to by the `currentStatePointer` still maintains its display type (which is resume).
 
 image::UndoRedoState4.png[]
 
-Step 6. The user executes `clear`, which calls `Model#commitResumeBook()`. Since the `currentStatePointer` is not pointing at the end of the `resumeBookStateList`, all resume book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add i/ res ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `sort i/ ski order/ name`, which calls `Model#commitResumeBook()`. Since the `currentStatePointer` is not pointing at the end of the `resumeBookStateList`, all resume book states after the `currentStatePointer` will be purged.
+We designed it this way because it no longer makes sense to redo the `add i/ ski ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoState5.png[]
 
@@ -752,12 +762,34 @@ when it is executed; when an `undo` is performed, we pop the top of the `UndoSta
 resume book.
 ** Cons: Handling of the stacks can be confusing, especially since there are commands that make no change to the model and thus are not (and should not be) stored. `edit` and `delete` require
 the old-versioned item to be stored as well so that it can be restored while `add` does not, thereby affecting consistency.
+
+==== [Proposed] Improvements for Undo/Redo
+
+A new function can be added that allows users to navigate resume book states. This is very possible because we
+can already store all these states and can map them to keys easily. This new function can let
+user traverse between resumes without needing to undo or redo too many times.
+
+A better data structure - like a search tree - can be used in place of a list. If the above proposed
+change is taken into consideration, then it is desirable to improve search time for a resume book state, from
+worst case linear to worst case logarithmic.
+
 // end::undoredo[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
-_{Explain here how the data encryption feature will be implemented}_
+Data encryption can be implemented in the future versions.
+
+===== Aspect: How data encryption will be implemented
+
+* **Alternative 1**: Encrypt and store data locally.
+** Pros:  Easy to implement. There are many existing encryption libraries that can be used.
+** Cons:  Performance issues may arise because every call to save to storage requires encrypting a lot of data. Security threat
+is still present if we store the encryption key in the same machine.
+
+* **Alternative 2**: Store data outside the user's machine and issue them access token.
+** Pros: Data is not bound to one machine and can be restored if the user forgets their credentials. If a DBMS is used then there are additional benefits to storage functionality as well.
+** Cons: We need to generate access tokens and check them. We also need to change the current implementation to work with external storage.
 
 // end::dataencryption[]
 
@@ -794,6 +826,7 @@ Refer to the guide <<Testing#, here>>.
 Refer to the guide <<DevOps#, here>>.
 
 [appendix]
+// tag::product-scope[]
 == Product Scope
 
 *Target user profile*:
@@ -807,7 +840,10 @@ Refer to the guide <<DevOps#, here>>.
 
 *Value proposition*: build and manage resumes faster than a typical mouse/GUI driven app
 
+// end::product-scope[]
+
 // tag::user-stories[]
+
 [appendix]
 == User Stories
 
@@ -926,6 +962,7 @@ Use case ends.
 _{More to be added}_
 
 [appendix]
+// tag::nfr[]
 == Non Functional Requirements
 
 .  The system should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
@@ -938,9 +975,11 @@ the data file) without any network connection.
 .  A user with some familiarity with Command Line Interface (CLI) should be able to accomplish most of the tasks faster
 using commands than using the mouse to navigate the Graphic User Interface (GUI).
 . The product is not required to handle the printing of resumes.
-
+// end::nfr[]
 
 [appendix]
+
+// tag::glossary[]
 == Glossary
 
 [[mainstream-os]] Mainstream OS::
@@ -949,6 +988,7 @@ Windows, Linux, Unix, OS-X
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
 
+// end::glossary[]
 [appendix]
 == Product Survey
 
