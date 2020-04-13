@@ -7,6 +7,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 :xrefstyle: full
+:icons: font
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -14,7 +15,12 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-F10-1/main
 
-By: `Team F10-1`      Since: `Jan 2020`
+By: `CS2103T F10-1`      Since: `Feb 2020`      Licence: `MIT`
+
+== Introduction
+This developer guide documents the system design and implementation of *ResuMe*. We hope that it would be a useful reference
+for software developers who wish to contribute to the project, or to simply gain deeper insight into our development process
+and considerations.
 
 == Setting up
 
@@ -130,15 +136,12 @@ image::DeleteSequenceDiagram.png[]
 NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 // end::logic[]
 
-// end::logic[]
-
 // tag::model[]
 [[Design-Model]]
 === Model component
 
-// TODO: Fix diagram layout
 .Structure of the Model Component
-image::ModelClassDiagram.png[]
+image::ModelClassDiagram.png[width="1000"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
@@ -146,11 +149,14 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Resume Book data.
-* exposes an unmodifiable `ObservableList<Item>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the Resume Book state using `VersionedResumeBook` to facilitate `undo`/`redo`.
+* exposes an `Observable` that contains an internal `Person` with user's data, and two unmodifiable `ObservableList<Item>`,
+one for `Note` and one for `Internship`, `Project`, `Skill` and `Resume`.
+* has the UI bound to its observables so that the UI automatically updates when the data change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Resume Book`, which `Item` can reference. This would allow `Resume Book` to only require one `Tag` object per unique `Tag`, instead of each `Item` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `ResumeBook`, which `Item` can reference. This would allow `ResumeBook` to only require one `Tag` object per unique `Tag`, instead of each `Item` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:BetterModelClassDiagram.png[]
 
@@ -180,43 +186,55 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::redit[]
 === Resume Edit feature
-==== Proposed Implementation
-The Resume Edit feature or `redit` allows users to edit which `Item` belongs to the `Resume` (for example, adding a `Skill` item or removing an `Internship` item).
-It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`.
+The Resume Edit feature or `redit` allows user to modify the `Item` contents of a `Resume` (for example, adding a `Skill` item or removing an `Internship` item). It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`.
 
-The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`.
-Therefore, like any other `Command` classes, it will have an `execute` method.
+==== Current Implementation
+The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`. Therefore, like any other `Command` classes, it will have an `execute` method.
 
-===== Adding into the resume
-The following screenshot illustrates what happens when we use `redit` to add item into the resume. The numbers in the command represent the index of the item in the list. After the end of the command, the number of item in the resume would have increased.
+Given below is an example usage scenario and how the `redit` works at each step.
 
-image::ReditAddIntoResume.png[][AddIntoResume,442,337]
+Step 1. The user launches the application, and uses the `add` command to add several `Resume`, `Internship`, `Project`, and `Skill` items.
 
-For modifications and removal of item from the resume, all we have to do is to run the same command again, specifying which item we want to *retain* in the resume.
+Step 2. The user executes `redit 1 int/ 2` command to add the second `Internship` in the list of `Internship` items to the first `Resume` in the list of `Resume` items.
 
-===== Removing all from the resume
-The following sreenshot illustrates what happens if you want to remove all the items in the resume, starting from a an already-filled resume:
+Step 3. This calls `ResumeBookParser#parseCommand()`, which would create a new `ResumeEditCommandParser` object and call the `ResumeEditCommandParser#parse()` method.
 
-image::ReditRemoveEverything.png[][RemoveEverything,442,337]
+Step 4. A new `ResumeEditCommand` object is created. It contains the index of the `Resume` that is to be modified, and three `Optional<List<Integer>>` representing the indices of `Internship`, `Project` and `Skill` to be modified into the `Resume`. In this example, the `Project` and `Skill` indices are represented by empty `Optional` because the user did not specify any project or skill indices.
 
-===== Removing some from the resume
-And the following screenshot illustrates what happens if you want to remove some items:
+Step 5. The `ResumeEditCommand#execute()` method is called with the current `model`. A copy of the `Resume` is created and its content is set to refer to the internships, projects and skills specified by the user.
 
-image::ReditWantSomeThings.png[][WantSomeThings,442,337]
+Step 6. A new `ResumeEditCommandResult` object, which contains the edited copy of the `Resume`, is created and returned.
 
-===== Changing content using tags
-On top of these methods to change the content of the resume, `redit` can also make changes to the resume by making use of tags.
-Regardless of what the original content is, after running the command, the resume will then only have items with the desired tags.
+The following sequence diagram shows how `redit` works:
 
-An example is shown in the following screenshot:
+.Sequence diagram for ResumeEdit.
+image::ResumeEditSequenceDiagram.png[]
 
-image::ReditTags.png[][ReditWithTags,442,337]
+===== Representation of indices after parsing
 
+In Step 4. above, it is mentioned that `Optional<List<Integer>>` is used to represent the indices of `Internship`, `Project`, and `Skill` items. This section elaborates further on the representation.
+
+To explain the various representations, we will use the example of executing `redit 1 int/ 2 3 proj/`:
+
+* A non-empty `List<Integer>` wrapped with `Optional` is used to represent the indices when the user specifies both the item prefix and the item indices. In the above example, indices of `Internship` items will be represented by a `List<Integer>` of `2` and `3`, wrapped with `Optional`.
+* An empty `List<Integer>` wrapped with `Optional` is used to represent the indices when the user specifies the item prefix, but no item indices are given. In the above example, indices of `Project` items will be represented by an empty `List<Integer>` wrapped with `Optional`.
+* An empty `Optional` is used to represent the indices when the user does not specify the item prefix. In the above example, indices of `Skill` items will be represented with an empty `Optional`.
+
+The three representations are used because `redit` facilitates the following:
+
+* If the prefix and indices are both present, the resume will be modified to contain the items of that prefix at the specified indices. In the same example above, `Resume` at index 1 will be modified to contain `Internship` items at indices 2 and 3.
+* If the prefix is specified but no indices are present, the resume will be modified to remove all the items of that prefix. In the example above, `Resume` at index 1 will be modified to have all its `Project` items removed.
+* If the prefix is not specified, the resume will have the items of that prefix unmodified. In the example above, `Resume` at index 1 will not have its `Skill` items modified. If originally there were 4 `Skill` items, then after the command execution, it will still have 4 `Skill` items.
+
+The following activity diagram summarises the execution of `ResumeEditCommand`:
+
+.Activity Diagram for ResumeEdit.
+image::ResumeEditActivityDiagram.png[]
 ==== Design Considerations
 ===== Aspect: Whether `ResumeEditCommand` should extend `EditCommand`
-* ** Alternative 1 (current choice):** `ResumeEditCommand` does not extend `EditCommand`, but extends `Command`. This design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the resume such as its name, while `redit` is supposed to change the content that the resume holds.
+* ** Alternative 1 (current choice):** `ResumeEditCommand` does not extend `EditCommand`, but extends `Command`.
 
-** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Pricniple is observed.
+** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Principle is observed.
 ** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may be confusing to have both `redit` and `edit`.
 
 image::ResumeEditCommandAlt1.png[]
@@ -227,7 +245,75 @@ image::ResumeEditCommandAlt1.png[]
 ** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely.
 
 image::ResumeEditCommandAlt2.png[]
+
+****
+*Conclusion:* The first design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the resume such as its name, while `redit` is supposed to change the content that the resume holds.
+
+This also reduces bloating of code and increases the flexibility of `ResumeEditCommand` class if the behaviour of `redit` needs to be changed in the future.
+****
+===== Aspect: Representation of indices after parsing
+* **Alternative 1 (current choice):** Usage of `Optional<List<Integer>>`
+
+** Pros: The 3 different cases is naturally represented when `List<Integer>` is wrapped with `Optional`. Enhanced safety, reducing risk of `NullPointerException`.
+** Cons: More checks are required to ensure that the `Optional` is not empty before getting its value.
+
+* **Alternative 2:** Usage of `null` and `List<Integer>`
+
+** Pros: Implementation is much simpler, and code becomes much more concise.
+** Cons: High risk of getting a `NullPointerException` if `null` is not handled carefully.
+
+****
+*Conclusion:* We went with `Optional` as it is more expressive than using `null`. It has a clearer semantic when checking whether the value of `Optional` is empty or not than to check whether the variable is a `null` value.
+
+Additionally, using `Optional` provides much less risk to getting `NullPointerException`. The reduced risk allows the developers to potentially save some debugging time, and developers need not worry about handling the `NullPointerException`.
+****
 // end::redit[]
+
+// tag::tagpull[]
+=== Tag Pull feature
+The Tag Pull feature is similar to <<Resume Edit Feature, Resume Edit Feature>> in the sense that it modifies the content of the `Resume`. Unlike Resume Edit which modifies using item indices, the Tag Pull feature modifies the resume by _adding_ items with the specified tags on top of existing items in the `Resume`.
+
+==== Current Implementation
+The `tagpull` command is facilitated by `TagPullCommand`, which extends `Command`. Therefore, like any other `Command` classes, it will have an `execute` method.
+
+Given below is an example usage scenario and how the `tagpull` works at each step.
+
+Step 1. The user launches the application, and uses the `add` command to add several `Resume`, `Internship`, `Project`, and `Skill` items.
+
+Step 2. The user executes `tagpull 1 #/ tech` command to add all items that have been tagged with `tech` to the first `Resume` in the list of `Resume` items.
+
+Step 3. This calls `ResumeBookParser#parseCommand()`, which would create a new `TagPullCommandParser` object and call the `TagPullCommandParser#parse()` method.
+
+Step 4. A new `TagPullCommand` object is created. It contains the index of the `Resume` that is to be modified, and the tags of the items which the user wants to add. In this example, it will only have the `tech` tag.
+
+Step 5. The `TagPullCommand#execute()` method is called with the current `model`. A copy of the `Resume` is created and all the items with matching tags are retrieved from `model`. The content of the copied `Resume` is updated to now contain all the items with matching tags, on top of existing ones.
+
+Step 6. A new `TagPullCommand` object, which contains the edited copy of the `Resume`, is created and returned.
+
+The following sequence diagram shows how `tagpull` works:
+
+image::TagPullSequenceDiagram.png[]
+
+==== Design Considerations
+===== Aspect: Integrating Tag Pull to Resume Edit
+* **Alternative 1 (current choice):** Separating `redit` and `tagpull`
+
+** Pros: Separation of concerns. `redit` handles updates of `Resume` using indices and `tagpull` handles updates of `Resume` using tags.
+** Cons: There is some code duplication due to similarities in behaviour.
+
+* **Alternative 2:** Combine `redit` with `tagpull`, making use of `#/` as prefix for `redit` command
+
+** Pros: It may be intuitive for user to only have a single command that handles modification of `Resume`
+** Cons: The implementation of `redit` becomes much more complicated as various combinations of input has to be considered. For example, considerations of what the expected behaviour should be if indices and tags are given.
+
+****
+*Conclusion:* We decided to separate the two commands in order to have a simpler implementation of the commands. By separating the two, there is a separation of concerns and there is no need to consider the behaviour when both indices and tags are given as arguments.
+
+It may also save the user some confusion since the `redit` feature specifically handles only updates using indices while the `tagpull` feature handles only updates using tags.
+
+As we have separated the two commands, we can then also vary the behaviour of the two commands slightly. Instead of both commands modifying the `Resume`, we have implemented `redit` to _modify_ the `Resume` item, while `tagpull` _adds_ onto existing items in the `Resume`.
+****
+// end::tagpull[]
 
 // tag::command-classes[]
 === Implementation of `Command` classes
@@ -257,7 +343,7 @@ image::CommandClassDiagram.png[]
 The following is the activity diagram for execution of `AddResumeCommand` when the user adds a resume.
 
 .Activity diagram for execution of `AddResumeCommand`
-image::AddResumeCommandActivityDiagram.png[]
+image::AddResumeCommandActivityDiagram.png[width="450"]
 
 This leads to a cleaner execution method of each ABCItemCommand as each command class has a clear goal.
 
@@ -268,7 +354,7 @@ This leads to a cleaner execution method of each ABCItemCommand as each command 
 The following is the activity diagram for execution of `AddCommand` when the user adds a resume.
 
 .Activity diagram for execution of `AddCommand`
-image::AddCommandActivityDiagram.png[]
+image::AddCommandActivityDiagram.png[width="350"]
 
 Implementing `ABCCommand` this way forces execute to be switch-cased.
 Functionality of execute would vary depending on the item `Type`.
@@ -386,23 +472,23 @@ with the app.
 This allows the user to change the background and font color using rgb or hex color codes.
 
 //tag::export[]
-=== Export Resume feature
-The Export Resume feature supports two main actions: previewing the content of a `Resume` item, and
-then exporting it as a .pdf file.
+=== Export Feature
+The Export Feature supports two main actions: previewing the content of a `Resume` item, and
+then generating a `.pdf` file from it.
 
-==== rpreview: preview a `Resume`
+==== Previewing a resume: `rpreview`
 ===== Implementation
-`rpreview` is supported by the new `Command`, `ResumePreviewCommand` and the additional method `Resume#getPreview()`
-which return the content of the `Resume` in textual format.
+`rpreview` is supported by the new `Command`, `ResumePreviewCommand` and the additional method `toPreview()` implemented
+in `Internship`, `Project` and `Skill`, which return the content of the item in textual format.
 
 Given below is an example usage scenario:
 
-Step 1. The user launches the ResuMe application. After loading data from storage to the application memory, the list of
-resumes in the ResumeBook could either contain some resumes, or is empty.
+Step 1. The user launches the *ResuMe* application. After loading data from storage to the application memory, the list of
+`resumes` in the `ResumeBook` could either contain some resumes, or is empty.
 
-Step 2. The user executes `rpreview INDEX`. If the specified resume index is out of bound, ResuMe throws an error message.
+Step 2. The user executes `rpreview INDEX`. If the specified resume `INDEX` is out of bound, *ResuMe* throws an error message.
 
-Step 3. The application retrieves the correct `Resume` item and call `getPreview()` on that resume.
+Step 3. The application retrieves the correct `Resume` item and calls `toPreview()` on the items contained in that resume.
 
 The following activity diagram summarises what happens when a user executes `rpreview` command:
 
@@ -412,46 +498,55 @@ image::ExportPreviewActivityDiagram.png[]
 ===== Design Considerations
 ===== Aspect: Where `rpreview` is displayed
 
-* *Alternative 1 (current choice):* Display in the same panel as `view`
+* *Alternative 1 (current choice):* Displays in a separate preview pop-up window.
+** Pros: The preview is separated from the application and does not clutter the application view. It is also no longer
+confined to a small space and hence improves readability.
+** Cons: Additional non-command-line action needed to close the pop-up window after previewing.
+
+* *Alternative 2:* Display in the same panel as `view`
 ** Pros: No significant change to UI component.
 ** Cons: Multiple commands needed if user finds out about a typo in an item, wants to view the item in details,
 fix the typo and then check the preview again to ensure there is no more error.
 
-* *Alternative 2:* Create a separate UI panel to display the resume preview. Additionally, this panel could be implemented
+* *Alternative 3:* Create a separate preview box to display the resume preview. Additionally, this box could be implemented
 such that it automatically updates when the content of the `Resume` item is edited.
-** Pros: User can see the resume preview and the item detail panels at the same time, hence saving time switching between views.
+** Pros: User can see the resume preview in the preview box, and the item details in the view box at the same time,
+hence saving time switching between views.
 ** Cons: Too many panels could be confusing for the user to navigate. The space is also often wasted since user does not
 need to use `rpreview` regularly.
 
 ****
-*Conclusion:* Given that the application already has quite a number of panels (User Profile, Command Input,
-Command Result, Item Detail and List View), alternative 1 is chosen to minimise the layout and improve on user experience.
-The Command Result panel will display a confirmation message for any successful item edit, hence the user will not need
-to call `rpreview` after each edit, reducing the number of switches between views.
+*Conclusion:* Given that the application already has quite a number of panels (User Box, Command Box, Result Box,
+View Box and List Box), alternative 1 is chosen to minimise the layout and improve on user experience.
+
+Every time the user makes an edit, the Result Box will display a confirmation message, and the View Box will shows the
+edited details. Hence, user will not need to call `rpreview` after each edit just to confirm that the command is
+successfully executed and error-free. As such, `rpreview` will not be a command that is used often, and the benefits of
+a clean UI outweighs the compromise made when additional action to close the pop-up window is required.
+
 ****
 
-==== rgen: generate a .pdf file from a `Resume`
+==== Generating a `.pdf` file from a resume: `rgen`
 ===== Implementation
-This feature utilises the external *iText* library. When using `rgen`, the user could specify the desired name of
+This feature utilises the external *Apache Pdf Box* library. When using `rgen`, the user could specify the desired name of
 the generated file, which will be saved in the root directory of the project.
 
-`rgen` implements the following operations:
+The executing of `rgen` is facilitated by an addition `PdfBuilder` class, which implements the following main operations:
 
-* `create(String)` and `create()` - initialises the .pdf file, either with the input `String` name specified by the user,
-or with the same name as the `Resume` name if the file name is not specified.
-* `addSection(String)` - starts a new section with the `String` name (e.g. "Internship").
-* `populateSection(UniqueItemList)` and `insertItem(Item)` - populates the section with items in the same order as they
-are in the `UniqueItemList`. When an `Item` is inserted, it is correctly formatted depending on the item type.
+* `addPage()` - starts a new page in the `.pdf` file. This method is called dynamically to fit the content of the resume
+to be generated.
+* `addPersonalDetails()` - adds the relevant resume and user details to the `.pdf` file.
+* `addInternships()`, `addProjects()` and `addSkills()` - adds the resume content to the `.pdf` file in the same
+order that they appear in the resume. If a section is empty, it will not be added to the output file.
 
 Given below is an example usage scenario:
 
-Step 1. The user launches ResuMe. After loading data from storage to the application memory, the list of resumes in the
-ResumeBook could either contain some resumes, or is empty.
+Step 1. The user launches *ResuMe*. After loading data from storage to the application memory, the list of `resumes` in the
+`ResumeBook` could either contain some resumes, or is empty.
 
-Step 2. The user executes `rgen INDEX n/ FILE_NAME`. If the specified resume index is out of bound,
-ResuMe throws an error message.
+Step 2. The user executes `rgen INDEX n/ FILE_NAME`. If the specified resume `INDEX` is out of bound, *ResuMe* throws an error message.
 
-Step 3. The application retrieves the correct `Resume` item, create a new .pdf file and populates it with the corresponding
+Step 3. The application retrieves the correct `Resume` item, create a new `.pdf` file and populates it with the corresponding
 items inside the `Resume`.
 
 The following activity diagram summarises what happens when a user executes `rgen` command:
@@ -465,17 +560,17 @@ image::ExportSequenceDiagram.png[, 1000]
 ==== Design Considerations
 ===== Aspect: How `rgen` executes
 
-* *Alternative 1 (current choice):* Generate .pdf file by iteratively reading and inserting details of `Item` from inside the `Resume` itself.
+* *Alternative 1 (current choice):* Generate `.pdf` file by iteratively adding `items` contained in `resume`.
 ** Pros: Better control of the output layout, as the position and formatting of each section could be set individually.
 Additionaly, `rgen` is dynamic, in the sense that even without calling `rpreview` every time, the generated file will be
 consistent with any item update.
 ** Cons: Coupled with `rpreview`, the content of a `Resume` must be read twice every time the user wishes to export.
 
-* *Alternative 2:* Generate .pdf file directly from the previewed text output by `rpreview`
-** Pros: Faster `rgen`
-** Cons: Limited formatting options (font and font size at most) since the whole document is input as one long string.
-`rgen` implemented this way is also static, and might not reflect the most updated content if there are item changes
-after `rpreview` is called.
+* *Alternative 2:* Generate `.pdf` file directly from the previewed text output by `rpreview`
+** Pros: Faster and simpler `rgen`
+** Cons: Limited formatting options (font type, font size and page layout) since the whole document is now input as one
+long string of text. `rgen` implemented this way is also static, and might not reflect the most updated content
+if there are item changes after `rpreview` is called.
 
 ****
 *Conclusion:* Alternative 1 is chosen because each resume is not likely to hold more than 20 items, hence the cost
@@ -483,7 +578,7 @@ of reading its content twice (once during `rpreview` and once during `rgen`) is 
 will further allows the application to have more control when formatting the output file, and leaving room for potential
 extended features (e.g. allow user to choose from a variety of pre-defined resume templates).
 ****
-end::export[]
+//end::export[]
 
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature

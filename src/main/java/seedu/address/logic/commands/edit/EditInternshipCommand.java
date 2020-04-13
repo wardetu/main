@@ -31,7 +31,7 @@ import seedu.address.model.tag.Tag;
 public class EditInternshipCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
-
+    public static final String MESSAGE_SAME_INTERNSHIP = "You are not making any changes to this internship.";
     public static final String MESSAGE_FROM_TO_MISORDER = "\'from\' cannot be later than \'to\' field. ";
 
     private static final String FIELDS = "Examples: "
@@ -78,6 +78,10 @@ public class EditInternshipCommand extends EditCommand {
         Internship toEdit = model.getInternshipByIndex(index);
 
         Internship editedInternship = createEditedInternship(toEdit, editInternshipDescriptor);
+
+        if (editedInternship.equals(toEdit)) {
+            throw new CommandException(MESSAGE_SAME_INTERNSHIP);
+        }
 
         if (editedInternship.getFrom().compareTo(editedInternship.getTo()) > 0) {
             throw new CommandException(MESSAGE_FROM_TO_MISORDER);
