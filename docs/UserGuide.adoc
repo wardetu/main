@@ -656,7 +656,7 @@ Pull all the `Internship`, `Project` and `Skill` items with the specified tag(s)
 [NOTE]
 This command does not remove items from the `resume` and will add items on top of the existing items.
 
-*Example 1: Pulling with one tag*
+*Example 1: Pulling items using one tag*
 
 Before you try this example, ensure you have added some items with the tag `SE`. You may verify for their presence by using the `list` command.
 
@@ -675,7 +675,7 @@ image::ReditListRes.png[width = "790"]
 +
 image::TagPullOneTag.png[width = "790"]
 
-*Example 2:*
+*Example 2: Pulling items using multiple tags*
 
 Before you try this example, ensure you have added some items with the tag `SE` and/or `github`. You may verify for their presence by using the `list` command.
 
