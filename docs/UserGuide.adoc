@@ -694,7 +694,7 @@ image::TagPullMultiTags.png[width = "790"]
 
 // tag::undo[]
 
-=== Undo a command: `undo`
+=== Undoing a command: `undo`
 
 Undoes the previous command and restores the state of the application to before that command is performed.
 
@@ -737,7 +737,7 @@ image::postUndo_JavaIsBack.png[width="790"]
 
 // tag::redo[]
 
-=== Redo a command: `redo`
+=== Redoing a command: `redo`
 
 Redoes the most recent undone command and brings the application state to after the (re)execution
 of that command.
