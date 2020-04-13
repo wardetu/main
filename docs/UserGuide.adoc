@@ -311,6 +311,8 @@ image::AddDukeProject.png[width="600"]
 
 // end::add[]
 
+{ start of `edit` section written by: Christian James Welly }
+
 // tag::edit[]
 === Editing an item : `edit`
 
@@ -370,6 +372,8 @@ image::ListSkill1.png[width="790"]
 +
 image::EditSkillExample.png[width="790"]
 // end::edit[]
+
+{ end of `edit` section written by: Christian James Welly }
 
 // tag::find[]
 
@@ -524,6 +528,8 @@ image::
 
 // end::sort[]
 
+{ start of `view` section written by: Christian James Welly }
+
 // tag::view[]
 === Viewing an item in details: `view`
 
@@ -551,6 +557,10 @@ image::ListProject2.png[width="790"]
 image::ViewDetaskProject.png[width="790"]
 
 // end::view[]
+
+{ end of `view` section written by: Christian James Welly }
+
+{ start of `redit` section written by: Christian James Welly }
 
 // tag::redit[]
 === Modifying the content a resume: `redit`
@@ -638,8 +648,10 @@ image::ReditKeepSomeThings.png[width = "790"]
 
 So by leaving out one of the prefixes (`TYPE/ ITEM_INDEX...`) from the command, you can keep some of the items in your `resume`!
 
-
 // end::redit[]
+{ end of `redit` section written by: Christian James Welly }
+
+{ start of `tagpull` section written by: Christian James Welly }
 
 // tag::tagpull[]
 === Pulling tagged items into the resume: `tagpull`
@@ -694,6 +706,7 @@ image::ReditListRes.png[width = "790"]
 image::TagPullMultiTags.png[width = "790"]
 
 // end::tagpull[]
+{ end of `tagpull` section written by: Christian James Welly }
 
 // tag::undo[]
 
