@@ -101,7 +101,7 @@ image::UiClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ItemDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ItemDisplayList`, `ItemListPanel`, `NoteListPanel`, `UserOverallPane` and `StatusBarFooter`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -186,7 +186,7 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::redit[]
 === Resume Edit feature
-The Resume Edit feature or `redit` allows user to modify the `Item` contents of a `Resume` (for example, adding a `Skill` item or removing an `Internship` item). It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`.
+The Resume Edit feature or `redit` allows user to modify the <<content-item, content items>> of the `Resume` (for example, adding a `Skill` item or removing an `Internship` item). It is not to be confused with the `edit` command, which simply modifies the fields of an `Item` (such as name).
 
 ==== Current Implementation
 The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`. Therefore, like any other `Command` classes, it will have an `execute` method.
@@ -199,9 +199,9 @@ Step 2. The user executes `redit 1 int/ 2` command to add the second `Internship
 
 Step 3. This calls `ResumeBookParser#parseCommand()`, which would create a new `ResumeEditCommandParser` object and call the `ResumeEditCommandParser#parse()` method.
 
-Step 4. A new `ResumeEditCommand` object is created. It contains the index of the `Resume` that is to be modified, and three `Optional<List<Integer>>` representing the indices of `Internship`, `Project` and `Skill` to be modified into the `Resume`. In this example, the `Project` and `Skill` indices are represented by empty `Optional` because the user did not specify any project or skill indices.
+Step 4. A new `ResumeEditCommand` object is created. It contains the index of the `Resume` that is to be modified, and three `Optional<List<Integer>>` representing the indices of `Internship`, `Project` and `Skill` to be modified into the `Resume`. In this example, the `Project` and `Skill` indices are represented by empty `Optional` because the user did not specify any project or skill indices. (This will be further elaborated in the next section)
 
-Step 5. The `ResumeEditCommand#execute()` method is called with the current `model`. A copy of the `Resume` is created and its content is set to refer to the internships, projects and skills specified by the user.
+Step 5. The `ResumeEditCommand#execute()` method is called with the current `model`. A copy of the `Resume` is created and its content is set to refer to the `Internship`, `Project` and `Skill` items specified by the user.
 
 Step 6. A new `ResumeEditCommandResult` object, which contains the edited copy of the `Resume`, is created and returned.
 
@@ -222,7 +222,7 @@ To explain the various representations, we will use the example of executing `re
 
 The three representations are used because `redit` facilitates the following:
 
-* If the prefix and indices are both present, the resume will be modified to contain the items of that prefix at the specified indices. In the same example above, `Resume` at index 1 will be modified to contain `Internship` items at indices 2 and 3.
+* If the prefix and indices are both present, the resume will be modified to contain the content items of that prefix at the specified indices. In the same example above, `Resume` at index 1 will be modified to contain `Internship` items at indices 2 and 3.
 * If the prefix is specified but no indices are present, the resume will be modified to remove all the items of that prefix. In the example above, `Resume` at index 1 will be modified to have all its `Project` items removed.
 * If the prefix is not specified, the resume will have the items of that prefix unmodified. In the example above, `Resume` at index 1 will not have its `Skill` items modified. If originally there were 4 `Skill` items, then after the command execution, it will still have 4 `Skill` items.
 
@@ -234,27 +234,27 @@ image::ResumeEditActivityDiagram.png[]
 ===== Aspect: Whether `ResumeEditCommand` should extend `EditCommand`
 * ** Alternative 1 (current choice):** `ResumeEditCommand` does not extend `EditCommand`, but extends `Command`.
 
-** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Principle is observed.
-** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may be confusing to have both `redit` and `edit`.
+** Pros: Since `redit` modifies the content items of the `Resume` and not the `Resume` details, this reduces the size of responsibility for `EditCommand`. Each command class now does one and only one thing so Single Responsibility Principle is observed.
+** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may also be confusing to have both `redit` and `edit`.
 
 image::ResumeEditCommandAlt1.png[]
 
 * ** Alternative 2:** `ResumeEditCommand` extends `EditCommand`
 
 ** Pros: Some methods in `EditCommand` may be able to inherited by `ResumeEditCommand`, reducing code duplication.
-** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely.
+** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely. If the intention of `EditCommand` is to change the `Item` _details_ (such as name), and `ResumeEditCommand` only modifies the content items of the `Resume` (without changing any _details_), then this is also a violation of the Liskov Substitution Principle.
 
 image::ResumeEditCommandAlt2.png[]
 
 ****
-*Conclusion:* The first design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the resume such as its name, while `redit` is supposed to change the content that the resume holds.
+*Conclusion:* The first design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the `Resume`, such as its name, while `redit` is supposed to change the content items that the `Resume` holds.
 
-This also reduces bloating of code and increases the flexibility of `ResumeEditCommand` class if the behaviour of `redit` needs to be changed in the future.
+This also reduces bloating of code and increases the flexibility of `ResumeEditCommand` class if the behaviour of `redit` needs to be changed or added on in the future.
 ****
 ===== Aspect: Representation of indices after parsing
 * **Alternative 1 (current choice):** Usage of `Optional<List<Integer>>`
 
-** Pros: The 3 different cases is naturally represented when `List<Integer>` is wrapped with `Optional`. Enhanced safety, reducing risk of `NullPointerException`.
+** Pros: The 3 different cases is naturally represented when `List<Integer>` is wrapped with `Optional`. There is also an enhanced safety, reducing risk of `NullPointerException`.
 ** Cons: More checks are required to ensure that the `Optional` is not empty before getting its value.
 
 * **Alternative 2:** Usage of `null` and `List<Integer>`
@@ -263,15 +263,15 @@ This also reduces bloating of code and increases the flexibility of `ResumeEditC
 ** Cons: High risk of getting a `NullPointerException` if `null` is not handled carefully.
 
 ****
-*Conclusion:* We went with `Optional` as it is more expressive than using `null`. It has a clearer semantic when checking whether the value of `Optional` is empty or not than to check whether the variable is a `null` value.
+*Conclusion:* We went with `Optional` as it is more expressive than using `null`: it has a clearer semantic when checking whether the value of `Optional` is empty or not than to check whether the variable is a `null` value.
 
-Additionally, using `Optional` provides much less risk to getting `NullPointerException`. The reduced risk allows the developers to potentially save some debugging time, and developers need not worry about handling the `NullPointerException`.
+Additionally, using `Optional` provides much less risk to getting `NullPointerException`. The reduced risk allows the developers to potentially save some debugging time, and developers worry less about handling the `NullPointerException`.
 ****
 // end::redit[]
 
 // tag::tagpull[]
 === Tag Pull feature
-The Tag Pull feature is similar to <<Resume Edit Feature, Resume Edit Feature>> in the sense that it modifies the content of the `Resume`. Unlike Resume Edit which modifies using item indices, the Tag Pull feature modifies the resume by _adding_ items with the specified tags on top of existing items in the `Resume`.
+The Tag Pull feature is similar to <<Resume Edit Feature, Resume Edit Feature>> in the sense that it modifies the <<content-item, content items>> of the `Resume`. Unlike Resume Edit which modifies using the content item indices, the Tag Pull feature modifies the resume by _adding_ items with the specified tags on top of existing items in the `Resume`.
 
 ==== Current Implementation
 The `tagpull` command is facilitated by `TagPullCommand`, which extends `Command`. Therefore, like any other `Command` classes, it will have an `execute` method.
@@ -280,7 +280,7 @@ Given below is an example usage scenario and how the `tagpull` works at each ste
 
 Step 1. The user launches the application, and uses the `add` command to add several `Resume`, `Internship`, `Project`, and `Skill` items.
 
-Step 2. The user executes `tagpull 1 #/ tech` command to add all items that have been tagged with `tech` to the first `Resume` in the list of `Resume` items.
+Step 2. The user executes `tagpull 2 #/ tech` command to add all items that have been tagged with `tech` to the first `Resume` in the list of `Resume` items.
 
 Step 3. This calls `ResumeBookParser#parseCommand()`, which would create a new `TagPullCommandParser` object and call the `TagPullCommandParser#parse()` method.
 
@@ -304,14 +304,14 @@ image::TagPullSequenceDiagram.png[]
 * **Alternative 2:** Combine `redit` with `tagpull`, making use of `#/` as prefix for `redit` command
 
 ** Pros: It may be intuitive for user to only have a single command that handles modification of `Resume`
-** Cons: The implementation of `redit` becomes much more complicated as various combinations of input has to be considered. For example, considerations of what the expected behaviour should be if indices and tags are given.
+** Cons: The implementation of `redit` becomes much more complicated as various combinations of input has to be considered. For example, considerations of what the expected behaviour should be if both indices and tags are given as arguments.
 
 ****
 *Conclusion:* We decided to separate the two commands in order to have a simpler implementation of the commands. By separating the two, there is a separation of concerns and there is no need to consider the behaviour when both indices and tags are given as arguments.
 
 It may also save the user some confusion since the `redit` feature specifically handles only updates using indices while the `tagpull` feature handles only updates using tags.
 
-As we have separated the two commands, we can then also vary the behaviour of the two commands slightly. Instead of both commands modifying the `Resume`, we have implemented `redit` to _modify_ the `Resume` item, while `tagpull` _adds_ onto existing items in the `Resume`.
+As we have separated the two commands, we can then also vary the behaviour of the two commands slightly. We have implemented `redit` to be able to _modify_  (adding, changing, and removing) the `Resume` item, while `tagpull` modifies only by _adding_ onto existing content items in the `Resume`.
 ****
 // end::tagpull[]
 
@@ -375,57 +375,50 @@ be switch-cased again in `ABCCommand`.
 
 // end::command-classes[]
 
-=== Me Feature
-This feature allows a user to make changes and updates his/her user profile which is reflected by the user profile panel.
-At the same time, it also allows user to personalise his/her experience using the app with certain sub-features. They are
-elaborated below:
+// tag::me[]
+=== Me feature
+This feature intends to serve a single user of the application to sets and updates his/her user profile. The profile
+is then reflected in the user's profile panel.
 
-* Edit user profile image
+==== `me`: Edit User Profile
+===== Implementation
 
-* Edit user main data
+`me` is supported by the `EditUserCommand`, where it allows the main user to modify and update user information that
+includes `display picture`, `name`, `description`, `phone`, `email`, `github`, `university`, `major`, `from`, `to`, `cap`.
 
-* Input, store and generate motivational quotes
+Given below is an example usage scenario:
 
-* Change background and font color
+Step 1. User launches the ResuMe application for the first time. The user profile data is not yet edited and will thus be
+initialized with the initial json data stored.
 
-* Set reminders or take notes
+image::user-default.png[]
 
-==== Edit User Profile Image
-This allows the specific user to input and update his/her user profile picture.
+Step 2. User executes `me dp/ FILEPATH n/ NAME d/ DESCRIPTION p/ PHONE e/ EMAIL g/ GITHUB u/ UNIVERSITY m/ MAJOR f/ FROM t/ TO c/ CAP`
+so as to update the Person object currently stored in Model as well as Storage.
 
-==== Edit User Main Data
-This allows one specific user to modify and update user information that includes `name`, `phone`, `email1`, `github`,
-`university`, `major`, `from`, `to`, `cap`.
+ me dp/ /Users/nhamquochung/Desktop/test.png n/ HUNG d/ I am an aspiring software engineer. p/ 91648888 e/ nhamhung.gttn@gmail.com g/ nhamhung u/ National University of Singapore m/ Computer Science f/ 08-2018 t/ 05-2022 c/ 4.0 5.0
 
-Below is an example usage scenario and how the edit user data command works.
+Step 3. The user profile panel will be updated accordingly.
 
-* User launches the application for the first time. The User Profile and Data will be initialized with the initial json
-data stored.
+image::user.png[]
 
-image::user-default-data.png[]
-
-* User executes `me n/NAME p/PHONE e/EMAIL g/GITHUB u/UNIVERSITY m/MAJOR f/FROM t/TO c/CAP` so as to update the Person
-object currently stored in Model as well as Storage.
-
- me n/Nham Hung p/91608840 e/nhamhung.gttn@gmail.com g/nhamhung u/NUS m/CS f/10-2020 t/11-2020 c/5.0
-
-* The Ui User Data Table will be updated accordingly.
-
-image::user-data.png[]
+*Note:* To set customised user picture, the file path of your display picture has to be absolute and from the root directory of your computer.
 
 Command sequence:
 
-1. User type `me` command in the command box.
+1. User type `me [dp/FILEPATH] [n/NAME] ...` command in the command box.
 2. Command is executed by Logic Manager.
 3. Command is parsed by `ResumeBookParser` which identifies what type of command it is. An `EditUserParser` is returned accordingly.
-4. `EditUserParser` extracts out different components of the command into an `EditUserDescriptor` object and returns an `EditUserCommand`
-with the `EditUserDescriptor` object which contains information on which attributes of user data is updated or kept unchanged.
-5. `EditUserCommand` then calls `execute()` which first gets the existing user in Model as `userToEdit`. Then it creates a new
-`editedUser` based on `EditUserDescriptor`. It will then update the current `userToEdit` in Model with `editedUser`. Afterwards,
+4. `EditUserParser` extracts out different fields specified in the command based on their prefixes and returns an `EditUserCommand` with
+an `EditUserDescriptor` object parameter which contains information on which attributes of user data is updated or kept unchanged.
+5. `EditUserCommand` then calls `execute()` which first gets the existing `Person` in Model as the `userToEdit`. It then creates a new
+`editedUser` based on `EditUserDescriptor` and set the current `userToEdit` in Model to `editedUser`. Afterwards,
 a `CommandResult` is returned to Logic with data and feedback to be displayed to the user.
-6. Feedback acknowledge is displayed by `ResultDisplay`. User profile changes are displayed by JavaFx `TableView`.
+6. Feedback acknowledgement is displayed by `ResultDisplay`. User profile changes are displayed automatically as the user `Person`
+is wrapped around by a JavaFx Observable as an `ObservablePerson` so that the user profile 's display is always updated after execution of
+every command.
 
-The following sequence diagram shows how the `me` feature allows user to edit the user profile:
+The following sequence diagram shows how the `me` feature allows user to edit his/her user profile:
 
 image::MeSequenceDiagram.png[]
 
@@ -433,9 +426,10 @@ image::MeSequenceDiagram.png[]
 
 *Aspect: Whether `EditUserCommand` should extend `EditCommand`*
 
-* ** Alternative 1 (current choice):** `EditUserCommand` does not extend `EditCommand`, but extends `Command`
+* ** Alternative 1 (current choice):** `EditUserCommand` does not extend `EditCommand`, but extends `Command`.
+
 This design is chosen because while `EditCommand` takes into account the item index as all items are stored in a list in Model, `EditUserCommand`
-only concerns with a single `Person` who is the sole user.
+only concerns with a single `Person` who is the main user.
 
 ** Pros: Reduces unnecessary overhead for `EditUserCommand`.
 ** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`.
@@ -453,7 +447,7 @@ This design is chosen because `EditUserCommand` only concerns with a single `Per
 there is no need for `AddUserCommand` as `EditUserCommand` when executed always creates a new `Person` object to replace the
 existing one and update the Model and Ui accordingly.
 
-** Pros: Reduces unnecessary code duplication.
+** Pros: Reduces unnecessary code duplication with AddUserCommand is present.
 ** Cons: User may expect to have `add` command intuitively.
 
 * Alternative 2: Have both `AddUserCommand` and `EditUserCommand`
@@ -461,15 +455,107 @@ existing one and update the Model and Ui accordingly.
 ** Pros: User can intuitively treat `add` as adding in a new `user` and `edit` as just modifying an existing `user`.
 ** Cons: There will be code duplication and the one single user logic is not fully utilised to reduce code.
 
-==== Store and Display Motivational Quotes
-This allows the user to input and store motivational quotes. They are then able to display them at the user profile pane.
+****
+*Conclusion:* We went with our current design because it only concerns with a single target user whose usage of the application can
+help him/her manage and craft multiple resume versions. As such, only a single user profile which includes essential biography and educational
+background needs to be managed to be included in every generated resume. This user profile must thus be made clearly, constantly visible
+and to be updated with a simple and powerful command.
+****
+// end::me[]
 
-==== Set Personal Reminders and Take Notes
-This allows the user to set reminders as well as taking notes for him/herself to further customize his/her interaction
-with the app.
+// tag::note[]
+==== Note taking feature: take simple notes or reminders
 
-==== Change Background and Font Color
-This allows the user to change the background and font color using rgb or hex color codes.
+===== Implementation
+This feature utilises a `Note` class that extends `Item`. It provides necessary functionality related to note taking in order to
+support the user in his/her resume building and management.
+
+Given below is an example usage scenario:
+
+===== Scenario 1. Add a reminder note: `add i/note`
+Step 1. The user launches the ResuMe application. Data will be loaded from storage to fill the note list in model.
+
+Step 2. The user executes `add i/ note n/ NAME t/ TIME #/ TAG`. In `ResumeBook`, the note list is implemented as a `UniqueItemList`
+which implements an `add()` method that will always check if this note already exists in current note list. This check is done
+by iterating through every note in the list and compare to this note using an `isSame()` method that checks for the same
+note name and time. If a same note already exists, ResuMe throws a duplicate error message.
+
+Step 3. If no error is thrown, the note will be created, defaulted as `not done` and added to the current note list with according `Ui` update.
+
+===== Scenario 2. Edit an existing note: `edit i/note`
+
+Step 1. Once data has been loaded from `storage` to `model`, the list of notes in the ResumeBook could either contain some
+notes, or is empty.
+
+Step 2. The user executes `edit INDEX i/ Note [n/ NAME] [t/ TIME] [#/ TAG]`. If the specified note index is invalid or out of bound,
+ResuMe will throw an invalid index error message.
+
+Step 3. If no index error is thrown, edited values will be captured by an `EditNoteDescriptor` object and the note at the specified index
+will be extracted to be updated according to the fields captured by this descriptor. However, if this note to
+be edited becomes another similar note in the list, a duplicate item error will be thrown.
+
+Step 4. If no duplicate error is thrown, ResuMe will replace the note at this index with its edited version.
+
+The following activity diagram summarises this process when user executes `edit i/note` command:
+
+image::EditNoteCommandActivityDiagram.png[]
+
+===== Scenario 3. Mark an existing note as done: `done`
+
+Step 1. Given the currently displaying list of notes, the user executes `done INDEX`. If the specified note index is invalid
+or out of bound, ResuMe throws an error message.
+
+Step 2. The corresponding note at this index is marked as done with an Ui update from a `tick` to `cross`. If the note has
+already been marked as done, a user feedback message is displayed to notify the user.
+
+===== Design Considerations
+
+*Aspect: Whether this feature is necessary in supporting the user*
+
+* *Alternative 1 (current choice):* Note taking is implemented with functionality to `add`, `edit`, `view`, `list`, `find`, `delete`, `sort` and `done`.
+
+This design is chosen because it can be an important part of overall user experience in managing his/her resumes. It is an enhancement
+to existing features that deal strictly with building resumes, by allowing the user to jot down short entries which can serve as
+simple reminders for them.
+
+** Pros: User may work on crafting his/her `Internship`, `Project` and `Skill` with a lot of writing and summarising past experiences. As such,
+this brainstorming process tends to be over a long time. Note taking thus makes it easier for user to resume his/her work.
+** Cons: Note taking may seem like an unrelated feature to building resumes. Thus, it may be underutilised if the user only
+focuses on managing resumes.
+
+ ** *Alternative 2:* Remove note taking feature from the application
+
+** Pros: Make ResuMe more inline with being a resume building application.
+** Cons: May miss out on a portion of users who would appreciate this feature, especially those with a habit of jotting down notes.
+
+*Aspect: Whether `Note` class should extend `Item` class*
+
+* *Alternative 1 (current choice):* `Note` is also an `Item`
+
+This design is chosen because note taking feature is intended to have similar `Command` to a typical `Item` such as `AddCommand`, `EditCommand` and `SortCommand`.
+As such, by extending `Item`, `Note` can inherit attributes such as `Index` and `Tag` as well as being able to kept as a
+`UniqueItemList` in `Model`.
+
+** Pros: Reduce code duplication in achieving the same functionality between `Note` commands and other `Item` commands. `Note` can also inherit
+important attributes such as `index` and `tags` which it intends to have.
+** Cons: Right now other subclasses of `Item` are `Internship`, `Project`, `Skill`, `Person` and `Resume` which are all relevant
+to building a `Resume`. Details from these items will be included in the actual resume PDF generated. As such, `Note` as a subclass of
+`Item` can add confusion because it is not part of a resume.
+
+** *Alternative 2:* Implement a `Note` class which does not inherit from `Item`
+
+** Pros: Make it more independent and do not interfere with the design considerations for other resume-related items.
+** Cons: However, this would lead to a significant code duplication to achieve the same purpose. This could violate `Don't Repeat Yourself`
+principle which increases the amount of work required to test the application.
+
+****
+*Conclusion:* We went with our current design because we feel that note taking feature is helpful for user in managing multiple resume versions
+as it allows him/her to interact in more ways with the process of logging their experiences to include in resumes. We foresee that crafting
+resumes can be prolonged and thus this helps them to resume with ease. With regards to inheritance consideration, we decided that it would be
+faster and more reliable to make `Note` an `Item` so as to minimise double work and potential bugs. This is hidden from the user's perspective
+and so this design suits our needs given the short time frame that we have.
+****
+// end::note[]
 
 //tag::export[]
 === Export Feature
@@ -551,7 +637,7 @@ items inside the `Resume`.
 
 The following activity diagram summarises what happens when a user executes `rgen` command:
 
-image::ExportActivityDiagram.png[]
+image::ExportActivityDiagram.png[, 400]
 
 Detailed steps are shown in the sequence diagram below:
 
@@ -713,13 +799,14 @@ Refer to the guide <<DevOps#, here>>.
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* is a University student looking for internship or job
+* has a need to manage a significant number of personal experiences and resumes for different purposes
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: build and manage resumes faster than a typical mouse/GUI driven app
 
 [appendix]
 == User Stories
@@ -841,17 +928,17 @@ _{More to be added}_
 [appendix]
 == Non Functional Requirements
 
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
-.  Should work on both 32-bit and 64-bit environments.
-.  Should be able to support up to 1000 users without a noticeable sluggishness in performance for typical usage.
-.  Should be able to support at least 5 resumes per user, 20 items per resume, and 100 resume items in total.
-.  Data should be stored locally such that users can access them (either through the application or directly by access
+.  The system should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
+.  The system should work on both 32-bit and 64-bit environments.
+.  The system should be able to support at least 10 resumes per user, 20 items per resume, and 200 resume items in total.
+.  Data should be stored locally such that users can access them (either through the application or by directly accessing
 the data file) without any network connection.
-.  Should response within two seconds for a normal item query, and five seconds for a pdf generation request.
+.  The system should response within two seconds for a normal item query, and five seconds for a pdf generation request.
+.  The system should be usable by a novice who has never used a resume management application before.
 .  A user with some familiarity with Command Line Interface (CLI) should be able to accomplish most of the tasks faster
 using commands than using the mouse to navigate the Graphic User Interface (GUI).
+. The product is not required to handle the printing of resumes.
 
-_{More to be added}_
 
 [appendix]
 == Glossary

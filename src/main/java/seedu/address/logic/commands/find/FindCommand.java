@@ -18,7 +18,7 @@ public abstract class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all items whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]... " + PREFIX_ITEM + " TYPE\n"
+            + "Format: " + COMMAND_WORD + " KEYWORD [MORE_KEYWORDS]... " + PREFIX_ITEM + " TYPE\n"
             + "Example: " + COMMAND_WORD + " Google " + PREFIX_ITEM + " int";
 
     protected final NameContainsKeywordsPredicate predicate;

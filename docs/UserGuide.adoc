@@ -49,7 +49,7 @@ and job application woes.
 
 |4 |Resume |res |name, tag
 
-|5 |Note |note |name, time
+|5 |Note |note |name, time, tag
 |=======================================================================
 
 As you may have noticed from number 4, we are able to manage different `resumes` as well!
@@ -179,6 +179,7 @@ image::helpStart.png[width="790"]
 
 // end::help[]
 
+// tag::me[]
 === Editing user profile: `me`
 
 Edits and updates user's display information.
@@ -223,6 +224,14 @@ The user profile picture is updated accordingly as below:
 // TODO: update screenshot
 image::user_profile1.png[width="400"]
 
+// end::me[]
+
+// tag::note[]
+// end::note[]
+
+// tag::done[]
+// end::done[]
+
 // tag::list[]
 === Listing all items : `list`
 
@@ -265,18 +274,18 @@ Adds an item to the *ResuMe* application.
 
 The specific command syntax could be found in the table below:
 
-[width="100%",cols="^12%,88%",options="header",]
+[width="100%",cols="^.^12%,88%",options="header",]
 |=======================================================================
 |Type |Format
 |Internship | `add i/ int n/ COMPANY_NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
 
-|Project |`add i/ proj n/ PROJECT_NAME t/ TIME w/ WEBSITE d/ DESCRIPTION [#/ TAG]....`
+|Project |`add i/ proj n/ PROJECT_NAME t/ TIME w/ WEBSITE d/ DESCRIPTION [#/ TAG]...`
 
-|Skill |`add i/ ski n/ SKILL_NAME l/ LEVEL [#/ TAG]....`
+|Skill |`add i/ ski n/ SKILL_NAME l/ LEVEL [#/ TAG]...`
 
 |Resume |`add i/ res n/ RESUME_NAME [#/ TAG]...`
 
-|Note |`add i/ note n/ NOTE_NAME t/ TIME`
+|Note |`add i/ note n/ NOTE_NAME t/ TIME [#/ TAG]...`
 |=======================================================================
 
 [NOTE]
@@ -363,6 +372,8 @@ image::EditResumeExample.png[width="790"]
 +
 // TODO: add screenshot
 
+// tag::find[]
+
 === Finding items by name: `find`
 
 Finds items of a specific `type` in the *ResuMe* application whose names contain the specified keyword(s).
@@ -401,6 +412,7 @@ The specific command syntax could be found in the table below:
 . `Projects` whose names match keywords are listed in the list box.
 +
 image::find_command.png[width="790"]
+// end::find[]
 
 // tag::delete[]
 
@@ -551,7 +563,7 @@ Modifies the content of a `resume` to contain the items specified in the command
 `redit` is a different command from `edit`. Please visit <<FAQ, FAQ>> for more information.
 
 ====
-*Format:* `redit RESUME_INDEX TYPE/ [ITEM_INDEX...] [MORE_TYPE/ [ITEM_INDEX...]]`
+*Format:* `redit RESUME_INDEX TYPE/ [ITEM_INDEX...] [MORE_TYPE/ [ITEM_INDEX...]]...`
 ====
 
 [TIP]
@@ -606,7 +618,7 @@ image::ReditWantSomeThings.png[WantSomeThings,442,337]
 Pull the `Internship`, `Project` and `Skill` items with the specified tag(s) into a `resume`.
 
 ====
-*Format:* `tagpull INDEX [#/ TAG]`
+*Format:* `tagpull RESUME_INDEX [#/ TAG]...`
 ====
 
 [NOTE]
@@ -625,7 +637,7 @@ the tag `tech` are added into the `resume`.
 
 *Example 2:*
 
-`tagpull 2 #/ tech frontend`
+`tagpull 2 #/ tech #/ frontend`
 
 *Outcome:*
 
@@ -718,12 +730,12 @@ image::redo_success.png[width="790"]
 Previews a `resume` in text format in a pop-up window.
 
 ====
-*Format:* `rpreview INDEX`
+*Format:* `rpreview RESUME_INDEX`
 ====
 
 [NOTE]
 --
-* `INDEX` is the index of the `resume` seen when `list i/res` is called.
+* `RESUME_INDEX` is the index of the `resume` seen when `list i/res` is called.
 * `description` of `internship` and `project` is automatically separated into bullet points when the program detects full sentences.
 --
 
@@ -752,10 +764,10 @@ image::RPreviewIndexTwo.png[width = "790"]
 Generates a `.pdf` file from an existing `resume` stored inside the application at the specified index.
 
 ====
-*Format:* `rgen INDEX [n/ FILE_NAME]`
+*Format:* `rgen RESUME_INDEX [n/ FILE_NAME]`
 ====
 
-* A valid `INDEX` is a positive integer that identifies an existing `resume`.
+* A valid `RESUME_INDEX` is a positive integer that identifies an existing `resume`.
 * The exported `.pdf` file
 will be located in the same folder as the application `.jar` file.
 
@@ -802,9 +814,11 @@ This command can be undone.
 
 Exits the program.
 
+// tag::exit[]
 ====
 *Format:* `exit`
 ====
+// end::exit[]
 
 === Saving the data
 *ResuMe* data is saved in the hard disk automatically after any command
@@ -833,28 +847,31 @@ ____
 file created with the data file of your *ResuMe* folder in the current Computer.
 ____
 
+// tag::summary[]
 == Command Summary
 
 This is a summary of all available commands for your reference.
 
 === General commands
-These are commands that either do not affect any items, or can be applied to all item types.
+These are commands have consistent format regardless of item type.
 [source,sh]
-[cols="^.^20%,.^80%",options="header"]
+[cols="20%,80%",options="header"]
 |=======================================================================
 
 | Command | Format
 
-| Help  | `help`
-| Me | `me [dp/ FILE_PATH] [n/ NAME] [d/ DESCRIPTION] [p/ PHONE_NUMBER] [e/ EMAIL] [g/ GITHUB] [u/ UNIVERSITY] [m/ MAJOR] [f/ FROM] [t/ TO] [c/ CURRENT_CAP MAX_CAP]`
-| List | `list i/ TYPE`
-| View | `view INDEX i/ TYPE`
-| Find | `find KEYWORD [MORE_KEYWORDS]... i/ TYPE`
-| Delete | `delete INDEX i/ TYPE`
-| Undo | `undo`
-| Redo | `redo`
 | Clear | `clear`
+| Delete | `delete INDEX i/ TYPE`
+| Done | `done INDEX`
 | Exit | `exit`
+| Find | `find KEYWORD [MORE_KEYWORDS]... i/ TYPE`
+| Help | `help OPTION`
+| List | `list i/ TYPE`
+| Me | `me [dp/ FILE_PATH] [n/ NAME] [d/ DESCRIPTION] [p/ PHONE_NUMBER] [e/ EMAIL] [g/ GITHUB] [u/ UNIVERSITY] [m/ MAJOR] [f/ FROM] [t/ TO] [c/ CURRENT_CAP MAX_CAP]`
+| Redo | `redo`
+| Sort | `sort i/ TYPE order/ SORT_WORD [reverse/ TRUE_OR_FALSE]`
+| Undo | `undo`
+| View | `view INDEX i/ TYPE`
 
 |=======================================================================
 
@@ -863,20 +880,21 @@ These are commands that either do not affect any items, or can be applied to all
 These are commands whose format varies depending on item type.
 
 [source,sh]
-[cols="^.^5%,.^15%,80%",options="header"]
+[cols="5%,15%,80%",options="header"]
 |=======================================================================
 
 | Command | Type | Format
 
-.5+| Add |Internship | `add i/ int n/ COMPANY_NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
+.5+| Add
+|Internship | `add i/ int n/ COMPANY_NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
 |Project |`add i/ proj n/ PROJECT_NAME t/ TIME w/ WEBSITE d/ DESCRIPTION [#/ TAG]...`
 |Skill |`add i/ ski n/ SKILL_NAME l/ LEVEL [#/ TAG]...`
 |Resume |`add i/ res n/ RESUME_NAME [#/ TAG]...`
 |Note |`add i/ note n/ NOTE_NAME t/ TIME [#/ TAG]...`
 
 .5+| Edit |Internship | `edit i/ int [n/ COMPANY_NAME] [r/ ROLE] [f/ FROM] [t/ TO] [d/ DESCRIPTION] [#/ TAG]...`
-|Project |`edit i/ proj [n/ PROJECT_NAME] [t/ TIME] [w/ WEBSITE] [d/ DESCRIPTION] [#/ TAG]....`
-|Skill |`edit i/ ski [n/ SKILL_NAME] [l/ LEVEL] [#/ TAG]....`
+|Project |`edit i/ proj [n/ PROJECT_NAME] [t/ TIME] [w/ WEBSITE] [d/ DESCRIPTION] [#/ TAG]...`
+|Skill |`edit i/ ski [n/ SKILL_NAME] [l/ LEVEL] [#/ TAG]...`
 |Resume |`edit i/ res [n/ RESUME_NAME] [#/ TAG]...`
 |Note |`add i/ note [n/ NOTE_NAME] [t/ TIME] [#/ TAG]...`
 
@@ -885,13 +903,15 @@ These are commands whose format varies depending on item type.
 === Resume commands
 These are commands specific to `resume` items.
 [source,sh]
-[cols="^.^20%,.^80%",options="header"]
+[cols="20%,80%",options="header"]
 |=======================================================================
 
 | Command | Format
 
-| Edit Resume | `redit RESUME_INDEX TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]`
-| Preview Resume | `rpreview RESUME_INDEX`
+| Edit Resume | `redit RESUME_INDEX TYPE/ [ITEM_ID...] [MORE_TYPE/ [ITEM_ID...]]...`
 | Generate Resume | `rgen RESUME_INDEX`
+| Preview Resume | `rpreview RESUME_INDEX`
+| Tag Pull | `tagpull RESUME_INDEX [#/ TAG]`
 
 |=======================================================================
+// end::summary[]

@@ -21,11 +21,11 @@ public abstract class SortCommand extends Command {
             + "Projects can be sorted by time using \"time\". \n"
             + "Internships can be sorted by start time using \"time\". \n"
             + "Skills can be sorted by level using \"level\". \n"
-            + "Parameters: "
+            + "Format: " + COMMAND_WORD + " "
             + PREFIX_ITEM + " TYPE "
             + PREFIX_SORT_ORDER + " SORT_WORD "
-            + "[ " + PREFIX_REVERSE + " REVERSE_OR_NOT ]\n"
-            + "Example: " + COMMAND_WORD
+            + "[ " + PREFIX_REVERSE + " TRUE_OR_FALSE]\n"
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_ITEM + " int "
             + PREFIX_SORT_ORDER + " time ";
 

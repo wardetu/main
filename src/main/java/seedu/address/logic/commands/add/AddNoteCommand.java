@@ -18,15 +18,16 @@ import seedu.address.model.item.Note;
 public class AddNoteCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to your note list.\n"
+            + "Format: "
             + COMMAND_WORD + " "
-            + PREFIX_ITEM + "TYPE "
-            + PREFIX_NAME + "TITLE "
-            + PREFIX_TIME + "TIME \n"
+            + PREFIX_ITEM + " TYPE "
+            + PREFIX_NAME + " NAME "
+            + PREFIX_TIME + " TIME \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ITEM + "note "
-            + PREFIX_NAME + "Finish Resume 3 "
-            + PREFIX_TIME + "04-2020 "
-            + PREFIX_TAG + "urgent";
+            + PREFIX_ITEM + " note "
+            + PREFIX_NAME + " Finish Resume 3 "
+            + PREFIX_TIME + " 04-2020 "
+            + PREFIX_TAG + " urgent";
 
     public static final String MESSAGE_SUCCESS = "New note added!";
 
