@@ -49,7 +49,7 @@ and job application woes.
 
 |4 |Resume |res |name, tag
 
-|5 |Note |note |name, time
+|5 |Note |note |name, time, tag
 |=======================================================================
 
 As you may have noticed from number 4, we are able to manage different `resumes` as well!
@@ -182,7 +182,7 @@ image::helpStart.png[width="790"]
 // tag::me[]
 === Editing user profile: `me`
 
-Edits and updates user's display information.
+Edits and updates user's display profile.
 
 ====
 *Format:* `me [dp/ FILE_PATH] [n/ NAME] [d/ DESCRIPTION] [p/ PHONE_NUMBER] [e/ EMAIL] [g/ GITHUB] [u/ UNIVERSITY] [m/ MAJOR] [f/ FROM] [t/ TO] [c/ CURRENT_CAP MAX_CAP]`
@@ -190,7 +190,6 @@ Edits and updates user's display information.
 
 [NOTE]
 A user profile contains the following fields: `Display Picture`, `Name`, `Description`, `Phone`, `Email`, `Github`, `University`, `Major`, `From`, `To`, `CAP`.
-
 
 *Example 1:* Update user profile details +
 
@@ -202,12 +201,11 @@ Try typing in the command box this command:
 
 The user box is updated accordingly as below:
 
-// TODO: update screenshot
-image::user_profile.png[width="400"]
+image::ug.png[width="450"]
 
 *Example 2:* Update user profile picture
 
-Follow the steps in one of these two links to copy a file path according to your respective Operating System.
+Follow the steps in one of these two links to copy an absolute file path according to your respective Operating System.
 
 . Mac: https://osxdaily.com/2013/06/19/copy-file-folder-path-mac-os-x/
 
@@ -221,16 +219,9 @@ Afterwards, try a command similar to the one below:
 
 The user profile picture is updated accordingly as below:
 
-// TODO: update screenshot
-image::user_profile1.png[width="400"]
+image::ugu.png[width="450"]
 
 // end::me[]
-
-// tag::note[]
-// end::note[]
-
-// tag::done[]
-// end::done[]
 
 // tag::list[]
 === Listing all items : `list`
@@ -260,6 +251,11 @@ Lists all internship items.
 +
 image::ListAllInternships.png[width = "450"]
 
+* `list i/ note`
+Lists all note items.
++
+image::ListAllNotes.png[width = "450"]
+
 
 // end::list[]
 
@@ -279,13 +275,13 @@ The specific command syntax could be found in the table below:
 |Type |Format
 |Internship | `add i/ int n/ COMPANY_NAME r/ ROLE f/ FROM t/ TO d/ DESCRIPTION [#/ TAG]...`
 
-|Project |`add i/ proj n/ PROJECT_NAME t/ TIME w/ WEBSITE d/ DESCRIPTION [#/ TAG]....`
+|Project |`add i/ proj n/ PROJECT_NAME t/ TIME w/ WEBSITE d/ DESCRIPTION [#/ TAG]...`
 
-|Skill |`add i/ ski n/ SKILL_NAME l/ LEVEL [#/ TAG]....`
+|Skill |`add i/ ski n/ SKILL_NAME l/ LEVEL [#/ TAG]...`
 
 |Resume |`add i/ res n/ RESUME_NAME [#/ TAG]...`
 
-|Note |`add i/ note n/ NOTE_NAME t/ TIME`
+|Note |`add i/ note n/ NOTE_NAME t/ TIME [#/ TAG]...`
 |=======================================================================
 
 [NOTE]
@@ -332,13 +328,13 @@ Edits an existing item in the *ResuMe* application.
 |Type |Format
 |Internship |`edit INDEX i/ int [n/ COMPANY_NAME] [r/ ROLE] [f/ FROM] [t/ TO] [d/ DESCRIPTION] [#/ TAG]...`
 
-|Project |`edit INDEX i/ proj [n/ PROJECT_NAME] [t/ TIME] [w/ WEBSITE] [d/ DESCRIPTION] [#/ TAG]....`
+|Project |`edit INDEX i/ proj [n/ PROJECT_NAME] [t/ TIME] [w/ WEBSITE] [d/ DESCRIPTION] [#/ TAG]...`
 
-|Skill |`edit INDEX i/ ski [n/ SKILL_NAME] [l/ LEVEL] [#/ TAG]....`
+|Skill |`edit INDEX i/ ski [n/ SKILL_NAME] [l/ LEVEL] [#/ TAG]...`
 
 |Resume |`edit INDEX i/ res [n/ RESUME_NAME] [#/ TAG]...`
 
-|Note |`edit INDEX i/ note [n/ NOTE_NAME] [t/ TIME]`
+|Note |`edit INDEX i/ note [n/ NOTE_NAME] [t/ TIME] [#/ TAG]...`
 |=======================================================================
 
 
@@ -376,7 +372,7 @@ image::EditResumeExample.png[width="790"]
 
 === Finding items by name: `find`
 
-Finds items of a specific `type` in the *ResuMe* application whose names contain the specified keyword(s).
+Finds items of a specific `type` in the corresponding list of items whose names contain the specified keyword(s).
 
 ====
 *Format:* `find KEYWORD [MORE_KEYWORDS]... i/ TYPE`
@@ -401,17 +397,20 @@ The specific command syntax could be found in the table below:
 *Example:* Try typing in the command box these commands one by one!
 
 . `list i/ proj`
-. `add i/ proj n/ Duke t/ 06-2020 w/ abc.github.io d/ For a little module named CS2103T. #/ java #/ tech`
-. `find Duke i/ proj`
+. `find Orbital i/ proj`
 
 *Outcome*
 
-// TODO: add screenshot
-. All `project` items are listed in the list box.
-. A new `project` with the specified details is added.
+. All `project` items are listed in the list box. A sample project list is shown below.
++
+
+image::list-orbital.png[width="790"]
+
 . `Projects` whose names match keywords are listed in the list box.
 +
-image::find_command.png[width="790"]
+
+image::find-orbital.png[width="790"]
+
 // end::find[]
 
 // tag::delete[]
@@ -721,6 +720,33 @@ image::PdfFile.PNG[width="790"]
 
 // end::rgen[]
 
+// tag::note[]
+=== Mark a note as done: `done`
+Mark a `Note` at a specific index from the current note list as `done`.
+
+====
+*Format:* `done INDEX`
+====
+
+* A valid `INDEX` is a positive integer that identifies an existing `note`.
+
+*Example:* Let's try out the following commands!
+
+. `list i/ note`
+
+. `done 1`
+
+*Outcome:*
+
+. The first command lists out all `notes`. Assuming that you want to mark the first `note` in the list as `done`.
++
+image::ListAllNotes.png[width="790"]
+
+. The second command marks this `note` as done, by updating the tick box.
++
+image::note-done.png[width="790"]
+// end::note[]
+
 // tag::clear[]
 
 === Clearing all data: `clear`
@@ -733,19 +759,18 @@ Clears all data from *ResuMe*. Empties all data in the resume book, user informa
 [NOTE]
 This command can be undone.
 
-
-
 // end::clear[]
 
+// tag::exit[]
 
 === Exiting the program : `exit`
 
-Exits the program.
+Exits from *ResuMe*.
 
-// tag::exit[]
 ====
 *Format:* `exit`
 ====
+
 // end::exit[]
 
 === Saving the data
