@@ -391,8 +391,6 @@ Given below is an example usage scenario:
 Step 1. User launches the ResuMe application for the first time. The user profile data is not yet edited and will thus be
 initialized with the initial json data stored.
 
-image::user-default.png[]
-
 Step 2. User executes `me dp/ FILEPATH n/ NAME d/ DESCRIPTION p/ PHONE e/ EMAIL g/ GITHUB u/ UNIVERSITY m/ MAJOR f/ FROM t/ TO c/ CAP`
 so as to update the Person object currently stored in Model as well as Storage.
 
@@ -400,13 +398,11 @@ so as to update the Person object currently stored in Model as well as Storage.
 
 Step 3. The user profile panel will be updated accordingly.
 
-image::user.png[]
-
 *Note:* To set customised user picture, the file path of your display picture has to be absolute and from the root directory of your computer.
 
 Command sequence:
 
-1. User type `me [dp/FILEPATH] [n/NAME] ...` command in the command box.
+1. User type `me [dp/ FILEPATH] [n/ NAME] ...` command in the command box.
 2. Command is executed by Logic Manager.
 3. Command is parsed by `ResumeBookParser` which identifies what type of command it is. An `EditUserParser` is returned accordingly.
 4. `EditUserParser` extracts out different fields specified in the command based on their prefixes and returns an `EditUserCommand` with
@@ -472,7 +468,7 @@ support the user in his/her resume building and management.
 
 Given below is an example usage scenario:
 
-===== Scenario 1. Add a reminder note: `add i/note`
+===== Scenario 1. Add a reminder note: `add i/ note`
 Step 1. The user launches the ResuMe application. Data will be loaded from storage to fill the note list in model.
 
 Step 2. The user executes `add i/ note n/ NAME t/ TIME #/ TAG`. In `ResumeBook`, the note list is implemented as a `UniqueItemList`
@@ -482,7 +478,7 @@ note name and time. If a same note already exists, ResuMe throws a duplicate err
 
 Step 3. If no error is thrown, the note will be created, defaulted as `not done` and added to the current note list with according `Ui` update.
 
-===== Scenario 2. Edit an existing note: `edit i/note`
+===== Scenario 2. Edit an existing note: `edit i/ note`
 
 Step 1. Once data has been loaded from `storage` to `model`, the list of notes in the ResumeBook could either contain some
 notes, or is empty.
@@ -496,7 +492,7 @@ be edited becomes another similar note in the list, a duplicate item error will 
 
 Step 4. If no duplicate error is thrown, ResuMe will replace the note at this index with its edited version.
 
-The following activity diagram summarises this process when user executes `edit i/note` command:
+The following activity diagram summarises this process when user executes `edit i/ note` command:
 
 image::EditNoteCommandActivityDiagram.png[]
 
