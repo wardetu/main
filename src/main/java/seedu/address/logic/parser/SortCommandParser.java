@@ -87,8 +87,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
 
         default:
-            // Should not have reached here at all
-            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
+            throw new AssertionError("Able to reach unreachable statement");
         }
     }
 

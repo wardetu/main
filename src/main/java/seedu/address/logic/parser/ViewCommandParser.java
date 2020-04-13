@@ -52,8 +52,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         case ItemUtil.NOTE_ALIAS:
             return new ViewNoteCommand(index);
         default:
-            // Should not have reached here at all
-            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
+            throw new AssertionError("Able to reach unreachable statement");
         }
     }
 }
