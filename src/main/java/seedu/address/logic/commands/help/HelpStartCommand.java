@@ -11,9 +11,11 @@ import seedu.address.model.Model;
  */
 public class HelpStartCommand extends HelpCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-            + "Example: " + COMMAND_WORD + " start";
-
+    /**
+     * Opens a pop-up window with instructions for user on how to get started.
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} that describes changes made when command execute runs successfully.
+     */
     @Override
     public CommandResult execute(Model model) {
         return new HelpCommandResult("", SHOWING_HELP_MESSAGE, model.getDisplayType(), HELP_START);

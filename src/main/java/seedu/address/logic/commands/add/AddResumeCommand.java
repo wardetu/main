@@ -17,15 +17,16 @@ import seedu.address.model.item.Resume;
 public class AddResumeCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a resume to the address book.\n"
+            + "Format: "
             + COMMAND_WORD + " "
-            + PREFIX_ITEM + "TYPE "
-            + PREFIX_NAME + "NAME "
-            + "[" + PREFIX_TAG + "TAG]....\n"
+            + PREFIX_ITEM + " TYPE "
+            + PREFIX_NAME + " NAME "
+            + "[" + PREFIX_TAG + " TAG]....\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ITEM + "res "
-            + PREFIX_NAME + "Resume 1 "
-            + PREFIX_TAG + "frontend "
-            + PREFIX_TAG + "tech";
+            + PREFIX_ITEM + " res "
+            + PREFIX_NAME + " Resume 1 "
+            + PREFIX_TAG + " frontend "
+            + PREFIX_TAG + " tech";
 
     private final Resume toAdd;
 

@@ -12,9 +12,15 @@ import seedu.address.model.item.Resume;
  * Sorts Resume items in the resume book.
  */
 public class SortResumesCommand extends SortCommand {
+
     private final Comparator<Resume> sortComparator;
+    private final String sortOrder;
+    private final boolean reverse;
+
     public SortResumesCommand(String sortOrder, boolean reverse) {
-        Comparator<Resume> baseComparator = (res1, res2) -> res1.getName().compareTo(res2.getName());
+        this.sortOrder = sortOrder;
+        this.reverse = reverse;
+        Comparator<Resume> baseComparator = Comparator.comparing(Resume::getName);
         sortComparator = reverse ? baseComparator.reversed() : baseComparator;
     }
 
@@ -24,6 +30,15 @@ public class SortResumesCommand extends SortCommand {
         model.setResumeToDisplay();
         model.commitResumeBook();
 
-        return new SortCommandResult(String.format(MESSAGE_SUCCESS, "Resume"), model.getDisplayType());
+        return new SortCommandResult(
+                String.format(MESSAGE_SUCCESS, Resume.class.getSimpleName()), model.getDisplayType());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof SortResumesCommand
+                && sortOrder.equals(((SortResumesCommand) other).sortOrder)
+                && reverse == ((SortResumesCommand) other).reverse);
     }
 }

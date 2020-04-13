@@ -136,8 +136,6 @@ image::DeleteSequenceDiagram.png[]
 NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 // end::logic[]
 
-// end::logic[]
-
 // tag::model[]
 [[Design-Model]]
 === Model component
@@ -188,43 +186,55 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::redit[]
 === Resume Edit feature
-==== Proposed Implementation
-The Resume Edit feature or `redit` allows users to edit which `Item` belongs to the `Resume` (for example, adding a `Skill` item or removing an `Internship` item).
-It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`.
+The Resume Edit feature or `redit` allows user to modify the `Item` contents of a `Resume` (for example, adding a `Skill` item or removing an `Internship` item). It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`.
 
-The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`.
-Therefore, like any other `Command` classes, it will have an `execute` method.
+==== Current Implementation
+The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`. Therefore, like any other `Command` classes, it will have an `execute` method.
 
-===== Adding into the resume
-The following screenshot illustrates what happens when we use `redit` to add item into the resume. The numbers in the command represent the index of the item in the list. After the end of the command, the number of item in the resume would have increased.
+Given below is an example usage scenario and how the `redit` works at each step.
 
-image::ReditAddIntoResume.png[][AddIntoResume,442,337]
+Step 1. The user launches the application, and uses the `add` command to add several `Resume`, `Internship`, `Project`, and `Skill` items.
 
-For modifications and removal of item from the resume, all we have to do is to run the same command again, specifying which item we want to *retain* in the resume.
+Step 2. The user executes `redit 1 int/ 2` command to add the second `Internship` in the list of `Internship` items to the first `Resume` in the list of `Resume` items.
 
-===== Removing all from the resume
-The following sreenshot illustrates what happens if you want to remove all the items in the resume, starting from a an already-filled resume:
+Step 3. This calls `ResumeBookParser#parseCommand()`, which would create a new `ResumeEditCommandParser` object and call the `ResumeEditCommandParser#parse()` method.
 
-image::ReditRemoveEverything.png[][RemoveEverything,442,337]
+Step 4. A new `ResumeEditCommand` object is created. It contains the index of the `Resume` that is to be modified, and three `Optional<List<Integer>>` representing the indices of `Internship`, `Project` and `Skill` to be modified into the `Resume`. In this example, the `Project` and `Skill` indices are represented by empty `Optional` because the user did not specify any project or skill indices.
 
-===== Removing some from the resume
-And the following screenshot illustrates what happens if you want to remove some items:
+Step 5. The `ResumeEditCommand#execute()` method is called with the current `model`. A copy of the `Resume` is created and its content is set to refer to the internships, projects and skills specified by the user.
 
-image::ReditWantSomeThings.png[][WantSomeThings,442,337]
+Step 6. A new `ResumeEditCommandResult` object, which contains the edited copy of the `Resume`, is created and returned.
 
-===== Changing content using tags
-On top of these methods to change the content of the resume, `redit` can also make changes to the resume by making use of tags.
-Regardless of what the original content is, after running the command, the resume will then only have items with the desired tags.
+The following sequence diagram shows how `redit` works:
 
-An example is shown in the following screenshot:
+.Sequence diagram for ResumeEdit.
+image::ResumeEditSequenceDiagram.png[]
 
-image::ReditTags.png[][ReditWithTags,442,337]
+===== Representation of indices after parsing
 
+In Step 4. above, it is mentioned that `Optional<List<Integer>>` is used to represent the indices of `Internship`, `Project`, and `Skill` items. This section elaborates further on the representation.
+
+To explain the various representations, we will use the example of executing `redit 1 int/ 2 3 proj/`:
+
+* A non-empty `List<Integer>` wrapped with `Optional` is used to represent the indices when the user specifies both the item prefix and the item indices. In the above example, indices of `Internship` items will be represented by a `List<Integer>` of `2` and `3`, wrapped with `Optional`.
+* An empty `List<Integer>` wrapped with `Optional` is used to represent the indices when the user specifies the item prefix, but no item indices are given. In the above example, indices of `Project` items will be represented by an empty `List<Integer>` wrapped with `Optional`.
+* An empty `Optional` is used to represent the indices when the user does not specify the item prefix. In the above example, indices of `Skill` items will be represented with an empty `Optional`.
+
+The three representations are used because `redit` facilitates the following:
+
+* If the prefix and indices are both present, the resume will be modified to contain the items of that prefix at the specified indices. In the same example above, `Resume` at index 1 will be modified to contain `Internship` items at indices 2 and 3.
+* If the prefix is specified but no indices are present, the resume will be modified to remove all the items of that prefix. In the example above, `Resume` at index 1 will be modified to have all its `Project` items removed.
+* If the prefix is not specified, the resume will have the items of that prefix unmodified. In the example above, `Resume` at index 1 will not have its `Skill` items modified. If originally there were 4 `Skill` items, then after the command execution, it will still have 4 `Skill` items.
+
+The following activity diagram summarises the execution of `ResumeEditCommand`:
+
+.Activity Diagram for ResumeEdit.
+image::ResumeEditActivityDiagram.png[]
 ==== Design Considerations
 ===== Aspect: Whether `ResumeEditCommand` should extend `EditCommand`
-* ** Alternative 1 (current choice):** `ResumeEditCommand` does not extend `EditCommand`, but extends `Command`. This design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the resume such as its name, while `redit` is supposed to change the content that the resume holds.
+* ** Alternative 1 (current choice):** `ResumeEditCommand` does not extend `EditCommand`, but extends `Command`.
 
-** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Pricniple is observed.
+** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Principle is observed.
 ** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may be confusing to have both `redit` and `edit`.
 
 image::ResumeEditCommandAlt1.png[]
@@ -235,7 +245,75 @@ image::ResumeEditCommandAlt1.png[]
 ** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely.
 
 image::ResumeEditCommandAlt2.png[]
+
+****
+*Conclusion:* The first design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the resume such as its name, while `redit` is supposed to change the content that the resume holds.
+
+This also reduces bloating of code and increases the flexibility of `ResumeEditCommand` class if the behaviour of `redit` needs to be changed in the future.
+****
+===== Aspect: Representation of indices after parsing
+* **Alternative 1 (current choice):** Usage of `Optional<List<Integer>>`
+
+** Pros: The 3 different cases is naturally represented when `List<Integer>` is wrapped with `Optional`. Enhanced safety, reducing risk of `NullPointerException`.
+** Cons: More checks are required to ensure that the `Optional` is not empty before getting its value.
+
+* **Alternative 2:** Usage of `null` and `List<Integer>`
+
+** Pros: Implementation is much simpler, and code becomes much more concise.
+** Cons: High risk of getting a `NullPointerException` if `null` is not handled carefully.
+
+****
+*Conclusion:* We went with `Optional` as it is more expressive than using `null`. It has a clearer semantic when checking whether the value of `Optional` is empty or not than to check whether the variable is a `null` value.
+
+Additionally, using `Optional` provides much less risk to getting `NullPointerException`. The reduced risk allows the developers to potentially save some debugging time, and developers need not worry about handling the `NullPointerException`.
+****
 // end::redit[]
+
+// tag::tagpull[]
+=== Tag Pull feature
+The Tag Pull feature is similar to <<Resume Edit Feature, Resume Edit Feature>> in the sense that it modifies the content of the `Resume`. Unlike Resume Edit which modifies using item indices, the Tag Pull feature modifies the resume by _adding_ items with the specified tags on top of existing items in the `Resume`.
+
+==== Current Implementation
+The `tagpull` command is facilitated by `TagPullCommand`, which extends `Command`. Therefore, like any other `Command` classes, it will have an `execute` method.
+
+Given below is an example usage scenario and how the `tagpull` works at each step.
+
+Step 1. The user launches the application, and uses the `add` command to add several `Resume`, `Internship`, `Project`, and `Skill` items.
+
+Step 2. The user executes `tagpull 1 #/ tech` command to add all items that have been tagged with `tech` to the first `Resume` in the list of `Resume` items.
+
+Step 3. This calls `ResumeBookParser#parseCommand()`, which would create a new `TagPullCommandParser` object and call the `TagPullCommandParser#parse()` method.
+
+Step 4. A new `TagPullCommand` object is created. It contains the index of the `Resume` that is to be modified, and the tags of the items which the user wants to add. In this example, it will only have the `tech` tag.
+
+Step 5. The `TagPullCommand#execute()` method is called with the current `model`. A copy of the `Resume` is created and all the items with matching tags are retrieved from `model`. The content of the copied `Resume` is updated to now contain all the items with matching tags, on top of existing ones.
+
+Step 6. A new `TagPullCommand` object, which contains the edited copy of the `Resume`, is created and returned.
+
+The following sequence diagram shows how `tagpull` works:
+
+image::TagPullSequenceDiagram.png[]
+
+==== Design Considerations
+===== Aspect: Integrating Tag Pull to Resume Edit
+* **Alternative 1 (current choice):** Separating `redit` and `tagpull`
+
+** Pros: Separation of concerns. `redit` handles updates of `Resume` using indices and `tagpull` handles updates of `Resume` using tags.
+** Cons: There is some code duplication due to similarities in behaviour.
+
+* **Alternative 2:** Combine `redit` with `tagpull`, making use of `#/` as prefix for `redit` command
+
+** Pros: It may be intuitive for user to only have a single command that handles modification of `Resume`
+** Cons: The implementation of `redit` becomes much more complicated as various combinations of input has to be considered. For example, considerations of what the expected behaviour should be if indices and tags are given.
+
+****
+*Conclusion:* We decided to separate the two commands in order to have a simpler implementation of the commands. By separating the two, there is a separation of concerns and there is no need to consider the behaviour when both indices and tags are given as arguments.
+
+It may also save the user some confusion since the `redit` feature specifically handles only updates using indices while the `tagpull` feature handles only updates using tags.
+
+As we have separated the two commands, we can then also vary the behaviour of the two commands slightly. Instead of both commands modifying the `Resume`, we have implemented `redit` to _modify_ the `Resume` item, while `tagpull` _adds_ onto existing items in the `Resume`.
+****
+// end::tagpull[]
 
 // tag::command-classes[]
 === Implementation of `Command` classes
@@ -265,7 +343,7 @@ image::CommandClassDiagram.png[]
 The following is the activity diagram for execution of `AddResumeCommand` when the user adds a resume.
 
 .Activity diagram for execution of `AddResumeCommand`
-image::AddResumeCommandActivityDiagram.png[]
+image::AddResumeCommandActivityDiagram.png[width="450"]
 
 This leads to a cleaner execution method of each ABCItemCommand as each command class has a clear goal.
 
@@ -276,7 +354,7 @@ This leads to a cleaner execution method of each ABCItemCommand as each command 
 The following is the activity diagram for execution of `AddCommand` when the user adds a resume.
 
 .Activity diagram for execution of `AddCommand`
-image::AddCommandActivityDiagram.png[]
+image::AddCommandActivityDiagram.png[width="350"]
 
 Implementing `ABCCommand` this way forces execute to be switch-cased.
 Functionality of execute would vary depending on the item `Type`.

@@ -21,23 +21,24 @@ import seedu.address.model.item.Internship;
 public class AddInternshipCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an internship to the address book.\n"
+            + "Format: "
             + COMMAND_WORD + " "
-            + PREFIX_ITEM + "TYPE "
-            + PREFIX_NAME + "COMPANY NAME "
-            + PREFIX_ROLE + "ROLE "
-            + PREFIX_FROM + "FROM "
-            + PREFIX_TO + "TO "
-            + PREFIX_DESCRIPTION + "DESC "
-            + "[" + PREFIX_TAG + "TAG]....\n"
+            + PREFIX_ITEM + " TYPE "
+            + PREFIX_NAME + " COMPANY NAME "
+            + PREFIX_ROLE + " ROLE "
+            + PREFIX_FROM + " FROM "
+            + PREFIX_TO + " TO "
+            + PREFIX_DESCRIPTION + " DESC "
+            + "[" + PREFIX_TAG + " TAG]....\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ITEM + "int "
-            + PREFIX_NAME + "Google "
-            + PREFIX_ROLE + "Frontend Web Engineer "
-            + PREFIX_FROM + "06-2020 "
-            + PREFIX_TO + "12-2020 "
-            + PREFIX_DESCRIPTION + "I did work, made money. "
-            + PREFIX_TAG + "frontend "
-            + PREFIX_TAG + "tech";
+            + PREFIX_ITEM + " int "
+            + PREFIX_NAME + " Google "
+            + PREFIX_ROLE + " Frontend Web Engineer "
+            + PREFIX_FROM + " 06-2020 "
+            + PREFIX_TO + " 12-2020 "
+            + PREFIX_DESCRIPTION + " I did work, made money. "
+            + PREFIX_TAG + " frontend "
+            + PREFIX_TAG + " tech";
 
     public static final String MESSAGE_FROM_TO_MISORDER = "'from' cannot be later than 'to' field. ";
 

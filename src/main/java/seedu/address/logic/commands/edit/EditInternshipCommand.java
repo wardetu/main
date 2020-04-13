@@ -31,25 +31,25 @@ import seedu.address.model.tag.Tag;
 public class EditInternshipCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
-
+    public static final String MESSAGE_SAME_INTERNSHIP = "You are not making any changes to this internship.";
     public static final String MESSAGE_FROM_TO_MISORDER = "\'from\' cannot be later than \'to\' field. ";
 
-    private static final String FIELDS = "Examples: "
+    private static final String FIELDS = "Format: "
             + COMMAND_WORD + " "
             + PREFIX_ITEM + "int "
-            + "[" + PREFIX_NAME + "COMPANY NAME] "
-            + "[" + PREFIX_ROLE + "ROLE] "
-            + "[" + PREFIX_FROM + "FROM] "
-            + "[" + PREFIX_TO + "TO] "
-            + "[" + PREFIX_DESCRIPTION + "DESC] "
-            + "[" + PREFIX_TAG + "TAG]....\n";
+            + "[" + PREFIX_NAME + " COMPANY_NAME] "
+            + "[" + PREFIX_ROLE + " ROLE] "
+            + "[" + PREFIX_FROM + " FROM] "
+            + "[" + PREFIX_TO + " TO] "
+            + "[" + PREFIX_DESCRIPTION + " DESC] "
+            + "[" + PREFIX_TAG + " TAG]....\n";
     private static final String EXAMPLE = "Example: "
             + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + " int "
             + PREFIX_NAME + " Shopee "
             + PREFIX_FROM + " 05-2020 "
             + PREFIX_TO + " 08-2020 "
-            + PREFIX_ROLE + " Backend Engineer"
+            + PREFIX_ROLE + " Backend Engineer "
             + PREFIX_DESCRIPTION + " I did some work "
             + PREFIX_TAG + " backend ";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n"
@@ -78,6 +78,10 @@ public class EditInternshipCommand extends EditCommand {
         Internship toEdit = model.getInternshipByIndex(index);
 
         Internship editedInternship = createEditedInternship(toEdit, editInternshipDescriptor);
+
+        if (editedInternship.equals(toEdit)) {
+            throw new CommandException(MESSAGE_SAME_INTERNSHIP);
+        }
 
         if (editedInternship.getFrom().compareTo(editedInternship.getTo()) > 0) {
             throw new CommandException(MESSAGE_FROM_TO_MISORDER);

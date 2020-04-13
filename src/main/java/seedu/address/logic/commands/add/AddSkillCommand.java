@@ -18,17 +18,18 @@ import seedu.address.model.item.Skill;
 public class AddSkillCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a skill to the address book.\n"
+            + "Format: "
             + COMMAND_WORD + " "
-            + PREFIX_ITEM + "TYPE "
-            + PREFIX_NAME + "SKILL NAME "
-            + PREFIX_LEVEL + "LEVEL "
-            + "[" + PREFIX_TAG + "TAG]....\n"
+            + PREFIX_ITEM + " TYPE "
+            + PREFIX_NAME + " SKILL NAME "
+            + PREFIX_LEVEL + " LEVEL "
+            + "[" + PREFIX_TAG + " TAG]....\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ITEM + "ski "
-            + PREFIX_NAME + "Git and Github "
-            + PREFIX_LEVEL + "INTERMEDIATE "
-            + PREFIX_TAG + "VCS "
-            + PREFIX_TAG + "tech";
+            + PREFIX_ITEM + " ski "
+            + PREFIX_NAME + " Git and Github "
+            + PREFIX_LEVEL + " INTERMEDIATE "
+            + PREFIX_TAG + " VCS "
+            + PREFIX_TAG + " tech";
 
     private final Skill toAdd;
 

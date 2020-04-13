@@ -30,15 +30,16 @@ import seedu.address.model.tag.Tag;
 public class EditProjectCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_PROJECT_SUCCESS = "Edited Project: %1$s";
+    public static final String MESSAGE_SAME_PROJECT = "You are not making any changes to this project.";
 
-    private static final String FIELDS = COMMAND_WORD
+    private static final String FIELDS = "Format: " + COMMAND_WORD
             + " INDEX "
-            + PREFIX_ITEM + "proj "
-            + "[" + PREFIX_NAME + "PROJECT NAME] "
-            + "[" + PREFIX_WEBSITE + "WEBSITE] "
-            + "[" + PREFIX_TIME + "TIME] "
-            + "[" + PREFIX_DESCRIPTION + "DESC] "
-            + "[" + PREFIX_TAG + "TAG]....\n";
+            + PREFIX_ITEM + " proj "
+            + "[" + PREFIX_NAME + " PROJECT_NAME] "
+            + "[" + PREFIX_WEBSITE + " WEBSITE] "
+            + "[" + PREFIX_TIME + " TIME] "
+            + "[" + PREFIX_DESCRIPTION + " DESC] "
+            + "[" + PREFIX_TAG + " TAG]....\n";
     private static final String EXAMPLE = "Example: "
             + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + " proj "
@@ -46,7 +47,7 @@ public class EditProjectCommand extends EditCommand {
             + PREFIX_WEBSITE + " laundryboo.io "
             + PREFIX_TIME + " 02-2022 "
             + PREFIX_DESCRIPTION + " It washes things. "
-            + PREFIX_TAG + "clean\n";
+            + PREFIX_TAG + " clean\n";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + FIELDS + EXAMPLE;
 
     private EditProjectDescriptor editProjectDescriptor;
@@ -71,6 +72,10 @@ public class EditProjectCommand extends EditCommand {
         Project toEdit = model.getProjectByIndex(index);
 
         Project editedProject = createEditedProject(toEdit, editProjectDescriptor);
+
+        if (editedProject.equals(toEdit)) {
+            throw new CommandException(MESSAGE_SAME_PROJECT);
+        }
 
         try {
             model.setProject(toEdit, editedProject);

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root maxWidth="1450" minHeight="600" minWidth="1000" onCloseRequest="#handleExit" title="ResuMe" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="1000" onCloseRequest="#handleExit" title="ResuMe" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -34,9 +34,9 @@
         </MenuBar>
             <HBox fx:id="mainContainer" minWidth="700" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox fx:id="userExperiencePlaceholder" maxWidth="350.0" minWidth="330.0" styleClass="pane-with-border">
+                  <VBox fx:id="userExperiencePlaceholder" maxWidth="350.0" minWidth="330.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                      <children>
-                        <StackPane fx:id="profilePlaceholder" styleClass="pane-with-border" />
+                        <StackPane fx:id="profilePlaceholder" maxHeight="90.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
                         <StackPane fx:id="notePlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
@@ -51,7 +51,7 @@
                        <items>
                           <VBox fx:id="resultAndItem">
                              <children>
-                             <StackPane fx:id="resultDisplayPlaceholder" maxHeight="250.0" minWidth="300.0">
+                             <StackPane fx:id="resultDisplayPlaceholder" maxHeight="250.0" minWidth="300.0" VBox.vgrow="ALWAYS">
                              </StackPane>
                              <StackPane fx:id="itemDisplayPlaceholder" minWidth="300.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                                  <VBox.margin>

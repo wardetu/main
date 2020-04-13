@@ -23,318 +23,104 @@ import seedu.address.model.item.field.Level;
  */
 public class PdfBuilder {
 
-    private static final Color MAIN_COLOR = new Color(0, 0, 0);
-    private static final Color ACCENT_COLOR = new Color(153, 0, 51);
-    private static final int BODY_SIZE = 11;
-    private static final int HEADING_SIZE = 14;
-    private static final int TITLE_SIZE = 20;
+    private static final Color COLOR_ACCENT = new Color(153, 0, 51);
+    private static final Color COLOR_MAIN = new Color(0, 0, 0);
+
+    private static final float MARGIN_X = 64;
+    private static final float MARGIN_Y = 100;
+    private static final float START_X = PDRectangle.A4.getLowerLeftX();
+    private static final float START_Y = PDRectangle.A4.getLowerLeftY();
+    private static final float PAGE_HEIGHT = PDRectangle.A4.getHeight();
+    private static final float PAGE_WIDTH = PDRectangle.A4.getWidth();
+    private static final float LINE_LIMIT = PAGE_WIDTH - 2 * MARGIN_X;
+    private static final float SPACING = 20;
+
+    private static final int FONT_SIZE_BODY = 11;
+    private static final int FONT_SIZE_HEADING = 14;
+    private static final int FONT_SIZE_TITLE = 20;
+
     private static final PDFont FONT_BOLD = PDType1Font.HELVETICA_BOLD;
     private static final PDFont FONT_REGULAR = PDType1Font.HELVETICA;
     private static final PDFont FONT_OBLIQUE = PDType1Font.HELVETICA_OBLIQUE;
 
     private final PDDocument resume = new PDDocument();
-    private final int marginX = 64;
-    private final int marginY = 100;
-    private final float spacing = 20;
-    private final PDRectangle page = PDRectangle.A4;
-    private final float pageHeight = page.getHeight();
-    private final float pageWidth = page.getWidth();
 
-    private PDPageContentStream contentStream;
     private float curX;
     private float curY;
-    private PDFont curFont;
     private int curSize;
+    private PDFont curFont;
+    private PDPageContentStream contentStream;
 
-    //=========== Page set up ================================================================================
+    //=========== Public methods =============================================================================
 
     /**
-     * Adds a new page.
+     * Adds a new page to the .pdf file.
+     *
      * @throws IOException
      */
     public void addPage() throws IOException {
         PDPage blank = new PDPage();
         resume.addPage(blank);
         contentStream = new PDPageContentStream(resume, blank);
-        setFont(FONT_REGULAR, BODY_SIZE);
-        setColor(MAIN_COLOR);
-        contentStream.setLeading(spacing);
+        setFont(FONT_REGULAR, FONT_SIZE_BODY);
+        setColor(COLOR_MAIN);
+        contentStream.setLeading(SPACING);
         contentStream.beginText();
-        curX = page.getLowerLeftX();
-        curY = page.getLowerLeftY();;
-        contentStream.newLineAtOffset(resetX(), resetY());
+        curX = START_X;
+        curY = START_Y;
+        resetX();
+        resetY();
     }
 
     /**
-     * Ends the current page.
+     * Adds the user's name, bio, contact information and education to the .pdf file.
+     * @param user the user of the application.
      * @throws IOException
      */
-    public void endPage() throws IOException {
-        contentStream.endText();
-        contentStream.close();
-    }
-
-    public boolean isEndOfPage() {
-        return curY + spacing <= marginY;
+    public void addPersonalDetails(Person user) throws IOException {
+        addResumeTitle(user);
+        addBio(user);
+        addContact(user);
+        addEducation(user);
     }
 
     /**
-     * Moves cursor to the next line.
+     * Adds the user's internship experiences to the .pdf file.
+     * @param internshipsToAdd the list of {@code Internship} ids to be added to the .pdf file.
      * @throws IOException
      */
-    public void nextLine() throws IOException {
-        contentStream.newLine();
-        curY -= spacing;
-    }
-
-    /**
-     * Reset x alignment to left align.
-     * @return the value of x-coordinate offset.
-     * @throws IOException
-     */
-    public float resetX() {
-        float xOffSet = -curX + marginX;
-        curX += xOffSet;
-        return xOffSet;
-    }
-
-    /**
-     * Reset y alignment to left align.
-     * @return the value of y-coordinate offset.
-     * @throws IOException
-     */
-    public float resetY() {
-        float yOffSet = -curY + pageHeight - marginY - spacing;
-        curY += yOffSet;
-        return yOffSet;
-    }
-
-    /**
-     * Changes the alignment of the text to centre align.
-     * @param content content the text to be aligned
-     * @throws IOException
-     */
-    public void centerAlign(String content) throws IOException {
-        float stringWidth = curFont.getStringWidth(content) * curSize / 1000f;
-        float xOffSet = -curX + (pageWidth - stringWidth) / 2f;
-        contentStream.newLineAtOffset(xOffSet, 0);
-        curX += xOffSet;
-    }
-
-    public void setColor(Color color) throws IOException {
-        contentStream.setNonStrokingColor(color);
-    }
-
-    public void setFont(PDFont font, int size) throws IOException {
-        contentStream.setFont(font, size);
-        curFont = font;
-        curSize = size;
-    }
-
-    //=========== Add and format section content =============================================================
-
-    /**
-     * Formats and shows content that spans over multiple lines.
-     * @param content the content to be shown.
-     * @throws IOException
-     */
-    public void fitMultiLine(String content) throws IOException {
-        if (isEndOfPage()) {
-            endPage();
-            addPage();
-        }
-        float limit = page.getWidth() - 2 * marginX;
-        String[] words = content.split(" ");
-        int i = 0;
-        boolean isFirstLine = true;
-        while (i < words.length) {
-            String line = "";
-            float width = 0;
-            while (i < words.length) {
-                String word = words[i];
-                float add = curFont.getStringWidth(word + " ") * curSize / 1000f;
-                if (width + add > limit) {
-                    break;
-                }
-                width += add;
-                line += word + " ";
-                i++;
-            }
-            if (!isFirstLine) {
-                line = "  " + line;
-            }
-            contentStream.showText(line);
-            isFirstLine = false;
-            nextLine();
+    public void addInternships(List<Internship> internshipsToAdd) throws IOException {
+        addSectionTitle("INTERNSHIPS");
+        for (Internship internship: internshipsToAdd) {
+            addInternship(internship);
         }
     }
 
     /**
-     * Adds a new section title to the output Resume file.
-     * @param section name of the new section.
+     * Adds the user's projects to the .pdf file.
+     * @param projectsToAdd the list of {@code Project} ids to be added to the .pdf file.
      * @throws IOException
      */
-    public void addSectionTitle(String section) throws IOException {
-        if (isEndOfPage()) {
-            endPage();
-            addPage();
+    public void addProjects(List<Project> projectsToAdd) throws IOException {
+        addSectionTitle("PROJECTS");
+        for (Project project: projectsToAdd) {
+            addProject(project);
         }
-        setFont(FONT_BOLD, HEADING_SIZE);
-        setColor(ACCENT_COLOR);
-        contentStream.showText(section);
-        nextLine();
     }
 
     /**
-     * Adds title to a new item in the output Resume file
-     * @param title title of the item to be added
+     * Adds the user's skills to the .pdf file.
+     * @param skillsToAdd the list of {@code Skill} ids to be added to the .pdf file.
      * @throws IOException
      */
-    public void addItemTitle(String title) throws IOException {
-        if (isEndOfPage()) {
-            endPage();
-            addPage();
-        }
-        setColor(MAIN_COLOR);
-        setFont(FONT_BOLD, BODY_SIZE);
-        contentStream.showText(title);
-        nextLine();
-    }
+    public void addSkills(List<Skill> skillsToAdd) throws IOException {
+        addSectionTitle("SKILLS");
 
-    /**
-     * Adds description to a new item in the output Resume file
-     * @param description description of the item to be added
-     * @throws IOException
-     */
-    public void addDescription(String description) throws IOException {
-        setFont(FONT_REGULAR, BODY_SIZE);
-
-        String[] content = description.split("\\.");
-        for (String line: content) {
-            String point = "- " + line.trim() + ".";
-            fitMultiLine(point);
-        }
-        nextLine();
-    }
-
-    //=========== Add sections ================================================================================
-
-    /**
-     * Adds resume title to the resume.
-     * @param user user of the application.
-     * @throws IOException
-     */
-    public void addResumeTitle(Person user) throws IOException {
-        setFont(FONT_BOLD, TITLE_SIZE);
-        setColor(ACCENT_COLOR);
-        String name = user.getName().toString();
-        centerAlign(name);
-        contentStream.showText(name.toUpperCase());
-        contentStream.newLineAtOffset(resetX(), 0);
-        nextLine();
-    }
-
-    /**
-     * Adds user's bio to the resume
-     * @param user user of the application.
-     * @throws IOException
-     */
-    public void addBio(Person user) throws IOException {
-        setFont(FONT_OBLIQUE, HEADING_SIZE);
-        setColor(ACCENT_COLOR);
-        String bio = user.getDescription().toString();
-        centerAlign(bio);
-        contentStream.showText(bio);
-        contentStream.newLineAtOffset(resetX(), 0);
-        nextLine();
-    }
-
-    /**
-     * Adds user's contact to the resume.
-     * @param user user of the application.
-     * @throws IOException
-     */
-    public void addContact(Person user) throws IOException {
-        setFont(FONT_REGULAR, BODY_SIZE);
-        setColor(MAIN_COLOR);
-        String phone = user.getPhone().toString();
-        String email = user.getEmail().toString();
-        String git = user.getGithub().toString();
-        String contact = phone + "  |  " + email + "  |  " + git;
-        centerAlign(contact);
-        contentStream.showText(contact);
-        contentStream.newLineAtOffset(resetX(), 0);
-        nextLine();
-        nextLine();
-    }
-
-    /**
-     * Adds educational details of the user to the output Resume file.
-     * @param user user of the application.
-     * @throws IOException
-     */
-    public void addEducation(Person user) throws IOException {
-        String university = user.getUniversity().toString();
-        String from = user.getFrom().format();
-        String to = user.getTo().format();
-        String title = university + " | " + from + " - " + to;
-        addItemTitle(title);
-
-        setFont(FONT_REGULAR, BODY_SIZE);
-        setColor(MAIN_COLOR);
-        String major = "- " + user.getMajor();
-        contentStream.showText(major);
-        nextLine();
-        String cap = "- Cumulative Average Point: " + user.getCap().toString();
-        contentStream.showText(cap);
-        nextLine();
-        nextLine();
-    }
-
-    /**
-     * Adds a new {@code Internship} item to the output Resume file.
-     * @param internship {@code Internship} item to be added.
-     * @throws IOException
-     */
-    public void addInternship(Internship internship) throws IOException {
-        String name = internship.getName().toString();
-        String role = internship.getRole().toString();
-        String from = internship.getFrom().format();
-        String to = internship.getTo().format();
-        String title = name + " | " + role + " | " + from + " - " + to;
-        addItemTitle(title);
-
-        String description = internship.getDescription().toString();
-        addDescription(description);
-    }
-
-    /**
-     * Adds a new {@code Project} item to the output Resume file.
-     * @param project {@code Project} item to be added.
-     * @throws IOException
-     */
-    public void addProject(Project project) throws IOException {
-        String name = project.getName().toString();
-        String time = project.getTime().format();
-        String website = project.getWebsite().toString();
-        String title = name + " | " + time + " | " + website;
-        addItemTitle(title);
-
-        String description = project.getDescription().toString();
-        addDescription(description);
-    }
-
-    /**
-     * Adds {@code Skill} items to the output Resume file.
-     * @param skills {@code Skill} item to be added.
-     * @throws IOException
-     */
-    public void addSkills(List<Skill> skills) throws IOException {
         List<Skill> basic = new ArrayList<>();
         List<Skill> intermediate = new ArrayList<>();
         List<Skill> advanced = new ArrayList<>();
 
-        for (Skill skill: skills) {
+        for (Skill skill: skillsToAdd) {
             Level level = skill.getLevel();
             switch (level) {
             case BASIC:
@@ -347,50 +133,365 @@ public class PdfBuilder {
                 advanced.add(skill);
                 break;
             default:
-                //Should not reach here
+                assert false : "Able to reach unreachable statement";
             }
         }
 
         if (!advanced.isEmpty()) {
-            addLeveledSkills("Advanced: ", advanced);
+            showLeveledSkills("Advanced: ", advanced);
         }
         if (!intermediate.isEmpty()) {
-            addLeveledSkills("Intermediate: ", intermediate);
+            showLeveledSkills("Intermediate: ", intermediate);
         }
         if (!basic.isEmpty()) {
-            addLeveledSkills("Basic: ", basic);
+            showLeveledSkills("Basic: ", basic);
         }
     }
 
     /**
+     * Builds the completed resume file.
+     *
+     * @return the formatted {@code PDDocument} to be saved.
+     * @throws IOException
+     */
+    public PDDocument build() throws IOException {
+        contentStream.endText();
+        contentStream.close();
+        return this.resume;
+    }
+
+    //=========== Page set-up ================================================================================
+
+    /**
+     * Adds and moves to a new page if end-of-page is reached.
+     */
+    private void nextPageIfEndOfPage() throws IOException {
+        if (curY + SPACING <= MARGIN_Y) {
+            contentStream.endText();
+            contentStream.close();
+            addPage();
+        }
+    }
+
+    /**
+     * Changes the current color to the specified color.
+     *
+     * @param color the {@code Color} to be set.
+     * @throws IOException
+     */
+    private void setColor(Color color) throws IOException {
+        contentStream.setNonStrokingColor(color);
+    }
+
+    /**
+     * Changes the current font to the specified font.
+     *
+     * @param font the {@code PDType1Font} to be set.
+     * @param size the {@code int} font size to be set.
+     * @throws IOException
+     */
+    private void setFont(PDFont font, int size) throws IOException {
+        contentStream.setFont(font, size);
+        curFont = font;
+        curSize = size;
+    }
+
+    //=========== Page navigation ============================================================================
+
+    /**
+     * Moves the current pointer to the next line.
+     *
+     * @throws IOException
+     */
+    private void nextLine() throws IOException {
+        contentStream.newLine();
+        curY -= SPACING;
+    }
+
+    /**
+     * Resets the x-coordinate of the current pointer to the left of the page.
+     *
+     * @throws IOException
+     */
+    private void resetX() throws IOException {
+        float xOffSet = -curX + MARGIN_X;
+        contentStream.newLineAtOffset(xOffSet, 0);
+        curX += xOffSet;
+    }
+
+    /**
+     * Resets the y-coordinate of the current pointer to the bottom of the page.
+     *
+     * @throws IOException
+     */
+    private void resetY() throws IOException {
+        float yOffSet = -curY + PAGE_HEIGHT - MARGIN_Y - SPACING;
+        contentStream.newLineAtOffset(0, yOffSet);
+        curY += yOffSet;
+    }
+
+    //=========== Text formatting ============================================================================
+
+    /**
+     * Returns the width of a text in the current font and font size.
+     *
+     * @param content {@code String} content to be formatted.
+     * @return the width of the {@code String} content.
+     * @throws IOException
+     */
+    private float getStringWidth(String content) throws IOException {
+        return curFont.getStringWidth(content) * curSize / 1000f;
+    }
+
+    /**
+     * Center-aligns and shows content in the .pdf file.
+     *
+     * @param content {@code String} content to be center-aligned.
+     * @throws IOException
+     */
+    private void showTextCenter(String content) throws IOException {
+        float stringWidth = getStringWidth(content);
+        float xOffSet = -curX + (PAGE_WIDTH - stringWidth) / 2f;
+        contentStream.newLineAtOffset(xOffSet, 0);
+        curX += xOffSet;
+        contentStream.showText(content);
+        resetX();
+        nextLine();
+    }
+
+    /**
+     * Pads the item title with whitespaces such that the item name is left-aligned while its time is right-aligned.
+     * @param name {@code String} title of the item.
+     * @param time {@code String} time of the item.
+     * @return the padded {@code String} title line.
+     * @throws IOException
+     */
+    private String padTimeRightAlign(String name, String time) throws IOException {
+        String line = name;
+        String pad = " ";
+        float lineWidth = getStringWidth(name + time);
+        float padWidth = getStringWidth(pad);
+        while (true) {
+            if (lineWidth + padWidth > LINE_LIMIT) {
+                break;
+            }
+            line += pad;
+            lineWidth += padWidth;
+        }
+        return line + time;
+    }
+
+    /**
+     * Shows the next portion of that fit within a single line. Lines following the first line will be
+     * automatically indented.
+     *
+     * @param words the array of {@code String} words in the given text.
+     * @param position the starting position for the line in the given text.
+     * @param isFirstLine {@code boolean} value of whether the line is the first line.
+     * @return the starting position for the next line to be read.
+     * @throws IOException
+     */
+    private int showNextLine(String[] words, int position, boolean isFirstLine) throws IOException {
+        String line = "";
+        float lineWidth = 0;
+        if (!isFirstLine) {
+            lineWidth += getStringWidth(line += "  ");
+        }
+
+        while (position < words.length) {
+            String add = words[position] + " ";
+            float addWidth = getStringWidth(add);
+            if (lineWidth + addWidth > LINE_LIMIT) {
+                break;
+            }
+            line += add;
+            lineWidth += addWidth;
+            position += 1;
+        }
+        contentStream.showText(line);
+        nextLine();
+        return position;
+    }
+
+    /**
+     * Formats and shows content that spans over multiple lines in the .pdf file.
+     *
+     * @param content {@code String} content to be shown.
+     * @throws IOException
+     */
+    private void showTextMultiLine(String content) throws IOException {
+        nextPageIfEndOfPage();
+        String[] words = content.split(" ");
+        int position = 0;
+        position = showNextLine(words, position, true);
+        while (position < words.length) {
+            position = showNextLine(words, position, false);
+        }
+    }
+
+    //=========== Content formatting ==========================================================================
+
+    /**
+     * Adds title to the resume.
+     *
+     * @param user the user of the application.
+     * @throws IOException
+     */
+    private void addResumeTitle(Person user) throws IOException {
+        setFont(FONT_BOLD, FONT_SIZE_TITLE);
+        setColor(COLOR_ACCENT);
+        String name = user.getName().toString().toUpperCase();
+        showTextCenter(name);
+    }
+
+    /**
+     * Adds user's bio to the resume file.
+     *
+     * @param user user of the application.
+     * @throws IOException
+     */
+    private void addBio(Person user) throws IOException {
+        setFont(FONT_OBLIQUE, FONT_SIZE_HEADING);
+        setColor(COLOR_ACCENT);
+        String bio = user.getDescription().toString();
+        showTextCenter(bio);
+    }
+
+    /**
+     * Adds user's contact to the resume file.
+     *
+     * @param user user of the application.
+     * @throws IOException
+     */
+    private void addContact(Person user) throws IOException {
+        setFont(FONT_REGULAR, FONT_SIZE_BODY);
+        setColor(COLOR_MAIN);
+        String phone = user.getPhone().toString();
+        String email = user.getEmail().toString();
+        String git = user.getGithub().toString();
+        String contact = phone + "  |  " + email + "  |  " + git;
+        showTextCenter(contact);
+        nextLine();
+    }
+
+    /**
+     * Adds user's educational details to the resume file.
+     *
+     * @param user user of the application.
+     * @throws IOException
+     */
+    private void addEducation(Person user) throws IOException {
+        addSectionTitle("EDUCATION");
+
+        String name = user.getUniversity().toString();
+        String time = user.getFrom().format() + " - " + user.getTo().format();
+        addItemTitle(name, time);
+
+        setFont(FONT_REGULAR, FONT_SIZE_BODY);
+        setColor(COLOR_MAIN);
+        String major = "- " + user.getMajor();
+        contentStream.showText(major);
+        nextLine();
+        String cap = "- Cumulative Average Point: " + user.getCap().toString();
+        contentStream.showText(cap);
+        nextLine();
+        nextLine();
+    }
+
+    /**
+     * Adds an {@code Internship} to the resume file.
+     *
+     * @param internship {@code Internship} item to be added.
+     * @throws IOException
+     */
+    private void addInternship(Internship internship) throws IOException {
+        String name = internship.getName().toString() + " | " + internship.getRole().toString();
+        String time = internship.getFrom().format() + " - " + internship.getTo().format();
+        addItemTitle(name, time);
+
+        String description = internship.getDescription().toString();
+        addItemDescription(description);
+    }
+
+    /**
+     * Adds a {@code Project} to the resume file.
+     *
+     * @param project {@code Project} item to be added.
+     * @throws IOException
+     */
+    private void addProject(Project project) throws IOException {
+        String name = project.getName().toString() + " | " + project.getWebsite().toString();
+        String time = project.getTime().format();
+        addItemTitle(name, time);
+
+        String description = project.getDescription().toString();
+        addItemDescription(description);
+    }
+
+    /**
      * Formats and shows skills of a specific level.
+     *
      * @param level the level title to be shown.
      * @param skills list of skills with the specified level.
      * @throws IOException
      */
-    public void addLeveledSkills(String level, List<Skill> skills) throws IOException {
-        if (isEndOfPage()) {
-            endPage();
-            addPage();
-        }
-        setColor(MAIN_COLOR);
-        setFont(FONT_BOLD, BODY_SIZE);
+    private void showLeveledSkills(String level, List<Skill> skills) throws IOException {
+        nextPageIfEndOfPage();
+        setColor(COLOR_MAIN);
+        setFont(FONT_BOLD, FONT_SIZE_BODY);
         contentStream.showText(level);
         String line = skills.get(0).getName().toString();
         for (int i = 1; i < skills.size(); i++) {
             line += ", " + skills.get(i).getName().toString();
         }
-        setFont(FONT_REGULAR, BODY_SIZE);
-        fitMultiLine(line);
+        setFont(FONT_REGULAR, FONT_SIZE_BODY);
+        showTextMultiLine(line);
     }
 
     /**
-     * Builds the completed resume file.
-     * @return the formatted document to be saved.
+     * Adds a new section title to the resume file.
+     *
+     * @param section {@code String} title of the new section.
      * @throws IOException
      */
-    public PDDocument build() throws IOException {
-        endPage();
-        return this.resume;
+    private void addSectionTitle(String section) throws IOException {
+        nextPageIfEndOfPage();
+        setFont(FONT_BOLD, FONT_SIZE_HEADING);
+        setColor(COLOR_ACCENT);
+        contentStream.showText(section);
+        nextLine();
+    }
+
+    /**
+     * Adds title to a new item in the resume file.
+     *
+     * @param name {@code String} name of the item to be added.
+     * @param time {@code String} time of the item to be added.
+     * @throws IOException
+     */
+    private void addItemTitle(String name, String time) throws IOException {
+        nextPageIfEndOfPage();
+        setColor(COLOR_MAIN);
+        setFont(FONT_BOLD, FONT_SIZE_BODY);
+        String title = padTimeRightAlign(name, time);
+        contentStream.showText(title);
+        nextLine();
+    }
+
+    /**
+     * Adds description to a new item in the resume file.
+     *
+     * @param itemDescription {@code String} description of the item to be added.
+     * @throws IOException
+     */
+    private void addItemDescription(String itemDescription) throws IOException {
+        setFont(FONT_REGULAR, FONT_SIZE_BODY);
+        itemDescription = itemDescription.trim() + " ";
+        String[] content = itemDescription.split("\\. ");
+        for (String line: content) {
+            String point = "- " + line.trim() + ". ";
+            showTextMultiLine(point);
+        }
+        nextLine();
     }
 }

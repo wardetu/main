@@ -329,12 +329,13 @@
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
-    -fx-background-color:transparent !important;
+    -fx-background-color:transparent;
     -fx-padding: 0 0 0 0;
 }
 
 .scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
     -fx-shape: " ";
+    -fx-padding:0;
 }
 
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
@@ -430,14 +431,6 @@
 .scroll-pane {
     -fx-background: transparent !important;
     -fx-background-color: transparent !important;
-}
-
-.scroll-pane .corner {
-    -fx-background-color: black;
-}
-
-.scroll-bar .corner {
-    -fx-background-color: black;
 }
 
 .user {

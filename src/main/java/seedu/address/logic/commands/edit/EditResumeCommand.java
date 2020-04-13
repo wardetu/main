@@ -24,18 +24,20 @@ import seedu.address.model.tag.Tag;
 public class EditResumeCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_RESUME_SUCCESS = "Edited Resume: %1$s";
+    public static final String MESSAGE_SAME_RESUME = "You are not making any changes to this resume.";
 
-    private static final String FIELDS = COMMAND_WORD
+    private static final String FIELDS = "Format: " + COMMAND_WORD
             + " INDEX "
-            + PREFIX_ITEM + "res "
-            + "[" + PREFIX_NAME + "RESUME NAME] "
-            + "[" + PREFIX_TAG + "TAG]....\n";
+            + PREFIX_ITEM + " res "
+            + "[" + PREFIX_NAME + " RESUME_NAME] "
+            + "[" + PREFIX_TAG + " TAG]....\n";
     private static final String EXAMPLE = "Example: "
             + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + " res "
             + PREFIX_NAME + " Resume 1 "
             + PREFIX_TAG + " frontend ";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n" + FIELDS + EXAMPLE;
+
     private EditResumeDescriptor editResumeDescriptor;
     /**
      * @param index                of the resume in the filtered resume list to edit
@@ -57,6 +59,10 @@ public class EditResumeCommand extends EditCommand {
         Resume toEdit = model.getResumeByIndex(index);
 
         Resume editedResume = createEditedResume(toEdit, editResumeDescriptor);
+
+        if (editedResume.equals(toEdit)) {
+            throw new CommandException(MESSAGE_SAME_RESUME);
+        }
 
         try {
             model.setResume(toEdit, editedResume);

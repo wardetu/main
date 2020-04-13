@@ -77,6 +77,8 @@ include::../UserGuide.adoc[tag=rpreview]
 
 include::../UserGuide.adoc[tag=clear]
 
+include::../UserGuide.adoc[tag=summary]
+
 == Contributions to the Developer Guide
 
 |===
