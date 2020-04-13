@@ -506,16 +506,23 @@ If you find it a hassle to manually enter items into the `resume`, you can consi
   For example `proj/ 3 6`, will add `project` item of indices 3 and 6 to the `resume`.
 * You can remove all items of type `TYPE` by typing `TYPE/` without specifying any `ITEM_INDEX` after it.
 
-*Example 1:*
+*Example 1: Modifying all the items in the resume*
 
-`redit 1 int/ 1 proj/ 1 ski/ 1 2`
+Before you try this example, ensure you have added at least one `internship`, one `project`, and two `skill` items. You may verify for their presence by using the `list` command.
+
+. `list i/ res`
+. `redit 1 int/ 1 proj/ 1 ski/ 1 2`
 
 *Outcome:*
 
-The content of the `resume` at index 1 is modified. The `resume` now contains the `internship` item at index 1,
+. The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box.
+
+image::ReditListRes.png[List,442,337]
+
+. The second command modifies the `resume` at index 1, named "Winter 2019". The `resume` now contains the `internship` item at index 1,
 `project` item at index 1, and `skill` items at indices 1 and 2. The following screenshot illustrates what happens in the list box:
 
-image::ReditAddIntoResume.png[AddIntoResume,442,337]
+image::ReditAddIntoResume.png[]
 
 *Example 2:*
 
