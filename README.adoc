@@ -10,8 +10,12 @@ https://coveralls.io/github/AY1920S2-CS2103T-F10-1/main?branch=master[image:http
 It is easy to build, customise and export different resume versions using only Command Line Interface. If you are a busy student
 in need of a clean and functional resume, whether for an internship or a job position, *ResuMe* can deliver that in no time!
 
+ifdef::env-github[]
+image::docs/images/Ui.png[width="600"]
+endif::[]
+
 ifndef::env-github[]
-image::images/Ui.png[width="790"]
+image::images/Ui.png[width="600"]
 endif::[]
 
 == Site Map
