@@ -29,12 +29,14 @@ public class TagPullCommand extends Command {
     public static final String COMMAND_WORD = "tagpull";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Pulls all the items with the desired tag into the "
-            + "resume in the application with the specified index.\n"
+            + "resume in the application with the specified index. "
             + "Existing values will be added on top the new items to be added.\n"
-            + "Parameters: INDEX "
-            + "[#/ TAG]\n"
+            + "Format: " + COMMAND_WORD
+            + " INDEX "
+            + "[#/ TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TAG + " tech";
+            + PREFIX_TAG + " tech "
+            + PREFIX_TAG + " frontend";
 
     public static final String MESSAGE_SUCCESS = "Items pulled:\n%1$d internship(s), %2$d project(s), %3$d skill(s).";
 

@@ -25,8 +25,9 @@ public class ResumePreviewCommand extends Command {
     public static final String COMMAND_WORD = "rpreview";
     public static final String MESSAGE_SUCCESS = "Previewing resume at index %1$s successfully!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Previews the details of the resume identified "
-            + "by the index number used in the displayed resume list. "
-            + "Parameters: INDEX "
+            + "by the index number used in the displayed resume list. \n"
+            + "Format: " + COMMAND_WORD
+            + " INDEX \n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
     private Index index;
