@@ -1,5 +1,8 @@
 @startuml
 !include style.puml
+skinparam defaultFontSize 13
+skinparam nodesep 100
+skinparam ranksep 180
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -27,7 +30,7 @@ activate EditUserParser
 EditUserParser --> ResumeBookParser
 deactivate EditUserParser
 
-ResumeBookParser -> EditUserParser : parse("me n/Quoc Hung")
+ResumeBookParser -> EditUserParser : parse("n/Quoc Hung")
 activate EditUserParser
 
 create EditUserCommand
