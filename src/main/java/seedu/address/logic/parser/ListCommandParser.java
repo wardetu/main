@@ -11,7 +11,6 @@ import seedu.address.logic.commands.list.ListProjectCommand;
 import seedu.address.logic.commands.list.ListResumeCommand;
 import seedu.address.logic.commands.list.ListSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.item.Item;
 import seedu.address.model.util.ItemUtil;
 
 
