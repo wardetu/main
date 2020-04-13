@@ -406,7 +406,7 @@ image::user.png[]
 
 Command sequence:
 
-1. User type `me [dp/FILEPATH] [n/NAME] ...` command in the command box.
+1. User type `me [dp/ FILEPATH] [n/ NAME] ...` command in the command box.
 2. Command is executed by Logic Manager.
 3. Command is parsed by `ResumeBookParser` which identifies what type of command it is. An `EditUserParser` is returned accordingly.
 4. `EditUserParser` extracts out different fields specified in the command based on their prefixes and returns an `EditUserCommand` with
@@ -496,7 +496,7 @@ be edited becomes another similar note in the list, a duplicate item error will 
 
 Step 4. If no duplicate error is thrown, ResuMe will replace the note at this index with its edited version.
 
-The following activity diagram summarises this process when user executes `edit i/note` command:
+The following activity diagram summarises this process when user executes `edit i/ note` command:
 
 image::EditNoteCommandActivityDiagram.png[]
 
