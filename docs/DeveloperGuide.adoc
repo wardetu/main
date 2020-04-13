@@ -186,7 +186,7 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::redit[]
 === Resume Edit feature
-The Resume Edit feature or `redit` allows user to modify the `Item` contents of a `Resume` (for example, adding a `Skill` item or removing an `Internship` item). It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`.
+The Resume Edit feature or `redit` allows user to modify the `Item` contents of a `Resume` (for example, adding a `Skill` item or removing an `Internship` item). It is not to be confused with the `edit` command, which simply modifies the fields of an `Item` (such as name).
 
 ==== Current Implementation
 The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`. Therefore, like any other `Command` classes, it will have an `execute` method.
@@ -199,9 +199,9 @@ Step 2. The user executes `redit 1 int/ 2` command to add the second `Internship
 
 Step 3. This calls `ResumeBookParser#parseCommand()`, which would create a new `ResumeEditCommandParser` object and call the `ResumeEditCommandParser#parse()` method.
 
-Step 4. A new `ResumeEditCommand` object is created. It contains the index of the `Resume` that is to be modified, and three `Optional<List<Integer>>` representing the indices of `Internship`, `Project` and `Skill` to be modified into the `Resume`. In this example, the `Project` and `Skill` indices are represented by empty `Optional` because the user did not specify any project or skill indices.
+Step 4. A new `ResumeEditCommand` object is created. It contains the index of the `Resume` that is to be modified, and three `Optional<List<Integer>>` representing the indices of `Internship`, `Project` and `Skill` to be modified into the `Resume`. In this example, the `Project` and `Skill` indices are represented by empty `Optional` because the user did not specify any project or skill indices. (This will be further elaborated in the next section)
 
-Step 5. The `ResumeEditCommand#execute()` method is called with the current `model`. A copy of the `Resume` is created and its content is set to refer to the internships, projects and skills specified by the user.
+Step 5. The `ResumeEditCommand#execute()` method is called with the current `model`. A copy of the `Resume` is created and its content is set to refer to the `Internship`, `Project` and `Skill` items specified by the user.
 
 Step 6. A new `ResumeEditCommandResult` object, which contains the edited copy of the `Resume`, is created and returned.
 
@@ -234,27 +234,27 @@ image::ResumeEditActivityDiagram.png[]
 ===== Aspect: Whether `ResumeEditCommand` should extend `EditCommand`
 * ** Alternative 1 (current choice):** `ResumeEditCommand` does not extend `EditCommand`, but extends `Command`.
 
-** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Principle is observed.
-** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may be confusing to have both `redit` and `edit`.
+** Pros: Since `redit` modifies the content of the `Resume` and not the `Resume` details, this reduces the size of responsibility for `EditCommand`. Each command class now does one and only one thing so Single Responsibility Principle is observed.
+** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may also be confusing to have both `redit` and `edit`.
 
 image::ResumeEditCommandAlt1.png[]
 
 * ** Alternative 2:** `ResumeEditCommand` extends `EditCommand`
 
 ** Pros: Some methods in `EditCommand` may be able to inherited by `ResumeEditCommand`, reducing code duplication.
-** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely.
+** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely. If the intention of `EditCommand` is to change the `Item` _fields_ (such as name), and `ResumeEditCommand` only modifies the content of the `Resume` (without changing any _fields_), then this is also a violation of the Liskov Substitution Principle. 
 
 image::ResumeEditCommandAlt2.png[]
 
 ****
-*Conclusion:* The first design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the resume such as its name, while `redit` is supposed to change the content that the resume holds.
+*Conclusion:* The first design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the `Resume` such as its name, while `redit` is supposed to change the content that the `Resume` holds.
 
-This also reduces bloating of code and increases the flexibility of `ResumeEditCommand` class if the behaviour of `redit` needs to be changed in the future.
+This also reduces bloating of code and increases the flexibility of `ResumeEditCommand` class if the behaviour of `redit` needs to be changed or added on in the future.
 ****
 ===== Aspect: Representation of indices after parsing
 * **Alternative 1 (current choice):** Usage of `Optional<List<Integer>>`
 
-** Pros: The 3 different cases is naturally represented when `List<Integer>` is wrapped with `Optional`. Enhanced safety, reducing risk of `NullPointerException`.
+** Pros: The 3 different cases is naturally represented when `List<Integer>` is wrapped with `Optional`. There is also an enhanced safety, reducing risk of `NullPointerException`.
 ** Cons: More checks are required to ensure that the `Optional` is not empty before getting its value.
 
 * **Alternative 2:** Usage of `null` and `List<Integer>`
@@ -263,9 +263,9 @@ This also reduces bloating of code and increases the flexibility of `ResumeEditC
 ** Cons: High risk of getting a `NullPointerException` if `null` is not handled carefully.
 
 ****
-*Conclusion:* We went with `Optional` as it is more expressive than using `null`. It has a clearer semantic when checking whether the value of `Optional` is empty or not than to check whether the variable is a `null` value.
+*Conclusion:* We went with `Optional` as it is more expressive than using `null`: it has a clearer semantic when checking whether the value of `Optional` is empty or not than to check whether the variable is a `null` value.
 
-Additionally, using `Optional` provides much less risk to getting `NullPointerException`. The reduced risk allows the developers to potentially save some debugging time, and developers need not worry about handling the `NullPointerException`.
+Additionally, using `Optional` provides much less risk to getting `NullPointerException`. The reduced risk allows the developers to potentially save some debugging time, and developers worry less about handling the `NullPointerException`.
 ****
 // end::redit[]
 
