@@ -13,7 +13,6 @@ public abstract class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    // TODO: Double check if this command format is all right
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the item identified by the index number (must be a positive integer) used in the displayed "
             + "item list.\n"

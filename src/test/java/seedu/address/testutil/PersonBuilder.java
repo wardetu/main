@@ -151,7 +151,6 @@ public class PersonBuilder {
         return this;
     }
 
-    // TODO: Make use of Duong's CAP refactoring?
     /**
      * Sets the {@code cap} of the {@code Person} that we are building.
      */

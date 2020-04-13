@@ -31,7 +31,6 @@ public class Type {
         case ("proj"):
             return "Project";
         default:
-            // TODO: better error handling
             return "Not a valid type";
         }
     }

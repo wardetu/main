@@ -22,7 +22,6 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Edits a Skill Item in the resume book.
- * TODO: CONNECT LEVEL TO SKILL
  */
 public class EditSkillCommand extends EditCommand {
 
