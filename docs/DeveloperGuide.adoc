@@ -173,7 +173,7 @@ image::StorageClassDiagram.png[]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Resume Book data in json format and read it back.
+* can save the `ResumeBook` data in json format and read it back.
 
 [[Design-Commons]]
 === Common classes
@@ -633,7 +633,8 @@ Step 5. The user then decides to execute the command `list i/ res`. Commands tha
 
 image::UndoRedoState4.png[]
 
-Step 6. The user executes `clear`, which calls `Model#commitResumeBook()`. Since the `currentStatePointer` is not pointing at the end of the `resumeBookStateList`, all resume book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add i/ res ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `sort i/ ski order/ name`, which calls `Model#commitResumeBook()`. Since the `currentStatePointer` is not pointing at the end of the `resumeBookStateList`, all resume book states after the `currentStatePointer` will be purged.
+We designed it this way because it no longer makes sense to redo the `add i/ res ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoState5.png[]
 

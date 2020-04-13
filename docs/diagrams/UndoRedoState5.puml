@@ -3,12 +3,12 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 
-title After command "clear"
+title After command "sort i/ ski order/ name"
 
 package States <<rectangle>> {
     class State1 as "__rb0:ResumeBook__"
     class State2 as "__rb1:ResumeBook__"
-    class State3 as "__rb2:ResumeBook__"
+    class State3 as "__rb3:ResumeBook__"
 }
 
 State1 -[hidden]right-> State2

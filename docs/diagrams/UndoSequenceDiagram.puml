@@ -11,10 +11,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant ":VersionedResumeBook" as VersionedResumeBook MODEL_COLOR
 end box
-[-> LogicManager : execute(undo)
+[-> LogicManager : execute("undo")
 activate LogicManager
 
-LogicManager -> ResumeBookParser : parseCommand(undo)
+LogicManager -> ResumeBookParser : parseCommand("undo")
 activate ResumeBookParser
 
 create UndoCommand
@@ -37,6 +37,7 @@ Model -> VersionedResumeBook : undo()
 activate VersionedResumeBook
 
 VersionedResumeBook -> VersionedResumeBook :resetData(ReadOnlyResumeBook)
+VersionedResumeBook -> VersionedResumeBook :(String)
 VersionedResumeBook --> Model :
 deactivate VersionedResumeBook
 
