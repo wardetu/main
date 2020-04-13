@@ -89,8 +89,6 @@ include::../UserGuide.adoc[tag=me]
 
 {end of extract 1}
 
-include::../UserGuide.adoc[tag=note]
-
 {start of extract 2: find}
 
 include::../UserGuide.adoc[tag=find]

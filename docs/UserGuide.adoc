@@ -720,7 +720,7 @@ image::PdfFile.PNG[width="790"]
 
 // end::rgen[]
 
-// tag::note[]
+// tag::done[]
 === Mark a note as done: `done`
 Mark a `Note` at a specific index from the current note list as `done`.
 
@@ -745,7 +745,7 @@ image::ListAllNotes.png[width="790"]
 . The second command marks this `note` as done, by updating the tick box.
 +
 image::note-done.png[width="790"]
-// end::note[]
+// end::done[]
 
 // tag::clear[]
 
