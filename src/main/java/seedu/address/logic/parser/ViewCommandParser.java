@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.UNREACHABLE_STATEMENT_REACHED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 
 import seedu.address.commons.core.index.Index;
@@ -52,8 +53,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         case ItemUtil.NOTE_ALIAS:
             return new ViewNoteCommand(index);
         default:
-            // Should not have reached here at all
-            throw new ParseException(Item.MESSAGE_INVALID_ITEM_TYPE);
+            throw new AssertionError(UNREACHABLE_STATEMENT_REACHED);
         }
     }
 }
