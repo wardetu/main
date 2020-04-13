@@ -27,7 +27,7 @@ and considerations.
 Refer to the guide <<SettingUp#, here>>.
 
 == Design
-// tag::overall-architecture[]
+
 [[Design-Architecture]]
 === Architecture
 
@@ -66,6 +66,8 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[]
+
+// tag::overall-architecture[]
 
 [discrete]
 ==== How the architecture components interact with each other
