@@ -15,13 +15,13 @@ public class SortResumesCommand extends SortCommand {
 
     private final Comparator<Resume> sortComparator;
     private final String sortOrder;
-    private final boolean reverse;
+    private final boolean isReverse;
 
-    public SortResumesCommand(String sortOrder, boolean reverse) {
+    public SortResumesCommand(String sortOrder, boolean isReverse) {
         this.sortOrder = sortOrder;
-        this.reverse = reverse;
+        this.isReverse = isReverse;
         Comparator<Resume> baseComparator = Comparator.comparing(Resume::getName);
-        sortComparator = reverse ? baseComparator.reversed() : baseComparator;
+        sortComparator = isReverse ? baseComparator.reversed() : baseComparator;
     }
 
     @Override
@@ -39,6 +39,6 @@ public class SortResumesCommand extends SortCommand {
         return other == this
                 || (other instanceof SortResumesCommand
                 && sortOrder.equals(((SortResumesCommand) other).sortOrder)
-                && reverse == ((SortResumesCommand) other).reverse);
+                && isReverse == ((SortResumesCommand) other).isReverse);
     }
 }

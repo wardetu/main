@@ -27,7 +27,7 @@ and considerations.
 Refer to the guide <<SettingUp#, here>>.
 
 == Design
-// tag::overall-architecture[]
+
 [[Design-Architecture]]
 === Architecture
 
@@ -67,6 +67,8 @@ For example, the `Logic` component (see the class diagram given below) defines i
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[]
 
+// tag::overall-architecture[]
+
 [discrete]
 ==== How the architecture components interact with each other
 
@@ -78,7 +80,8 @@ image::ArchitectureSequenceDiagram.png[]
 The figure above explains quite clearly how the input of the user is passed into the system through `Ui` that calls
 `Logic` to make changes in the `Model` and saves to `Storage`. However, it may not be immediately clear how the `Ui` is
 then updated to give visual feedback to the User. The updating of the Ui is actually done through a combination
-of observables and data passing through `commandResult`. Head to <<UI component>> to read more.
+of observable items, lists, and updating of the Ui with data passed through `commandResult`.
+Head to <<UI component>> to read more.
 
 [discrete]
 ==== How the architecture components interact at start up
@@ -157,11 +160,6 @@ one for `Note` and one for `Internship`, `Project`, `Skill` and `Resume`.
 * has the UI bound to its observables so that the UI automatically updates when the data change.
 * does not depend on any of the other three components.
 
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `ResumeBook`, which `Item` can reference. This would allow `ResumeBook` to only require one `Tag` object per unique `Tag`, instead of each `Item` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:BetterModelClassDiagram.png[]
-
 // end::model[]
 
 [[Design-Storage]]
@@ -175,7 +173,7 @@ image::StorageClassDiagram.png[]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Resume Book data in json format and read it back.
+* can save the `ResumeBook` data in json format and read it back.
 
 [[Design-Commons]]
 === Common classes
@@ -188,7 +186,7 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::redit[]
 === Resume Edit feature
-The Resume Edit feature or `redit` allows user to modify the `Item` contents of a `Resume` (for example, adding a `Skill` item or removing an `Internship` item). It is not to be confused with the `edit` command, which simply modifies the fields of an `Item`.
+The Resume Edit feature or `redit` allows user to modify the <<content-item, content items>> of the `Resume` (for example, adding a `Skill` item or removing an `Internship` item). It is not to be confused with the `edit` command, which simply modifies the fields of an `Item` (such as name).
 
 ==== Current Implementation
 The `redit` command is facilitated by `ResumeEditCommand`, which extends `Command`. Therefore, like any other `Command` classes, it will have an `execute` method.
@@ -201,13 +199,13 @@ Step 2. The user executes `redit 1 int/ 2` command to add the second `Internship
 
 Step 3. This calls `ResumeBookParser#parseCommand()`, which would create a new `ResumeEditCommandParser` object and call the `ResumeEditCommandParser#parse()` method.
 
-Step 4. A new `ResumeEditCommand` object is created. It contains the index of the `Resume` that is to be modified, and three `Optional<List<Integer>>` representing the indices of `Internship`, `Project` and `Skill` to be modified into the `Resume`. In this example, the `Project` and `Skill` indices are represented by empty `Optional` because the user did not specify any project or skill indices.
+Step 4. A new `ResumeEditCommand` object is created. It contains the index of the `Resume` that is to be modified, and three `Optional<List<Integer>>` representing the indices of `Internship`, `Project` and `Skill` to be modified into the `Resume`. In this example, the `Project` and `Skill` indices are represented by empty `Optional` because the user did not specify any project or skill indices. (This will be further elaborated in the next section)
 
-Step 5. The `ResumeEditCommand#execute()` method is called with the current `model`. A copy of the `Resume` is created and its content is set to refer to the internships, projects and skills specified by the user.
+Step 5. The `ResumeEditCommand#execute()` method is called with the current `model`. A copy of the `Resume` is created and its content is set to refer to the `Internship`, `Project` and `Skill` items specified by the user.
 
 Step 6. A new `ResumeEditCommandResult` object, which contains the edited copy of the `Resume`, is created and returned.
 
-The following sequence diagram shows how `redit` works:
+The following sequence diagram shows the process of invokation for `redit`:
 
 .Sequence diagram for ResumeEdit.
 image::ResumeEditSequenceDiagram.png[]
@@ -224,7 +222,7 @@ To explain the various representations, we will use the example of executing `re
 
 The three representations are used because `redit` facilitates the following:
 
-* If the prefix and indices are both present, the resume will be modified to contain the items of that prefix at the specified indices. In the same example above, `Resume` at index 1 will be modified to contain `Internship` items at indices 2 and 3.
+* If the prefix and indices are both present, the resume will be modified to contain the content items of that prefix at the specified indices. In the same example above, `Resume` at index 1 will be modified to contain `Internship` items at indices 2 and 3.
 * If the prefix is specified but no indices are present, the resume will be modified to remove all the items of that prefix. In the example above, `Resume` at index 1 will be modified to have all its `Project` items removed.
 * If the prefix is not specified, the resume will have the items of that prefix unmodified. In the example above, `Resume` at index 1 will not have its `Skill` items modified. If originally there were 4 `Skill` items, then after the command execution, it will still have 4 `Skill` items.
 
@@ -236,27 +234,29 @@ image::ResumeEditActivityDiagram.png[]
 ===== Aspect: Whether `ResumeEditCommand` should extend `EditCommand`
 * ** Alternative 1 (current choice):** `ResumeEditCommand` does not extend `EditCommand`, but extends `Command`.
 
-** Pros: Reduce the size of responsibility for `EditResumeCommand`. Each command class now does one and only one thing so Single Responsibility Principle is observed.
-** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may be confusing to have both `redit` and `edit`.
+** Pros: Since `redit` modifies the content items of the `Resume` and not the `Resume` details, this reduces the size of responsibility for `EditCommand`. Each command class now does one and only one thing so Single Responsibility Principle is observed.
+** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may also be confusing to have both `redit` and `edit`.
 
+.ResumeEditCommand and EditCommand extends Command.
 image::ResumeEditCommandAlt1.png[]
 
 * ** Alternative 2:** `ResumeEditCommand` extends `EditCommand`
 
 ** Pros: Some methods in `EditCommand` may be able to inherited by `ResumeEditCommand`, reducing code duplication.
-** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely.
+** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely. If the intention of `EditCommand` is to change the `Item` _details_ (such as name), and `ResumeEditCommand` only modifies the content items of the `Resume` (without changing any _details_), then this is also a violation of the Liskov Substitution Principle.
 
+.ResumeEditCommand extends EditCommand.
 image::ResumeEditCommandAlt2.png[]
 
 ****
-*Conclusion:* The first design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the resume such as its name, while `redit` is supposed to change the content that the resume holds.
+*Conclusion:* The first design is chosen because `redit` is sufficiently different from `edit`. An `edit` command is intended to change the details of the `Resume`, such as its name, while `redit` is supposed to change the content items that the `Resume` holds.
 
-This also reduces bloating of code and increases the flexibility of `ResumeEditCommand` class if the behaviour of `redit` needs to be changed in the future.
+This also reduces bloating of code and increases the flexibility of `ResumeEditCommand` class if the behaviour of `redit` needs to be changed or added on in the future.
 ****
 ===== Aspect: Representation of indices after parsing
 * **Alternative 1 (current choice):** Usage of `Optional<List<Integer>>`
 
-** Pros: The 3 different cases is naturally represented when `List<Integer>` is wrapped with `Optional`. Enhanced safety, reducing risk of `NullPointerException`.
+** Pros: The 3 different cases is naturally represented when `List<Integer>` is wrapped with `Optional`. There is also an enhanced safety, reducing risk of `NullPointerException`.
 ** Cons: More checks are required to ensure that the `Optional` is not empty before getting its value.
 
 * **Alternative 2:** Usage of `null` and `List<Integer>`
@@ -265,15 +265,15 @@ This also reduces bloating of code and increases the flexibility of `ResumeEditC
 ** Cons: High risk of getting a `NullPointerException` if `null` is not handled carefully.
 
 ****
-*Conclusion:* We went with `Optional` as it is more expressive than using `null`. It has a clearer semantic when checking whether the value of `Optional` is empty or not than to check whether the variable is a `null` value.
+*Conclusion:* We went with `Optional` as it is more expressive than using `null`: it has a clearer semantic when checking whether the value of `Optional` is empty or not than to check whether the variable is a `null` value.
 
-Additionally, using `Optional` provides much less risk to getting `NullPointerException`. The reduced risk allows the developers to potentially save some debugging time, and developers need not worry about handling the `NullPointerException`.
+Additionally, using `Optional` provides much less risk to getting `NullPointerException`. The reduced risk allows the developers to potentially save some debugging time, and developers worry less about handling the `NullPointerException`.
 ****
 // end::redit[]
 
 // tag::tagpull[]
 === Tag Pull feature
-The Tag Pull feature is similar to <<Resume Edit Feature, Resume Edit Feature>> in the sense that it modifies the content of the `Resume`. Unlike Resume Edit which modifies using item indices, the Tag Pull feature modifies the resume by _adding_ items with the specified tags on top of existing items in the `Resume`.
+The Tag Pull feature is similar to <<Resume Edit Feature, Resume Edit Feature>> in the sense that it modifies the <<content-item, content items>> of the `Resume`. Unlike Resume Edit which modifies using the content item indices, the Tag Pull feature modifies the resume by _adding_ items with the specified tags on top of existing items in the `Resume`.
 
 ==== Current Implementation
 The `tagpull` command is facilitated by `TagPullCommand`, which extends `Command`. Therefore, like any other `Command` classes, it will have an `execute` method.
@@ -282,7 +282,7 @@ Given below is an example usage scenario and how the `tagpull` works at each ste
 
 Step 1. The user launches the application, and uses the `add` command to add several `Resume`, `Internship`, `Project`, and `Skill` items.
 
-Step 2. The user executes `tagpull 1 #/ tech` command to add all items that have been tagged with `tech` to the first `Resume` in the list of `Resume` items.
+Step 2. The user executes `tagpull 2 #/ tech` command to add all items that have been tagged with `tech` to the first `Resume` in the list of `Resume` items.
 
 Step 3. This calls `ResumeBookParser#parseCommand()`, which would create a new `TagPullCommandParser` object and call the `TagPullCommandParser#parse()` method.
 
@@ -292,10 +292,15 @@ Step 5. The `TagPullCommand#execute()` method is called with the current `model`
 
 Step 6. A new `TagPullCommand` object, which contains the edited copy of the `Resume`, is created and returned.
 
-The following sequence diagram shows how `tagpull` works:
+The following sequence diagram shows the process of invokation for `tagpull`:
 
+.Sequence Diagram for Tag Pull.
 image::TagPullSequenceDiagram.png[]
 
+The following activity diagram summarises the execution of `tagpull`:
+
+.Activity Diagram for Tag Pull.
+image::TagPullActivityDiagram.png[]
 ==== Design Considerations
 ===== Aspect: Integrating Tag Pull to Resume Edit
 * **Alternative 1 (current choice):** Separating `redit` and `tagpull`
@@ -306,14 +311,14 @@ image::TagPullSequenceDiagram.png[]
 * **Alternative 2:** Combine `redit` with `tagpull`, making use of `#/` as prefix for `redit` command
 
 ** Pros: It may be intuitive for user to only have a single command that handles modification of `Resume`
-** Cons: The implementation of `redit` becomes much more complicated as various combinations of input has to be considered. For example, considerations of what the expected behaviour should be if indices and tags are given.
+** Cons: The implementation of `redit` becomes much more complicated as various combinations of input has to be considered. For example, considerations of what the expected behaviour should be if both indices and tags are given as arguments.
 
 ****
 *Conclusion:* We decided to separate the two commands in order to have a simpler implementation of the commands. By separating the two, there is a separation of concerns and there is no need to consider the behaviour when both indices and tags are given as arguments.
 
 It may also save the user some confusion since the `redit` feature specifically handles only updates using indices while the `tagpull` feature handles only updates using tags.
 
-As we have separated the two commands, we can then also vary the behaviour of the two commands slightly. Instead of both commands modifying the `Resume`, we have implemented `redit` to _modify_ the `Resume` item, while `tagpull` _adds_ onto existing items in the `Resume`.
+As we have separated the two commands, we can then also vary the behaviour of the two commands slightly. We have implemented `redit` to be able to _modify_  (adding, changing, and removing) the `Resume` item, while `tagpull` modifies only by _adding_ onto existing content items in the `Resume`.
 ****
 // end::tagpull[]
 
@@ -576,7 +581,7 @@ Step 3. The application retrieves the correct `Resume` item and calls `toPreview
 
 The following activity diagram summarises what happens when a user executes `rpreview` command:
 
-image::ExportPreviewActivityDiagram.png[]
+image::ExportPreviewActivityDiagram.png[width="200"]
 
 
 ===== Design Considerations
@@ -635,7 +640,7 @@ items inside the `Resume`.
 
 The following activity diagram summarises what happens when a user executes `rgen` command:
 
-image::ExportActivityDiagram.png[]
+image::ExportActivityDiagram.png[, 250]
 
 Detailed steps are shown in the sequence diagram below:
 
@@ -665,7 +670,7 @@ extended features (e.g. allow user to choose from a variety of pre-defined resum
 //end::export[]
 
 // tag::undoredo[]
-=== [Proposed] Undo/Redo feature
+=== Undo/Redo feature
 ==== Implementation
 
 The undo/redo mechanism is facilitated by `VersionedResumeBook`.
@@ -681,21 +686,31 @@ These operations are exposed in the `Model` interface as `Model#commitResumeBook
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedResumeBook` will be initialized with the initial resume book state, and the `currentStatePointer` pointing to that single resume book state.
+Do note that all resume books begin with an empty string set for display type. Display type of a resume book lets it know
+what item list to show.
 
 image::UndoRedoState0.png[]
 
 Step 2. The user executes `delete 5 i/ res` command to delete the 5th resume in the resume book. The `delete` command calls `Model#commitResumeBook()`, causing the modified state of the resume book after the `delete 5 i/ res` command executes to be saved in the `resumeBookStateList`, and the `currentStatePointer` is shifted to the newly inserted resume book state.
+In addition, the display type of the current resume book will be set to resume.
 
 image::UndoRedoState1.png[]
 
-Step 3. The user executes `add i/ res n/ Summer Resume ...` to add a new resume. The `add` command also calls `Model#commitResumeBook()`, causing another modified resume book state to be saved into the `resumeBookStateList`.
+Step 3. The user executes `add i/ int n/ RESUME Internship ...` to add a new internship. The `add` command also calls `Model#commitResumeBook()`, causing another modified resume book state to be saved into the `resumeBookStateList`. This resume
+book has its display type set to `int` - which is an alias for internship.
 
 image::UndoRedoState2.png[]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitResumeBook()`, so the resume book state will not be saved into the `resumeBookStateList`.
 
-Step 4. The user now decides that adding the resume was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoResumeBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous resume book state, and restores the resume book to that state.
+Step 4. The user now decides that adding the internship was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoResumeBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous resume book state, and restores the resume book to that state.
+This resume book state, however, does not has the display type that we want. Thus, `VersionedResumeBook#setItemsToDisplay()` will be called to set the current resume book's
+display type to that of the resume book state one to the right of the `currentStatePointer` - which corresponds to the command that just has been undone.
+
+Note: `resumeBookStateList` stores resume book states as `ReadOnlyResumeBook`, thereby allowing these states to stay unmodified throughout
+their life cycle. Operations like `Model#commitResumeBook()`, `Model#undoResumeBook()`, and `VersionedResumeBook#setItemsToDisplay()` will not
+change any of these state at all. Immutable state like this is desirable because it gives rise to fewer bugs and fewer unexpected behaviours.
 
 image::UndoRedoState3.png[]
 
@@ -713,11 +728,15 @@ The `redo` command does the opposite -- it calls `Model#redoResumeBook()`, which
 [NOTE]
 If the `currentStatePointer` is at index `resumeBookStateList.size() - 1`, pointing to the latest resume book state, then there are no undone resume book states to restore. The `redo` command uses `Model#canRedoResumeBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list i/ res`. Commands that do not modify the resume book, such as `list`, will usually not call `Model#commitResumeBook()`, `Model#undoResumeBook()` or `Model#redoResumeBook()`. Thus, the `resumeBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list i/ ski`. Commands that do not modify the resume book, such as `list`, will usually not call `Model#commitResumeBook()`, `Model#undoResumeBook()` or `Model#redoResumeBook()`. Thus, the `resumeBookStateList` remains unchanged.
+
+Here we also see how the stored resume book states are immutable. `list i/ ski` causes the display type of the current resume book to switch to skill (whose alias is "ski"),
+while the resume book state pointed to by the `currentStatePointer` still maintains its display type (which is resume).
 
 image::UndoRedoState4.png[]
 
-Step 6. The user executes `clear`, which calls `Model#commitResumeBook()`. Since the `currentStatePointer` is not pointing at the end of the `resumeBookStateList`, all resume book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add i/ res ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `sort i/ ski order/ name`, which calls `Model#commitResumeBook()`. Since the `currentStatePointer` is not pointing at the end of the `resumeBookStateList`, all resume book states after the `currentStatePointer` will be purged.
+We designed it this way because it no longer makes sense to redo the `add i/ ski ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoState5.png[]
 
@@ -750,12 +769,34 @@ when it is executed; when an `undo` is performed, we pop the top of the `UndoSta
 resume book.
 ** Cons: Handling of the stacks can be confusing, especially since there are commands that make no change to the model and thus are not (and should not be) stored. `edit` and `delete` require
 the old-versioned item to be stored as well so that it can be restored while `add` does not, thereby affecting consistency.
+
+==== [Proposed] Improvements for Undo/Redo
+
+A new function can be added that allows users to navigate resume book states. This is very possible because we
+can already store all these states and can map them to keys easily. This new function can let
+user traverse between resumes without needing to undo or redo too many times.
+
+A better data structure - like a search tree - can be used in place of a list. If the above proposed
+change is taken into consideration, then it is desirable to improve search time for a resume book state, from
+worst case linear to worst case logarithmic.
+
 // end::undoredo[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
-_{Explain here how the data encryption feature will be implemented}_
+Data encryption can be implemented in the future versions.
+
+===== Aspect: How data encryption will be implemented
+
+* **Alternative 1**: Encrypt and store data locally.
+** Pros:  Easy to implement. There are many existing encryption libraries that can be used.
+** Cons:  Performance issues may arise because every call to save to storage requires encrypting a lot of data. Security threat
+is still present if we store the encryption key in the same machine.
+
+* **Alternative 2**: Store data outside the user's machine and issue them access token.
+** Pros: Data is not bound to one machine and can be restored if the user forgets their credentials. If a DBMS is used then there are additional benefits to storage functionality as well.
+** Cons: We need to generate access tokens and check them. We also need to change the current implementation to work with external storage.
 
 // end::dataencryption[]
 
@@ -792,17 +833,23 @@ Refer to the guide <<Testing#, here>>.
 Refer to the guide <<DevOps#, here>>.
 
 [appendix]
+// tag::product-scope[]
 == Product Scope
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* is a University student looking for internship or job
+* has a need to manage a significant number of personal experiences and resumes for different purposes
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: build and manage resumes faster than a typical mouse/GUI driven app
+
+// end::product-scope[]
+
+// tag::user-stories[]
 
 [appendix]
 == User Stories
@@ -843,7 +890,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 _'items' refers to a resume field of type personal details, project, education, skills, internship, and achievement._
 
-_{More to be added}_
+// end::user-stories[]
 
 [appendix]
 == Use Cases
@@ -922,21 +969,24 @@ Use case ends.
 _{More to be added}_
 
 [appendix]
+// tag::nfr[]
 == Non Functional Requirements
 
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
-.  Should work on both 32-bit and 64-bit environments.
-.  Should be able to support up to 1000 users without a noticeable sluggishness in performance for typical usage.
-.  Should be able to support at least 5 resumes per user, 20 items per resume, and 100 resume items in total.
-.  Data should be stored locally such that users can access them (either through the application or directly by access
+.  The system should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
+.  The system should work on both 32-bit and 64-bit environments.
+.  The system should be able to support at least 10 resumes per user, 20 items per resume, and 200 resume items in total.
+.  Data should be stored locally such that users can access them (either through the application or by directly accessing
 the data file) without any network connection.
-.  Should response within two seconds for a normal item query, and five seconds for a pdf generation request.
+.  The system should response within two seconds for a normal item query, and five seconds for a pdf generation request.
+.  The system should be usable by a novice who has never used a resume management application before.
 .  A user with some familiarity with Command Line Interface (CLI) should be able to accomplish most of the tasks faster
 using commands than using the mouse to navigate the Graphic User Interface (GUI).
-
-_{More to be added}_
+. The product is not required to handle the printing of resumes.
+// end::nfr[]
 
 [appendix]
+
+// tag::glossary[]
 == Glossary
 
 [[mainstream-os]] Mainstream OS::
@@ -945,6 +995,7 @@ Windows, Linux, Unix, OS-X
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
 
+// end::glossary[]
 [appendix]
 == Product Survey
 
@@ -962,6 +1013,7 @@ Cons:
 * ...
 * ...
 
+//tag::manual-testing[]
 [appendix]
 == Instructions for Manual Testing
 
@@ -976,7 +1028,15 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: You are supposed to see this GUI, with default values for user details, and two empty resumes, enter
+   `list i/ res` to check it out. The window size may not be optimum.
++
+.Initial view when jar file runs
+image::InitOpen.png[]
+
++
+.Expected view after running the command `list i/ res` to show all resumes
+image::InitListResumes.png[]
 
 . Saving window preferences
 
@@ -984,26 +1044,55 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+. Shutting down the program
 
-=== Deleting a person
+.. To exit the program, you can enter the command `exit` or click the red close button, don't worry
+all your data is already saved.
 
-. Deleting a person while all persons are listed
+=== Adding items
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+. Adding an internship.
+.. This test case assumes that the internship list is empty. It does not have to be, but there must not be a duplicate
+internship with the internship we're about to add.
+.. Test case *adding an internship*: `add i/ int n/ Google r/ Frontend Web Engineer f/ 06-2020 t/ 12-2020 d/ I did work, made money. #/ frontend #/ tech` +
+   Expected: An internship item is added to the list of internships and the list view changes to list of internships.
+Data box is filled with the data of the internship that you just added.
++
+image::AddingGoogleTest.png[]
+
+.. Test case *adding an duplicate internship* (do this after part b): `add i/ int n/ Google r/ Frontend Web Engineer f/ 06-2020 t/ 12-2020 d/ I did work, made money. #/ frontend #/ tech` +
+Expected: No internship is added is added. Error details shown in the status message. Status bar remains the same.
+
+.. Test case *adding an internship with compulsory parameters missing*: `add i/ int n/ Shopee f/ 06-2020 t/ 12-2020 d/ I did work, made money. #/ frontend #/tech` +
+Expected: No internship is added is added. Error details shown in the status message. Status bar remains the same.
+
+.. Other incorrect add internship commands to try: commands where other compulsory parameters such as `to`, `from`, and `description`
+are missing. +
    Expected: Similar to previous.
 
-_{ more test cases ... }_
+. Adding items of other types
+.. Simlar to adding internship above, please make sure that you follow our User Guide for the correct formatting of the
+commands if you are expecting a positive test case.
 
-=== Saving data
+=== Deleting items
 
-. Dealing with missing/corrupted data files
+. Deleting a skill.
+.. This test case assumes that there are skills already in the skill list. Run `list i/ ski` to check. If there aren't any
+skills (shown below), follow G.2 above to add some skills.
++
+image::ListSkillBeforeDelete.png[]
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+.. Test case *deleting an internship*: `delete 1 i/ ski` +
+   Expected: An skill item is deleted from the skills and the data box is filled with the data of the skill that
+you just deleted.
 
-_{ more test cases ... }_
+.. Test case *delete a skill with wrong index*: `delete 0 i/ ski` +
+Expected: No skill is deleted. Error details shown in the status message. Status bar remains the same.
+
+.. Other incorrect add skill commands to try: `delete 1 i/skill`, `delete -1 i/ski`, `delete abc i/ski`
+   Expected: Similar to previous.
+
+. Deleting items of other types
+.. Simlar to deleting skills above, please make sure that you follow our User Guide for the correct formatting of the
+commands if you are expecting a positive test case.
+//end::manual-testing[]

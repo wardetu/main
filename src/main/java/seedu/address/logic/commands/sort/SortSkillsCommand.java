@@ -15,16 +15,16 @@ public class SortSkillsCommand extends SortCommand {
 
     private final Comparator<Skill> sortComparator;
     private final String sortOrder;
-    private final boolean reverse;
+    private final boolean isReverse;
 
-    public SortSkillsCommand(String sortOrder, boolean reverse) {
+    public SortSkillsCommand(String sortOrder, boolean isReverse) {
         this.sortOrder = sortOrder;
-        this.reverse = reverse;
+        this.isReverse = isReverse;
         Comparator<Skill> baseComparator =
                 sortOrder.equalsIgnoreCase("name")
                         ? Comparator.comparing(Skill::getName)
                         : Comparator.comparing(Skill::getLevel);
-        sortComparator = reverse ? baseComparator.reversed() : baseComparator;
+        sortComparator = isReverse ? baseComparator.reversed() : baseComparator;
     }
 
     @Override
@@ -42,6 +42,6 @@ public class SortSkillsCommand extends SortCommand {
         return other == this
                 || (other instanceof SortSkillsCommand
                 && sortOrder.equals(((SortSkillsCommand) other).sortOrder)
-                && reverse == ((SortSkillsCommand) other).reverse);
+                && isReverse == ((SortSkillsCommand) other).isReverse);
     }
 }

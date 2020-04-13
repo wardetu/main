@@ -15,16 +15,16 @@ public class SortInternshipsCommand extends SortCommand {
 
     private final Comparator<Internship> sortComparator;
     private final String sortOrder;
-    private final boolean reverse;
+    private final boolean isReverse;
 
-    public SortInternshipsCommand(String sortOrder, boolean reverse) {
+    public SortInternshipsCommand(String sortOrder, boolean isReverse) {
         this.sortOrder = sortOrder;
-        this.reverse = reverse;
+        this.isReverse = isReverse;
         Comparator<Internship> baseComparator =
                 sortOrder.equalsIgnoreCase("name")
                         ? Comparator.comparing(Internship::getName)
                         : Comparator.comparing(Internship::getFrom);
-        sortComparator = reverse ? baseComparator.reversed() : baseComparator;
+        sortComparator = isReverse ? baseComparator.reversed() : baseComparator;
     }
 
     @Override
@@ -43,6 +43,6 @@ public class SortInternshipsCommand extends SortCommand {
         return other == this
                 || (other instanceof SortInternshipsCommand
                 && sortOrder.equals(((SortInternshipsCommand) other).sortOrder)
-                && reverse == ((SortInternshipsCommand) other).reverse);
+                && isReverse == ((SortInternshipsCommand) other).isReverse);
     }
 }

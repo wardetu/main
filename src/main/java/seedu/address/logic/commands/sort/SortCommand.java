@@ -20,6 +20,7 @@ public abstract class SortCommand extends Command {
             + "All items can be sorted by name using sort word \"name\", "
             + "Projects can be sorted by time using \"time\". \n"
             + "Internships can be sorted by start time using \"time\". \n"
+            + "Notes can be sorted by deadline using \"time\". \n"
             + "Skills can be sorted by level using \"level\". \n"
             + "Format: " + COMMAND_WORD + " "
             + PREFIX_ITEM + " TYPE "
