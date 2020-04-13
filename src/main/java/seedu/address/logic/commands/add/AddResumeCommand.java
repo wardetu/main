@@ -17,6 +17,7 @@ import seedu.address.model.item.Resume;
 public class AddResumeCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a resume to the address book.\n"
+            + "Format: "
             + COMMAND_WORD + " "
             + PREFIX_ITEM + " TYPE "
             + PREFIX_NAME + " NAME "

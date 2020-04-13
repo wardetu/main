@@ -18,6 +18,7 @@ import seedu.address.model.item.Note;
 public class AddNoteCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to your note list.\n"
+            + "Format: "
             + COMMAND_WORD + " "
             + PREFIX_ITEM + " TYPE "
             + PREFIX_NAME + " TITLE "

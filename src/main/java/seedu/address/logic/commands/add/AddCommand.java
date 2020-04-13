@@ -14,6 +14,7 @@ public abstract class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an Item to the resume book.\n"
+            + "Format: "
             + COMMAND_WORD + " "
             + PREFIX_ITEM + " TYPE "
             + PREFIX_NAME + " NAME "

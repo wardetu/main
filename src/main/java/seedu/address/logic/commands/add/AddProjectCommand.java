@@ -20,6 +20,7 @@ import seedu.address.model.item.Project;
 public class AddProjectCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an project to the address book.\n"
+            + "Format: "
             + COMMAND_WORD + " "
             + PREFIX_ITEM + " TYPE "
             + PREFIX_NAME + " PROJECT NAME "
