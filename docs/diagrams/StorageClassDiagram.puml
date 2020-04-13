@@ -20,16 +20,18 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonResumeBookStorage .up.|> ResumeBookStorage
 JsonResumeBookStorage .down.> JsonSerializableResumeBook
 
-JsonSerializableResumeBook .right.> JsonSerializablePerson
-JsonSerializableResumeBook .down.> JsonSerializableInternship
-JsonSerializableResumeBook .down.> JsonSerializableProject
-JsonSerializableResumeBook .down.> JsonSerializableResume
-JsonSerializableResumeBook .down.> JsonSerializableSkill
+JsonSerializableResumeBook .right.> JsonAdaptedPerson
+JsonSerializableResumeBook .down.> JsonAdaptedInternship
+JsonSerializableResumeBook .down.> JsonAdaptedProject
+JsonSerializableResumeBook .down.> JsonAdaptedResume
+JsonSerializableResumeBook .down.> JsonAdaptedSkill
+JsonSerializableResumeBook .down.> JsonAdaptedNote
 
-JsonSerializableInternship .down.> JsonAdaptedTag
-JsonSerializableProject .down.> JsonAdaptedTag
-JsonSerializableResume .down.> JsonAdaptedTag
-JsonSerializableSkill .down.> JsonAdaptedTag
+JsonAdaptedInternship .down.> JsonAdaptedTag
+JsonAdaptedProject .down.> JsonAdaptedTag
+JsonAdaptedResume .down.> JsonAdaptedTag
+JsonAdaptedSkill .down.> JsonAdaptedTag
+JsonAdaptedNote .down.> JsonAdaptedTag
 
 @enduml
 
