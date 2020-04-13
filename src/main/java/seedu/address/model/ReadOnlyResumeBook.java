@@ -36,6 +36,11 @@ public interface ReadOnlyResumeBook {
     ObservableList<Item> getItemToDisplayList();
 
     /**
+     * Returns the display type in String form of the current display list in the list box
+     */
+    String getDisplayType();
+
+    /**
      * Returns an unmodifiable view of the current notes list as an {@code ObservableList}
      * This list will not contain any duplicate items.
      */
