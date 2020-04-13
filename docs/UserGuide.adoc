@@ -528,7 +528,7 @@ image::ReditAddIntoResume.png[AddIntoResume,442,337]
 
 *Example 2: Modifying the contents of the resume*
 
-Following from the previous example, you realise that you actually wanted to use a different set of items for your "Winter 2019" `resume`. Here is how you can rectify this!
+Following from example 1, you realise that you actually wanted to use a different set of items for your "Winter 2019" `resume`. Here is how you can rectify this!
 
 Before you try this example, ensure you have added at least one `internship` and three `skill` items. You may verify for their presence by using the `list` command.
 
@@ -547,19 +547,29 @@ no `project` items, and `skill` item at index 3. The following screenshot illust
 +
 image::ReditWantSomeThings.png[WantSomeThings,442,337]
 
-You can think of this command as "retaining" only the items that has been specified in the command. In this example, we no longer want the items we have previously added, and we would like the "Winter 2019" `resume` to contain only the first internship item and the third skill item.
+You can think of this command as using only the items that has been specified in the command. In this example, we no longer want the items we have previously added, and we would like the "Winter 2019" `resume` to contain only the first internship item and the third skill item.
 
-*Example 3:*
+*Example 3: No modifications to `internship` and `skill` items*
 
-`redit 1 int/ proj/ ski/`
+Following from example 2, you are now satisfied with the `internship` and `skill` items, but you would like to add a `project` item without changing the `internship` and `skill` items. Here is how you can do it!
+
+Before you try out this example, ensure you have at least two `project` items. 
+
+Type in these commands:
+. `list i/ res`
+. `redit 1 proj/ 2`
 
 *Outcome:*
 
-The content of the `resume` at index 1 is modified and now contains no `internship`, `project` or `skill` items.
-The following screenshot illustrates what happens to the list box:
+. The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box. Since we are following from example 2, the "Winter 2019" `resume` would already have some items in it.
++
+image::ReditListRes3.png[List,442,337]
 
-image::ReditRemoveEverything.png[RemoveEverything,442,337]
+. Before the second command, the `resume` contains the same set of items as the one in example 2. The command modifies the `resume` at index 1, named "Winter 2019". The `resume` will now contain the the `project` item at index 2. The `internship` and `skill` items remain unchanged. The following screenshot illustrates what happens after this command:
++
+image::ReditKeepSomeThings.png[KeepSomeThings,442,337]
 
+So by leaving out one of the prefixes (`TYPE/ ITEM_INDEX...`) from the command, you can keep some of the items in your `resume`!
 
 
 // end::redit[]
