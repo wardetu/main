@@ -542,8 +542,7 @@ Type in these commands:
 +
 image::ReditListRes2.png[List,442,337]
 
-. Before the second command, the `resume` contains the same set of items as the one in example 1. The command modifies the `resume` at index 1, named "Winter 2019". The `resume` now still contains the `internship` item at index 1,
-no `project` items, and `skill` item at index 3. The following screenshot illustrates what happens after this command:
+. Before the second command, the `resume` contains the same set of items as the one in example 1. The command modifies the `resume` at index 1, named "Winter 2019". The `resume` now still contains the `internship` item at index 1, no `project` items, and `skill` item at index 3. The following screenshot illustrates what happens after this command:
 +
 image::ReditWantSomeThings.png[WantSomeThings,442,337]
 
@@ -553,7 +552,7 @@ You can think of this command as using only the items that has been specified in
 
 Following from example 2, you are now satisfied with the `internship` and `skill` items, but you would like to add a `project` item without changing the `internship` and `skill` items. Here is how you can do it!
 
-Before you try out this example, ensure you have at least two `project` items. 
+Before you try out this example, ensure you have at least two `project` items.
 
 Type in these commands:
 . `list i/ res`
