@@ -629,7 +629,7 @@ Try typing in these commands:
 
 *Outcome:*
 
-. The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box.
+. The first command lists out all `resume` items. Assuming you want to modify the contents of the first `resume` in the list box.
 +
 .List of all resume items
 image::ReditListRes.png[width = "790"]
@@ -653,7 +653,7 @@ Try typing in these commands:
 
 *Outcome:*
 
-. The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box. Since we are following from example 1, the "Winter 2019" `resume` would already have some items in it.
+. The first command lists out all `resume` items. Assuming you want to modify the contents of the first `resume` in the list box. Since we are following from example 1, the "Winter 2019" `resume` would already have some items in it.
 +
 .List of all resume items
 image::ReditListRes2.png[width = "790"]
@@ -678,7 +678,7 @@ Try typing in these commands:
 
 *Outcome:*
 
-. The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box. Since we are following from example 2, the "Winter 2019" `resume` would already have some items in it.
+. The first command lists out all `resume` items. Assuming you want to modify the contents of the first `resume` in the list box. Since we are following from example 2, the "Winter 2019" `resume` would already have some items in it.
 +
 .List of all resume items
 image::ReditListRes3.png[width = "790"]
@@ -748,7 +748,7 @@ image::ReditListRes.png[width = "790"]
 
 . The second command pulls all items which has "SE" _or_ "github" as the tag into the `resume` at index 1, named "Winter 2019". The following screenshot illustrates the outcome of the command if we have 1 `internship` item and 2 `project` items tagged with "SE", and 1 `skill` item tagged with "github".
 +
-.Resume content after `tagpull`
+.Resume content after tagpull
 image::TagPullMultiTags.png[width = "790"]
 
 // end::tagpull[]
