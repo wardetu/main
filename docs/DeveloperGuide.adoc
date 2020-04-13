@@ -80,7 +80,8 @@ image::ArchitectureSequenceDiagram.png[]
 The figure above explains quite clearly how the input of the user is passed into the system through `Ui` that calls
 `Logic` to make changes in the `Model` and saves to `Storage`. However, it may not be immediately clear how the `Ui` is
 then updated to give visual feedback to the User. The updating of the Ui is actually done through a combination
-of observables and data passing through `commandResult`. Head to <<UI component>> to read more.
+of observable items, lists, and updating of the Ui with data passed through `commandResult`.
+Head to <<UI component>> to read more.
 
 [discrete]
 ==== How the architecture components interact at start up
