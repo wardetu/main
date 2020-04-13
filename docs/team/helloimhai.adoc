@@ -69,15 +69,25 @@ https://github.com/AY1920S2-CS2103T-F10-1/main/pull/148[#148] and more)
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+{Start of extract 1: Introduction}
 include::../UserGuide.adoc[tag=intro-para]
+{End of extract 1: Introduction}
 
+{Start of extract 2: List Command}
 include::../UserGuide.adoc[tag=list]
+{End of extract 2: List Command}
 
+{Start of extract 3: Resume Preview Command}
 include::../UserGuide.adoc[tag=rpreview]
+{End of extract 3: Resume Preview Command}
 
+{Start of extract 4: Clear Command}
 include::../UserGuide.adoc[tag=clear]
+{Start of extract 4: Clear Command}
 
+{Start of extract 5: Command Summary}
 include::../UserGuide.adoc[tag=summary]
+{End of extract 5: Command Summary}
 
 == Contributions to the Developer Guide
 
@@ -85,7 +95,19 @@ include::../UserGuide.adoc[tag=summary]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+{Start of extract 1: Overall Architecture}
 include::../DeveloperGuide.adoc[tag=overall-architecture]
+{End of extract 1: Overall Architecture}
 
+{Start of extract 2: Implementation of Command Classes}
 include::../DeveloperGuide.adoc[tag=command-classes]
+{End of extract 2: Implementation of Command Classes}
+
+{Start of extract 3: User Stories}
+include::../DeveloperGuide.adoc[tag=user-stories]
+{End of extract 3: User Stories}
+
+{Start of extract 3: User Stories}
+include::../DeveloperGuide.adoc[tag=manual-testing]
+{End of extract 3: User Stories}
 

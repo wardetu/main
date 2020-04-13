@@ -807,6 +807,7 @@ Refer to the guide <<DevOps#, here>>.
 
 *Value proposition*: build and manage resumes faster than a typical mouse/GUI driven app
 
+// tag::user-stories[]
 [appendix]
 == User Stories
 
@@ -846,7 +847,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 _'items' refers to a resume field of type personal details, project, education, skills, internship, and achievement._
 
-_{More to be added}_
+// end::user-stories[]
 
 [appendix]
 == Use Cases
@@ -965,6 +966,7 @@ Cons:
 * ...
 * ...
 
+//tag::manual-testing[]
 [appendix]
 == Instructions for Manual Testing
 
@@ -1046,4 +1048,4 @@ Expected: No skill is deleted. Error details shown in the status message. Status
 . Deleting items of other types
 .. Simlar to deleting skills above, please make sure that you follow our User Guide for the correct formatting of the
 commands if you are expecting a positive test case.
-
+//end::manual-testing[]
