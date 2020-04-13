@@ -13,7 +13,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/AY1920S2-CS2103T-F10-1/main
+:repoURL: https://github.com/AY1920S2-CS2103T-F10-1/main/blob/master
 
 By: `CS2103T F10-1`      Since: `Feb 2020`      Licence: `MIT`
 
@@ -160,6 +160,7 @@ one for `Note` and one for `Internship`, `Project`, `Skill` and `Resume`.
 
 // end::model[]
 
+// tag::storage[]
 [[Design-Storage]]
 === Storage component
 
@@ -168,10 +169,13 @@ image::StorageClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
+
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the `ResumeBook` data in json format and read it back.
+
+// end::storage[]
 
 [[Design-Commons]]
 === Common classes
@@ -409,6 +413,8 @@ not likely to manifest considering the usage scenarios for our application (offl
 
 We would, however, make it a priority to change the implementation to Alternative 1, since we want to scale up
 our application and it is not recommendable to build it on top of something that is no longer supported.
+
+// end::observableuser[]
 
 // tag::me[]
 === Me feature
