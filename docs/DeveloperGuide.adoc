@@ -1020,7 +1020,7 @@ Expected: No internship is added is added. Error details shown in the status mes
 Expected: No internship is added is added. Error details shown in the status message. Status bar remains the same.
 
 .. Other incorrect add internship commands to try: commands where other compulsory parameters such as `to`, `from`, and `description`
-are missing _{give more}_ +
+are missing. +
    Expected: Similar to previous.
 
 . Adding items of other types
