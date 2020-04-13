@@ -205,7 +205,7 @@ Step 5. The `ResumeEditCommand#execute()` method is called with the current `mod
 
 Step 6. A new `ResumeEditCommandResult` object, which contains the edited copy of the `Resume`, is created and returned.
 
-The following sequence diagram shows how `redit` works:
+The following sequence diagram shows the process of invokation for `redit`:
 
 .Sequence diagram for ResumeEdit.
 image::ResumeEditSequenceDiagram.png[]
@@ -237,6 +237,7 @@ image::ResumeEditActivityDiagram.png[]
 ** Pros: Since `redit` modifies the content items of the `Resume` and not the `Resume` details, this reduces the size of responsibility for `EditCommand`. Each command class now does one and only one thing so Single Responsibility Principle is observed.
 ** Cons: Unable to exploit polymorphism if there is similarity with the `EditCommand`. From user's point-of-view, it may also be confusing to have both `redit` and `edit`.
 
+.ResumeEditCommand and EditCommand extends Command.
 image::ResumeEditCommandAlt1.png[]
 
 * ** Alternative 2:** `ResumeEditCommand` extends `EditCommand`
@@ -244,6 +245,7 @@ image::ResumeEditCommandAlt1.png[]
 ** Pros: Some methods in `EditCommand` may be able to inherited by `ResumeEditCommand`, reducing code duplication.
 ** Cons: If the functionality of `ResumeEditCommand` is limited, it could have been combined with `EditCommand` entirely. If the intention of `EditCommand` is to change the `Item` _details_ (such as name), and `ResumeEditCommand` only modifies the content items of the `Resume` (without changing any _details_), then this is also a violation of the Liskov Substitution Principle.
 
+.ResumeEditCommand extends EditCommand.
 image::ResumeEditCommandAlt2.png[]
 
 ****
@@ -290,10 +292,15 @@ Step 5. The `TagPullCommand#execute()` method is called with the current `model`
 
 Step 6. A new `TagPullCommand` object, which contains the edited copy of the `Resume`, is created and returned.
 
-The following sequence diagram shows how `tagpull` works:
+The following sequence diagram shows the process of invokation for `tagpull`:
 
+.Sequence Diagram for Tag Pull.
 image::TagPullSequenceDiagram.png[]
 
+The following activity diagram summarises the execution of `tagpull`:
+
+.Activity Diagram for Tag Pull.
+image::TagPullActivityDiagram.png[]
 ==== Design Considerations
 ===== Aspect: Integrating Tag Pull to Resume Edit
 * **Alternative 1 (current choice):** Separating `redit` and `tagpull`
