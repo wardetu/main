@@ -510,21 +510,17 @@ recent internships to a resume. So easy!
 +
 
 image::
-// TODO: add screenshot
 
 . Sort all skills in descending level of proficiency with `sort i/ ski order/ level reverse/ true` .
 +
 
 image::
-// TODO: add screenshot
 
 . Sort all notes by their deadline in ascending order with `sort i/ note order/ time reverse/ false`, specifying
 `reverse/` this time because we really like to type.
 +
 
 image::
-
-// TODO: add screenshot
 
 // end::sort[]
 
