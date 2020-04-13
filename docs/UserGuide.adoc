@@ -469,6 +469,8 @@ image::find-orbital.png[width="790"]
 
 { end of `find` section written by: Nham Quoc Hung }
 
+{ start of `delete` section written by: Nguyen Minh Hoang}
+
 // tag::delete[]
 
 === Deleting an item : `delete`
@@ -498,18 +500,23 @@ to the second `resume` item.
 .List of all resume items
 image::BeforeDeleteResumeList.png[width="790"]
 
-. Delete the 2nd `resume` with `delete 2 i/ res` .
+. We delete the 2nd `resume` with `delete 2 i/ res` .
 +
 .Application view after deleting the resume item at index 2
 image::ResumeDelete2.png[width="790"]
 
-. Delete the 3rd `skill` with `delete 3 i/ ski` . Do note how it is not a must for the list box to display `skill` items for
+. We delete the 3rd `skill` with `delete 3 i/ ski` . Do note how it is not a must for the list box to display `skill` items for
 deletion to proceed. After the deletion the list box is set to show `skill` items.
 +
 .Application view after deleteing the skill item at index 3
 image::DeleteSkill3.png[width="790"]
 
 // end::delete[]
+
+{ end of `delete` section written by: Nguyen Minh Hoang}
+
+
+{ start of `sort` section written by: Nguyen Minh Hoang}
 
 // tag::sort[]
 
@@ -557,23 +564,25 @@ recent internships to a resume. So easy!
 
 *Example:*
 
-. Sort all `resume` items by their name in ascending order with `sort i/ res order/ name`.
+. We sort all `resume` items by their name in ascending order with `sort i/ res order/ name`.
 +
 .List of resume items sorted by name in ascending order
 image::SortResByName.png[width="790"]
 
-. Sort all `skill` items in descending level of proficiency with `sort i/ ski order/ level reverse/ true` .
+. We sort all `skill` items in descending level of proficiency with `sort i/ ski order/ level reverse/ true` .
 +
 .List of skill items sorted by level in descending order
 image::SortSkiByLevelReverse.png[width="790"]
 
-. Sort all `internship` by their start date in ascending order with `sort i/ int order/ time reverse/ false`, specifying
+. We sort all `internship` by their start date in ascending order with `sort i/ int order/ time reverse/ false`, specifying
 `reverse/` this time because we really like to type.
 +
 .List of all note items sorted by deadline in ascending order
 image::SortIntByTime.png[width="790"]
 
 // end::sort[]
+
+{ end of `sort` section written by: Nguyen Minh Hoang}
 
 { start of `view` section written by: Christian James Welly }
 
@@ -767,6 +776,8 @@ image::TagPullMultiTags.png[width = "790"]
 // end::tagpull[]
 { end of `tagpull` section written by: Christian James Welly }
 
+
+{ start of `undo` section written by: Nguyen Minh Hoang}
 // tag::undo[]
 
 === Undoing a command: `undo`
@@ -810,6 +821,9 @@ image::postUndo_JavaIsBack.png[width="790"]
 
 // end::undo[]
 
+{ end of `undo` section written by: Nguyen Minh Hoang}
+
+{ start of `redo` section written by: Nguyen Minh Hoang}
 // tag::redo[]
 
 === Redoing a command: `redo`
@@ -843,6 +857,8 @@ Java. Once again, Java is removed from our life.
 image::redo_success.png[width="790"]
 
 // end::redo[]
+
+{ end of `redo` section written by: Nguyen Minh Hoang}
 
 { start of `rpreview` section written by: Nguyen Chi Hai }
 
@@ -995,6 +1011,10 @@ Exits from *ResuMe*.
 
 { end of `exit` section written by: Nham Quoc Hung }
 
+
+{ start of `data-encryption` section written by: Nguyen Minh Hoang}
+
+// tag::data-encryption[]
 === Saving the data
 *ResuMe* data is saved in the hard disk automatically after any command
 that changes the data. There is no need to save manually.
@@ -1004,7 +1024,9 @@ We are currently working on a login feature that will let you set password for R
 your locally stored data encrypted, so that no one (even us) can gain access to your precious information.
 
 We value your privacy and we want you to feel safe. Stay tuned!
-// end::dataencryption[]
+// end::data-encryption[]
+
+{ end of `data-encryption` section written by: Nguyen Minh Hoang}
 
 == FAQ
 
