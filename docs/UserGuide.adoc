@@ -269,8 +269,8 @@ To view items in full details, use <<Viewing an item in details: `view`, view>>.
 
 [NOTE]
 --
-`note` list is always showing on the bottom left of the application. However, `list i/ note` will show the whole
-`note` list. This is to be used in conjunction with `find` for `note` to show all `note` items after
+`note` list is always showing on the bottom left of the application. `list i/ note` command will show the entire
+`note` lis, this is to be used in conjunction with `find` for `note` to show all `note` items after
 you have filtered the list.
 --
 
