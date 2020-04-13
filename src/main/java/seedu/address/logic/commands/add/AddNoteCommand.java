@@ -21,7 +21,7 @@ public class AddNoteCommand extends AddCommand {
             + "Format: "
             + COMMAND_WORD + " "
             + PREFIX_ITEM + " TYPE "
-            + PREFIX_NAME + " TITLE "
+            + PREFIX_NAME + " NAME "
             + PREFIX_TIME + " TIME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ITEM + " note "
