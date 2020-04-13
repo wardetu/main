@@ -347,11 +347,11 @@ Try typing in the command box these two commands one by one!
 
 *Outcome:*
 
-. All `resume` items are listed in the list box. Assuming you want to edit the `resume` item at index 1.
+. The first command lists all `resume` items in the list box. Assuming you want to edit the `resume` item at index 1.
 +
 image::ListResume2.png[width="790"]
 
-. The `resume` at index 1 has its name changed from _"Winter 2019"_ to _"Software Engineering Resume"_ and its tag set to _"agile"_.
+. The second command edits the `resume` item at index 1. It has its name changed from _"Winter 2019"_ to _"Software Engineering Resume"_ and its tag set to _"agile"_.
 +
 image::EditResumeExample.png[width="790"]
 
@@ -362,11 +362,11 @@ image::EditResumeExample.png[width="790"]
 
 *Outcome:*
 
-. All `skill` items are listed in the list box. Assuming you want to edit the `skill` item at index 2.
+. The first command lists all `skill` items in the list box. Assuming you want to edit the `skill` item at index 2.
 +
 image::ListSkill1.png[width="790"]
 
-. The `skill` at index 2 has its level changed to `ADVANCED` and all its existing tags cleared.
+. The second command edits the `skill` item at index 2. It has its level changed to from `INTERMEDIATE` to `ADVANCED` and all its existing tags cleared.
 +
 image::EditSkillExample.png[width="790"]
 // end::edit[]
