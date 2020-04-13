@@ -375,6 +375,7 @@ be switch-cased again in `ABCCommand`.
 
 // end::command-classes[]
 
+// tag::me[]
 === Me feature
 This feature intends to serve a single user of the application to sets and updates his/her user profile. The profile
 is then reflected in the user's profile panel.
@@ -392,10 +393,10 @@ initialized with the initial json data stored.
 
 image::user-default.png[]
 
-Step 2. User executes `me dp/FILEPATH n/NAME d/DESCRIPTION p/PHONE e/EMAIL g/GITHUB u/UNIVERSITY m/MAJOR f/FROM t/TO c/CAP`
+Step 2. User executes `me dp/ FILEPATH n/ NAME d/ DESCRIPTION p/ PHONE e/ EMAIL g/ GITHUB u/ UNIVERSITY m/ MAJOR f/ FROM t/ TO c/ CAP`
 so as to update the Person object currently stored in Model as well as Storage.
 
- me dp//Users/nhamquochung/Desktop/test.png n/HUNG d/I am an aspiring software engineer. p/91648888 e/nhamhung.gttn@gmail.com g/nhamhung u/National University of Singapore m/Computer Science f/08-2018 t/05-2022 c/4.0 5.0
+ me dp/ /Users/nhamquochung/Desktop/test.png n/ HUNG d/ I am an aspiring software engineer. p/ 91648888 e/ nhamhung.gttn@gmail.com g/ nhamhung u/ National University of Singapore m/ Computer Science f/ 08-2018 t/ 05-2022 c/ 4.0 5.0
 
 Step 3. The user profile panel will be updated accordingly.
 
@@ -460,7 +461,9 @@ help him/her manage and craft multiple resume versions. As such, only a single u
 background needs to be managed to be included in every generated resume. This user profile must thus be made clearly, constantly visible
 and to be updated with a simple and powerful command.
 ****
+// end::me[]
 
+// tag::note[]
 ==== Note taking feature: take simple notes or reminders
 
 ===== Implementation
@@ -472,7 +475,7 @@ Given below is an example usage scenario:
 ===== Scenario 1. Add a reminder note: `add i/note`
 Step 1. The user launches the ResuMe application. Data will be loaded from storage to fill the note list in model.
 
-Step 2. The user executes `add i/note n/NAME t/TIME #/TAG`. In `ResumeBook`, the note list is implemented as a `UniqueItemList`
+Step 2. The user executes `add i/ note n/ NAME t/ TIME #/ TAG`. In `ResumeBook`, the note list is implemented as a `UniqueItemList`
 which implements an `add()` method that will always check if this note already exists in current note list. This check is done
 by iterating through every note in the list and compare to this note using an `isSame()` method that checks for the same
 note name and time. If a same note already exists, ResuMe throws a duplicate error message.
@@ -484,7 +487,7 @@ Step 3. If no error is thrown, the note will be created, defaulted as `not done`
 Step 1. Once data has been loaded from `storage` to `model`, the list of notes in the ResumeBook could either contain some
 notes, or is empty.
 
-Step 2. The user executes `edit INDEX i/Note [n/NAME] [t/TIME] [#/TAG]`. If the specified note index is invalid or out of bound,
+Step 2. The user executes `edit INDEX i/ Note [n/ NAME] [t/ TIME] [#/ TAG]`. If the specified note index is invalid or out of bound,
 ResuMe will throw an invalid index error message.
 
 Step 3. If no index error is thrown, edited values will be captured by an `EditNoteDescriptor` object and the note at the specified index
@@ -530,7 +533,7 @@ focuses on managing resumes.
 * *Alternative 1 (current choice):* `Note` is also an `Item`
 
 This design is chosen because note taking feature is intended to have similar `Command` to a typical `Item` such as `AddCommand`, `EditCommand` and `SortCommand`.
-As such, by extending `Item`, `Note` can inherit attributes such as `Index` and `TAG` as well as being able to kept as a
+As such, by extending `Item`, `Note` can inherit attributes such as `Index` and `Tag` as well as being able to kept as a
 `UniqueItemList` in `Model`.
 
 ** Pros: Reduce code duplication in achieving the same functionality between `Note` commands and other `Item` commands. `Note` can also inherit
@@ -552,6 +555,7 @@ resumes can be prolonged and thus this helps them to resume with ease. With rega
 faster and more reliable to make `Note` an `Item` so as to minimise double work and potential bugs. This is hidden from the user's perspective
 and so this design suits our needs given the short time frame that we have.
 ****
+// end::note[]
 
 //tag::export[]
 === Export Feature
