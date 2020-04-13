@@ -22,6 +22,7 @@ Class XYZCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
 Class XYZItemCommand
+Class XYZCommandResult
 }
 
 Interface Logic <<Interface>>
@@ -62,6 +63,7 @@ Logic ..> CommandResult
 LogicManager .down.> CommandResult
 Command .up.> CommandResult
 CommandResult -[hidden]-> Parser
+XYZCommandResult -left-|> CommandResult
 
 hide field
 @enduml
