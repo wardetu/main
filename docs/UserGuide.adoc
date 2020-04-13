@@ -786,7 +786,8 @@ If no name is specified, the filename will be set, by default, to the name of th
 +
 image::ListResume.PNG[width="790"]
 
-. The second command generates a `My Resume.pdf` file from the specified resume. The screenshots of what happened are as below:
+. The second command generates a `My Resume.pdf` file from the specified resume. The screenshots of the application view
+and of the generated file are as below:
 +
 image::GenerateResume.PNG[width="790"]
 image::PdfFile.PNG[width="790"]
