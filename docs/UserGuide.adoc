@@ -18,7 +18,9 @@ endif::[]
 
 By: `CS2103T F10-1`      Since: `Jan 2020`      Licence: `MIT`
 
+{ start of `introduction` section written by: Nguyen Chi Hai }
 // tag::intro-para[]
+
 == Introduction
 
 Hello fellow University friends! Have you ever found writing resumes
@@ -33,6 +35,7 @@ understands your struggle and strives to cater to your specific resume needs
 and job application woes.
 
 // end::intro-para[]
+{ end of `introduction` section written by: Nguyen Chi Hai }
 
 === Overview
 *ResuMe* allows the management of five different item types:
@@ -246,6 +249,8 @@ image::ugu.png[width="450"]
 
 { end of `me` section written by: Nham Quoc Hung }
 
+{ start of `list` section written by: Nguyen Chi Hai }
+
 // tag::list[]
 === Listing all items : `list`
 
@@ -257,9 +262,16 @@ Lists items in the storage.
 
 [TIP]
 --
-* Listed items are in short form, only showing their `index`, `name`, `tags` and a short summary.
+* Listed items are in short form, only showing their index, `name`, `tags` and a short summary.
 To view items in full details, use <<Viewing an item in details: `view`, view>>.
 * The type of items listed will light up in orange.
+--
+
+[NOTE]
+--
+`note` list is always showing on the bottom left of the application. However, `list i/ note` will show the whole
+`note` list. This is to be used in conjunction with `find` for `note` to show all `note` items after
+you have filtered the list.
 --
 
 *Examples:*
@@ -279,8 +291,9 @@ image::ListAllInternships.png[width = "450"]
 .List of all note items
 image::ListAllNotes.png[width = "450"]
 
-
 // end::list[]
+
+{ end of `list` section written by: Nguyen Chi Hai }
 
 { start of `add` section written by: Pham Thuy Duong }
 // tag::add[]
@@ -831,6 +844,8 @@ image::redo_success.png[width="790"]
 
 // end::redo[]
 
+{ start of `rpreview` section written by: Nguyen Chi Hai }
+
 // tag::rpreview[]
 === Previewing a resume: `rpreview`
 
@@ -843,7 +858,12 @@ Previews a `resume` in text format in a pop-up window.
 [NOTE]
 --
 * `RESUME_INDEX` is the index of the `resume` seen when `list i/ res` is called.
-* `description` of `internship` and `project` is automatically separated into bullet points when the program detects full sentences.
+--
+
+[WARNING]
+--
+* `description` of `internship` and `project` is automatically separated into bullet points when the program detects
+full sentences marked by a full stop.
 --
 
 *Example:* Let's try out the following commands!
@@ -861,12 +881,14 @@ image::ListResumeRPreview.png[width="790"]
 . The second command will preview the `resume` at index 2 named "Software Engineering". A pop-up window will be opened,
 featuring a text-based view of the content of "Software Engineering". The screenshots of the results are as shown below:
 +
-.Application view after `rpreview` is executed
+.Application view after rpreview is executed
 image::RPreview.png[width = "790"]
 .Preview pop-up window
 image::RPreviewIndexTwo.png[width = "790"]
 
 // end::rpreview[]
+
+{ end of `rpreview` section written by: Nguyen Chi Hai }
 
 { start of `rgen` section written by: Pham Thuy Duong }
 // tag::rgen[]
@@ -1000,6 +1022,8 @@ ____
 file created with the data file of your *ResuMe* folder in the current Computer.
 ____
 
+{ start of `summary` section written by: Nguyen Chi Hai }
+
 // tag::summary[]
 == Command Summary
 
@@ -1068,3 +1092,5 @@ These are commands specific to `resume` items.
 
 |=======================================================================
 // end::summary[]
+
+{ end of `summary` section written by: Nguyen Chi Hai }
