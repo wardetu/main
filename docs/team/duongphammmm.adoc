@@ -6,7 +6,6 @@
 
 == PROJECT: ResuMe
 
-
 == Overview
 
 *ResuMe* is a desktop application for you to manage all of your resumes from a centralised location.
@@ -44,18 +43,11 @@ and facilitate easy cross-reference.
 
 ==== 1.2. Contributions to Documentation:
 ** Updated README (https://github.com/AY1920S2-CS2103T-F10-1/main/pull/161[#161])
-** Updated the <<Contributions to the User Guide (Extracts), User Guide>> to reflect my feature enhancements. Sections contributed includes:
-*** About this guide
-*** Viewing help: `help`
-*** Adding an item: `add`
-*** Generating a resume: `rgen`
+** Updated the <<Contributions to the User Guide (Extracts), User Guide>> for the following sections: About this guide,
+Viewing help: `help`, Adding an item: `add`, Generating a resume: `rgen`
 
-** Updated the <<Contributions to the Developer Guide (Extracts), Developer Guide>> to reflect my feature enhancements. Sections contributed includes:
-*** Model Component
-*** Export Feature
-*** Appendix A: Product Scope
-*** Appendix D: Non Functional Requirements
-*** Appendix E: Glossary
+** Updated the <<Contributions to the Developer Guide (Extracts), Developer Guide>> for the following sections: Model Component,
+Export Feature, Appendix A: Product Scope, Appendix D: Non Functional Requirements, Appendix E: Glossary
 
 === 2. Team Contributions
 ==== 2.1. Model Refactoring
@@ -82,15 +74,11 @@ https://github.com/AY1920S2-CS2103T-F10-1/main/pull/256[#256],...
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/duongphammmm/ped/issues/2[1],
 https://github.com/duongphammmm/ped/issues/7[2], https://github.com/duongphammmm/ped/issues/9[3])
 
-
 == Contributions to the User Guide (Extracts)
-
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 include::../UserGuide.adoc[tag=guide]
-
-include::../UserGuide.adoc[tag=help]
 
 include::../UserGuide.adoc[tag=add]
 
@@ -106,8 +94,3 @@ include::../DeveloperGuide.adoc[tag=model]
 
 include::../DeveloperGuide.adoc[tag=export]
 
-include::../DeveloperGuide.adoc[tag=product-scope]
-
-include::../DeveloperGuide.adoc[tag=nfr]
-
-include::../DeveloperGuide.adoc[tag=glossary]

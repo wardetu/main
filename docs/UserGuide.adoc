@@ -304,10 +304,10 @@ _(refer to <<Generating a resume: `rgen`, rgen>> for more details)_
 
 . All `project` items are listed in the list box.
 +
-image::ListProject.png[width="790"]
+image::ListProject.png[width="600"]
 . A new `project` item named `Duke` with the specified fields is added. This item is automatically reflected in the list box.
 +
-image::AddDukeProject.png[width="790"]
+image::AddDukeProject.png[width="600"]
 
 // end::add[]
 

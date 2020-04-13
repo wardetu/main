@@ -158,11 +158,6 @@ one for `Note` and one for `Internship`, `Project`, `Skill` and `Resume`.
 * has the UI bound to its observables so that the UI automatically updates when the data change.
 * does not depend on any of the other three components.
 
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `ResumeBook`, which `Item` can reference. This would allow `ResumeBook` to only require one `Tag` object per unique `Tag`, instead of each `Item` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:BetterModelClassDiagram.png[]
-
 // end::model[]
 
 [[Design-Storage]]
@@ -584,7 +579,7 @@ Step 3. The application retrieves the correct `Resume` item and calls `toPreview
 
 The following activity diagram summarises what happens when a user executes `rpreview` command:
 
-image::ExportPreviewActivityDiagram.png[]
+image::ExportPreviewActivityDiagram.png[width="200"]
 
 
 ===== Design Considerations
@@ -643,7 +638,7 @@ items inside the `Resume`.
 
 The following activity diagram summarises what happens when a user executes `rgen` command:
 
-image::ExportActivityDiagram.png[, 400]
+image::ExportActivityDiagram.png[, 250]
 
 Detailed steps are shown in the sequence diagram below:
 
