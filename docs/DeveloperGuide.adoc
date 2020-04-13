@@ -391,8 +391,6 @@ Given below is an example usage scenario:
 Step 1. User launches the ResuMe application for the first time. The user profile data is not yet edited and will thus be
 initialized with the initial json data stored.
 
-image::user-default.png[]
-
 Step 2. User executes `me dp/ FILEPATH n/ NAME d/ DESCRIPTION p/ PHONE e/ EMAIL g/ GITHUB u/ UNIVERSITY m/ MAJOR f/ FROM t/ TO c/ CAP`
 so as to update the Person object currently stored in Model as well as Storage.
 
@@ -400,13 +398,11 @@ so as to update the Person object currently stored in Model as well as Storage.
 
 Step 3. The user profile panel will be updated accordingly.
 
-image::user.png[]
-
 *Note:* To set customised user picture, the file path of your display picture has to be absolute and from the root directory of your computer.
 
 Command sequence:
 
-1. User type `me [dp/FILEPATH] [n/NAME] ...` command in the command box.
+1. User type `me [dp/ FILEPATH] [n/ NAME] ...` command in the command box.
 2. Command is executed by Logic Manager.
 3. Command is parsed by `ResumeBookParser` which identifies what type of command it is. An `EditUserParser` is returned accordingly.
 4. `EditUserParser` extracts out different fields specified in the command based on their prefixes and returns an `EditUserCommand` with
@@ -472,7 +468,7 @@ support the user in his/her resume building and management.
 
 Given below is an example usage scenario:
 
-===== Scenario 1. Add a reminder note: `add i/note`
+===== Scenario 1. Add a reminder note: `add i/ note`
 Step 1. The user launches the ResuMe application. Data will be loaded from storage to fill the note list in model.
 
 Step 2. The user executes `add i/ note n/ NAME t/ TIME #/ TAG`. In `ResumeBook`, the note list is implemented as a `UniqueItemList`
@@ -482,7 +478,7 @@ note name and time. If a same note already exists, ResuMe throws a duplicate err
 
 Step 3. If no error is thrown, the note will be created, defaulted as `not done` and added to the current note list with according `Ui` update.
 
-===== Scenario 2. Edit an existing note: `edit i/note`
+===== Scenario 2. Edit an existing note: `edit i/ note`
 
 Step 1. Once data has been loaded from `storage` to `model`, the list of notes in the ResumeBook could either contain some
 notes, or is empty.
@@ -496,7 +492,7 @@ be edited becomes another similar note in the list, a duplicate item error will 
 
 Step 4. If no duplicate error is thrown, ResuMe will replace the note at this index with its edited version.
 
-The following activity diagram summarises this process when user executes `edit i/note` command:
+The following activity diagram summarises this process when user executes `edit i/ note` command:
 
 image::EditNoteCommandActivityDiagram.png[]
 
@@ -1015,7 +1011,15 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: You are supposed to see this GUI, with default values for user details, and two empty resumes, enter
+   `list i/ res` to check it out. The window size may not be optimum.
++
+.Initial view when jar file runs
+image::InitOpen.png[]
+
++
+.Expected view after running the command `list i/ res` to show all resumes
+image::InitListResumes.png[]
 
 . Saving window preferences
 
@@ -1023,26 +1027,55 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+. Shutting down the program
 
-=== Deleting a person
+.. To exit the program, you can enter the command `exit` or click the red close button, don't worry
+all your data is already saved.
 
-. Deleting a person while all persons are listed
+=== Adding items
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+. Adding an internship.
+.. This test case assumes that the internship list is empty. It does not have to be, but there must not be a duplicate
+internship with the internship we're about to add.
+.. Test case *adding an internship*: `add i/ int n/ Google r/ Frontend Web Engineer f/ 06-2020 t/ 12-2020 d/ I did work, made money. #/ frontend #/ tech` +
+   Expected: An internship item is added to the list of internships and the list view changes to list of internships.
+Data box is filled with the data of the internship that you just added.
++
+image::AddingGoogleTest.png[]
+
+.. Test case *adding an duplicate internship* (do this after part b): `add i/ int n/ Google r/ Frontend Web Engineer f/ 06-2020 t/ 12-2020 d/ I did work, made money. #/ frontend #/ tech` +
+Expected: No internship is added is added. Error details shown in the status message. Status bar remains the same.
+
+.. Test case *adding an internship with compulsory parameters missing*: `add i/ int n/ Shopee f/ 06-2020 t/ 12-2020 d/ I did work, made money. #/ frontend #/tech` +
+Expected: No internship is added is added. Error details shown in the status message. Status bar remains the same.
+
+.. Other incorrect add internship commands to try: commands where other compulsory parameters such as `to`, `from`, and `description`
+are missing _{give more}_ +
    Expected: Similar to previous.
 
-_{ more test cases ... }_
+. Adding items of other types
+.. Simlar to adding internship above, please make sure that you follow our User Guide for the correct formatting of the
+commands if you are expecting a positive test case.
 
-=== Saving data
+=== Deleting items
 
-. Dealing with missing/corrupted data files
+. Deleting a skill.
+.. This test case assumes that there are skills already in the skill list. Run `list i/ ski` to check. If there aren't any
+skills (shown below), follow G.2 above to add some skills.
++
+image::ListSkillBeforeDelete.png[]
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+.. Test case *deleting an internship*: `delete 1 i/ ski` +
+   Expected: An skill item is deleted from the skills and the data box is filled with the data of the skill that
+you just deleted.
 
-_{ more test cases ... }_
+.. Test case *delete a skill with wrong index*: `delete 0 i/ ski` +
+Expected: No skill is deleted. Error details shown in the status message. Status bar remains the same.
+
+.. Other incorrect add skill commands to try: `delete 1 i/skill`, `delete -1 i/ski`, `delete abc i/ski`
+   Expected: Similar to previous.
+
+. Deleting items of other types
+.. Simlar to deleting skills above, please make sure that you follow our User Guide for the correct formatting of the
+commands if you are expecting a positive test case.
+
