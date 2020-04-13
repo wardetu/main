@@ -6,8 +6,12 @@ skinparam ClassBorderColor #000000
 title After command "delete 5 i/ res"
 
 package States {
-    class State1 as "__rb0:ResumeBook__"
-    class State2 as "__rb1:ResumeBook__"
+    class State1 as "__rb0:ResumeBook__" {
+        displayType = ""
+    }
+    class State2 as "__rb1:ResumeBook__" {
+        displayType = "res"
+    }
     class State3 as "__rb2:ResumeBook__"
 }
 
@@ -17,6 +21,6 @@ State2 -[hidden]right-> State3
 hide State3
 
 class Pointer as "Current State" #FFFFF
-
+hide Pointer field
 Pointer -up-> State2
 @end

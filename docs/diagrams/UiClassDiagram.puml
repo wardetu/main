@@ -29,8 +29,8 @@ HiddenOutside ..> Ui
 UiManager ..|> Ui
 UiManager --> MainWindow
 
-MainWindow ---> HelpWindow
-MainWindow ---> CommandBox
+MainWindow *---> HelpWindow
+MainWindow *---> CommandBox
 
 MainWindow *---> ResultDisplay
 MainWindow *---> StatusBarFooter
