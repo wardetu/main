@@ -634,7 +634,6 @@ public class ResumeBook implements ReadOnlyResumeBook {
     @Override
     public String toString() {
         return itemsToDisplay.asUnmodifiableObservableList().size() + " items";
-        // TODO: refine later
     }
 
     /**

@@ -502,7 +502,6 @@ recent internships to a resume. So easy!
 |`note` |`time` |Deadline of `note`
 |=======================================================================
 
-
 *Example:*
 
 . Sort all `resume` items by their name in ascending order with `sort i/ res order/ name`.
