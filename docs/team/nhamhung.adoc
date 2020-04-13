@@ -22,50 +22,67 @@ projects and internships and use these components to construct and export a full
 ** What it does: allows user to customise and display all their essential details as a university student which
 can be automatically inserted into each version of their resumes upon its PDF export. This function serves only a
 single user of the application.
-** Justification: This feature improves the product significantly because user details is an essential component in
+** Justification: This feature improves the product significantly because user profile is an essential component in
 each resume and thus it should be made clearly visible and easily edited by the user. That is why one separate section
-of the application is reserved for consistent display of this feature and user details are included in every PDF resume
+of the application is reserved for consistent display of this feature and user details are included in every resume PDF
 version.
 ** Highlights: This enhancement involves a key consideration which had to be made with regards to the user. Ultimately,
-the team decided to manage a single user profile details only as our application envisions to support only a single user
-in managing his/her resumes. At the same time, it is relatively UI intensive which took some time to get used to.
-** Credits: `https://o7planning.org/en/11009/javafx` (https://github.com/AY1920S2-CS2103T-F10-1/main/pull/80[#80])
+the team decided to manage a single user profile only as our application envisions to support only a single user
+in managing his/her multiple resumes. At the same time, it is relatively UI intensive which took some time to get used to.
+** Credits: `https://docs.oracle.com/javafx/2/ui_controls/table-view.htm` (https://github.com/AY1920S2-CS2103T-F10-1/main/pull/80[#80])
 
 * *Major enhancement*: added a note taking feature for user to record notes or set simple reminders when working on
-their resume.
+his/her resumes.
 ** What it does: allows user to create simple notes which will be displayed on start-up. Each note has a status of
 `done` or `not done` so user can decide when to remove it.
 ** Justification: This feature improves the product as it enhances user experience overall. As crafting their resumes
-and summarising their skills, projects or internship experiences can take time, or sometimes requires brainstorming,
+and summarising their skills, projects or internship experiences can take time, even requires brainstorming sometimes,
 the note taking feature allows user to set simple reminders so they can be more organised when pausing or resuming their
 work. This is in line with our vision of the application through which we want to make the process of managing and
-creating resume more of a personal learning journey.
+creating resumes more of a personal learning journey through an activity called `experience logging`.
 ** Highlights: This feature, though appearing simple, requires a look through of the entire application code structure
 as it involves most components including Ui, Logic, Model and Storage.
 ** https://github.com/AY1920S2-CS2103T-F10-1/main/pull/159[#159]
 
-* *Minor enhancement*: added Ui updates for the application structure.
-
 ==== Contributions to documentation:
 ** Updated README (https://github.com/AY1920S2-CS2103T-F10-1/main/pull/173[#173])
-** Updated application screenshots for the User Guide
-
-==== Contributions to the Developer Guide:
-_to add_
 
 ==== Contributions to team-based tasks:
-
+* Updated Ui for the the application (https://github.com/AY1920S2-CS2103T-F10-1/main/pull/135[#135], https://github.com/AY1920S2-CS2103T-F10-1/main/pull/336[#336])
+* Wrote additional tests for existing features to increase coverage (https://github.com/AY1920S2-CS2103T-F10-1/main/pull/285[#285], https://github.com/AY1920S2-CS2103T-F10-1/main/pull/328[#328], https://github.com/AY1920S2-CS2103T-F10-1/main/pull/300[#300])
 
 ==== Reviewing contributions:
+* PRs reviewed with non-trivial review comments (https://github.com/AY1920S2-CS2103T-F10-1/main/pull/320[#320], https://github.com/AY1920S2-CS2103T-F10-1/main/pull/260[#260])
+* Reported bugs and suggestions for other teams in class (examples: https://github.com/nhamhung/ped/issues/4[1], https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/25[2])
 
 == Contributions to the User Guide
 
 |===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-== Contributions to the Developer Guide
+include::../UserGuide.adoc[tag=me]
 
+include::../UserGuide.adoc[tag=note]
+
+include::../UserGuide.adoc[tag=exit]
+
+include::../UserGuide.adoc[tag=done]
+
+==== Contributions to the Developer Guide:
 |===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+{start of extract 1: Me}
+
+include::../DeveloperGuide.adoc[tag=me]
+
+{end of extract 1}
+
+{start of extract 2: Note}
+
+include::../DeveloperGuide.adoc[tag=note]
+
+{end of extract 2}
 

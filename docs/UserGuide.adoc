@@ -179,6 +179,7 @@ image::helpStart.png[width="790"]
 
 // end::help[]
 
+// tag::me[]
 === Editing user profile: `me`
 
 Edits and updates user's display information.
@@ -222,6 +223,14 @@ The user profile picture is updated accordingly as below:
 
 // TODO: update screenshot
 image::user_profile1.png[width="400"]
+
+// end::me[]
+
+// tag::note[]
+// end::note[]
+
+// tag::done[]
+// end::done[]
 
 // tag::list[]
 === Listing all items : `list`
@@ -363,6 +372,8 @@ image::EditResumeExample.png[width="790"]
 +
 // TODO: add screenshot
 
+// tag::find[]
+
 === Finding items by name: `find`
 
 Finds items of a specific `type` in the *ResuMe* application whose names contain the specified keyword(s).
@@ -401,6 +412,7 @@ The specific command syntax could be found in the table below:
 . `Projects` whose names match keywords are listed in the list box.
 +
 image::find_command.png[width="790"]
+// end::find[]
 
 // tag::delete[]
 
@@ -731,9 +743,11 @@ This command can be undone.
 
 Exits the program.
 
+// tag::exit[]
 ====
 *Format:* `exit`
 ====
+// end::exit[]
 
 === Saving the data
 *ResuMe* data is saved in the hard disk automatically after any command
