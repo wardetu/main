@@ -27,6 +27,7 @@ import seedu.address.model.tag.Tag;
 public class EditSkillCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_SKILL_SUCCESS = "Edited Skill: %1$s";
+    public static final String MESSAGE_SAME_SKILL = "You are not making any changes to this skill.";
 
     private static final String FIELDS = COMMAND_WORD
             + " INDEX "
@@ -61,6 +62,10 @@ public class EditSkillCommand extends EditCommand {
         Skill toEdit = model.getSkillByIndex(index);
 
         Skill editedSkill = createEditedSkill(toEdit, editSkillDescriptor);
+
+        if (editedSkill.equals(toEdit)) {
+            throw new CommandException(MESSAGE_SAME_SKILL);
+        }
 
         try {
             model.setSkill(toEdit, editedSkill);

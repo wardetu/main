@@ -12,11 +12,13 @@ public abstract class HelpCommand extends Command {
     public static final String COMMAND_OPTION_START = "start";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-            + COMMAND_WORD + " OPTION\n"
-            + "Example: " + COMMAND_WORD + " " + COMMAND_OPTION_SUMMARY;
+            + "Format: " + COMMAND_WORD + " OPTION\n"
+            + "Examples: \n"
+            + "1. " + COMMAND_WORD + " " + COMMAND_OPTION_SUMMARY + "\n"
+            + "2. " + COMMAND_WORD + " " + COMMAND_OPTION_START;
 
-    public static final String MESSAGE_INVALID_OPTION = "The help option is invalid! "
-            + "Try \"help command\" or \"help start\" instead.";
+    public static final String MESSAGE_INVALID_OPTION = "The help option is invalid! \n"
+            + MESSAGE_USAGE;
 
-    public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
+    public static final String SHOWING_HELP_MESSAGE = "Opened help pop-up window.";
 }

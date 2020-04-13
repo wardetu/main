@@ -5,17 +5,28 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NAME_GOOGLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_NAME_PAYPAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERNSHIP_ROLE_BACKEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_NAME_CS2103;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_TIME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_NAME_DUKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_NAME_ORBITAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RESUME_NAME_SE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SKILL_NAME_GIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SKILL_NAME_REACT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BACKEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRONTEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_URGENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEBSITE_DUKE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WEBSITE_ORBITAL;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_ITEM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 import static seedu.address.testutil.TypicalInternship.GOOGLE;
 import static seedu.address.testutil.TypicalInternship.NINJA_VAN;
@@ -127,6 +138,35 @@ public class EditCommandIntegrationTest {
     }
 
     @Test
+    public void execute_editInternshipWithoutChanges_throwsCommandException() {
+        // Same role
+        EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptorBuilder()
+                .withRole(VALID_INTERNSHIP_ROLE_BACKEND)
+                .build();
+        assertCommandFailure(new EditInternshipCommand(INDEX_SECOND_ITEM, editInternshipDescriptor),
+                model,
+                new CommandException(EditInternshipCommand.MESSAGE_SAME_INTERNSHIP));
+
+        // Same name
+        editInternshipDescriptor = new EditInternshipDescriptorBuilder()
+                .withName(VALID_INTERNSHIP_NAME_PAYPAL)
+                .build();
+        assertCommandFailure(new EditInternshipCommand(INDEX_SECOND_ITEM, editInternshipDescriptor),
+                model,
+                new CommandException(EditInternshipCommand.MESSAGE_SAME_INTERNSHIP));
+
+        // Same from, to, tags
+        editInternshipDescriptor = new EditInternshipDescriptorBuilder()
+                .withFrom(VALID_FROM)
+                .withTo(VALID_TO)
+                .withTags(VALID_TAG_BACKEND, VALID_TAG_SE, VALID_TAG_TECH)
+                .build();
+        assertCommandFailure(new EditInternshipCommand(INDEX_SECOND_ITEM, editInternshipDescriptor),
+                model,
+                new CommandException(EditInternshipCommand.MESSAGE_SAME_INTERNSHIP));
+    }
+
+    @Test
     public void execute_outOfBoundsInternship_throwsCommandException() {
         EditInternshipDescriptor editInternshipDescriptor = new EditInternshipDescriptor();
         assertCommandFailure(new EditInternshipCommand(INDEX_FOURTH_ITEM, editInternshipDescriptor),
@@ -184,6 +224,26 @@ public class EditCommandIntegrationTest {
                         String.format(EditNoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, validNote.getName().fullName),
                         ItemUtil.NOTE_ALIAS),
                 expectedModel);
+    }
+
+    @Test
+    public void execute_editNoteWithoutChanges_throwsCommandException() {
+        // Same name
+        EditNoteDescriptor editNoteDescriptor = new EditNoteDescriptorBuilder()
+                .withName(VALID_NOTE_NAME_CS2103)
+                .build();
+        assertCommandFailure(new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptor),
+                model,
+                new CommandException(EditNoteCommand.MESSAGE_SAME_NOTE));
+
+        // Same time and tags
+        editNoteDescriptor = new EditNoteDescriptorBuilder()
+                .withTime(VALID_NOTE_TIME)
+                .withTags(VALID_TAG_URGENT)
+                .build();
+        assertCommandFailure(new EditNoteCommand(INDEX_FIRST_ITEM, editNoteDescriptor),
+                model,
+                new CommandException(EditNoteCommand.MESSAGE_SAME_NOTE));
     }
 
     @Test
@@ -248,6 +308,34 @@ public class EditCommandIntegrationTest {
     }
 
     @Test
+    public void execute_editProjectWithoutChanges_throwsCommandException() {
+        // Same website
+        EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptorBuilder()
+                .withWebsite(VALID_WEBSITE_ORBITAL)
+                .build();
+        assertCommandFailure(new EditProjectCommand(INDEX_FIRST_ITEM, editProjectDescriptor),
+                model,
+                new CommandException(EditProjectCommand.MESSAGE_SAME_PROJECT));
+
+        // Same name
+        editProjectDescriptor = new EditProjectDescriptorBuilder()
+                .withName(VALID_PROJECT_NAME_ORBITAL)
+                .build();
+        assertCommandFailure(new EditProjectCommand(INDEX_FIRST_ITEM, editProjectDescriptor),
+                model,
+                new CommandException(EditProjectCommand.MESSAGE_SAME_PROJECT));
+
+        // Same time and tags
+        editProjectDescriptor = new EditProjectDescriptorBuilder()
+                .withTime(VALID_TIME_1)
+                .withTags(VALID_TAG_TECH)
+                .build();
+        assertCommandFailure(new EditProjectCommand(INDEX_FIRST_ITEM, editProjectDescriptor),
+                model,
+                new CommandException(EditProjectCommand.MESSAGE_SAME_PROJECT));
+    }
+
+    @Test
     public void execute_outOfBoundsProject_throwsCommandException() {
         EditProjectDescriptor editProjectDescriptor = new EditProjectDescriptor();
         assertCommandFailure(new EditProjectCommand(INDEX_THIRD_ITEM, editProjectDescriptor),
@@ -309,6 +397,26 @@ public class EditCommandIntegrationTest {
     }
 
     @Test
+    public void execute_editSkillWithoutChanges_throwsCommandException() {
+        // Same name
+        EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptorBuilder()
+                .withName(VALID_SKILL_NAME_REACT)
+                .build();
+        assertCommandFailure(new EditSkillCommand(INDEX_FIRST_ITEM, editSkillDescriptor),
+                model,
+                new CommandException(EditSkillCommand.MESSAGE_SAME_SKILL));
+
+        // Same level and tags
+        editSkillDescriptor = new EditSkillDescriptorBuilder()
+                .withLevel(Level.BASIC)
+                .withTags(VALID_TAG_TECH, VALID_TAG_FRONTEND)
+                .build();
+        assertCommandFailure(new EditSkillCommand(INDEX_FIRST_ITEM, editSkillDescriptor),
+                model,
+                new CommandException(EditSkillCommand.MESSAGE_SAME_SKILL));
+    }
+
+    @Test
     public void execute_outOfBoundsSkill_throwsCommandException() {
         EditSkillDescriptor editSkillDescriptor = new EditSkillDescriptor();
         assertCommandFailure(new EditSkillCommand(INDEX_THIRD_ITEM, editSkillDescriptor),
@@ -367,6 +475,17 @@ public class EditCommandIntegrationTest {
                         String.format(EditResumeCommand.MESSAGE_EDIT_RESUME_SUCCESS,
                                 validResume.getName().fullName), ItemUtil.RESUME_ALIAS),
                 expectedModel);
+    }
+
+    @Test
+    public void execute_editResumeWithoutChanges_throwsCommandException() {
+        // Same name
+        EditResumeDescriptor editResumeDescriptor = new EditResumeDescriptorBuilder()
+                .withName(VALID_RESUME_NAME_SE)
+                .build();
+        assertCommandFailure(new EditResumeCommand(INDEX_SECOND_ITEM, editResumeDescriptor),
+                model,
+                new CommandException(EditResumeCommand.MESSAGE_SAME_RESUME));
     }
 
     @Test

@@ -28,6 +28,7 @@ import seedu.address.model.util.ItemUtil;
 public class EditNoteCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edited Note: %1$s.";
+    public static final String MESSAGE_SAME_NOTE = "You are not making any changes to this note.";
 
     private static final String FIELDS = COMMAND_WORD
             + " INDEX "
@@ -41,7 +42,6 @@ public class EditNoteCommand extends EditCommand {
             + PREFIX_NAME + " Complete Resume 3 "
             + PREFIX_TIME + " 04-2020 "
             + PREFIX_TAG + " urgent ";
-
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n"
             + FIELDS
@@ -65,6 +65,11 @@ public class EditNoteCommand extends EditCommand {
         Note toEdit = model.getNoteByIndex(index);
 
         Note editedNote = createEditedNote(toEdit, editNoteDescriptor);
+
+        if (editedNote.equals(toEdit)) {
+            throw new CommandException(MESSAGE_SAME_NOTE);
+        }
+
         try {
             model.setNote(toEdit, editedNote);
             model.updateFilteredNoteList(PREDICATE_SHOW_ALL_ITEMS);

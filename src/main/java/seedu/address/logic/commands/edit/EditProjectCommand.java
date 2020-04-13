@@ -30,6 +30,7 @@ import seedu.address.model.tag.Tag;
 public class EditProjectCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_PROJECT_SUCCESS = "Edited Project: %1$s";
+    public static final String MESSAGE_SAME_PROJECT = "You are not making any changes to this project.";
 
     private static final String FIELDS = COMMAND_WORD
             + " INDEX "
@@ -71,6 +72,10 @@ public class EditProjectCommand extends EditCommand {
         Project toEdit = model.getProjectByIndex(index);
 
         Project editedProject = createEditedProject(toEdit, editProjectDescriptor);
+
+        if (editedProject.equals(toEdit)) {
+            throw new CommandException(MESSAGE_SAME_PROJECT);
+        }
 
         try {
             model.setProject(toEdit, editedProject);
