@@ -18,7 +18,9 @@ endif::[]
 
 By: `CS2103T F10-1`      Since: `Jan 2020`      Licence: `MIT`
 
+{ start of `introduction` section written by: Nguyen Chi Hai }
 // tag::intro-para[]
+
 == Introduction
 
 Hello fellow University friends! Have you ever found writing resumes
@@ -33,6 +35,7 @@ understands your struggle and strives to cater to your specific resume needs
 and job application woes.
 
 // end::intro-para[]
+{ end of `introduction` section written by: Nguyen Chi Hai }
 
 === Overview
 *ResuMe* allows the management of five different item types:
@@ -52,8 +55,8 @@ and job application woes.
 |5 |Note |note |name, time, tag
 |=======================================================================
 
-As you may have noticed from number 4, we are able to manage different `resumes` as well!
-Items from number 1 to 3 can be shared across different `resumes`.
+As you may have noticed from number 4, we are able to manage different `resume` items as well!
+Items from number 1 to 3 can be shared across different `resume` items.
 
 === Preview
 The following is the GUI for our application:
@@ -79,8 +82,8 @@ the list box will be set to display that type.
 . *_User box:_* where you can view your personal information like `name`, `email`, or `phone number`. Any changes made
 to your user profile will be automatically reflected here.
 
-. *_Note box:_* where you can view your list of notes. You can also change the view of this list by using `list` command.
-When a note is marked as done, this box will be automatically updated.
+. *_Note box:_* where you can view your list of `note` items. You can also change the view of this list by using `list` command.
+When a `note` is marked as done, this box will be automatically updated.
 
 ====
 
@@ -137,7 +140,7 @@ image::Ui.png[width="790"]
 e.g. typing *`help start`* and pressing kbd:[Enter] will open the help window for getting started.
 .  Try out these example commands:
 
-* **`list`**`i/ res` : lists all `resumes`.
+* **`list`**`i/ res` : lists all `resume` items.
 * **`add`**`i/ res n/ Software Engineering Resume #/ SE #/ frontend`: adds a `resume` named `Software Engineering Resume`
 with `tags` _"SE"_ and _"frontend"_.
 * **`delete`**`1 i/ res` : deletes the 1st `resume` shown in the resume list.
@@ -206,7 +209,7 @@ You can edit your display profile here! It will then be updated accordingly in t
 ====
 
 [NOTE]
-A user profile contains the following fields: `Display Picture`, `Name`, `Description`, `Phone`, `Email`, `Github`, `University`, `Major`, `From`, `To`, `CAP`.
+A user profile contains the following fields: `DisplayPicture`, `Name`, `Description`, `Phone`, `Email`, `Github`, `University`, `Major`, `From`, `To`, `CAP`.
 
 *Example 1:* Update user profile details +
 
@@ -246,6 +249,8 @@ image::ugu.png[width="450"]
 
 { end of `me` section written by: Nham Quoc Hung }
 
+{ start of `list` section written by: Nguyen Chi Hai }
+
 // tag::list[]
 === Listing all items : `list`
 
@@ -257,9 +262,16 @@ Lists items in the storage.
 
 [TIP]
 --
-* Listed items are in short form, only showing their `index`, `name`, `tags` and a short summary.
+* Listed items are in short form, only showing their index, `name`, `tags` and a short summary.
 To view items in full details, use <<Viewing an item in details: `view`, view>>.
 * The type of items listed will light up in orange.
+--
+
+[NOTE]
+--
+`note` list is always showing on the bottom left of the application. `list i/ note` command will show the entire
+`note` lis, this is to be used in conjunction with `find` for `note` to show all `note` items after
+you have filtered the list.
 --
 
 *Examples:*
@@ -279,8 +291,9 @@ image::ListAllInternships.png[width = "450"]
 .List of all note items
 image::ListAllNotes.png[width = "450"]
 
-
 // end::list[]
+
+{ end of `list` section written by: Nguyen Chi Hai }
 
 { start of `add` section written by: Pham Thuy Duong }
 // tag::add[]
@@ -312,7 +325,7 @@ The specific command syntax could be found in the table below:
 [NOTE]
 --
 * An item could have any number of tags _(including 0)_.
-* There are three possible levels for a `skill` item: `ADVANCED`, `INTERMEDIATE` and `BASIC`.
+* There are three possible `levels` for a `skill` item: `ADVANCED`, `INTERMEDIATE` and `BASIC`.
 * A newly added note will be automatically marked as `undone`.
 --
 [TIP]
@@ -331,7 +344,7 @@ _(refer to <<Generating a resume: `rgen`, rgen>> for more details)_
 +
 .List of all project items
 image::ListProject.png[width="600"]
-. A new `project` item named `Duke` with the specified fields is added. This item is automatically reflected in the list box.
+. A new `project` item named "Duke" with the specified fields is added. This item is automatically reflected in the list box.
 +
 .Application view after project "Duke" is added
 image::AddDukeProject.png[width="600"]
@@ -399,7 +412,7 @@ image::EditResumeExample.png[width="790"]
 .List of all skill items
 image::ListSkill1.png[width="790"]
 
-. The second command edits the `skill` item at index 2. It has its level changed to from `INTERMEDIATE` to `ADVANCED` and all its existing `tags` cleared.
+. The second command edits the `skill` item at index 2. It has its `level` changed to from `INTERMEDIATE` to `ADVANCED` and all its existing `tags` cleared.
 +
 .Application view after editing the skill item at index 2
 image::EditSkillExample.png[width="790"]
@@ -638,7 +651,7 @@ Try typing in these commands:
 
 *Outcome:*
 
-. The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box.
+. The first command lists out all `resume` items. Assuming you want to modify the contents of the first `resume` in the list box.
 +
 .List of all resume items
 image::ReditListRes.png[width = "790"]
@@ -662,7 +675,7 @@ Try typing in these commands:
 
 *Outcome:*
 
-. The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box. Since we are following from example 1, the "Winter 2019" `resume` would already have some items in it.
+. The first command lists out all `resume` items. Assuming you want to modify the contents of the first `resume` in the list box. Since we are following from example 1, the "Winter 2019" `resume` would already have some items in it.
 +
 .List of all resume items
 image::ReditListRes2.png[width = "790"]
@@ -687,7 +700,7 @@ Try typing in these commands:
 
 *Outcome:*
 
-. The first command lists out all `resumes`. Assuming you want to modify the contents of the first `resume` in the list box. Since we are following from example 2, the "Winter 2019" `resume` would already have some items in it.
+. The first command lists out all `resume` items. Assuming you want to modify the contents of the first `resume` in the list box. Since we are following from example 2, the "Winter 2019" `resume` would already have some items in it.
 +
 .List of all resume items
 image::ReditListRes3.png[width = "790"]
@@ -757,7 +770,7 @@ image::ReditListRes.png[width = "790"]
 
 . The second command pulls all items which has "SE" _or_ "github" as the tag into the `resume` at index 1, named "Winter 2019". The following screenshot illustrates the outcome of the command if we have 1 `internship` item and 2 `project` items tagged with "SE", and 1 `skill` item tagged with "github".
 +
-.Resume content after `tagpull`
+.Resume content after tagpull
 image::TagPullMultiTags.png[width = "790"]
 
 // end::tagpull[]
@@ -847,6 +860,8 @@ image::redo_success.png[width="790"]
 
 { end of `redo` section written by: Nguyen Minh Hoang}
 
+{ start of `rpreview` section written by: Nguyen Chi Hai }
+
 // tag::rpreview[]
 === Previewing a resume: `rpreview`
 
@@ -859,7 +874,12 @@ Previews a `resume` in text format in a pop-up window.
 [NOTE]
 --
 * `RESUME_INDEX` is the index of the `resume` seen when `list i/ res` is called.
-* `description` of `internship` and `project` is automatically separated into bullet points when the program detects full sentences.
+--
+
+[WARNING]
+--
+* `description` of `internship` and `project` is automatically separated into bullet points when the program detects
+full sentences marked by a full stop.
 --
 
 *Example:* Let's try out the following commands!
@@ -877,12 +897,14 @@ image::ListResumeRPreview.png[width="790"]
 . The second command will preview the `resume` at index 2 named "Software Engineering". A pop-up window will be opened,
 featuring a text-based view of the content of "Software Engineering". The screenshots of the results are as shown below:
 +
-.Application view after `rpreview` is executed
+.Application view after rpreview is executed
 image::RPreview.png[width = "790"]
 .Preview pop-up window
 image::RPreviewIndexTwo.png[width = "790"]
 
 // end::rpreview[]
+
+{ end of `rpreview` section written by: Nguyen Chi Hai }
 
 { start of `rgen` section written by: Pham Thuy Duong }
 // tag::rgen[]
@@ -900,7 +922,7 @@ will be located in the same folder as the application `.jar` file.
 
 [TIP]
 It is optional to specify a `FILE_NAME` for the .pdf file.
-If no name is specified, the filename will be set, by default, to the name of the generated `Resume`.
+If no name is specified, the filename will be set, by default, to the name of the generated `resume`.
 
 *Example:* Let's try out the following commands!
 
@@ -909,17 +931,17 @@ If no name is specified, the filename will be set, by default, to the name of th
 
 *Outcome:*
 
-. The first command lists out all `resumes`. Assuming that you want to generate the first `resume` in the list box.
+. The first command lists out all `resume` items. Assuming that you want to generate the first `resume` in the list box.
 +
 .List of all resume items
 image::ListResume.PNG[width="790"]
 
-. The second command generates a `My Resume.pdf` file from the specified resume. The screenshots of the application view
+. The second command generates a "My Resume.pdf" file from the specified resume. The screenshots of the application view
 and of the generated file are as below:
 +
-.Application view after `rgen` is executed
+.Application view after rgen is executed
 image::GenerateResume.PNG[width="790"]
-.Generated `.pdf` file
+.Generated .pdf file
 image::PdfFile.PNG[width="790"]
 
 // end::rgen[]
@@ -1022,6 +1044,8 @@ ____
 file created with the data file of your *ResuMe* folder in the current Computer.
 ____
 
+{ start of `summary` section written by: Nguyen Chi Hai }
+
 // tag::summary[]
 == Command Summary
 
@@ -1090,3 +1114,5 @@ These are commands specific to `resume` items.
 
 |=======================================================================
 // end::summary[]
+
+{ end of `summary` section written by: Nguyen Chi Hai }
