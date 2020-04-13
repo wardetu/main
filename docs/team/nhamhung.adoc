@@ -11,6 +11,10 @@
 Using only Command Line Interface, it aims to revolutionise the way you record your personal data, education, skills,
 projects and internships and use these components to construct and export a fully formatted resume with ease.
 
+The project builds upon https://github.com/nus-cs2103-AY1920S2/addressbook-level3[Address Book Level 3 (AB3)], a desktop
+Address Book application written in Java. Our developer team consists of five Year 2 Computer Science students from the National University of Singapore.
+This project was completed within six weeks to constitute a major component of our CS2103T Software Engineering module.
+
 == Summary of contributions
 
 === *1. Individual contributions*
@@ -80,7 +84,7 @@ as it involves most components including Ui, Logic, Model and Storage.
 == Contributions to the User Guide (Extracts)
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
 {start of extract 1: me}
