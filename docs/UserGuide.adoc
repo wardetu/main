@@ -211,6 +211,29 @@ You can edit your display profile here! It will then be updated accordingly in t
 [NOTE]
 A user profile contains the following fields: `DisplayPicture`, `Name`, `Description`, `Phone`, `Email`, `Github`, `University`, `Major`, `From`, `To`, `CAP`.
 
+* We note that these fields are your essential information which will be displayed in the PDF file of every generated resume. As such,
+each field comes with a format check which you need to fulfill in order to make a valid change.
+
+[source,sh]
+[cols="^.^20%,.^80%",options="header"]
+|=======================================================================
+
+| Field | Format
+
+| Display Picture  | Has to be a valid image file ending with .jpg, .png or .jpeg.
+| Name | Should only contain alphanumeric characters and spaces, and it should not be blank.
+| Description | Can take any characters and it should not be blank.
+| Phone | Should only contain numbers, and it should be at least 3 digits long.
+| Email | Must follow a valid email format.
+| Github | Must follow a valid github username format.
+| University |  Should only contain alphanumeric characters and spaces, with a maximum of 50 characters and should not be blank.
+| Major | Should only contain alphanumeric characters and spaces, with a maximum of 50 characters and should not be blank.
+| From | Should be in the format of MM-yyyy.
+| To | Should be in the format of MM-yyyy and must not be an earlier date than From.
+| Cap | Must be in the format of "CURRENT_CAP MAX_CAP" where "CURRENT_CAP" is not greater than "MAX_CAP". Must contain only non-negative numbers.
+
+|=======================================================================
+
 *Example 1:* Update user profile details +
 
 Try typing in the command box this command:
@@ -508,8 +531,10 @@ image::ResumeDelete2.png[width="700"]
 . We delete the 3rd `skill` with `delete 3 i/ ski` . Do note how it is not a must for the list box to display `skill` items for
 deletion to proceed. After the deletion the list box is set to show `skill` items.
 +
+
 .Application view after deleteing the skill item at index 3
 image::DeleteSkill3.png[width="700"]
+
 
 // end::delete[]
 
