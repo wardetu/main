@@ -93,6 +93,7 @@ The sections below give more details of each component.
 
 // end::overall-architecture[]
 
+// tag::ui[]
 [[Design-Ui]]
 === UI component
 
@@ -110,6 +111,7 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 * Responds to events raised by various commands and the UI can be updated accordingly.
+// end::ui[]
 
 // tag::logic[]
 [[Design-Logic]]
